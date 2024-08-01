@@ -3,6 +3,7 @@
 /// Note: `Table.schema` has been deprecated in favor of `Table.schemaJson`.
 /// `Table.schema` may continue to be present in your logs during this
 /// transition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuditData {
@@ -22,6 +23,7 @@ pub struct AuditData {
 /// Nested message and enum types in `AuditData`.
 pub mod audit_data {
     /// Request data for each BigQuery method.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Request {
@@ -59,6 +61,7 @@ pub mod audit_data {
         ),
     }
     /// Response data for each BigQuery method.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
@@ -93,6 +96,7 @@ pub mod audit_data {
     }
 }
 /// Table insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableInsertRequest {
@@ -101,6 +105,7 @@ pub struct TableInsertRequest {
     pub resource: ::core::option::Option<Table>,
 }
 /// Table update request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableUpdateRequest {
@@ -109,6 +114,7 @@ pub struct TableUpdateRequest {
     pub resource: ::core::option::Option<Table>,
 }
 /// Table insert response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableInsertResponse {
@@ -117,6 +123,7 @@ pub struct TableInsertResponse {
     pub resource: ::core::option::Option<Table>,
 }
 /// Table update response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableUpdateResponse {
@@ -125,14 +132,16 @@ pub struct TableUpdateResponse {
     pub resource: ::core::option::Option<Table>,
 }
 /// Dataset list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DatasetListRequest {
     /// Whether to list all datasets, including hidden ones.
     #[prost(bool, tag = "1")]
     pub list_all: bool,
 }
 /// Dataset insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetInsertRequest {
@@ -141,6 +150,7 @@ pub struct DatasetInsertRequest {
     pub resource: ::core::option::Option<Dataset>,
 }
 /// Dataset insert response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetInsertResponse {
@@ -149,6 +159,7 @@ pub struct DatasetInsertResponse {
     pub resource: ::core::option::Option<Dataset>,
 }
 /// Dataset update request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetUpdateRequest {
@@ -157,6 +168,7 @@ pub struct DatasetUpdateRequest {
     pub resource: ::core::option::Option<Dataset>,
 }
 /// Dataset update response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetUpdateResponse {
@@ -165,6 +177,7 @@ pub struct DatasetUpdateResponse {
     pub resource: ::core::option::Option<Dataset>,
 }
 /// Job insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobInsertRequest {
@@ -173,6 +186,7 @@ pub struct JobInsertRequest {
     pub resource: ::core::option::Option<Job>,
 }
 /// Job insert response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobInsertResponse {
@@ -181,6 +195,7 @@ pub struct JobInsertResponse {
     pub resource: ::core::option::Option<Job>,
 }
 /// Job query request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobQueryRequest {
@@ -201,6 +216,7 @@ pub struct JobQueryRequest {
     pub dry_run: bool,
 }
 /// Job query response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobQueryResponse {
@@ -212,8 +228,9 @@ pub struct JobQueryResponse {
     pub job: ::core::option::Option<Job>,
 }
 /// Job getQueryResults request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct JobGetQueryResultsRequest {
     /// Maximum number of results to return.
     #[prost(uint32, tag = "1")]
@@ -223,6 +240,7 @@ pub struct JobGetQueryResultsRequest {
     pub start_row: u64,
 }
 /// Job getQueryResults response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobGetQueryResultsResponse {
@@ -236,6 +254,7 @@ pub struct JobGetQueryResultsResponse {
     pub job: ::core::option::Option<Job>,
 }
 /// Job getQueryDone response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobQueryDoneResponse {
@@ -245,6 +264,7 @@ pub struct JobQueryDoneResponse {
     pub job: ::core::option::Option<Job>,
 }
 /// Query job completed event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobCompletedEvent {
@@ -257,6 +277,7 @@ pub struct JobCompletedEvent {
 }
 /// Table data read event. Only present for tables, not views, and is only
 /// included in the log record for the project that owns the table.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableDataReadEvent {
@@ -270,8 +291,9 @@ pub struct TableDataReadEvent {
     pub referenced_fields: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Table data-list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TableDataListRequest {
     /// Starting row offset.
     #[prost(uint64, tag = "1")]
@@ -286,6 +308,7 @@ pub struct TableDataListRequest {
 /// Note: `Table.schema` has been deprecated in favor of `Table.schemaJson`.
 /// `Table.schema` may continue to be present in your logs during this
 /// transition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Table {
@@ -305,22 +328,23 @@ pub struct Table {
     /// is deleted and the storage reclaimed.
     /// If not present, the table persists indefinitely.
     #[prost(message, optional, tag = "5")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the table was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the table was last truncated
     /// by an operation with a `writeDisposition` of `WRITE_TRUNCATE`.
     #[prost(message, optional, tag = "7")]
-    pub truncate_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub truncate_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the table was last modified.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The table encryption information. Set when non-default encryption is used.
     #[prost(message, optional, tag = "10")]
     pub encryption: ::core::option::Option<EncryptionInfo>,
 }
 /// User-provided metadata for a table.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableInfo {
@@ -339,6 +363,7 @@ pub struct TableInfo {
     >,
 }
 /// Describes a virtual table defined by a SQL query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableViewDefinition {
@@ -349,6 +374,7 @@ pub struct TableViewDefinition {
 /// BigQuery dataset information.
 /// See the [Dataset](/bigquery/docs/reference/v2/datasets) API resource
 /// for more details on individual fields.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
@@ -360,10 +386,10 @@ pub struct Dataset {
     pub info: ::core::option::Option<DatasetInfo>,
     /// The time the dataset was created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the dataset was last modified.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The access control list for the dataset.
     #[prost(message, optional, tag = "6")]
     pub acl: ::core::option::Option<BigQueryAcl>,
@@ -372,9 +398,12 @@ pub struct Dataset {
     /// duration to the table's `createTime`.  If this field is empty,
     /// there is no default table expiration time.
     #[prost(message, optional, tag = "8")]
-    pub default_table_expire_duration: ::core::option::Option<::prost_types::Duration>,
+    pub default_table_expire_duration: ::core::option::Option<
+        ::prost_wkt_types::Duration,
+    >,
 }
 /// User-provided metadata for a dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetInfo {
@@ -393,6 +422,7 @@ pub struct DatasetInfo {
     >,
 }
 /// An access control list.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryAcl {
@@ -403,6 +433,7 @@ pub struct BigQueryAcl {
 /// Nested message and enum types in `BigQueryAcl`.
 pub mod big_query_acl {
     /// Access control entry.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entry {
@@ -428,6 +459,7 @@ pub mod big_query_acl {
     }
 }
 /// Describes a job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
@@ -447,6 +479,7 @@ pub struct Job {
 /// Job configuration information.
 /// See the [Jobs](/bigquery/docs/reference/v2/jobs) API resource
 /// for more details on individual fields.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobConfiguration {
@@ -466,6 +499,7 @@ pub struct JobConfiguration {
 /// Nested message and enum types in `JobConfiguration`.
 pub mod job_configuration {
     /// Describes a query job, which executes a SQL-like query.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Query {
@@ -504,6 +538,7 @@ pub mod job_configuration {
     }
     /// Describes a load job, which loads data from an external source via
     /// the  import pipeline.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Load {
@@ -532,6 +567,7 @@ pub mod job_configuration {
     }
     /// Describes an extract job, which exports data to an external source
     /// via the  export pipeline.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Extract {
@@ -543,6 +579,7 @@ pub mod job_configuration {
         pub source_table: ::core::option::Option<super::TableName>,
     }
     /// Describes a copy job, which copies an existing table to another table.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TableCopy {
@@ -566,6 +603,7 @@ pub mod job_configuration {
         pub destination_table_encryption: ::core::option::Option<super::EncryptionInfo>,
     }
     /// Job configuration information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Configuration {
@@ -584,6 +622,7 @@ pub mod job_configuration {
     }
 }
 /// Describes an external data source used in a query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableDefinition {
@@ -595,6 +634,7 @@ pub struct TableDefinition {
     pub source_uris: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Running state of a job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobStatus {
@@ -612,18 +652,19 @@ pub struct JobStatus {
     >,
 }
 /// Job statistics that may change after a job starts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobStatistics {
     /// Time when the job was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Time when the job started.
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Time when the job ended.
     #[prost(message, optional, tag = "3")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Total bytes processed for a job.
     #[prost(int64, tag = "4")]
     pub total_processed_bytes: i64,
@@ -678,6 +719,7 @@ pub struct JobStatistics {
 /// Nested message and enum types in `JobStatistics`.
 pub mod job_statistics {
     /// Job resource usage breakdown by reservation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReservationResourceUsage {
@@ -690,6 +732,7 @@ pub mod job_statistics {
     }
 }
 /// The fully-qualified name for a dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatasetName {
@@ -701,6 +744,7 @@ pub struct DatasetName {
     pub dataset_id: ::prost::alloc::string::String,
 }
 /// The fully-qualified name for a table.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableName {
@@ -715,6 +759,7 @@ pub struct TableName {
     pub table_id: ::prost::alloc::string::String,
 }
 /// The fully-qualified name for a job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobName {
@@ -729,6 +774,7 @@ pub struct JobName {
     pub location: ::prost::alloc::string::String,
 }
 /// Describes encryption properties for a table or a job
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EncryptionInfo {

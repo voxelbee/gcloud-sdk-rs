@@ -4,6 +4,7 @@
 /// file will contain one `OptimizeToursResponse`. The request contains
 /// information to read/write and parse the files. All the input and output files
 /// should be under the same project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursRequest {
@@ -26,6 +27,7 @@ pub struct BatchOptimizeToursRequest {
 /// Nested message and enum types in `BatchOptimizeToursRequest`.
 pub mod batch_optimize_tours_request {
     /// Information for solving one optimization model asynchronously.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AsyncModelConfig {
@@ -43,15 +45,18 @@ pub mod batch_optimize_tours_request {
 }
 /// Response to a `BatchOptimizeToursRequest`. This is returned in
 /// the Long Running Operation after the operation is complete.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursResponse {}
 /// Operation metadata for `BatchOptimizeToursRequest` calls.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatchOptimizeToursMetadata {}
 /// Request to be given to a tour optimization solver which defines the
 /// shipment model to solve as well as optimization parameters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursRequest {
@@ -71,7 +76,7 @@ pub struct OptimizeToursRequest {
     /// For asynchronous requests, the server will generate a solution (if
     /// possible) before the timeout has elapsed.
     #[prost(message, optional, tag = "2")]
-    pub timeout: ::core::option::Option<::prost_types::Duration>,
+    pub timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Shipment model to solve.
     #[prost(message, optional, tag = "3")]
     pub model: ::core::option::Option<ShipmentModel>,
@@ -262,6 +267,7 @@ pub mod optimize_tours_request {
     /// `INVALID_REQUEST` error. See
     /// [max_validation_errors][google.maps.routeoptimization.v1.OptimizeToursRequest.max_validation_errors]
     /// to cap the number of errors returned.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -326,6 +332,7 @@ pub mod optimize_tours_request {
     }
     /// Mode defining the behavior of the search, trading off latency versus
     /// solution quality. In all modes, the global request deadline is enforced.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -372,6 +379,7 @@ pub mod optimize_tours_request {
 /// Response after solving a tour optimization problem containing the routes
 /// followed by each vehicle, the shipments which have been skipped and the
 /// overall cost of the solution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursResponse {
@@ -400,6 +408,7 @@ pub struct OptimizeToursResponse {
 /// Nested message and enum types in `OptimizeToursResponse`.
 pub mod optimize_tours_response {
     /// Overall metrics, aggregated over all routes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Metrics {
@@ -422,13 +431,15 @@ pub mod optimize_tours_response {
         /// [ShipmentRoute.vehicle_start_time][google.maps.routeoptimization.v1.ShipmentRoute.vehicle_start_time].
         #[prost(message, optional, tag = "4")]
         pub earliest_vehicle_start_time: ::core::option::Option<
-            ::prost_types::Timestamp,
+            ::prost_wkt_types::Timestamp,
         >,
         /// The latest end time for a used vehicle, computed as the maximum over all
         /// used vehicles of
         /// [ShipmentRoute.vehicle_end_time][google.maps.routeoptimization.v1.ShipmentRoute.vehicle_end_time].
         #[prost(message, optional, tag = "5")]
-        pub latest_vehicle_end_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub latest_vehicle_end_time: ::core::option::Option<
+            ::prost_wkt_types::Timestamp,
+        >,
         /// Cost of the solution, broken down by cost-related request fields.
         /// The keys are proto paths, relative to the input OptimizeToursRequest,
         /// e.g. "model.shipments.pickups.cost", and the values are the total cost
@@ -452,6 +463,7 @@ pub mod optimize_tours_response {
 ///    travel time, and fixed cost over all vehicles).
 /// * the unperformed shipment penalties.
 /// * the cost of the global duration of the shipments
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentModel {
@@ -481,11 +493,11 @@ pub struct ShipmentModel {
     /// If unset, 00:00:00 UTC, January 1, 1970 (i.e. seconds: 0, nanos: 0) is used
     /// as default.
     #[prost(message, optional, tag = "5")]
-    pub global_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub global_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// If unset, 00:00:00 UTC, January 1, 1971 (i.e. seconds: 31536000, nanos: 0)
     /// is used as default.
     #[prost(message, optional, tag = "6")]
-    pub global_end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub global_end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The "global duration" of the overall plan is the difference between the
     /// earliest effective start time and the latest effective end time of
     /// all vehicles. Users can assign a cost per hour to that quantity to try
@@ -642,6 +654,7 @@ pub struct ShipmentModel {
 pub mod shipment_model {
     /// Specifies a duration and distance matrix from visit and vehicle start
     /// locations to visit and vehicle end locations.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DurationDistanceMatrix {
@@ -665,13 +678,14 @@ pub mod shipment_model {
     /// Nested message and enum types in `DurationDistanceMatrix`.
     pub mod duration_distance_matrix {
         /// Specifies a row of the duration and distance matrix.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Row {
             /// Duration values for a given row. It must have as many elements as
             /// [ShipmentModel.duration_distance_matrix_dst_tags][google.maps.routeoptimization.v1.ShipmentModel.duration_distance_matrix_dst_tags].
             #[prost(message, repeated, tag = "1")]
-            pub durations: ::prost::alloc::vec::Vec<::prost_types::Duration>,
+            pub durations: ::prost::alloc::vec::Vec<::prost_wkt_types::Duration>,
             /// Distance values for a given row. If no costs or constraints refer to
             /// distances in the model, this can be left empty; otherwise it must have
             /// as many elements as `durations`.
@@ -689,8 +703,9 @@ pub mod shipment_model {
     ///
     /// Furthermore, precedences only apply when both shipments are performed and
     /// are otherwise ignored.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PrecedenceRule {
         /// Shipment index of the "first" event. This field must be specified.
         #[prost(int32, optional, tag = "1")]
@@ -706,7 +721,7 @@ pub mod shipment_model {
         pub second_is_delivery: bool,
         /// The offset between the "first" and "second" event. It can be negative.
         #[prost(message, optional, tag = "5")]
-        pub offset_duration: ::core::option::Option<::prost_types::Duration>,
+        pub offset_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     }
 }
 /// The shipment of a single item, from one of its pickups to one of its
@@ -714,6 +729,7 @@ pub mod shipment_model {
 /// must visit one of its pickup locations (and decrease its spare capacities
 /// accordingly), then visit one of its delivery locations later on (and
 /// therefore re-increase its spare capacities accordingly).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Shipment {
@@ -812,7 +828,7 @@ pub struct Shipment {
     /// depend on vehicles.
     #[prost(message, optional, tag = "9")]
     pub pickup_to_delivery_absolute_detour_limit: ::core::option::Option<
-        ::prost_types::Duration,
+        ::prost_wkt_types::Duration,
     >,
     /// Specifies the maximum duration from start of pickup to start of delivery of
     /// a shipment. If specified, it must be nonnegative, and the shipment must
@@ -821,7 +837,9 @@ pub struct Shipment {
     /// This can be specified alongside maximum detour constraints: the solution
     /// will respect both specifications.
     #[prost(message, optional, tag = "10")]
-    pub pickup_to_delivery_time_limit: ::core::option::Option<::prost_types::Duration>,
+    pub pickup_to_delivery_time_limit: ::core::option::Option<
+        ::prost_wkt_types::Duration,
+    >,
     /// Non-empty string specifying a "type" for this shipment.
     /// This feature can be used to define incompatibilities or requirements
     /// between `shipment_types` (see `shipment_type_incompatibilities` and
@@ -855,6 +873,7 @@ pub mod shipment {
     /// (or two, see below), opening and closing times represented by time windows,
     /// and a service duration time (time spent by the vehicle once it has arrived
     /// to pickup or drop off goods).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VisitRequest {
@@ -908,7 +927,7 @@ pub mod shipment {
         /// and departure (to be added to the possible waiting time; see
         /// `time_windows`).
         #[prost(message, optional, tag = "7")]
-        pub duration: ::core::option::Option<::prost_types::Duration>,
+        pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Cost to service this visit request on a vehicle route. This can be used
         /// to pay different costs for each alternative pickup or delivery of a
         /// shipment. This cost must be in the same unit as `Shipment.penalty_cost`
@@ -945,8 +964,9 @@ pub mod shipment {
     /// load if it's a pickup, or subtracted if it's a delivery. This message
     /// defines such amount. See
     /// [load_demands][google.maps.routeoptimization.v1.Shipment.load_demands].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Load {
         /// The amount by which the load of the vehicle performing the corresponding
         /// visit will vary. Since it is an integer, users are advised to choose an
@@ -958,6 +978,7 @@ pub mod shipment {
 /// Specifies incompatibilties between shipments depending on their
 /// shipment_type. The appearance of incompatible shipments on the same route is
 /// restricted based on the incompatibility mode.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentTypeIncompatibility {
@@ -976,6 +997,7 @@ pub struct ShipmentTypeIncompatibility {
 pub mod shipment_type_incompatibility {
     /// Modes defining how the appearance of incompatible shipments are restricted
     /// on the same route.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1035,6 +1057,7 @@ pub mod shipment_type_incompatibility {
 }
 /// Specifies requirements between shipments based on their shipment_type.
 /// The specifics of the requirement are defined by the requirement mode.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentTypeRequirement {
@@ -1061,6 +1084,7 @@ pub struct ShipmentTypeRequirement {
 /// Nested message and enum types in `ShipmentTypeRequirement`.
 pub mod shipment_type_requirement {
     /// Modes defining the appearance of dependent shipments on a route.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1128,6 +1152,7 @@ pub mod shipment_type_requirement {
 /// Models a vehicle in a shipment problem. Solving a shipment problem will
 /// build a route starting from `start_location` and ending at `end_location`
 /// for this vehicle. A route is a sequence of visits (see `ShipmentRoute`).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Vehicle {
@@ -1300,7 +1325,7 @@ pub struct Vehicle {
     #[prost(map = "string, message", tag = "24")]
     pub extra_visit_duration_for_visit_type: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Duration,
+        ::prost_wkt_types::Duration,
     >,
     /// Describes the break schedule to be enforced on this vehicle.
     /// If empty, no breaks will be scheduled for this vehicle.
@@ -1332,8 +1357,9 @@ pub mod vehicle {
     /// Defines a load limit applying to a vehicle, e.g. "this truck may only
     /// carry up to 3500 kg". See
     /// [load_limits][google.maps.routeoptimization.v1.Vehicle.load_limits].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LoadLimit {
         /// The maximum acceptable amount of load.
         #[prost(int64, optional, tag = "1")]
@@ -1362,8 +1388,9 @@ pub mod vehicle {
     /// Nested message and enum types in `LoadLimit`.
     pub mod load_limit {
         /// Interval of acceptable load amounts.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Interval {
             /// A minimum acceptable load. Must be ≥ 0.
             /// If they're both specified,
@@ -1387,12 +1414,13 @@ pub mod vehicle {
     ///
     /// When a soft limit field is defined, both the soft max threshold and its
     /// associated cost must be defined together.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DurationLimit {
         /// A hard limit constraining the duration to be at most max_duration.
         #[prost(message, optional, tag = "1")]
-        pub max_duration: ::core::option::Option<::prost_types::Duration>,
+        pub max_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// A soft limit not enforcing a maximum duration limit, but when violated
         /// makes the route incur a cost. This cost adds up to other costs defined in
         /// the model, with the same unit.
@@ -1400,7 +1428,7 @@ pub mod vehicle {
         /// If defined, `soft_max_duration` must be nonnegative. If max_duration is
         /// also defined, `soft_max_duration` must be less than max_duration.
         #[prost(message, optional, tag = "2")]
-        pub soft_max_duration: ::core::option::Option<::prost_types::Duration>,
+        pub soft_max_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Cost per hour incurred if the `soft_max_duration` threshold is violated.
         /// The additional cost is 0 if the duration is under the threshold,
         /// otherwise the cost depends on the duration as follows:
@@ -1421,7 +1449,9 @@ pub mod vehicle {
         ///
         ///     `max_duration - quadratic_soft_max_duration <= 86400 seconds`
         #[prost(message, optional, tag = "4")]
-        pub quadratic_soft_max_duration: ::core::option::Option<::prost_types::Duration>,
+        pub quadratic_soft_max_duration: ::core::option::Option<
+            ::prost_wkt_types::Duration,
+        >,
         /// Cost per square hour incurred if the
         /// `quadratic_soft_max_duration` threshold is violated.
         ///
@@ -1442,6 +1472,7 @@ pub mod vehicle {
     /// These should be a subset of the Google Maps Platform Routes Preferred API
     /// travel modes, see:
     /// <https://developers.google.com/maps/documentation/routes_preferred/reference/rest/Shared.Types/RouteTravelMode.>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1489,6 +1520,7 @@ pub mod vehicle {
     ///
     /// Other shipments are free to occur anywhere on the route independent of
     /// `unloading_policy`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1554,23 +1586,24 @@ pub mod vehicle {
 ///    0 <= `start_time` <= `soft_start_time` <= `end_time` and
 ///    0 <= `start_time` <= `soft_end_time` <= `end_time`.
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeWindow {
     /// The hard time window start time. If unspecified it will be set to
     /// `ShipmentModel.global_start_time`.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The hard time window end time. If unspecified it will be set to
     /// `ShipmentModel.global_end_time`.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The soft start time of the time window.
     #[prost(message, optional, tag = "3")]
-    pub soft_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub soft_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The soft end time of the time window.
     #[prost(message, optional, tag = "4")]
-    pub soft_end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub soft_end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A cost per hour added to other costs in the model if the event occurs
     /// before soft_start_time, computed as:
     ///
@@ -1603,8 +1636,9 @@ pub struct TimeWindow {
 ///
 /// If a soft limit is defined, both `soft_max_meters` and
 /// `cost_per_kilometer_above_soft_max` must be defined and be nonnegative.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DistanceLimit {
     /// A hard limit constraining the distance to be at most max_meters. The limit
     /// must be nonnegative.
@@ -1633,6 +1667,7 @@ pub struct DistanceLimit {
 /// route. Several `TransitionAttributes` may apply to the same transition: in
 /// that case, all extra costs add up and the strictest constraint or limit
 /// applies (following natural "AND" semantics).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitionAttributes {
@@ -1683,10 +1718,11 @@ pub struct TransitionAttributes {
     /// This delay always occurs *after* finishing the source visit and *before*
     /// starting the destination visit.
     #[prost(message, optional, tag = "8")]
-    pub delay: ::core::option::Option<::prost_types::Duration>,
+    pub delay: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Encapsulates a waypoint. Waypoints mark arrival and departure locations of
 /// VisitRequests, and start and end locations of Vehicles.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Waypoint {
@@ -1705,6 +1741,7 @@ pub struct Waypoint {
 /// Nested message and enum types in `Waypoint`.
 pub mod waypoint {
     /// Different ways to represent a location.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LocationType {
@@ -1718,8 +1755,9 @@ pub mod waypoint {
     }
 }
 /// Encapsulates a location (a geographic point, and an optional heading).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Location {
     /// The waypoint's geographic coordinates.
     #[prost(message, optional, tag = "1")]
@@ -1741,6 +1779,7 @@ pub struct Location {
 /// * or before the vehicle start (the vehicle may not start in the middle of
 ///    a break), in which case it does not affect the vehicle start time.
 /// * or after the vehicle end (ditto, with the vehicle end time).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BreakRule {
@@ -1759,18 +1798,19 @@ pub mod break_rule {
     /// that sequence, in the order in which they must occur. Their time windows
     /// (`earliest_start_time` / `latest_start_time`) may overlap, but they must
     /// be compatible with the order (this is checked).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BreakRequest {
         /// Required. Lower bound (inclusive) on the start of the break.
         #[prost(message, optional, tag = "1")]
-        pub earliest_start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub earliest_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Required. Upper bound (inclusive) on the start of the break.
         #[prost(message, optional, tag = "2")]
-        pub latest_start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub latest_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Required. Minimum duration of the break. Must be positive.
         #[prost(message, optional, tag = "3")]
-        pub min_duration: ::core::option::Option<::prost_types::Duration>,
+        pub min_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     }
     /// One may further constrain the frequency and duration of the breaks
     /// specified above, by enforcing a minimum break frequency, such as
@@ -1805,18 +1845,21 @@ pub mod break_rule {
     ///     .. performing travel and visits ..
     ///    23:59 vehicle end
     /// ```
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct FrequencyConstraint {
         /// Required. Minimum break duration for this constraint. Nonnegative.
         /// See description of `FrequencyConstraint`.
         #[prost(message, optional, tag = "1")]
-        pub min_break_duration: ::core::option::Option<::prost_types::Duration>,
+        pub min_break_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Required. Maximum allowed span of any interval of time in the route that
         /// does not include at least partially a break of `duration >=
         /// min_break_duration`. Must be positive.
         #[prost(message, optional, tag = "2")]
-        pub max_inter_break_duration: ::core::option::Option<::prost_types::Duration>,
+        pub max_inter_break_duration: ::core::option::Option<
+            ::prost_wkt_types::Duration,
+        >,
     }
 }
 /// A vehicle's route can be decomposed, along the time axis, like this (we
@@ -1903,6 +1946,7 @@ pub mod break_rule {
 ///    ||     |       |           |       |           |         |         ||
 /// --++-----------------------------------------------------------------++-->
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShipmentRoute {
@@ -1916,10 +1960,10 @@ pub struct ShipmentRoute {
     pub vehicle_label: ::prost::alloc::string::String,
     /// Time at which the vehicle starts its route.
     #[prost(message, optional, tag = "5")]
-    pub vehicle_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub vehicle_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Time at which the vehicle finishes its route.
     #[prost(message, optional, tag = "6")]
-    pub vehicle_end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub vehicle_end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Ordered sequence of visits representing a route.
     /// visits\[i\] is the i-th visit in the route.
     /// If this field is empty, the vehicle is considered as unused.
@@ -1986,6 +2030,7 @@ pub struct ShipmentRoute {
 pub mod shipment_route {
     /// A visit performed during a route. This visit corresponds to a pickup or a
     /// delivery of a `Shipment`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Visit {
@@ -2005,7 +2050,7 @@ pub mod shipment_route {
         /// than this at the visit location. Times are consistent with the
         /// `ShipmentModel`.
         #[prost(message, optional, tag = "4")]
-        pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Total visit load demand as the sum of the shipment and the visit request
         /// `load_demands`. The values are negative if the visit is a delivery.
         /// Demands are reported for the same types as the
@@ -2032,7 +2077,7 @@ pub mod shipment_route {
         /// the vehicle's `start_location` to the visit.
         /// ```
         #[prost(message, optional, tag = "6")]
-        pub detour: ::core::option::Option<::prost_types::Duration>,
+        pub detour: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Copy of the corresponding `Shipment.label`, if specified in the
         /// `Shipment`.
         #[prost(string, tag = "7")]
@@ -2048,12 +2093,13 @@ pub mod shipment_route {
     ///
     /// If the vehicle does not have a `start_location` and/or `end_location`, the
     /// corresponding travel metrics are 0.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Transition {
         /// Travel duration during this transition.
         #[prost(message, optional, tag = "1")]
-        pub travel_duration: ::core::option::Option<::prost_types::Duration>,
+        pub travel_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Distance traveled during the transition.
         #[prost(double, tag = "2")]
         pub travel_distance_meters: f64,
@@ -2070,17 +2116,17 @@ pub mod shipment_route {
         /// vehicle end). See
         /// [TransitionAttributes.delay][google.maps.routeoptimization.v1.TransitionAttributes.delay].
         #[prost(message, optional, tag = "4")]
-        pub delay_duration: ::core::option::Option<::prost_types::Duration>,
+        pub delay_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Sum of the duration of the breaks occurring during this transition, if
         /// any. Details about each break's start time and duration are stored in
         /// [ShipmentRoute.breaks][google.maps.routeoptimization.v1.ShipmentRoute.breaks].
         #[prost(message, optional, tag = "5")]
-        pub break_duration: ::core::option::Option<::prost_types::Duration>,
+        pub break_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Time spent waiting during this transition. Wait duration corresponds to
         /// idle time and does not include break time. Also note that this wait time
         /// may be split into several non-contiguous intervals.
         #[prost(message, optional, tag = "6")]
-        pub wait_duration: ::core::option::Option<::prost_types::Duration>,
+        pub wait_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Total duration of the transition, provided for convenience. It is equal
         /// to:
         ///
@@ -2090,10 +2136,10 @@ pub mod shipment_route {
         /// additionally holds: `total_duration = travel_duration + delay_duration
         /// + break_duration + wait_duration`.
         #[prost(message, optional, tag = "7")]
-        pub total_duration: ::core::option::Option<::prost_types::Duration>,
+        pub total_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Start time of this transition.
         #[prost(message, optional, tag = "8")]
-        pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// The encoded polyline representation of the route followed during the
         /// transition.
         /// This field is only populated if \[populate_transition_polylines\]
@@ -2121,8 +2167,9 @@ pub mod shipment_route {
     /// Reports the actual load of the vehicle at some point along the route,
     /// for a given type (see
     /// [Transition.vehicle_loads][google.maps.routeoptimization.v1.ShipmentRoute.Transition.vehicle_loads]).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VehicleLoad {
         /// The amount of load on the vehicle, for the given type. The unit of load
         /// is usually indicated by the type. See
@@ -2134,6 +2181,7 @@ pub mod shipment_route {
     /// encoding can be found here:
     /// <https://developers.google.com/maps/documentation/utilities/polylinealgorithm>
     /// <https://developers.google.com/maps/documentation/javascript/reference/geometry#encoding.>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EncodedPolyline {
@@ -2142,20 +2190,22 @@ pub mod shipment_route {
         pub points: ::prost::alloc::string::String,
     }
     /// Data representing the execution of a break.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Break {
         /// Start time of a break.
         #[prost(message, optional, tag = "1")]
-        pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Duration of a break.
         #[prost(message, optional, tag = "2")]
-        pub duration: ::core::option::Option<::prost_types::Duration>,
+        pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     }
 }
 /// Specifies details of unperformed shipments in a solution. For trivial cases
 /// and/or if we are able to identify the cause for skipping, we report the
 /// reason here.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkippedShipment {
@@ -2201,6 +2251,7 @@ pub mod skipped_shipment {
     /// capacity would be exceeded (including vehicle 1), at least one vehicle's
     /// "Pears" capacity would be exceeded (including vehicle 3) and at least one
     /// vehicle's distance limit would be exceeded (including vehicle 1).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Reason {
@@ -2221,6 +2272,7 @@ pub mod skipped_shipment {
         /// Code identifying the reason type. The order here is meaningless. In
         /// particular, it gives no indication of whether a given reason will
         /// appear before another in the solution, if both apply.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2330,6 +2382,7 @@ pub mod skipped_shipment {
 /// and/or [Visit][google.maps.routeoptimization.v1.ShipmentRoute.Visit] (resp.
 /// over all [ShipmentRoute][google.maps.routeoptimization.v1.ShipmentRoute])
 /// elements.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregatedMetrics {
@@ -2339,19 +2392,19 @@ pub struct AggregatedMetrics {
     pub performed_shipment_count: i32,
     /// Total travel duration for a route or a solution.
     #[prost(message, optional, tag = "2")]
-    pub travel_duration: ::core::option::Option<::prost_types::Duration>,
+    pub travel_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total wait duration for a route or a solution.
     #[prost(message, optional, tag = "3")]
-    pub wait_duration: ::core::option::Option<::prost_types::Duration>,
+    pub wait_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total delay duration for a route or a solution.
     #[prost(message, optional, tag = "4")]
-    pub delay_duration: ::core::option::Option<::prost_types::Duration>,
+    pub delay_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total break duration for a route or a solution.
     #[prost(message, optional, tag = "5")]
-    pub break_duration: ::core::option::Option<::prost_types::Duration>,
+    pub break_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total visit duration for a route or a solution.
     #[prost(message, optional, tag = "6")]
-    pub visit_duration: ::core::option::Option<::prost_types::Duration>,
+    pub visit_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The total duration should be equal to the sum of all durations above.
     /// For routes, it also corresponds to:
     /// ```
@@ -2360,7 +2413,7 @@ pub struct AggregatedMetrics {
     /// [ShipmentRoute.vehicle_start_time][google.maps.routeoptimization.v1.ShipmentRoute.vehicle_start_time]
     /// ```
     #[prost(message, optional, tag = "7")]
-    pub total_duration: ::core::option::Option<::prost_types::Duration>,
+    pub total_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total travel distance for a route or a solution.
     #[prost(double, tag = "8")]
     pub travel_distance_meters: f64,
@@ -2378,6 +2431,7 @@ pub struct AggregatedMetrics {
 }
 /// Solution injected in the request including information about which visits
 /// must be constrained and how they must be constrained.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InjectedSolutionConstraint {
@@ -2404,6 +2458,7 @@ pub mod injected_solution_constraint {
     /// visits will be relaxed and to which level. Shipments listed in
     /// the `skipped_shipment` field are constrained to be skipped; i.e., they
     /// cannot be performed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConstraintRelaxation {
@@ -2463,8 +2518,9 @@ pub mod injected_solution_constraint {
         /// and no visits may be inserted into these sequences. Also, if a
         /// vehicle start or end does not satisfy the conditions of any
         /// relaxation the time is fixed, unless the vehicle is empty.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Relaxation {
             /// The constraint relaxation level that applies when the conditions
             /// at or after `threshold_time` AND at least `threshold_visit_count` are
@@ -2473,7 +2529,7 @@ pub mod injected_solution_constraint {
             pub level: i32,
             /// The time at or after which the relaxation `level` may be applied.
             #[prost(message, optional, tag = "2")]
-            pub threshold_time: ::core::option::Option<::prost_types::Timestamp>,
+            pub threshold_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
             /// The number of visits at or after which the relaxation `level` may be
             /// applied. If `threshold_visit_count` is 0 (or unset), the `level` may be
             /// applied directly at the vehicle start.
@@ -2491,6 +2547,7 @@ pub mod injected_solution_constraint {
             /// threshold conditions.
             ///
             /// The enumeration below is in order of increasing relaxation.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[derive(
                 Clone,
                 Copy,
@@ -2558,6 +2615,7 @@ pub mod injected_solution_constraint {
     }
 }
 /// Describes an error encountered when validating an `OptimizeToursRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptimizeToursValidationError {
@@ -2841,6 +2899,7 @@ pub mod optimize_tours_validation_error {
     /// ```
     /// We however omit top-level entities such as `OptimizeToursRequest` or
     /// `ShipmentModel` to avoid crowding the message.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldReference {
@@ -2857,6 +2916,7 @@ pub mod optimize_tours_validation_error {
     }
     /// Nested message and enum types in `FieldReference`.
     pub mod field_reference {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum IndexOrKey {
@@ -2871,6 +2931,7 @@ pub mod optimize_tours_validation_error {
 }
 /// Specify an input for
 /// [BatchOptimizeTours][google.maps.routeoptimization.v1.RouteOptimizationService.BatchOptimizeTours].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
@@ -2884,6 +2945,7 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Required.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -2895,6 +2957,7 @@ pub mod input_config {
 /// Specify a destination for
 /// [BatchOptimizeTours][google.maps.routeoptimization.v1.RouteOptimizationService.BatchOptimizeTours]
 /// results.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutputConfig {
@@ -2908,6 +2971,7 @@ pub struct OutputConfig {
 /// Nested message and enum types in `OutputConfig`.
 pub mod output_config {
     /// Required.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -2917,6 +2981,7 @@ pub mod output_config {
     }
 }
 /// The Google Cloud Storage location where the input file will be read from.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsSource {
@@ -2927,6 +2992,7 @@ pub struct GcsSource {
 }
 /// The Google Cloud Storage location where the output file(s) will be written
 /// to.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsDestination {
@@ -2935,6 +3001,7 @@ pub struct GcsDestination {
     pub uri: ::prost::alloc::string::String,
 }
 /// Data formats for input and output files.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DataFormat {

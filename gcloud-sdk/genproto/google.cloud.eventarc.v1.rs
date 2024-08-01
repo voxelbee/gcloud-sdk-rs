@@ -3,6 +3,7 @@
 /// A Channel is a resource on which event providers publish their events.
 /// The published events are delivered through the transport associated with the
 /// channel. Note that a channel is associated with exactly one event provider.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Channel {
@@ -18,10 +19,10 @@ pub struct Channel {
     pub uid: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last-modified time.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The name of the event provider (e.g. Eventarc SaaS partner) associated
     /// with the channel. This provider will be granted permissions to publish
     /// events to the channel. Format:
@@ -48,6 +49,7 @@ pub struct Channel {
 /// Nested message and enum types in `Channel`.
 pub mod channel {
     /// State lists all the possible states of a Channel
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -107,6 +109,7 @@ pub mod channel {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Transport {
@@ -121,6 +124,7 @@ pub mod channel {
 /// A ChannelConnection is a resource which event providers create during the
 /// activation process to establish a connection between the provider and the
 /// subscriber channel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelConnection {
@@ -139,10 +143,10 @@ pub struct ChannelConnection {
     pub channel: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last-modified time.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Input only. Activation token for the channel. The token will be used
     /// during the creation of ChannelConnection to bind the channel with the
     /// provider project. This field will not be stored in the provider resource.
@@ -150,6 +154,7 @@ pub struct ChannelConnection {
     pub activation_token: ::prost::alloc::string::String,
 }
 /// A representation of the Provider resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Provider {
@@ -165,6 +170,7 @@ pub struct Provider {
     pub event_types: ::prost::alloc::vec::Vec<EventType>,
 }
 /// A representation of the event type resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventType {
@@ -191,6 +197,7 @@ pub struct EventType {
 }
 /// A representation of the FilteringAttribute resource.
 /// Filtering attributes are per event type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FilteringAttribute {
@@ -214,6 +221,7 @@ pub struct FilteringAttribute {
 /// Once configured, first-party event data will be protected
 /// using the specified custom managed encryption key instead of Google-managed
 /// encryption keys.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleChannelConfig {
@@ -223,7 +231,7 @@ pub struct GoogleChannelConfig {
     pub name: ::prost::alloc::string::String,
     /// Output only. The last-modified time.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Resource name of a KMS crypto key (managed by the user) used to
     /// encrypt/decrypt their event data.
     ///
@@ -233,6 +241,7 @@ pub struct GoogleChannelConfig {
     pub crypto_key_name: ::prost::alloc::string::String,
 }
 /// A representation of the trigger resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trigger {
@@ -247,10 +256,10 @@ pub struct Trigger {
     pub uid: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last-modified time.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. Unordered list. The list of filters that applies to event attributes. Only events that
     /// match all the provided filters are sent to the destination.
     #[prost(message, repeated, tag = "8")]
@@ -304,6 +313,7 @@ pub struct Trigger {
     pub etag: ::prost::alloc::string::String,
 }
 /// Filters events based on exact matches on the CloudEvents attributes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventFilter {
@@ -324,6 +334,7 @@ pub struct EventFilter {
     pub operator: ::prost::alloc::string::String,
 }
 /// A condition that is part of the trigger state computation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StateCondition {
@@ -335,6 +346,7 @@ pub struct StateCondition {
     pub message: ::prost::alloc::string::String,
 }
 /// Represents a target of an invocation over HTTP.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Destination {
@@ -343,6 +355,7 @@ pub struct Destination {
 }
 /// Nested message and enum types in `Destination`.
 pub mod destination {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Descriptor {
@@ -368,6 +381,7 @@ pub mod destination {
 }
 /// Represents the transport intermediaries created for the trigger to
 /// deliver events.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transport {
@@ -376,6 +390,7 @@ pub struct Transport {
 }
 /// Nested message and enum types in `Transport`.
 pub mod transport {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Intermediary {
@@ -386,6 +401,7 @@ pub mod transport {
     }
 }
 /// Represents a Cloud Run destination.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRun {
@@ -407,6 +423,7 @@ pub struct CloudRun {
     pub region: ::prost::alloc::string::String,
 }
 /// Represents a GKE destination.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Gke {
@@ -433,6 +450,7 @@ pub struct Gke {
     pub path: ::prost::alloc::string::String,
 }
 /// Represents a Pub/Sub transport.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pubsub {
@@ -452,6 +470,7 @@ pub struct Pubsub {
     pub subscription: ::prost::alloc::string::String,
 }
 /// The request message for the GetTrigger method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTriggerRequest {
@@ -460,6 +479,7 @@ pub struct GetTriggerRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request message for the ListTriggers method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTriggersRequest {
@@ -491,6 +511,7 @@ pub struct ListTriggersRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// The response message for the `ListTriggers` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTriggersResponse {
@@ -506,6 +527,7 @@ pub struct ListTriggersResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request message for the CreateTrigger method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTriggerRequest {
@@ -524,6 +546,7 @@ pub struct CreateTriggerRequest {
     pub validate_only: bool,
 }
 /// The request message for the UpdateTrigger method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTriggerRequest {
@@ -534,7 +557,7 @@ pub struct UpdateTriggerRequest {
     /// If no field mask is provided, all provided fields in the request are
     /// updated. To update all fields, provide a field mask of "*".
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// If set to true, and the trigger is not found, a new trigger will be
     /// created. In this situation, `update_mask` is ignored.
     #[prost(bool, tag = "3")]
@@ -545,6 +568,7 @@ pub struct UpdateTriggerRequest {
     pub validate_only: bool,
 }
 /// The request message for the DeleteTrigger method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTriggerRequest {
@@ -565,6 +589,7 @@ pub struct DeleteTriggerRequest {
     pub validate_only: bool,
 }
 /// The request message for the GetChannel method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelRequest {
@@ -573,6 +598,7 @@ pub struct GetChannelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request message for the ListChannels method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsRequest {
@@ -599,6 +625,7 @@ pub struct ListChannelsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response message for the `ListChannels` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsResponse {
@@ -614,6 +641,7 @@ pub struct ListChannelsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request message for the CreateChannel method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelRequest {
@@ -632,6 +660,7 @@ pub struct CreateChannelRequest {
     pub validate_only: bool,
 }
 /// The request message for the UpdateChannel method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChannelRequest {
@@ -642,13 +671,14 @@ pub struct UpdateChannelRequest {
     /// If no field mask is provided, all provided fields in the request are
     /// updated. To update all fields, provide a field mask of "*".
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. If set, validate the request and preview the review, but do not
     /// post it.
     #[prost(bool, tag = "3")]
     pub validate_only: bool,
 }
 /// The request message for the DeleteChannel method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelRequest {
@@ -661,6 +691,7 @@ pub struct DeleteChannelRequest {
     pub validate_only: bool,
 }
 /// The request message for the GetProvider method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProviderRequest {
@@ -669,6 +700,7 @@ pub struct GetProviderRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request message for the ListProviders method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProvidersRequest {
@@ -696,6 +728,7 @@ pub struct ListProvidersRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// The response message for the `ListProviders` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProvidersResponse {
@@ -711,6 +744,7 @@ pub struct ListProvidersResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request message for the GetChannelConnection method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelConnectionRequest {
@@ -719,6 +753,7 @@ pub struct GetChannelConnectionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request message for the ListChannelConnections method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelConnectionsRequest {
@@ -739,6 +774,7 @@ pub struct ListChannelConnectionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response message for the `ListChannelConnections` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelConnectionsResponse {
@@ -756,6 +792,7 @@ pub struct ListChannelConnectionsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request message for the CreateChannelConnection method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelConnectionRequest {
@@ -770,6 +807,7 @@ pub struct CreateChannelConnectionRequest {
     pub channel_connection_id: ::prost::alloc::string::String,
 }
 /// The request message for the DeleteChannelConnection method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelConnectionRequest {
@@ -778,6 +816,7 @@ pub struct DeleteChannelConnectionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request message for the UpdateGoogleChannelConfig method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleChannelConfigRequest {
@@ -788,9 +827,10 @@ pub struct UpdateGoogleChannelConfigRequest {
     /// If no field mask is provided, all provided fields in the request are
     /// updated. To update all fields, provide a field mask of "*".
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request message for the GetGoogleChannelConfig method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGoogleChannelConfigRequest {
@@ -799,15 +839,16 @@ pub struct GetGoogleChannelConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,

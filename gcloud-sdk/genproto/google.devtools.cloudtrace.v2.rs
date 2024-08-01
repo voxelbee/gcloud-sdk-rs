@@ -7,6 +7,7 @@
 /// A trace can also contain multiple root spans, or none at all.
 /// Spans do not need to be contiguous. There might be
 /// gaps or overlaps between spans in a trace.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Span {
@@ -45,12 +46,12 @@ pub struct Span {
     /// side, this is the time when the server's application handler starts
     /// running.
     #[prost(message, optional, tag = "5")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. The end time of the span. On the client side, this is the time
     /// kept by the local machine where the span execution ends. On the server
     /// side, this is the time when the server application handler stops running.
     #[prost(message, optional, tag = "6")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A set of attributes on the span. You can have up to 32 attributes per
     /// span.
     #[prost(message, optional, tag = "7")]
@@ -72,11 +73,13 @@ pub struct Span {
     /// the same process as its parent. If you do not set this parameter,
     /// Trace is unable to take advantage of this helpful information.
     #[prost(message, optional, tag = "12")]
-    pub same_process_as_parent_span: ::core::option::Option<bool>,
+    pub same_process_as_parent_span: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Optional. The number of child spans that were generated while this span
     /// was active. If set, allows implementation to detect missing child spans.
     #[prost(message, optional, tag = "13")]
-    pub child_span_count: ::core::option::Option<i32>,
+    pub child_span_count: ::core::option::Option<pb::Int32Value>,
     /// Optional. Distinguishes between spans generated in a particular context.
     /// For example, two spans with the same name may be distinguished using
     /// `CLIENT` (caller) and `SERVER` (callee) to identify an RPC call.
@@ -86,6 +89,7 @@ pub struct Span {
 /// Nested message and enum types in `Span`.
 pub mod span {
     /// A set of attributes as key-value pairs.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Attributes {
@@ -108,12 +112,13 @@ pub mod span {
         pub dropped_attributes_count: i32,
     }
     /// A time-stamped annotation or message event in the Span.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TimeEvent {
         /// The timestamp indicating the time the event occurred.
         #[prost(message, optional, tag = "1")]
-        pub time: ::core::option::Option<::prost_types::Timestamp>,
+        pub time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// A `TimeEvent` can contain either an `Annotation` object or a
         /// `MessageEvent` object, but not both.
         #[prost(oneof = "time_event::Value", tags = "2, 3")]
@@ -122,6 +127,7 @@ pub mod span {
     /// Nested message and enum types in `TimeEvent`.
     pub mod time_event {
         /// Text annotation with a set of attributes.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Annotation {
@@ -135,8 +141,9 @@ pub mod span {
             pub attributes: ::core::option::Option<super::Attributes>,
         }
         /// An event describing a message sent/received between Spans.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct MessageEvent {
             /// Type of MessageEvent. Indicates whether the message was sent or
             /// received.
@@ -158,6 +165,7 @@ pub mod span {
         /// Nested message and enum types in `MessageEvent`.
         pub mod message_event {
             /// Indicates whether the message was sent or received.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[derive(
                 Clone,
                 Copy,
@@ -203,6 +211,7 @@ pub mod span {
         }
         /// A `TimeEvent` can contain either an `Annotation` object or a
         /// `MessageEvent` object, but not both.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Value {
@@ -217,6 +226,7 @@ pub mod span {
     /// A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
     /// on the span, consisting of either user-supplied key:value pairs, or
     /// details of a message sent/received between Spans.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TimeEvents {
@@ -236,6 +246,7 @@ pub mod span {
     /// different trace. For example, this can be used in batching operations,
     /// where a single batch handler processes multiple requests from different
     /// traces or when the handler receives a request from a different project.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Link {
@@ -257,6 +268,7 @@ pub mod span {
     pub mod link {
         /// The relationship of the current span relative to the linked span: child,
         /// parent, or unspecified.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -302,6 +314,7 @@ pub mod span {
     }
     /// A collection of links, which are references from this span to a span
     /// in the same or different trace.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Links {
@@ -315,6 +328,7 @@ pub mod span {
     }
     /// Type of span. Can be used to specify additional relationships between spans
     /// in addition to a parent/child relationship.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -380,6 +394,7 @@ pub mod span {
     }
 }
 /// The allowed types for `\[VALUE\]` in a `\[KEY\]:[VALUE]` attribute.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributeValue {
@@ -390,6 +405,7 @@ pub struct AttributeValue {
 /// Nested message and enum types in `AttributeValue`.
 pub mod attribute_value {
     /// The type of the value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
@@ -405,6 +421,7 @@ pub mod attribute_value {
     }
 }
 /// A call stack appearing in a trace.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StackTrace {
@@ -426,6 +443,7 @@ pub struct StackTrace {
 /// Nested message and enum types in `StackTrace`.
 pub mod stack_trace {
     /// Represents a single stack frame in a stack trace.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StackFrame {
@@ -458,6 +476,7 @@ pub mod stack_trace {
         pub source_version: ::core::option::Option<super::TruncatableString>,
     }
     /// A collection of stack frames, which can be truncated.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StackFrames {
@@ -472,6 +491,7 @@ pub mod stack_trace {
     }
 }
 /// Binary module.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Module {
@@ -485,6 +505,7 @@ pub struct Module {
     pub build_id: ::core::option::Option<TruncatableString>,
 }
 /// Represents a string that might be shortened to a specified length.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TruncatableString {
@@ -503,6 +524,7 @@ pub struct TruncatableString {
     pub truncated_byte_count: i32,
 }
 /// The request message for the `BatchWriteSpans` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchWriteSpansRequest {
@@ -612,7 +634,10 @@ pub mod trace_service_client {
         pub async fn batch_write_spans(
             &mut self,
             request: impl tonic::IntoRequest<super::BatchWriteSpansRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

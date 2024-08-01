@@ -1,7 +1,7 @@
 use bytes::{Buf, BufMut};
 use secret_vault_value::SecretValue;
 
-#[derive(Clone, PartialEq, Eq, Debug, Default)]
+#[derive(Clone, PartialEq, Eq, Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct SecretPayload {
     pub data: SecretValue,
 

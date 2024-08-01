@@ -2,6 +2,7 @@
 /// Backup as stored in Platform log. It's used to log the details of
 /// a createBackup/updateBackup request, so only fields that can be taken
 /// from API calls are included here.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoggedBackup {
@@ -32,6 +33,7 @@ pub struct LoggedBackup {
 /// Nested message and enum types in `LoggedBackup`.
 pub mod logged_backup {
     /// State
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -91,6 +93,7 @@ pub mod logged_backup {
     }
 }
 /// Namespaces, list of namespaces
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespaces {
@@ -99,6 +102,7 @@ pub struct Namespaces {
     pub namespaces: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// NamespacedName
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespacedName {
@@ -110,6 +114,7 @@ pub struct NamespacedName {
     pub name: ::prost::alloc::string::String,
 }
 /// NamespacedNames
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamespacedNames {
@@ -119,6 +124,7 @@ pub struct NamespacedNames {
 }
 /// Encryption key.
 /// This only contains the key metadata, and no key material.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EncryptionKey {
@@ -130,6 +136,7 @@ pub struct EncryptionKey {
 /// BackupPlan as stored in Platform log. It's used to log the details of
 /// a createBackupPlan/updateBackupPlan request, so only fields that can be taken
 /// from user input are included here.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoggedBackupPlan {
@@ -164,8 +171,9 @@ pub mod logged_backup_plan {
     /// 1. When to automatically delete Backups created under this BackupPlan
     /// 2. A plan level minimum Backup retain days which blocks deletion
     /// 3. Lock to disallow any policy updates
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RetentionPolicy {
         /// Number of days during which deletion of a Backup created under this
         /// BackupPlan will be blocked.
@@ -185,6 +193,7 @@ pub mod logged_backup_plan {
         pub locked: bool,
     }
     /// Schedule, an inner message type defines a cron schedule.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Schedule {
@@ -197,6 +206,7 @@ pub mod logged_backup_plan {
     }
     /// BackupConfig, an inner message type defines the configuration of creating
     /// a backup from this BackupPlan
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BackupConfig {
@@ -215,6 +225,7 @@ pub mod logged_backup_plan {
     }
     /// Nested message and enum types in `BackupConfig`.
     pub mod backup_config {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum BackupScope {
@@ -233,6 +244,7 @@ pub mod logged_backup_plan {
 /// Restore as stored in Platform log. It's used to log the update details of a
 /// updateRestore request, so only mutable and non-output_only fields are
 /// included here..
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoggedRestore {
@@ -259,6 +271,7 @@ pub struct LoggedRestore {
 /// Nested message and enum types in `LoggedRestore`.
 pub mod logged_restore {
     /// Possible values for state of the Restore.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -320,6 +333,7 @@ pub mod logged_restore {
 /// RestorePlan as stored in Platform log. It's used to log the details of
 /// a createRestorePlan/updateRestorePlan request, so only fields that can be
 /// taken from user input are included here.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoggedRestorePlan {
@@ -350,6 +364,7 @@ pub struct LoggedRestorePlan {
     >,
 }
 /// Configuration of a restore.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreConfig {
@@ -397,6 +412,7 @@ pub mod restore_config {
     /// This is a direct map to the Kubernetes GroupKind type
     /// [GroupKind](<https://godoc.org/k8s.io/apimachinery/pkg/runtime/schema#GroupKind>)
     /// and is used for identifying specific "types" of resources to restore.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GroupKind {
@@ -411,6 +427,7 @@ pub mod restore_config {
         pub resource_kind: ::prost::alloc::string::String,
     }
     /// Identifies the cluster-scoped resources to restore from the Backup.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ClusterResourceRestoreScope {
@@ -424,6 +441,7 @@ pub mod restore_config {
     /// A transformation rule to be applied against Kubernetes resources as they
     /// are selected for restoration from a Backup. A rule contains both filtering
     /// logic (which resources are subject to substitution) and substitution logic.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubstitutionRule {
@@ -470,6 +488,7 @@ pub mod restore_config {
         pub new_value: ::prost::alloc::string::String,
     }
     /// Defines how volume data should be restored
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -536,6 +555,7 @@ pub mod restore_config {
     }
     /// Defines the behavior for handling the situation where cluster-scoped
     /// resources being restored already exist in the target cluster.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -588,6 +608,7 @@ pub mod restore_config {
     }
     /// Defines the behavior for handling the situation where sets of namespaced
     /// resources being restored already exist in the target cluster.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -645,6 +666,7 @@ pub mod restore_config {
     /// Specifies the namespaced resources to restore from the Backup.
     /// Only one of the entries may be specified. If not specified, NO namespaced
     /// resources will be restored.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum NamespacedResourceRestoreScope {
@@ -666,6 +688,7 @@ pub mod restore_config {
 /// use case 1
 /// A log entry when modification(creation, update, deletion) is made to a
 /// BackupPlan
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupPlanChange {
@@ -679,7 +702,7 @@ pub struct BackupPlanChange {
     pub change_type: i32,
     /// Modification details.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The input BackupPlan resource with the updated fields populated to update
     /// the source BackupPlan to.
     #[prost(message, optional, tag = "4")]
@@ -691,6 +714,7 @@ pub struct BackupPlanChange {
 /// use case 2
 /// A log entry when modification(creation, update, deletion) is made to a
 /// Backup
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupChange {
@@ -707,7 +731,7 @@ pub struct BackupChange {
     pub scheduled: bool,
     /// Modification details.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The input Backup resource with the updated fields populated to update
     /// the source Backup to, or the backup created automatically from retention
     /// policy.
@@ -720,6 +744,7 @@ pub struct BackupChange {
 /// use case 3
 /// A log entry when modification(creation, update, deletion) is made to a
 /// restorePlan.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestorePlanChange {
@@ -733,7 +758,7 @@ pub struct RestorePlanChange {
     pub change_type: i32,
     /// Modification details.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The input RestorePlan resource with the updated fields populated to update
     /// the source RestorePlan to.
     #[prost(message, optional, tag = "4")]
@@ -745,6 +770,7 @@ pub struct RestorePlanChange {
 /// use case 4
 /// A log entry when modification(creation, update, deletion) is made to a
 /// restore.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreChange {
@@ -758,7 +784,7 @@ pub struct RestoreChange {
     pub change_type: i32,
     /// Modification details.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The input Restore resource with the updated fields populated to update
     /// the source Restore to.
     #[prost(message, optional, tag = "4")]
@@ -768,6 +794,7 @@ pub struct RestoreChange {
     pub error: ::core::option::Option<super::super::super::super::rpc::Status>,
 }
 /// The type of changes this log is about.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ChangeType {

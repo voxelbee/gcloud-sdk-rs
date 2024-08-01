@@ -2,8 +2,9 @@
 /// Information related to how and why a fallback result was used. If this field
 /// is set, then it means the server used a different routing mode from your
 /// preferred mode as fallback.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FallbackInfo {
     /// Routing mode used for the response. If fallback was triggered, the mode
     /// may be different from routing preference set in the original client
@@ -17,6 +18,7 @@ pub struct FallbackInfo {
     pub reason: i32,
 }
 /// Reasons for using fallback response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FallbackReason {
@@ -54,6 +56,7 @@ impl FallbackReason {
     }
 }
 /// Actual routing mode used for returned fallback response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FallbackRoutingMode {
@@ -93,6 +96,7 @@ impl FallbackRoutingMode {
 /// Contains [`GeocodedWaypoints`][google.maps.routing.v2.GeocodedWaypoint] for
 /// origin, destination and intermediate waypoints. Only populated for address
 /// waypoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeocodingResults {
@@ -111,6 +115,7 @@ pub struct GeocodingResults {
 /// Details about the locations used as waypoints. Only populated for address
 /// waypoints. Includes details about the geocoding results for the purposes of
 /// determining what the address was geocoded to.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeocodedWaypoint {
@@ -138,6 +143,7 @@ pub struct GeocodedWaypoint {
     pub place_id: ::prost::alloc::string::String,
 }
 /// Localized description of time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedTime {
@@ -151,8 +157,9 @@ pub struct LocalizedTime {
     pub time_zone: ::prost::alloc::string::String,
 }
 /// Encapsulates a location (a geographic point, and an optional heading).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Location {
     /// The waypoint's geographic coordinates.
     #[prost(message, optional, tag = "1")]
@@ -164,10 +171,11 @@ pub struct Location {
     /// `DRIVE` and `TWO_WHEELER`
     /// [`RouteTravelMode`][google.maps.routing.v2.RouteTravelMode].
     #[prost(message, optional, tag = "2")]
-    pub heading: ::core::option::Option<i32>,
+    pub heading: ::core::option::Option<pb::Int32Value>,
 }
 /// A set of values that specify the navigation action to take for the current
 /// step (for example, turn left, merge, or straight).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Maneuver {
@@ -274,6 +282,7 @@ impl Maneuver {
 }
 /// Encapsulates navigation instructions for a
 /// [`RouteLegStep`][google.maps.routing.v2.RouteLegStep].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NavigationInstruction {
@@ -287,6 +296,7 @@ pub struct NavigationInstruction {
     pub instructions: ::prost::alloc::string::String,
 }
 /// Encapsulates an encoded polyline.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Polyline {
@@ -297,6 +307,7 @@ pub struct Polyline {
 /// Nested message and enum types in `Polyline`.
 pub mod polyline {
     /// Encapsulates the type of polyline. Defaults to encoded_polyline.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PolylineType {
@@ -307,10 +318,11 @@ pub mod polyline {
         /// Specifies a polyline using the [GeoJSON LineString
         /// format](<https://tools.ietf.org/html/rfc7946#section-3.1.4>).
         #[prost(message, tag = "2")]
-        GeoJsonLinestring(::prost_types::Struct),
+        GeoJsonLinestring(::prost_wkt_types::Struct),
     }
 }
 /// A set of values that specify the quality of the polyline.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PolylineQuality {
@@ -349,6 +361,7 @@ impl PolylineQuality {
     }
 }
 /// Specifies the preferred type of polyline to be returned.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PolylineEncoding {
@@ -385,6 +398,7 @@ impl PolylineEncoding {
 }
 /// Labels for the [`Route`][google.maps.routing.v2.Route] that are useful to
 /// identify specific properties of the route to compare against others.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RouteLabel {
@@ -430,6 +444,7 @@ impl RouteLabel {
 /// sometimes be missing clear sidewalks, pedestrian paths, or bicycling paths.
 /// You must display this warning to the user for all walking, bicycling, and
 /// two-wheel routes that you display in your app.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RouteTravelMode {
@@ -479,8 +494,9 @@ impl RouteTravelMode {
 /// Given a path with points P_0, P_1, ... , P_N (zero-based index), the
 /// `SpeedReadingInterval` defines an interval and describes its traffic using
 /// the following categories.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpeedReadingInterval {
     /// The starting index of this interval in the polyline.
     #[prost(int32, optional, tag = "1")]
@@ -494,6 +510,7 @@ pub struct SpeedReadingInterval {
 /// Nested message and enum types in `SpeedReadingInterval`.
 pub mod speed_reading_interval {
     /// The classification of polyline speed based on traffic data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -540,8 +557,9 @@ pub mod speed_reading_interval {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum SpeedType {
         /// Traffic speed in this interval.
         #[prost(enumeration = "Speed", tag = "3")]
@@ -550,6 +568,7 @@ pub mod speed_reading_interval {
 }
 /// Encapsulates toll information on a [`Route`][google.maps.routing.v2.Route] or
 /// on a [`RouteLeg`][google.maps.routing.v2.RouteLeg].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TollInfo {
@@ -564,6 +583,7 @@ pub struct TollInfo {
     pub estimated_price: ::prost::alloc::vec::Vec<super::super::super::r#type::Money>,
 }
 /// A transit agency that operates a transit line.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitAgency {
@@ -578,6 +598,7 @@ pub struct TransitAgency {
     pub uri: ::prost::alloc::string::String,
 }
 /// Contains information about the transit line used in this step.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitLine {
@@ -610,6 +631,7 @@ pub struct TransitLine {
     pub vehicle: ::core::option::Option<TransitVehicle>,
 }
 /// Information about a transit stop.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitStop {
@@ -621,6 +643,7 @@ pub struct TransitStop {
     pub location: ::core::option::Option<Location>,
 }
 /// Information about a vehicle used in transit routes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitVehicle {
@@ -641,6 +664,7 @@ pub struct TransitVehicle {
 /// Nested message and enum types in `TransitVehicle`.
 pub mod transit_vehicle {
     /// The type of vehicles for transit routes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -754,6 +778,7 @@ pub mod transit_vehicle {
 }
 /// Contains a route, which consists of a series of connected road segments
 /// that join beginning, ending, and intermediate waypoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Route {
@@ -779,11 +804,11 @@ pub struct Route {
     /// `TRAFFIC_AWARE` or `TRAFFIC_AWARE_OPTIMAL`, then this value is calculated
     /// taking traffic conditions into account.
     #[prost(message, optional, tag = "3")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The duration of travel through the route without taking traffic
     /// conditions into consideration.
     #[prost(message, optional, tag = "4")]
-    pub static_duration: ::core::option::Option<::prost_types::Duration>,
+    pub static_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The overall route polyline. This polyline is the combined polyline of
     /// all `legs`.
     #[prost(message, optional, tag = "5")]
@@ -829,6 +854,7 @@ pub struct Route {
 /// Nested message and enum types in `Route`.
 pub mod route {
     /// Text representations of certain properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLocalizedValues {
@@ -859,6 +885,7 @@ pub mod route {
 }
 /// Contains the additional information that the user should be informed
 /// about, such as possible traffic zone restrictions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteTravelAdvisory {
@@ -896,6 +923,7 @@ pub struct RouteTravelAdvisory {
 }
 /// Contains the additional information that the user should be informed
 /// about on a leg step, such as possible traffic zone restrictions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegTravelAdvisory {
@@ -922,6 +950,7 @@ pub struct RouteLegTravelAdvisory {
 }
 /// Contains the additional information that the user should be informed
 /// about, such as possible traffic zone restrictions on a leg step.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStepTravelAdvisory {
@@ -930,6 +959,7 @@ pub struct RouteLegStepTravelAdvisory {
     pub speed_reading_intervals: ::prost::alloc::vec::Vec<SpeedReadingInterval>,
 }
 /// Contains a segment between non-`via` waypoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLeg {
@@ -942,11 +972,11 @@ pub struct RouteLeg {
     /// `TRAFFIC_AWARE_OPTIMAL`, then this value is calculated taking traffic
     /// conditions into account.
     #[prost(message, optional, tag = "2")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The duration of travel through the leg, calculated without taking
     /// traffic conditions into consideration.
     #[prost(message, optional, tag = "3")]
-    pub static_duration: ::core::option::Option<::prost_types::Duration>,
+    pub static_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The overall polyline for this leg that includes each `step`'s
     /// polyline.
     #[prost(message, optional, tag = "4")]
@@ -980,6 +1010,7 @@ pub struct RouteLeg {
 /// Nested message and enum types in `RouteLeg`.
 pub mod route_leg {
     /// Text representations of certain properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLegLocalizedValues {
@@ -1003,6 +1034,7 @@ pub mod route_leg {
         >,
     }
     /// Provides overview information about a list of `RouteLegStep`s.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StepsOverview {
@@ -1021,6 +1053,7 @@ pub mod route_leg {
         /// contiguous `RouteLegStep` that have the same `RouteTravelMode`.
         /// This field is not populated if the `RouteLeg` does not contain any
         /// multi-modal segments in the steps.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct MultiModalSegment {
@@ -1046,6 +1079,7 @@ pub mod route_leg {
 /// Contains a segment of a [`RouteLeg`][google.maps.routing.v2.RouteLeg]. A
 /// step corresponds to a single navigation instruction. Route legs are made up
 /// of steps.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStep {
@@ -1057,7 +1091,7 @@ pub struct RouteLegStep {
     /// into consideration. In some circumstances, this field might not have a
     /// value.
     #[prost(message, optional, tag = "2")]
-    pub static_duration: ::core::option::Option<::prost_types::Duration>,
+    pub static_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The polyline associated with this step.
     #[prost(message, optional, tag = "3")]
     pub polyline: ::core::option::Option<Polyline>,
@@ -1089,6 +1123,7 @@ pub struct RouteLegStep {
 /// Nested message and enum types in `RouteLegStep`.
 pub mod route_leg_step {
     /// Text representations of certain properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLegStepLocalizedValues {
@@ -1106,6 +1141,7 @@ pub mod route_leg_step {
     }
 }
 /// Additional information for the `RouteLegStep` related to `TRANSIT` routes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStepTransitDetails {
@@ -1128,7 +1164,7 @@ pub struct RouteLegStepTransitDetails {
     /// stop at this time. For example, with a headway seconds value of 600, you
     /// would expect a ten minute wait if you should miss your bus.
     #[prost(message, optional, tag = "4")]
-    pub headway: ::core::option::Option<::prost_types::Duration>,
+    pub headway: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Information about the transit line used in this step.
     #[prost(message, optional, tag = "5")]
     pub transit_line: ::core::option::Option<TransitLine>,
@@ -1148,6 +1184,7 @@ pub struct RouteLegStepTransitDetails {
 /// Nested message and enum types in `RouteLegStepTransitDetails`.
 pub mod route_leg_step_transit_details {
     /// Details about the transit stops for the `RouteLegStep`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TransitStopDetails {
@@ -1156,15 +1193,16 @@ pub mod route_leg_step_transit_details {
         pub arrival_stop: ::core::option::Option<super::TransitStop>,
         /// The estimated time of arrival for the step.
         #[prost(message, optional, tag = "2")]
-        pub arrival_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub arrival_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Information about the departure stop for the step.
         #[prost(message, optional, tag = "3")]
         pub departure_stop: ::core::option::Option<super::TransitStop>,
         /// The estimated time of departure for the step.
         #[prost(message, optional, tag = "4")]
-        pub departure_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub departure_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// Localized descriptions of values for `RouteTransitDetails`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TransitDetailsLocalizedValues {
@@ -1177,6 +1215,7 @@ pub mod route_leg_step_transit_details {
     }
 }
 /// List of toll passes around the world that we support.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TollPass {
@@ -1646,6 +1685,7 @@ impl TollPass {
 /// A set of values describing the vehicle's emission type.
 /// Applies only to the `DRIVE`
 /// [`RouteTravelMode`][google.maps.routing.v2.RouteTravelMode].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum VehicleEmissionType {
@@ -1687,8 +1727,9 @@ impl VehicleEmissionType {
     }
 }
 /// Contains the vehicle information, such as the vehicle emission type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VehicleInfo {
     /// Describes the vehicle's emission type.
     /// Applies only to the `DRIVE`
@@ -1698,6 +1739,7 @@ pub struct VehicleInfo {
 }
 /// Encapsulates a set of optional conditions to satisfy when calculating the
 /// routes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteModifiers {
@@ -1735,6 +1777,7 @@ pub struct RouteModifiers {
 }
 /// A set of values that specify factors to take into consideration when
 /// calculating the route.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RoutingPreference {
@@ -1790,6 +1833,7 @@ impl RoutingPreference {
 /// setting affects the value returned in the `duration` field in the
 /// response, which contains the predicted time in traffic based on historical
 /// averages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TrafficModel {
@@ -1835,6 +1879,7 @@ impl TrafficModel {
 }
 /// Preferences for `TRANSIT` based routes that influence the route that is
 /// returned.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitPreferences {
@@ -1850,6 +1895,7 @@ pub struct TransitPreferences {
 /// Nested message and enum types in `TransitPreferences`.
 pub mod transit_preferences {
     /// A set of values used to specify the mode of transit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1906,6 +1952,7 @@ pub mod transit_preferences {
         }
     }
     /// Specifies routing preferences for transit routes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1954,6 +2001,7 @@ pub mod transit_preferences {
     }
 }
 /// A set of values that specify the unit of measure used in the display.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Units {
@@ -1989,6 +2037,7 @@ impl Units {
 }
 /// Encapsulates a waypoint. Waypoints mark both the beginning and end of a
 /// route, and include intermediate stops along the route.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Waypoint {
@@ -2028,6 +2077,7 @@ pub struct Waypoint {
 /// Nested message and enum types in `Waypoint`.
 pub mod waypoint {
     /// Different ways to represent a location.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LocationType {
@@ -2045,6 +2095,7 @@ pub mod waypoint {
     }
 }
 /// ComputeRoutes request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRoutesRequest {
@@ -2082,7 +2133,7 @@ pub struct ComputeRoutesRequest {
     /// `TRANSIT`. Transit trips are available for up to 7 days in the past or 100
     /// days in the future.
     #[prost(message, optional, tag = "7")]
-    pub departure_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub departure_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The arrival time.
     /// NOTE: Can only be set when
     /// [RouteTravelMode][google.maps.routing.v2.RouteTravelMode] is set to
@@ -2090,7 +2141,7 @@ pub struct ComputeRoutesRequest {
     /// not both. Transit trips are available for up to 7 days in the past or 100
     /// days in the future.
     #[prost(message, optional, tag = "19")]
-    pub arrival_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub arrival_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Specifies whether to calculate alternate routes in addition to
     /// the route. No alternative routes are returned for requests that have
     /// intermediate waypoints.
@@ -2181,6 +2232,7 @@ pub struct ComputeRoutesRequest {
 /// Nested message and enum types in `ComputeRoutesRequest`.
 pub mod compute_routes_request {
     /// A supported reference route on the ComputeRoutesRequest.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2221,6 +2273,7 @@ pub mod compute_routes_request {
         }
     }
     /// Extra computations to perform while completing the request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2280,6 +2333,7 @@ pub mod compute_routes_request {
     }
 }
 /// ComputeRoutes the response message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRoutesResponse {
@@ -2301,6 +2355,7 @@ pub struct ComputeRoutesResponse {
     pub geocoding_results: ::core::option::Option<GeocodingResults>,
 }
 /// ComputeRouteMatrix request message
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRouteMatrixRequest {
@@ -2338,14 +2393,14 @@ pub struct ComputeRouteMatrixRequest {
     /// [`RouteTravelMode`][google.maps.routing.v2.RouteTravelMode] is set to
     /// `TRANSIT`.
     #[prost(message, optional, tag = "5")]
-    pub departure_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub departure_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The arrival time.
     /// NOTE: Can only be set when
     /// [`RouteTravelMode`][google.maps.routing.v2.RouteTravelMode] is set to
     /// `TRANSIT`. You can specify either `departure_time` or `arrival_time`, but
     /// not both.
     #[prost(message, optional, tag = "11")]
-    pub arrival_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub arrival_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
     /// information, see [Unicode Locale
     /// Identifier](<http://www.unicode.org/reports/tr35/#Unicode_locale_identifier>).
@@ -2395,6 +2450,7 @@ pub struct ComputeRouteMatrixRequest {
 /// Nested message and enum types in `ComputeRouteMatrixRequest`.
 pub mod compute_route_matrix_request {
     /// Extra computations to perform while completing the request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2435,6 +2491,7 @@ pub mod compute_route_matrix_request {
     }
 }
 /// A single origin for ComputeRouteMatrixRequest
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixOrigin {
@@ -2446,6 +2503,7 @@ pub struct RouteMatrixOrigin {
     pub route_modifiers: ::core::option::Option<RouteModifiers>,
 }
 /// A single destination for ComputeRouteMatrixRequest
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixDestination {
@@ -2455,6 +2513,7 @@ pub struct RouteMatrixDestination {
 }
 /// Contains route information computed for an origin/destination pair in the
 /// ComputeRouteMatrix API. This proto can be streamed to the client.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixElement {
@@ -2480,11 +2539,11 @@ pub struct RouteMatrixElement {
     /// `TRAFFIC_AWARE_OPTIMAL`, then this value is calculated taking traffic
     /// conditions into account.
     #[prost(message, optional, tag = "5")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The duration of traveling through the route without taking traffic
     /// conditions into consideration.
     #[prost(message, optional, tag = "6")]
-    pub static_duration: ::core::option::Option<::prost_types::Duration>,
+    pub static_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Additional information about the route. For example: restriction
     /// information and toll information
     #[prost(message, optional, tag = "7")]
@@ -2503,6 +2562,7 @@ pub struct RouteMatrixElement {
 /// Nested message and enum types in `RouteMatrixElement`.
 pub mod route_matrix_element {
     /// Text representations of certain properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LocalizedValues {
@@ -2532,6 +2592,7 @@ pub mod route_matrix_element {
     }
 }
 /// The condition of the route being returned.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RouteMatrixElementCondition {

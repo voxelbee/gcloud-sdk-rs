@@ -10,6 +10,7 @@
 ///    |---------------------Trace----------------------|
 ///    Step1(State) Step2(State) ---  StepN(State(final))
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
@@ -35,6 +36,7 @@ pub struct Trace {
 }
 /// A simulated forwarding path is composed of multiple steps.
 /// Each step has a well-defined state and an associated configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Step {
@@ -65,6 +67,7 @@ pub struct Step {
 pub mod step {
     /// Type of states that are defined in the network state machine.
     /// Each step in the packet trace is in a specific state.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -252,6 +255,7 @@ pub mod step {
     /// has no permission to view the configuration in this step, for non-final
     /// states a special state is populated (VIEWER_PERMISSION_MISSING), and for
     /// final state the configuration is cleared.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StepInfo {
@@ -334,6 +338,7 @@ pub mod step {
     }
 }
 /// For display only. Metadata associated with a Compute Engine instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceInfo {
@@ -364,6 +369,7 @@ pub struct InstanceInfo {
     pub service_account: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine network.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkInfo {
@@ -379,6 +385,7 @@ pub struct NetworkInfo {
 }
 /// For display only. Metadata associated with a VPC firewall rule, an implied
 /// VPC firewall rule, or a hierarchical firewall policy rule.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirewallInfo {
@@ -423,6 +430,7 @@ pub struct FirewallInfo {
 /// Nested message and enum types in `FirewallInfo`.
 pub mod firewall_info {
     /// The firewall rule's type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -528,6 +536,7 @@ pub mod firewall_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine route.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteInfo {
@@ -586,6 +595,7 @@ pub struct RouteInfo {
 /// Nested message and enum types in `RouteInfo`.
 pub mod route_info {
     /// Type of route:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -650,6 +660,7 @@ pub mod route_info {
         }
     }
     /// Type of next hop:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -739,6 +750,7 @@ pub mod route_info {
         }
     }
     /// Indicates where routes are applicable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -787,6 +799,7 @@ pub mod route_info {
 /// some Google Services use special routes within Google production
 /// infrastructure to reach Compute Engine Instances.
 /// <https://cloud.google.com/vpc/docs/routes#special_return_paths>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleServiceInfo {
@@ -800,6 +813,7 @@ pub struct GoogleServiceInfo {
 /// Nested message and enum types in `GoogleServiceInfo`.
 pub mod google_service_info {
     /// Recognized type of a Google Service.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -873,6 +887,7 @@ pub mod google_service_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine forwarding rule.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardingRuleInfo {
@@ -899,6 +914,7 @@ pub struct ForwardingRuleInfo {
     pub network_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a load balancer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerInfo {
@@ -924,6 +940,7 @@ pub struct LoadBalancerInfo {
 /// Nested message and enum types in `LoadBalancerInfo`.
 pub mod load_balancer_info {
     /// The type definition for a load balancer:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -979,6 +996,7 @@ pub mod load_balancer_info {
         }
     }
     /// The type definition for a load balancer backend configuration:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1027,6 +1045,7 @@ pub mod load_balancer_info {
     }
 }
 /// For display only. Metadata associated with a specific load balancer backend.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackend {
@@ -1053,6 +1072,7 @@ pub struct LoadBalancerBackend {
 /// Nested message and enum types in `LoadBalancerBackend`.
 pub mod load_balancer_backend {
     /// State of a health check firewall configuration:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1104,6 +1124,7 @@ pub mod load_balancer_backend {
     }
 }
 /// For display only. Metadata associated with a Compute Engine VPN gateway.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnGatewayInfo {
@@ -1129,6 +1150,7 @@ pub struct VpnGatewayInfo {
     pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine VPN tunnel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnTunnelInfo {
@@ -1164,6 +1186,7 @@ pub struct VpnTunnelInfo {
 pub mod vpn_tunnel_info {
     /// Types of VPN routing policy. For details, refer to [Networks and Tunnel
     /// routing](<https://cloud.google.com/network-connectivity/docs/vpn/concepts/choosing-networks-routing/>).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1214,6 +1237,7 @@ pub mod vpn_tunnel_info {
 /// For display only. The specification of the endpoints for the test.
 /// EndpointInfo is derived from source and destination Endpoint and validated
 /// by the backend data plane model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointInfo {
@@ -1243,6 +1267,7 @@ pub struct EndpointInfo {
     pub source_agent_uri: ::prost::alloc::string::String,
 }
 /// Details of the final state "deliver" and associated resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliverInfo {
@@ -1259,6 +1284,7 @@ pub struct DeliverInfo {
 /// Nested message and enum types in `DeliverInfo`.
 pub mod deliver_info {
     /// Deliver target types:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1354,6 +1380,7 @@ pub mod deliver_info {
     }
 }
 /// Details of the final state "forward" and associated resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardInfo {
@@ -1370,6 +1397,7 @@ pub struct ForwardInfo {
 /// Nested message and enum types in `ForwardInfo`.
 pub mod forward_info {
     /// Forward target types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1444,6 +1472,7 @@ pub mod forward_info {
     }
 }
 /// Details of the final state "abort" and associated resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbortInfo {
@@ -1466,6 +1495,7 @@ pub struct AbortInfo {
 /// Nested message and enum types in `AbortInfo`.
 pub mod abort_info {
     /// Abort cause types:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1693,6 +1723,7 @@ pub mod abort_info {
     }
 }
 /// Details of the final state "drop" and associated resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropInfo {
@@ -1715,6 +1746,7 @@ pub struct DropInfo {
 /// Nested message and enum types in `DropInfo`.
 pub mod drop_info {
     /// Drop cause types:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2166,6 +2198,7 @@ pub mod drop_info {
 }
 /// For display only. Metadata associated with a Google Kubernetes Engine (GKE)
 /// cluster master.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GkeMasterInfo {
@@ -2183,6 +2216,7 @@ pub struct GkeMasterInfo {
     pub external_ip: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudSqlInstanceInfo {
@@ -2207,6 +2241,7 @@ pub struct CloudSqlInstanceInfo {
     pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Cloud Function.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudFunctionInfo {
@@ -2224,6 +2259,7 @@ pub struct CloudFunctionInfo {
     pub version_id: i64,
 }
 /// For display only. Metadata associated with a Cloud Run revision.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunRevisionInfo {
@@ -2241,6 +2277,7 @@ pub struct CloudRunRevisionInfo {
     pub service_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with an App Engine version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineVersionInfo {
@@ -2258,6 +2295,7 @@ pub struct AppEngineVersionInfo {
     pub environment: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a VPC connector.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpcConnectorInfo {
@@ -2272,6 +2310,7 @@ pub struct VpcConnectorInfo {
     pub location: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with NAT.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NatInfo {
@@ -2320,6 +2359,7 @@ pub struct NatInfo {
 /// Nested message and enum types in `NatInfo`.
 pub mod nat_info {
     /// Types of NAT.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2372,6 +2412,7 @@ pub mod nat_info {
     }
 }
 /// For display only. Metadata associated with ProxyConnection.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProxyConnectionInfo {
@@ -2413,6 +2454,7 @@ pub struct ProxyConnectionInfo {
     pub network_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with the load balancer backend.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackendInfo {
@@ -2462,6 +2504,7 @@ pub struct LoadBalancerBackendInfo {
 /// Nested message and enum types in `LoadBalancerBackendInfo`.
 pub mod load_balancer_backend_info {
     /// Health check firewalls configuration state enum.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2536,6 +2579,7 @@ pub mod load_balancer_backend_info {
     }
 }
 /// For display only. Metadata associated with Storage Bucket.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageBucketInfo {
@@ -2546,6 +2590,7 @@ pub struct StorageBucketInfo {
 /// Type of a load balancer. For more information, see [Summary of Google Cloud
 /// load
 /// balancers](<https://cloud.google.com/load-balancing/docs/load-balancing-overview#summary-of-google-cloud-load-balancers>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LoadBalancerType {
@@ -2618,6 +2663,7 @@ impl LoadBalancerType {
     }
 }
 /// A Connectivity Test for a network reachability analysis.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectivityTest {
@@ -2691,10 +2737,10 @@ pub struct ConnectivityTest {
     >,
     /// Output only. The time the test was created.
     #[prost(message, optional, tag = "10")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the test's configuration was updated.
     #[prost(message, optional, tag = "11")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The reachability details of this test from the latest run.
     /// The details are updated when creating a new test, updating an
     /// existing test, or triggering a one-time rerun of an existing test.
@@ -2712,6 +2758,7 @@ pub struct ConnectivityTest {
     pub bypass_firewall_checks: bool,
 }
 /// Source or destination of the Connectivity Test.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
@@ -2784,6 +2831,7 @@ pub struct Endpoint {
 /// Nested message and enum types in `Endpoint`.
 pub mod endpoint {
     /// Wrapper for Cloud Function attributes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudFunctionEndpoint {
@@ -2792,6 +2840,7 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for the App Engine service version attributes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AppEngineVersionEndpoint {
@@ -2802,6 +2851,7 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for Cloud Run revision attributes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudRunRevisionEndpoint {
@@ -2814,6 +2864,7 @@ pub mod endpoint {
     }
     /// The type definition of an endpoint's network. Use one of the
     /// following choices:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2861,6 +2912,7 @@ pub mod endpoint {
         }
     }
     /// Type of the target of a forwarding rule.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2914,6 +2966,7 @@ pub mod endpoint {
     }
 }
 /// Results of the configuration analysis from the last run of the test.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReachabilityDetails {
@@ -2922,7 +2975,7 @@ pub struct ReachabilityDetails {
     pub result: i32,
     /// The time of the configuration analysis.
     #[prost(message, optional, tag = "2")]
-    pub verify_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub verify_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The details of a failure or a cancellation of reachability analysis.
     #[prost(message, optional, tag = "3")]
     pub error: ::core::option::Option<super::super::super::rpc::Status>,
@@ -2935,6 +2988,7 @@ pub struct ReachabilityDetails {
 /// Nested message and enum types in `ReachabilityDetails`.
 pub mod reachability_details {
     /// The overall result of the test's configuration analysis.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3005,8 +3059,9 @@ pub mod reachability_details {
     }
 }
 /// Latency percentile rank and value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LatencyPercentile {
     /// Percentage of samples this data point applies to.
     #[prost(int32, tag = "1")]
@@ -3018,6 +3073,7 @@ pub struct LatencyPercentile {
     pub latency_micros: i64,
 }
 /// Describes measured latency distribution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LatencyDistribution {
@@ -3026,6 +3082,7 @@ pub struct LatencyDistribution {
     pub latency_percentiles: ::prost::alloc::vec::Vec<LatencyPercentile>,
 }
 /// Results of active probing from the last run of the test.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProbingDetails {
@@ -3034,7 +3091,7 @@ pub struct ProbingDetails {
     pub result: i32,
     /// The time that reachability was assessed through active probing.
     #[prost(message, optional, tag = "2")]
-    pub verify_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub verify_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Details about an internal failure or the cancellation of active probing.
     #[prost(message, optional, tag = "3")]
     pub error: ::core::option::Option<super::super::super::rpc::Status>,
@@ -3070,6 +3127,7 @@ pub struct ProbingDetails {
 pub mod probing_details {
     /// Representation of a network edge location as per
     /// <https://cloud.google.com/vpc/docs/edge-locations.>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EdgeLocation {
@@ -3078,6 +3136,7 @@ pub mod probing_details {
         pub metropolitan_area: ::prost::alloc::string::String,
     }
     /// Overall probing result of the test.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3133,6 +3192,7 @@ pub mod probing_details {
         }
     }
     /// Abort cause types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3178,6 +3238,7 @@ pub mod probing_details {
     }
 }
 /// Request for the `ListConnectivityTests` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsRequest {
@@ -3216,6 +3277,7 @@ pub struct ListConnectivityTestsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response for the `ListConnectivityTests` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsResponse {
@@ -3230,6 +3292,7 @@ pub struct ListConnectivityTestsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request for the `GetConnectivityTest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConnectivityTestRequest {
@@ -3239,6 +3302,7 @@ pub struct GetConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `CreateConnectivityTest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConnectivityTestRequest {
@@ -3261,18 +3325,20 @@ pub struct CreateConnectivityTestRequest {
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `UpdateConnectivityTest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConnectivityTestRequest {
     /// Required. Mask of fields to update. At least one path must be supplied in
     /// this field.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Only fields specified in update_mask are updated.
     #[prost(message, optional, tag = "2")]
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `DeleteConnectivityTest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConnectivityTestRequest {
@@ -3282,6 +3348,7 @@ pub struct DeleteConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `RerunConnectivityTest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RerunConnectivityTestRequest {
@@ -3291,15 +3358,16 @@ pub struct RerunConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Metadata describing an [Operation][google.longrunning.Operation]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Target of the operation - for example
     /// projects/project-1/locations/global/connectivityTests/test-1
     #[prost(string, tag = "3")]

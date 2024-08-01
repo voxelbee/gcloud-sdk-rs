@@ -2,6 +2,7 @@
 /// A CrawledUrl resource represents a URL that was crawled during a ScanRun. Web
 /// Security Scanner Service crawls the web applications, following all links
 /// within the scope of sites, to find the URLs to test against.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrawledUrl {
@@ -17,6 +18,7 @@ pub struct CrawledUrl {
     pub body: ::prost::alloc::string::String,
 }
 /// ! Information about a vulnerability with an HTML.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Form {
@@ -28,6 +30,7 @@ pub struct Form {
     pub fields: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information reported for an outdated library.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutdatedLibrary {
@@ -43,6 +46,7 @@ pub struct OutdatedLibrary {
 }
 /// Information regarding any resource causing the vulnerability such
 /// as JavaScript sources, image, audio files, etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ViolatingResource {
@@ -54,6 +58,7 @@ pub struct ViolatingResource {
     pub resource_url: ::prost::alloc::string::String,
 }
 /// Information about vulnerable request parameters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableParameters {
@@ -62,6 +67,7 @@ pub struct VulnerableParameters {
     pub parameter_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information about vulnerable or missing HTTP Headers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableHeaders {
@@ -75,6 +81,7 @@ pub struct VulnerableHeaders {
 /// Nested message and enum types in `VulnerableHeaders`.
 pub mod vulnerable_headers {
     /// Describes a HTTP Header.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Header {
@@ -87,6 +94,7 @@ pub mod vulnerable_headers {
     }
 }
 /// Information reported for an XSS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Xss {
@@ -106,6 +114,7 @@ pub struct Xss {
 /// Nested message and enum types in `Xss`.
 pub mod xss {
     /// Types of XSS attack vector.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -203,6 +212,7 @@ pub mod xss {
     }
 }
 /// Information reported for an XXE.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Xxe {
@@ -217,6 +227,7 @@ pub struct Xxe {
 /// Nested message and enum types in `Xxe`.
 pub mod xxe {
     /// Locations within a request where XML was substituted.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -258,6 +269,7 @@ pub mod xxe {
 }
 /// A Finding resource represents a vulnerability instance identified during a
 /// ScanRun.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Finding {
@@ -331,6 +343,7 @@ pub struct Finding {
 /// Nested message and enum types in `Finding`.
 pub mod finding {
     /// The severity level of a vulnerability.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -384,6 +397,7 @@ pub mod finding {
 }
 /// A FindingTypeStats resource represents stats regarding a specific FindingType
 /// of Findings under a given ScanRun.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindingTypeStats {
@@ -395,6 +409,7 @@ pub struct FindingTypeStats {
     pub finding_count: i32,
 }
 /// A ScanConfig resource contains the configurations to launch a scan.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanConfig {
@@ -451,6 +466,7 @@ pub struct ScanConfig {
 /// Nested message and enum types in `ScanConfig`.
 pub mod scan_config {
     /// Scan authentication configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Authentication {
@@ -462,6 +478,7 @@ pub mod scan_config {
     /// Nested message and enum types in `Authentication`.
     pub mod authentication {
         /// Describes authentication configuration that uses a Google account.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GoogleAccount {
@@ -474,6 +491,7 @@ pub mod scan_config {
             pub password: ::prost::alloc::string::String,
         }
         /// Describes authentication configuration that uses a custom account.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CustomAccount {
@@ -489,6 +507,7 @@ pub mod scan_config {
             pub login_url: ::prost::alloc::string::String,
         }
         /// Describes authentication configuration for Identity-Aware-Proxy (IAP).
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct IapCredential {
@@ -500,6 +519,7 @@ pub mod scan_config {
         pub mod iap_credential {
             /// Describes authentication configuration when Web-Security-Scanner
             /// service account is added in Identity-Aware-Proxy (IAP) access policies.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct IapTestServiceAccountInfo {
@@ -509,6 +529,7 @@ pub mod scan_config {
                 pub target_audience_client_id: ::prost::alloc::string::String,
             }
             /// Identity-Aware-Proxy (IAP) Authentication Configuration
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum IapCredentials {
@@ -520,6 +541,7 @@ pub mod scan_config {
         }
         /// Required.
         /// Authentication configuration
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Authentication {
@@ -535,20 +557,22 @@ pub mod scan_config {
         }
     }
     /// Scan schedule configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Schedule {
         /// A timestamp indicates when the next run will be scheduled. The value is
         /// refreshed by the server after each run. If unspecified, it will default
         /// to current server time, which means the scan will be scheduled to start
         /// immediately.
         #[prost(message, optional, tag = "1")]
-        pub schedule_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub schedule_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Required. The duration of time between executions in days.
         #[prost(int32, tag = "2")]
         pub interval_duration_days: i32,
     }
     /// Type of user agents used for scanning.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -598,6 +622,7 @@ pub mod scan_config {
     /// Scan risk levels supported by Web Security Scanner. LOW impact
     /// scanning will minimize requests with the potential to modify data. To
     /// achieve the maximum scan coverage, NORMAL risk level is recommended.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -642,6 +667,7 @@ pub mod scan_config {
     }
     /// Controls export of scan configurations and results to Security
     /// Command Center.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -693,6 +719,7 @@ pub mod scan_config {
 /// APIs when scan configuration validation fails. It is also reported as part of
 /// a ScanRunErrorTrace message if scan validation fails due to a scan
 /// configuration error.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanConfigError {
@@ -711,6 +738,7 @@ pub mod scan_config_error {
     /// Output only.
     /// Defines an error reason code.
     /// Next id: 44
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -978,6 +1006,7 @@ pub mod scan_config_error {
 }
 /// Output only.
 /// Defines an error trace message for a ScanRun.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRunErrorTrace {
@@ -1000,6 +1029,7 @@ pub mod scan_run_error_trace {
     /// Output only.
     /// Defines an error reason code.
     /// Next id: 8
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1067,8 +1097,9 @@ pub mod scan_run_error_trace {
 /// Output only.
 /// Defines a warning trace message for ScanRun. Warning traces provide customers
 /// with useful information that helps make the scanning process more effective.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScanRunWarningTrace {
     /// Output only. Indicates the warning code.
     #[prost(enumeration = "scan_run_warning_trace::Code", tag = "1")]
@@ -1079,6 +1110,7 @@ pub mod scan_run_warning_trace {
     /// Output only.
     /// Defines a warning message code.
     /// Next id: 6
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1145,6 +1177,7 @@ pub mod scan_run_warning_trace {
 }
 /// A ScanRun is a output-only resource representing an actual run of the scan.
 /// Next id: 12
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRun {
@@ -1162,11 +1195,11 @@ pub struct ScanRun {
     pub result_state: i32,
     /// Output only. The time at which the ScanRun started.
     #[prost(message, optional, tag = "4")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which the ScanRun reached termination state - that the ScanRun
     /// is either finished or stopped by user.
     #[prost(message, optional, tag = "5")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The number of URLs crawled during this ScanRun. If the scan is in progress,
     /// the value represents the number of URLs crawled up to now.
     #[prost(int64, tag = "6")]
@@ -1197,6 +1230,7 @@ pub struct ScanRun {
 /// Nested message and enum types in `ScanRun`.
 pub mod scan_run {
     /// Types of ScanRun execution state.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1245,6 +1279,7 @@ pub mod scan_run {
         }
     }
     /// Types of ScanRun result state.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1298,6 +1333,7 @@ pub mod scan_run {
 /// Other than an added summary, this is a subset of the ScanRun.
 /// Representation in logs is either a proto Struct, or converted to JSON.
 /// Next id: 9
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRunLog {
@@ -1323,6 +1359,7 @@ pub struct ScanRunLog {
     pub error_trace: ::core::option::Option<ScanRunErrorTrace>,
 }
 /// Request for the `CreateScanConfig` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateScanConfigRequest {
@@ -1335,6 +1372,7 @@ pub struct CreateScanConfigRequest {
     pub scan_config: ::core::option::Option<ScanConfig>,
 }
 /// Request for the `DeleteScanConfig` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteScanConfigRequest {
@@ -1344,6 +1382,7 @@ pub struct DeleteScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanConfig` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanConfigRequest {
@@ -1353,6 +1392,7 @@ pub struct GetScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanConfigs` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsRequest {
@@ -1372,6 +1412,7 @@ pub struct ListScanConfigsRequest {
     pub page_size: i32,
 }
 /// Request for the `UpdateScanConfigRequest` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateScanConfigRequest {
@@ -1384,9 +1425,10 @@ pub struct UpdateScanConfigRequest {
     /// see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Response for the `ListScanConfigs` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsResponse {
@@ -1399,6 +1441,7 @@ pub struct ListScanConfigsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StartScanRun` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartScanRunRequest {
@@ -1408,6 +1451,7 @@ pub struct StartScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanRun` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanRunRequest {
@@ -1418,6 +1462,7 @@ pub struct GetScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanRuns` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsRequest {
@@ -1437,6 +1482,7 @@ pub struct ListScanRunsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListScanRuns` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsResponse {
@@ -1449,6 +1495,7 @@ pub struct ListScanRunsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StopScanRun` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopScanRunRequest {
@@ -1459,6 +1506,7 @@ pub struct StopScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListCrawledUrls` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsRequest {
@@ -1479,6 +1527,7 @@ pub struct ListCrawledUrlsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListCrawledUrls` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsResponse {
@@ -1491,6 +1540,7 @@ pub struct ListCrawledUrlsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `GetFinding` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFindingRequest {
@@ -1501,6 +1551,7 @@ pub struct GetFindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindings` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsRequest {
@@ -1527,6 +1578,7 @@ pub struct ListFindingsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListFindings` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsResponse {
@@ -1539,6 +1591,7 @@ pub struct ListFindingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindingTypeStats` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsRequest {
@@ -1549,6 +1602,7 @@ pub struct ListFindingTypeStatsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Response for the `ListFindingTypeStats` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsResponse {
@@ -1676,7 +1730,10 @@ pub mod web_security_scanner_client {
         pub async fn delete_scan_config(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteScanConfigRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -3,6 +3,7 @@
 ///
 /// The backup contains all documents and index configurations for the given
 /// database at a specific point in time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Backup {
@@ -23,10 +24,10 @@ pub struct Backup {
     /// Output only. The backup contains an externally consistent copy of the
     /// database at this time.
     #[prost(message, optional, tag = "3")]
-    pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub snapshot_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp at which this backup expires.
     #[prost(message, optional, tag = "4")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Statistics about the backup.
     ///
     /// This data only becomes available after the backup is fully materialized to
@@ -40,8 +41,9 @@ pub struct Backup {
 /// Nested message and enum types in `Backup`.
 pub mod backup {
     /// Backup specific statistics.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Stats {
         /// Output only. Summation of the size of all documents and index entries in
         /// the backup, measured in bytes.
@@ -55,6 +57,7 @@ pub mod backup {
         pub index_count: i64,
     }
     /// Indicate the current state of the backup.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -104,6 +107,7 @@ pub mod backup {
     }
 }
 /// A Cloud Firestore Database.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Database {
@@ -117,12 +121,12 @@ pub struct Database {
     /// Output only. The timestamp at which this database was created. Databases
     /// created before 2016 do not populate create_time.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp at which this database was most recently
     /// updated. Note this only includes updates to the database resource and not
     /// data contained by the database.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The location of the database. Available locations are listed at
     /// <https://cloud.google.com/firestore/docs/locations.>
     #[prost(string, tag = "9")]
@@ -146,7 +150,7 @@ pub struct Database {
     /// If the PITR feature is enabled, the retention period is 7 days. Otherwise,
     /// the retention period is 1 hour.
     #[prost(message, optional, tag = "17")]
-    pub version_retention_period: ::core::option::Option<::prost_types::Duration>,
+    pub version_retention_period: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Output only. The earliest timestamp at which older versions of the data can
     /// be read from the database. See \[version_retention_period\] above; this field
     /// is populated with `now - version_retention_period`.
@@ -156,7 +160,7 @@ pub struct Database {
     /// for the time from the moment when the value is queried to the moment when
     /// you initiate the recovery.
     #[prost(message, optional, tag = "18")]
-    pub earliest_version_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub earliest_version_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Whether to enable the PITR feature on this database.
     #[prost(enumeration = "database::PointInTimeRecoveryEnablement", tag = "21")]
     pub point_in_time_recovery_enablement: i32,
@@ -188,6 +192,7 @@ pub mod database {
     /// information about how to choose.
     ///
     /// Mode changes are only allowed if the database is empty.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -231,6 +236,7 @@ pub mod database {
         }
     }
     /// The type of concurrency control mode for transactions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -289,6 +295,7 @@ pub mod database {
         }
     }
     /// Point In Time Recovery feature enablement.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -352,6 +359,7 @@ pub mod database {
         }
     }
     /// The type of App Engine integration mode.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -403,6 +411,7 @@ pub mod database {
         }
     }
     /// The delete protection state of the database.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -454,6 +463,7 @@ pub mod database {
 }
 /// Cloud Firestore indexes enable simple and complex queries against
 /// documents in a database.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Index {
@@ -497,6 +507,7 @@ pub mod index {
     /// A field in an index.
     /// The field_path describes which field is indexed, the value_mode describes
     /// how the field value is indexed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexField {
@@ -512,8 +523,9 @@ pub mod index {
     /// Nested message and enum types in `IndexField`.
     pub mod index_field {
         /// The index configuration to support vector search operations
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct VectorConfig {
             /// Required. The vector dimension this configuration applies to.
             ///
@@ -529,12 +541,14 @@ pub mod index {
         pub mod vector_config {
             /// An index that stores vectors in a flat data structure, and supports
             /// exhaustive search.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct FlatIndex {}
             /// The type of index used.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Oneof)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum Type {
                 /// Indicates the vector index is a flat index.
                 #[prost(message, tag = "2")]
@@ -542,6 +556,7 @@ pub mod index {
             }
         }
         /// The supported orderings.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -585,6 +600,7 @@ pub mod index {
             }
         }
         /// The supported array value configurations.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -624,8 +640,9 @@ pub mod index {
             }
         }
         /// How the field value is indexed.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum ValueMode {
             /// Indicates that this field supports ordering by the specified order or
             /// comparing using =, !=, <, <=, >, >=.
@@ -642,6 +659,7 @@ pub mod index {
     }
     /// Query Scope defines the scope at which a query is run. This is specified on
     /// a StructuredQuery's `from` field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -695,6 +713,7 @@ pub mod index {
     }
     /// API Scope defines the APIs (Firestore Native, or Firestore in
     /// Datastore Mode) that are supported for queries.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -738,6 +757,7 @@ pub mod index {
     /// `CREATING` state. If the index is created successfully, it will transition
     /// to the `READY` state. If the index creation encounters a problem, the index
     /// will transition to the `NEEDS_REPAIR` state.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -801,6 +821,7 @@ pub mod index {
 ///
 /// Fields are grouped by their "Collection Group", which represent all
 /// collections in the database with the same id.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Field {
@@ -845,6 +866,7 @@ pub struct Field {
 /// Nested message and enum types in `Field`.
 pub mod field {
     /// The index configuration for this field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexConfig {
@@ -878,8 +900,9 @@ pub mod field {
     /// indicate that the document is eligible for immediate expiration. Using any
     /// other data type or leaving the field absent will disable expiration for the
     /// individual document.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TtlConfig {
         /// Output only. The state of the TTL configuration.
         #[prost(enumeration = "ttl_config::State", tag = "1")]
@@ -888,6 +911,7 @@ pub mod field {
     /// Nested message and enum types in `TtlConfig`.
     pub mod ttl_config {
         /// The state of applying the TTL configuration to all documents.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -946,16 +970,17 @@ pub mod field {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.CreateIndex][google.firestore.admin.v1.FirestoreAdmin.CreateIndex].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IndexOperationMetadata {
     /// The time this operation started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation completed. Will be unset if operation still in
     /// progress.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The index resource that this operation is acting on. For example:
     /// `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
     #[prost(string, tag = "3")]
@@ -973,16 +998,17 @@ pub struct IndexOperationMetadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldOperationMetadata {
     /// The time this operation started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation completed. Will be unset if operation still in
     /// progress.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The field resource that this operation is acting on. For example:
     /// `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_path}`
     #[prost(string, tag = "3")]
@@ -1012,6 +1038,7 @@ pub struct FieldOperationMetadata {
 /// Nested message and enum types in `FieldOperationMetadata`.
 pub mod field_operation_metadata {
     /// Information about an index configuration change.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IndexConfigDelta {
@@ -1025,6 +1052,7 @@ pub mod field_operation_metadata {
     /// Nested message and enum types in `IndexConfigDelta`.
     pub mod index_config_delta {
         /// Specifies how the index is changing.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1069,8 +1097,9 @@ pub mod field_operation_metadata {
         }
     }
     /// Information about a TTL configuration change.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TtlConfigDelta {
         /// Specifies how the TTL configuration is changing.
         #[prost(enumeration = "ttl_config_delta::ChangeType", tag = "1")]
@@ -1079,6 +1108,7 @@ pub mod field_operation_metadata {
     /// Nested message and enum types in `TtlConfigDelta`.
     pub mod ttl_config_delta {
         /// Specifies how the TTL config is changing.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1126,16 +1156,17 @@ pub mod field_operation_metadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.ExportDocuments][google.firestore.admin.v1.FirestoreAdmin.ExportDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsMetadata {
     /// The time this operation started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation completed. Will be unset if operation still in
     /// progress.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The state of the export operation.
     #[prost(enumeration = "OperationState", tag = "3")]
     pub operation_state: i32,
@@ -1158,21 +1189,22 @@ pub struct ExportDocumentsMetadata {
     /// exported. If unspecified, there are no guarantees about the consistency of
     /// the documents being exported.
     #[prost(message, optional, tag = "9")]
-    pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub snapshot_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.ImportDocuments][google.firestore.admin.v1.FirestoreAdmin.ImportDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDocumentsMetadata {
     /// The time this operation started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation completed. Will be unset if operation still in
     /// progress.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The state of the import operation.
     #[prost(enumeration = "OperationState", tag = "3")]
     pub operation_state: i32,
@@ -1195,16 +1227,17 @@ pub struct ImportDocumentsMetadata {
 /// Metadata for [google.longrunning.Operation][google.longrunning.Operation]
 /// results from
 /// [FirestoreAdmin.BulkDeleteDocuments][google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsMetadata {
     /// The time this operation started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation completed. Will be unset if operation still in
     /// progress.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The state of the operation.
     #[prost(enumeration = "OperationState", tag = "3")]
     pub operation_state: i32,
@@ -1225,10 +1258,11 @@ pub struct BulkDeleteDocumentsMetadata {
     /// the timestamp of PITR in case of disaster recovery (subject to PITR window
     /// limit).
     #[prost(message, optional, tag = "8")]
-    pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub snapshot_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Returned in the [google.longrunning.Operation][google.longrunning.Operation]
 /// response field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsResponse {
@@ -1240,15 +1274,16 @@ pub struct ExportDocumentsResponse {
 }
 /// Metadata for the [long-running operation][google.longrunning.Operation] from
 /// the [RestoreDatabase][google.firestore.admin.v1.RestoreDatabase] request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreDatabaseMetadata {
     /// The time the restore was started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the restore finished, unset for ongoing restores.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The operation state of the restore.
     #[prost(enumeration = "OperationState", tag = "3")]
     pub operation_state: i32,
@@ -1265,8 +1300,9 @@ pub struct RestoreDatabaseMetadata {
 /// Describes the progress of the operation.
 /// Unit of work is generic and must be interpreted based on where
 /// [Progress][google.firestore.admin.v1.Progress] is used.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Progress {
     /// The amount of work estimated.
     #[prost(int64, tag = "1")]
@@ -1276,6 +1312,7 @@ pub struct Progress {
     pub completed_work: i64,
 }
 /// Describes the state of the operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum OperationState {
@@ -1334,6 +1371,7 @@ impl OperationState {
 ///
 /// This resource is owned by the database it is backing up, and is deleted along
 /// with the database. The actual backups are not though.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupSchedule {
@@ -1351,16 +1389,16 @@ pub struct BackupSchedule {
     ///
     /// No backups will be created for this schedule before this time.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp at which this backup schedule was most recently
     /// updated. When a backup schedule is first created, this is the same as
     /// create_time.
     #[prost(message, optional, tag = "10")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// At what relative time in the future, compared to its creation time,
     /// the backup should be deleted, e.g. keep backups for 7 days.
     #[prost(message, optional, tag = "6")]
-    pub retention: ::core::option::Option<::prost_types::Duration>,
+    pub retention: ::core::option::Option<::prost_wkt_types::Duration>,
     /// A oneof field to represent when backups will be taken.
     #[prost(oneof = "backup_schedule::Recurrence", tags = "7, 8")]
     pub recurrence: ::core::option::Option<backup_schedule::Recurrence>,
@@ -1368,8 +1406,9 @@ pub struct BackupSchedule {
 /// Nested message and enum types in `BackupSchedule`.
 pub mod backup_schedule {
     /// A oneof field to represent when backups will be taken.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Recurrence {
         /// For a schedule that runs daily.
         #[prost(message, tag = "7")]
@@ -1382,14 +1421,16 @@ pub mod backup_schedule {
 /// Represents a recurring schedule that runs at a specific time every day.
 ///
 /// The time zone is UTC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DailyRecurrence {}
 /// Represents a recurring schedule that runs on a specified day of the week.
 ///
 /// The time zone is UTC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WeeklyRecurrence {
     /// The day of week to run.
     ///
@@ -1398,6 +1439,7 @@ pub struct WeeklyRecurrence {
     pub day: i32,
 }
 /// A request to list the Firestore Databases in all locations for a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatabasesRequest {
@@ -1411,6 +1453,7 @@ pub struct ListDatabasesRequest {
 }
 /// The request for
 /// [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.FirestoreAdmin.CreateDatabase].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDatabaseRequest {
@@ -1433,10 +1476,12 @@ pub struct CreateDatabaseRequest {
     pub database_id: ::prost::alloc::string::String,
 }
 /// Metadata related to the create database operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateDatabaseMetadata {}
 /// The list of databases for a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatabasesResponse {
@@ -1457,6 +1502,7 @@ pub struct ListDatabasesResponse {
 }
 /// The request for
 /// [FirestoreAdmin.GetDatabase][google.firestore.admin.v1.FirestoreAdmin.GetDatabase].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatabaseRequest {
@@ -1467,6 +1513,7 @@ pub struct GetDatabaseRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateDatabase][google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDatabaseRequest {
@@ -1475,14 +1522,16 @@ pub struct UpdateDatabaseRequest {
     pub database: ::core::option::Option<Database>,
     /// The list of fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Metadata related to the update database operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateDatabaseMetadata {}
 /// The request for
 /// [FirestoreAdmin.DeleteDatabase][google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDatabaseRequest {
@@ -1497,11 +1546,13 @@ pub struct DeleteDatabaseRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Metadata related to the delete database operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteDatabaseMetadata {}
 /// The request for
 /// [FirestoreAdmin.CreateBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.CreateBackupSchedule].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBackupScheduleRequest {
@@ -1516,6 +1567,7 @@ pub struct CreateBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.GetBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.GetBackupSchedule].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBackupScheduleRequest {
@@ -1528,6 +1580,7 @@ pub struct GetBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateBackupSchedule][google.firestore.admin.v1.FirestoreAdmin.UpdateBackupSchedule].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBackupScheduleRequest {
@@ -1536,10 +1589,11 @@ pub struct UpdateBackupScheduleRequest {
     pub backup_schedule: ::core::option::Option<BackupSchedule>,
     /// The list of fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request for
 /// [FirestoreAdmin.ListBackupSchedules][google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupSchedulesRequest {
@@ -1551,6 +1605,7 @@ pub struct ListBackupSchedulesRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListBackupSchedules][google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupSchedulesResponse {
@@ -1559,6 +1614,7 @@ pub struct ListBackupSchedulesResponse {
     pub backup_schedules: ::prost::alloc::vec::Vec<BackupSchedule>,
 }
 /// The request for [FirestoreAdmin.DeleteBackupSchedules][].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBackupScheduleRequest {
@@ -1571,6 +1627,7 @@ pub struct DeleteBackupScheduleRequest {
 }
 /// The request for
 /// [FirestoreAdmin.CreateIndex][google.firestore.admin.v1.FirestoreAdmin.CreateIndex].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateIndexRequest {
@@ -1584,6 +1641,7 @@ pub struct CreateIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListIndexes][google.firestore.admin.v1.FirestoreAdmin.ListIndexes].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListIndexesRequest {
@@ -1605,6 +1663,7 @@ pub struct ListIndexesRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListIndexes][google.firestore.admin.v1.FirestoreAdmin.ListIndexes].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListIndexesResponse {
@@ -1618,6 +1677,7 @@ pub struct ListIndexesResponse {
 }
 /// The request for
 /// [FirestoreAdmin.GetIndex][google.firestore.admin.v1.FirestoreAdmin.GetIndex].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetIndexRequest {
@@ -1628,6 +1688,7 @@ pub struct GetIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.DeleteIndex][google.firestore.admin.v1.FirestoreAdmin.DeleteIndex].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteIndexRequest {
@@ -1638,6 +1699,7 @@ pub struct DeleteIndexRequest {
 }
 /// The request for
 /// [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFieldRequest {
@@ -1647,10 +1709,11 @@ pub struct UpdateFieldRequest {
     /// A mask, relative to the field. If specified, only configuration specified
     /// by this field_mask will be updated in the field.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request for
 /// [FirestoreAdmin.GetField][google.firestore.admin.v1.FirestoreAdmin.GetField].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFieldRequest {
@@ -1661,6 +1724,7 @@ pub struct GetFieldRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFieldsRequest {
@@ -1688,6 +1752,7 @@ pub struct ListFieldsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFieldsResponse {
@@ -1701,6 +1766,7 @@ pub struct ListFieldsResponse {
 }
 /// The request for
 /// [FirestoreAdmin.ExportDocuments][google.firestore.admin.v1.FirestoreAdmin.ExportDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDocumentsRequest {
@@ -1738,10 +1804,11 @@ pub struct ExportDocumentsRequest {
     /// of the database at the provided time. Otherwise, there are no guarantees
     /// about the consistency of the exported documents.
     #[prost(message, optional, tag = "5")]
-    pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub snapshot_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The request for
 /// [FirestoreAdmin.ImportDocuments][google.firestore.admin.v1.FirestoreAdmin.ImportDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDocumentsRequest {
@@ -1779,6 +1846,7 @@ pub struct ImportDocumentsRequest {
 /// Please use
 /// [FirestoreAdmin.DeleteDatabase][google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase]
 /// instead.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsRequest {
@@ -1807,11 +1875,13 @@ pub struct BulkDeleteDocumentsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.BulkDeleteDocuments][google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BulkDeleteDocumentsResponse {}
 /// The request for
 /// [FirestoreAdmin.GetBackup][google.firestore.admin.v1.FirestoreAdmin.GetBackup].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBackupRequest {
@@ -1823,6 +1893,7 @@ pub struct GetBackupRequest {
 }
 /// The request for
 /// [FirestoreAdmin.ListBackups][google.firestore.admin.v1.FirestoreAdmin.ListBackups].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupsRequest {
@@ -1837,6 +1908,7 @@ pub struct ListBackupsRequest {
 }
 /// The response for
 /// [FirestoreAdmin.ListBackups][google.firestore.admin.v1.FirestoreAdmin.ListBackups].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBackupsResponse {
@@ -1854,6 +1926,7 @@ pub struct ListBackupsResponse {
 }
 /// The request for
 /// [FirestoreAdmin.DeleteBackup][google.firestore.admin.v1.FirestoreAdmin.DeleteBackup].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBackupRequest {
@@ -1865,6 +1938,7 @@ pub struct DeleteBackupRequest {
 }
 /// The request message for
 /// [FirestoreAdmin.RestoreDatabase][google.firestore.admin.v1.RestoreDatabase].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreDatabaseRequest {
@@ -2101,7 +2175,10 @@ pub mod firestore_admin_client {
         pub async fn delete_index(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteIndexRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2567,7 +2644,10 @@ pub mod firestore_admin_client {
         pub async fn delete_backup(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteBackupRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2759,7 +2839,10 @@ pub mod firestore_admin_client {
         pub async fn delete_backup_schedule(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteBackupScheduleRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2787,6 +2870,7 @@ pub mod firestore_admin_client {
 }
 /// The metadata message for
 /// [google.cloud.location.Location.metadata][google.cloud.location.Location.metadata].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LocationMetadata {}

@@ -2,6 +2,7 @@
 /// Information related to the details for one ad tag. This resource is only
 /// available for live sessions that do not implement Google Ad Manager ad
 /// insertion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LiveAdTagDetail {
@@ -16,6 +17,7 @@ pub struct LiveAdTagDetail {
 /// Information related to the details for one ad tag. This resource is only
 /// available for VOD sessions that do not implement Google Ad Manager ad
 /// insertion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodAdTagDetail {
@@ -28,6 +30,7 @@ pub struct VodAdTagDetail {
     pub ad_requests: ::prost::alloc::vec::Vec<AdRequest>,
 }
 /// Details of an ad request to an ad server.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdRequest {
@@ -42,14 +45,16 @@ pub struct AdRequest {
     pub response_metadata: ::core::option::Option<ResponseMetadata>,
 }
 /// Metadata for an ad request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestMetadata {
     /// The HTTP headers of the ad request.
     #[prost(message, optional, tag = "1")]
-    pub headers: ::core::option::Option<::prost_types::Struct>,
+    pub headers: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// Metadata for the response of an ad request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResponseMetadata {
@@ -58,7 +63,7 @@ pub struct ResponseMetadata {
     pub error: ::prost::alloc::string::String,
     /// Headers from the response.
     #[prost(message, optional, tag = "2")]
-    pub headers: ::core::option::Option<::prost_types::Struct>,
+    pub headers: ::core::option::Option<::prost_wkt_types::Struct>,
     /// Status code for the response.
     #[prost(string, tag = "3")]
     pub status_code: ::prost::alloc::string::String,
@@ -67,7 +72,7 @@ pub struct ResponseMetadata {
     pub size_bytes: i32,
     /// Total time elapsed for the response.
     #[prost(message, optional, tag = "5")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The body of the response.
     #[prost(string, tag = "6")]
     pub body: ::prost::alloc::string::String,
@@ -75,6 +80,7 @@ pub struct ResponseMetadata {
 /// Configuration for a CDN key. Used by the Video Stitcher
 /// to sign URIs for fetching video manifests and signing
 /// media segments for playback.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CdnKey {
@@ -93,6 +99,7 @@ pub struct CdnKey {
 /// Nested message and enum types in `CdnKey`.
 pub mod cdn_key {
     /// Configuration associated with the CDN key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CdnKeyConfig {
@@ -108,6 +115,7 @@ pub mod cdn_key {
     }
 }
 /// Configuration for a Google Cloud CDN key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleCdnKey {
@@ -119,6 +127,7 @@ pub struct GoogleCdnKey {
     pub key_name: ::prost::alloc::string::String,
 }
 /// Configuration for an Akamai CDN key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AkamaiCdnKey {
@@ -127,6 +136,7 @@ pub struct AkamaiCdnKey {
     pub token_key: ::prost::alloc::vec::Vec<u8>,
 }
 /// Configuration for a Media CDN key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaCdnKey {
@@ -144,6 +154,7 @@ pub struct MediaCdnKey {
 /// Nested message and enum types in `MediaCdnKey`.
 pub mod media_cdn_key {
     /// Configuration for a Media CDN token.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TokenConfig {
@@ -160,6 +171,7 @@ pub mod media_cdn_key {
     }
 }
 /// Describes an event and a trigger URI.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
@@ -174,11 +186,12 @@ pub struct Event {
     pub id: ::prost::alloc::string::String,
     /// The offset in seconds if the event type is `PROGRESS`.
     #[prost(message, optional, tag = "4")]
-    pub offset: ::core::option::Option<::prost_types::Duration>,
+    pub offset: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Nested message and enum types in `Event`.
 pub mod event {
     /// Describes the event that occurred.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -312,13 +325,14 @@ pub mod event {
 }
 /// Indicates a time in which a list of events should be triggered
 /// during media playback.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProgressEvent {
     /// The time when the following tracking events occurs. The time is in
     /// seconds relative to the start of the VOD asset.
     #[prost(message, optional, tag = "1")]
-    pub time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The list of progress tracking events for the ad break. These can be of
     /// the following IAB types: `BREAK_START`, `BREAK_END`, `IMPRESSION`,
     /// `CREATIVE_VIEW`, `START`, `FIRST_QUARTILE`, `MIDPOINT`, `THIRD_QUARTILE`,
@@ -327,6 +341,7 @@ pub struct ProgressEvent {
     pub events: ::prost::alloc::vec::Vec<Event>,
 }
 /// Metadata for companion ads.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompanionAds {
@@ -340,6 +355,7 @@ pub struct CompanionAds {
 /// Nested message and enum types in `CompanionAds`.
 pub mod companion_ads {
     /// Indicates how many of the companions should be displayed with the ad.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -388,6 +404,7 @@ pub mod companion_ads {
     }
 }
 /// Metadata for a companion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Companion {
@@ -427,6 +444,7 @@ pub struct Companion {
 /// Nested message and enum types in `Companion`.
 pub mod companion {
     /// Ad resource associated with the companion ad.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AdResource {
@@ -442,6 +460,7 @@ pub mod companion {
     }
 }
 /// Metadata for an HTML ad resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HtmlAdResource {
@@ -450,6 +469,7 @@ pub struct HtmlAdResource {
     pub html_source: ::prost::alloc::string::String,
 }
 /// Metadata for an IFrame ad resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IframeAdResource {
@@ -458,6 +478,7 @@ pub struct IframeAdResource {
     pub uri: ::prost::alloc::string::String,
 }
 /// Metadata for a static ad resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticAdResource {
@@ -469,6 +490,7 @@ pub struct StaticAdResource {
     pub creative_type: ::prost::alloc::string::String,
 }
 /// Options on how fetches should be made.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchOptions {
@@ -483,6 +505,7 @@ pub struct FetchOptions {
     >,
 }
 /// Metadata for used to register live configs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LiveConfig {
@@ -526,6 +549,7 @@ pub struct LiveConfig {
 /// Nested message and enum types in `LiveConfig`.
 pub mod live_config {
     /// State of the live config.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -575,6 +599,7 @@ pub mod live_config {
     /// Defines the ad stitching behavior in case the ad duration does not align
     /// exactly with the ad break boundaries. If not specified, the default is
     /// `CUT_CURRENT`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -619,8 +644,9 @@ pub mod live_config {
     }
 }
 /// The configuration for prefetch ads.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PrefetchConfig {
     /// Required. Indicates whether the option to prefetch ad requests is enabled.
     #[prost(bool, tag = "1")]
@@ -632,9 +658,10 @@ pub struct PrefetchConfig {
     /// expected. For example, for a live event with 30s and 60s ad breaks, the
     /// initial duration should be set to 30s.
     #[prost(message, optional, tag = "2")]
-    pub initial_ad_request_duration: ::core::option::Option<::prost_types::Duration>,
+    pub initial_ad_request_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Metadata used to register a live stream with Google Ad Manager (GAM)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GamLiveConfig {
@@ -649,6 +676,7 @@ pub struct GamLiveConfig {
     pub custom_asset_key: ::prost::alloc::string::String,
 }
 /// Determines the ad tracking policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AdTracking {
@@ -684,6 +712,7 @@ impl AdTracking {
     }
 }
 /// Metadata for a VOD session. The session expires 4 hours after its creation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodSession {
@@ -747,6 +776,7 @@ pub struct VodSession {
 pub mod vod_session {
     /// Defines fields related to Google Ad Manager (GAM). This should be set if
     /// GAM is being used for ads.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GamSettings {
@@ -759,6 +789,7 @@ pub mod vod_session {
     }
 }
 /// Describes what was stitched into a VOD session's manifest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Interstitials {
@@ -770,12 +801,13 @@ pub struct Interstitials {
     pub session_content: ::core::option::Option<VodSessionContent>,
 }
 /// Metadata for an inserted ad in a VOD session.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodSessionAd {
     /// Duration in seconds of the ad.
     #[prost(message, optional, tag = "1")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Metadata of companion ads associated with the ad.
     #[prost(message, optional, tag = "2")]
     pub companion_ads: ::core::option::Option<CompanionAds>,
@@ -788,15 +820,17 @@ pub struct VodSessionAd {
     pub activity_events: ::prost::alloc::vec::Vec<Event>,
 }
 /// Metadata for the entire stitched content in a VOD session.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VodSessionContent {
     /// The total duration in seconds of the content including the ads stitched
     /// in.
     #[prost(message, optional, tag = "1")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Metadata for an inserted ad break.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodSessionAdBreak {
@@ -808,13 +842,14 @@ pub struct VodSessionAdBreak {
     pub ads: ::prost::alloc::vec::Vec<VodSessionAd>,
     /// Ad break end time in seconds relative to the start of the VOD asset.
     #[prost(message, optional, tag = "3")]
-    pub end_time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub end_time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Ad break start time in seconds relative to the start of the VOD asset.
     #[prost(message, optional, tag = "4")]
-    pub start_time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub start_time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Metadata for a live session. The session expires 5 minutes after the client
 /// stops fetching the session's playlists.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LiveSession {
@@ -862,6 +897,7 @@ pub struct LiveSession {
 /// Nested message and enum types in `LiveSession`.
 pub mod live_session {
     /// Defines fields related to Google Ad Manager (GAM).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GamSettings {
@@ -881,6 +917,7 @@ pub mod live_session {
     }
 }
 /// Options for manifest generation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ManifestOptions {
@@ -896,6 +933,7 @@ pub struct ManifestOptions {
 /// Nested message and enum types in `ManifestOptions`.
 pub mod manifest_options {
     /// Defines the ordering policy during manifest generation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -940,6 +978,7 @@ pub mod manifest_options {
     }
 }
 /// Filters for a video or muxed redition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenditionFilter {
@@ -953,6 +992,7 @@ pub struct RenditionFilter {
     pub codecs: ::prost::alloc::string::String,
 }
 /// Slate object
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slate {
@@ -972,6 +1012,7 @@ pub struct Slate {
 pub mod slate {
     /// GamSlate object has Google Ad Manager (GAM) related properties for the
     /// slate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GamSlate {
@@ -986,6 +1027,7 @@ pub mod slate {
 /// Information related to the interstitial of a VOD session. This resource is
 /// only available for VOD sessions that do not implement Google Ad Manager ad
 /// insertion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodStitchDetail {
@@ -998,6 +1040,7 @@ pub struct VodStitchDetail {
     pub ad_stitch_details: ::prost::alloc::vec::Vec<AdStitchDetail>,
 }
 /// Metadata for a stitched ad.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdStitchDetail {
@@ -1009,7 +1052,7 @@ pub struct AdStitchDetail {
     pub ad_id: ::prost::alloc::string::String,
     /// Required. The time offset of the processed ad.
     #[prost(message, optional, tag = "3")]
-    pub ad_time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub ad_time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. Indicates the reason why the ad has been skipped.
     #[prost(string, tag = "4")]
     pub skip_reason: ::prost::alloc::string::String,
@@ -1017,10 +1060,11 @@ pub struct AdStitchDetail {
     #[prost(map = "string, message", tag = "5")]
     pub media: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
 }
 /// Metadata used to register VOD configs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VodConfig {
@@ -1047,6 +1091,7 @@ pub struct VodConfig {
 /// Nested message and enum types in `VodConfig`.
 pub mod vod_config {
     /// State of the VOD config.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1095,6 +1140,7 @@ pub mod vod_config {
     }
 }
 /// Metadata used for GAM ad decisioning.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GamVodConfig {
@@ -1103,6 +1149,7 @@ pub struct GamVodConfig {
     pub network_code: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.createCdnKey.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCdnKeyRequest {
@@ -1123,6 +1170,7 @@ pub struct CreateCdnKeyRequest {
     pub cdn_key_id: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listCdnKeys.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCdnKeysRequest {
@@ -1145,6 +1193,7 @@ pub struct ListCdnKeysRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcher.ListCdnKeys.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCdnKeysResponse {
@@ -1159,6 +1208,7 @@ pub struct ListCdnKeysResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for VideoStitcherService.getCdnKey.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCdnKeyRequest {
@@ -1168,6 +1218,7 @@ pub struct GetCdnKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.deleteCdnKey.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCdnKeyRequest {
@@ -1177,6 +1228,7 @@ pub struct DeleteCdnKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.updateCdnKey.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCdnKeyRequest {
@@ -1187,9 +1239,10 @@ pub struct UpdateCdnKeyRequest {
     /// For the `FieldMask` definition, see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for VideoStitcherService.createVodSession
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVodSessionRequest {
@@ -1202,6 +1255,7 @@ pub struct CreateVodSessionRequest {
     pub vod_session: ::core::option::Option<VodSession>,
 }
 /// Request message for VideoStitcherService.getVodSession
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVodSessionRequest {
@@ -1211,6 +1265,7 @@ pub struct GetVodSessionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listVodStitchDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodStitchDetailsRequest {
@@ -1226,6 +1281,7 @@ pub struct ListVodStitchDetailsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcherService.listVodStitchDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodStitchDetailsResponse {
@@ -1237,6 +1293,7 @@ pub struct ListVodStitchDetailsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.getVodStitchDetail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVodStitchDetailRequest {
@@ -1247,6 +1304,7 @@ pub struct GetVodStitchDetailRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listVodAdTagDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodAdTagDetailsRequest {
@@ -1262,6 +1320,7 @@ pub struct ListVodAdTagDetailsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcherService.listVodAdTagDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodAdTagDetailsResponse {
@@ -1273,6 +1332,7 @@ pub struct ListVodAdTagDetailsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.getVodAdTagDetail
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVodAdTagDetailRequest {
@@ -1283,6 +1343,7 @@ pub struct GetVodAdTagDetailRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listLiveAdTagDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLiveAdTagDetailsRequest {
@@ -1298,6 +1359,7 @@ pub struct ListLiveAdTagDetailsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcherService.listLiveAdTagDetails.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLiveAdTagDetailsResponse {
@@ -1309,6 +1371,7 @@ pub struct ListLiveAdTagDetailsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.getLiveAdTagDetail
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLiveAdTagDetailRequest {
@@ -1318,6 +1381,7 @@ pub struct GetLiveAdTagDetailRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.createSlate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSlateRequest {
@@ -1351,6 +1415,7 @@ pub struct CreateSlateRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.getSlate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSlateRequest {
@@ -1360,6 +1425,7 @@ pub struct GetSlateRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listSlates.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSlatesRequest {
@@ -1382,6 +1448,7 @@ pub struct ListSlatesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcherService.listSlates.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSlatesResponse {
@@ -1396,6 +1463,7 @@ pub struct ListSlatesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for VideoStitcherService.updateSlate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSlateRequest {
@@ -1404,9 +1472,10 @@ pub struct UpdateSlateRequest {
     pub slate: ::core::option::Option<Slate>,
     /// Required. The update mask which specifies fields which should be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for VideoStitcherService.deleteSlate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSlateRequest {
@@ -1416,6 +1485,7 @@ pub struct DeleteSlateRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.createLiveSession.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateLiveSessionRequest {
@@ -1428,6 +1498,7 @@ pub struct CreateLiveSessionRequest {
     pub live_session: ::core::option::Option<LiveSession>,
 }
 /// Request message for VideoStitcherService.getSession.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLiveSessionRequest {
@@ -1437,6 +1508,7 @@ pub struct GetLiveSessionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.createLiveConfig
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateLiveConfigRequest {
@@ -1467,6 +1539,7 @@ pub struct CreateLiveConfigRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listLiveConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLiveConfigsRequest {
@@ -1491,6 +1564,7 @@ pub struct ListLiveConfigsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcher.ListLiveConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLiveConfigsResponse {
@@ -1505,6 +1579,7 @@ pub struct ListLiveConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for VideoStitcherService.getLiveConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLiveConfigRequest {
@@ -1515,6 +1590,7 @@ pub struct GetLiveConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.deleteLiveConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLiveConfigRequest {
@@ -1524,6 +1600,7 @@ pub struct DeleteLiveConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.updateLiveConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateLiveConfigRequest {
@@ -1535,9 +1612,10 @@ pub struct UpdateLiveConfigRequest {
     /// For the `FieldMask` definition, see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for VideoStitcherService.createVodConfig
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVodConfigRequest {
@@ -1568,6 +1646,7 @@ pub struct CreateVodConfigRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.listVodConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodConfigsRequest {
@@ -1593,6 +1672,7 @@ pub struct ListVodConfigsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for VideoStitcher.ListVodConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVodConfigsResponse {
@@ -1607,6 +1687,7 @@ pub struct ListVodConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for VideoStitcherService.getVodConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVodConfigRequest {
@@ -1616,6 +1697,7 @@ pub struct GetVodConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.deleteVodConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVodConfigRequest {
@@ -1625,6 +1707,7 @@ pub struct DeleteVodConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for VideoStitcherService.updateVodConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVodConfigRequest {
@@ -1636,18 +1719,19 @@ pub struct UpdateVodConfigRequest {
     /// For the `FieldMask` definition, see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,

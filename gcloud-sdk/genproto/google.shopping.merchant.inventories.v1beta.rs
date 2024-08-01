@@ -4,6 +4,7 @@
 /// [`storeCode`][google.shopping.merchant.inventories.v1beta.LocalInventory.store_code].
 /// For a list of all accepted attribute values, see the [local product inventory
 /// data specification](<https://support.google.com/merchants/answer/3061342>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalInventory {
@@ -72,6 +73,7 @@ pub struct LocalInventory {
     >,
 }
 /// Request message for the `ListLocalInventories` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesRequest {
@@ -98,6 +100,7 @@ pub struct ListLocalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListLocalInventories` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesResponse {
@@ -111,6 +114,7 @@ pub struct ListLocalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertLocalInventory` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertLocalInventoryRequest {
@@ -125,6 +129,7 @@ pub struct InsertLocalInventoryRequest {
     pub local_inventory: ::core::option::Option<LocalInventory>,
 }
 /// Request message for the `DeleteLocalInventory` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLocalInventoryRequest {
@@ -300,7 +305,10 @@ pub mod local_inventory_service_client {
         pub async fn delete_local_inventory(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteLocalInventoryRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -332,6 +340,7 @@ pub mod local_inventory_service_client {
 /// For a list of all accepted attribute values, see the [regional product
 /// inventory data
 /// specification](<https://support.google.com/merchants/answer/9698880>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionalInventory {
@@ -378,6 +387,7 @@ pub struct RegionalInventory {
     >,
 }
 /// Request message for the `ListRegionalInventories` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesRequest {
@@ -403,6 +413,7 @@ pub struct ListRegionalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListRegionalInventories` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesResponse {
@@ -416,6 +427,7 @@ pub struct ListRegionalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertRegionalInventory` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertRegionalInventoryRequest {
@@ -430,6 +442,7 @@ pub struct InsertRegionalInventoryRequest {
     pub regional_inventory: ::core::option::Option<RegionalInventory>,
 }
 /// Request message for the `DeleteRegionalInventory` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRegionalInventoryRequest {
@@ -611,7 +624,10 @@ pub mod regional_inventory_service_client {
         pub async fn delete_regional_inventory(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteRegionalInventoryRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

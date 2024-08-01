@@ -13,6 +13,7 @@
 /// Constraints have a default behavior determined by the `constraint_default`
 /// field, which is the enforcement behavior that is used in the absence of a
 /// policy being defined or inherited for the resource in question.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Constraint {
@@ -53,8 +54,9 @@ pub struct Constraint {
 pub mod constraint {
     /// A constraint that allows or disallows a list of string values, which are
     /// configured by an Organization Policy administrator with a policy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ListConstraint {
         /// Indicates whether values grouped into categories can be used in
         /// `Policy.allowed_values` and `Policy.denied_values`. For example,
@@ -73,13 +75,15 @@ pub mod constraint {
     /// For example, a constraint `constraints/compute.disableSerialPortAccess`.
     /// If it is enforced on a VM instance, serial port connections will not be
     /// opened to that instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BooleanConstraint {}
     /// Specifies the default behavior in the absence of any policy for the
     /// constraint. This must not be `CONSTRAINT_DEFAULT_UNSPECIFIED`.
     ///
     /// Immutable after creation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -128,8 +132,9 @@ pub mod constraint {
     /// The type of restrictions for this `Constraint`.
     ///
     /// Immutable after creation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ConstraintType {
         /// Defines this constraint as being a ListConstraint.
         #[prost(message, tag = "5")]
@@ -145,6 +150,7 @@ pub mod constraint {
 /// By creating a custom constraint, customers can apply policies of this
 /// custom constraint. *Creating a custom constraint itself does NOT apply any
 /// policy enforcement*.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConstraint {
@@ -190,7 +196,7 @@ pub struct CustomConstraint {
     /// represents the last time that the `CreateCustomConstraint` or
     /// `UpdateCustomConstraint` RPC was called
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `CustomConstraint`.
 pub mod custom_constraint {
@@ -201,6 +207,7 @@ pub mod custom_constraint {
     ///
     /// `UPDATE` only custom constraints are not supported. Use `CREATE` or
     /// `CREATE, UPDATE`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -249,6 +256,7 @@ pub mod custom_constraint {
         }
     }
     /// Allow or deny type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -294,6 +302,7 @@ pub mod custom_constraint {
 }
 /// Defines an organization policy which is used to specify constraints
 /// for configurations of Google Cloud resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Policy {
@@ -333,6 +342,7 @@ pub struct Policy {
 }
 /// Similar to PolicySpec but with an extra 'launch' field for launch reference.
 /// The PolicySpec here is specific for dry-run/darklaunch.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlternatePolicySpec {
@@ -347,6 +357,7 @@ pub struct AlternatePolicySpec {
 }
 /// Defines a Google Cloud policy specification which is used to specify
 /// constraints for configurations of Google Cloud resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicySpec {
@@ -367,7 +378,7 @@ pub struct PolicySpec {
     /// represents the last time a call to `CreatePolicy` or `UpdatePolicy` was
     /// made for that policy.
     #[prost(message, optional, tag = "2")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// In policies for boolean constraints, the following requirements apply:
     ///
     ///    - There must be one and only one policy rule where condition is unset.
@@ -398,6 +409,7 @@ pub struct PolicySpec {
 /// Nested message and enum types in `PolicySpec`.
 pub mod policy_spec {
     /// A rule used to express this policy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PolicyRule {
@@ -437,6 +449,7 @@ pub mod policy_spec {
         ///
         /// The `supports_under` field of the associated `Constraint`  defines
         /// whether ancestry prefixes can be used.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StringValues {
@@ -447,6 +460,7 @@ pub mod policy_spec {
             #[prost(string, repeated, tag = "2")]
             pub denied_values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         }
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
@@ -472,6 +486,7 @@ pub mod policy_spec {
 }
 /// The request sent to the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsRequest {
@@ -496,6 +511,7 @@ pub struct ListConstraintsRequest {
 }
 /// The response returned from the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsResponse {
@@ -508,6 +524,7 @@ pub struct ListConstraintsResponse {
 }
 /// The request sent to the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesRequest {
@@ -534,6 +551,7 @@ pub struct ListPoliciesRequest {
 /// The response returned from the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method. It will be empty
 /// if no policies are set on the resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesResponse {
@@ -548,6 +566,7 @@ pub struct ListPoliciesResponse {
 }
 /// The request sent to the \[GetPolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetPolicy\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPolicyRequest {
@@ -558,6 +577,7 @@ pub struct GetPolicyRequest {
 }
 /// The request sent to the \[GetEffectivePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetEffectivePolicy\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectivePolicyRequest {
@@ -568,6 +588,7 @@ pub struct GetEffectivePolicyRequest {
 }
 /// The request sent to the \[CreatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicy\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePolicyRequest {
@@ -586,6 +607,7 @@ pub struct CreatePolicyRequest {
 }
 /// The request sent to the \[UpdatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdatePolicy\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePolicyRequest {
@@ -596,10 +618,11 @@ pub struct UpdatePolicyRequest {
     /// by the set. The fields specified in the update_mask are relative to the
     /// policy, not the full request.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request sent to the \[DeletePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeletePolicy\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePolicyRequest {
@@ -615,6 +638,7 @@ pub struct DeletePolicyRequest {
 }
 /// The request sent to the \[CreateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraint\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomConstraintRequest {
@@ -629,6 +653,7 @@ pub struct CreateCustomConstraintRequest {
 }
 /// The request sent to the \[GetCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraint\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomConstraintRequest {
@@ -639,6 +664,7 @@ pub struct GetCustomConstraintRequest {
 }
 /// The request sent to the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsRequest {
@@ -662,6 +688,7 @@ pub struct ListCustomConstraintsRequest {
 /// The response returned from the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method. It will
 /// be empty if no custom constraints are set on the organization resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsResponse {
@@ -676,6 +703,7 @@ pub struct ListCustomConstraintsResponse {
 }
 /// The request sent to the \[UpdateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraint\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomConstraintRequest {
@@ -685,6 +713,7 @@ pub struct UpdateCustomConstraintRequest {
 }
 /// The request sent to the \[DeleteCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraint\] method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCustomConstraintRequest {
@@ -998,7 +1027,10 @@ pub mod org_policy_client {
         pub async fn delete_policy(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePolicyRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1168,7 +1200,10 @@ pub mod org_policy_client {
         pub async fn delete_custom_constraint(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCustomConstraintRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

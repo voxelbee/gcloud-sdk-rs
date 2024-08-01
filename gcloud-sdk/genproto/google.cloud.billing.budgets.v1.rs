@@ -4,6 +4,7 @@
 /// (for example, send an alert when 90% of the target spend is met).
 /// The budget time period is configurable, with options such as month (default),
 /// quarter, year, or custom time period.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Budget {
@@ -43,6 +44,7 @@ pub struct Budget {
     pub etag: ::prost::alloc::string::String,
 }
 /// The budgeted amount for each usage period.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BudgetAmount {
@@ -53,6 +55,7 @@ pub struct BudgetAmount {
 /// Nested message and enum types in `BudgetAmount`.
 pub mod budget_amount {
     /// Specification for what amount to use as the budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BudgetAmount {
@@ -79,8 +82,9 @@ pub mod budget_amount {
 /// LastPeriodAmount cannot be set for a budget configured with
 /// a
 /// [Filter.custom_period][google.cloud.billing.budgets.v1.Filter.custom_period].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LastPeriodAmount {}
 /// ThresholdRule contains the definition of a threshold. Threshold rules define
 /// the triggering events used to generate a budget notification email. When a
@@ -104,8 +108,9 @@ pub struct LastPeriodAmount {}
 /// For more information, see
 /// [set budget threshold rules and
 /// actions](<https://cloud.google.com/billing/docs/how-to/budgets#budget-actions>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ThresholdRule {
     /// Required. Send an alert when this threshold is exceeded.
     /// This is a 1.0-based percentage, so 0.5 = 50%.
@@ -120,6 +125,7 @@ pub struct ThresholdRule {
 /// Nested message and enum types in `ThresholdRule`.
 pub mod threshold_rule {
     /// The type of basis used to determine if spend has passed the threshold.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -170,6 +176,7 @@ pub mod threshold_rule {
 }
 /// NotificationsRule defines notifications that are sent based on budget spend
 /// and thresholds.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NotificationsRule {
@@ -252,6 +259,7 @@ pub struct NotificationsRule {
     pub enable_project_level_recipients: bool,
 }
 /// A filter for a budget, limiting the scope of the cost to calculate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Filter {
@@ -313,7 +321,7 @@ pub struct Filter {
     #[prost(map = "string, message", tag = "6")]
     pub labels: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
     /// Multiple options to choose the budget's time period, specifying that only
     /// usage that occurs during this time period should be included in the budget.
@@ -328,6 +336,7 @@ pub mod filter {
     /// selected credits.
     /// [See the documentation for a list of credit
     /// types](<https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type>).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -383,8 +392,9 @@ pub mod filter {
     /// Multiple options to choose the budget's time period, specifying that only
     /// usage that occurs during this time period should be included in the budget.
     /// If not set, the <code>usage_period</code> defaults to CalendarPeriod.MONTH.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum UsagePeriod {
         /// Optional. Specifies to track usage for recurring calendar period.
         /// For example, assume that CalendarPeriod.QUARTER is set. The budget
@@ -401,8 +411,9 @@ pub mod filter {
     }
 }
 /// All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomPeriod {
     /// Required. The start date must be after January 1, 2017.
     #[prost(message, optional, tag = "1")]
@@ -417,6 +428,7 @@ pub struct CustomPeriod {
 /// has a canonical start. Grammatically, "the start of the current
 /// `CalendarPeriod`". All calendar times begin at 12 AM US and Canadian
 /// Pacific Time (UTC-8).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum CalendarPeriod {
@@ -457,6 +469,7 @@ impl CalendarPeriod {
     }
 }
 /// Request for CreateBudget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBudgetRequest {
@@ -469,6 +482,7 @@ pub struct CreateBudgetRequest {
     pub budget: ::core::option::Option<Budget>,
 }
 /// Request for UpdateBudget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBudgetRequest {
@@ -483,9 +497,10 @@ pub struct UpdateBudgetRequest {
     /// <https://developers.google.com/protocol-buffers/docs/proto3#default> for more
     /// details about default values.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request for GetBudget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBudgetRequest {
@@ -495,6 +510,7 @@ pub struct GetBudgetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListBudgets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsRequest {
@@ -521,6 +537,7 @@ pub struct ListBudgetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListBudgets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsResponse {
@@ -533,6 +550,7 @@ pub struct ListBudgetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for DeleteBudget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBudgetRequest {
@@ -763,7 +781,10 @@ pub mod budget_service_client {
         pub async fn delete_budget(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteBudgetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

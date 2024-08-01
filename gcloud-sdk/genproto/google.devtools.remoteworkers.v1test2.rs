@@ -34,6 +34,7 @@
 /// Keys are not context sensitive.
 ///
 /// See <http://goo.gl/NurY8g> for more information on the Worker message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Worker {
@@ -72,6 +73,7 @@ pub struct Worker {
 /// Nested message and enum types in `Worker`.
 pub mod worker {
     /// A global property; see the `properties` field for more information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Property {
@@ -93,6 +95,7 @@ pub mod worker {
     }
     /// A configuration request or report; see the `configs` field for more
     /// information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Config {
@@ -114,6 +117,7 @@ pub mod worker {
 }
 /// Any device, including computers, phones, accelerators (e.g. GPUs), etc. All
 /// names must be unique.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Device {
@@ -144,6 +148,7 @@ pub struct Device {
 /// Nested message and enum types in `Device`.
 pub mod device {
     /// A device property; see `properties` for more information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Property {
@@ -172,6 +177,7 @@ pub mod device {
 /// hardware), which is the reverse of real life, but more natural from the point
 /// of the view of this API, which communicates solely with the bot and not
 /// directly with the underlying worker.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BotSession {
@@ -216,7 +222,7 @@ pub struct BotSession {
     /// The time at which this bot session will expire, unless the bot calls
     /// UpdateBotSession again. Output only.
     #[prost(message, optional, tag = "6")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The version of the bot code currently running. The server may use this
     /// information to issue an admin action to tell the bot to update itself.
     #[prost(string, tag = "7")]
@@ -240,6 +246,7 @@ pub struct BotSession {
 /// The server will remove COMPLETED leases from time to time, after which the
 /// bot shouldn't report on them any more (the server will ignore superfluous
 /// COMPLETED records).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lease {
@@ -250,13 +257,13 @@ pub struct Lease {
     /// the lease is not in the `PENDING` state. The message must be meaningful to
     /// the bot. Output only (must only be set by the server).
     #[prost(message, optional, tag = "8")]
-    pub payload: ::core::option::Option<::prost_types::Any>,
+    pub payload: ::core::option::Option<::prost_wkt_types::Any>,
     /// Any result the bot wishes to provide about the lease. Must not be changed
     /// after the first call with the lease in the `COMPLETED` or `CANCELLED`
     /// state. Input only (must only be set by the bot, will not be echoed by the
     /// server).
     #[prost(message, optional, tag = "9")]
-    pub result: ::core::option::Option<::prost_types::Any>,
+    pub result: ::core::option::Option<::prost_wkt_types::Any>,
     /// The state of the lease. See LeaseState for more information.
     #[prost(enumeration = "LeaseState", tag = "2")]
     pub state: i32,
@@ -277,7 +284,7 @@ pub struct Lease {
     /// time, but due to race conditions, the bot is not *required* to respect any
     /// expiry date except the first one.
     #[prost(message, optional, tag = "5")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// DEPRECATED. The assignment should be provided to the bot via the `payload`
     /// field. Clients that wish to use a simple name (such as a queue of work
     /// provided elsewhere) should define a custom message type and encode it into
@@ -288,7 +295,7 @@ pub struct Lease {
     /// DEPRECATED. Use `payload` instead.
     #[deprecated]
     #[prost(message, optional, tag = "6")]
-    pub inline_assignment: ::core::option::Option<::prost_types::Any>,
+    pub inline_assignment: ::core::option::Option<::prost_wkt_types::Any>,
 }
 /// AdminTemp is a prelimiary set of administration tasks. It's called "Temp"
 /// because we do not yet know the best way to represent admin tasks; it's
@@ -302,6 +309,7 @@ pub struct Lease {
 ///
 /// This message is heavily based on Swarming administration tasks from the LUCI
 /// project (<http://github.com/luci/luci-py/appengine/swarming>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdminTemp {
@@ -315,6 +323,7 @@ pub struct AdminTemp {
 /// Nested message and enum types in `AdminTemp`.
 pub mod admin_temp {
     /// Possible administration actions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -371,6 +380,7 @@ pub mod admin_temp {
     }
 }
 /// Request message for CreateBotSession.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBotSessionRequest {
@@ -383,6 +393,7 @@ pub struct CreateBotSessionRequest {
     pub bot_session: ::core::option::Option<BotSession>,
 }
 /// Request message for UpdateBotSession.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBotSessionRequest {
@@ -395,10 +406,11 @@ pub struct UpdateBotSessionRequest {
     /// Required. The fields on the bot that should be updated. See the BotSession
     /// resource for which fields are updatable by which caller.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A coarse description of the status of the bot that the server uses to
 /// determine whether to assign the bot new leases.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum BotStatus {
@@ -458,6 +470,7 @@ impl BotStatus {
 /// ACTIVE to COMPLETED. The server can change PENDING or ACTIVE to CANCELLED if
 /// it wants the bot to release its resources - for example, if the bot needs to
 /// be quarantined (it's producing bad output) or a cell needs to be drained.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LeaseState {
@@ -677,6 +690,7 @@ pub mod bots_client {
 }
 /// Describes a shell-style task to execute, suitable for providing as the Bots
 /// interface's `Lease.payload` field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandTask {
@@ -693,6 +707,7 @@ pub struct CommandTask {
 /// Nested message and enum types in `CommandTask`.
 pub mod command_task {
     /// Describes the inputs to a shell-style task.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Inputs {
@@ -740,6 +755,7 @@ pub mod command_task {
     /// Nested message and enum types in `Inputs`.
     pub mod inputs {
         /// An environment variable required by this task.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EnvironmentVariable {
@@ -752,6 +768,7 @@ pub mod command_task {
         }
     }
     /// Describes the expected outputs of the command.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Outputs {
@@ -779,20 +796,21 @@ pub mod command_task {
         pub stderr_destination: ::prost::alloc::string::String,
     }
     /// Describes the timeouts associated with this task.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Timeouts {
         /// This specifies the maximum time that the task can run, excluding the
         /// time required to download inputs or upload outputs. That is, the worker
         /// will terminate the task if it runs longer than this.
         #[prost(message, optional, tag = "1")]
-        pub execution: ::core::option::Option<::prost_types::Duration>,
+        pub execution: ::core::option::Option<::prost_wkt_types::Duration>,
         /// This specifies the maximum amount of time the task can be idle - that is,
         /// go without generating some output in either stdout or stderr. If the
         /// process is silent for more than the specified time, the worker will
         /// terminate the task.
         #[prost(message, optional, tag = "2")]
-        pub idle: ::core::option::Option<::prost_types::Duration>,
+        pub idle: ::core::option::Option<::prost_wkt_types::Duration>,
         /// If the execution or IO timeouts are exceeded, the worker will try to
         /// gracefully terminate the task and return any existing logs. However,
         /// tasks may be hard-frozen in which case this process will fail. This
@@ -800,11 +818,12 @@ pub mod command_task {
         /// gracefully (e.g. via SIGTERM) before we bring down the hammer (e.g.
         /// SIGKILL on *nix, CTRL_BREAK_EVENT on Windows).
         #[prost(message, optional, tag = "3")]
-        pub shutdown: ::core::option::Option<::prost_types::Duration>,
+        pub shutdown: ::core::option::Option<::prost_wkt_types::Duration>,
     }
 }
 /// DEPRECATED - use CommandResult instead.
 /// Describes the actual outputs from the task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandOutputs {
@@ -824,21 +843,23 @@ pub struct CommandOutputs {
 /// DEPRECATED - use CommandResult instead.
 /// Can be used as part of CompleteRequest.metadata, or are part of a more
 /// sophisticated message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CommandOverhead {
     /// The elapsed time between calling Accept and Complete. The server will also
     /// have its own idea of what this should be, but this excludes the overhead of
     /// the RPCs and the bot response time.
     #[prost(message, optional, tag = "1")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The amount of time *not* spent executing the command (ie
     /// uploading/downloading files).
     #[prost(message, optional, tag = "2")]
-    pub overhead: ::core::option::Option<::prost_types::Duration>,
+    pub overhead: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// All information about the execution of a command, suitable for providing as
 /// the Bots interface's `Lease.result` field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandResult {
@@ -862,12 +883,12 @@ pub struct CommandResult {
     /// the RPCs and the bot response time.
     #[deprecated]
     #[prost(message, optional, tag = "4")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The amount of time *not* spent executing the command (ie
     /// uploading/downloading files).
     #[deprecated]
     #[prost(message, optional, tag = "5")]
-    pub overhead: ::core::option::Option<::prost_types::Duration>,
+    pub overhead: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Implementation-dependent metadata about the task. Both servers and bots
     /// may define messages which can be encoded here; bots are free to provide
     /// metadata in multiple formats, and servers are free to choose one or more
@@ -875,10 +896,11 @@ pub struct CommandResult {
     /// considered an error for the bot to provide the server with a field that it
     /// doesn't know about.
     #[prost(message, repeated, tag = "6")]
-    pub metadata: ::prost::alloc::vec::Vec<::prost_types::Any>,
+    pub metadata: ::prost::alloc::vec::Vec<::prost_wkt_types::Any>,
 }
 /// The metadata for a file. Similar to the equivalent message in the Remote
 /// Execution API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileMetadata {
@@ -903,6 +925,7 @@ pub struct FileMetadata {
 }
 /// The metadata for a directory. Similar to the equivalent message in the Remote
 /// Execution API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DirectoryMetadata {
@@ -924,6 +947,7 @@ pub struct DirectoryMetadata {
 /// In the context of the RWAPI, a Digest will virtually always refer to the
 /// contents of a file or a directory. The latter is represented by the
 /// byte-encoded Directory message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Digest {
@@ -939,6 +963,7 @@ pub struct Digest {
     pub size_bytes: i64,
 }
 /// Describes a blob of binary content with its digest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Blob {
@@ -951,6 +976,7 @@ pub struct Blob {
 }
 /// The contents of a directory. Similar to the equivalent message in the Remote
 /// Execution API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Directory {

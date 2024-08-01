@@ -2,6 +2,7 @@
 /// A set of words or phrases that represents a common concept likely to appear
 /// in your audio, for example a list of passenger ship names. CustomClass items
 /// can be substituted into placeholders that you set in PhraseSet phrases.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomClass {
@@ -19,6 +20,7 @@ pub struct CustomClass {
 /// Nested message and enum types in `CustomClass`.
 pub mod custom_class {
     /// An item of the class.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ClassItem {
@@ -29,6 +31,7 @@ pub mod custom_class {
 }
 /// Provides "hints" to the speech recognizer to favor specific words and phrases
 /// in the results.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhraseSet {
@@ -77,6 +80,7 @@ pub mod phrase_set {
     /// endpoint, use the `global` location. To specify a region, use a
     /// [regional endpoint](<https://cloud.google.com/speech-to-text/docs/endpoints>)
     /// with matching `us` or `eu` location value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Phrase {
@@ -97,6 +101,7 @@ pub mod phrase_set {
     }
 }
 /// Speech adaptation configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechAdaptation {
@@ -122,6 +127,7 @@ pub struct SpeechAdaptation {
 }
 /// Nested message and enum types in `SpeechAdaptation`.
 pub mod speech_adaptation {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AbnfGrammar {
@@ -135,6 +141,7 @@ pub mod speech_adaptation {
 /// to automatically replace parts of the transcript with phrases of your
 /// choosing. For StreamingRecognize, this normalization only applies to stable
 /// partial transcripts (stability > 0.8) and final transcripts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TranscriptNormalization {
@@ -148,6 +155,7 @@ pub struct TranscriptNormalization {
 /// Nested message and enum types in `TranscriptNormalization`.
 pub mod transcript_normalization {
     /// A single replacement configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entry {
@@ -163,6 +171,7 @@ pub mod transcript_normalization {
     }
 }
 /// The top-level message sent by the client for the `Recognize` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecognizeRequest {
@@ -176,6 +185,7 @@ pub struct RecognizeRequest {
 }
 /// The top-level message sent by the client for the `LongRunningRecognize`
 /// method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LongRunningRecognizeRequest {
@@ -191,6 +201,7 @@ pub struct LongRunningRecognizeRequest {
     pub output_config: ::core::option::Option<TranscriptOutputConfig>,
 }
 /// Specifies an optional destination for the recognition results.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TranscriptOutputConfig {
@@ -199,6 +210,7 @@ pub struct TranscriptOutputConfig {
 }
 /// Nested message and enum types in `TranscriptOutputConfig`.
 pub mod transcript_output_config {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OutputType {
@@ -214,6 +226,7 @@ pub mod transcript_output_config {
 /// must contain a `streaming_config` message and must not contain
 /// `audio_content`. All subsequent messages must contain `audio_content` and
 /// must not contain a `streaming_config` message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamingRecognizeRequest {
@@ -226,6 +239,7 @@ pub struct StreamingRecognizeRequest {
 /// Nested message and enum types in `StreamingRecognizeRequest`.
 pub mod streaming_recognize_request {
     /// The streaming request, which is either a streaming config or audio content.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StreamingRequest {
@@ -248,6 +262,7 @@ pub mod streaming_recognize_request {
 }
 /// Provides information to the recognizer that specifies how to process the
 /// request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamingRecognitionConfig {
@@ -299,19 +314,21 @@ pub struct StreamingRecognitionConfig {
 /// Nested message and enum types in `StreamingRecognitionConfig`.
 pub mod streaming_recognition_config {
     /// Events that a timeout can be set on for voice activity.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VoiceActivityTimeout {
         /// Duration to timeout the stream if no speech begins.
         #[prost(message, optional, tag = "1")]
-        pub speech_start_timeout: ::core::option::Option<::prost_types::Duration>,
+        pub speech_start_timeout: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Duration to timeout the stream after speech ends.
         #[prost(message, optional, tag = "2")]
-        pub speech_end_timeout: ::core::option::Option<::prost_types::Duration>,
+        pub speech_end_timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     }
 }
 /// Provides information to the recognizer that specifies how to process the
 /// request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecognitionConfig {
@@ -432,14 +449,18 @@ pub struct RecognitionConfig {
     /// you?". See <https://cloud.google.com/speech-to-text/docs/spoken-punctuation>
     /// for support. If 'false', spoken punctuation is not replaced.
     #[prost(message, optional, tag = "22")]
-    pub enable_spoken_punctuation: ::core::option::Option<bool>,
+    pub enable_spoken_punctuation: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// The spoken emoji behavior for the call
     /// If not set, uses default behavior based on model of choice
     /// If 'true', adds spoken emoji formatting for the request. This will replace
     /// spoken emojis with the corresponding Unicode symbols in the final
     /// transcript. If 'false', spoken emojis are not replaced.
     #[prost(message, optional, tag = "23")]
-    pub enable_spoken_emojis: ::core::option::Option<bool>,
+    pub enable_spoken_emojis: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// If 'true', enables speaker detection for each recognized word in
     /// the top alternative of the recognition result using a speaker_tag provided
     /// in the WordInfo.
@@ -556,6 +577,7 @@ pub mod recognition_config {
     /// header; otherwise the request returns an
     /// [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error
     /// code.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -652,8 +674,9 @@ pub mod recognition_config {
     }
 }
 /// Config to enable speaker diarization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpeakerDiarizationConfig {
     /// If 'true', enables speaker detection for each recognized word in
     /// the top alternative of the recognition result using a speaker_tag provided
@@ -676,6 +699,7 @@ pub struct SpeakerDiarizationConfig {
     pub speaker_tag: i32,
 }
 /// Description of audio data to be recognized.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecognitionMetadata {
@@ -722,6 +746,7 @@ pub struct RecognitionMetadata {
 pub mod recognition_metadata {
     /// Use case categories that the audio recognition request can be described
     /// by.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -796,6 +821,7 @@ pub mod recognition_metadata {
         }
     }
     /// Enumerates the types of capture settings describing an audio file.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -845,6 +871,7 @@ pub mod recognition_metadata {
         }
     }
     /// The original media the speech was recorded on.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -888,6 +915,7 @@ pub mod recognition_metadata {
         }
     }
     /// The type of device the speech was recorded with.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -949,6 +977,7 @@ pub mod recognition_metadata {
 }
 /// Provides "hints" to the speech recognizer to favor specific words and phrases
 /// in the results.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechContext {
@@ -981,6 +1010,7 @@ pub struct SpeechContext {
 /// Either `content` or `uri` must be supplied. Supplying both or neither
 /// returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
 /// See [content limits](<https://cloud.google.com/speech-to-text/quotas#content>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecognitionAudio {
@@ -993,6 +1023,7 @@ pub struct RecognitionAudio {
 pub mod recognition_audio {
     /// The audio source, which is either inline content or a Google Cloud
     /// Storage uri.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AudioSource {
@@ -1016,6 +1047,7 @@ pub mod recognition_audio {
 /// The only message returned to the client by the `Recognize` method. It
 /// contains the result as zero or more sequential `SpeechRecognitionResult`
 /// messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecognizeResponse {
@@ -1025,7 +1057,7 @@ pub struct RecognizeResponse {
     pub results: ::prost::alloc::vec::Vec<SpeechRecognitionResult>,
     /// When available, billed audio seconds for the corresponding request.
     #[prost(message, optional, tag = "3")]
-    pub total_billed_time: ::core::option::Option<::prost_types::Duration>,
+    pub total_billed_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Provides information on adaptation behavior in response
     #[prost(message, optional, tag = "7")]
     pub speech_adaptation_info: ::core::option::Option<SpeechAdaptationInfo>,
@@ -1039,6 +1071,7 @@ pub struct RecognizeResponse {
 /// messages. It is included in the `result.response` field of the `Operation`
 /// returned by the `GetOperation` call of the `google::longrunning::Operations`
 /// service.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LongRunningRecognizeResponse {
@@ -1048,7 +1081,7 @@ pub struct LongRunningRecognizeResponse {
     pub results: ::prost::alloc::vec::Vec<SpeechRecognitionResult>,
     /// When available, billed audio seconds for the corresponding request.
     #[prost(message, optional, tag = "3")]
-    pub total_billed_time: ::core::option::Option<::prost_types::Duration>,
+    pub total_billed_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Original output config if present in the request.
     #[prost(message, optional, tag = "6")]
     pub output_config: ::core::option::Option<TranscriptOutputConfig>,
@@ -1066,6 +1099,7 @@ pub struct LongRunningRecognizeResponse {
 /// Describes the progress of a long-running `LongRunningRecognize` call. It is
 /// included in the `metadata` field of the `Operation` returned by the
 /// `GetOperation` call of the `google::longrunning::Operations` service.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LongRunningRecognizeMetadata {
@@ -1075,10 +1109,10 @@ pub struct LongRunningRecognizeMetadata {
     pub progress_percent: i32,
     /// Time when the request was received.
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Time of the most recent processing update.
     #[prost(message, optional, tag = "3")]
-    pub last_update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The URI of the audio file being transcribed. Empty if the
     /// audio was sent as byte content.
     #[prost(string, tag = "4")]
@@ -1137,6 +1171,7 @@ pub struct LongRunningRecognizeMetadata {
 ///      `error`,
 ///      `speech_event_type`, or
 ///      one or more (repeated) `results`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamingRecognizeResponse {
@@ -1155,11 +1190,11 @@ pub struct StreamingRecognizeResponse {
     pub speech_event_type: i32,
     /// Time offset between the beginning of the audio and event emission.
     #[prost(message, optional, tag = "8")]
-    pub speech_event_time: ::core::option::Option<::prost_types::Duration>,
+    pub speech_event_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// When available, billed audio seconds for the stream.
     /// Set only if this is the last response in the stream.
     #[prost(message, optional, tag = "5")]
-    pub total_billed_time: ::core::option::Option<::prost_types::Duration>,
+    pub total_billed_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Provides information on adaptation behavior in response
     #[prost(message, optional, tag = "9")]
     pub speech_adaptation_info: ::core::option::Option<SpeechAdaptationInfo>,
@@ -1171,6 +1206,7 @@ pub struct StreamingRecognizeResponse {
 /// Nested message and enum types in `StreamingRecognizeResponse`.
 pub mod streaming_recognize_response {
     /// Indicates the type of speech event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1238,6 +1274,7 @@ pub mod streaming_recognize_response {
 }
 /// A streaming speech recognition result corresponding to a portion of the audio
 /// that is currently being processed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamingRecognitionResult {
@@ -1264,7 +1301,7 @@ pub struct StreamingRecognitionResult {
     /// Time offset of the end of this result relative to the
     /// beginning of the audio.
     #[prost(message, optional, tag = "4")]
-    pub result_end_time: ::core::option::Option<::prost_types::Duration>,
+    pub result_end_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// For multi-channel audio, this is the channel number corresponding to the
     /// recognized result for the audio from that channel.
     /// For audio_channel_count = N, its output values can range from '1' to 'N'.
@@ -1277,6 +1314,7 @@ pub struct StreamingRecognitionResult {
     pub language_code: ::prost::alloc::string::String,
 }
 /// A speech recognition result corresponding to a portion of the audio.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechRecognitionResult {
@@ -1294,7 +1332,7 @@ pub struct SpeechRecognitionResult {
     /// Time offset of the end of this result relative to the
     /// beginning of the audio.
     #[prost(message, optional, tag = "4")]
-    pub result_end_time: ::core::option::Option<::prost_types::Duration>,
+    pub result_end_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Output only. The [BCP-47](<https://www.rfc-editor.org/rfc/bcp/bcp47.txt>)
     /// language tag of the language in this result. This language code was
     /// detected to have the most likelihood of being spoken in the audio.
@@ -1302,6 +1340,7 @@ pub struct SpeechRecognitionResult {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Alternative hypotheses (a.k.a. n-best list).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechRecognitionAlternative {
@@ -1327,6 +1366,7 @@ pub struct SpeechRecognitionAlternative {
     pub words: ::prost::alloc::vec::Vec<WordInfo>,
 }
 /// Word-specific information for recognized words.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WordInfo {
@@ -1337,7 +1377,7 @@ pub struct WordInfo {
     /// This is an experimental feature and the accuracy of the time offset can
     /// vary.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Duration>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time offset relative to the beginning of the audio,
     /// and corresponding to the end of the spoken word.
     /// This field is only set if `enable_word_time_offsets=true` and only
@@ -1345,7 +1385,7 @@ pub struct WordInfo {
     /// This is an experimental feature and the accuracy of the time offset can
     /// vary.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Duration>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The word corresponding to this set of information.
     #[prost(string, tag = "3")]
     pub word: ::prost::alloc::string::String,
@@ -1367,6 +1407,7 @@ pub struct WordInfo {
     pub speaker_tag: i32,
 }
 /// Information on speech adaptation use in results
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechAdaptationInfo {
@@ -1567,6 +1608,7 @@ pub mod speech_client {
     }
 }
 /// Message sent by the client for the `CreatePhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePhraseSetRequest {
@@ -1594,6 +1636,7 @@ pub struct CreatePhraseSetRequest {
     pub phrase_set: ::core::option::Option<PhraseSet>,
 }
 /// Message sent by the client for the `UpdatePhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePhraseSetRequest {
@@ -1613,9 +1656,10 @@ pub struct UpdatePhraseSetRequest {
     pub phrase_set: ::core::option::Option<PhraseSet>,
     /// The list of fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Message sent by the client for the `GetPhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPhraseSetRequest {
@@ -1632,6 +1676,7 @@ pub struct GetPhraseSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message sent by the client for the `ListPhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPhraseSetRequest {
@@ -1661,6 +1706,7 @@ pub struct ListPhraseSetRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message returned to the client by the `ListPhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPhraseSetResponse {
@@ -1673,6 +1719,7 @@ pub struct ListPhraseSetResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message sent by the client for the `DeletePhraseSet` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePhraseSetRequest {
@@ -1683,6 +1730,7 @@ pub struct DeletePhraseSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message sent by the client for the `CreateCustomClass` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomClassRequest {
@@ -1710,6 +1758,7 @@ pub struct CreateCustomClassRequest {
     pub custom_class: ::core::option::Option<CustomClass>,
 }
 /// Message sent by the client for the `UpdateCustomClass` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomClassRequest {
@@ -1729,9 +1778,10 @@ pub struct UpdateCustomClassRequest {
     pub custom_class: ::core::option::Option<CustomClass>,
     /// The list of fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Message sent by the client for the `GetCustomClass` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomClassRequest {
@@ -1742,6 +1792,7 @@ pub struct GetCustomClassRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message sent by the client for the `ListCustomClasses` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomClassesRequest {
@@ -1771,6 +1822,7 @@ pub struct ListCustomClassesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message returned to the client by the `ListCustomClasses` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomClassesResponse {
@@ -1783,6 +1835,7 @@ pub struct ListCustomClassesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message sent by the client for the `DeleteCustomClass` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCustomClassRequest {
@@ -2005,7 +2058,10 @@ pub mod adaptation_client {
         pub async fn delete_phrase_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePhraseSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2148,7 +2204,10 @@ pub mod adaptation_client {
         pub async fn delete_custom_class(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCustomClassRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

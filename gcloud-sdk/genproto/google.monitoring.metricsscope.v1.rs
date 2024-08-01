@@ -3,6 +3,7 @@
 /// Scope](<https://cloud.google.com/monitoring/settings#concept-scope>) in Cloud
 /// Monitoring, which specifies one or more Google projects and zero or more AWS
 /// accounts to monitor together.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricsScope {
@@ -16,10 +17,10 @@ pub struct MetricsScope {
     pub name: ::prost::alloc::string::String,
     /// Output only. The time when this `Metrics Scope` was created.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time when this `Metrics Scope` record was last updated.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The list of projects monitored by this `Metrics Scope`.
     #[prost(message, repeated, tag = "4")]
     pub monitored_projects: ::prost::alloc::vec::Vec<MonitoredProject>,
@@ -27,6 +28,7 @@ pub struct MetricsScope {
 /// A [project being
 /// monitored](<https://cloud.google.com/monitoring/settings/multiple-projects#create-multi>)
 /// by a `Metrics Scope`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MonitoredProject {
@@ -39,9 +41,10 @@ pub struct MonitoredProject {
     pub name: ::prost::alloc::string::String,
     /// Output only. The time when this `MonitoredProject` was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request for the `GetMetricsScope` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMetricsScopeRequest {
@@ -52,6 +55,7 @@ pub struct GetMetricsScopeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListMetricsScopesByMonitoredProject` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMetricsScopesByMonitoredProjectRequest {
@@ -62,6 +66,7 @@ pub struct ListMetricsScopesByMonitoredProjectRequest {
     pub monitored_resource_container: ::prost::alloc::string::String,
 }
 /// Response for the `ListMetricsScopesByMonitoredProject` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMetricsScopesByMonitoredProjectResponse {
@@ -71,6 +76,7 @@ pub struct ListMetricsScopesByMonitoredProjectResponse {
     pub metrics_scopes: ::prost::alloc::vec::Vec<MetricsScope>,
 }
 /// Request for the `CreateMonitoredProject` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMonitoredProjectRequest {
@@ -88,6 +94,7 @@ pub struct CreateMonitoredProjectRequest {
     pub monitored_project: ::core::option::Option<MonitoredProject>,
 }
 /// Request for the `DeleteMonitoredProject` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMonitoredProjectRequest {
@@ -103,22 +110,24 @@ pub struct DeleteMonitoredProjectRequest {
 }
 /// Contains metadata for longrunning operation for the edit Metrics Scope
 /// endpoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Current state of the batch operation.
     #[prost(enumeration = "operation_metadata::State", tag = "1")]
     pub state: i32,
     /// The time when the batch request was received.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time when the operation result was last updated.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `OperationMetadata`.
 pub mod operation_metadata {
     /// Batch operation states.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

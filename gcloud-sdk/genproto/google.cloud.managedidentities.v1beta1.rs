@@ -3,6 +3,7 @@
 /// If the domain is being changed, it will be placed into the UPDATING state,
 /// which indicates that the resource is being reconciled. At this point, Get
 /// will reflect an intermediate state.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Domain {
@@ -47,10 +48,10 @@ pub struct Domain {
     pub fqdn: ::prost::alloc::string::String,
     /// Output only. The time the instance was created.
     #[prost(message, optional, tag = "11")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last update time.
     #[prost(message, optional, tag = "12")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The current state of this domain.
     #[prost(enumeration = "domain::State", tag = "13")]
     pub state: i32,
@@ -65,6 +66,7 @@ pub struct Domain {
 /// Nested message and enum types in `Domain`.
 pub mod domain {
     /// Represents the different states of a managed domain.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -131,6 +133,7 @@ pub mod domain {
 }
 /// Represents a relationship between two domains. This allows a controller in
 /// one domain to authenticate a user in another domain.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trust {
@@ -162,10 +165,10 @@ pub struct Trust {
     pub trust_handshake_secret: ::prost::alloc::string::String,
     /// Output only. The time the instance was created.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last update time.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The current state of the trust.
     #[prost(enumeration = "trust::State", tag = "9")]
     pub state: i32,
@@ -176,11 +179,12 @@ pub struct Trust {
     /// Output only. The last heartbeat time when the trust was known to be
     /// connected.
     #[prost(message, optional, tag = "12")]
-    pub last_trust_heartbeat_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_trust_heartbeat_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `Trust`.
 pub mod trust {
     /// Represents the different states of a domain trust.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -236,6 +240,7 @@ pub mod trust {
         }
     }
     /// Represents the different inter-forest trust types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -282,6 +287,7 @@ pub mod trust {
     /// See
     /// [System.DirectoryServices.ActiveDirectory.TrustDirection](<https://docs.microsoft.com/en-us/dotnet/api/system.directoryservices.activedirectory.trustdirection?view=netframework-4.7.2>)
     /// for more information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -330,15 +336,16 @@ pub mod trust {
     }
 }
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpMetadata {
     /// Output only. The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,
@@ -357,6 +364,7 @@ pub struct OpMetadata {
 }
 /// Request message for
 /// [CreateMicrosoftAdDomain][google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomain]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMicrosoftAdDomainRequest {
@@ -382,6 +390,7 @@ pub struct CreateMicrosoftAdDomainRequest {
 }
 /// Request message for
 /// [ResetAdminPassword][google.cloud.managedidentities.v1beta1.ResetAdminPassword]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetAdminPasswordRequest {
@@ -392,6 +401,7 @@ pub struct ResetAdminPasswordRequest {
 }
 /// Response message for
 /// [ResetAdminPassword][google.cloud.managedidentities.v1beta1.ResetAdminPassword]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetAdminPasswordResponse {
@@ -401,6 +411,7 @@ pub struct ResetAdminPasswordResponse {
 }
 /// Request message for
 /// [ListDomains][google.cloud.managedidentities.v1beta1.ListDomains]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDomainsRequest {
@@ -433,6 +444,7 @@ pub struct ListDomainsRequest {
 }
 /// Response message for
 /// [ListDomains][google.cloud.managedidentities.v1beta1.ListDomains]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDomainsResponse {
@@ -449,6 +461,7 @@ pub struct ListDomainsResponse {
 }
 /// Request message for
 /// [GetDomain][google.cloud.managedidentities.v1beta1.GetDomain]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDomainRequest {
@@ -459,6 +472,7 @@ pub struct GetDomainRequest {
 }
 /// Request message for
 /// [UpdateDomain][google.cloud.managedidentities.v1beta1.UpdateDomain]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDomainRequest {
@@ -470,7 +484,7 @@ pub struct UpdateDomainRequest {
     ///   * `authorized_networks`
     ///   * `audit_logs_enabled`
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Domain message with updated fields. Only supported fields specified in
     /// update_mask are updated.
     #[prost(message, optional, tag = "2")]
@@ -478,6 +492,7 @@ pub struct UpdateDomainRequest {
 }
 /// Request message for
 /// [DeleteDomain][google.cloud.managedidentities.v1beta1.DeleteDomain]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDomainRequest {
@@ -488,6 +503,7 @@ pub struct DeleteDomainRequest {
 }
 /// Request message for
 /// [AttachTrust][google.cloud.managedidentities.v1beta1.AttachTrust]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttachTrustRequest {
@@ -501,6 +517,7 @@ pub struct AttachTrustRequest {
 }
 /// Request message for
 /// [ReconfigureTrust][google.cloud.managedidentities.v1beta1.ReconfigureTrust]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReconfigureTrustRequest {
@@ -521,6 +538,7 @@ pub struct ReconfigureTrustRequest {
 }
 /// Request message for
 /// [DetachTrust][google.cloud.managedidentities.v1beta1.DetachTrust]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DetachTrustRequest {
@@ -534,6 +552,7 @@ pub struct DetachTrustRequest {
 }
 /// Request message for
 /// [ValidateTrust][google.cloud.managedidentities.v1beta1.ValidateTrust]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateTrustRequest {

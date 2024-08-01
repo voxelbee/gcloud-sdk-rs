@@ -2,6 +2,7 @@
 /// A billing account in the
 /// [Google Cloud Console](<https://console.cloud.google.com/>). You can assign a
 /// billing account to one or more projects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BillingAccount {
@@ -42,6 +43,7 @@ pub struct BillingAccount {
 /// Encapsulation of billing information for a Google Cloud Console project. A
 /// project has at most one associated billing account at a time (but a billing
 /// account can be assigned to multiple projects).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectBillingInfo {
@@ -68,6 +70,7 @@ pub struct ProjectBillingInfo {
     pub billing_enabled: bool,
 }
 /// Request message for `GetBillingAccount`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBillingAccountRequest {
@@ -77,6 +80,7 @@ pub struct GetBillingAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for `ListBillingAccounts`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBillingAccountsRequest {
@@ -108,6 +112,7 @@ pub struct ListBillingAccountsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Response message for `ListBillingAccounts`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBillingAccountsResponse {
@@ -121,6 +126,7 @@ pub struct ListBillingAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `CreateBillingAccount`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBillingAccountRequest {
@@ -138,6 +144,7 @@ pub struct CreateBillingAccountRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for `UpdateBillingAccount`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBillingAccountRequest {
@@ -151,9 +158,10 @@ pub struct UpdateBillingAccountRequest {
     /// The update mask applied to the resource.
     /// Only "display_name" is currently supported.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for `ListProjectBillingInfo`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProjectBillingInfoRequest {
@@ -173,6 +181,7 @@ pub struct ListProjectBillingInfoRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Request message for `ListProjectBillingInfoResponse`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProjectBillingInfoResponse {
@@ -187,6 +196,7 @@ pub struct ListProjectBillingInfoResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `GetProjectBillingInfo`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProjectBillingInfoRequest {
@@ -196,6 +206,7 @@ pub struct GetProjectBillingInfoRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for `UpdateProjectBillingInfo`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProjectBillingInfoRequest {
@@ -211,6 +222,7 @@ pub struct UpdateProjectBillingInfoRequest {
     pub project_billing_info: ::core::option::Option<ProjectBillingInfo>,
 }
 /// Request message for `MoveBillingAccount` RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MoveBillingAccountRequest {
@@ -723,6 +735,7 @@ pub mod cloud_billing_client {
     }
 }
 /// Encapsulates a single service in Google Cloud Platform.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
@@ -743,6 +756,7 @@ pub struct Service {
     pub business_entity_name: ::prost::alloc::string::String,
 }
 /// Encapsulates a single SKU in Google Cloud
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Sku {
@@ -778,6 +792,7 @@ pub struct Sku {
     pub geo_taxonomy: ::core::option::Option<GeoTaxonomy>,
 }
 /// Represents the category hierarchy of a SKU.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Category {
@@ -798,6 +813,7 @@ pub struct Category {
     pub usage_type: ::prost::alloc::string::String,
 }
 /// Represents the pricing information for a SKU at a single point of time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PricingInfo {
@@ -808,7 +824,7 @@ pub struct PricingInfo {
     /// be equivalent to a time within the last 12 hours, indicating the latest
     /// pricing info.
     #[prost(message, optional, tag = "1")]
-    pub effective_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub effective_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// An optional human readable summary of the pricing information, has a
     /// maximum length of 256 characters.
     #[prost(string, tag = "2")]
@@ -838,6 +854,7 @@ pub struct PricingInfo {
 /// The above expresses a pricing formula where the first 20GB is free, the
 /// next 80GB is priced at $10 per GB followed by $5 per GB for additional
 /// usage.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PricingExpression {
@@ -883,6 +900,7 @@ pub struct PricingExpression {
 /// Nested message and enum types in `PricingExpression`.
 pub mod pricing_expression {
     /// The price rate indicating starting usage and its corresponding price.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TierRate {
@@ -900,8 +918,9 @@ pub mod pricing_expression {
     }
 }
 /// Represents the aggregation level and interval for pricing of a single SKU.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AggregationInfo {
     #[prost(enumeration = "aggregation_info::AggregationLevel", tag = "1")]
     pub aggregation_level: i32,
@@ -918,6 +937,7 @@ pub mod aggregation_info {
     /// The level at which usage is aggregated to compute cost.
     /// Example: "ACCOUNT" aggregation level indicates that usage for tiered
     /// pricing is aggregated across all projects in a single account.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -960,6 +980,7 @@ pub mod aggregation_info {
     /// The interval at which usage is aggregated to compute cost.
     /// Example: "MONTHLY" aggregation interval indicates that usage for tiered
     /// pricing is aggregated every month.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1001,6 +1022,7 @@ pub mod aggregation_info {
     }
 }
 /// Encapsulates the geographic taxonomy data for a sku.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeoTaxonomy {
@@ -1015,6 +1037,7 @@ pub struct GeoTaxonomy {
 /// Nested message and enum types in `GeoTaxonomy`.
 pub mod geo_taxonomy {
     /// The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1065,6 +1088,7 @@ pub mod geo_taxonomy {
     }
 }
 /// Request message for `ListServices`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesRequest {
@@ -1078,6 +1102,7 @@ pub struct ListServicesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for `ListServices`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesResponse {
@@ -1091,6 +1116,7 @@ pub struct ListServicesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `ListSkus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkusRequest {
@@ -1105,7 +1131,7 @@ pub struct ListSkusRequest {
     /// specified, the latest pricing will be returned (up to 12 hours old at
     /// most).
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional exclusive end time of the time range for which the pricing
     /// versions will be returned. Timestamps in the future are not allowed.
     /// The time range has to be within a single calendar month in
@@ -1113,7 +1139,7 @@ pub struct ListSkusRequest {
     /// specified, the latest pricing will be returned (up to 12 hours old at
     /// most).
     #[prost(message, optional, tag = "3")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The ISO 4217 currency code for the pricing info in the response proto.
     /// Will use the conversion rate as of start_time.
     /// Optional. If not specified USD will be used.
@@ -1129,6 +1155,7 @@ pub struct ListSkusRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for `ListSkus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkusResponse {

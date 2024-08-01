@@ -7,6 +7,7 @@
 /// See [Supported asset
 /// types](<https://cloud.google.com/asset-inventory/docs/supported-asset-types>)
 /// for more information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
@@ -64,6 +65,7 @@ pub struct Asset {
 pub mod asset {
     /// A representation of an [access
     /// policy](<https://cloud.google.com/access-context-manager/docs/overview#access-policies>).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AccessContextPolicy {
@@ -88,6 +90,7 @@ pub mod asset {
     }
 }
 /// A representation of a Google Cloud resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Resource {
@@ -133,9 +136,10 @@ pub struct Resource {
     /// The content of the resource, in which some sensitive fields are removed
     /// and may not be present.
     #[prost(message, optional, tag = "6")]
-    pub data: ::core::option::Option<::prost_types::Struct>,
+    pub data: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// ListAssets request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
@@ -151,7 +155,7 @@ pub struct ListAssetsRequest {
     /// data collection and indexing, there is a volatile window during which
     /// running the same query may get different results.
     #[prost(message, optional, tag = "2")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A list of asset types to take a snapshot for. For example:
     /// "compute.googleapis.com/Disk".
     ///
@@ -187,12 +191,13 @@ pub struct ListAssetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// ListAssets response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
     /// Time the snapshot was taken.
     #[prost(message, optional, tag = "1")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Assets.
     #[prost(message, repeated, tag = "2")]
     pub assets: ::prost::alloc::vec::Vec<Asset>,
@@ -203,6 +208,7 @@ pub struct ListAssetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Asset content type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ContentType {

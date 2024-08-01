@@ -2,8 +2,9 @@
 /// A note that indicates a type of analysis a provider would perform. This note
 /// exists in a provider's project. A `Discovery` occurrence is created in a
 /// consumer's project at the start of analysis.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Discovery {
     /// Required. Immutable. The kind of analysis that is handled by this
     /// discovery.
@@ -11,6 +12,7 @@ pub struct Discovery {
     pub analysis_kind: i32,
 }
 /// Details of a discovery occurrence.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Details {
@@ -19,6 +21,7 @@ pub struct Details {
     pub discovered: ::core::option::Option<Discovered>,
 }
 /// Provides information about the analysis status of a discovered resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Discovered {
@@ -27,7 +30,7 @@ pub struct Discovered {
     pub continuous_analysis: i32,
     /// The last time continuous analysis was done for this resource.
     #[prost(message, optional, tag = "2")]
-    pub last_analysis_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_analysis_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The status of discovery for the resource.
     #[prost(enumeration = "discovered::AnalysisStatus", tag = "3")]
     pub analysis_status: i32,
@@ -42,6 +45,7 @@ pub struct Discovered {
 /// Nested message and enum types in `Discovered`.
 pub mod discovered {
     /// Whether the resource is continuously analyzed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -86,6 +90,7 @@ pub mod discovered {
     }
     /// Analysis status for a resource. Currently for initial analysis only (not
     /// updated in continuous analysis).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

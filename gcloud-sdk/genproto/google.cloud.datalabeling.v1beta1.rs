@@ -2,6 +2,7 @@
 /// An AnnotationSpecSet is a collection of label definitions. For example, in
 /// image classification tasks, you define a set of possible labels for images as
 /// an AnnotationSpecSet. An AnnotationSpecSet is immutable upon creation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationSpecSet {
@@ -31,6 +32,7 @@ pub struct AnnotationSpecSet {
 /// in a labeling task. For example, an image classification task where images
 /// are labeled as `dog` or `cat` must reference an AnnotationSpec for `dog` and
 /// an AnnotationSpec for `cat`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationSpec {
@@ -45,6 +47,7 @@ pub struct AnnotationSpec {
 /// Annotation for Example. Each example may have one or more annotations. For
 /// example in image classification problem, each image might have one or more
 /// labels. We call labels binded with this image an Annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Annotation {
@@ -69,6 +72,7 @@ pub struct Annotation {
     pub annotation_sentiment: i32,
 }
 /// Annotation value for an example.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationValue {
@@ -77,6 +81,7 @@ pub struct AnnotationValue {
 }
 /// Nested message and enum types in `AnnotationValue`.
 pub mod annotation_value {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ValueType {
@@ -114,6 +119,7 @@ pub mod annotation_value {
     }
 }
 /// Image classification annotation definition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageClassificationAnnotation {
@@ -123,8 +129,9 @@ pub struct ImageClassificationAnnotation {
 }
 /// A vertex represents a 2D point in the image.
 /// NOTE: the vertex coordinates are in the same scale as the original image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Vertex {
     /// X coordinate.
     #[prost(int32, tag = "1")]
@@ -136,8 +143,9 @@ pub struct Vertex {
 /// A vertex represents a 2D point in the image.
 /// NOTE: the normalized vertex coordinates are relative to the original image
 /// and range from 0 to 1.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NormalizedVertex {
     /// X coordinate.
     #[prost(float, tag = "1")]
@@ -147,6 +155,7 @@ pub struct NormalizedVertex {
     pub y: f32,
 }
 /// A bounding polygon in the image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BoundingPoly {
@@ -155,6 +164,7 @@ pub struct BoundingPoly {
     pub vertices: ::prost::alloc::vec::Vec<Vertex>,
 }
 /// Normalized bounding polygon.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NormalizedBoundingPoly {
@@ -164,6 +174,7 @@ pub struct NormalizedBoundingPoly {
 }
 /// Image bounding poly annotation. It represents a polygon including
 /// bounding box in the image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageBoundingPolyAnnotation {
@@ -181,6 +192,7 @@ pub struct ImageBoundingPolyAnnotation {
 pub mod image_bounding_poly_annotation {
     /// The region of the polygon. If it is a bounding box, it is guaranteed to be
     /// four points.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BoundedArea {
@@ -191,6 +203,7 @@ pub mod image_bounding_poly_annotation {
     }
 }
 /// A line with multiple line segments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Polyline {
@@ -199,6 +212,7 @@ pub struct Polyline {
     pub vertices: ::prost::alloc::vec::Vec<Vertex>,
 }
 /// Normalized polyline.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NormalizedPolyline {
@@ -207,6 +221,7 @@ pub struct NormalizedPolyline {
     pub normalized_vertices: ::prost::alloc::vec::Vec<NormalizedVertex>,
 }
 /// A polyline for the image annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImagePolylineAnnotation {
@@ -218,6 +233,7 @@ pub struct ImagePolylineAnnotation {
 }
 /// Nested message and enum types in `ImagePolylineAnnotation`.
 pub mod image_polyline_annotation {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Poly {
@@ -228,6 +244,7 @@ pub mod image_polyline_annotation {
     }
 }
 /// Image segmentation annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageSegmentationAnnotation {
@@ -247,6 +264,7 @@ pub struct ImageSegmentationAnnotation {
     pub image_bytes: ::prost::alloc::vec::Vec<u8>,
 }
 /// Text classification annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextClassificationAnnotation {
@@ -255,6 +273,7 @@ pub struct TextClassificationAnnotation {
     pub annotation_spec: ::core::option::Option<AnnotationSpec>,
 }
 /// Text entity extraction annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextEntityExtractionAnnotation {
@@ -266,8 +285,9 @@ pub struct TextEntityExtractionAnnotation {
     pub sequential_segment: ::core::option::Option<SequentialSegment>,
 }
 /// Start and end position in a sequence (e.g. text segment).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SequentialSegment {
     /// Start position (inclusive).
     #[prost(int32, tag = "1")]
@@ -277,19 +297,21 @@ pub struct SequentialSegment {
     pub end: i32,
 }
 /// A time period inside of an example that has a time dimension (e.g. video).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeSegment {
     /// Start of the time segment (inclusive), represented as the duration since
     /// the example start.
     #[prost(message, optional, tag = "1")]
-    pub start_time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub start_time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// End of the time segment (exclusive), represented as the duration since the
     /// example start.
     #[prost(message, optional, tag = "2")]
-    pub end_time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub end_time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Video classification annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoClassificationAnnotation {
@@ -301,12 +323,13 @@ pub struct VideoClassificationAnnotation {
     pub annotation_spec: ::core::option::Option<AnnotationSpec>,
 }
 /// Video frame level annotation for object detection and tracking.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectTrackingFrame {
     /// The time offset of this frame relative to the beginning of the video.
     #[prost(message, optional, tag = "3")]
-    pub time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The bounding box location of this object track for the frame.
     #[prost(oneof = "object_tracking_frame::BoundedArea", tags = "1, 2")]
     pub bounded_area: ::core::option::Option<object_tracking_frame::BoundedArea>,
@@ -314,6 +337,7 @@ pub struct ObjectTrackingFrame {
 /// Nested message and enum types in `ObjectTrackingFrame`.
 pub mod object_tracking_frame {
     /// The bounding box location of this object track for the frame.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BoundedArea {
@@ -324,6 +348,7 @@ pub mod object_tracking_frame {
     }
 }
 /// Video object tracking annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoObjectTrackingAnnotation {
@@ -338,6 +363,7 @@ pub struct VideoObjectTrackingAnnotation {
     pub object_tracking_frames: ::prost::alloc::vec::Vec<ObjectTrackingFrame>,
 }
 /// Video event annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoEventAnnotation {
@@ -349,6 +375,7 @@ pub struct VideoEventAnnotation {
     pub time_segment: ::core::option::Option<TimeSegment>,
 }
 /// Additional information associated with the annotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationMetadata {
@@ -357,6 +384,7 @@ pub struct AnnotationMetadata {
     pub operator_metadata: ::core::option::Option<OperatorMetadata>,
 }
 /// General information useful for labels coming from contributors.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperatorMetadata {
@@ -377,6 +405,7 @@ pub struct OperatorMetadata {
 }
 /// Specifies where the annotation comes from (whether it was provided by a
 /// human labeler or a different source).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AnnotationSource {
@@ -404,6 +433,7 @@ impl AnnotationSource {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AnnotationSentiment {
@@ -435,6 +465,7 @@ impl AnnotationSentiment {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AnnotationType {
@@ -547,6 +578,7 @@ impl AnnotationType {
     }
 }
 /// Container of information about an image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImagePayload {
@@ -564,6 +596,7 @@ pub struct ImagePayload {
     pub signed_uri: ::prost::alloc::string::String,
 }
 /// Container of information about a piece of text.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextPayload {
@@ -572,6 +605,7 @@ pub struct TextPayload {
     pub text_content: ::prost::alloc::string::String,
 }
 /// Container of information of a video thumbnail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoThumbnail {
@@ -581,9 +615,10 @@ pub struct VideoThumbnail {
     /// Time offset relative to the beginning of the video, corresponding to the
     /// video frame where the thumbnail has been extracted from.
     #[prost(message, optional, tag = "2")]
-    pub time_offset: ::core::option::Option<::prost_types::Duration>,
+    pub time_offset: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Container of information of a video.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoPayload {
@@ -604,6 +639,7 @@ pub struct VideoPayload {
     pub signed_uri: ::prost::alloc::string::String,
 }
 /// Configuration for how human labeling task should be done.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HumanAnnotationConfig {
@@ -639,7 +675,7 @@ pub struct HumanAnnotationConfig {
     /// Optional. Maximum duration for contributors to answer a question. Maximum
     /// is 3600 seconds. Default is 3600 seconds.
     #[prost(message, optional, tag = "7")]
-    pub question_duration: ::core::option::Option<::prost_types::Duration>,
+    pub question_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. If you want your own labeling contributors to manage and work on
     /// this labeling request, you can set these contributors here. We will give
     /// them access to the question types in crowdcompute. Note that these
@@ -653,6 +689,7 @@ pub struct HumanAnnotationConfig {
     pub user_email_address: ::prost::alloc::string::String,
 }
 /// Config for image classification human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageClassificationConfig {
@@ -668,6 +705,7 @@ pub struct ImageClassificationConfig {
     pub answer_aggregation_type: i32,
 }
 /// Config for image bounding poly (and bounding box) human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BoundingPolyConfig {
@@ -679,6 +717,7 @@ pub struct BoundingPolyConfig {
     pub instruction_message: ::prost::alloc::string::String,
 }
 /// Config for image polyline human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolylineConfig {
@@ -690,6 +729,7 @@ pub struct PolylineConfig {
     pub instruction_message: ::prost::alloc::string::String,
 }
 /// Config for image segmentation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SegmentationConfig {
@@ -706,6 +746,7 @@ pub struct SegmentationConfig {
 /// 1. Assign labels on the entire video.
 /// 2. Split the video into multiple video clips based on camera shot, and
 /// assign labels on each video clip.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoClassificationConfig {
@@ -726,6 +767,7 @@ pub struct VideoClassificationConfig {
 /// Nested message and enum types in `VideoClassificationConfig`.
 pub mod video_classification_config {
     /// Annotation spec set with the setting of allowing multi labels or not.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AnnotationSpecSetConfig {
@@ -743,6 +785,7 @@ pub mod video_classification_config {
 /// and those objects will be labeled with bounding boxes.
 /// User need to specify the number of images to be extracted per second as the
 /// extraction frame rate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectDetectionConfig {
@@ -754,6 +797,7 @@ pub struct ObjectDetectionConfig {
     pub extraction_frame_rate: f64,
 }
 /// Config for video object tracking human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectTrackingConfig {
@@ -762,6 +806,7 @@ pub struct ObjectTrackingConfig {
     pub annotation_spec_set: ::prost::alloc::string::String,
 }
 /// Config for video event human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventConfig {
@@ -772,6 +817,7 @@ pub struct EventConfig {
     pub annotation_spec_sets: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Config for text classification human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextClassificationConfig {
@@ -787,8 +833,9 @@ pub struct TextClassificationConfig {
     pub sentiment_config: ::core::option::Option<SentimentConfig>,
 }
 /// Config for setting up sentiments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SentimentConfig {
     /// If set to true, contributors will have the option to select sentiment of
     /// the label they selected, to mark it as negative or positive label. Default
@@ -797,6 +844,7 @@ pub struct SentimentConfig {
     pub enable_label_sentiment_selection: bool,
 }
 /// Config for text entity extraction human labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextEntityExtractionConfig {
@@ -804,6 +852,7 @@ pub struct TextEntityExtractionConfig {
     #[prost(string, tag = "1")]
     pub annotation_spec_set: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum StringAggregationType {
@@ -841,6 +890,7 @@ impl StringAggregationType {
 }
 /// Dataset is the resource to hold your data. You can request multiple labeling
 /// tasks for a dataset while each one will generate an AnnotatedDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
@@ -857,7 +907,7 @@ pub struct Dataset {
     pub description: ::prost::alloc::string::String,
     /// Output only. Time the dataset is created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. This is populated with the original input configs
     /// where ImportData is called. It is available only after the clients
     /// import data to this dataset.
@@ -872,6 +922,7 @@ pub struct Dataset {
     pub data_item_count: i64,
 }
 /// The configuration of input data, including data type, location, etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
@@ -898,6 +949,7 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Optional. The metadata associated with each data type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DataTypeMetadata {
@@ -906,6 +958,7 @@ pub mod input_config {
         TextMetadata(super::TextMetadata),
     }
     /// Required. Where the data is from.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -919,6 +972,7 @@ pub mod input_config {
     }
 }
 /// Metadata for the text.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextMetadata {
@@ -929,14 +983,16 @@ pub struct TextMetadata {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Metadata for classification annotations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ClassificationMetadata {
     /// Whether the classification task is multi-label or not.
     #[prost(bool, tag = "1")]
     pub is_multi_label: bool,
 }
 /// Source of the Cloud Storage file to be imported.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsSource {
@@ -951,6 +1007,7 @@ pub struct GcsSource {
 /// The BigQuery location for input data. If used in an [EvaluationJob][google.cloud.datalabeling.v1beta1.EvaluationJob], this
 /// is where the service saves the prediction input and output sampled from the
 /// model version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQuerySource {
@@ -972,6 +1029,7 @@ pub struct BigQuerySource {
     pub input_uri: ::prost::alloc::string::String,
 }
 /// The configuration of output data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutputConfig {
@@ -982,6 +1040,7 @@ pub struct OutputConfig {
 /// Nested message and enum types in `OutputConfig`.
 pub mod output_config {
     /// Required. Location to output data to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -997,6 +1056,7 @@ pub mod output_config {
 }
 /// Export destination of the data.Only gcs path is allowed in
 /// output_uri.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsDestination {
@@ -1010,6 +1070,7 @@ pub struct GcsDestination {
     pub mime_type: ::prost::alloc::string::String,
 }
 /// Export folder destination of the data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsFolderDestination {
@@ -1018,6 +1079,7 @@ pub struct GcsFolderDestination {
     pub output_folder_uri: ::prost::alloc::string::String,
 }
 /// DataItem is a piece of data, without annotation. For example, an image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataItem {
@@ -1032,6 +1094,7 @@ pub struct DataItem {
 /// Nested message and enum types in `DataItem`.
 pub mod data_item {
     /// Output only.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Payload {
@@ -1049,6 +1112,7 @@ pub mod data_item {
 /// AnnotatedDataset is a set holding annotations for data in a Dataset. Each
 /// labeling task will generate an AnnotatedDataset under the Dataset that the
 /// task is requested for.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotatedDataset {
@@ -1086,7 +1150,7 @@ pub struct AnnotatedDataset {
     pub label_stats: ::core::option::Option<LabelStats>,
     /// Output only. Time the AnnotatedDataset was created.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Additional information about AnnotatedDataset.
     #[prost(message, optional, tag = "10")]
     pub metadata: ::core::option::Option<AnnotatedDatasetMetadata>,
@@ -1096,6 +1160,7 @@ pub struct AnnotatedDataset {
     pub blocking_resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Statistics about annotation specs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelStats {
@@ -1108,6 +1173,7 @@ pub struct LabelStats {
     pub example_count: ::std::collections::HashMap<::prost::alloc::string::String, i64>,
 }
 /// Metadata on AnnotatedDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotatedDatasetMetadata {
@@ -1127,6 +1193,7 @@ pub struct AnnotatedDatasetMetadata {
 /// Nested message and enum types in `AnnotatedDatasetMetadata`.
 pub mod annotated_dataset_metadata {
     /// Specific request configuration used when requesting the labeling task.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AnnotationRequestConfig {
@@ -1164,6 +1231,7 @@ pub mod annotated_dataset_metadata {
 }
 /// An Example is a piece of data and its annotation. For example, an image with
 /// label "house".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Example {
@@ -1183,6 +1251,7 @@ pub struct Example {
 /// Nested message and enum types in `Example`.
 pub mod example {
     /// Output only. The data part of Example.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Payload {
@@ -1197,6 +1266,7 @@ pub mod example {
         VideoPayload(super::VideoPayload),
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DataType {
@@ -1237,6 +1307,7 @@ impl DataType {
 }
 /// Describes an evaluation between a machine learning model's predictions and
 /// ground truth labels. Created when an [EvaluationJob][google.cloud.datalabeling.v1beta1.EvaluationJob] runs successfully.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Evaluation {
@@ -1253,10 +1324,10 @@ pub struct Evaluation {
     /// Output only. Timestamp for when the evaluation job that created this
     /// evaluation ran.
     #[prost(message, optional, tag = "3")]
-    pub evaluation_job_run_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub evaluation_job_run_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp for when this evaluation was created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Metrics comparing predictions to ground truth labels.
     #[prost(message, optional, tag = "5")]
     pub evaluation_metrics: ::core::option::Option<EvaluationMetrics>,
@@ -1275,8 +1346,9 @@ pub struct Evaluation {
 }
 /// Configuration details used for calculating evaluation metrics and creating an
 /// [Evaluation][google.cloud.datalabeling.v1beta1.Evaluation].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EvaluationConfig {
     /// Vertical specific options for general metrics.
     #[prost(oneof = "evaluation_config::VerticalOption", tags = "1")]
@@ -1285,8 +1357,9 @@ pub struct EvaluationConfig {
 /// Nested message and enum types in `EvaluationConfig`.
 pub mod evaluation_config {
     /// Vertical specific options for general metrics.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum VerticalOption {
         /// Only specify this field if the related model performs image object
         /// detection (`IMAGE_BOUNDING_BOX_ANNOTATION`). Describes how to evaluate
@@ -1296,8 +1369,9 @@ pub mod evaluation_config {
     }
 }
 /// Options regarding evaluation between bounding boxes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BoundingBoxEvaluationOptions {
     /// Minimum
     /// [intersection-over-union
@@ -1308,6 +1382,7 @@ pub struct BoundingBoxEvaluationOptions {
     #[prost(float, tag = "1")]
     pub iou_threshold: f32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvaluationMetrics {
@@ -1318,6 +1393,7 @@ pub struct EvaluationMetrics {
 /// Nested message and enum types in `EvaluationMetrics`.
 pub mod evaluation_metrics {
     /// Common metrics covering most general cases.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Metrics {
@@ -1328,6 +1404,7 @@ pub mod evaluation_metrics {
     }
 }
 /// Metrics calculated for a classification model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClassificationMetrics {
@@ -1340,6 +1417,7 @@ pub struct ClassificationMetrics {
     pub confusion_matrix: ::core::option::Option<ConfusionMatrix>,
 }
 /// Metrics calculated for an image object detection (bounding box) model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectDetectionMetrics {
@@ -1347,6 +1425,7 @@ pub struct ObjectDetectionMetrics {
     #[prost(message, optional, tag = "1")]
     pub pr_curve: ::core::option::Option<PrCurve>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PrCurve {
@@ -1371,8 +1450,9 @@ pub struct PrCurve {
 }
 /// Nested message and enum types in `PrCurve`.
 pub mod pr_curve {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ConfidenceMetricsEntry {
         /// Threshold used for this entry.
         ///
@@ -1420,6 +1500,7 @@ pub mod pr_curve {
 /// Confusion matrix of the model running the classification. Only applicable
 /// when the metrics entry aggregates multiple labels. Not applicable when the
 /// entry is for a single label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfusionMatrix {
@@ -1428,6 +1509,7 @@ pub struct ConfusionMatrix {
 }
 /// Nested message and enum types in `ConfusionMatrix`.
 pub mod confusion_matrix {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConfusionMatrixEntry {
@@ -1441,6 +1523,7 @@ pub mod confusion_matrix {
     }
     /// A row in the confusion matrix. Each entry in this row has the same
     /// ground truth label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Row {
@@ -1457,6 +1540,7 @@ pub mod confusion_matrix {
 /// [Evaluations][google.cloud.datalabeling.v1beta1.Evaluation]. [Creating an evaluation
 /// job](/ml-engine/docs/continuous-evaluation/create-job) is the starting point
 /// for using continuous evaluation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvaluationJob {
@@ -1520,11 +1604,12 @@ pub struct EvaluationJob {
     pub attempts: ::prost::alloc::vec::Vec<Attempt>,
     /// Output only. Timestamp of when this evaluation job was created.
     #[prost(message, optional, tag = "10")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `EvaluationJob`.
 pub mod evaluation_job {
     /// State of the job.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1609,6 +1694,7 @@ pub mod evaluation_job {
 }
 /// Configures specific details of how a continuous evaluation job works. Provide
 /// this configuration when you create an EvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvaluationJobConfig {
@@ -1696,6 +1782,7 @@ pub struct EvaluationJobConfig {
 pub mod evaluation_job_config {
     /// Required. Details for how you want human reviewers to provide ground truth
     /// labels.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum HumanAnnotationRequestConfig {
@@ -1727,6 +1814,7 @@ pub mod evaluation_job_config {
 }
 /// Provides details for how an evaluation job sends email alerts based on the
 /// results of a run.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvaluationJobAlertConfig {
@@ -1742,17 +1830,19 @@ pub struct EvaluationJobAlertConfig {
     pub min_acceptable_mean_average_precision: f64,
 }
 /// Records a failed evaluation job run.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Attempt {
     #[prost(message, optional, tag = "1")]
-    pub attempt_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub attempt_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Details of errors that occurred.
     #[prost(message, repeated, tag = "2")]
     pub partial_failures: ::prost::alloc::vec::Vec<super::super::super::rpc::Status>,
 }
 /// Instruction of how to perform the labeling task for human operators.
 /// Currently only PDF instruction is supported.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Instruction {
@@ -1769,10 +1859,10 @@ pub struct Instruction {
     pub description: ::prost::alloc::string::String,
     /// Output only. Creation time of instruction.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Last update time of instruction.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. The data type of this instruction.
     #[prost(enumeration = "DataType", tag = "6")]
     pub data_type: i32,
@@ -1796,6 +1886,7 @@ pub struct Instruction {
 }
 /// Deprecated: this instruction format is not supported any more.
 /// Instruction from a CSV file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CsvInstruction {
@@ -1804,6 +1895,7 @@ pub struct CsvInstruction {
     pub gcs_file_uri: ::prost::alloc::string::String,
 }
 /// Instruction from a PDF file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PdfInstruction {
@@ -1812,6 +1904,7 @@ pub struct PdfInstruction {
     pub gcs_file_uri: ::prost::alloc::string::String,
 }
 /// Request message for CreateDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDatasetRequest {
@@ -1824,6 +1917,7 @@ pub struct CreateDatasetRequest {
     pub dataset: ::core::option::Option<Dataset>,
 }
 /// Request message for GetDataSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatasetRequest {
@@ -1833,6 +1927,7 @@ pub struct GetDatasetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsRequest {
@@ -1856,6 +1951,7 @@ pub struct ListDatasetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing datasets within a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsResponse {
@@ -1867,6 +1963,7 @@ pub struct ListDatasetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDatasetRequest {
@@ -1876,6 +1973,7 @@ pub struct DeleteDatasetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ImportData API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDataRequest {
@@ -1892,6 +1990,7 @@ pub struct ImportDataRequest {
     pub user_email_address: ::prost::alloc::string::String,
 }
 /// Request message for ExportData API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDataRequest {
@@ -1918,6 +2017,7 @@ pub struct ExportDataRequest {
     pub user_email_address: ::prost::alloc::string::String,
 }
 /// Request message for GetDataItem.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataItemRequest {
@@ -1927,6 +2027,7 @@ pub struct GetDataItemRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDataItems.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataItemsRequest {
@@ -1950,6 +2051,7 @@ pub struct ListDataItemsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing data items in a dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataItemsResponse {
@@ -1961,6 +2063,7 @@ pub struct ListDataItemsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetAnnotatedDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotatedDatasetRequest {
@@ -1971,6 +2074,7 @@ pub struct GetAnnotatedDatasetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAnnotatedDatasets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAnnotatedDatasetsRequest {
@@ -1994,6 +2098,7 @@ pub struct ListAnnotatedDatasetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing annotated datasets for a dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAnnotatedDatasetsResponse {
@@ -2005,6 +2110,7 @@ pub struct ListAnnotatedDatasetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAnnotatedDataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotatedDatasetRequest {
@@ -2015,6 +2121,7 @@ pub struct DeleteAnnotatedDatasetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for starting an image labeling task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageRequest {
@@ -2036,6 +2143,7 @@ pub struct LabelImageRequest {
 /// Nested message and enum types in `LabelImageRequest`.
 pub mod label_image_request {
     /// Image labeling task feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2099,6 +2207,7 @@ pub mod label_image_request {
     }
     /// Required. Config for labeling tasks. The type of request config must
     /// match the selected feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RequestConfig {
@@ -2125,6 +2234,7 @@ pub mod label_image_request {
     }
 }
 /// Request message for LabelVideo.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelVideoRequest {
@@ -2146,6 +2256,7 @@ pub struct LabelVideoRequest {
 /// Nested message and enum types in `LabelVideoRequest`.
 pub mod label_video_request {
     /// Video labeling task feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2197,6 +2308,7 @@ pub mod label_video_request {
     }
     /// Required. Config for labeling tasks. The type of request config must
     /// match the selected feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RequestConfig {
@@ -2223,6 +2335,7 @@ pub mod label_video_request {
     }
 }
 /// Request message for LabelText.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelTextRequest {
@@ -2244,6 +2357,7 @@ pub struct LabelTextRequest {
 /// Nested message and enum types in `LabelTextRequest`.
 pub mod label_text_request {
     /// Text labeling task feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2287,6 +2401,7 @@ pub mod label_text_request {
     }
     /// Required. Config for labeling tasks. The type of request config must
     /// match the selected feature.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RequestConfig {
@@ -2303,6 +2418,7 @@ pub mod label_text_request {
     }
 }
 /// Request message for GetExample
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetExampleRequest {
@@ -2318,6 +2434,7 @@ pub struct GetExampleRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Request message for ListExamples.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExamplesRequest {
@@ -2343,6 +2460,7 @@ pub struct ListExamplesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing Examples in and annotated dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExamplesResponse {
@@ -2354,6 +2472,7 @@ pub struct ListExamplesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateAnnotationSpecSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAnnotationSpecSetRequest {
@@ -2368,6 +2487,7 @@ pub struct CreateAnnotationSpecSetRequest {
     pub annotation_spec_set: ::core::option::Option<AnnotationSpecSet>,
 }
 /// Request message for GetAnnotationSpecSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotationSpecSetRequest {
@@ -2377,6 +2497,7 @@ pub struct GetAnnotationSpecSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAnnotationSpecSets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAnnotationSpecSetsRequest {
@@ -2400,6 +2521,7 @@ pub struct ListAnnotationSpecSetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing annotation spec set under a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAnnotationSpecSetsResponse {
@@ -2411,6 +2533,7 @@ pub struct ListAnnotationSpecSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAnnotationSpecSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotationSpecSetRequest {
@@ -2420,6 +2543,7 @@ pub struct DeleteAnnotationSpecSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateInstruction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInstructionRequest {
@@ -2432,6 +2556,7 @@ pub struct CreateInstructionRequest {
     pub instruction: ::core::option::Option<Instruction>,
 }
 /// Request message for GetInstruction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInstructionRequest {
@@ -2441,6 +2566,7 @@ pub struct GetInstructionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteInstruction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInstructionRequest {
@@ -2450,6 +2576,7 @@ pub struct DeleteInstructionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListInstructions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstructionsRequest {
@@ -2473,6 +2600,7 @@ pub struct ListInstructionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of listing instructions under a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstructionsResponse {
@@ -2484,6 +2612,7 @@ pub struct ListInstructionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetEvaluation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEvaluationRequest {
@@ -2494,6 +2623,7 @@ pub struct GetEvaluationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for SearchEvaluation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEvaluationsRequest {
@@ -2549,6 +2679,7 @@ pub struct SearchEvaluationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of searching evaluations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEvaluationsResponse {
@@ -2560,6 +2691,7 @@ pub struct SearchEvaluationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message of SearchExampleComparisons.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchExampleComparisonsRequest {
@@ -2584,6 +2716,7 @@ pub struct SearchExampleComparisonsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results of searching example comparisons.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchExampleComparisonsResponse {
@@ -2600,6 +2733,7 @@ pub struct SearchExampleComparisonsResponse {
 pub mod search_example_comparisons_response {
     /// Example comparisons comparing ground truth output and predictions for a
     /// specific input.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExampleComparison {
@@ -2612,6 +2746,7 @@ pub mod search_example_comparisons_response {
     }
 }
 /// Request message for CreateEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEvaluationJobRequest {
@@ -2624,6 +2759,7 @@ pub struct CreateEvaluationJobRequest {
     pub job: ::core::option::Option<EvaluationJob>,
 }
 /// Request message for UpdateEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEvaluationJobRequest {
@@ -2640,9 +2776,10 @@ pub struct UpdateEvaluationJobRequest {
     /// You can provide more than one of these fields by separating them with
     /// commas.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for GetEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEvaluationJobRequest {
@@ -2653,6 +2790,7 @@ pub struct GetEvaluationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for PauseEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseEvaluationJobRequest {
@@ -2663,6 +2801,7 @@ pub struct PauseEvaluationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message ResumeEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeEvaluationJobRequest {
@@ -2673,6 +2812,7 @@ pub struct ResumeEvaluationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message DeleteEvaluationJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEvaluationJobRequest {
@@ -2683,6 +2823,7 @@ pub struct DeleteEvaluationJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListEvaluationJobs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEvaluationJobsRequest {
@@ -2713,6 +2854,7 @@ pub struct ListEvaluationJobsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Results for listing evaluation jobs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEvaluationJobsResponse {
@@ -2900,7 +3042,10 @@ pub mod data_labeling_service_client {
         pub async fn delete_dataset(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDatasetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3117,7 +3262,10 @@ pub mod data_labeling_service_client {
         pub async fn delete_annotated_dataset(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAnnotatedDatasetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3393,7 +3541,10 @@ pub mod data_labeling_service_client {
         pub async fn delete_annotation_spec_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAnnotationSpecSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3511,7 +3662,10 @@ pub mod data_labeling_service_client {
         pub async fn delete_instruction(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteInstructionRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3722,7 +3876,10 @@ pub mod data_labeling_service_client {
         pub async fn pause_evaluation_job(
             &mut self,
             request: impl tonic::IntoRequest<super::PauseEvaluationJobRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3751,7 +3908,10 @@ pub mod data_labeling_service_client {
         pub async fn resume_evaluation_job(
             &mut self,
             request: impl tonic::IntoRequest<super::ResumeEvaluationJobRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3779,7 +3939,10 @@ pub mod data_labeling_service_client {
         pub async fn delete_evaluation_job(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteEvaluationJobRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3838,6 +4001,7 @@ pub mod data_labeling_service_client {
     }
 }
 /// Response used for ImportData longrunning operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDataOperationResponse {
@@ -3852,6 +4016,7 @@ pub struct ImportDataOperationResponse {
     pub import_count: i32,
 }
 /// Response used for ExportDataset longrunning operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDataOperationResponse {
@@ -3873,6 +4038,7 @@ pub struct ExportDataOperationResponse {
     pub output_config: ::core::option::Option<OutputConfig>,
 }
 /// Metadata of an ImportData operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportDataOperationMetadata {
@@ -3887,9 +4053,10 @@ pub struct ImportDataOperationMetadata {
     pub partial_failures: ::prost::alloc::vec::Vec<super::super::super::rpc::Status>,
     /// Output only. Timestamp when import dataset request was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Metadata of an ExportData operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportDataOperationMetadata {
@@ -3904,10 +4071,11 @@ pub struct ExportDataOperationMetadata {
     pub partial_failures: ::prost::alloc::vec::Vec<super::super::super::rpc::Status>,
     /// Output only. Timestamp when export dataset request was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Metadata of a labeling operation, such as LabelImage or LabelVideo.
 /// Next tag: 20
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelOperationMetadata {
@@ -3921,7 +4089,7 @@ pub struct LabelOperationMetadata {
     pub partial_failures: ::prost::alloc::vec::Vec<super::super::super::rpc::Status>,
     /// Output only. Timestamp when labeling request was created.
     #[prost(message, optional, tag = "16")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Ouptut only. Details of specific label operation.
     #[prost(
         oneof = "label_operation_metadata::Details",
@@ -3932,6 +4100,7 @@ pub struct LabelOperationMetadata {
 /// Nested message and enum types in `LabelOperationMetadata`.
 pub mod label_operation_metadata {
     /// Ouptut only. Details of specific label operation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Details {
@@ -3976,6 +4145,7 @@ pub mod label_operation_metadata {
     }
 }
 /// Metadata of a LabelImageClassification operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageClassificationOperationMetadata {
@@ -3984,6 +4154,7 @@ pub struct LabelImageClassificationOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelImageBoundingBox operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageBoundingBoxOperationMetadata {
@@ -3992,6 +4163,7 @@ pub struct LabelImageBoundingBoxOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelImageOrientedBoundingBox operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageOrientedBoundingBoxOperationMetadata {
@@ -4000,6 +4172,7 @@ pub struct LabelImageOrientedBoundingBoxOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of LabelImageBoundingPoly operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageBoundingPolyOperationMetadata {
@@ -4008,6 +4181,7 @@ pub struct LabelImageBoundingPolyOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of LabelImagePolyline operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImagePolylineOperationMetadata {
@@ -4016,6 +4190,7 @@ pub struct LabelImagePolylineOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelImageSegmentation operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelImageSegmentationOperationMetadata {
@@ -4024,6 +4199,7 @@ pub struct LabelImageSegmentationOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelVideoClassification operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelVideoClassificationOperationMetadata {
@@ -4032,6 +4208,7 @@ pub struct LabelVideoClassificationOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelVideoObjectDetection operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelVideoObjectDetectionOperationMetadata {
@@ -4040,6 +4217,7 @@ pub struct LabelVideoObjectDetectionOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelVideoObjectTracking operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelVideoObjectTrackingOperationMetadata {
@@ -4048,6 +4226,7 @@ pub struct LabelVideoObjectTrackingOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelVideoEvent operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelVideoEventOperationMetadata {
@@ -4056,6 +4235,7 @@ pub struct LabelVideoEventOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelTextClassification operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelTextClassificationOperationMetadata {
@@ -4064,6 +4244,7 @@ pub struct LabelTextClassificationOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Details of a LabelTextEntityExtraction operation metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelTextEntityExtractionOperationMetadata {
@@ -4072,6 +4253,7 @@ pub struct LabelTextEntityExtractionOperationMetadata {
     pub basic_config: ::core::option::Option<HumanAnnotationConfig>,
 }
 /// Metadata of a CreateInstruction operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInstructionMetadata {
@@ -4086,5 +4268,5 @@ pub struct CreateInstructionMetadata {
     pub partial_failures: ::prost::alloc::vec::Vec<super::super::super::rpc::Status>,
     /// Timestamp when create instruction request was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }

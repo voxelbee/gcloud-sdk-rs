@@ -5,6 +5,7 @@
 /// The sole purpose of this message is for the use of AlloyDB connectors.
 /// Clients should not rely on this message directly as there can be breaking
 /// changes in the future.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetadataExchangeRequest {
@@ -22,6 +23,7 @@ pub struct MetadataExchangeRequest {
 /// Nested message and enum types in `MetadataExchangeRequest`.
 pub mod metadata_exchange_request {
     /// AuthType contains all supported authentication types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -68,6 +70,7 @@ pub mod metadata_exchange_request {
 /// Message for response to metadata exchange request. The sole purpose of this
 /// message is for the use of AlloyDB connectors. Clients should not rely on this
 /// message directly as there can be breaking changes in the future.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetadataExchangeResponse {
@@ -81,6 +84,7 @@ pub struct MetadataExchangeResponse {
 /// Nested message and enum types in `MetadataExchangeResponse`.
 pub mod metadata_exchange_response {
     /// Response code.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

@@ -2,6 +2,7 @@
 /// A detailed representation of an Apt artifact. Information in the record
 /// is derived from the archive's control file.
 /// See <https://www.debian.org/doc/debian-policy/ch-controlfields.html>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AptArtifact {
@@ -27,6 +28,7 @@ pub struct AptArtifact {
 /// Nested message and enum types in `AptArtifact`.
 pub mod apt_artifact {
     /// Package type is either binary or source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -71,6 +73,7 @@ pub mod apt_artifact {
     }
 }
 /// Google Cloud Storage location where the artifacts currently reside.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportAptArtifactsGcsSource {
@@ -82,6 +85,7 @@ pub struct ImportAptArtifactsGcsSource {
     pub use_wildcards: bool,
 }
 /// The request to import new apt artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportAptArtifactsRequest {
@@ -95,6 +99,7 @@ pub struct ImportAptArtifactsRequest {
 /// Nested message and enum types in `ImportAptArtifactsRequest`.
 pub mod import_apt_artifacts_request {
     /// The source location of the package binaries.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -104,6 +109,7 @@ pub mod import_apt_artifacts_request {
     }
 }
 /// Error information explaining why a package was not imported.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportAptArtifactsErrorInfo {
@@ -117,6 +123,7 @@ pub struct ImportAptArtifactsErrorInfo {
 /// Nested message and enum types in `ImportAptArtifactsErrorInfo`.
 pub mod import_apt_artifacts_error_info {
     /// The source that was not imported.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -126,6 +133,7 @@ pub mod import_apt_artifacts_error_info {
     }
 }
 /// The response message from importing APT artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportAptArtifactsResponse {
@@ -137,10 +145,12 @@ pub struct ImportAptArtifactsResponse {
     pub errors: ::prost::alloc::vec::Vec<ImportAptArtifactsErrorInfo>,
 }
 /// The operation metadata for importing artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ImportAptArtifactsMetadata {}
 /// A hash of file content.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Hash {
@@ -154,6 +164,7 @@ pub struct Hash {
 /// Nested message and enum types in `Hash`.
 pub mod hash {
     /// The algorithm used to compute the hash.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -198,6 +209,7 @@ pub mod hash {
     }
 }
 /// Files store content that is potentially associated with Packages or Versions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct File {
@@ -214,15 +226,16 @@ pub struct File {
     pub hashes: ::prost::alloc::vec::Vec<Hash>,
     /// The time when the File was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time when the File was last updated.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The name of the Package or Version that owns this file, if any.
     #[prost(string, tag = "7")]
     pub owner: ::prost::alloc::string::String,
 }
 /// The request to list files.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesRequest {
@@ -252,6 +265,7 @@ pub struct ListFilesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response from listing files.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesResponse {
@@ -264,6 +278,7 @@ pub struct ListFilesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to retrieve a file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileRequest {
@@ -272,6 +287,7 @@ pub struct GetFileRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Packages are named collections of versions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Package {
@@ -284,13 +300,14 @@ pub struct Package {
     pub display_name: ::prost::alloc::string::String,
     /// The time when the package was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time when the package was last updated. This includes publishing a new
     /// version of the package.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The request to list packages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPackagesRequest {
@@ -306,6 +323,7 @@ pub struct ListPackagesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response from listing packages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPackagesResponse {
@@ -318,6 +336,7 @@ pub struct ListPackagesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to retrieve a package.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPackageRequest {
@@ -326,6 +345,7 @@ pub struct GetPackageRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request to delete a package.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePackageRequest {
@@ -334,6 +354,7 @@ pub struct DeletePackageRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A Repository for storing artifacts with a specific format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Repository {
@@ -359,10 +380,10 @@ pub struct Repository {
     >,
     /// The time when the repository was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time when the repository was last updated.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The Cloud KMS resource name of the customer managed encryption key that’s
     /// used to encrypt the contents of the Repository. Has the form:
     /// `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`.
@@ -378,8 +399,9 @@ pub mod repository {
     /// MavenRepositoryConfig is maven related repository details.
     /// Provides additional configuration details for repositories of the maven
     /// format type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MavenRepositoryConfig {
         /// The repository with this flag will allow publishing
         /// the same snapshot versions.
@@ -392,6 +414,7 @@ pub mod repository {
     /// Nested message and enum types in `MavenRepositoryConfig`.
     pub mod maven_repository_config {
         /// VersionPolicy is the version policy for the repository.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -438,6 +461,7 @@ pub mod repository {
         }
     }
     /// A package format.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -497,8 +521,9 @@ pub mod repository {
         }
     }
     /// Repository-specific configurations.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum FormatConfig {
         /// Maven repository config contains repository level configuration
         /// for the repositories of maven type.
@@ -507,6 +532,7 @@ pub mod repository {
     }
 }
 /// The request to list repositories.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRepositoriesRequest {
@@ -521,6 +547,7 @@ pub struct ListRepositoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response from listing repositories.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRepositoriesResponse {
@@ -533,6 +560,7 @@ pub struct ListRepositoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to retrieve a repository.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRepositoryRequest {
@@ -541,6 +569,7 @@ pub struct GetRepositoryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request to create a new repository.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRepositoryRequest {
@@ -555,6 +584,7 @@ pub struct CreateRepositoryRequest {
     pub repository: ::core::option::Option<Repository>,
 }
 /// The request to update a repository.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateRepositoryRequest {
@@ -565,9 +595,10 @@ pub struct UpdateRepositoryRequest {
     /// see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request to delete a repository.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRepositoryRequest {
@@ -576,6 +607,7 @@ pub struct DeleteRepositoryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The Artifact Registry settings that apply to a Project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectSettings {
@@ -595,6 +627,7 @@ pub struct ProjectSettings {
 /// Nested message and enum types in `ProjectSettings`.
 pub mod project_settings {
     /// The possible redirection states for legacy repositories.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -655,6 +688,7 @@ pub mod project_settings {
     }
 }
 /// Gets the redirection status for a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProjectSettingsRequest {
@@ -663,6 +697,7 @@ pub struct GetProjectSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Sets the settings of the project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProjectSettingsRequest {
@@ -671,10 +706,11 @@ pub struct UpdateProjectSettingsRequest {
     pub project_settings: ::core::option::Option<ProjectSettings>,
     /// Field mask to support partial updates.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Tags point to a version and represent an alternative name that can be used
 /// to access the version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Tag {
@@ -693,6 +729,7 @@ pub struct Tag {
     pub version: ::prost::alloc::string::String,
 }
 /// The request to list tags.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTagsRequest {
@@ -718,6 +755,7 @@ pub struct ListTagsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response from listing tags.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTagsResponse {
@@ -730,6 +768,7 @@ pub struct ListTagsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to retrieve a tag.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTagRequest {
@@ -738,6 +777,7 @@ pub struct GetTagRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request to create a new tag.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTagRequest {
@@ -752,6 +792,7 @@ pub struct CreateTagRequest {
     pub tag: ::core::option::Option<Tag>,
 }
 /// The request to create or update a tag.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTagRequest {
@@ -762,9 +803,10 @@ pub struct UpdateTagRequest {
     /// see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request to delete a tag.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTagRequest {
@@ -775,6 +817,7 @@ pub struct DeleteTagRequest {
 /// The body of a version resource. A version resource represents a
 /// collection of components, such as files and other data. This may correspond
 /// to a version in many package management schemes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Version {
@@ -789,10 +832,10 @@ pub struct Version {
     pub description: ::prost::alloc::string::String,
     /// The time when the version was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time when the version was last updated.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. A list of related tags. Will contain up to 100 tags that
     /// reference this version.
     #[prost(message, repeated, tag = "7")]
@@ -802,9 +845,10 @@ pub struct Version {
     /// resource. Currently, the only resource in use is
     /// [DockerImage][google.devtools.artifactregistry.v1.DockerImage]
     #[prost(message, optional, tag = "8")]
-    pub metadata: ::core::option::Option<::prost_types::Struct>,
+    pub metadata: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// The request to list versions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVersionsRequest {
@@ -825,6 +869,7 @@ pub struct ListVersionsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response from listing versions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVersionsResponse {
@@ -837,6 +882,7 @@ pub struct ListVersionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to retrieve a version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVersionRequest {
@@ -848,6 +894,7 @@ pub struct GetVersionRequest {
     pub view: i32,
 }
 /// The request to delete a version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVersionRequest {
@@ -861,6 +908,7 @@ pub struct DeleteVersionRequest {
 }
 /// The view, which determines what version information is returned in a
 /// response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum VersionView {
@@ -895,6 +943,7 @@ impl VersionView {
     }
 }
 /// A detailed representation of a Yum artifact.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct YumArtifact {
@@ -914,6 +963,7 @@ pub struct YumArtifact {
 /// Nested message and enum types in `YumArtifact`.
 pub mod yum_artifact {
     /// Package type is either binary or source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -958,6 +1008,7 @@ pub mod yum_artifact {
     }
 }
 /// Google Cloud Storage location where the artifacts currently reside.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportYumArtifactsGcsSource {
@@ -969,6 +1020,7 @@ pub struct ImportYumArtifactsGcsSource {
     pub use_wildcards: bool,
 }
 /// The request to import new yum artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportYumArtifactsRequest {
@@ -982,6 +1034,7 @@ pub struct ImportYumArtifactsRequest {
 /// Nested message and enum types in `ImportYumArtifactsRequest`.
 pub mod import_yum_artifacts_request {
     /// The source location of the package binaries.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -991,6 +1044,7 @@ pub mod import_yum_artifacts_request {
     }
 }
 /// Error information explaining why a package was not imported.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportYumArtifactsErrorInfo {
@@ -1004,6 +1058,7 @@ pub struct ImportYumArtifactsErrorInfo {
 /// Nested message and enum types in `ImportYumArtifactsErrorInfo`.
 pub mod import_yum_artifacts_error_info {
     /// The source that was not imported.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -1013,6 +1068,7 @@ pub mod import_yum_artifacts_error_info {
     }
 }
 /// The response message from importing YUM artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportYumArtifactsResponse {
@@ -1024,12 +1080,14 @@ pub struct ImportYumArtifactsResponse {
     pub errors: ::prost::alloc::vec::Vec<ImportYumArtifactsErrorInfo>,
 }
 /// The operation metadata for importing artifacts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ImportYumArtifactsMetadata {}
 /// Metadata type for longrunning-operations, currently empty.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {}
 /// Generated client implementations.
 pub mod artifact_registry_client {
@@ -1709,7 +1767,10 @@ pub mod artifact_registry_client {
         pub async fn delete_tag(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteTagRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

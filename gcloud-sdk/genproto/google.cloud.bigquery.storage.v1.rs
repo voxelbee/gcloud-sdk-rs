@@ -5,6 +5,7 @@
 /// <https://arrow.apache.org/docs/format/Columnar.html#serialization-and-interprocess-communication-ipc>
 ///
 /// See code samples on how this message can be deserialized.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrowSchema {
@@ -13,6 +14,7 @@ pub struct ArrowSchema {
     pub serialized_schema: ::prost::alloc::vec::Vec<u8>,
 }
 /// Arrow RecordBatch.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrowRecordBatch {
@@ -26,8 +28,9 @@ pub struct ArrowRecordBatch {
     pub row_count: i64,
 }
 /// Contains options specific to Arrow Serialization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ArrowSerializationOptions {
     /// The compression codec to use for Arrow buffers in serialized record
     /// batches.
@@ -37,6 +40,7 @@ pub struct ArrowSerializationOptions {
 /// Nested message and enum types in `ArrowSerializationOptions`.
 pub mod arrow_serialization_options {
     /// Compression codec's supported by Arrow.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -81,6 +85,7 @@ pub mod arrow_serialization_options {
     }
 }
 /// Avro schema.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvroSchema {
@@ -90,6 +95,7 @@ pub struct AvroSchema {
     pub schema: ::prost::alloc::string::String,
 }
 /// Avro rows.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvroRows {
@@ -103,8 +109,9 @@ pub struct AvroRows {
     pub row_count: i64,
 }
 /// Contains options specific to Avro Serialization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AvroSerializationOptions {
     /// Enable displayName attribute in Avro schema.
     ///
@@ -120,6 +127,7 @@ pub struct AvroSerializationOptions {
     pub enable_display_name_attribute: bool,
 }
 /// ProtoSchema describes the schema of the serialized protocol buffer data rows.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProtoSchema {
@@ -133,8 +141,9 @@ pub struct ProtoSchema {
     /// For additional information for how proto types and values map onto BigQuery
     /// see: <https://cloud.google.com/bigquery/docs/write-api#data_type_conversions>
     #[prost(message, optional, tag = "1")]
-    pub proto_descriptor: ::core::option::Option<::prost_types::DescriptorProto>,
+    pub proto_descriptor: ::core::option::Option<pb::DescriptorProto>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProtoRows {
@@ -148,6 +157,7 @@ pub struct ProtoRows {
 /// Schema of a table. This schema is a subset of
 /// google.cloud.bigquery.v2.TableSchema containing information necessary to
 /// generate valid message to write to BigQuery.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableSchema {
@@ -156,6 +166,7 @@ pub struct TableSchema {
     pub fields: ::prost::alloc::vec::Vec<TableFieldSchema>,
 }
 /// TableFieldSchema defines a single field/column within a table schema.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableFieldSchema {
@@ -244,13 +255,15 @@ pub struct TableFieldSchema {
 /// Nested message and enum types in `TableFieldSchema`.
 pub mod table_field_schema {
     /// Represents the type of a field element.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct FieldElementType {
         /// Required. The type of a field element.
         #[prost(enumeration = "Type", tag = "1")]
         pub r#type: i32,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -349,6 +362,7 @@ pub mod table_field_schema {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -394,6 +408,7 @@ pub mod table_field_schema {
     }
 }
 /// Information about the ReadSession.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadSession {
@@ -406,7 +421,7 @@ pub struct ReadSession {
     /// expire_time is automatically assigned and currently cannot be specified or
     /// updated.
     #[prost(message, optional, tag = "2")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Immutable. Data format of the output data. DATA_FORMAT_UNSPECIFIED not
     /// supported.
     #[prost(enumeration = "DataFormat", tag = "3")]
@@ -464,14 +479,16 @@ pub struct ReadSession {
 /// Nested message and enum types in `ReadSession`.
 pub mod read_session {
     /// Additional attributes when reading a table.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TableModifiers {
         /// The snapshot time of the table. If not set, interpreted as now.
         #[prost(message, optional, tag = "1")]
-        pub snapshot_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub snapshot_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// Options dictating how we read a table.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TableReadOptions {
@@ -569,6 +586,7 @@ pub mod read_session {
         /// creating a read session requesting Arrow responses, setting both native
         /// Arrow compression and application-level response compression will not be
         /// allowed - choose, at most, one kind of compression.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -609,8 +627,9 @@ pub mod read_session {
                 }
             }
         }
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum OutputFormatSerializationOptions {
             /// Optional. Options specific to the Apache Arrow output format.
             #[prost(message, tag = "3")]
@@ -623,6 +642,7 @@ pub mod read_session {
     /// The schema for the read. If read_options.selected_fields is set, the
     /// schema may be different from the table schema as it will only contain
     /// the selected fields.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Schema {
@@ -637,6 +657,7 @@ pub mod read_session {
 /// Information about a single stream that gets data out of the storage system.
 /// Most of the information about `ReadStream` instances is aggregated, making
 /// `ReadStream` lightweight.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadStream {
@@ -646,6 +667,7 @@ pub struct ReadStream {
     pub name: ::prost::alloc::string::String,
 }
 /// Information about a single stream that gets data inside the storage system.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteStream {
@@ -659,13 +681,13 @@ pub struct WriteStream {
     /// Output only. Create time of the stream. For the _default stream, this is
     /// the creation_time of the table.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Commit time of the stream.
     /// If a stream is of `COMMITTED` type, then it will have a commit_time same as
     /// `create_time`. If the stream is of `PENDING` type, empty commit_time
     /// means it is not committed.
     #[prost(message, optional, tag = "4")]
-    pub commit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub commit_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The schema of the destination table. It is only returned in
     /// `CreateWriteStream` response. Caller should generate data that's
     /// compatible with this schema to send in initial `AppendRowsRequest`.
@@ -684,6 +706,7 @@ pub struct WriteStream {
 /// Nested message and enum types in `WriteStream`.
 pub mod write_stream {
     /// Type enum of the stream.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -732,6 +755,7 @@ pub mod write_stream {
         }
     }
     /// Mode enum of the stream.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -773,6 +797,7 @@ pub mod write_stream {
     }
 }
 /// Data format for input or output data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DataFormat {
@@ -809,6 +834,7 @@ impl DataFormat {
 }
 /// WriteStreamView is a view enum that controls what details about a write
 /// stream should be returned.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum WriteStreamView {
@@ -846,6 +872,7 @@ impl WriteStreamView {
     }
 }
 /// Request message for `CreateReadSession`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateReadSessionRequest {
@@ -880,6 +907,7 @@ pub struct CreateReadSessionRequest {
     pub preferred_min_stream_count: i32,
 }
 /// Request message for `ReadRows`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsRequest {
@@ -893,8 +921,9 @@ pub struct ReadRowsRequest {
     pub offset: i64,
 }
 /// Information on if the current connection is being throttled.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ThrottleState {
     /// How much this connection is being throttled. Zero means no throttling,
     /// 100 means fully throttled.
@@ -902,8 +931,9 @@ pub struct ThrottleState {
     pub throttle_percent: i32,
 }
 /// Estimated stream statistics for a given read Stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StreamStats {
     /// Represents the progress of the current stream.
     #[prost(message, optional, tag = "2")]
@@ -911,8 +941,9 @@ pub struct StreamStats {
 }
 /// Nested message and enum types in `StreamStats`.
 pub mod stream_stats {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Progress {
         /// The fraction of rows assigned to the stream that have been processed by
         /// the server so far, not including the rows in the current response
@@ -936,6 +967,7 @@ pub mod stream_stats {
 }
 /// Response from calling `ReadRows` may include row data, progress and
 /// throttling information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsResponse {
@@ -979,6 +1011,7 @@ pub struct ReadRowsResponse {
 /// Nested message and enum types in `ReadRowsResponse`.
 pub mod read_rows_response {
     /// Row data is returned in format specified during session creation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Rows {
@@ -994,6 +1027,7 @@ pub mod read_rows_response {
     /// the selected fields. This schema is equivalent to the one returned by
     /// CreateSession. This field is only populated in the first ReadRowsResponse
     /// RPC.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Schema {
@@ -1006,6 +1040,7 @@ pub mod read_rows_response {
     }
 }
 /// Request message for `SplitReadStream`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SplitReadStreamRequest {
@@ -1023,6 +1058,7 @@ pub struct SplitReadStreamRequest {
     pub fraction: f64,
 }
 /// Response message for `SplitReadStream`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SplitReadStreamResponse {
@@ -1037,6 +1073,7 @@ pub struct SplitReadStreamResponse {
     pub remainder_stream: ::core::option::Option<ReadStream>,
 }
 /// Request message for `CreateWriteStream`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWriteStreamRequest {
@@ -1057,6 +1094,7 @@ pub struct CreateWriteStreamRequest {
 ///
 /// The size of a single AppendRowsRequest must be less than 10 MB in size.
 /// Requests larger than this return an error, typically `INVALID_ARGUMENT`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppendRowsRequest {
@@ -1099,7 +1137,7 @@ pub struct AppendRowsRequest {
     /// current end of stream. Specifying a value for this field is not allowed
     /// when calling AppendRows for the '_default' stream.
     #[prost(message, optional, tag = "2")]
-    pub offset: ::core::option::Option<i64>,
+    pub offset: ::core::option::Option<pb::Int64Value>,
     /// Id set by client to annotate its identity. Only initial request setting is
     /// respected.
     #[prost(string, tag = "6")]
@@ -1152,6 +1190,7 @@ pub struct AppendRowsRequest {
 pub mod append_rows_request {
     /// ProtoData contains the data rows and schema when constructing append
     /// requests.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProtoData {
@@ -1175,6 +1214,7 @@ pub mod append_rows_request {
     /// An enum to indicate how to interpret missing values of fields that are
     /// present in user schema but missing in rows. A missing value can represent a
     /// NULL or a column default value defined in BigQuery table schema.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1225,6 +1265,7 @@ pub mod append_rows_request {
     /// request and currently, it will be ignored if specified in following
     /// requests. Following requests must have data in the same format as the
     /// initial request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Rows {
@@ -1234,6 +1275,7 @@ pub mod append_rows_request {
     }
 }
 /// Response message for `AppendRows`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppendRowsResponse {
@@ -1257,14 +1299,16 @@ pub struct AppendRowsResponse {
 /// Nested message and enum types in `AppendRowsResponse`.
 pub mod append_rows_response {
     /// AppendResult is returned for successful append requests.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AppendResult {
         /// The row offset at which the last append occurred. The offset will not be
         /// set if appending using default streams.
         #[prost(message, optional, tag = "1")]
-        pub offset: ::core::option::Option<i64>,
+        pub offset: ::core::option::Option<pb::Int64Value>,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
@@ -1296,6 +1340,7 @@ pub mod append_rows_response {
     }
 }
 /// Request message for `GetWriteStreamRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWriteStreamRequest {
@@ -1309,6 +1354,7 @@ pub struct GetWriteStreamRequest {
     pub view: i32,
 }
 /// Request message for `BatchCommitWriteStreams`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCommitWriteStreamsRequest {
@@ -1321,6 +1367,7 @@ pub struct BatchCommitWriteStreamsRequest {
     pub write_streams: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for `BatchCommitWriteStreams`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCommitWriteStreamsResponse {
@@ -1328,7 +1375,7 @@ pub struct BatchCommitWriteStreamsResponse {
     /// This field will only exist when there are no stream errors.
     /// **Note** if this field is not set, it means the commit was not successful.
     #[prost(message, optional, tag = "1")]
-    pub commit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub commit_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Stream level error if commit failed. Only streams with error will be in
     /// the list.
     /// If empty, there is no error and all streams are committed successfully.
@@ -1338,6 +1385,7 @@ pub struct BatchCommitWriteStreamsResponse {
     pub stream_errors: ::prost::alloc::vec::Vec<StorageError>,
 }
 /// Request message for invoking `FinalizeWriteStream`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeWriteStreamRequest {
@@ -1347,14 +1395,16 @@ pub struct FinalizeWriteStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message for `FinalizeWriteStream`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FinalizeWriteStreamResponse {
     /// Number of rows in the finalized stream.
     #[prost(int64, tag = "1")]
     pub row_count: i64,
 }
 /// Request message for `FlushRows`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlushRowsRequest {
@@ -1364,11 +1414,12 @@ pub struct FlushRowsRequest {
     /// Ending offset of the flush operation. Rows before this offset(including
     /// this offset) will be flushed.
     #[prost(message, optional, tag = "2")]
-    pub offset: ::core::option::Option<i64>,
+    pub offset: ::core::option::Option<pb::Int64Value>,
 }
 /// Respond message for `FlushRows`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FlushRowsResponse {
     /// The rows before this offset (including this offset) are flushed.
     #[prost(int64, tag = "1")]
@@ -1378,6 +1429,7 @@ pub struct FlushRowsResponse {
 /// as error details in the returned rpc Status. In particular, the use of error
 /// codes allows more structured error handling, and reduces the need to evaluate
 /// unstructured error text strings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageError {
@@ -1394,6 +1446,7 @@ pub struct StorageError {
 /// Nested message and enum types in `StorageError`.
 pub mod storage_error {
     /// Error code for `StorageError`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1494,6 +1547,7 @@ pub mod storage_error {
     }
 }
 /// The message that presents row level error info in a request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RowError {
@@ -1510,6 +1564,7 @@ pub struct RowError {
 /// Nested message and enum types in `RowError`.
 pub mod row_error {
     /// Error code for `RowError`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

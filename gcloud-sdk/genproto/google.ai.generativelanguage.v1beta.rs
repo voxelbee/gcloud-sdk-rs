@@ -4,6 +4,7 @@
 /// A `Content` includes a `role` field designating the producer of the `Content`
 /// and a `parts` field containing multi-part data that contains the content of
 /// the message turn.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Content {
@@ -25,6 +26,7 @@ pub struct Content {
 ///
 /// A `Part` must have a fixed IANA MIME type identifying the type and subtype
 /// of the media if the `inline_data` field is filled with raw bytes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Part {
@@ -33,6 +35,7 @@ pub struct Part {
 }
 /// Nested message and enum types in `Part`.
 pub mod part {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
@@ -67,6 +70,7 @@ pub mod part {
 /// Raw media bytes.
 ///
 /// Text should not be sent as raw bytes, use the 'text' field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Blob {
@@ -84,6 +88,7 @@ pub struct Blob {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// URI based data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileData {
@@ -100,6 +105,7 @@ pub struct FileData {
 /// Only generated when using the `CodeExecution` tool, in which the code will
 /// be automatically executed, and a corresponding `CodeExecutionResult` will
 /// also be generated.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutableCode {
@@ -113,6 +119,7 @@ pub struct ExecutableCode {
 /// Nested message and enum types in `ExecutableCode`.
 pub mod executable_code {
     /// Supported programming languages for the generated code.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -156,6 +163,7 @@ pub mod executable_code {
 ///
 /// Only generated when using the `CodeExecution`, and always follows a `part`
 /// containing the `ExecutableCode`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CodeExecutionResult {
@@ -170,6 +178,7 @@ pub struct CodeExecutionResult {
 /// Nested message and enum types in `CodeExecutionResult`.
 pub mod code_execution_result {
     /// Enumeration of possible outcomes of the code execution.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -224,6 +233,7 @@ pub mod code_execution_result {
 /// A `Tool` is a piece of code that enables the system to interact with
 /// external systems to perform an action, or set of actions, outside of
 /// knowledge and scope of the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Tool {
@@ -250,11 +260,13 @@ pub struct Tool {
 ///
 /// See also `ExecutableCode` and `CodeExecutionResult` which are only generated
 /// when using this tool.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CodeExecution {}
 /// The Tool configuration containing parameters for specifying `Tool` use
 /// in the request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ToolConfig {
@@ -263,6 +275,7 @@ pub struct ToolConfig {
     pub function_calling_config: ::core::option::Option<FunctionCallingConfig>,
 }
 /// Configuration for specifying function calling behavior.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionCallingConfig {
@@ -283,6 +296,7 @@ pub struct FunctionCallingConfig {
 pub mod function_calling_config {
     /// Defines the execution behavior for function calling by defining the
     /// execution mode.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -340,6 +354,7 @@ pub mod function_calling_config {
 /// in this declaration are the function name and parameters. This
 /// FunctionDeclaration is a representation of a block of code that can be used
 /// as a `Tool` by the model and executed by the client.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionDeclaration {
@@ -361,6 +376,7 @@ pub struct FunctionDeclaration {
 /// A predicted `FunctionCall` returned from the model that contains
 /// a string representing the `FunctionDeclaration.name` with the
 /// arguments and their values.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionCall {
@@ -371,13 +387,14 @@ pub struct FunctionCall {
     pub name: ::prost::alloc::string::String,
     /// Optional. The function parameters and values in JSON object format.
     #[prost(message, optional, tag = "2")]
-    pub args: ::core::option::Option<::prost_types::Struct>,
+    pub args: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// The result output from a `FunctionCall` that contains a string
 /// representing the `FunctionDeclaration.name` and a structured JSON
 /// object containing any output from the function is used as context to
 /// the model. This should contain the result of a`FunctionCall` made
 /// based on model prediction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionResponse {
@@ -388,12 +405,13 @@ pub struct FunctionResponse {
     pub name: ::prost::alloc::string::String,
     /// Required. The function response in JSON object format.
     #[prost(message, optional, tag = "2")]
-    pub response: ::core::option::Option<::prost_types::Struct>,
+    pub response: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// The `Schema` object allows the definition of input and output data types.
 /// These types can be objects, but also primitives and arrays.
 /// Represents a select subset of an [OpenAPI 3.0 schema
 /// object](<https://spec.openapis.org/oas/v3.0.3#schema>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Schema {
@@ -429,6 +447,7 @@ pub struct Schema {
     pub required: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Passage included inline with a grounding configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingPassage {
@@ -441,6 +460,7 @@ pub struct GroundingPassage {
     pub content: ::core::option::Option<Content>,
 }
 /// A repeated list of passages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingPassages {
@@ -450,6 +470,7 @@ pub struct GroundingPassages {
 }
 /// Type contains the list of OpenAPI data types as defined by
 /// <https://spec.openapis.org/oas/v3.0.3#data-types>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Type {
@@ -502,6 +523,7 @@ impl Type {
 /// to GenerativeService.
 ///
 /// Cached content can be only used with model it was created for.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CachedContent {
@@ -534,10 +556,10 @@ pub struct CachedContent {
     pub tool_config: ::core::option::Option<ToolConfig>,
     /// Output only. Creation time of the cache entry.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. When the cache entry was last updated in UTC time.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Metadata on the usage of the cached content.
     #[prost(message, optional, tag = "12")]
     pub usage_metadata: ::core::option::Option<cached_content::UsageMetadata>,
@@ -548,28 +570,31 @@ pub struct CachedContent {
 /// Nested message and enum types in `CachedContent`.
 pub mod cached_content {
     /// Metadata on the usage of the cached content.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UsageMetadata {
         /// Total number of tokens that the cached content consumes.
         #[prost(int32, tag = "1")]
         pub total_token_count: i32,
     }
     /// Specifies when this resource will expire.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Timestamp in UTC of when this resource is considered expired.
         /// This is *always* provided on output, regardless of what was sent
         /// on input.
         #[prost(message, tag = "9")]
-        ExpireTime(::prost_types::Timestamp),
+        ExpireTime(::prost_wkt_types::Timestamp),
         /// Input only. New TTL for this resource, input only.
         #[prost(message, tag = "10")]
-        Ttl(::prost_types::Duration),
+        Ttl(::prost_wkt_types::Duration),
     }
 }
 /// Request to list CachedContents.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCachedContentsRequest {
@@ -588,6 +613,7 @@ pub struct ListCachedContentsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response with CachedContents list.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCachedContentsResponse {
@@ -600,6 +626,7 @@ pub struct ListCachedContentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to create CachedContent.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCachedContentRequest {
@@ -608,6 +635,7 @@ pub struct CreateCachedContentRequest {
     pub cached_content: ::core::option::Option<CachedContent>,
 }
 /// Request to read CachedContent.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCachedContentRequest {
@@ -617,6 +645,7 @@ pub struct GetCachedContentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update CachedContent.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCachedContentRequest {
@@ -625,9 +654,10 @@ pub struct UpdateCachedContentRequest {
     pub cached_content: ::core::option::Option<CachedContent>,
     /// The list of fields to update.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to delete CachedContent.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCachedContentRequest {
@@ -844,7 +874,10 @@ pub mod cache_service_client {
         pub async fn delete_cached_content(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCachedContentRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -871,6 +904,7 @@ pub mod cache_service_client {
     }
 }
 /// A collection of source attributions for a piece of content.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CitationMetadata {
@@ -879,6 +913,7 @@ pub struct CitationMetadata {
     pub citation_sources: ::prost::alloc::vec::Vec<CitationSource>,
 }
 /// A citation to a source for a portion of a specific response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CitationSource {
@@ -905,6 +940,7 @@ pub struct CitationSource {
 ///
 /// ContentFilter contains a reason and an optional supporting string. The reason
 /// may be unspecified.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentFilter {
@@ -918,6 +954,7 @@ pub struct ContentFilter {
 /// Nested message and enum types in `ContentFilter`.
 pub mod content_filter {
     /// A list of reasons why content may have been blocked.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -968,8 +1005,9 @@ pub mod content_filter {
 /// Each SafetyFeedback will return the safety settings used by the request as
 /// well as the lowest HarmProbability that should be allowed in order to return
 /// a result.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetyFeedback {
     /// Safety rating evaluated from content.
     #[prost(message, optional, tag = "1")]
@@ -985,8 +1023,9 @@ pub struct SafetyFeedback {
 /// Content is classified for safety across a number of
 /// harm categories and the probability of the harm classification is included
 /// here.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetyRating {
     /// Required. The category for this rating.
     #[prost(enumeration = "HarmCategory", tag = "3")]
@@ -1004,6 +1043,7 @@ pub mod safety_rating {
     ///
     /// The classification system gives the probability of the content being
     /// unsafe. This does not indicate the severity of harm for a piece of content.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1059,8 +1099,9 @@ pub mod safety_rating {
 ///
 /// Passing a safety setting for a category changes the allowed probability that
 /// content is blocked.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetySetting {
     /// Required. The category for this setting.
     #[prost(enumeration = "HarmCategory", tag = "3")]
@@ -1072,6 +1113,7 @@ pub struct SafetySetting {
 /// Nested message and enum types in `SafetySetting`.
 pub mod safety_setting {
     /// Block at and beyond a specified harm probability.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1127,6 +1169,7 @@ pub mod safety_setting {
 ///
 /// These categories cover various kinds of harms that developers
 /// may wish to adjust.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum HarmCategory {
@@ -1193,6 +1236,7 @@ impl HarmCategory {
     }
 }
 /// Request to generate a message response from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateMessageRequest {
@@ -1243,6 +1287,7 @@ pub struct GenerateMessageRequest {
 ///
 /// This includes candidate messages and
 /// conversation history in the form of chronologically-ordered messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateMessageResponse {
@@ -1268,6 +1313,7 @@ pub struct GenerateMessageResponse {
 ///
 /// The `author` is used to tag messages when they are fed to the
 /// model as text.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
@@ -1298,6 +1344,7 @@ pub struct Message {
 /// prime the model to respond in different ways, and the conversation history
 /// or list of messages representing the alternating turns of the conversation
 /// between the user and the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessagePrompt {
@@ -1342,6 +1389,7 @@ pub struct MessagePrompt {
 /// An input/output example used to instruct the Model.
 ///
 /// It demonstrates how the model should respond or format its response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Example {
@@ -1356,6 +1404,7 @@ pub struct Example {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountMessageTokensRequest {
@@ -1374,8 +1423,9 @@ pub struct CountMessageTokensRequest {
 /// A response from `CountMessageTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountMessageTokensResponse {
     /// The number of tokens that the `model` tokenizes the `prompt` into.
     ///
@@ -1537,6 +1587,7 @@ pub mod discuss_service_client {
     }
 }
 /// A file uploaded to the API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct File {
@@ -1560,14 +1611,14 @@ pub struct File {
     pub size_bytes: i64,
     /// Output only. The timestamp of when the `File` was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp of when the `File` was last updated.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp of when the `File` will be deleted. Only set if
     /// the `File` is scheduled to expire.
     #[prost(message, optional, tag = "7")]
-    pub expiration_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expiration_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. SHA-256 hash of the uploaded bytes.
     #[prost(bytes = "vec", tag = "8")]
     pub sha256_hash: ::prost::alloc::vec::Vec<u8>,
@@ -1587,6 +1638,7 @@ pub struct File {
 /// Nested message and enum types in `File`.
 pub mod file {
     /// States for the lifecycle of a File.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1634,8 +1686,9 @@ pub mod file {
         }
     }
     /// Metadata for the File.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Metadata {
         /// Output only. Metadata for a video.
         #[prost(message, tag = "12")]
@@ -1643,14 +1696,16 @@ pub mod file {
     }
 }
 /// Metadata for a video `File`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VideoMetadata {
     /// Duration of the video.
     #[prost(message, optional, tag = "1")]
-    pub video_duration: ::core::option::Option<::prost_types::Duration>,
+    pub video_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Request for `CreateFile`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFileRequest {
@@ -1659,6 +1714,7 @@ pub struct CreateFileRequest {
     pub file: ::core::option::Option<File>,
 }
 /// Response for `CreateFile`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFileResponse {
@@ -1667,6 +1723,7 @@ pub struct CreateFileResponse {
     pub file: ::core::option::Option<File>,
 }
 /// Request for `ListFiles`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesRequest {
@@ -1679,6 +1736,7 @@ pub struct ListFilesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for `ListFiles`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesResponse {
@@ -1691,6 +1749,7 @@ pub struct ListFilesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for `GetFile`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileRequest {
@@ -1700,6 +1759,7 @@ pub struct GetFileRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for `DeleteFile`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFileRequest {
@@ -1888,7 +1948,10 @@ pub mod file_service_client {
         pub async fn delete_file(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteFileRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1916,6 +1979,7 @@ pub mod file_service_client {
 }
 /// A `Corpus` is a collection of `Document`s.
 /// A project can create up to 5 corpora.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Corpus {
@@ -1935,13 +1999,14 @@ pub struct Corpus {
     pub display_name: ::prost::alloc::string::String,
     /// Output only. The Timestamp of when the `Corpus` was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The Timestamp of when the `Corpus` was last updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A `Document` is a collection of `Chunk`s.
 /// A `Corpus` can have a maximum of 10,000 `Document`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Document {
@@ -1964,12 +2029,13 @@ pub struct Document {
     pub custom_metadata: ::prost::alloc::vec::Vec<CustomMetadata>,
     /// Output only. The Timestamp of when the `Document` was last updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The Timestamp of when the `Document` was created.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// User provided string values assigned to a single metadata key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StringList {
@@ -1978,6 +2044,7 @@ pub struct StringList {
     pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// User provided metadata stored as key-value pairs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetadata {
@@ -1989,6 +2056,7 @@ pub struct CustomMetadata {
 }
 /// Nested message and enum types in `CustomMetadata`.
 pub mod custom_metadata {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
@@ -2009,6 +2077,7 @@ pub mod custom_metadata {
 ///    key = "document.custom_metadata.genre"
 ///    conditions = [{string_value = "drama", operation = EQUAL},
 ///                  {string_value = "action", operation = EQUAL}]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetadataFilter {
@@ -2021,6 +2090,7 @@ pub struct MetadataFilter {
     pub conditions: ::prost::alloc::vec::Vec<Condition>,
 }
 /// Filter condition applicable to a single key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
@@ -2040,6 +2110,7 @@ pub struct Condition {
 /// Nested message and enum types in `Condition`.
 pub mod condition {
     /// Defines the valid operators that can be applied to a key-value pair.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2114,6 +2185,7 @@ pub mod condition {
     /// value type, the filtering condition should use `string_value` paired with
     /// an INCLUDES/EXCLUDES operation, otherwise the result will also be an empty
     /// set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
@@ -2128,6 +2200,7 @@ pub mod condition {
 /// A `Chunk` is a subpart of a `Document` that is treated as an independent unit
 /// for the purposes of vector representation and storage.
 /// A `Corpus` can have a maximum of 1 million `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Chunk {
@@ -2149,10 +2222,10 @@ pub struct Chunk {
     pub custom_metadata: ::prost::alloc::vec::Vec<CustomMetadata>,
     /// Output only. The Timestamp of when the `Chunk` was created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The Timestamp of when the `Chunk` was last updated.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Current state of the `Chunk`.
     #[prost(enumeration = "chunk::State", tag = "6")]
     pub state: i32,
@@ -2160,6 +2233,7 @@ pub struct Chunk {
 /// Nested message and enum types in `Chunk`.
 pub mod chunk {
     /// States for the lifecycle of a `Chunk`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2208,6 +2282,7 @@ pub mod chunk {
     }
 }
 /// Extracted data that represents the `Chunk` content.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChunkData {
@@ -2216,6 +2291,7 @@ pub struct ChunkData {
 }
 /// Nested message and enum types in `ChunkData`.
 pub mod chunk_data {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
@@ -2226,6 +2302,7 @@ pub mod chunk_data {
     }
 }
 /// Request to generate a completion from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateContentRequest {
@@ -2283,6 +2360,7 @@ pub struct GenerateContentRequest {
 }
 /// Configuration options for model generation and outputs. Not all parameters
 /// may be configurable for every model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerationConfig {
@@ -2357,6 +2435,7 @@ pub struct GenerationConfig {
 }
 /// Configuration for retrieving grounding content from a `Corpus` or
 /// `Document` created using the Semantic Retriever API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SemanticRetrieverConfig {
@@ -2389,6 +2468,7 @@ pub struct SemanticRetrieverConfig {
 ///     prompt (see `prompt_feedback`)
 ///   - feedback on each candidate is reported on `finish_reason` and
 ///     `safety_ratings`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateContentResponse {
@@ -2408,6 +2488,7 @@ pub struct GenerateContentResponse {
 pub mod generate_content_response {
     /// A set of the feedback metadata the prompt specified in
     /// `GenerateContentRequest.content`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PromptFeedback {
@@ -2423,6 +2504,7 @@ pub mod generate_content_response {
     /// Nested message and enum types in `PromptFeedback`.
     pub mod prompt_feedback {
         /// Specifies what was the reason why prompt was blocked.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2468,8 +2550,9 @@ pub mod generate_content_response {
         }
     }
     /// Metadata on the generation request's token usage.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UsageMetadata {
         /// Number of tokens in the prompt. When cached_content is set, this is still
         /// the total effective prompt size. I.e. this includes the number of tokens
@@ -2489,6 +2572,7 @@ pub mod generate_content_response {
     }
 }
 /// A response candidate generated from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Candidate {
@@ -2528,6 +2612,7 @@ pub struct Candidate {
 /// Nested message and enum types in `Candidate`.
 pub mod candidate {
     /// Defines the reason why the model stopped generating tokens.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2584,6 +2669,7 @@ pub mod candidate {
     }
 }
 /// Identifier for the source contributing to this attribution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributionSourceId {
@@ -2593,6 +2679,7 @@ pub struct AttributionSourceId {
 /// Nested message and enum types in `AttributionSourceId`.
 pub mod attribution_source_id {
     /// Identifier for a part within a `GroundingPassage`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GroundingPassageId {
@@ -2607,6 +2694,7 @@ pub mod attribution_source_id {
     }
     /// Identifier for a `Chunk` retrieved via Semantic Retriever specified in the
     /// `GenerateAnswerRequest` using `SemanticRetrieverConfig`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SemanticRetrieverChunk {
@@ -2620,6 +2708,7 @@ pub mod attribution_source_id {
         #[prost(string, tag = "2")]
         pub chunk: ::prost::alloc::string::String,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -2632,6 +2721,7 @@ pub mod attribution_source_id {
     }
 }
 /// Attribution for a source that contributed to an answer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingAttribution {
@@ -2643,6 +2733,7 @@ pub struct GroundingAttribution {
     pub content: ::core::option::Option<Content>,
 }
 /// Request to generate a grounded answer from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAnswerRequest {
@@ -2696,6 +2787,7 @@ pub struct GenerateAnswerRequest {
 /// Nested message and enum types in `GenerateAnswerRequest`.
 pub mod generate_answer_request {
     /// Style for grounded answers.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2744,6 +2836,7 @@ pub mod generate_answer_request {
         }
     }
     /// The sources in which to ground the answer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum GroundingSource {
@@ -2757,6 +2850,7 @@ pub mod generate_answer_request {
     }
 }
 /// Response from the model for a grounded answer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAnswerResponse {
@@ -2800,6 +2894,7 @@ pub struct GenerateAnswerResponse {
 pub mod generate_answer_response {
     /// Feedback related to the input data used to answer the question, as opposed
     /// to model-generated response to the question.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InputFeedback {
@@ -2815,6 +2910,7 @@ pub mod generate_answer_response {
     /// Nested message and enum types in `InputFeedback`.
     pub mod input_feedback {
         /// Specifies what was the reason why input was blocked.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2861,6 +2957,7 @@ pub mod generate_answer_response {
     }
 }
 /// Request containing the `Content` for the model to embed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedContentRequest {
@@ -2895,6 +2992,7 @@ pub struct EmbedContentRequest {
     pub output_dimensionality: ::core::option::Option<i32>,
 }
 /// A list of floats representing an embedding.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentEmbedding {
@@ -2903,6 +3001,7 @@ pub struct ContentEmbedding {
     pub values: ::prost::alloc::vec::Vec<f32>,
 }
 /// The response to an `EmbedContentRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedContentResponse {
@@ -2911,6 +3010,7 @@ pub struct EmbedContentResponse {
     pub embedding: ::core::option::Option<ContentEmbedding>,
 }
 /// Batch request to get embeddings from the model for a list of prompts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedContentsRequest {
@@ -2928,6 +3028,7 @@ pub struct BatchEmbedContentsRequest {
     pub requests: ::prost::alloc::vec::Vec<EmbedContentRequest>,
 }
 /// The response to a `BatchEmbedContentsRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedContentsResponse {
@@ -2940,6 +3041,7 @@ pub struct BatchEmbedContentsResponse {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountTokensRequest {
@@ -2963,8 +3065,9 @@ pub struct CountTokensRequest {
 /// A response from `CountTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountTokensResponse {
     /// The number of tokens that the `model` tokenizes the `prompt` into.
     ///
@@ -2979,6 +3082,7 @@ pub struct CountTokensResponse {
     pub cached_content_token_count: i32,
 }
 /// Type of task for which the embedding will be used.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TaskType {
@@ -3316,6 +3420,7 @@ pub mod generative_service_client {
     }
 }
 /// Information about a Generative Language Model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Model {
@@ -3396,6 +3501,7 @@ pub struct Model {
     pub top_k: ::core::option::Option<i32>,
 }
 /// A fine-tuned model created using ModelService.CreateTunedModel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TunedModel {
@@ -3449,10 +3555,10 @@ pub struct TunedModel {
     pub state: i32,
     /// Output only. The timestamp when this model was created.
     #[prost(message, optional, tag = "8")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when this model was updated.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. The tuning task that creates the tuned model.
     #[prost(message, optional, tag = "10")]
     pub tuning_task: ::core::option::Option<TuningTask>,
@@ -3463,6 +3569,7 @@ pub struct TunedModel {
 /// Nested message and enum types in `TunedModel`.
 pub mod tuned_model {
     /// The state of the tuned model.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3510,6 +3617,7 @@ pub mod tuned_model {
         }
     }
     /// The model used as the starting point for tuning.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SourceModel {
@@ -3524,6 +3632,7 @@ pub mod tuned_model {
     }
 }
 /// Tuned model as a source for training a new model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TunedModelSource {
@@ -3538,15 +3647,16 @@ pub struct TunedModelSource {
     pub base_model: ::prost::alloc::string::String,
 }
 /// Tuning tasks that create tuned models.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningTask {
     /// Output only. The timestamp when tuning this model started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when tuning this model completed.
     #[prost(message, optional, tag = "2")]
-    pub complete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub complete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Metrics collected during tuning.
     #[prost(message, repeated, tag = "3")]
     pub snapshots: ::prost::alloc::vec::Vec<TuningSnapshot>,
@@ -3560,8 +3670,9 @@ pub struct TuningTask {
 }
 /// Hyperparameters controlling the tuning process. Read more at
 /// <https://ai.google.dev/docs/model_tuning_guidance>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Hyperparameters {
     /// Immutable. The number of training epochs. An epoch is one pass through the
     /// training data. If not set, a default of 5 will be used.
@@ -3581,8 +3692,9 @@ pub struct Hyperparameters {
 /// Nested message and enum types in `Hyperparameters`.
 pub mod hyperparameters {
     /// Options for specifying learning rate during tuning.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum LearningRateOption {
         /// Optional. Immutable. The learning rate hyperparameter for tuning.
         /// If not set, a default of 0.001 or 0.0002 will be calculated based on the
@@ -3599,6 +3711,7 @@ pub mod hyperparameters {
     }
 }
 /// Dataset for training or validation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
@@ -3609,6 +3722,7 @@ pub struct Dataset {
 /// Nested message and enum types in `Dataset`.
 pub mod dataset {
     /// Inline data or a reference to the data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Dataset {
@@ -3618,6 +3732,7 @@ pub mod dataset {
     }
 }
 /// A set of tuning examples. Can be training or validation data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningExamples {
@@ -3627,6 +3742,7 @@ pub struct TuningExamples {
     pub examples: ::prost::alloc::vec::Vec<TuningExample>,
 }
 /// A single example for tuning.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningExample {
@@ -3640,6 +3756,7 @@ pub struct TuningExample {
 /// Nested message and enum types in `TuningExample`.
 pub mod tuning_example {
     /// The input to the model for this example.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ModelInput {
@@ -3649,8 +3766,9 @@ pub mod tuning_example {
     }
 }
 /// Record for a single tuning step.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TuningSnapshot {
     /// Output only. The tuning step.
     #[prost(int32, tag = "1")]
@@ -3663,9 +3781,10 @@ pub struct TuningSnapshot {
     pub mean_loss: f32,
     /// Output only. The timestamp when this metric was computed.
     #[prost(message, optional, tag = "4")]
-    pub compute_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub compute_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request for getting information about a specific Model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetModelRequest {
@@ -3678,6 +3797,7 @@ pub struct GetModelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing all Models.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListModelsRequest {
@@ -3700,6 +3820,7 @@ pub struct ListModelsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response from `ListModel` containing a paginated list of Models.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListModelsResponse {
@@ -3713,6 +3834,7 @@ pub struct ListModelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for getting information about a specific Model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTunedModelRequest {
@@ -3723,6 +3845,7 @@ pub struct GetTunedModelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing TunedModels.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTunedModelsRequest {
@@ -3761,6 +3884,7 @@ pub struct ListTunedModelsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response from `ListTunedModels` containing a paginated list of Models.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTunedModelsResponse {
@@ -3774,6 +3898,7 @@ pub struct ListTunedModelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to create a TunedModel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTunedModelRequest {
@@ -3789,6 +3914,7 @@ pub struct CreateTunedModelRequest {
 }
 /// Metadata about the state and progress of creating a tuned model returned from
 /// the long-running operation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTunedModelMetadata {
@@ -3809,6 +3935,7 @@ pub struct CreateTunedModelMetadata {
     pub snapshots: ::prost::alloc::vec::Vec<TuningSnapshot>,
 }
 /// Request to update a TunedModel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTunedModelRequest {
@@ -3817,9 +3944,10 @@ pub struct UpdateTunedModelRequest {
     pub tuned_model: ::core::option::Option<TunedModel>,
     /// Required. The list of fields to update.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to delete a TunedModel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTunedModelRequest {
@@ -4101,7 +4229,10 @@ pub mod model_service_client {
         pub async fn delete_tuned_model(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteTunedModelRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -4141,6 +4272,7 @@ pub mod model_service_client {
 /// - reader can use the resource (e.g. tuned model, corpus) for inference
 /// - writer has reader's permissions and additionally can edit and share
 /// - owner has writer's permissions and additionally can delete
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Permission {
@@ -4166,6 +4298,7 @@ pub struct Permission {
 /// Nested message and enum types in `Permission`.
 pub mod permission {
     /// Defines types of the grantee of this permission.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4214,6 +4347,7 @@ pub mod permission {
         }
     }
     /// Defines the role granted by this permission.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4262,6 +4396,7 @@ pub mod permission {
     }
 }
 /// Request to create a `Permission`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePermissionRequest {
@@ -4276,6 +4411,7 @@ pub struct CreatePermissionRequest {
     pub permission: ::core::option::Option<Permission>,
 }
 /// Request for getting information about a specific `Permission`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPermissionRequest {
@@ -4288,6 +4424,7 @@ pub struct GetPermissionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing permissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPermissionsRequest {
@@ -4317,6 +4454,7 @@ pub struct ListPermissionsRequest {
 }
 /// Response from `ListPermissions` containing a paginated list of
 /// permissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPermissionsResponse {
@@ -4330,6 +4468,7 @@ pub struct ListPermissionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to update the `Permission`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePermissionRequest {
@@ -4341,9 +4480,10 @@ pub struct UpdatePermissionRequest {
     /// Required. The list of fields to update. Accepted ones:
     ///   - role (`Permission.role` field)
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to delete the `Permission`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePermissionRequest {
@@ -4355,6 +4495,7 @@ pub struct DeletePermissionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to transfer the ownership of the tuned model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferOwnershipRequest {
@@ -4369,8 +4510,9 @@ pub struct TransferOwnershipRequest {
     pub email_address: ::prost::alloc::string::String,
 }
 /// Response from `TransferOwnership`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransferOwnershipResponse {}
 /// Generated client implementations.
 pub mod permission_service_client {
@@ -4577,7 +4719,10 @@ pub mod permission_service_client {
         pub async fn delete_permission(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePermissionRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -4637,6 +4782,7 @@ pub mod permission_service_client {
     }
 }
 /// Request to create a `Corpus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCorpusRequest {
@@ -4645,6 +4791,7 @@ pub struct CreateCorpusRequest {
     pub corpus: ::core::option::Option<Corpus>,
 }
 /// Request for getting information about a specific `Corpus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCorpusRequest {
@@ -4654,6 +4801,7 @@ pub struct GetCorpusRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Corpus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCorpusRequest {
@@ -4663,9 +4811,10 @@ pub struct UpdateCorpusRequest {
     /// Required. The list of fields to update.
     /// Currently, this only supports updating `display_name`.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to delete a `Corpus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCorpusRequest {
@@ -4682,6 +4831,7 @@ pub struct DeleteCorpusRequest {
     pub force: bool,
 }
 /// Request for listing `Corpora`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCorporaRequest {
@@ -4704,6 +4854,7 @@ pub struct ListCorporaRequest {
 }
 /// Response from `ListCorpora` containing a paginated list of `Corpora`.
 /// The results are sorted by ascending `corpus.create_time`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCorporaResponse {
@@ -4716,6 +4867,7 @@ pub struct ListCorporaResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for querying a `Corpus`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryCorpusRequest {
@@ -4768,6 +4920,7 @@ pub struct QueryCorpusRequest {
     pub results_count: i32,
 }
 /// Response from `QueryCorpus` containing a list of relevant chunks.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryCorpusResponse {
@@ -4776,6 +4929,7 @@ pub struct QueryCorpusResponse {
     pub relevant_chunks: ::prost::alloc::vec::Vec<RelevantChunk>,
 }
 /// The information for a chunk relevant to a query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RelevantChunk {
@@ -4787,6 +4941,7 @@ pub struct RelevantChunk {
     pub chunk: ::core::option::Option<Chunk>,
 }
 /// Request to create a `Document`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDocumentRequest {
@@ -4799,6 +4954,7 @@ pub struct CreateDocumentRequest {
     pub document: ::core::option::Option<Document>,
 }
 /// Request for getting information about a specific `Document`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDocumentRequest {
@@ -4808,6 +4964,7 @@ pub struct GetDocumentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Document`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDocumentRequest {
@@ -4818,9 +4975,10 @@ pub struct UpdateDocumentRequest {
     /// Currently, this only supports updating `display_name` and
     /// `custom_metadata`.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to delete a `Document`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDocumentRequest {
@@ -4837,6 +4995,7 @@ pub struct DeleteDocumentRequest {
     pub force: bool,
 }
 /// Request for listing `Document`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsRequest {
@@ -4863,6 +5022,7 @@ pub struct ListDocumentsRequest {
 }
 /// Response from `ListDocuments` containing a paginated list of `Document`s.
 /// The `Document`s are sorted by ascending `document.create_time`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsResponse {
@@ -4875,6 +5035,7 @@ pub struct ListDocumentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for querying a `Document`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDocumentRequest {
@@ -4927,6 +5088,7 @@ pub struct QueryDocumentRequest {
     pub metadata_filters: ::prost::alloc::vec::Vec<MetadataFilter>,
 }
 /// Response from `QueryDocument` containing a list of relevant chunks.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDocumentResponse {
@@ -4935,6 +5097,7 @@ pub struct QueryDocumentResponse {
     pub relevant_chunks: ::prost::alloc::vec::Vec<RelevantChunk>,
 }
 /// Request to create a `Chunk`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChunkRequest {
@@ -4947,6 +5110,7 @@ pub struct CreateChunkRequest {
     pub chunk: ::core::option::Option<Chunk>,
 }
 /// Request to batch create `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateChunksRequest {
@@ -4961,6 +5125,7 @@ pub struct BatchCreateChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<CreateChunkRequest>,
 }
 /// Response from `BatchCreateChunks` containing a list of created `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateChunksResponse {
@@ -4969,6 +5134,7 @@ pub struct BatchCreateChunksResponse {
     pub chunks: ::prost::alloc::vec::Vec<Chunk>,
 }
 /// Request for getting information about a specific `Chunk`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChunkRequest {
@@ -4978,6 +5144,7 @@ pub struct GetChunkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Chunk`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChunkRequest {
@@ -4987,9 +5154,10 @@ pub struct UpdateChunkRequest {
     /// Required. The list of fields to update.
     /// Currently, this only supports updating `custom_metadata` and `data`.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to batch update `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateChunksRequest {
@@ -5004,6 +5172,7 @@ pub struct BatchUpdateChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<UpdateChunkRequest>,
 }
 /// Response from `BatchUpdateChunks` containing a list of updated `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateChunksResponse {
@@ -5012,6 +5181,7 @@ pub struct BatchUpdateChunksResponse {
     pub chunks: ::prost::alloc::vec::Vec<Chunk>,
 }
 /// Request to delete a `Chunk`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChunkRequest {
@@ -5021,6 +5191,7 @@ pub struct DeleteChunkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to batch delete `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchDeleteChunksRequest {
@@ -5034,6 +5205,7 @@ pub struct BatchDeleteChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<DeleteChunkRequest>,
 }
 /// Request for listing `Chunk`s.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChunksRequest {
@@ -5060,6 +5232,7 @@ pub struct ListChunksRequest {
 }
 /// Response from `ListChunks` containing a paginated list of `Chunk`s.
 /// The `Chunk`s are sorted by ascending `chunk.create_time`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChunksResponse {
@@ -5245,7 +5418,10 @@ pub mod retriever_service_client {
         pub async fn delete_corpus(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCorpusRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5419,7 +5595,10 @@ pub mod retriever_service_client {
         pub async fn delete_document(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDocumentRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5655,7 +5834,10 @@ pub mod retriever_service_client {
         pub async fn delete_chunk(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteChunkRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5683,7 +5865,10 @@ pub mod retriever_service_client {
         pub async fn batch_delete_chunks(
             &mut self,
             request: impl tonic::IntoRequest<super::BatchDeleteChunksRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5741,6 +5926,7 @@ pub mod retriever_service_client {
     }
 }
 /// Request to generate a text completion response from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateTextRequest {
@@ -5827,6 +6013,7 @@ pub struct GenerateTextRequest {
     pub stop_sequences: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response from the model, including candidate completions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateTextResponse {
@@ -5853,6 +6040,7 @@ pub struct GenerateTextResponse {
 /// Text given to the model as a prompt.
 ///
 /// The Model will use this TextPrompt to Generate a text completion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextPrompt {
@@ -5861,6 +6049,7 @@ pub struct TextPrompt {
     pub text: ::prost::alloc::string::String,
 }
 /// Output text returned from a model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextCompletion {
@@ -5881,6 +6070,7 @@ pub struct TextCompletion {
     pub citation_metadata: ::core::option::Option<CitationMetadata>,
 }
 /// Request to get a text embedding from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTextRequest {
@@ -5893,6 +6083,7 @@ pub struct EmbedTextRequest {
     pub text: ::prost::alloc::string::String,
 }
 /// The response to a EmbedTextRequest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTextResponse {
@@ -5901,6 +6092,7 @@ pub struct EmbedTextResponse {
     pub embedding: ::core::option::Option<Embedding>,
 }
 /// Batch request to get a text embedding from the model.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedTextRequest {
@@ -5920,6 +6112,7 @@ pub struct BatchEmbedTextRequest {
     pub requests: ::prost::alloc::vec::Vec<EmbedTextRequest>,
 }
 /// The response to a EmbedTextRequest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedTextResponse {
@@ -5928,6 +6121,7 @@ pub struct BatchEmbedTextResponse {
     pub embeddings: ::prost::alloc::vec::Vec<Embedding>,
 }
 /// A list of floats representing the embedding.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Embedding {
@@ -5939,6 +6133,7 @@ pub struct Embedding {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountTextTokensRequest {
@@ -5957,8 +6152,9 @@ pub struct CountTextTokensRequest {
 /// A response from `CountTextTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountTextTokensResponse {
     /// The number of tokens that the `model` tokenizes the `prompt` into.
     ///

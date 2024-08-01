@@ -2,6 +2,7 @@
 /// The group information for methods in the Merchant API. The quota is shared
 /// between all methods in the group. Even if none of the methods within the
 /// group have usage the information for the group is returned.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuotaGroup {
@@ -26,6 +27,7 @@ pub struct QuotaGroup {
     pub method_details: ::prost::alloc::vec::Vec<MethodDetails>,
 }
 /// The method details per method in the Merchant API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MethodDetails {
@@ -44,6 +46,7 @@ pub struct MethodDetails {
     pub path: ::prost::alloc::string::String,
 }
 /// Request message for the ListQuotaGroups method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQuotaGroupsRequest {
@@ -61,6 +64,7 @@ pub struct ListQuotaGroupsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ListMethodGroups method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQuotaGroupsResponse {

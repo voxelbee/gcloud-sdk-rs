@@ -5,6 +5,7 @@
 /// these configurations allows several benefits, such as reduced network latency
 /// while accessing the customer resources from managed Data Fusion instance
 /// nodes, as well as access to the customer on-prem resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkConfig {
@@ -21,6 +22,7 @@ pub struct NetworkConfig {
     pub ip_allocation: ::prost::alloc::string::String,
 }
 /// The Data Fusion version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Version {
@@ -40,6 +42,7 @@ pub struct Version {
 /// Nested message and enum types in `Version`.
 pub mod version {
     /// Each type represents the release availability of a CDF version
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -84,8 +87,9 @@ pub mod version {
     }
 }
 /// Identifies Data Fusion accelerators for an instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Accelerator {
     /// The type of an accelator for a CDF instance.
     #[prost(enumeration = "accelerator::AcceleratorType", tag = "1")]
@@ -95,6 +99,7 @@ pub struct Accelerator {
 pub mod accelerator {
     /// Each type represents an Accelerator (Add-On) supported by Cloud Data Fusion
     /// service.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -141,6 +146,7 @@ pub mod accelerator {
 }
 /// The crypto key configuration. This field is used by the Customer-managed
 /// encryption keys (CMEK) feature.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CryptoKeyConfig {
@@ -151,6 +157,7 @@ pub struct CryptoKeyConfig {
     pub key_reference: ::prost::alloc::string::String,
 }
 /// Represents a Data Fusion instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Instance {
@@ -196,10 +203,10 @@ pub struct Instance {
     >,
     /// Output only. The time the instance was created.
     #[prost(message, optional, tag = "10")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the instance was last updated.
     #[prost(message, optional, tag = "11")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The current state of this Data Fusion instance.
     #[prost(enumeration = "instance::State", tag = "12")]
     pub state: i32,
@@ -270,6 +277,7 @@ pub struct Instance {
 pub mod instance {
     /// Represents the type of Data Fusion instance. Each type is configured with
     /// the default settings for processing and memory.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -325,6 +333,7 @@ pub mod instance {
         }
     }
     /// Represents the state of a Data Fusion instance
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -400,6 +409,7 @@ pub mod instance {
         }
     }
     /// The reason for disabling the instance if the state is DISABLED.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -440,6 +450,7 @@ pub mod instance {
     }
 }
 /// Request message for listing Data Fusion instances.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesRequest {
@@ -464,6 +475,7 @@ pub struct ListInstancesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for the list instance request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesResponse {
@@ -479,6 +491,7 @@ pub struct ListInstancesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for the list available versions request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsRequest {
@@ -500,6 +513,7 @@ pub struct ListAvailableVersionsRequest {
     pub latest_patch_only: bool,
 }
 /// Response message for the list available versions request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsResponse {
@@ -512,6 +526,7 @@ pub struct ListAvailableVersionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for getting details about a Data Fusion instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInstanceRequest {
@@ -521,6 +536,7 @@ pub struct GetInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for creating a Data Fusion instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInstanceRequest {
@@ -536,6 +552,7 @@ pub struct CreateInstanceRequest {
     pub instance: ::core::option::Option<Instance>,
 }
 /// Request message for deleting a Data Fusion instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInstanceRequest {
@@ -547,6 +564,7 @@ pub struct DeleteInstanceRequest {
 /// Request message for updating a Data Fusion instance.
 /// Data Fusion only allows updating the labels, options, and stack driver
 /// settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInstanceRequest {
@@ -562,9 +580,10 @@ pub struct UpdateInstanceRequest {
     /// If the user does not provide a mask, all the supported fields (labels and
     /// options currently) will be overwritten.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for restarting a Data Fusion instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestartInstanceRequest {
@@ -575,6 +594,7 @@ pub struct RestartInstanceRequest {
 }
 /// Request message for upgrading a Data Fusion instance.
 /// To change the instance properties, instance update should be used.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpgradeInstanceRequest {
@@ -586,15 +606,16 @@ pub struct UpgradeInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of a long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,
@@ -615,6 +636,7 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Request message for RemoveIamPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveIamPolicyRequest {
@@ -623,10 +645,12 @@ pub struct RemoveIamPolicyRequest {
     pub resource: ::prost::alloc::string::String,
 }
 /// Response message for RemoveIamPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveIamPolicyResponse {}
 /// List namespaces request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesRequest {
@@ -649,6 +673,7 @@ pub struct ListNamespacesRequest {
 }
 /// IAMPolicy encapsulates the IAM policy name, definition and status of
 /// policy fetching.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IamPolicy {
@@ -661,6 +686,7 @@ pub struct IamPolicy {
     pub status: ::core::option::Option<super::super::super::rpc::Status>,
 }
 /// Represents the information of a namespace
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
@@ -672,6 +698,7 @@ pub struct Namespace {
     pub iam_policy: ::core::option::Option<IamPolicy>,
 }
 /// List namespaces response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesResponse {
@@ -685,6 +712,7 @@ pub struct ListNamespacesResponse {
 }
 /// DNS peering configuration. These configurations are used to create
 /// DNS peering with the customer Cloud DNS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DnsPeering {
@@ -705,6 +733,7 @@ pub struct DnsPeering {
     pub target_network: ::prost::alloc::string::String,
 }
 /// Request message to create dns peering.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddDnsPeeringRequest {
@@ -716,10 +745,12 @@ pub struct AddDnsPeeringRequest {
     pub dns_peering: ::core::option::Option<DnsPeering>,
 }
 /// Response message for set dns peering method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddDnsPeeringResponse {}
 /// Request message to remove dns peering.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveDnsPeeringRequest {
@@ -731,10 +762,12 @@ pub struct RemoveDnsPeeringRequest {
     pub zone: ::prost::alloc::string::String,
 }
 /// Response message for set dns peering method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveDnsPeeringResponse {}
 /// List dns peering request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDnsPeeringsRequest {
@@ -750,6 +783,7 @@ pub struct ListDnsPeeringsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// List dns peering response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDnsPeeringsResponse {
@@ -762,6 +796,7 @@ pub struct ListDnsPeeringsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A view for Namespace
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum NamespaceView {

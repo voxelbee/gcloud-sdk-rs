@@ -12,6 +12,7 @@
 /// must provide a username and password for a test account in
 /// Settings.testing_instructions for the review team to review the app (they
 /// will not be visible to users).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountLinking {
@@ -75,6 +76,7 @@ pub struct AccountLinking {
 /// Nested message and enum types in `AccountLinking`.
 pub mod account_linking {
     /// The type of Account Linking to perform.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -124,6 +126,7 @@ pub mod account_linking {
     }
     /// The OAuth2 grant type Google uses to guide the user to sign in to your
     /// App's web service.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -171,6 +174,7 @@ pub mod account_linking {
 }
 /// Information about the encrypted OAuth client secret used in account linking
 /// flows (for AUTH_CODE grant type).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountLinkingSecret {
@@ -185,6 +189,7 @@ pub struct AccountLinkingSecret {
     pub encryption_key_version: ::prost::alloc::string::String,
 }
 /// Represents the list of Actions defined in a project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Actions {
@@ -203,6 +208,7 @@ pub struct Actions {
 pub mod actions {
     /// Defines the engagement mechanisms associated with this action. This
     /// allows end users to subscribe to push notification and daily update.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Engagement {
@@ -236,17 +242,20 @@ pub mod actions {
     /// Nested message and enum types in `Engagement`.
     pub mod engagement {
         /// Defines push notification settings that this engagement supports.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct PushNotification {}
         /// Defines daily update settings that this engagement supports.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct DailyUpdate {}
         /// Indicates whether sharing links is enabled for this action and the
         /// corresponding settings. Action links are used to deep link a user into a
         /// specific action.
         /// ActionLink is deprecated. Use AssistantLink instead.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ActionLink {
@@ -257,6 +266,7 @@ pub mod actions {
         /// Indicates whether sharing links is enabled for this action and the
         /// corresponding settings. Assistant links are used to deep link a user into
         /// a specific action.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct AssistantLink {
@@ -265,8 +275,9 @@ pub mod actions {
             pub title: ::prost::alloc::string::String,
         }
         /// Recurring update settings that this engagement supports.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum RecurringUpdate {
             /// Daily update settings that this engagement supports.
             #[prost(message, tag = "3")]
@@ -274,6 +285,7 @@ pub mod actions {
         }
     }
     /// Details regarding a custom action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomAction {
@@ -288,6 +300,7 @@ pub mod actions {
 }
 /// Contains information that's "transportable" i.e. not specific to any given
 /// project and can be moved between projects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Manifest {
@@ -297,6 +310,7 @@ pub struct Manifest {
     pub version: ::prost::alloc::string::String,
 }
 /// Styles applied to cards that are presented to users
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ThemeCustomization {
@@ -350,6 +364,7 @@ pub struct ThemeCustomization {
 /// Nested message and enum types in `ThemeCustomization`.
 pub mod theme_customization {
     /// Describes how the borders of images should be rendered.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -396,6 +411,7 @@ pub mod theme_customization {
 /// Represents settings of an Actions project that are specific to a user locale.
 /// In this instance, user means the end user who invokes your Actions.
 /// **This message is localizable.**
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedSettings {
@@ -464,6 +480,7 @@ pub struct LocalizedSettings {
 }
 /// Contains a set of requirements that the client surface must support to invoke
 /// Actions in your project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SurfaceRequirements {
@@ -474,8 +491,9 @@ pub struct SurfaceRequirements {
     pub minimum_requirements: ::prost::alloc::vec::Vec<CapabilityRequirement>,
 }
 /// Represents a requirement about the availability of a given capability.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CapabilityRequirement {
     /// The type of capability.
     #[prost(enumeration = "capability_requirement::SurfaceCapability", tag = "1")]
@@ -484,6 +502,7 @@ pub struct CapabilityRequirement {
 /// Nested message and enum types in `CapabilityRequirement`.
 pub mod capability_requirement {
     /// Possible set of surface capabilities.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -548,6 +567,7 @@ pub mod capability_requirement {
     }
 }
 /// Represents settings of an Actions project that are not locale specific.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Settings {
@@ -646,6 +666,7 @@ pub struct Settings {
 /// Nested message and enum types in `Settings`.
 pub mod settings {
     /// The category choices for an Actions project.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -769,6 +790,7 @@ pub mod settings {
 ///   - `/webhooks/my_webhook.yaml`
 ///   - `/webhooks/my_webhook/index.js`
 ///   - `/webhooks/my_webhook/package.json`
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Webhook {
@@ -784,6 +806,7 @@ pub mod webhook {
     /// Declares the name of the webhoook handler. A webhook can have
     /// multiple handlers registered. These handlers can be called from multiple
     /// places in your Actions project.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Handler {
@@ -794,6 +817,7 @@ pub mod webhook {
         pub name: ::prost::alloc::string::String,
     }
     /// REST endpoint to notify if you're not using the inline editor.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct HttpsEndpoint {
@@ -818,6 +842,7 @@ pub mod webhook {
     }
     /// Holds the metadata of an inline Cloud Function deployed from the
     /// webhooks folder.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InlineCloudFunction {
@@ -827,6 +852,7 @@ pub mod webhook {
         pub execute_function: ::prost::alloc::string::String,
     }
     /// Only one webhook type is supported.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum WebhookType {
@@ -839,6 +865,7 @@ pub mod webhook {
     }
 }
 /// Wrapper for repeated config files. Repeated fields cannot exist in a oneof.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigFiles {
@@ -849,6 +876,7 @@ pub struct ConfigFiles {
 /// Represents a single file which contains structured data. Developers can
 /// define most of their project using structured config including Actions,
 /// Settings, Fulfillment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigFile {
@@ -867,6 +895,7 @@ pub struct ConfigFile {
 /// Nested message and enum types in `ConfigFile`.
 pub mod config_file {
     /// Each type of config file should have a corresponding field in the oneof.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum File {
@@ -927,10 +956,11 @@ pub mod config_file {
         /// Allowed file paths: `resources/strings/{language}?/{multiple
         /// directories}?/{BundleName}.yaml`
         #[prost(message, tag = "12")]
-        ResourceBundle(::prost_types::Struct),
+        ResourceBundle(::prost_wkt_types::Struct),
     }
 }
 /// Wrapper for repeated data file. Repeated fields cannot exist in a oneof.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataFiles {
@@ -940,6 +970,7 @@ pub struct DataFiles {
 }
 /// Represents a single file which contains unstructured data. Examples include
 /// image files, audio files, and cloud function source code.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataFile {
@@ -972,6 +1003,7 @@ pub struct DataFile {
     pub payload: ::prost::alloc::vec::Vec<u8>,
 }
 /// Wrapper for a list of files.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Files {
@@ -984,6 +1016,7 @@ pub struct Files {
 pub mod files {
     /// Only one type of files can be sent to the server at a time, config files or
     /// data files.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum FileType {
@@ -998,6 +1031,7 @@ pub mod files {
     }
 }
 /// Definition of release channel resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReleaseChannel {
@@ -1015,6 +1049,7 @@ pub struct ReleaseChannel {
     pub pending_version: ::prost::alloc::string::String,
 }
 /// Wrapper for repeated validation result.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidationResults {
@@ -1023,6 +1058,7 @@ pub struct ValidationResults {
     pub results: ::prost::alloc::vec::Vec<ValidationResult>,
 }
 /// Represents a validation result associated with the app content.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidationResult {
@@ -1036,6 +1072,7 @@ pub struct ValidationResult {
 /// Nested message and enum types in `ValidationResult`.
 pub mod validation_result {
     /// Context to identify the resource the validation message relates to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ValidationContext {
@@ -1048,6 +1085,7 @@ pub mod validation_result {
     }
 }
 /// Definition of version resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Version {
@@ -1063,11 +1101,12 @@ pub struct Version {
     pub creator: ::prost::alloc::string::String,
     /// Timestamp of the last change to this version.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `Version`.
 pub mod version {
     /// Represents the current state of the version.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VersionState {
@@ -1082,6 +1121,7 @@ pub mod version {
     pub mod version_state {
         /// Enum indicating the states that a Version can take. This enum is not yet
         /// frozen and values maybe added later.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1157,6 +1197,7 @@ pub mod version {
     }
 }
 /// Streaming RPC request for WriteDraft.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteDraftRequest {
@@ -1175,6 +1216,7 @@ pub struct WriteDraftRequest {
     pub files: ::core::option::Option<Files>,
 }
 /// Definition of draft resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Draft {
@@ -1189,6 +1231,7 @@ pub struct Draft {
     pub validation_results: ::core::option::Option<ValidationResults>,
 }
 /// Streaming RPC request for WritePreview.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WritePreviewRequest {
@@ -1206,10 +1249,12 @@ pub struct WritePreviewRequest {
 /// Nested message and enum types in `WritePreviewRequest`.
 pub mod write_preview_request {
     /// Indicates the preview content will be coming from the Draft.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ContentFromDraft {}
     /// Indicates the preview content will be coming from an exiting version.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ContentFromSubmittedVersion {
@@ -1219,16 +1264,20 @@ pub mod write_preview_request {
         pub version: ::prost::alloc::string::String,
     }
     /// Settings for updating the preview.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PreviewSettings {
         /// Indicates whether or not to run certain operations, such as transactions,
         /// in sandbox mode. By default, preview requests run these operations in
         /// sandbox mode. In other words, the default value for `sandbox` is `true`.
         #[prost(message, optional, tag = "1")]
-        pub sandbox: ::core::option::Option<bool>,
+        pub sandbox: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
     }
     /// Data source used to created the preview.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -1250,6 +1299,7 @@ pub mod write_preview_request {
     }
 }
 /// Definition of preview resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Preview {
@@ -1265,6 +1315,7 @@ pub struct Preview {
     pub simulator_url: ::prost::alloc::string::String,
 }
 /// Streaming RPC request for CreateVersion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVersionRequest {
@@ -1289,6 +1340,7 @@ pub struct CreateVersionRequest {
     pub release_channel: ::prost::alloc::string::String,
 }
 /// RPC request for ReadDraft.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadDraftRequest {
@@ -1304,6 +1356,7 @@ pub struct ReadDraftRequest {
     pub client_secret_encryption_key_version: ::prost::alloc::string::String,
 }
 /// Streaming RPC response for ReadDraft.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadDraftResponse {
@@ -1312,6 +1365,7 @@ pub struct ReadDraftResponse {
     pub files: ::core::option::Option<Files>,
 }
 /// RPC request for ReadVersion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadVersionRequest {
@@ -1329,6 +1383,7 @@ pub struct ReadVersionRequest {
     pub client_secret_encryption_key_version: ::prost::alloc::string::String,
 }
 /// Streaming RPC response for ReadVersion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadVersionResponse {
@@ -1337,6 +1392,7 @@ pub struct ReadVersionResponse {
     pub files: ::core::option::Option<Files>,
 }
 /// RPC request for EncryptSecret.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EncryptSecretRequest {
@@ -1345,6 +1401,7 @@ pub struct EncryptSecretRequest {
     pub client_secret: ::prost::alloc::string::String,
 }
 /// RPC response for EncryptSecret.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EncryptSecretResponse {
@@ -1354,6 +1411,7 @@ pub struct EncryptSecretResponse {
     pub account_linking_secret: ::core::option::Option<AccountLinkingSecret>,
 }
 /// RPC request for DecryptSecret.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DecryptSecretRequest {
@@ -1362,6 +1420,7 @@ pub struct DecryptSecretRequest {
     pub encrypted_client_secret: ::prost::alloc::vec::Vec<u8>,
 }
 /// RPC response for DecryptSecret.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DecryptSecretResponse {
@@ -1370,6 +1429,7 @@ pub struct DecryptSecretResponse {
     pub client_secret: ::prost::alloc::string::String,
 }
 /// RPC request for ListSampleProjects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSampleProjectsRequest {
@@ -1385,6 +1445,7 @@ pub struct ListSampleProjectsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// RPC response for ListSampleProjects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSampleProjectsResponse {
@@ -1397,6 +1458,7 @@ pub struct ListSampleProjectsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Definition of sample project resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SampleProject {
@@ -1412,6 +1474,7 @@ pub struct SampleProject {
     pub description: ::prost::alloc::string::String,
 }
 /// RPC request for listing release channels
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListReleaseChannelsRequest {
@@ -1432,6 +1495,7 @@ pub struct ListReleaseChannelsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// RPC response for listing release channels
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListReleaseChannelsResponse {
@@ -1444,6 +1508,7 @@ pub struct ListReleaseChannelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// RPC request for listing versions
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVersionsRequest {
@@ -1464,6 +1529,7 @@ pub struct ListVersionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// RPC response for listing versions
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVersionsResponse {
@@ -1854,12 +1920,13 @@ pub mod actions_sdk_client {
 /// Actions Builder conversation request. For an overview of the stages involved
 /// in a conversation request, see
 /// <https://developers.google.com/assistant/conversational/actions.>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionEvent {
     /// Timestamp when the event happened.
     #[prost(message, optional, tag = "1")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// State of the execution during this event.
     #[prost(message, optional, tag = "2")]
     pub execution_state: ::core::option::Option<ExecutionState>,
@@ -1888,6 +1955,7 @@ pub mod execution_event {
     /// Detailed information specific to different of events that may be involved
     /// in processing a conversation round. The field set here defines the type of
     /// this event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EventData {
@@ -1933,6 +2001,7 @@ pub mod execution_event {
     }
 }
 /// Current state of the execution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionState {
@@ -1942,7 +2011,7 @@ pub struct ExecutionState {
     /// State of the session storage:
     /// <https://developers.google.com/assistant/conversational/storage-session>
     #[prost(message, optional, tag = "2")]
-    pub session_storage: ::core::option::Option<::prost_types::Struct>,
+    pub session_storage: ::core::option::Option<::prost_wkt_types::Struct>,
     /// State of the slots filling, if applicable:
     /// <https://developers.google.com/assistant/conversational/scenes#slot_filling>
     #[prost(message, optional, tag = "5")]
@@ -1954,13 +2023,14 @@ pub struct ExecutionState {
     /// State of the user storage:
     /// <https://developers.google.com/assistant/conversational/storage-user>
     #[prost(message, optional, tag = "6")]
-    pub user_storage: ::core::option::Option<::prost_types::Struct>,
+    pub user_storage: ::core::option::Option<::prost_wkt_types::Struct>,
     /// State of the home storage:
     /// <https://developers.google.com/assistant/conversational/storage-home>
     #[prost(message, optional, tag = "8")]
-    pub household_storage: ::core::option::Option<::prost_types::Struct>,
+    pub household_storage: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// Represents the current state of a the scene's slots.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slots {
@@ -1975,6 +2045,7 @@ pub struct Slots {
     >,
 }
 /// Information related to user input.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserConversationInput {
@@ -1987,6 +2058,7 @@ pub struct UserConversationInput {
 }
 /// Information about triggered intent match (global or within a scene):
 /// <https://developers.google.com/assistant/conversational/intents>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IntentMatch {
@@ -2008,6 +2080,7 @@ pub struct IntentMatch {
 }
 /// Results of conditions evaluation:
 /// <https://developers.google.com/assistant/conversational/scenes#conditions>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConditionsEvaluated {
@@ -2019,6 +2092,7 @@ pub struct ConditionsEvaluated {
     pub success_condition: ::core::option::Option<Condition>,
 }
 /// Evaluated condition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
@@ -2034,6 +2108,7 @@ pub struct Condition {
 }
 /// Information about execution of onSceneEnter stage:
 /// <https://developers.google.com/assistant/conversational/scenes#on_enter>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnSceneEnter {
@@ -2043,6 +2118,7 @@ pub struct OnSceneEnter {
 }
 /// Event triggered by destination scene returned from webhook:
 /// <https://developers.google.com/assistant/conversational/webhooks#transition_scenes>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebhookInitiatedTransition {
@@ -2052,6 +2128,7 @@ pub struct WebhookInitiatedTransition {
 }
 /// Information about a request dispatched to the Action webhook:
 /// <https://developers.google.com/assistant/conversational/webhooks#payloads>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebhookRequest {
@@ -2061,6 +2138,7 @@ pub struct WebhookRequest {
 }
 /// Information about a response received from the Action webhook:
 /// <https://developers.google.com/assistant/conversational/webhooks#payloads>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebhookResponse {
@@ -2070,6 +2148,7 @@ pub struct WebhookResponse {
 }
 /// Information about matched slot(s):
 /// <https://developers.google.com/assistant/conversational/scenes#slot_filling>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotMatch {
@@ -2082,6 +2161,7 @@ pub struct SlotMatch {
 }
 /// Information about currently requested slot:
 /// <https://developers.google.com/assistant/conversational/scenes#slot_filling>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotRequested {
@@ -2094,24 +2174,29 @@ pub struct SlotRequested {
 }
 /// Event which happens after webhook validation was finished for slot(s):
 /// <https://developers.google.com/assistant/conversational/scenes#slot_filling>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SlotValidated {}
 /// Event which happens when form is fully filled:
 /// <https://developers.google.com/assistant/conversational/scenes#slot_filling>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FormFilled {}
 /// Event which happens when system needs user input:
 /// <https://developers.google.com/assistant/conversational/scenes#input>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WaitingForUserInput {}
 /// Event which informs that conversation with agent was ended.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EndConversation {}
 /// Request for playing a round of the conversation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendInteractionRequest {
@@ -2133,6 +2218,7 @@ pub struct SendInteractionRequest {
     pub conversation_token: ::prost::alloc::string::String,
 }
 /// User input provided on a conversation round.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInput {
@@ -2146,6 +2232,7 @@ pub struct UserInput {
 /// Nested message and enum types in `UserInput`.
 pub mod user_input {
     /// Indicates the input source, typed query or voice query.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2198,6 +2285,7 @@ pub mod user_input {
     }
 }
 /// Properties of device relevant to a conversation round.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceProperties {
@@ -2223,6 +2311,7 @@ pub struct DeviceProperties {
 pub mod device_properties {
     /// Possible surfaces used to interact with the Action.
     /// Additional values may be included in the future.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2279,6 +2368,7 @@ pub mod device_properties {
     }
 }
 /// Container that represents a location.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Location {
@@ -2308,6 +2398,7 @@ pub struct Location {
     pub city: ::prost::alloc::string::String,
 }
 /// Response to a round of the conversation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendInteractionResponse {
@@ -2323,6 +2414,7 @@ pub struct SendInteractionResponse {
     pub conversation_token: ::prost::alloc::string::String,
 }
 /// User-visible output to the conversation round.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Output {
@@ -2343,6 +2435,7 @@ pub struct Output {
     pub actions_builder_prompt: ::core::option::Option<conversation::Prompt>,
 }
 /// Diagnostics information related to the conversation round.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Diagnostics {
@@ -2353,6 +2446,7 @@ pub struct Diagnostics {
     pub actions_builder_events: ::prost::alloc::vec::Vec<ExecutionEvent>,
 }
 /// Request for finding matching intents.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchIntentsRequest {
@@ -2371,6 +2465,7 @@ pub struct MatchIntentsRequest {
     pub locale: ::prost::alloc::string::String,
 }
 /// Response for finding matching intents.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchIntentsResponse {
@@ -2380,8 +2475,9 @@ pub struct MatchIntentsResponse {
     pub matched_intents: ::prost::alloc::vec::Vec<conversation::Intent>,
 }
 /// Request for setting Web & App Activity preferences.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetWebAndAppActivityControlRequest {
     /// Whether the setting should be set to an enabled or disabled state.
     #[prost(bool, tag = "1")]
@@ -2549,7 +2645,10 @@ pub mod actions_testing_client {
         pub async fn set_web_and_app_activity_control(
             &mut self,
             request: impl tonic::IntoRequest<super::SetWebAndAppActivityControlRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

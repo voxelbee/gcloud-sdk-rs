@@ -4,6 +4,7 @@
 ///
 /// A [Secret][google.cloud.secrets.v1beta1.Secret] is made up of zero or more [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] that
 /// represent the secret data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Secret {
@@ -17,7 +18,7 @@ pub struct Secret {
     pub replication: ::core::option::Option<Replication>,
     /// Output only. The time at which the [Secret][google.cloud.secrets.v1beta1.Secret] was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The labels assigned to this Secret.
     ///
     /// Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
@@ -36,6 +37,7 @@ pub struct Secret {
     >,
 }
 /// A secret version resource in the Secret Manager API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretVersion {
@@ -48,12 +50,12 @@ pub struct SecretVersion {
     pub name: ::prost::alloc::string::String,
     /// Output only. The time at which the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] was created.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time this [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] was destroyed.
     /// Only present if [state][google.cloud.secrets.v1beta1.SecretVersion.state] is
     /// [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED].
     #[prost(message, optional, tag = "3")]
-    pub destroy_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub destroy_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The current state of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
     #[prost(enumeration = "secret_version::State", tag = "4")]
     pub state: i32,
@@ -61,6 +63,7 @@ pub struct SecretVersion {
 /// Nested message and enum types in `SecretVersion`.
 pub mod secret_version {
     /// The state of a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion], indicating if it can be accessed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -112,6 +115,7 @@ pub mod secret_version {
     }
 }
 /// A policy that defines the replication configuration of data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Replication {
@@ -123,11 +127,13 @@ pub struct Replication {
 pub mod replication {
     /// A replication policy that replicates the [Secret][google.cloud.secrets.v1beta1.Secret] payload without any
     /// restrictions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Automatic {}
     /// A replication policy that replicates the [Secret][google.cloud.secrets.v1beta1.Secret] payload into the
     /// locations specified in [Secret.replication.user_managed.replicas][]
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UserManaged {
@@ -140,6 +146,7 @@ pub mod replication {
     /// Nested message and enum types in `UserManaged`.
     pub mod user_managed {
         /// Represents a Replica for this [Secret][google.cloud.secrets.v1beta1.Secret].
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Replica {
@@ -150,6 +157,7 @@ pub mod replication {
         }
     }
     /// The replication policy for this secret.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Replication {
@@ -163,6 +171,7 @@ pub mod replication {
 }
 /// A secret payload resource in the Secret Manager API. This contains the
 /// sensitive secret data that is associated with a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretPayload {
@@ -171,6 +180,7 @@ pub struct SecretPayload {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request message for [SecretManagerService.ListSecrets][google.cloud.secrets.v1beta1.SecretManagerService.ListSecrets].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretsRequest {
@@ -189,6 +199,7 @@ pub struct ListSecretsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for [SecretManagerService.ListSecrets][google.cloud.secrets.v1beta1.SecretManagerService.ListSecrets].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretsResponse {
@@ -205,6 +216,7 @@ pub struct ListSecretsResponse {
     pub total_size: i32,
 }
 /// Request message for [SecretManagerService.CreateSecret][google.cloud.secrets.v1beta1.SecretManagerService.CreateSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSecretRequest {
@@ -224,6 +236,7 @@ pub struct CreateSecretRequest {
     pub secret: ::core::option::Option<Secret>,
 }
 /// Request message for [SecretManagerService.AddSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.AddSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddSecretVersionRequest {
@@ -236,6 +249,7 @@ pub struct AddSecretVersionRequest {
     pub payload: ::core::option::Option<SecretPayload>,
 }
 /// Request message for [SecretManagerService.GetSecret][google.cloud.secrets.v1beta1.SecretManagerService.GetSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecretRequest {
@@ -244,6 +258,7 @@ pub struct GetSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for [SecretManagerService.ListSecretVersions][google.cloud.secrets.v1beta1.SecretManagerService.ListSecretVersions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretVersionsRequest {
@@ -263,6 +278,7 @@ pub struct ListSecretVersionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for [SecretManagerService.ListSecretVersions][google.cloud.secrets.v1beta1.SecretManagerService.ListSecretVersions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretVersionsResponse {
@@ -279,6 +295,7 @@ pub struct ListSecretVersionsResponse {
     pub total_size: i32,
 }
 /// Request message for [SecretManagerService.GetSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.GetSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecretVersionRequest {
@@ -290,6 +307,7 @@ pub struct GetSecretVersionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for [SecretManagerService.UpdateSecret][google.cloud.secrets.v1beta1.SecretManagerService.UpdateSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecretRequest {
@@ -298,9 +316,10 @@ pub struct UpdateSecretRequest {
     pub secret: ::core::option::Option<Secret>,
     /// Required. Specifies the fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for [SecretManagerService.AccessSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.AccessSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessSecretVersionRequest {
@@ -310,6 +329,7 @@ pub struct AccessSecretVersionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message for [SecretManagerService.AccessSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.AccessSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessSecretVersionResponse {
@@ -322,6 +342,7 @@ pub struct AccessSecretVersionResponse {
     pub payload: ::core::option::Option<SecretPayload>,
 }
 /// Request message for [SecretManagerService.DeleteSecret][google.cloud.secrets.v1beta1.SecretManagerService.DeleteSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSecretRequest {
@@ -331,6 +352,7 @@ pub struct DeleteSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for [SecretManagerService.DisableSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.DisableSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableSecretVersionRequest {
@@ -340,6 +362,7 @@ pub struct DisableSecretVersionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for [SecretManagerService.EnableSecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.EnableSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableSecretVersionRequest {
@@ -349,6 +372,7 @@ pub struct EnableSecretVersionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for [SecretManagerService.DestroySecretVersion][google.cloud.secrets.v1beta1.SecretManagerService.DestroySecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestroySecretVersionRequest {
@@ -597,7 +621,10 @@ pub mod secret_manager_service_client {
         pub async fn delete_secret(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteSecretRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

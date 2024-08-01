@@ -3,6 +3,7 @@
 /// Command Center resource. Security marks are scoped within a Security Command
 /// Center organization -- they can be modified and viewed by all users who have
 /// proper permissions on the organization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityMarks {
@@ -34,6 +35,7 @@ pub struct SecurityMarks {
 /// about a single Google Cloud resource. All modifications to an Asset are only
 /// within the context of Security Command Center and don't affect the referenced
 /// Google Cloud resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
@@ -54,7 +56,7 @@ pub struct Asset {
     #[prost(map = "string, message", tag = "7")]
     pub resource_properties: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// User specified security marks. These marks are entirely managed by the user
     /// and come from the SecurityMarks resource that belongs to the asset.
@@ -62,16 +64,17 @@ pub struct Asset {
     pub security_marks: ::core::option::Option<SecurityMarks>,
     /// The time at which the asset was created in Security Command Center.
     #[prost(message, optional, tag = "9")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which the asset was last updated, added, or deleted in Security
     /// Command Center.
     #[prost(message, optional, tag = "10")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `Asset`.
 pub mod asset {
     /// Security Command Center managed properties. These properties are managed by
     /// Security Command Center and cannot be modified by the user.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecurityCenterProperties {
@@ -105,6 +108,7 @@ pub mod asset {
 /// ingested into Security Command Center for presentation, notification,
 /// analysis, policy testing, and enforcement. For example, an XSS vulnerability
 /// in an App Engine application is a finding.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Finding {
@@ -150,7 +154,7 @@ pub struct Finding {
     #[prost(map = "string, message", tag = "7")]
     pub source_properties: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// Output only. User specified security marks. These marks are entirely
     /// managed by the user and come from the SecurityMarks resource that belongs
@@ -163,14 +167,15 @@ pub struct Finding {
     /// accuracy is determined by the detector. If the finding were to be resolved
     /// afterward, this time would reflect when the finding was resolved.
     #[prost(message, optional, tag = "9")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which the finding was created in Security Command Center.
     #[prost(message, optional, tag = "10")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `Finding`.
 pub mod finding {
     /// The state of the finding.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -217,6 +222,7 @@ pub mod finding {
 }
 /// User specified settings that are attached to the Security Command
 /// Center organization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrganizationSettings {
@@ -241,6 +247,7 @@ pub struct OrganizationSettings {
 /// Nested message and enum types in `OrganizationSettings`.
 pub mod organization_settings {
     /// The configuration used for Asset Discovery runs.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AssetDiscoveryConfig {
@@ -261,6 +268,7 @@ pub mod organization_settings {
         /// projects are discovered during asset discovery. If neither are set, then
         /// all projects within the organization are discovered during asset
         /// discovery.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -309,19 +317,21 @@ pub mod organization_settings {
     }
 }
 /// Response of asset discovery run
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RunAssetDiscoveryResponse {
     /// The state of an asset discovery run.
     #[prost(enumeration = "run_asset_discovery_response::State", tag = "1")]
     pub state: i32,
     /// The duration between asset discovery run start and end
     #[prost(message, optional, tag = "2")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Nested message and enum types in `RunAssetDiscoveryResponse`.
 pub mod run_asset_discovery_response {
     /// The state of an asset discovery run.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -373,6 +383,7 @@ pub mod run_asset_discovery_response {
 /// Security Command Center finding source. A finding source
 /// is an entity or a mechanism that can produce a finding. A source is like a
 /// container of findings that come from the same scanner, logger, monitor, etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Source {
@@ -400,6 +411,7 @@ pub struct Source {
     pub description: ::prost::alloc::string::String,
 }
 /// Request message for creating a finding.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFindingRequest {
@@ -418,6 +430,7 @@ pub struct CreateFindingRequest {
     pub finding: ::core::option::Option<Finding>,
 }
 /// Request message for creating a source.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSourceRequest {
@@ -431,6 +444,7 @@ pub struct CreateSourceRequest {
     pub source: ::core::option::Option<Source>,
 }
 /// Request message for getting organization settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrganizationSettingsRequest {
@@ -440,6 +454,7 @@ pub struct GetOrganizationSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for getting a source.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSourceRequest {
@@ -449,6 +464,7 @@ pub struct GetSourceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for grouping by assets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupAssetsRequest {
@@ -523,13 +539,13 @@ pub struct GroupAssetsRequest {
     ///
     /// This field is ignored if `state` is not a field in `group_by`.
     #[prost(message, optional, tag = "4")]
-    pub compare_duration: ::core::option::Option<::prost_types::Duration>,
+    pub compare_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time used as a reference point when filtering assets. The filter is limited
     /// to assets existing at the supplied time and their values are those at that
     /// specific time. Absence of this field will default to the API's version of
     /// NOW.
     #[prost(message, optional, tag = "5")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The value returned by the last `GroupAssetsResponse`; indicates
     /// that this is a continuation of a prior `GroupAssets` call, and that the
     /// system should return the next page of data.
@@ -541,6 +557,7 @@ pub struct GroupAssetsRequest {
     pub page_size: i32,
 }
 /// Response message for grouping by assets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupAssetsResponse {
@@ -551,13 +568,14 @@ pub struct GroupAssetsResponse {
     pub group_by_results: ::prost::alloc::vec::Vec<GroupResult>,
     /// Time used for executing the groupBy request.
     #[prost(message, optional, tag = "2")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Token to retrieve the next page of results, or empty if there are no more
     /// results.
     #[prost(string, tag = "3")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for grouping by findings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupFindingsRequest {
@@ -612,7 +630,7 @@ pub struct GroupFindingsRequest {
     /// those at that specific time. Absence of this field will default to the
     /// API's version of NOW.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The value returned by the last `GroupFindingsResponse`; indicates
     /// that this is a continuation of a prior `GroupFindings` call, and
     /// that the system should return the next page of data.
@@ -624,6 +642,7 @@ pub struct GroupFindingsRequest {
     pub page_size: i32,
 }
 /// Response message for group by findings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupFindingsResponse {
@@ -634,13 +653,14 @@ pub struct GroupFindingsResponse {
     pub group_by_results: ::prost::alloc::vec::Vec<GroupResult>,
     /// Time used for executing the groupBy request.
     #[prost(message, optional, tag = "2")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Token to retrieve the next page of results, or empty if there are no more
     /// results.
     #[prost(string, tag = "3")]
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Result containing the properties and count of a groupBy request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupResult {
@@ -648,13 +668,14 @@ pub struct GroupResult {
     #[prost(map = "string, message", tag = "1")]
     pub properties: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// Total count of resources for the given properties.
     #[prost(int64, tag = "2")]
     pub count: i64,
 }
 /// Request message for listing sources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSourcesRequest {
@@ -673,6 +694,7 @@ pub struct ListSourcesRequest {
     pub page_size: i32,
 }
 /// Response message for listing sources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSourcesResponse {
@@ -685,6 +707,7 @@ pub struct ListSourcesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for listing assets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
@@ -736,7 +759,7 @@ pub struct ListAssetsRequest {
     /// specific time. Absence of this field will default to the API's version of
     /// NOW.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// When compare_duration is set, the ListAssetResult's "state" attribute is
     /// updated to indicate whether the asset was added, removed, or remained
     /// present during the compare_duration period of time that precedes the
@@ -761,12 +784,12 @@ pub struct ListAssetsRequest {
     /// If compare_duration is not specified, then the only possible state is
     /// "UNUSED", which indicates that the asset is present at read_time.
     #[prost(message, optional, tag = "5")]
-    pub compare_duration: ::core::option::Option<::prost_types::Duration>,
+    pub compare_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. A field mask to specify the ListAssetsResult fields to be listed in the
     /// response.
     /// An empty field mask will list all fields.
     #[prost(message, optional, tag = "7")]
-    pub field_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub field_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The value returned by the last `ListAssetsResponse`; indicates
     /// that this is a continuation of a prior `ListAssets` call, and
     /// that the system should return the next page of data.
@@ -778,6 +801,7 @@ pub struct ListAssetsRequest {
     pub page_size: i32,
 }
 /// Response message for listing assets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
@@ -788,7 +812,7 @@ pub struct ListAssetsResponse {
     >,
     /// Time used for executing the list request.
     #[prost(message, optional, tag = "2")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Token to retrieve the next page of results, or empty if there are no more
     /// results.
     #[prost(string, tag = "3")]
@@ -800,6 +824,7 @@ pub struct ListAssetsResponse {
 /// Nested message and enum types in `ListAssetsResponse`.
 pub mod list_assets_response {
     /// Result containing the Asset and its State.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ListAssetsResult {
@@ -818,6 +843,7 @@ pub mod list_assets_response {
         /// the change between the two points: ADDED, REMOVED, or ACTIVE.
         /// If there was no compare_duration supplied in the request the state should
         /// be: UNUSED
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -871,6 +897,7 @@ pub mod list_assets_response {
     }
 }
 /// Request message for listing findings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsRequest {
@@ -922,11 +949,11 @@ pub struct ListFindingsRequest {
     /// those at that specific time. Absence of this field will default to the
     /// API's version of NOW.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. A field mask to specify the Finding fields to be listed in the response.
     /// An empty field mask will list all fields.
     #[prost(message, optional, tag = "5")]
-    pub field_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub field_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The value returned by the last `ListFindingsResponse`; indicates
     /// that this is a continuation of a prior `ListFindings` call, and
     /// that the system should return the next page of data.
@@ -938,6 +965,7 @@ pub struct ListFindingsRequest {
     pub page_size: i32,
 }
 /// Response message for listing findings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsResponse {
@@ -946,7 +974,7 @@ pub struct ListFindingsResponse {
     pub findings: ::prost::alloc::vec::Vec<Finding>,
     /// Time used for executing the list request.
     #[prost(message, optional, tag = "2")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Token to retrieve the next page of results, or empty if there are no more
     /// results.
     #[prost(string, tag = "3")]
@@ -956,6 +984,7 @@ pub struct ListFindingsResponse {
     pub total_size: i32,
 }
 /// Request message for updating a finding's state.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetFindingStateRequest {
@@ -970,9 +999,10 @@ pub struct SetFindingStateRequest {
     pub state: i32,
     /// Required. The time at which the updated state takes effect.
     #[prost(message, optional, tag = "3")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request message for running asset discovery for an organization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAssetDiscoveryRequest {
@@ -982,6 +1012,7 @@ pub struct RunAssetDiscoveryRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for updating or creating a finding.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFindingRequest {
@@ -996,9 +1027,10 @@ pub struct UpdateFindingRequest {
     /// The FieldMask to use when updating the finding resource. This field should
     /// not be specified when creating a finding.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for updating an organization's settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOrganizationSettingsRequest {
@@ -1007,9 +1039,10 @@ pub struct UpdateOrganizationSettingsRequest {
     pub organization_settings: ::core::option::Option<OrganizationSettings>,
     /// The FieldMask to use when updating the settings resource.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for updating a source.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSourceRequest {
@@ -1018,9 +1051,10 @@ pub struct UpdateSourceRequest {
     pub source: ::core::option::Option<Source>,
     /// The FieldMask to use when updating the source resource.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for updating a SecurityMarks resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecurityMarksRequest {
@@ -1029,10 +1063,10 @@ pub struct UpdateSecurityMarksRequest {
     pub security_marks: ::core::option::Option<SecurityMarks>,
     /// The FieldMask to use when updating the security marks resource.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// The time at which the updated SecurityMarks take effect.
     #[prost(message, optional, tag = "3")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Generated client implementations.
 pub mod security_center_client {

@@ -3,6 +3,7 @@
 /// stream resources. Internally, these logs represent events happening in
 /// the control plane as result of API invocations against the stream resource
 /// entities.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationEventLog {
@@ -11,7 +12,7 @@ pub struct OperationEventLog {
     pub event_type: i32,
     /// Timestamp when the event occurred.
     #[prost(message, optional, tag = "2")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Operation resource identifier.
     #[prost(string, tag = "3")]
     pub operation: ::prost::alloc::string::String,
@@ -21,6 +22,7 @@ pub struct OperationEventLog {
 }
 /// OperationArtifact contains the information about the artifact created as
 /// result of the operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationArtifact {
@@ -35,6 +37,7 @@ pub struct OperationArtifact {
 /// to serve the end consumer. Internally, these logs represent events in the
 /// data plane streamer instance as a result of end consumer interacting with the
 /// stream resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SessionEventLog {
@@ -43,12 +46,13 @@ pub struct SessionEventLog {
     pub event_type: i32,
     /// Timestamp when the event occurred.
     #[prost(message, optional, tag = "2")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Session identifier generated from the server.
     #[prost(string, tag = "3")]
     pub session_id: ::prost::alloc::string::String,
 }
 /// OperationEventType is the enum value for the state of operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum OperationEventType {
@@ -186,6 +190,7 @@ impl OperationEventType {
     }
 }
 /// SessionEventType is the enum value for the state of session.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SessionEventType {

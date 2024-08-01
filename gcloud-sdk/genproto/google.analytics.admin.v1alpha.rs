@@ -2,6 +2,7 @@
 /// Dimensions are attributes of your data. For example, the dimension
 /// `userEmail` indicates the email of the user that accessed reporting data.
 /// Dimension values in report responses are strings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimension {
@@ -15,6 +16,7 @@ pub struct AccessDimension {
 }
 /// The quantitative measurements of a report. For example, the metric
 /// `accessCount` is the total number of data access records.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetric {
@@ -27,6 +29,7 @@ pub struct AccessMetric {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// A contiguous range of days: startDate, startDate + 1, ..., endDate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDateRange {
@@ -45,6 +48,7 @@ pub struct AccessDateRange {
 }
 /// Expresses dimension or metric filters. The fields in the same expression need
 /// to be either all dimensions or all metrics.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpression {
@@ -55,6 +59,7 @@ pub struct AccessFilterExpression {
 /// Nested message and enum types in `AccessFilterExpression`.
 pub mod access_filter_expression {
     /// Specify one type of filter expression for `FilterExpression`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneExpression {
@@ -74,6 +79,7 @@ pub mod access_filter_expression {
     }
 }
 /// A list of filter expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpressionList {
@@ -82,6 +88,7 @@ pub struct AccessFilterExpressionList {
     pub expressions: ::prost::alloc::vec::Vec<AccessFilterExpression>,
 }
 /// An expression to filter dimension or metric values.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilter {
@@ -95,6 +102,7 @@ pub struct AccessFilter {
 /// Nested message and enum types in `AccessFilter`.
 pub mod access_filter {
     /// Specify one type of filter for `Filter`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
@@ -113,6 +121,7 @@ pub mod access_filter {
     }
 }
 /// The filter for strings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessStringFilter {
@@ -129,6 +138,7 @@ pub struct AccessStringFilter {
 /// Nested message and enum types in `AccessStringFilter`.
 pub mod access_string_filter {
     /// The match type of a string filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -189,6 +199,7 @@ pub mod access_string_filter {
     }
 }
 /// The result needs to be in a list of string values.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessInListFilter {
@@ -200,8 +211,9 @@ pub struct AccessInListFilter {
     pub case_sensitive: bool,
 }
 /// Filters for numeric or date values.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessNumericFilter {
     /// The operation type for this filter.
     #[prost(enumeration = "access_numeric_filter::Operation", tag = "1")]
@@ -213,6 +225,7 @@ pub struct AccessNumericFilter {
 /// Nested message and enum types in `AccessNumericFilter`.
 pub mod access_numeric_filter {
     /// The operation applied to a numeric filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -269,8 +282,9 @@ pub mod access_numeric_filter {
     }
 }
 /// To express that the result needs to be between two numbers (inclusive).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessBetweenFilter {
     /// Begins with this number.
     #[prost(message, optional, tag = "1")]
@@ -280,8 +294,9 @@ pub struct AccessBetweenFilter {
     pub to_value: ::core::option::Option<NumericValue>,
 }
 /// To represent a number.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NumericValue {
     /// One of a numeric value
     #[prost(oneof = "numeric_value::OneValue", tags = "1, 2")]
@@ -290,8 +305,9 @@ pub struct NumericValue {
 /// Nested message and enum types in `NumericValue`.
 pub mod numeric_value {
     /// One of a numeric value
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum OneValue {
         /// Integer value
         #[prost(int64, tag = "1")]
@@ -304,6 +320,7 @@ pub mod numeric_value {
 /// Order bys define how rows will be sorted in the response. For example,
 /// ordering rows by descending access count is one ordering, and ordering rows
 /// by the country string is a different ordering.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessOrderBy {
@@ -318,6 +335,7 @@ pub struct AccessOrderBy {
 /// Nested message and enum types in `AccessOrderBy`.
 pub mod access_order_by {
     /// Sorts by metric values.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricOrderBy {
@@ -326,6 +344,7 @@ pub mod access_order_by {
         pub metric_name: ::prost::alloc::string::String,
     }
     /// Sorts by dimension values.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DimensionOrderBy {
@@ -339,6 +358,7 @@ pub mod access_order_by {
     /// Nested message and enum types in `DimensionOrderBy`.
     pub mod dimension_order_by {
         /// Rule to order the string dimension values by.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -396,6 +416,7 @@ pub mod access_order_by {
         }
     }
     /// Specify one type of order by for `OrderBy`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneOrderBy {
@@ -411,6 +432,7 @@ pub mod access_order_by {
 /// produce column entries within rows and DimensionHeaders. However, dimensions
 /// used exclusively within filters or expressions do not produce columns in a
 /// report; correspondingly, those dimensions do not produce headers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionHeader {
@@ -422,6 +444,7 @@ pub struct AccessDimensionHeader {
 /// report produce column entries within rows and MetricHeaders. However,
 /// metrics used exclusively within filters or expressions do not produce columns
 /// in a report; correspondingly, those metrics do not produce headers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricHeader {
@@ -430,6 +453,7 @@ pub struct AccessMetricHeader {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// Access report data for each row.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessRow {
@@ -443,6 +467,7 @@ pub struct AccessRow {
     pub metric_values: ::prost::alloc::vec::Vec<AccessMetricValue>,
 }
 /// The value of a dimension.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionValue {
@@ -452,6 +477,7 @@ pub struct AccessDimensionValue {
     pub value: ::prost::alloc::string::String,
 }
 /// The value of a metric.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricValue {
@@ -462,8 +488,9 @@ pub struct AccessMetricValue {
 /// Current state of all quotas for this Analytics property. If any quota for a
 /// property is exhausted, all requests to that property will return Resource
 /// Exhausted errors.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuota {
     /// Properties can use 250,000 tokens per day. Most requests consume fewer than
     /// 10 tokens.
@@ -489,8 +516,9 @@ pub struct AccessQuota {
     pub tokens_per_project_per_hour: ::core::option::Option<AccessQuotaStatus>,
 }
 /// Current state for a particular quota group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuotaStatus {
     /// Quota consumed by this request.
     #[prost(int32, tag = "1")]
@@ -500,6 +528,7 @@ pub struct AccessQuotaStatus {
     pub remaining: i32,
 }
 /// A specific filter for a single dimension or metric.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceDimensionOrMetricFilter {
@@ -544,6 +573,7 @@ pub struct AudienceDimensionOrMetricFilter {
 /// Nested message and enum types in `AudienceDimensionOrMetricFilter`.
 pub mod audience_dimension_or_metric_filter {
     /// A filter for a string-type dimension that matches a particular pattern.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
@@ -561,6 +591,7 @@ pub mod audience_dimension_or_metric_filter {
     /// Nested message and enum types in `StringFilter`.
     pub mod string_filter {
         /// The match type for the string filter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -617,6 +648,7 @@ pub mod audience_dimension_or_metric_filter {
         }
     }
     /// A filter for a string dimension that matches a particular list of options.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
@@ -630,8 +662,9 @@ pub mod audience_dimension_or_metric_filter {
         pub case_sensitive: bool,
     }
     /// To represent a number.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NumericValue {
         /// One of a numeric value.
         #[prost(oneof = "numeric_value::OneValue", tags = "1, 2")]
@@ -640,8 +673,9 @@ pub mod audience_dimension_or_metric_filter {
     /// Nested message and enum types in `NumericValue`.
     pub mod numeric_value {
         /// One of a numeric value.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum OneValue {
             /// Integer value.
             #[prost(int64, tag = "1")]
@@ -652,8 +686,9 @@ pub mod audience_dimension_or_metric_filter {
         }
     }
     /// A filter for numeric or date values on a dimension or metric.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NumericFilter {
         /// Required. The operation applied to a numeric filter.
         #[prost(enumeration = "numeric_filter::Operation", tag = "1")]
@@ -665,6 +700,7 @@ pub mod audience_dimension_or_metric_filter {
     /// Nested message and enum types in `NumericFilter`.
     pub mod numeric_filter {
         /// The operation applied to a numeric filter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -714,8 +750,9 @@ pub mod audience_dimension_or_metric_filter {
     }
     /// A filter for numeric or date values between certain values on a dimension
     /// or metric.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BetweenFilter {
         /// Required. Begins with this number, inclusive.
         #[prost(message, optional, tag = "1")]
@@ -725,6 +762,7 @@ pub mod audience_dimension_or_metric_filter {
         pub to_value: ::core::option::Option<NumericValue>,
     }
     /// One of the above filters.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
@@ -747,6 +785,7 @@ pub mod audience_dimension_or_metric_filter {
 /// A filter that matches events of a single event name. If an event parameter
 /// is specified, only the subset of events that match both the single event name
 /// and the parameter filter expressions match this event filter.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceEventFilter {
@@ -766,6 +805,7 @@ pub struct AudienceEventFilter {
     >,
 }
 /// A logical expression of Audience dimension, metric, or event filters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterExpression {
@@ -776,6 +816,7 @@ pub struct AudienceFilterExpression {
 /// Nested message and enum types in `AudienceFilterExpression`.
 pub mod audience_filter_expression {
     /// The expression applied to a filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
@@ -804,6 +845,7 @@ pub mod audience_filter_expression {
     }
 }
 /// A list of Audience filter expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterExpressionList {
@@ -813,6 +855,7 @@ pub struct AudienceFilterExpressionList {
 }
 /// Defines a simple filter that a user must satisfy to be a member of the
 /// Audience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceSimpleFilter {
@@ -826,6 +869,7 @@ pub struct AudienceSimpleFilter {
 }
 /// Defines filters that must occur in a specific order for the user to be a
 /// member of the Audience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceSequenceFilter {
@@ -834,7 +878,7 @@ pub struct AudienceSequenceFilter {
     pub scope: i32,
     /// Optional. Defines the time period in which the whole sequence must occur.
     #[prost(message, optional, tag = "2")]
-    pub sequence_maximum_duration: ::core::option::Option<::prost_types::Duration>,
+    pub sequence_maximum_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Required. An ordered sequence of steps. A user must complete each step in
     /// order to join the sequence filter.
     #[prost(message, repeated, tag = "3")]
@@ -846,6 +890,7 @@ pub struct AudienceSequenceFilter {
 pub mod audience_sequence_filter {
     /// A condition that must occur in the specified step order for this user
     /// to match the sequence.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AudienceSequenceStep {
@@ -864,7 +909,7 @@ pub mod audience_sequence_filter {
         /// constraint_duration). If not set, there is no duration requirement (the
         /// duration is effectively unlimited). It is ignored for the first step.
         #[prost(message, optional, tag = "3")]
-        pub constraint_duration: ::core::option::Option<::prost_types::Duration>,
+        pub constraint_duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Required. Immutable. A logical expression of Audience dimension, metric,
         /// or event filters in each step.
         #[prost(message, optional, tag = "4")]
@@ -875,6 +920,7 @@ pub mod audience_sequence_filter {
 /// inclusive (For example, users satisfying the filter clause are included in
 /// the Audience) or exclusive (For example, users satisfying the filter clause
 /// are excluded from the Audience).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterClause {
@@ -887,6 +933,7 @@ pub struct AudienceFilterClause {
 /// Nested message and enum types in `AudienceFilterClause`.
 pub mod audience_filter_clause {
     /// Specifies whether this is an include or exclude filter clause.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -929,6 +976,7 @@ pub mod audience_filter_clause {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
@@ -942,6 +990,7 @@ pub mod audience_filter_clause {
     }
 }
 /// Specifies an event to log when a user joins the Audience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceEventTrigger {
@@ -955,6 +1004,7 @@ pub struct AudienceEventTrigger {
 /// Nested message and enum types in `AudienceEventTrigger`.
 pub mod audience_event_trigger {
     /// Determines when to log the event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1000,6 +1050,7 @@ pub mod audience_event_trigger {
     }
 }
 /// A resource message representing a GA4 Audience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Audience {
@@ -1039,6 +1090,7 @@ pub struct Audience {
 pub mod audience {
     /// Specifies how long an exclusion lasts for users that meet the exclusion
     /// filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1090,6 +1142,7 @@ pub mod audience {
     }
 }
 /// Specifies how to evaluate users for joining an Audience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AudienceFilterScope {
@@ -1136,6 +1189,7 @@ impl AudienceFilterScope {
     }
 }
 /// A specific filter for a single dimension.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilter {
@@ -1149,6 +1203,7 @@ pub struct ChannelGroupFilter {
 /// Nested message and enum types in `ChannelGroupFilter`.
 pub mod channel_group_filter {
     /// Filter where the field value is a String. The match is case insensitive.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
@@ -1162,6 +1217,7 @@ pub mod channel_group_filter {
     /// Nested message and enum types in `StringFilter`.
     pub mod string_filter {
         /// How the filter will be used to determine a match.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1223,6 +1279,7 @@ pub mod channel_group_filter {
     }
     /// A filter for a string dimension that matches a particular list of options.
     /// The match is case insensitive.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
@@ -1232,6 +1289,7 @@ pub mod channel_group_filter {
         pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// A StringFilter or InListFilter that defines this filters behavior.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ValueFilter {
@@ -1245,6 +1303,7 @@ pub mod channel_group_filter {
     }
 }
 /// A logical expression of Channel Group dimension filters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilterExpression {
@@ -1255,6 +1314,7 @@ pub struct ChannelGroupFilterExpression {
 /// Nested message and enum types in `ChannelGroupFilterExpression`.
 pub mod channel_group_filter_expression {
     /// The expression applied to a filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
@@ -1279,6 +1339,7 @@ pub mod channel_group_filter_expression {
     }
 }
 /// A list of Channel Group filter expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilterExpressionList {
@@ -1287,6 +1348,7 @@ pub struct ChannelGroupFilterExpressionList {
     pub filter_expressions: ::prost::alloc::vec::Vec<ChannelGroupFilterExpression>,
 }
 /// The rules that govern how traffic is grouped into one channel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupingRule {
@@ -1298,6 +1360,7 @@ pub struct GroupingRule {
     pub expression: ::core::option::Option<ChannelGroupFilterExpression>,
 }
 /// A resource message representing a Channel Group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroup {
@@ -1322,6 +1385,7 @@ pub struct ChannelGroup {
     pub system_defined: bool,
 }
 /// Defines an event parameter to mutate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParameterMutation {
@@ -1352,6 +1416,7 @@ pub struct ParameterMutation {
 ///
 /// Event Edit and Event Create rules can't be used to modify an event created
 /// from an Event Create rule.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventCreateRule {
@@ -1386,6 +1451,7 @@ pub struct EventCreateRule {
 }
 /// Defines a condition for when an Event Edit or Event Creation rule applies to
 /// an event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchingCondition {
@@ -1414,6 +1480,7 @@ pub struct MatchingCondition {
 /// Nested message and enum types in `MatchingCondition`.
 pub mod matching_condition {
     /// Comparison type for matching condition
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1512,6 +1579,7 @@ pub mod matching_condition {
     }
 }
 /// A specific filter for a single dimension
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilter {
@@ -1525,6 +1593,7 @@ pub struct ExpandedDataSetFilter {
 /// Nested message and enum types in `ExpandedDataSetFilter`.
 pub mod expanded_data_set_filter {
     /// A filter for a string-type dimension that matches a particular pattern.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
@@ -1544,6 +1613,7 @@ pub mod expanded_data_set_filter {
     /// Nested message and enum types in `StringFilter`.
     pub mod string_filter {
         /// The match type for the string filter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1588,6 +1658,7 @@ pub mod expanded_data_set_filter {
         }
     }
     /// A filter for a string dimension that matches a particular list of options.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
@@ -1602,6 +1673,7 @@ pub mod expanded_data_set_filter {
         pub case_sensitive: bool,
     }
     /// One of the above filters.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
@@ -1615,6 +1687,7 @@ pub mod expanded_data_set_filter {
     }
 }
 /// A logical expression of EnhancedDataSet dimension filters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilterExpression {
@@ -1625,6 +1698,7 @@ pub struct ExpandedDataSetFilterExpression {
 /// Nested message and enum types in `ExpandedDataSetFilterExpression`.
 pub mod expanded_data_set_filter_expression {
     /// The expression applied to a filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
@@ -1648,6 +1722,7 @@ pub mod expanded_data_set_filter_expression {
     }
 }
 /// A list of ExpandedDataSet filter expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilterExpressionList {
@@ -1656,6 +1731,7 @@ pub struct ExpandedDataSetFilterExpressionList {
     pub filter_expressions: ::prost::alloc::vec::Vec<ExpandedDataSetFilterExpression>,
 }
 /// A resource message representing a GA4 ExpandedDataSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSet {
@@ -1693,9 +1769,10 @@ pub struct ExpandedDataSet {
     /// Output only. Time when expanded data set began (or will begin) collecing
     /// data.
     #[prost(message, optional, tag = "7")]
-    pub data_collection_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub data_collection_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A resource message representing a Google Analytics account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Account {
@@ -1706,10 +1783,10 @@ pub struct Account {
     pub name: ::prost::alloc::string::String,
     /// Output only. Time when this account was originally created.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when account payload fields were last updated.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. Human-readable display name for this account.
     #[prost(string, tag = "4")]
     pub display_name: ::prost::alloc::string::String,
@@ -1722,6 +1799,7 @@ pub struct Account {
     pub deleted: bool,
 }
 /// A resource message representing a Google Analytics GA4 property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
@@ -1737,10 +1815,10 @@ pub struct Property {
     pub property_type: i32,
     /// Output only. Time when the entity was originally created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when entity payload fields were last updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Immutable. Resource name of this property's logical parent.
     ///
     /// Note: The Property-Moving UI can be used to change the parent.
@@ -1782,12 +1860,12 @@ pub struct Property {
     /// Output only. If set, the time at which this property was trashed. If not
     /// set, then this property is not currently in the trash can.
     #[prost(message, optional, tag = "11")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. If set, the time at which this trashed property will be
     /// permanently deleted. If not set, then this property is not currently in the
     /// trash can and is not slated to be deleted.
     #[prost(message, optional, tag = "12")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Immutable. The resource name of the parent account
     /// Format: accounts/{account_id}
     /// Example: "accounts/123"
@@ -1795,6 +1873,7 @@ pub struct Property {
     pub account: ::prost::alloc::string::String,
 }
 /// A resource message representing a data stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataStream {
@@ -1815,10 +1894,10 @@ pub struct DataStream {
     pub display_name: ::prost::alloc::string::String,
     /// Output only. Time when this stream was originally created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when stream payload fields were last updated.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Data for specific data stream types. The message that will be
     /// set corresponds to the type of this stream.
     #[prost(oneof = "data_stream::StreamData", tags = "6, 7, 8")]
@@ -1827,6 +1906,7 @@ pub struct DataStream {
 /// Nested message and enum types in `DataStream`.
 pub mod data_stream {
     /// Data specific to web streams.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WebStreamData {
@@ -1845,6 +1925,7 @@ pub mod data_stream {
         pub default_uri: ::prost::alloc::string::String,
     }
     /// Data specific to Android app streams.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AndroidAppStreamData {
@@ -1858,6 +1939,7 @@ pub mod data_stream {
         pub package_name: ::prost::alloc::string::String,
     }
     /// Data specific to iOS app streams.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IosAppStreamData {
@@ -1871,6 +1953,7 @@ pub mod data_stream {
         pub bundle_id: ::prost::alloc::string::String,
     }
     /// The type of the data stream.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1919,6 +2002,7 @@ pub mod data_stream {
     }
     /// Data for specific data stream types. The message that will be
     /// set corresponds to the type of this stream.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StreamData {
@@ -1937,6 +2021,7 @@ pub mod data_stream {
     }
 }
 /// A link between a GA4 property and a Firebase project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirebaseLink {
@@ -1954,10 +2039,11 @@ pub struct FirebaseLink {
     pub project: ::prost::alloc::string::String,
     /// Output only. Time when this FirebaseLink was originally created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Read-only resource with the tag for sending data from a website to a
 /// DataStream. Only present for web DataStream resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalSiteTag {
@@ -1972,6 +2058,7 @@ pub struct GlobalSiteTag {
     pub snippet: ::prost::alloc::string::String,
 }
 /// A link between a GA4 property and a Google Ads account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsLink {
@@ -1992,13 +2079,15 @@ pub struct GoogleAdsLink {
     /// Analytics remarketing events/parameters to the linked Google Ads account.
     /// If this field is not set on create/update, it will be defaulted to true.
     #[prost(message, optional, tag = "5")]
-    pub ads_personalization_enabled: ::core::option::Option<bool>,
+    pub ads_personalization_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Output only. Time when this link was originally created.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this link was last updated.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Email address of the user that created the link.
     /// An empty string will be returned if the email address can't be retrieved.
     #[prost(string, tag = "9")]
@@ -2006,6 +2095,7 @@ pub struct GoogleAdsLink {
 }
 /// A resource message representing data sharing settings of a Google Analytics
 /// account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataSharingSettings {
@@ -2036,6 +2126,7 @@ pub struct DataSharingSettings {
 }
 /// A virtual resource representing an overview of an account and
 /// all its child GA4 properties.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountSummary {
@@ -2057,6 +2148,7 @@ pub struct AccountSummary {
     pub property_summaries: ::prost::alloc::vec::Vec<PropertySummary>,
 }
 /// A virtual resource representing metadata for a GA4 property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertySummary {
@@ -2080,6 +2172,7 @@ pub struct PropertySummary {
     pub parent: ::prost::alloc::string::String,
 }
 /// A secret value used for sending hits to Measurement Protocol.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MeasurementProtocolSecret {
@@ -2098,6 +2191,7 @@ pub struct MeasurementProtocolSecret {
     pub secret_value: ::prost::alloc::string::String,
 }
 /// SKAdNetwork conversion value schema of an iOS stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkAdNetworkConversionValueSchema {
@@ -2141,6 +2235,7 @@ pub struct SkAdNetworkConversionValueSchema {
     pub apply_conversion_values: bool,
 }
 /// Settings for a SKAdNetwork conversion postback window.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostbackWindow {
@@ -2162,6 +2257,7 @@ pub struct PostbackWindow {
 }
 /// Conversion value settings for a postback window for SKAdNetwork conversion
 /// value schema.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionValues {
@@ -2194,6 +2290,7 @@ pub struct ConversionValues {
     pub lock_enabled: bool,
 }
 /// Event setting conditions to match an event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventMapping {
@@ -2226,6 +2323,7 @@ pub struct EventMapping {
 /// that resulted from the same cause. Common causes would be updates made in the
 /// Google Analytics UI, changes from customer support, or automatic Google
 /// Analytics system changes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryEvent {
@@ -2234,7 +2332,7 @@ pub struct ChangeHistoryEvent {
     pub id: ::prost::alloc::string::String,
     /// Time when change was made.
     #[prost(message, optional, tag = "2")]
-    pub change_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub change_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The type of actor that made this change.
     #[prost(enumeration = "ActorType", tag = "3")]
     pub actor_type: i32,
@@ -2253,6 +2351,7 @@ pub struct ChangeHistoryEvent {
     pub changes: ::prost::alloc::vec::Vec<ChangeHistoryChange>,
 }
 /// A description of a change to a single Google Analytics resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryChange {
@@ -2279,6 +2378,7 @@ pub struct ChangeHistoryChange {
 pub mod change_history_change {
     /// A snapshot of a resource as before or after the result of a change in
     /// change history.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ChangeHistoryResource {
@@ -2290,6 +2390,7 @@ pub mod change_history_change {
     }
     /// Nested message and enum types in `ChangeHistoryResource`.
     pub mod change_history_resource {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Resource {
@@ -2379,6 +2480,7 @@ pub mod change_history_change {
     }
 }
 /// A link between a GA4 property and a Display & Video 360 advertiser.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisplayVideo360AdvertiserLink {
@@ -2398,20 +2500,26 @@ pub struct DisplayVideo360AdvertiserLink {
     /// Enables personalized advertising features with this integration.
     /// If this field is not set on create/update, it will be defaulted to true.
     #[prost(message, optional, tag = "4")]
-    pub ads_personalization_enabled: ::core::option::Option<bool>,
+    pub ads_personalization_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Immutable. Enables the import of campaign data from Display & Video 360
     /// into the GA4 property. After link creation, this can only be updated from
     /// the Display & Video 360 product. If this field is not set on create, it
     /// will be defaulted to true.
     #[prost(message, optional, tag = "5")]
-    pub campaign_data_sharing_enabled: ::core::option::Option<bool>,
+    pub campaign_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Immutable. Enables the import of cost data from Display & Video 360 into
     /// the GA4 property. This can only be enabled if campaign_data_sharing_enabled
     /// is enabled. After link creation, this can only be updated from the Display
     /// & Video 360 product. If this field is not set on create, it will be
     /// defaulted to true.
     #[prost(message, optional, tag = "6")]
-    pub cost_data_sharing_enabled: ::core::option::Option<bool>,
+    pub cost_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// A proposal for a link between a GA4 property and a Display & Video 360
 /// advertiser.
@@ -2419,6 +2527,7 @@ pub struct DisplayVideo360AdvertiserLink {
 /// A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
 /// Google Analytics admins approve inbound proposals while Display & Video 360
 /// admins approve outbound proposals.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisplayVideo360AdvertiserLinkProposal {
@@ -2450,18 +2559,25 @@ pub struct DisplayVideo360AdvertiserLinkProposal {
     /// Immutable. Enables personalized advertising features with this integration.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "6")]
-    pub ads_personalization_enabled: ::core::option::Option<bool>,
+    pub ads_personalization_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Immutable. Enables the import of campaign data from Display & Video 360.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "7")]
-    pub campaign_data_sharing_enabled: ::core::option::Option<bool>,
+    pub campaign_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Immutable. Enables the import of cost data from Display & Video 360.
     /// This can only be enabled if campaign_data_sharing_enabled is enabled.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "8")]
-    pub cost_data_sharing_enabled: ::core::option::Option<bool>,
+    pub cost_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// A link between a GA4 property and a Search Ads 360 entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAds360Link {
@@ -2480,14 +2596,18 @@ pub struct SearchAds360Link {
     /// Ads 360 product.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "3")]
-    pub campaign_data_sharing_enabled: ::core::option::Option<bool>,
+    pub campaign_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Immutable. Enables the import of cost data from Search Ads 360 to the GA4
     /// property. This can only be enabled if campaign_data_sharing_enabled is
     /// enabled. After link creation, this can only be updated from
     /// the Search Ads 360 product.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "4")]
-    pub cost_data_sharing_enabled: ::core::option::Option<bool>,
+    pub cost_data_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Output only. The display name of the Search Ads 360 Advertiser.
     /// Allows users to easily identify the linked resource.
     #[prost(string, tag = "5")]
@@ -2495,13 +2615,18 @@ pub struct SearchAds360Link {
     /// Enables personalized advertising features with this integration.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "6")]
-    pub ads_personalization_enabled: ::core::option::Option<bool>,
+    pub ads_personalization_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Enables export of site stats with this integration.
     /// If this field is not set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "7")]
-    pub site_stats_sharing_enabled: ::core::option::Option<bool>,
+    pub site_stats_sharing_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// Status information for a link proposal.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LinkProposalStatusDetails {
@@ -2516,6 +2641,7 @@ pub struct LinkProposalStatusDetails {
     pub link_proposal_state: i32,
 }
 /// A conversion event in a Google Analytics property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionEvent {
@@ -2529,7 +2655,7 @@ pub struct ConversionEvent {
     pub event_name: ::prost::alloc::string::String,
     /// Output only. Time when this conversion event was created in the property.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. If set, this event can currently be deleted with
     /// DeleteConversionEvent.
     #[prost(bool, tag = "4")]
@@ -2557,6 +2683,7 @@ pub struct ConversionEvent {
 pub mod conversion_event {
     /// Defines a default value/currency for a conversion event. Both value and
     /// currency must be provided.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultConversionValue {
@@ -2573,6 +2700,7 @@ pub mod conversion_event {
     }
     /// The method by which conversions will be counted across multiple events
     /// within a session.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2620,6 +2748,7 @@ pub mod conversion_event {
     }
 }
 /// Settings values for Google Signals.  This is a singleton resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleSignalsSettings {
@@ -2636,6 +2765,7 @@ pub struct GoogleSignalsSettings {
     pub consent: i32,
 }
 /// A definition for a CustomDimension.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomDimension {
@@ -2681,6 +2811,7 @@ pub struct CustomDimension {
 /// Nested message and enum types in `CustomDimension`.
 pub mod custom_dimension {
     /// Valid values for the scope of this dimension.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2729,6 +2860,7 @@ pub mod custom_dimension {
     }
 }
 /// A definition for a custom metric.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetric {
@@ -2779,6 +2911,7 @@ pub mod custom_metric {
     ///
     /// Currency representation may change in the future, requiring a breaking API
     /// change.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2854,6 +2987,7 @@ pub mod custom_metric {
         }
     }
     /// The scope of this metric.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2894,6 +3028,7 @@ pub mod custom_metric {
     }
     /// Labels that mark the data in this custom metric as data that should be
     /// restricted to specific users.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2938,6 +3073,7 @@ pub mod custom_metric {
     }
 }
 /// A definition for a calculated metric.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CalculatedMetric {
@@ -2989,6 +3125,7 @@ pub struct CalculatedMetric {
 /// Nested message and enum types in `CalculatedMetric`.
 pub mod calculated_metric {
     /// Possible types of representing the calculated metric's value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3065,6 +3202,7 @@ pub mod calculated_metric {
     }
     /// Labels that mark the data in calculated metric used in conjunction with
     /// user roles that restrict access to cost and/or revenue metrics.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3109,6 +3247,7 @@ pub mod calculated_metric {
     }
 }
 /// Settings values for data retention. This is a singleton resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRetentionSettings {
@@ -3127,6 +3266,7 @@ pub struct DataRetentionSettings {
 /// Nested message and enum types in `DataRetentionSettings`.
 pub mod data_retention_settings {
     /// Valid values for the data retention duration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3187,6 +3327,7 @@ pub mod data_retention_settings {
 }
 /// The attribution settings used for a given property. This is a singleton
 /// resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributionSettings {
@@ -3230,6 +3371,7 @@ pub mod attribution_settings {
     /// How far back in time events should be considered for inclusion in a
     /// converting path which leads to the first install of an app or the first
     /// visit to a site.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3287,6 +3429,7 @@ pub mod attribution_settings {
     /// How far back in time events should be considered for inclusion in a
     /// converting path for all conversions other than first app install/first site
     /// visit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3351,6 +3494,7 @@ pub mod attribution_settings {
     }
     /// The reporting attribution model used to calculate conversion credit in this
     /// property's reports.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3420,6 +3564,7 @@ pub mod attribution_settings {
         }
     }
     /// The Conversion Export Scope for data exported to linked Ads Accounts.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3482,6 +3627,7 @@ pub mod attribution_settings {
     }
 }
 /// A binding of a user to a set of roles.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessBinding {
@@ -3515,6 +3661,7 @@ pub struct AccessBinding {
 /// Nested message and enum types in `AccessBinding`.
 pub mod access_binding {
     /// The target for which to set roles for.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AccessTarget {
@@ -3525,6 +3672,7 @@ pub mod access_binding {
     }
 }
 /// A link between a GA4 Property and BigQuery project.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryLink {
@@ -3543,7 +3691,7 @@ pub struct BigQueryLink {
     pub project: ::prost::alloc::string::String,
     /// Output only. Time when the link was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// If set true, enables daily data export to the linked Google Cloud project.
     #[prost(bool, tag = "4")]
     pub daily_export_enabled: bool,
@@ -3569,6 +3717,7 @@ pub struct BigQueryLink {
 }
 /// Singleton resource under a web DataStream, configuring measurement of
 /// additional site interactions and content.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnhancedMeasurementSettings {
@@ -3624,6 +3773,7 @@ pub struct EnhancedMeasurementSettings {
     pub uri_query_parameter: ::prost::alloc::string::String,
 }
 /// Configuration for a specific Connected Site Tag.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectedSiteTag {
@@ -3638,6 +3788,7 @@ pub struct ConnectedSiteTag {
 }
 /// Settings for client-side data redaction. Singleton resource under a Web
 /// Stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRedactionSettings {
@@ -3667,6 +3818,7 @@ pub struct DataRedactionSettings {
     pub query_parameter_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A link between a GA4 Property and an AdSense for Content ad client.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdSenseLink {
@@ -3681,6 +3833,7 @@ pub struct AdSenseLink {
     pub ad_client_code: ::prost::alloc::string::String,
 }
 /// A link that references a source property under the parent rollup property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollupPropertySourceLink {
@@ -3697,6 +3850,7 @@ pub struct RollupPropertySourceLink {
     pub source_property: ::prost::alloc::string::String,
 }
 /// The category selected for this property, used for industry benchmarking.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum IndustryCategory {
@@ -3828,6 +3982,7 @@ impl IndustryCategory {
     }
 }
 /// Various levels of service for Google Analytics.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ServiceLevel {
@@ -3862,6 +4017,7 @@ impl ServiceLevel {
 }
 /// Different kinds of actors that can make changes to Google Analytics
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ActorType {
@@ -3899,6 +4055,7 @@ impl ActorType {
     }
 }
 /// Types of actions that may change a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ActionType {
@@ -3936,6 +4093,7 @@ impl ActionType {
     }
 }
 /// Types of resources whose changes may be returned from change history.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ChangeHistoryResourceType {
@@ -4075,6 +4233,7 @@ impl ChangeHistoryResourceType {
     }
 }
 /// Status of the Google Signals settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum GoogleSignalsState {
@@ -4109,6 +4268,7 @@ impl GoogleSignalsState {
     }
 }
 /// Consent field of the Google Signals settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum GoogleSignalsConsent {
@@ -4144,6 +4304,7 @@ impl GoogleSignalsConsent {
     }
 }
 /// An indication of which product the user initiated a link proposal from.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LinkProposalInitiatingProduct {
@@ -4180,6 +4341,7 @@ impl LinkProposalInitiatingProduct {
     }
 }
 /// The state of a link proposal resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LinkProposalState {
@@ -4245,6 +4407,7 @@ impl LinkProposalState {
     }
 }
 /// Types of Property resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PropertyType {
@@ -4285,6 +4448,7 @@ impl PropertyType {
 /// when a ConversionValues.event_mappings conditions are satisfied. For
 /// more information, see
 /// [SKAdNetwork.CoarseConversionValue](<https://developer.apple.com/documentation/storekit/skadnetwork/coarseconversionvalue>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum CoarseValue {
@@ -4322,6 +4486,7 @@ impl CoarseValue {
     }
 }
 /// A specific filter expression
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterCondition {
@@ -4336,6 +4501,7 @@ pub struct SubpropertyEventFilterCondition {
 /// Nested message and enum types in `SubpropertyEventFilterCondition`.
 pub mod subproperty_event_filter_condition {
     /// A filter for a string-type dimension that matches a particular pattern.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
@@ -4353,6 +4519,7 @@ pub mod subproperty_event_filter_condition {
     /// Nested message and enum types in `StringFilter`.
     pub mod string_filter {
         /// How the filter will be used to determine a match.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -4412,6 +4579,7 @@ pub mod subproperty_event_filter_condition {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
@@ -4424,6 +4592,7 @@ pub mod subproperty_event_filter_condition {
     }
 }
 /// A logical expression of Subproperty event filters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterExpression {
@@ -4434,6 +4603,7 @@ pub struct SubpropertyEventFilterExpression {
 /// Nested message and enum types in `SubpropertyEventFilterExpression`.
 pub mod subproperty_event_filter_expression {
     /// The expression applied to a filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
@@ -4455,6 +4625,7 @@ pub mod subproperty_event_filter_expression {
     }
 }
 /// A list of Subproperty event filter expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterExpressionList {
@@ -4466,6 +4637,7 @@ pub struct SubpropertyEventFilterExpressionList {
 /// the filter clause are included in the subproperty's data) or exclusive
 /// (events satisfying the filter clause are excluded from the subproperty's
 /// data).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterClause {
@@ -4483,6 +4655,7 @@ pub struct SubpropertyEventFilterClause {
 /// Nested message and enum types in `SubpropertyEventFilterClause`.
 pub mod subproperty_event_filter_clause {
     /// Specifies whether this is an include or exclude filter clause.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4528,6 +4701,7 @@ pub mod subproperty_event_filter_clause {
     }
 }
 /// A resource message representing a GA4 Subproperty event filter.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilter {
@@ -4546,6 +4720,7 @@ pub struct SubpropertyEventFilter {
     pub filter_clauses: ::prost::alloc::vec::Vec<SubpropertyEventFilterClause>,
 }
 /// The request for a Data Access Record Report.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportRequest {
@@ -4641,6 +4816,7 @@ pub struct RunAccessReportRequest {
     pub expand_groups: bool,
 }
 /// The customized Data Access Record Report response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportResponse {
@@ -4673,6 +4849,7 @@ pub struct RunAccessReportResponse {
     pub quota: ::core::option::Option<AccessQuota>,
 }
 /// Request message for GetAccount RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountRequest {
@@ -4683,6 +4860,7 @@ pub struct GetAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccounts RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsRequest {
@@ -4705,6 +4883,7 @@ pub struct ListAccountsRequest {
     pub show_deleted: bool,
 }
 /// Request message for ListAccounts RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsResponse {
@@ -4717,6 +4896,7 @@ pub struct ListAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAccount RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccountRequest {
@@ -4727,6 +4907,7 @@ pub struct DeleteAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAccount RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountRequest {
@@ -4739,9 +4920,10 @@ pub struct UpdateAccountRequest {
     /// To replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ProvisionAccountTicket RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketRequest {
@@ -4754,6 +4936,7 @@ pub struct ProvisionAccountTicketRequest {
     pub redirect_uri: ::prost::alloc::string::String,
 }
 /// Response message for ProvisionAccountTicket RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketResponse {
@@ -4762,6 +4945,7 @@ pub struct ProvisionAccountTicketResponse {
     pub account_ticket_id: ::prost::alloc::string::String,
 }
 /// Request message for GetProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPropertyRequest {
@@ -4772,6 +4956,7 @@ pub struct GetPropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListProperties RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesRequest {
@@ -4812,6 +4997,7 @@ pub struct ListPropertiesRequest {
     pub show_deleted: bool,
 }
 /// Response message for ListProperties RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesResponse {
@@ -4824,6 +5010,7 @@ pub struct ListPropertiesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePropertyRequest {
@@ -4837,9 +5024,10 @@ pub struct UpdatePropertyRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for CreateProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePropertyRequest {
@@ -4849,6 +5037,7 @@ pub struct CreatePropertyRequest {
     pub property: ::core::option::Option<Property>,
 }
 /// Request message for DeleteProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePropertyRequest {
@@ -4859,6 +5048,7 @@ pub struct DeletePropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateFirebaseLink RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFirebaseLinkRequest {
@@ -4871,6 +5061,7 @@ pub struct CreateFirebaseLinkRequest {
     pub firebase_link: ::core::option::Option<FirebaseLink>,
 }
 /// Request message for DeleteFirebaseLink RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFirebaseLinkRequest {
@@ -4880,6 +5071,7 @@ pub struct DeleteFirebaseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListFirebaseLinks RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksRequest {
@@ -4901,6 +5093,7 @@ pub struct ListFirebaseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListFirebaseLinks RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksResponse {
@@ -4915,6 +5108,7 @@ pub struct ListFirebaseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetGlobalSiteTag RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGlobalSiteTagRequest {
@@ -4926,6 +5120,7 @@ pub struct GetGlobalSiteTagRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateGoogleAdsLink RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGoogleAdsLinkRequest {
@@ -4937,6 +5132,7 @@ pub struct CreateGoogleAdsLinkRequest {
     pub google_ads_link: ::core::option::Option<GoogleAdsLink>,
 }
 /// Request message for UpdateGoogleAdsLink RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleAdsLinkRequest {
@@ -4948,9 +5144,10 @@ pub struct UpdateGoogleAdsLinkRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteGoogleAdsLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGoogleAdsLinkRequest {
@@ -4959,6 +5156,7 @@ pub struct DeleteGoogleAdsLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListGoogleAdsLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksRequest {
@@ -4979,6 +5177,7 @@ pub struct ListGoogleAdsLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListGoogleAdsLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksResponse {
@@ -4991,6 +5190,7 @@ pub struct ListGoogleAdsLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataSharingSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataSharingSettingsRequest {
@@ -5001,6 +5201,7 @@ pub struct GetDataSharingSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccountSummaries RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesRequest {
@@ -5018,6 +5219,7 @@ pub struct ListAccountSummariesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccountSummaries RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesResponse {
@@ -5030,6 +5232,7 @@ pub struct ListAccountSummariesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for AcknowledgeUserDataCollection RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionRequest {
@@ -5048,10 +5251,12 @@ pub struct AcknowledgeUserDataCollectionRequest {
     pub acknowledgement: ::prost::alloc::string::String,
 }
 /// Response message for AcknowledgeUserDataCollection RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionResponse {}
 /// Request message for SearchChangeHistoryEvents RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsRequest {
@@ -5084,10 +5289,10 @@ pub struct SearchChangeHistoryEventsRequest {
     pub actor_email: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Optional. If set, only return changes made after this time (inclusive).
     #[prost(message, optional, tag = "6")]
-    pub earliest_change_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub earliest_change_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. If set, only return changes made before this time (inclusive).
     #[prost(message, optional, tag = "7")]
-    pub latest_change_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub latest_change_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The maximum number of ChangeHistoryEvent items to return.
     /// The service may return fewer than this value, even if there are additional
     /// pages. If unspecified, at most 50 items will be returned.
@@ -5103,6 +5308,7 @@ pub struct SearchChangeHistoryEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for SearchAccounts RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsResponse {
@@ -5115,6 +5321,7 @@ pub struct SearchChangeHistoryEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetMeasurementProtocolSecret RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMeasurementProtocolSecretRequest {
@@ -5125,6 +5332,7 @@ pub struct GetMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateMeasurementProtocolSecret RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMeasurementProtocolSecretRequest {
@@ -5137,6 +5345,7 @@ pub struct CreateMeasurementProtocolSecretRequest {
     pub measurement_protocol_secret: ::core::option::Option<MeasurementProtocolSecret>,
 }
 /// Request message for DeleteMeasurementProtocolSecret RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMeasurementProtocolSecretRequest {
@@ -5147,6 +5356,7 @@ pub struct DeleteMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateMeasurementProtocolSecret RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateMeasurementProtocolSecretRequest {
@@ -5156,9 +5366,10 @@ pub struct UpdateMeasurementProtocolSecretRequest {
     /// Required. The list of fields to be updated. Omitted fields will not be
     /// updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ListMeasurementProtocolSecret RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsRequest {
@@ -5180,6 +5391,7 @@ pub struct ListMeasurementProtocolSecretsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListMeasurementProtocolSecret RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsResponse {
@@ -5194,6 +5406,7 @@ pub struct ListMeasurementProtocolSecretsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetSKAdNetworkConversionValueSchema RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSkAdNetworkConversionValueSchemaRequest {
@@ -5204,6 +5417,7 @@ pub struct GetSkAdNetworkConversionValueSchemaRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateSKAdNetworkConversionValueSchema RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSkAdNetworkConversionValueSchemaRequest {
@@ -5218,6 +5432,7 @@ pub struct CreateSkAdNetworkConversionValueSchemaRequest {
     >,
 }
 /// Request message for DeleteSKAdNetworkConversionValueSchema RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSkAdNetworkConversionValueSchemaRequest {
@@ -5228,6 +5443,7 @@ pub struct DeleteSkAdNetworkConversionValueSchemaRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSKAdNetworkConversionValueSchema RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSkAdNetworkConversionValueSchemaRequest {
@@ -5239,9 +5455,10 @@ pub struct UpdateSkAdNetworkConversionValueSchemaRequest {
     /// Required. The list of fields to be updated. Omitted fields will not be
     /// updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ListSKAdNetworkConversionValueSchemas RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkAdNetworkConversionValueSchemasRequest {
@@ -5266,6 +5483,7 @@ pub struct ListSkAdNetworkConversionValueSchemasRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSKAdNetworkConversionValueSchemas RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkAdNetworkConversionValueSchemasResponse {
@@ -5284,6 +5502,7 @@ pub struct ListSkAdNetworkConversionValueSchemasResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetGoogleSignalsSettings RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGoogleSignalsSettingsRequest {
@@ -5293,6 +5512,7 @@ pub struct GetGoogleSignalsSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateGoogleSignalsSettings RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleSignalsSettingsRequest {
@@ -5305,9 +5525,10 @@ pub struct UpdateGoogleSignalsSettingsRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for CreateConversionEvent RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConversionEventRequest {
@@ -5320,6 +5541,7 @@ pub struct CreateConversionEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateConversionEvent RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConversionEventRequest {
@@ -5332,9 +5554,10 @@ pub struct UpdateConversionEventRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for GetConversionEvent RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConversionEventRequest {
@@ -5345,6 +5568,7 @@ pub struct GetConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteConversionEvent RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConversionEventRequest {
@@ -5355,6 +5579,7 @@ pub struct DeleteConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListConversionEvents RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsRequest {
@@ -5375,6 +5600,7 @@ pub struct ListConversionEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListConversionEvents RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsResponse {
@@ -5387,6 +5613,7 @@ pub struct ListConversionEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDisplayVideo360AdvertiserLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDisplayVideo360AdvertiserLinkRequest {
@@ -5396,6 +5623,7 @@ pub struct GetDisplayVideo360AdvertiserLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDisplayVideo360AdvertiserLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinksRequest {
@@ -5417,6 +5645,7 @@ pub struct ListDisplayVideo360AdvertiserLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDisplayVideo360AdvertiserLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinksResponse {
@@ -5431,6 +5660,7 @@ pub struct ListDisplayVideo360AdvertiserLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateDisplayVideo360AdvertiserLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDisplayVideo360AdvertiserLinkRequest {
@@ -5444,6 +5674,7 @@ pub struct CreateDisplayVideo360AdvertiserLinkRequest {
     >,
 }
 /// Request message for DeleteDisplayVideo360AdvertiserLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDisplayVideo360AdvertiserLinkRequest {
@@ -5453,6 +5684,7 @@ pub struct DeleteDisplayVideo360AdvertiserLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDisplayVideo360AdvertiserLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDisplayVideo360AdvertiserLinkRequest {
@@ -5465,9 +5697,10 @@ pub struct UpdateDisplayVideo360AdvertiserLinkRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for GetDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDisplayVideo360AdvertiserLinkProposalRequest {
@@ -5477,6 +5710,7 @@ pub struct GetDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinkProposalsRequest {
@@ -5499,6 +5733,7 @@ pub struct ListDisplayVideo360AdvertiserLinkProposalsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinkProposalsResponse {
@@ -5513,6 +5748,7 @@ pub struct ListDisplayVideo360AdvertiserLinkProposalsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDisplayVideo360AdvertiserLinkProposalRequest {
@@ -5526,6 +5762,7 @@ pub struct CreateDisplayVideo360AdvertiserLinkProposalRequest {
     >,
 }
 /// Request message for DeleteDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDisplayVideo360AdvertiserLinkProposalRequest {
@@ -5535,6 +5772,7 @@ pub struct DeleteDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApproveDisplayVideo360AdvertiserLinkProposalRequest {
@@ -5544,6 +5782,7 @@ pub struct ApproveDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApproveDisplayVideo360AdvertiserLinkProposalResponse {
@@ -5555,6 +5794,7 @@ pub struct ApproveDisplayVideo360AdvertiserLinkProposalResponse {
     >,
 }
 /// Request message for CancelDisplayVideo360AdvertiserLinkProposal RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelDisplayVideo360AdvertiserLinkProposalRequest {
@@ -5564,6 +5804,7 @@ pub struct CancelDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetSearchAds360Link RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSearchAds360LinkRequest {
@@ -5573,6 +5814,7 @@ pub struct GetSearchAds360LinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListSearchAds360Links RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSearchAds360LinksRequest {
@@ -5594,6 +5836,7 @@ pub struct ListSearchAds360LinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSearchAds360Links RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSearchAds360LinksResponse {
@@ -5606,6 +5849,7 @@ pub struct ListSearchAds360LinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateSearchAds360Link RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSearchAds360LinkRequest {
@@ -5617,6 +5861,7 @@ pub struct CreateSearchAds360LinkRequest {
     pub search_ads_360_link: ::core::option::Option<SearchAds360Link>,
 }
 /// Request message for DeleteSearchAds360Link RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSearchAds360LinkRequest {
@@ -5626,6 +5871,7 @@ pub struct DeleteSearchAds360LinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSearchAds360Link RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSearchAds360LinkRequest {
@@ -5636,9 +5882,10 @@ pub struct UpdateSearchAds360LinkRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for CreateCustomDimension RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomDimensionRequest {
@@ -5650,6 +5897,7 @@ pub struct CreateCustomDimensionRequest {
     pub custom_dimension: ::core::option::Option<CustomDimension>,
 }
 /// Request message for UpdateCustomDimension RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomDimensionRequest {
@@ -5660,9 +5908,10 @@ pub struct UpdateCustomDimensionRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ListCustomDimensions RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsRequest {
@@ -5683,6 +5932,7 @@ pub struct ListCustomDimensionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomDimensions RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsResponse {
@@ -5695,6 +5945,7 @@ pub struct ListCustomDimensionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomDimension RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomDimensionRequest {
@@ -5704,6 +5955,7 @@ pub struct ArchiveCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomDimension RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomDimensionRequest {
@@ -5713,6 +5965,7 @@ pub struct GetCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomMetricRequest {
@@ -5724,6 +5977,7 @@ pub struct CreateCustomMetricRequest {
     pub custom_metric: ::core::option::Option<CustomMetric>,
 }
 /// Request message for UpdateCustomMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomMetricRequest {
@@ -5734,9 +5988,10 @@ pub struct UpdateCustomMetricRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ListCustomMetrics RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsRequest {
@@ -5757,6 +6012,7 @@ pub struct ListCustomMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomMetrics RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsResponse {
@@ -5769,6 +6025,7 @@ pub struct ListCustomMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomMetricRequest {
@@ -5778,6 +6035,7 @@ pub struct ArchiveCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomMetricRequest {
@@ -5787,6 +6045,7 @@ pub struct GetCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCalculatedMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCalculatedMetricRequest {
@@ -5809,6 +6068,7 @@ pub struct CreateCalculatedMetricRequest {
     pub calculated_metric: ::core::option::Option<CalculatedMetric>,
 }
 /// Request message for UpdateCalculatedMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCalculatedMetricRequest {
@@ -5819,9 +6079,10 @@ pub struct UpdateCalculatedMetricRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteCalculatedMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCalculatedMetricRequest {
@@ -5832,6 +6093,7 @@ pub struct DeleteCalculatedMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListCalculatedMetrics RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCalculatedMetricsRequest {
@@ -5852,6 +6114,7 @@ pub struct ListCalculatedMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCalculatedMetrics RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCalculatedMetricsResponse {
@@ -5864,6 +6127,7 @@ pub struct ListCalculatedMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetCalculatedMetric RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCalculatedMetricRequest {
@@ -5874,6 +6138,7 @@ pub struct GetCalculatedMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetDataRetentionSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRetentionSettingsRequest {
@@ -5885,6 +6150,7 @@ pub struct GetDataRetentionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRetentionSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRetentionSettingsRequest {
@@ -5897,9 +6163,10 @@ pub struct UpdateDataRetentionSettingsRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for CreateDataStream RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataStreamRequest {
@@ -5911,6 +6178,7 @@ pub struct CreateDataStreamRequest {
     pub data_stream: ::core::option::Option<DataStream>,
 }
 /// Request message for DeleteDataStream RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataStreamRequest {
@@ -5920,6 +6188,7 @@ pub struct DeleteDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataStream RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataStreamRequest {
@@ -5930,9 +6199,10 @@ pub struct UpdateDataStreamRequest {
     /// updated. To replace the entire entity, use one path with the string "*" to
     /// match all fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ListDataStreams RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsRequest {
@@ -5953,6 +6223,7 @@ pub struct ListDataStreamsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDataStreams RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsResponse {
@@ -5965,6 +6236,7 @@ pub struct ListDataStreamsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataStream RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataStreamRequest {
@@ -5974,6 +6246,7 @@ pub struct GetDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetAudience RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAudienceRequest {
@@ -5983,6 +6256,7 @@ pub struct GetAudienceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAudiences RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAudiencesRequest {
@@ -6003,6 +6277,7 @@ pub struct ListAudiencesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAudiences RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAudiencesResponse {
@@ -6015,6 +6290,7 @@ pub struct ListAudiencesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateAudience RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAudienceRequest {
@@ -6026,6 +6302,7 @@ pub struct CreateAudienceRequest {
     pub audience: ::core::option::Option<Audience>,
 }
 /// Request message for UpdateAudience RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAudienceRequest {
@@ -6038,9 +6315,10 @@ pub struct UpdateAudienceRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for ArchiveAudience RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveAudienceRequest {
@@ -6049,6 +6327,7 @@ pub struct ArchiveAudienceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetAttributionSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAttributionSettingsRequest {
@@ -6058,6 +6337,7 @@ pub struct GetAttributionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAttributionSettings RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAttributionSettingsRequest {
@@ -6070,9 +6350,10 @@ pub struct UpdateAttributionSettingsRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for GetAccessBinding RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccessBindingRequest {
@@ -6084,6 +6365,7 @@ pub struct GetAccessBindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for BatchGetAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetAccessBindingsRequest {
@@ -6103,6 +6385,7 @@ pub struct BatchGetAccessBindingsRequest {
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for BatchGetAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetAccessBindingsResponse {
@@ -6111,6 +6394,7 @@ pub struct BatchGetAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for ListAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessBindingsRequest {
@@ -6133,6 +6417,7 @@ pub struct ListAccessBindingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessBindingsResponse {
@@ -6146,6 +6431,7 @@ pub struct ListAccessBindingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateAccessBinding RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAccessBindingRequest {
@@ -6159,6 +6445,7 @@ pub struct CreateAccessBindingRequest {
     pub access_binding: ::core::option::Option<AccessBinding>,
 }
 /// Request message for BatchCreateAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAccessBindingsRequest {
@@ -6175,6 +6462,7 @@ pub struct BatchCreateAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<CreateAccessBindingRequest>,
 }
 /// Response message for BatchCreateAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAccessBindingsResponse {
@@ -6183,6 +6471,7 @@ pub struct BatchCreateAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for UpdateAccessBinding RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccessBindingRequest {
@@ -6191,6 +6480,7 @@ pub struct UpdateAccessBindingRequest {
     pub access_binding: ::core::option::Option<AccessBinding>,
 }
 /// Request message for BatchUpdateAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateAccessBindingsRequest {
@@ -6208,6 +6498,7 @@ pub struct BatchUpdateAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<UpdateAccessBindingRequest>,
 }
 /// Response message for BatchUpdateAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateAccessBindingsResponse {
@@ -6216,6 +6507,7 @@ pub struct BatchUpdateAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for DeleteAccessBinding RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccessBindingRequest {
@@ -6226,6 +6518,7 @@ pub struct DeleteAccessBindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for BatchDeleteAccessBindings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchDeleteAccessBindingsRequest {
@@ -6242,6 +6535,7 @@ pub struct BatchDeleteAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<DeleteAccessBindingRequest>,
 }
 /// Request message for CreateExpandedDataSet RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateExpandedDataSetRequest {
@@ -6253,6 +6547,7 @@ pub struct CreateExpandedDataSetRequest {
     pub expanded_data_set: ::core::option::Option<ExpandedDataSet>,
 }
 /// Request message for UpdateExpandedDataSet RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateExpandedDataSetRequest {
@@ -6266,9 +6561,10 @@ pub struct UpdateExpandedDataSetRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteExpandedDataSet RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteExpandedDataSetRequest {
@@ -6277,6 +6573,7 @@ pub struct DeleteExpandedDataSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetExpandedDataSet RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetExpandedDataSetRequest {
@@ -6286,6 +6583,7 @@ pub struct GetExpandedDataSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListExpandedDataSets RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExpandedDataSetsRequest {
@@ -6306,6 +6604,7 @@ pub struct ListExpandedDataSetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListExpandedDataSets RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExpandedDataSetsResponse {
@@ -6319,6 +6618,7 @@ pub struct ListExpandedDataSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateChannelGroup RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelGroupRequest {
@@ -6331,6 +6631,7 @@ pub struct CreateChannelGroupRequest {
     pub channel_group: ::core::option::Option<ChannelGroup>,
 }
 /// Request message for UpdateChannelGroup RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChannelGroupRequest {
@@ -6344,9 +6645,10 @@ pub struct UpdateChannelGroupRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteChannelGroup RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelGroupRequest {
@@ -6356,6 +6658,7 @@ pub struct DeleteChannelGroupRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetChannelGroup RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelGroupRequest {
@@ -6365,6 +6668,7 @@ pub struct GetChannelGroupRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListChannelGroups RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelGroupsRequest {
@@ -6386,6 +6690,7 @@ pub struct ListChannelGroupsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListChannelGroups RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelGroupsResponse {
@@ -6399,6 +6704,7 @@ pub struct ListChannelGroupsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for setting the opt out status for the automated GA4 setup process.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAutomatedGa4ConfigurationOptOutRequest {
@@ -6414,10 +6720,12 @@ pub struct SetAutomatedGa4ConfigurationOptOutRequest {
 }
 /// Response message for setting the opt out status for the automated GA4 setup
 /// process.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetAutomatedGa4ConfigurationOptOutResponse {}
 /// Request for fetching the opt out status for the automated GA4 setup process.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchAutomatedGa4ConfigurationOptOutRequest {
@@ -6430,14 +6738,16 @@ pub struct FetchAutomatedGa4ConfigurationOptOutRequest {
 }
 /// Response message for fetching the opt out status for the automated GA4 setup
 /// process.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FetchAutomatedGa4ConfigurationOptOutResponse {
     /// The opt out status for the UA property.
     #[prost(bool, tag = "1")]
     pub opt_out: bool,
 }
 /// Request message for GetBigQueryLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBigQueryLinkRequest {
@@ -6448,6 +6758,7 @@ pub struct GetBigQueryLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListBigQueryLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBigQueryLinksRequest {
@@ -6470,6 +6781,7 @@ pub struct ListBigQueryLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListBigQueryLinks RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBigQueryLinksResponse {
@@ -6482,6 +6794,7 @@ pub struct ListBigQueryLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetEnhancedMeasurementSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEnhancedMeasurementSettingsRequest {
@@ -6493,6 +6806,7 @@ pub struct GetEnhancedMeasurementSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateEnhancedMeasurementSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEnhancedMeasurementSettingsRequest {
@@ -6507,9 +6821,10 @@ pub struct UpdateEnhancedMeasurementSettingsRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for GetDataRedactionSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRedactionSettingsRequest {
@@ -6521,6 +6836,7 @@ pub struct GetDataRedactionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRedactionSettings RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRedactionSettingsRequest {
@@ -6533,9 +6849,10 @@ pub struct UpdateDataRedactionSettingsRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for CreateConnectedSiteTag RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConnectedSiteTagRequest {
@@ -6550,10 +6867,12 @@ pub struct CreateConnectedSiteTagRequest {
     pub connected_site_tag: ::core::option::Option<ConnectedSiteTag>,
 }
 /// Response message for CreateConnectedSiteTag RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateConnectedSiteTagResponse {}
 /// Request message for DeleteConnectedSiteTag RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConnectedSiteTagRequest {
@@ -6569,6 +6888,7 @@ pub struct DeleteConnectedSiteTagRequest {
     pub tag_id: ::prost::alloc::string::String,
 }
 /// Request message for ListConnectedSiteTags RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectedSiteTagsRequest {
@@ -6580,6 +6900,7 @@ pub struct ListConnectedSiteTagsRequest {
     pub property: ::prost::alloc::string::String,
 }
 /// Response message for ListConnectedSiteTags RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectedSiteTagsResponse {
@@ -6589,6 +6910,7 @@ pub struct ListConnectedSiteTagsResponse {
     pub connected_site_tags: ::prost::alloc::vec::Vec<ConnectedSiteTag>,
 }
 /// Request message to be passed to CreateAdSenseLink method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAdSenseLinkRequest {
@@ -6602,6 +6924,7 @@ pub struct CreateAdSenseLinkRequest {
     pub adsense_link: ::core::option::Option<AdSenseLink>,
 }
 /// Request message to be passed to GetAdSenseLink method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdSenseLinkRequest {
@@ -6612,6 +6935,7 @@ pub struct GetAdSenseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message to be passed to DeleteAdSenseLink method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAdSenseLinkRequest {
@@ -6622,6 +6946,7 @@ pub struct DeleteAdSenseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message to be passed to ListAdSenseLinks method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdSenseLinksRequest {
@@ -6644,6 +6969,7 @@ pub struct ListAdSenseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAdSenseLinks method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdSenseLinksResponse {
@@ -6656,6 +6982,7 @@ pub struct ListAdSenseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for looking up GA4 property connected to a UA property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchConnectedGa4PropertyRequest {
@@ -6668,6 +6995,7 @@ pub struct FetchConnectedGa4PropertyRequest {
     pub property: ::prost::alloc::string::String,
 }
 /// Response for looking up GA4 property connected to a UA property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchConnectedGa4PropertyResponse {
@@ -6679,6 +7007,7 @@ pub struct FetchConnectedGa4PropertyResponse {
     pub property: ::prost::alloc::string::String,
 }
 /// Request message for CreateEventCreateRule RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventCreateRuleRequest {
@@ -6690,6 +7019,7 @@ pub struct CreateEventCreateRuleRequest {
     pub event_create_rule: ::core::option::Option<EventCreateRule>,
 }
 /// Request message for UpdateEventCreateRule RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEventCreateRuleRequest {
@@ -6703,9 +7033,10 @@ pub struct UpdateEventCreateRuleRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteEventCreateRule RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventCreateRuleRequest {
@@ -6715,6 +7046,7 @@ pub struct DeleteEventCreateRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetEventCreateRule RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventCreateRuleRequest {
@@ -6724,6 +7056,7 @@ pub struct GetEventCreateRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListEventCreateRules RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventCreateRulesRequest {
@@ -6744,6 +7077,7 @@ pub struct ListEventCreateRulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListEventCreateRules RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventCreateRulesResponse {
@@ -6757,6 +7091,7 @@ pub struct ListEventCreateRulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateRollupProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertyRequest {
@@ -6769,6 +7104,7 @@ pub struct CreateRollupPropertyRequest {
     pub source_properties: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for CreateRollupProperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertyResponse {
@@ -6780,6 +7116,7 @@ pub struct CreateRollupPropertyResponse {
     pub rollup_property_source_links: ::prost::alloc::vec::Vec<RollupPropertySourceLink>,
 }
 /// Request message for GetRollupPropertySourceLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRollupPropertySourceLinkRequest {
@@ -6791,6 +7128,7 @@ pub struct GetRollupPropertySourceLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListRollupPropertySourceLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRollupPropertySourceLinksRequest {
@@ -6813,6 +7151,7 @@ pub struct ListRollupPropertySourceLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListRollupPropertySourceLinks RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRollupPropertySourceLinksResponse {
@@ -6825,6 +7164,7 @@ pub struct ListRollupPropertySourceLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateRollupPropertySourceLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertySourceLinkRequest {
@@ -6837,6 +7177,7 @@ pub struct CreateRollupPropertySourceLinkRequest {
     pub rollup_property_source_link: ::core::option::Option<RollupPropertySourceLink>,
 }
 /// Request message for DeleteRollupPropertySourceLink RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRollupPropertySourceLinkRequest {
@@ -6847,6 +7188,7 @@ pub struct DeleteRollupPropertySourceLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateSubproperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubpropertyRequest {
@@ -6863,6 +7205,7 @@ pub struct CreateSubpropertyRequest {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Response message for CreateSubproperty RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubpropertyResponse {
@@ -6874,6 +7217,7 @@ pub struct CreateSubpropertyResponse {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Request message for CreateSubpropertyEventFilter RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubpropertyEventFilterRequest {
@@ -6886,6 +7230,7 @@ pub struct CreateSubpropertyEventFilterRequest {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Request message for GetSubpropertyEventFilter RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSubpropertyEventFilterRequest {
@@ -6897,6 +7242,7 @@ pub struct GetSubpropertyEventFilterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListSubpropertyEventFilters RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubpropertyEventFiltersRequest {
@@ -6920,6 +7266,7 @@ pub struct ListSubpropertyEventFiltersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSubpropertyEventFilter RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubpropertyEventFiltersResponse {
@@ -6932,6 +7279,7 @@ pub struct ListSubpropertyEventFiltersResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSubpropertyEventFilter RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSubpropertyEventFilterRequest {
@@ -6943,9 +7291,10 @@ pub struct UpdateSubpropertyEventFilterRequest {
     /// replace the entire entity, use one path with the string "*" to match all
     /// fields.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteSubpropertyEventFilter RPC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSubpropertyEventFilterRequest {
@@ -7119,7 +7468,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_account(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAccountRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -7425,7 +7777,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_firebase_link(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteFirebaseLinkRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -7570,7 +7925,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_google_ads_link(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteGoogleAdsLinkRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -7761,7 +8119,10 @@ pub mod analytics_admin_service_client {
             request: impl tonic::IntoRequest<
                 super::DeleteMeasurementProtocolSecretRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -7925,7 +8286,10 @@ pub mod analytics_admin_service_client {
             request: impl tonic::IntoRequest<
                 super::DeleteSkAdNetworkConversionValueSchemaRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -8207,7 +8571,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteConversionEventRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -8373,7 +8740,10 @@ pub mod analytics_admin_service_client {
             request: impl tonic::IntoRequest<
                 super::DeleteDisplayVideo360AdvertiserLinkRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -8536,7 +8906,10 @@ pub mod analytics_admin_service_client {
             request: impl tonic::IntoRequest<
                 super::DeleteDisplayVideo360AdvertiserLinkProposalRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -8729,7 +9102,10 @@ pub mod analytics_admin_service_client {
         pub async fn archive_custom_dimension(
             &mut self,
             request: impl tonic::IntoRequest<super::ArchiveCustomDimensionRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -8875,7 +9251,10 @@ pub mod analytics_admin_service_client {
         pub async fn archive_custom_metric(
             &mut self,
             request: impl tonic::IntoRequest<super::ArchiveCustomMetricRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9021,7 +9400,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_data_stream(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDataStreamRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9255,7 +9637,10 @@ pub mod analytics_admin_service_client {
         pub async fn archive_audience(
             &mut self,
             request: impl tonic::IntoRequest<super::ArchiveAudienceRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9376,7 +9761,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_search_ads360_link(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteSearchAds360LinkRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9626,7 +10014,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_access_binding(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAccessBindingRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9783,7 +10174,10 @@ pub mod analytics_admin_service_client {
         pub async fn batch_delete_access_bindings(
             &mut self,
             request: impl tonic::IntoRequest<super::BatchDeleteAccessBindingsRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -9935,7 +10329,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_expanded_data_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteExpandedDataSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -10078,7 +10475,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_channel_group(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteChannelGroupRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -10339,7 +10739,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_connected_site_tag(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteConnectedSiteTagRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -10488,7 +10891,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_ad_sense_link(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAdSenseLinkRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -10671,7 +11077,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_event_create_rule(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteEventCreateRuleRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -10885,7 +11294,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_calculated_metric(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCalculatedMetricRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -11049,7 +11461,10 @@ pub mod analytics_admin_service_client {
             request: impl tonic::IntoRequest<
                 super::DeleteRollupPropertySourceLinkRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -11233,7 +11648,10 @@ pub mod analytics_admin_service_client {
         pub async fn delete_subproperty_event_filter(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteSubpropertyEventFilterRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

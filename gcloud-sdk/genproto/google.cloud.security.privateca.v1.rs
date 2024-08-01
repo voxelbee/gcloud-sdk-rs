@@ -5,6 +5,7 @@
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
 /// can be used to create
 /// [Certificates][google.cloud.security.privateca.v1.Certificate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateAuthority {
@@ -27,7 +28,7 @@ pub struct CertificateAuthority {
     /// create the "not_before_time" and "not_after_time" fields inside an X.509
     /// certificate.
     #[prost(message, optional, tag = "4")]
-    pub lifetime: ::core::option::Option<::prost_types::Duration>,
+    pub lifetime: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Required. Immutable. Used when issuing certificates for this
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority].
     /// If this
@@ -89,26 +90,26 @@ pub struct CertificateAuthority {
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// was created.
     #[prost(message, optional, tag = "13")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// was last updated.
     #[prost(message, optional, tag = "14")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// was soft deleted, if it is in the
     /// [DELETED][google.cloud.security.privateca.v1.CertificateAuthority.State.DELETED]
     /// state.
     #[prost(message, optional, tag = "15")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// will be permanently purged, if it is in the
     /// [DELETED][google.cloud.security.privateca.v1.CertificateAuthority.State.DELETED]
     /// state.
     #[prost(message, optional, tag = "16")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Labels with user-defined metadata.
     #[prost(map = "string, string", tag = "17")]
     pub labels: ::std::collections::HashMap<
@@ -121,6 +122,7 @@ pub mod certificate_authority {
     /// URLs where a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// will publish content.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AccessUrls {
@@ -140,6 +142,7 @@ pub mod certificate_authority {
     /// A Cloud KMS key configuration that a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// will use.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyVersionSpec {
@@ -148,6 +151,7 @@ pub mod certificate_authority {
     }
     /// Nested message and enum types in `KeyVersionSpec`.
     pub mod key_version_spec {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum KeyVersion {
@@ -168,6 +172,7 @@ pub mod certificate_authority {
     /// The type of a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority],
     /// indicating its issuing chain.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -215,6 +220,7 @@ pub mod certificate_authority {
     /// The state of a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority],
     /// indicating if it can be used.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -302,6 +308,7 @@ pub mod certificate_authority {
     /// use PKCS1 algorithms if required for compatibility. For further
     /// recommendations, see
     /// <https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations.>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -376,6 +383,7 @@ pub mod certificate_authority {
 /// issuance policies for one or more
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
 /// resources and to rotate CA certificates in and out of the trust anchor.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CaPool {
@@ -420,8 +428,9 @@ pub mod ca_pool {
     /// set here apply to certificates issued by any
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// in the [CaPool][google.cloud.security.privateca.v1.CaPool].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PublishingOptions {
         /// Optional. When true, publishes each
         /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]'s
@@ -453,6 +462,7 @@ pub mod ca_pool {
     /// Nested message and enum types in `PublishingOptions`.
     pub mod publishing_options {
         /// Supported encoding formats for publishing.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -502,6 +512,7 @@ pub mod ca_pool {
     }
     /// Defines controls over all certificate issuance within a
     /// [CaPool][google.cloud.security.privateca.v1.CaPool].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IssuancePolicy {
@@ -520,7 +531,7 @@ pub mod ca_pool {
         /// requested maximum_lifetime, the effective lifetime will be explicitly
         /// truncated to match it.
         #[prost(message, optional, tag = "2")]
-        pub maximum_lifetime: ::core::option::Option<::prost_types::Duration>,
+        pub maximum_lifetime: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Optional. If specified, then only methods allowed in the
         /// [IssuanceModes][google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes]
         /// may be used to issue
@@ -578,8 +589,9 @@ pub mod ca_pool {
         /// [AllowedKeyType][google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType]
         /// may refer to either a fully-qualified key algorithm, such as RSA 4096, or
         /// a family of key algorithms, such as any RSA key.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct AllowedKeyType {
             #[prost(oneof = "allowed_key_type::KeyType", tags = "1, 2")]
             pub key_type: ::core::option::Option<allowed_key_type::KeyType>,
@@ -589,8 +601,9 @@ pub mod ca_pool {
             /// Describes an RSA key that may be used in a
             /// [Certificate][google.cloud.security.privateca.v1.Certificate] issued
             /// from a [CaPool][google.cloud.security.privateca.v1.CaPool].
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct RsaKeyType {
                 /// Optional. The minimum allowed RSA modulus size (inclusive), in bits.
                 /// If this is not set, or if set to zero, the service-level min RSA
@@ -606,8 +619,9 @@ pub mod ca_pool {
             /// Describes an Elliptic Curve key that may be used in a
             /// [Certificate][google.cloud.security.privateca.v1.Certificate] issued
             /// from a [CaPool][google.cloud.security.privateca.v1.CaPool].
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct EcKeyType {
                 /// Optional. A signature algorithm that must be used. If this is
                 /// omitted, any EC-based signature algorithm will be allowed.
@@ -620,6 +634,7 @@ pub mod ca_pool {
                 /// used in a
                 /// [Certificate][google.cloud.security.privateca.v1.Certificate] issued
                 /// from a [CaPool][google.cloud.security.privateca.v1.CaPool].
+                #[derive(serde::Serialize, serde::Deserialize)]
                 #[derive(
                     Clone,
                     Copy,
@@ -674,8 +689,9 @@ pub mod ca_pool {
                     }
                 }
             }
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Oneof)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum KeyType {
                 /// Represents an allowed RSA key type.
                 #[prost(message, tag = "1")]
@@ -689,8 +705,9 @@ pub mod ca_pool {
         /// specifies the allowed ways in which
         /// [Certificates][google.cloud.security.privateca.v1.Certificate] may be
         /// requested from this [CaPool][google.cloud.security.privateca.v1.CaPool].
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct IssuanceModes {
             /// Optional. When true, allows callers to create
             /// [Certificates][google.cloud.security.privateca.v1.Certificate] by
@@ -707,6 +724,7 @@ pub mod ca_pool {
     }
     /// The tier of a [CaPool][google.cloud.security.privateca.v1.CaPool],
     /// indicating its supported functionality and/or billing SKU.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -754,6 +772,7 @@ pub mod ca_pool {
 /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
 /// corresponds to a signed X.509 certificate Revocation List (CRL). A CRL
 /// contains the serial numbers of certificates that should no longer be trusted.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateRevocationList {
@@ -787,12 +806,12 @@ pub struct CertificateRevocationList {
     /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
     /// was created.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
     /// was updated.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The revision ID of this
     /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList].
     /// A new revision is committed whenever a new CRL is published. The format is
@@ -810,6 +829,7 @@ pub struct CertificateRevocationList {
 pub mod certificate_revocation_list {
     /// Describes a revoked
     /// [Certificate][google.cloud.security.privateca.v1.Certificate].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RevokedCertificate {
@@ -831,6 +851,7 @@ pub mod certificate_revocation_list {
     /// The state of a
     /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList],
     /// indicating if it is current.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -881,6 +902,7 @@ pub mod certificate_revocation_list {
 /// A [Certificate][google.cloud.security.privateca.v1.Certificate] corresponds
 /// to a signed X.509 certificate issued by a
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Certificate {
@@ -899,7 +921,7 @@ pub struct Certificate {
     /// certificate. Note that the lifetime may be truncated if it would extend
     /// past the life of any certificate authority in the issuing chain.
     #[prost(message, optional, tag = "5")]
-    pub lifetime: ::core::option::Option<::prost_types::Duration>,
+    pub lifetime: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Immutable. The resource name for a
     /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
     /// used to issue this certificate, in the format
@@ -935,11 +957,11 @@ pub struct Certificate {
     /// Output only. The time at which this
     /// [Certificate][google.cloud.security.privateca.v1.Certificate] was created.
     #[prost(message, optional, tag = "12")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [Certificate][google.cloud.security.privateca.v1.Certificate] was updated.
     #[prost(message, optional, tag = "13")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Labels with user-defined metadata.
     #[prost(map = "string, string", tag = "14")]
     pub labels: ::std::collections::HashMap<
@@ -954,8 +976,9 @@ pub struct Certificate {
 pub mod certificate {
     /// Describes fields that are relavent to the revocation of a
     /// [Certificate][google.cloud.security.privateca.v1.Certificate].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RevocationDetails {
         /// Indicates why a
         /// [Certificate][google.cloud.security.privateca.v1.Certificate] was
@@ -966,9 +989,10 @@ pub mod certificate {
         /// [Certificate][google.cloud.security.privateca.v1.Certificate] was
         /// revoked.
         #[prost(message, optional, tag = "2")]
-        pub revocation_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub revocation_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// The config used to create a signed X.509 certificate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CertificateConfig {
@@ -984,6 +1008,7 @@ pub mod certificate {
 /// A
 /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
 /// refers to a managed template for certificate issuance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateTemplate {
@@ -1008,7 +1033,7 @@ pub struct CertificateTemplate {
     /// maximum_lifetime, the effective lifetime will be explicitly truncated
     ///   to match it.
     #[prost(message, optional, tag = "9")]
-    pub maximum_lifetime: ::core::option::Option<::prost_types::Duration>,
+    pub maximum_lifetime: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. A set of X.509 values that will be applied to all issued
     /// certificates that use this template. If the certificate request includes
     /// conflicting values for the same properties, they will be overwritten by the
@@ -1053,12 +1078,12 @@ pub struct CertificateTemplate {
     /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
     /// was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which this
     /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
     /// was updated.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Labels with user-defined metadata.
     #[prost(map = "string, string", tag = "8")]
     pub labels: ::std::collections::HashMap<
@@ -1070,6 +1095,7 @@ pub struct CertificateTemplate {
 /// used to describe certain fields of an X.509 certificate, such as the key
 /// usage fields, fields specific to CA certificates, certificate policy
 /// extensions and custom extensions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct X509Parameters {
@@ -1101,8 +1127,9 @@ pub struct X509Parameters {
 /// Nested message and enum types in `X509Parameters`.
 pub mod x509_parameters {
     /// Describes values that are relevant in a CA certificate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct CaOptions {
         /// Optional. Refers to the "CA" X.509 extension, which is a boolean value.
         /// When this value is missing, the extension will be omitted from the CA
@@ -1120,6 +1147,7 @@ pub mod x509_parameters {
     }
     /// Describes the X.509 name constraints extension, per
     /// <https://tools.ietf.org/html/rfc5280#section-4.2.1.10>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NameConstraints {
@@ -1188,6 +1216,7 @@ pub mod x509_parameters {
 /// known issuing
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority],
 /// or a PEM issuer certificate chain.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubordinateConfig {
@@ -1200,6 +1229,7 @@ pub struct SubordinateConfig {
 pub mod subordinate_config {
     /// This message describes a subordinate CA's issuer certificate chain. This
     /// wrapper exists for compatibility reasons.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubordinateConfigChain {
@@ -1207,6 +1237,7 @@ pub mod subordinate_config {
         #[prost(string, repeated, tag = "1")]
         pub pem_certificates: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SubordinateConfig {
@@ -1228,6 +1259,7 @@ pub mod subordinate_config {
 }
 /// A [PublicKey][google.cloud.security.privateca.v1.PublicKey] describes a
 /// public key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PublicKey {
@@ -1243,6 +1275,7 @@ pub struct PublicKey {
 pub mod public_key {
     /// Types of public keys formats that are supported. Currently, only `PEM`
     /// format is supported.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1297,6 +1330,7 @@ pub mod public_key {
 /// A [CertificateConfig][google.cloud.security.privateca.v1.CertificateConfig]
 /// describes an X.509 certificate or CSR that is to be created, as an
 /// alternative to using ASN.1.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateConfig {
@@ -1329,6 +1363,7 @@ pub struct CertificateConfig {
 pub mod certificate_config {
     /// These values are used to create the distinguished name and subject
     /// alternative name fields in an X.509 certificate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubjectConfig {
@@ -1342,6 +1377,7 @@ pub mod certificate_config {
     }
     /// A KeyId identifies a specific public key, usually by hashing the public
     /// key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyId {
@@ -1355,6 +1391,7 @@ pub mod certificate_config {
 /// [CertificateDescription][google.cloud.security.privateca.v1.CertificateDescription]
 /// describes an X.509 certificate or CSR that has been issued, as an alternative
 /// to using ASN.1 / X.509.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateDescription {
@@ -1401,6 +1438,7 @@ pub struct CertificateDescription {
 pub mod certificate_description {
     /// These values describe fields in an issued X.509 certificate such as the
     /// distinguished name, subject alternative names, serial number, and lifetime.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubjectDescription {
@@ -1416,19 +1454,20 @@ pub mod certificate_description {
         pub hex_serial_number: ::prost::alloc::string::String,
         /// For convenience, the actual lifetime of an issued certificate.
         #[prost(message, optional, tag = "4")]
-        pub lifetime: ::core::option::Option<::prost_types::Duration>,
+        pub lifetime: ::core::option::Option<::prost_wkt_types::Duration>,
         /// The time at which the certificate becomes valid.
         #[prost(message, optional, tag = "5")]
-        pub not_before_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub not_before_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// The time after which the certificate is expired.
         /// Per RFC 5280, the validity period for a certificate is the period of time
         /// from not_before_time through not_after_time, inclusive.
         /// Corresponds to 'not_before_time' + 'lifetime' - 1 second.
         #[prost(message, optional, tag = "6")]
-        pub not_after_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub not_after_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// A KeyId identifies a specific public key, usually by hashing the public
     /// key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyId {
@@ -1438,6 +1477,7 @@ pub mod certificate_description {
         pub key_id: ::prost::alloc::string::String,
     }
     /// A group of fingerprints for the x509 certificate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CertificateFingerprint {
@@ -1449,6 +1489,7 @@ pub mod certificate_description {
 /// An [ObjectId][google.cloud.security.privateca.v1.ObjectId] specifies an
 /// object identifier (OID). These provide context and describe types in ASN.1
 /// messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectId {
@@ -1460,6 +1501,7 @@ pub struct ObjectId {
 /// An [X509Extension][google.cloud.security.privateca.v1.X509Extension]
 /// specifies an X.509 extension, which may be used in different parts of X.509
 /// objects like certificates, CSRs, and CRLs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct X509Extension {
@@ -1477,6 +1519,7 @@ pub struct X509Extension {
 }
 /// A [KeyUsage][google.cloud.security.privateca.v1.KeyUsage] describes key usage
 /// values that may appear in an X.509 certificate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyUsage {
@@ -1497,8 +1540,9 @@ pub mod key_usage {
     /// [KeyUsage.KeyUsageOptions][google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions]
     /// corresponds to the key usage values described in
     /// <https://tools.ietf.org/html/rfc5280#section-4.2.1.3.>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct KeyUsageOptions {
         /// The key may be used for digital signatures.
         #[prost(bool, tag = "1")]
@@ -1532,8 +1576,9 @@ pub mod key_usage {
     /// [KeyUsage.ExtendedKeyUsageOptions][google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions]
     /// has fields that correspond to certain common OIDs that could be specified
     /// as an extended key usage value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ExtendedKeyUsageOptions {
         /// Corresponds to OID 1.3.6.1.5.5.7.3.1. Officially described as "TLS WWW
         /// server authentication", though regularly used for non-WWW TLS.
@@ -1563,6 +1608,7 @@ pub mod key_usage {
 }
 /// [Subject][google.cloud.security.privateca.v1.Subject] describes parts of a
 /// distinguished name that, in turn, describes the subject of the certificate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subject {
@@ -1595,6 +1641,7 @@ pub struct Subject {
 /// corresponds to a more modern way of listing what the asserted identity is in
 /// a certificate (i.e., compared to the "common name" in the distinguished
 /// name).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAltNames {
@@ -1620,6 +1667,7 @@ pub struct SubjectAltNames {
 /// [Certificate][google.cloud.security.privateca.v1.Certificate]'s
 /// [Subject][google.cloud.security.privateca.v1.Subject] and
 /// [SubjectAltNames][google.cloud.security.privateca.v1.SubjectAltNames].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateIdentityConstraints {
@@ -1647,6 +1695,7 @@ pub struct CertificateIdentityConstraints {
 }
 /// Describes a set of X.509 extensions that may be part of some certificate
 /// issuance controls.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateExtensionConstraints {
@@ -1674,6 +1723,7 @@ pub mod certificate_extension_constraints {
     /// including the
     /// [SubjectAltNames][google.cloud.security.privateca.v1.SubjectAltNames]
     /// extension.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1769,6 +1819,7 @@ pub mod certificate_extension_constraints {
 /// revocation reasons from RFC 5280. Note that the enum labels and values in
 /// this definition are not the same ASN.1 values defined in RFC 5280. These
 /// values will be translated to the correct ASN.1 values when a CRL is created.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RevocationReason {
@@ -1849,6 +1900,7 @@ impl RevocationReason {
 /// [Subject][google.cloud.security.privateca.v1.Subject] and/or
 /// [SubjectAltNames][google.cloud.security.privateca.v1.SubjectAltNames] will be
 /// resolved.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SubjectRequestMode {
@@ -1895,6 +1947,7 @@ impl SubjectRequestMode {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateRequest {
@@ -1964,6 +2017,7 @@ pub struct CreateCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateRequest {
@@ -1975,6 +2029,7 @@ pub struct GetCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificates].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificatesRequest {
@@ -2010,6 +2065,7 @@ pub struct ListCertificatesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificates].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificatesResponse {
@@ -2027,6 +2083,7 @@ pub struct ListCertificatesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.RevokeCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.RevokeCertificate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RevokeCertificateRequest {
@@ -2058,6 +2115,7 @@ pub struct RevokeCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateRequest {
@@ -2067,7 +2125,7 @@ pub struct UpdateCertificateRequest {
     pub certificate: ::core::option::Option<Certificate>,
     /// Required. A list of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. An ID to identify requests. Specify a unique request ID so that
     /// if you must retry your request, the server will know to ignore the request
     /// if it has already been completed. The server will guarantee that for at
@@ -2086,6 +2144,7 @@ pub struct UpdateCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ActivateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActivateCertificateAuthorityRequest {
@@ -2120,6 +2179,7 @@ pub struct ActivateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateAuthorityRequest {
@@ -2156,6 +2216,7 @@ pub struct CreateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DisableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DisableCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableCertificateAuthorityRequest {
@@ -2188,6 +2249,7 @@ pub struct DisableCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.EnableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.EnableCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableCertificateAuthorityRequest {
@@ -2214,6 +2276,7 @@ pub struct EnableCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCertificateAuthorityCsrRequest {
@@ -2225,6 +2288,7 @@ pub struct FetchCertificateAuthorityCsrRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCertificateAuthorityCsrResponse {
@@ -2234,6 +2298,7 @@ pub struct FetchCertificateAuthorityCsrResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateAuthorityRequest {
@@ -2246,6 +2311,7 @@ pub struct GetCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateAuthoritiesRequest {
@@ -2278,6 +2344,7 @@ pub struct ListCertificateAuthoritiesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateAuthoritiesResponse {
@@ -2296,6 +2363,7 @@ pub struct ListCertificateAuthoritiesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UndeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UndeleteCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteCertificateAuthorityRequest {
@@ -2322,6 +2390,7 @@ pub struct UndeleteCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCertificateAuthorityRequest {
@@ -2363,6 +2432,7 @@ pub struct DeleteCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateAuthority].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateAuthorityRequest {
@@ -2373,7 +2443,7 @@ pub struct UpdateCertificateAuthorityRequest {
     pub certificate_authority: ::core::option::Option<CertificateAuthority>,
     /// Required. A list of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. An ID to identify requests. Specify a unique request ID so that
     /// if you must retry your request, the server will know to ignore the request
     /// if it has already been completed. The server will guarantee that for at
@@ -2392,6 +2462,7 @@ pub struct UpdateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCaPool].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCaPoolRequest {
@@ -2426,6 +2497,7 @@ pub struct CreateCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCaPool].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCaPoolRequest {
@@ -2435,7 +2507,7 @@ pub struct UpdateCaPoolRequest {
     pub ca_pool: ::core::option::Option<CaPool>,
     /// Required. A list of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. An ID to identify requests. Specify a unique request ID so that
     /// if you must retry your request, the server will know to ignore the request
     /// if it has already been completed. The server will guarantee that for at
@@ -2454,6 +2526,7 @@ pub struct UpdateCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCaPool].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCaPoolRequest {
@@ -2486,6 +2559,7 @@ pub struct DeleteCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.FetchCaCerts][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCaCerts].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCaCertsRequest {
@@ -2512,6 +2586,7 @@ pub struct FetchCaCertsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.FetchCaCerts][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCaCerts].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCaCertsResponse {
@@ -2523,6 +2598,7 @@ pub struct FetchCaCertsResponse {
 }
 /// Nested message and enum types in `FetchCaCertsResponse`.
 pub mod fetch_ca_certs_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CertChain {
@@ -2533,6 +2609,7 @@ pub mod fetch_ca_certs_response {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCaPool].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCaPoolRequest {
@@ -2543,6 +2620,7 @@ pub struct GetCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCaPools][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCaPools].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCaPoolsRequest {
@@ -2573,6 +2651,7 @@ pub struct ListCaPoolsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCaPools][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCaPools].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCaPoolsResponse {
@@ -2590,6 +2669,7 @@ pub struct ListCaPoolsResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateRevocationList].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateRevocationListRequest {
@@ -2603,6 +2683,7 @@ pub struct GetCertificateRevocationListRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateRevocationListsRequest {
@@ -2634,6 +2715,7 @@ pub struct ListCertificateRevocationListsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateRevocationListsResponse {
@@ -2654,6 +2736,7 @@ pub struct ListCertificateRevocationListsResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateRevocationList].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateRevocationListRequest {
@@ -2664,7 +2747,7 @@ pub struct UpdateCertificateRevocationListRequest {
     pub certificate_revocation_list: ::core::option::Option<CertificateRevocationList>,
     /// Required. A list of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. An ID to identify requests. Specify a unique request ID so that
     /// if you must retry your request, the server will know to ignore the request
     /// if it has already been completed. The server will guarantee that for at
@@ -2683,6 +2766,7 @@ pub struct UpdateCertificateRevocationListRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateTemplate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateTemplateRequest {
@@ -2718,6 +2802,7 @@ pub struct CreateCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateTemplate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCertificateTemplateRequest {
@@ -2744,6 +2829,7 @@ pub struct DeleteCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateTemplate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateTemplateRequest {
@@ -2756,6 +2842,7 @@ pub struct GetCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateTemplatesRequest {
@@ -2787,6 +2874,7 @@ pub struct ListCertificateTemplatesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateTemplatesResponse {
@@ -2805,6 +2893,7 @@ pub struct ListCertificateTemplatesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateTemplate].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateTemplateRequest {
@@ -2815,7 +2904,7 @@ pub struct UpdateCertificateTemplateRequest {
     pub certificate_template: ::core::option::Option<CertificateTemplate>,
     /// Required. A list of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. An ID to identify requests. Specify a unique request ID so that
     /// if you must retry your request, the server will know to ignore the request
     /// if it has already been completed. The server will guarantee that for at
@@ -2833,15 +2922,16 @@ pub struct UpdateCertificateTemplateRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,

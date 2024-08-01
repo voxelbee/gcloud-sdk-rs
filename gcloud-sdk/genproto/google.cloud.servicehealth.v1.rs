@@ -2,6 +2,7 @@
 /// Represents service health events that may affect Google Cloud products.
 /// Event resource is a read-only view and does not allow any modifications. All
 /// fields are output only.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
@@ -45,21 +46,22 @@ pub struct Event {
     pub parent_event: ::prost::alloc::string::String,
     /// Output only. The time when the event was last modified.
     #[prost(message, optional, tag = "12")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The start time of the event, if applicable.
     #[prost(message, optional, tag = "13")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The end time of the event, if applicable.
     #[prost(message, optional, tag = "14")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time when the next update can be expected.
     #[prost(message, optional, tag = "15")]
-    pub next_update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub next_update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `Event`.
 pub mod event {
     /// The category of the event. This enum lists all possible categories of
     /// event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -100,6 +102,7 @@ pub mod event {
     }
     /// The detailed category of an event. Contains all possible states for all
     /// event categories.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -145,6 +148,7 @@ pub mod event {
         }
     }
     /// The state of the event. This enum lists all possible states of event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -191,6 +195,7 @@ pub mod event {
     }
     /// The detailed state of the incident. This enum lists all possible detailed
     /// states of an incident.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -264,6 +269,7 @@ pub mod event {
     }
     /// Communicates why a given incident is deemed relevant in the context of a
     /// given project. This enum lists all possible detailed states of relevance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -326,6 +332,7 @@ pub mod event {
 /// Represents service health events that may affect Google Cloud products used
 /// across the organization. It is a read-only view and does not allow any
 /// modifications.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrganizationEvent {
@@ -372,22 +379,23 @@ pub struct OrganizationEvent {
     pub parent_event: ::prost::alloc::string::String,
     /// Output only. The time the update was posted.
     #[prost(message, optional, tag = "11")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The start time of the event, if applicable.
     #[prost(message, optional, tag = "12")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The end time of the event, if applicable.
     #[prost(message, optional, tag = "13")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Incident-only field. The time when the next update can be
     /// expected.
     #[prost(message, optional, tag = "14")]
-    pub next_update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub next_update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `OrganizationEvent`.
 pub mod organization_event {
     /// The category of the event. This enum lists all possible categories of
     /// event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -428,6 +436,7 @@ pub mod organization_event {
     }
     /// The detailed category of an event. Contains all possible states for all
     /// event categories.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -474,6 +483,7 @@ pub mod organization_event {
     }
     /// The state of the organization event. This enum lists all possible states of
     /// event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -520,6 +530,7 @@ pub mod organization_event {
     }
     /// The detailed state of the incident. This enum lists all possible detailed
     /// states of an incident.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -593,12 +604,13 @@ pub mod organization_event {
     }
 }
 /// Records an update made to the event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventUpdate {
     /// Output only. The time the update was posted.
     #[prost(message, optional, tag = "1")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Brief title for the event.
     #[prost(string, tag = "2")]
     pub title: ::prost::alloc::string::String,
@@ -613,6 +625,7 @@ pub struct EventUpdate {
     pub workaround: ::prost::alloc::string::String,
 }
 /// Represents the locations impacted by the event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Location {
@@ -621,6 +634,7 @@ pub struct Location {
     pub location_name: ::prost::alloc::string::String,
 }
 /// Represents the Google Cloud product impacted by the event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Product {
@@ -629,6 +643,7 @@ pub struct Product {
     pub product_name: ::prost::alloc::string::String,
 }
 /// Represents the Google Cloud products and locations impacted by the event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventImpact {
@@ -641,6 +656,7 @@ pub struct EventImpact {
 }
 /// Represents impact to assets at organizational level. It is a read-only view
 /// and does not allow any modifications.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrganizationImpact {
@@ -664,9 +680,10 @@ pub struct OrganizationImpact {
     pub asset: ::core::option::Option<Asset>,
     /// Output only. The time when the affected project was last modified.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Represents the asset impacted by the events.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
@@ -680,6 +697,7 @@ pub struct Asset {
     #[prost(string, tag = "2")]
     pub asset_type: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsRequest {
@@ -727,6 +745,7 @@ pub struct ListEventsRequest {
     #[prost(enumeration = "EventView", tag = "6")]
     pub view: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsResponse {
@@ -745,6 +764,7 @@ pub struct ListEventsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for getting an event
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventRequest {
@@ -758,6 +778,7 @@ pub struct GetEventRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationEventsRequest {
@@ -811,6 +832,7 @@ pub struct ListOrganizationEventsRequest {
     #[prost(enumeration = "OrganizationEventView", tag = "6")]
     pub view: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationEventsResponse {
@@ -828,6 +850,7 @@ pub struct ListOrganizationEventsResponse {
     #[prost(string, repeated, tag = "3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrganizationEventRequest {
@@ -844,6 +867,7 @@ pub struct GetOrganizationEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting list of OrganizationImpacts
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationImpactsRequest {
@@ -894,6 +918,7 @@ pub struct ListOrganizationImpactsRequest {
     #[prost(string, tag = "4")]
     pub filter: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationImpactsResponse {
@@ -913,6 +938,7 @@ pub struct ListOrganizationImpactsResponse {
     #[prost(string, repeated, tag = "3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrganizationImpactRequest {
@@ -930,6 +956,7 @@ pub struct GetOrganizationImpactRequest {
 }
 /// The event fields to include in ListEvents API response. This enum lists all
 /// possible event views.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum EventView {
@@ -965,6 +992,7 @@ impl EventView {
 }
 /// The organization event fields to include in ListOrganizationEvents API
 /// response. This enum lists all possible organization event views.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum OrganizationEventView {

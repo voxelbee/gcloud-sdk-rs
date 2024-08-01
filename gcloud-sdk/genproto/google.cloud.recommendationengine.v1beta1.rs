@@ -2,6 +2,7 @@
 /// FeatureMap represents extra features that customers want to include in the
 /// recommendation model for catalogs/user events as categorical/numerical
 /// features.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeatureMap {
@@ -34,6 +35,7 @@ pub struct FeatureMap {
 /// Nested message and enum types in `FeatureMap`.
 pub mod feature_map {
     /// A list of string features.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringList {
@@ -42,6 +44,7 @@ pub mod feature_map {
         pub value: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// A list of float features.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FloatList {
@@ -51,6 +54,7 @@ pub mod feature_map {
     }
 }
 /// CatalogItem captures all metadata information of items to be recommended.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CatalogItem {
@@ -119,6 +123,7 @@ pub struct CatalogItem {
 /// Nested message and enum types in `CatalogItem`.
 pub mod catalog_item {
     /// Category represents catalog item category hierarchy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CategoryHierarchy {
@@ -131,6 +136,7 @@ pub mod catalog_item {
         pub categories: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Extra catalog item metadata for different recommendation types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RecommendationType {
@@ -140,6 +146,7 @@ pub mod catalog_item {
     }
 }
 /// ProductCatalogItem captures item metadata specific to retail products.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductCatalogItem {
@@ -177,8 +184,9 @@ pub struct ProductCatalogItem {
 /// Nested message and enum types in `ProductCatalogItem`.
 pub mod product_catalog_item {
     /// Exact product price.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ExactPrice {
         /// Optional. Display price of the product.
         #[prost(float, tag = "1")]
@@ -190,8 +198,9 @@ pub mod product_catalog_item {
     }
     /// Product price range when there are a range of prices for different
     /// variations of the same product.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PriceRange {
         /// Required. The minimum product price.
         #[prost(float, tag = "1")]
@@ -202,6 +211,7 @@ pub mod product_catalog_item {
     }
     /// Item stock state. If this field is unspecified, the item is
     /// assumed to be in stock.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -249,8 +259,9 @@ pub mod product_catalog_item {
         }
     }
     /// Product price. Only one of 'exactPrice'/'priceRange' can be provided.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Price {
         /// Optional. The exact product price.
         #[prost(message, tag = "1")]
@@ -261,6 +272,7 @@ pub mod product_catalog_item {
     }
 }
 /// Catalog item thumbnail/detail image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Image {
@@ -276,6 +288,7 @@ pub struct Image {
 }
 /// UserEvent captures all metadata information recommendation engine needs to
 /// know about how end users interact with customers' website.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserEvent {
@@ -335,7 +348,7 @@ pub struct UserEvent {
     /// Optional. Only required for ImportUserEvents method. Timestamp of user
     /// event created.
     #[prost(message, optional, tag = "5")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. This field should *not* be set when using JavaScript pixel
     /// or the Recommendations AI Tag. Defaults to `EVENT_SOURCE_UNSPECIFIED`.
     #[prost(enumeration = "user_event::EventSource", tag = "6")]
@@ -344,6 +357,7 @@ pub struct UserEvent {
 /// Nested message and enum types in `UserEvent`.
 pub mod user_event {
     /// User event source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -394,6 +408,7 @@ pub mod user_event {
     }
 }
 /// Information of end users.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInfo {
@@ -433,6 +448,7 @@ pub struct UserInfo {
     pub direct_user_request: bool,
 }
 /// User event details shared by all recommendation types.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventDetail {
@@ -489,6 +505,7 @@ pub struct EventDetail {
 }
 /// ProductEventDetail captures user event information specific to retail
 /// products.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductEventDetail {
@@ -549,6 +566,7 @@ pub struct ProductEventDetail {
     pub purchase_transaction: ::core::option::Option<PurchaseTransaction>,
 }
 /// A transaction represents the entire purchase transaction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurchaseTransaction {
@@ -583,6 +601,7 @@ pub struct PurchaseTransaction {
     pub currency_code: ::prost::alloc::string::String,
 }
 /// Detailed product information associated with a user event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductDetail {
@@ -628,6 +647,7 @@ pub struct ProductDetail {
 }
 /// Google Cloud Storage location for input content.
 /// format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsSource {
@@ -642,6 +662,7 @@ pub struct GcsSource {
     pub input_uris: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The inline source for the input config for ImportCatalogItems method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CatalogInlineSource {
@@ -651,6 +672,7 @@ pub struct CatalogInlineSource {
     pub catalog_items: ::prost::alloc::vec::Vec<CatalogItem>,
 }
 /// The inline source for the input config for ImportUserEvents method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserEventInlineSource {
@@ -659,6 +681,7 @@ pub struct UserEventInlineSource {
     pub user_events: ::prost::alloc::vec::Vec<UserEvent>,
 }
 /// Configuration of destination for Import related errors.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportErrorsConfig {
@@ -669,6 +692,7 @@ pub struct ImportErrorsConfig {
 /// Nested message and enum types in `ImportErrorsConfig`.
 pub mod import_errors_config {
     /// Required. Errors destination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -681,6 +705,7 @@ pub mod import_errors_config {
     }
 }
 /// Request message for Import methods.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportCatalogItemsRequest {
@@ -701,6 +726,7 @@ pub struct ImportCatalogItemsRequest {
     pub errors_config: ::core::option::Option<ImportErrorsConfig>,
 }
 /// Request message for the ImportUserEvents request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportUserEventsRequest {
@@ -724,6 +750,7 @@ pub struct ImportUserEventsRequest {
     pub errors_config: ::core::option::Option<ImportErrorsConfig>,
 }
 /// The input config source.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputConfig {
@@ -734,6 +761,7 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Required. The source of the input.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -750,6 +778,7 @@ pub mod input_config {
 }
 /// Metadata related to the progress of the Import operation. This will be
 /// returned by the google.longrunning.Operation.metadata field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportMetadata {
@@ -762,7 +791,7 @@ pub struct ImportMetadata {
     pub request_id: ::prost::alloc::string::String,
     /// Operation create time.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Count of entries that were processed successfully.
     #[prost(int64, tag = "1")]
     pub success_count: i64,
@@ -772,11 +801,12 @@ pub struct ImportMetadata {
     /// Operation last update time. If the operation is done, this is also the
     /// finish time.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Response of the ImportCatalogItemsRequest. If the long running
 /// operation is done, then this message is returned by the
 /// google.longrunning.Operations.response field if the operation was successful.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportCatalogItemsResponse {
@@ -790,6 +820,7 @@ pub struct ImportCatalogItemsResponse {
 /// Response of the ImportUserEventsRequest. If the long running
 /// operation was successful, then this message is returned by the
 /// google.longrunning.Operations.response field if the operation was successful.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportUserEventsResponse {
@@ -806,8 +837,9 @@ pub struct ImportUserEventsResponse {
 }
 /// A summary of import result. The UserEventImportSummary summarizes
 /// the import status for user events.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UserEventImportSummary {
     /// Count of user events imported with complete existing catalog information.
     #[prost(int64, tag = "1")]
@@ -818,6 +850,7 @@ pub struct UserEventImportSummary {
     pub unjoined_events_count: i64,
 }
 /// Request message for CreateCatalogItem method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCatalogItemRequest {
@@ -830,6 +863,7 @@ pub struct CreateCatalogItemRequest {
     pub catalog_item: ::core::option::Option<CatalogItem>,
 }
 /// Request message for GetCatalogItem method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCatalogItemRequest {
@@ -839,6 +873,7 @@ pub struct GetCatalogItemRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListCatalogItems method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCatalogItemsRequest {
@@ -858,6 +893,7 @@ pub struct ListCatalogItemsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for ListCatalogItems method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCatalogItemsResponse {
@@ -870,6 +906,7 @@ pub struct ListCatalogItemsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateCatalogItem method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCatalogItemRequest {
@@ -884,9 +921,10 @@ pub struct UpdateCatalogItemRequest {
     /// Optional. Indicates which fields in the provided 'item' to update. If not
     /// set, will by default update all fields.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for DeleteCatalogItem method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCatalogItemRequest {
@@ -1101,7 +1139,10 @@ pub mod catalog_service_client {
         pub async fn delete_catalog_item(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCatalogItemRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1164,6 +1205,7 @@ pub mod catalog_service_client {
     }
 }
 /// Registered Api Key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictionApiKeyRegistration {
@@ -1172,6 +1214,7 @@ pub struct PredictionApiKeyRegistration {
     pub api_key: ::prost::alloc::string::String,
 }
 /// Request message for the `CreatePredictionApiKeyRegistration` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePredictionApiKeyRegistrationRequest {
@@ -1186,6 +1229,7 @@ pub struct CreatePredictionApiKeyRegistrationRequest {
     >,
 }
 /// Request message for the `ListPredictionApiKeyRegistrations`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPredictionApiKeyRegistrationsRequest {
@@ -1202,6 +1246,7 @@ pub struct ListPredictionApiKeyRegistrationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListPredictionApiKeyRegistrations`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPredictionApiKeyRegistrationsResponse {
@@ -1216,6 +1261,7 @@ pub struct ListPredictionApiKeyRegistrationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for `DeletePredictionApiKeyRegistration` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePredictionApiKeyRegistrationRequest {
@@ -1388,7 +1434,10 @@ pub mod prediction_api_key_registry_client {
             request: impl tonic::IntoRequest<
                 super::DeletePredictionApiKeyRegistrationRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1415,6 +1464,7 @@ pub mod prediction_api_key_registry_client {
     }
 }
 /// Request message for Predict method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictRequest {
@@ -1505,7 +1555,7 @@ pub struct PredictRequest {
     #[prost(map = "string, message", tag = "6")]
     pub params: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// Optional. The labels for the predict request.
     ///
@@ -1523,6 +1573,7 @@ pub struct PredictRequest {
     >,
 }
 /// Response message for predict method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictResponse {
@@ -1547,7 +1598,7 @@ pub struct PredictResponse {
     #[prost(map = "string, message", tag = "5")]
     pub metadata: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// If empty, the list is complete. If nonempty, the token to pass to the next
     /// request's PredictRequest.page_token.
@@ -1557,6 +1608,7 @@ pub struct PredictResponse {
 /// Nested message and enum types in `PredictResponse`.
 pub mod predict_response {
     /// PredictionResult represents the recommendation prediction results.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PredictionResult {
@@ -1574,7 +1626,7 @@ pub mod predict_response {
         #[prost(map = "string, message", tag = "2")]
         pub item_metadata: ::std::collections::HashMap<
             ::prost::alloc::string::String,
-            ::prost_types::Value,
+            ::prost_wkt_types::Value,
         >,
     }
 }
@@ -1701,6 +1753,7 @@ pub mod prediction_service_client {
     }
 }
 /// Request message for PurgeUserEvents method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsRequest {
@@ -1737,6 +1790,7 @@ pub struct PurgeUserEventsRequest {
 }
 /// Metadata related to the progress of the PurgeUserEvents operation.
 /// This will be returned by the google.longrunning.Operation.metadata field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsMetadata {
@@ -1745,11 +1799,12 @@ pub struct PurgeUserEventsMetadata {
     pub operation_name: ::prost::alloc::string::String,
     /// Operation create time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Response of the PurgeUserEventsRequest. If the long running operation is
 /// successfully done, then this message is returned by the
 /// google.longrunning.Operations.response field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeUserEventsResponse {
@@ -1762,6 +1817,7 @@ pub struct PurgeUserEventsResponse {
     pub user_events_sample: ::prost::alloc::vec::Vec<UserEvent>,
 }
 /// Request message for WriteUserEvent method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteUserEventRequest {
@@ -1774,6 +1830,7 @@ pub struct WriteUserEventRequest {
     pub user_event: ::core::option::Option<UserEvent>,
 }
 /// Request message for CollectUserEvent method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CollectUserEventRequest {
@@ -1797,6 +1854,7 @@ pub struct CollectUserEventRequest {
     pub ets: i64,
 }
 /// Request message for ListUserEvents method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUserEventsRequest {
@@ -1847,6 +1905,7 @@ pub struct ListUserEventsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for ListUserEvents method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUserEventsResponse {

@@ -2,6 +2,7 @@
 /// A RuntimeConfig resource is the primary resource in the Cloud RuntimeConfig
 /// service. A RuntimeConfig resource consists of metadata and a hierarchy of
 /// variables.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RuntimeConfig {
@@ -27,6 +28,7 @@ pub struct RuntimeConfig {
 /// `ports/serving_port` is a valid variable name. The variable value is an
 /// opaque string and only leaf variables can have values (that is, variables
 /// that do not have any child variables).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Variable {
@@ -50,7 +52,7 @@ pub struct Variable {
     pub name: ::prost::alloc::string::String,
     /// \[Output Only\] The time of the last variable update.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// \[Ouput only\] The current state of the variable. The variable state
     /// indicates the outcome of the `variables().watch` call and is visible
     /// through the `get` and `list` calls.
@@ -67,6 +69,7 @@ pub mod variable {
     /// The value of the variable. It can be either a binary or a string
     /// value. You must specify one of either `value` or `text`. Specifying both
     /// will cause the server to return an error.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Contents {
@@ -83,6 +86,7 @@ pub mod variable {
     }
 }
 /// The condition that a Waiter resource is waiting for.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndCondition {
@@ -107,6 +111,7 @@ pub mod end_condition {
     /// 3, however, because there is only 2 paths that start with `/foo`.
     /// Cardinality conditions are recursive; all subtrees under the specific
     /// path prefix are counted.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Cardinality {
@@ -120,6 +125,7 @@ pub mod end_condition {
     }
     /// The condition oneof holds the available condition types for this
     /// EndCondition. Currently, the only available type is Cardinality.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Condition {
@@ -144,6 +150,7 @@ pub mod end_condition {
 /// [Creating a
 /// Waiter](/deployment-manager/runtime-configurator/creating-a-waiter)
 /// documentation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Waiter {
@@ -164,7 +171,7 @@ pub struct Waiter {
     /// before the success or failure conditions are met, the waiter fails and sets
     /// the `error` code to `DEADLINE_EXCEEDED`.
     #[prost(message, optional, tag = "2")]
-    pub timeout: ::core::option::Option<::prost_types::Duration>,
+    pub timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     /// \[Optional\] The failure condition of this waiter. If this condition is met,
     /// `done` will be set to `true` and the `error` code will be set to `ABORTED`.
     /// The failure condition takes precedence over the success condition. If both
@@ -182,7 +189,7 @@ pub struct Waiter {
     /// the value of `timeout` to this instant yields the timeout deadline for the
     /// waiter.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// \[Output Only\] If the value is `false`, it means the waiter is still waiting
     /// for one of its conditions to be met.
     ///
@@ -198,6 +205,7 @@ pub struct Waiter {
 /// The `VariableState` describes the last known state of the variable and is
 /// used during a `variables().watch` call to distinguish the state of the
 /// variable.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum VariableState {
@@ -231,6 +239,7 @@ impl VariableState {
     }
 }
 /// Request for the `ListConfigs()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfigsRequest {
@@ -250,6 +259,7 @@ pub struct ListConfigsRequest {
 }
 /// `ListConfigs()` returns the following response. The order of returned
 /// objects is arbitrary; that is, it is not ordered in any particular way.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfigsResponse {
@@ -266,6 +276,7 @@ pub struct ListConfigsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Gets a RuntimeConfig resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConfigRequest {
@@ -276,6 +287,7 @@ pub struct GetConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Creates a RuntimeConfig resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConfigRequest {
@@ -301,6 +313,7 @@ pub struct CreateConfigRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for `UpdateConfig()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConfigRequest {
@@ -314,6 +327,7 @@ pub struct UpdateConfigRequest {
     pub config: ::core::option::Option<RuntimeConfig>,
 }
 /// Request for the `DeleteConfig()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConfigRequest {
@@ -324,6 +338,7 @@ pub struct DeleteConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListVariables()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVariablesRequest {
@@ -354,6 +369,7 @@ pub struct ListVariablesRequest {
     pub return_values: bool,
 }
 /// Response for the `ListVariables()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVariablesResponse {
@@ -370,6 +386,7 @@ pub struct ListVariablesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `WatchVariable()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WatchVariableRequest {
@@ -385,9 +402,10 @@ pub struct WatchVariableRequest {
     /// If not specified or the variable has an older timestamp, the watcher waits
     /// for a the value to change before returning.
     #[prost(message, optional, tag = "4")]
-    pub newer_than: ::core::option::Option<::prost_types::Timestamp>,
+    pub newer_than: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request for the `GetVariable()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVariableRequest {
@@ -398,6 +416,7 @@ pub struct GetVariableRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `CreateVariable()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVariableRequest {
@@ -424,6 +443,7 @@ pub struct CreateVariableRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request for the `UpdateVariable()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVariableRequest {
@@ -437,6 +457,7 @@ pub struct UpdateVariableRequest {
     pub variable: ::core::option::Option<Variable>,
 }
 /// Request for the `DeleteVariable()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVariableRequest {
@@ -451,6 +472,7 @@ pub struct DeleteVariableRequest {
     pub recursive: bool,
 }
 /// Request for the `ListWaiters()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWaitersRequest {
@@ -471,6 +493,7 @@ pub struct ListWaitersRequest {
 }
 /// Response for the `ListWaiters()` method.
 /// Order of returned waiter objects is arbitrary.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWaitersResponse {
@@ -486,6 +509,7 @@ pub struct ListWaitersResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `GetWaiter()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWaiterRequest {
@@ -497,6 +521,7 @@ pub struct GetWaiterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for `CreateWaiter()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWaiterRequest {
@@ -523,6 +548,7 @@ pub struct CreateWaiterRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request for the `DeleteWaiter()` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWaiterRequest {
@@ -747,7 +773,10 @@ pub mod runtime_config_manager_client {
         pub async fn delete_config(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteConfigRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -946,7 +975,10 @@ pub mod runtime_config_manager_client {
         pub async fn delete_variable(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteVariableRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1068,7 +1100,10 @@ pub mod runtime_config_manager_client {
         pub async fn delete_waiter(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteWaiterRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -2,6 +2,7 @@
 /// A reference to a class which is used to declare the type of a field or return
 /// value. Enums are also a type of class that can be referenced using
 /// ClassReference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClassReference {
@@ -16,6 +17,7 @@ pub struct ClassReference {
 /// Elements that will be displayed on the canvas once a particular type's entity
 /// is extracted from a query. Only relevant for canvas enabled apps.
 /// **This message is localizable.**
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntityDisplay {
@@ -28,6 +30,7 @@ pub struct EntityDisplay {
 }
 /// Type that matches any text if surrounding words context is close to provided
 /// training examples.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FreeTextType {
@@ -38,6 +41,7 @@ pub struct FreeTextType {
 }
 /// Type that matches text by regular expressions.
 /// **This message is localizable.**
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegularExpressionType {
@@ -52,6 +56,7 @@ pub struct RegularExpressionType {
 pub mod regular_expression_type {
     /// Represents an entity object that contains the regular expression that is
     /// used for comparison.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entity {
@@ -68,6 +73,7 @@ pub mod regular_expression_type {
     }
 }
 /// Type that matches text by set of synonyms.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SynonymType {
@@ -90,6 +96,7 @@ pub struct SynonymType {
 pub mod synonym_type {
     /// Represents a synonym entity field that contains the details of a single
     /// entry inside the type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entity {
@@ -105,6 +112,7 @@ pub mod synonym_type {
     /// all of the types use the same matching method and allow variation of
     /// matching for synonym matching (i.e. fuzzy versus exact). If the value is
     /// `UNSPECIFIED` it will be defaulted to `EXACT_MATCH`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -153,6 +161,7 @@ pub mod synonym_type {
 /// assigned to slots in a scene or parameters of an intent's training phrases.
 /// Practically, Types can be thought of as enums.
 /// Note, type name is specified in the name of the file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Type {
@@ -169,6 +178,7 @@ pub struct Type {
 /// Nested message and enum types in `Type`.
 pub mod r#type {
     /// Selection of sub type based on the type of matching to be done.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SubType {

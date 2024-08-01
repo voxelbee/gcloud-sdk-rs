@@ -2,7 +2,7 @@ use crate::google::cloud::kms::v1::ProtectionLevel;
 use bytes::{Buf, BufMut};
 use secret_vault_value::SecretValue;
 
-#[derive(Clone, PartialEq, Debug, Default)]
+#[derive(Clone, PartialEq, Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct EncryptRequest {
     /// Required. The resource name of the
     /// \[CryptoKey][google.cloud.kms.v1.CryptoKey\] or
@@ -197,7 +197,7 @@ impl prost::Message for EncryptRequest {
 
 /// Response message for
 /// \[KeyManagementService.Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt\].
-#[derive(Clone, PartialEq, Debug, Default)]
+#[derive(Clone, PartialEq, Debug, Default, serde::Serialize, serde::Deserialize)]
 pub struct DecryptResponse {
     /// The decrypted data originally supplied in
     /// \[EncryptRequest.plaintext][google.cloud.kms.v1.EncryptRequest.plaintext\].

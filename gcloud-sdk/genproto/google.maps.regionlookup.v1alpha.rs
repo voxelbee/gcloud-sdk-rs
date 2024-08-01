@@ -39,6 +39,7 @@
 /// California is returned as a candidate in the candidate_place_ids field.
 ///
 /// Next available tag: 10
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionIdentifier {
@@ -61,6 +62,7 @@ pub struct RegionIdentifier {
 /// Nested message and enum types in `RegionIdentifier`.
 pub mod region_identifier {
     /// Possible place types to match to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -136,6 +138,7 @@ pub mod region_identifier {
         }
     }
     /// The location must be specified by one of the following:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
@@ -184,6 +187,7 @@ pub mod region_identifier {
 /// Region Match.
 ///
 /// Next available tag: 5
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionMatch {
@@ -237,6 +241,7 @@ pub struct RegionMatch {
 /// the candidate_place_ids field.
 ///
 /// Next available tag: 10
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionSearchValue {
@@ -259,6 +264,7 @@ pub struct RegionSearchValue {
 /// Nested message and enum types in `RegionSearchValue`.
 pub mod region_search_value {
     /// Possible place types to match to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -334,6 +340,7 @@ pub mod region_search_value {
         }
     }
     /// The location must be specified by one of the following:
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
@@ -352,6 +359,7 @@ pub mod region_search_value {
 /// Lookup Region Request.
 ///
 /// Next available tag: 4
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRegionRequest {
@@ -377,6 +385,7 @@ pub struct LookupRegionRequest {
 /// Lookup Region Response.
 ///
 /// Next available tag: 3
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRegionResponse {
@@ -392,6 +401,7 @@ pub struct LookupRegionResponse {
 /// Search Region Request.
 ///
 /// Next available tag: 4
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchRegionRequest {
@@ -418,6 +428,7 @@ pub struct SearchRegionRequest {
 /// Match Region Response.
 ///
 /// Next available tag: 3
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchRegionResponse {

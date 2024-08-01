@@ -17,8 +17,9 @@
 ///    cause new restrictions on existing metadata related to the label are
 ///    rejected.
 /// * Disabled—When disabled, the configured `DisabledPolicy` takes effect.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Lifecycle {
     /// Output only. The state of the object associated with this lifecycle.
     #[prost(enumeration = "lifecycle::State", tag = "1")]
@@ -36,8 +37,9 @@ pub struct Lifecycle {
 pub mod lifecycle {
     /// The policy that governs how to treat a disabled label, field, or selection
     /// choice in different contexts.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisabledPolicy {
         /// Whether to hide this disabled object in the search menu for Drive items.
         ///
@@ -56,6 +58,7 @@ pub mod lifecycle {
         pub show_in_apply: bool,
     }
     /// The state of the object associated with this lifecycle.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -113,6 +116,7 @@ pub mod lifecycle {
     }
 }
 /// Information about a user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInfo {
@@ -123,8 +127,9 @@ pub struct UserInfo {
     pub person: ::prost::alloc::string::String,
 }
 /// Badge status of the label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BadgeConfig {
     /// The color of the badge. When not specified, no badge is rendered.
     /// The background, foreground, and solo (light and dark mode) colors set here
@@ -138,8 +143,9 @@ pub struct BadgeConfig {
 }
 /// The color derived from BadgeConfig and changed to the closest recommended
 /// supported color.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BadgeColors {
     /// Output only. Badge background that pairs with the foreground.
     #[prost(message, optional, tag = "1")]
@@ -157,8 +163,9 @@ pub struct BadgeColors {
 }
 /// Contains information about whether a label component should be considered
 /// locked.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LockStatus {
     /// Output only. Indicates whether this label component is the (direct) target
     /// of a LabelLock.  A label component can be implicitly locked even if it's
@@ -169,6 +176,7 @@ pub struct LockStatus {
 }
 /// Describes violations in a request to create or update a Label or its
 /// Fields.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InvalidArgument {
@@ -179,6 +187,7 @@ pub struct InvalidArgument {
 /// Nested message and enum types in `InvalidArgument`.
 pub mod invalid_argument {
     /// Describes the Field in which the violation occurred.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldViolation {
@@ -199,6 +208,7 @@ pub mod invalid_argument {
     /// Nested message and enum types in `FieldViolation`.
     pub mod field_violation {
         /// Possible reasons a field is invalid.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -264,6 +274,7 @@ pub mod invalid_argument {
     }
 }
 /// Describes what preconditions have failed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PreconditionFailure {
@@ -274,6 +285,7 @@ pub struct PreconditionFailure {
 /// Nested message and enum types in `PreconditionFailure`.
 pub mod precondition_failure {
     /// Specific failure reason.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Violation {
@@ -294,6 +306,7 @@ pub mod precondition_failure {
     /// Nested message and enum types in `Violation`.
     pub mod violation {
         /// The possible reasons a the violation occurred.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -397,8 +410,9 @@ pub mod precondition_failure {
     }
 }
 /// Exception detail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExceptionDetail {
     /// The type of exception that occurred. Required.
     #[prost(enumeration = "ExceptionType", tag = "1")]
@@ -409,6 +423,7 @@ pub struct ExceptionDetail {
 /// error for debugging and logging purposes.
 /// Add new ExceptionTypes to EXCEPTION_TYPE_TO_ERROR_CODE_MAP in
 /// j/c/g/apps/boq/metadata/model/service/exceptions/CategoryExceptionHelper
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ExceptionType {
@@ -572,6 +587,7 @@ impl ExceptionType {
 /// Defines a field that has a display name, data type, and other
 /// configuration options. This field defines the kind of metadata that may be
 /// set on a Drive item.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Field {
@@ -606,13 +622,13 @@ pub struct Field {
     pub creator: ::core::option::Option<UserInfo>,
     /// Output only. The time this field was created.
     #[prost(message, optional, tag = "9")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user who modified this field.
     #[prost(message, optional, tag = "10")]
     pub updater: ::core::option::Option<UserInfo>,
     /// Output only. The time this field was updated.
     #[prost(message, optional, tag = "11")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user who published this field. This value has no meaning
     /// when the field is not published.
     #[prost(message, optional, tag = "12")]
@@ -624,7 +640,7 @@ pub struct Field {
     /// Output only. The time this field was disabled. This value has no meaning
     /// when the field is not disabled.
     #[prost(message, optional, tag = "14")]
-    pub disable_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub disable_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The LockStatus of this field.
     #[prost(message, optional, tag = "15")]
     pub lock_status: ::core::option::Option<LockStatus>,
@@ -636,6 +652,7 @@ pub struct Field {
 /// Nested message and enum types in `Field`.
 pub mod field {
     /// The basic properties of the field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Properties {
@@ -651,8 +668,9 @@ pub mod field {
         pub insert_before_field: ::prost::alloc::string::String,
     }
     /// UI display hints for rendering a field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisplayHints {
         /// Whether the field should be shown as required in the UI.
         #[prost(bool, tag = "1")]
@@ -670,8 +688,9 @@ pub mod field {
         pub shown_in_apply: bool,
     }
     /// The capabilities related to this field when editing the field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SchemaCapabilities {
         /// Whether the user can change this field.
         #[prost(bool, tag = "1")]
@@ -691,8 +710,9 @@ pub mod field {
         pub can_enable: bool,
     }
     /// The capabilities related to this field on applied metadata.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AppliedCapabilities {
         /// Whether the user can read related applied metadata on items.
         #[prost(bool, tag = "1")]
@@ -705,16 +725,18 @@ pub mod field {
         pub can_write: bool,
     }
     /// Options for a multi-valued variant of an associated field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ListOptions {
         /// Maximum number of entries permitted.
         #[prost(int32, tag = "1")]
         pub max_entries: i32,
     }
     /// Options for the Text field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TextOptions {
         /// Output only. The minimum valid length of values for the text field.
         #[prost(int32, tag = "1")]
@@ -724,8 +746,9 @@ pub mod field {
         pub max_length: i32,
     }
     /// Options for the Integer field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct IntegerOptions {
         /// Output only. The minimum valid value for the integer field.
         #[prost(int64, tag = "1")]
@@ -735,6 +758,7 @@ pub mod field {
         pub max_value: i64,
     }
     /// Options for the date field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DateOptions {
@@ -759,6 +783,7 @@ pub mod field {
     /// Nested message and enum types in `DateOptions`.
     pub mod date_options {
         /// Localized date format options.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -807,6 +832,7 @@ pub mod field {
         }
     }
     /// Options for the selection field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SelectionOptions {
@@ -822,6 +848,7 @@ pub mod field {
     /// Nested message and enum types in `SelectionOptions`.
     pub mod selection_options {
         /// Selection field choice.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Choice {
@@ -853,13 +880,13 @@ pub mod field {
             pub creator: ::core::option::Option<super::super::UserInfo>,
             /// Output only. The time this choice was created.
             #[prost(message, optional, tag = "8")]
-            pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+            pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
             /// Output only. The user who updated this choice last.
             #[prost(message, optional, tag = "9")]
             pub updater: ::core::option::Option<super::super::UserInfo>,
             /// Output only. The time this choice was updated last.
             #[prost(message, optional, tag = "10")]
-            pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+            pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
             /// Output only. The user who published this choice. This value has no
             /// meaning when the choice is not published.
             #[prost(message, optional, tag = "11")]
@@ -867,7 +894,7 @@ pub mod field {
             /// Output only. The time this choice was published. This value has no
             /// meaning when the choice is not published.
             #[prost(message, optional, tag = "12")]
-            pub publish_time: ::core::option::Option<::prost_types::Timestamp>,
+            pub publish_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
             /// Output only. The user who disabled this choice. This value has no
             /// meaning when the option is not disabled.
             #[prost(message, optional, tag = "13")]
@@ -875,7 +902,7 @@ pub mod field {
             /// Output only. The time this choice was disabled. This value has no
             /// meaning when the choice is not disabled.
             #[prost(message, optional, tag = "14")]
-            pub disable_time: ::core::option::Option<::prost_types::Timestamp>,
+            pub disable_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
             /// Output only. The LockStatus of this choice.
             #[prost(message, optional, tag = "15")]
             pub lock_status: ::core::option::Option<super::super::LockStatus>,
@@ -883,6 +910,7 @@ pub mod field {
         /// Nested message and enum types in `Choice`.
         pub mod choice {
             /// Basic properties of the choice.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct Properties {
@@ -904,8 +932,9 @@ pub mod field {
                 pub insert_before_choice: ::prost::alloc::string::String,
             }
             /// UI display hints for rendering an option.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct DisplayHints {
                 /// Whether the option should be shown in the UI as disabled.
                 #[prost(bool, tag = "1")]
@@ -940,8 +969,9 @@ pub mod field {
                 pub badge_priority: i64,
             }
             /// The capabilities related to this choice when editing the choice.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct SchemaCapabilities {
                 /// Whether the user can update this choice.
                 #[prost(bool, tag = "1")]
@@ -957,8 +987,9 @@ pub mod field {
                 pub can_enable: bool,
             }
             /// The capabilities related to this choice on applied metadata.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct AppliedCapabilities {
                 /// Whether the user can read related applied metadata on items.
                 #[prost(bool, tag = "1")]
@@ -973,8 +1004,9 @@ pub mod field {
         }
     }
     /// Options for the user field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UserOptions {
         /// When specified, indicates that this field supports a list of values.
         /// Once the field is published, this cannot be changed.
@@ -983,6 +1015,7 @@ pub mod field {
     }
     /// The data type and options of this field.
     /// Once published, the data type cannot be changed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
@@ -1007,6 +1040,7 @@ pub mod field {
 /// organize and search across items. Labels can be simple strings, or can
 /// contain fields that describe additional metadata that can be further used to
 /// organize and search Drive items.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Label {
@@ -1034,13 +1068,13 @@ pub struct Label {
     pub creator: ::core::option::Option<UserInfo>,
     /// Output only. The time this label was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user who created this label revision.
     #[prost(message, optional, tag = "7")]
     pub revision_creator: ::core::option::Option<UserInfo>,
     /// Output only. The time this label revision was created.
     #[prost(message, optional, tag = "8")]
-    pub revision_create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub revision_create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user who published this label.  This value has no meaning
     /// when the label is not published.
     #[prost(message, optional, tag = "9")]
@@ -1048,7 +1082,7 @@ pub struct Label {
     /// Output only. The time this label was published. This value has no meaning
     /// when the label is not published.
     #[prost(message, optional, tag = "10")]
-    pub publish_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub publish_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user who disabled this label. This value has no meaning
     /// when the label is not disabled.
     #[prost(message, optional, tag = "11")]
@@ -1056,7 +1090,7 @@ pub struct Label {
     /// Output only. The time this label was disabled. This value has no meaning
     /// when the label is not disabled.
     #[prost(message, optional, tag = "12")]
-    pub disable_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub disable_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The customer this label belongs to.
     /// For example: "customers/123abc789."
     #[prost(string, tag = "13")]
@@ -1094,6 +1128,7 @@ pub struct Label {
 /// Nested message and enum types in `Label`.
 pub mod label {
     /// Basic properties of the label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Properties {
@@ -1105,8 +1140,9 @@ pub mod label {
         pub description: ::prost::alloc::string::String,
     }
     /// UI display hints for rendering the label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisplayHints {
         /// Whether the label should be shown in the UI as disabled.
         #[prost(bool, tag = "1")]
@@ -1124,8 +1160,9 @@ pub mod label {
         pub priority: i64,
     }
     /// The capabilities a user has on this label's applied metadata.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AppliedCapabilities {
         /// Whether the user can read applied metadata related to this label.
         #[prost(bool, tag = "1")]
@@ -1138,8 +1175,9 @@ pub mod label {
         pub can_remove: bool,
     }
     /// The capabilities related to this label when editing the label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SchemaCapabilities {
         /// Whether the user can change this label.
         #[prost(bool, tag = "1")]
@@ -1159,8 +1197,9 @@ pub mod label {
         pub can_enable: bool,
     }
     /// Behavior of this label when it's applied to Drive items.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AppliedLabelPolicy {
         /// Indicates how the applied label and field values should be copied when
         /// a Drive item is copied.
@@ -1171,6 +1210,7 @@ pub mod label {
     pub mod applied_label_policy {
         /// Indicates how the applied label and field values should be copied when
         /// a Drive item is copied.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1223,6 +1263,7 @@ pub mod label {
         }
     }
     /// The type of this label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1274,6 +1315,7 @@ pub mod label {
 }
 /// Label constraints governing the structure of a Label; such as, the maximum
 /// number of Fields allowed and maximum length of the label title.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelLimits {
@@ -1302,8 +1344,9 @@ pub struct LabelLimits {
 }
 /// Field constants governing the structure of a Field; such as, the maximum
 /// title length, minimum and maximum field values or length, etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FieldLimits {
     /// Max length for the id.
     #[prost(int32, tag = "1")]
@@ -1335,16 +1378,18 @@ pub struct FieldLimits {
     pub selection_limits: ::core::option::Option<SelectionLimits>,
 }
 /// Limits for list-variant of a Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ListLimits {
     /// Maximum number of values allowed for the Field type.
     #[prost(int32, tag = "1")]
     pub max_entries: i32,
 }
 /// Limits for text Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TextLimits {
     /// Minimum length allowed for a text Field type.
     #[prost(int32, tag = "1")]
@@ -1354,8 +1399,9 @@ pub struct TextLimits {
     pub max_length: i32,
 }
 /// Limits for long text Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LongTextLimits {
     /// Minimum length allowed for a long text Field type.
     #[prost(int32, tag = "1")]
@@ -1365,8 +1411,9 @@ pub struct LongTextLimits {
     pub max_length: i32,
 }
 /// Limits for integer Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct IntegerLimits {
     /// Minimum value for an integer Field type.
     #[prost(int64, tag = "1")]
@@ -1376,8 +1423,9 @@ pub struct IntegerLimits {
     pub max_value: i64,
 }
 /// Limits for date Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DateLimits {
     /// Minimum value for the date Field type.
     #[prost(message, optional, tag = "1")]
@@ -1387,8 +1435,9 @@ pub struct DateLimits {
     pub max_value: ::core::option::Option<super::super::super::super::r#type::Date>,
 }
 /// Limits for selection Field type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SelectionLimits {
     /// Limits for list-variant of a Field type.
     #[prost(message, optional, tag = "1")]
@@ -1407,14 +1456,16 @@ pub struct SelectionLimits {
     pub max_deleted_choices: i32,
 }
 /// Limits for Field.Type.USER.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UserLimits {
     /// Limits for list-variant of a Field type.
     #[prost(message, optional, tag = "1")]
     pub list_limits: ::core::option::Option<ListLimits>,
 }
 /// A Lock that can be applied to a Label, Field, or Choice.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelLock {
@@ -1431,7 +1482,7 @@ pub struct LabelLock {
     pub choice_id: ::prost::alloc::string::String,
     /// Output only. The time this LabelLock was created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user whose credentials were used to create the LabelLock.
     /// This will not be present if no user was responsible for creating the
     /// LabelLock.
@@ -1441,7 +1492,7 @@ pub struct LabelLock {
     /// deletion. This will be present only if this LabelLock is in the DELETING
     /// state.
     #[prost(message, optional, tag = "6")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The user's capabilities on this LabelLock.
     #[prost(message, optional, tag = "8")]
     pub capabilities: ::core::option::Option<label_lock::Capabilities>,
@@ -1452,14 +1503,16 @@ pub struct LabelLock {
 /// Nested message and enum types in `LabelLock`.
 pub mod label_lock {
     /// A description of a user's capabilities on a LabelLock.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Capabilities {
         /// True if the user is authorized to view the policy.
         #[prost(bool, tag = "1")]
         pub can_view_policy: bool,
     }
     /// A description of a LabelLock's state.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1506,6 +1559,7 @@ pub mod label_lock {
 }
 /// The permission that applies to a principal (user, group, audience) on a
 /// label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelPermission {
@@ -1533,6 +1587,7 @@ pub struct LabelPermission {
 /// Nested message and enum types in `LabelPermission`.
 pub mod label_permission {
     /// Roles are concentric with subsequent role.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1593,6 +1648,7 @@ pub mod label_permission {
     /// * people/12345
     /// * groups/45678
     /// * audiences/default
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Principal {
@@ -1611,6 +1667,7 @@ pub mod label_permission {
 }
 /// Provides control over how write requests are executed. When not specified,
 /// the last write wins.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteControl {
@@ -1625,6 +1682,7 @@ pub mod write_control {
     /// Determines the revision of the label to write to and how the request
     /// should behave if that revision is not the current revision of the
     /// label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Control {
@@ -1637,6 +1695,7 @@ pub mod write_control {
     }
 }
 /// Request to get the capabilities for a user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserCapabilitiesRequest {
@@ -1651,6 +1710,7 @@ pub struct GetUserCapabilitiesRequest {
     pub customer: ::prost::alloc::string::String,
 }
 /// Request to create a Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateLabelRequest {
@@ -1668,6 +1728,7 @@ pub struct CreateLabelRequest {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Request to get a label by resource name.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLabelRequest {
@@ -1696,6 +1757,7 @@ pub struct GetLabelRequest {
 }
 /// The set of requests for updating aspects of a Label. If any request is not
 /// valid, no requests will be applied.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeltaUpdateLabelRequest {
@@ -1725,6 +1787,7 @@ pub struct DeltaUpdateLabelRequest {
 /// Nested message and enum types in `DeltaUpdateLabelRequest`.
 pub mod delta_update_label_request {
     /// A single kind of update to apply to a Label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Request {
@@ -1735,6 +1798,7 @@ pub mod delta_update_label_request {
     /// Nested message and enum types in `Request`.
     pub mod request {
         /// The kind of update. Exactly one Field is required.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
@@ -1779,6 +1843,7 @@ pub mod delta_update_label_request {
         }
     }
     /// Updates basic properties of a Label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpdateLabelPropertiesRequest {
@@ -1786,12 +1851,13 @@ pub mod delta_update_label_request {
         /// The root `label_properties` is implied and should not be specified. A
         /// single `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. Label properties to update.
         #[prost(message, optional, tag = "2")]
         pub properties: ::core::option::Option<super::label::Properties>,
     }
     /// Request to disable the Field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DisableFieldRequest {
@@ -1799,7 +1865,7 @@ pub mod delta_update_label_request {
         /// The root `disabled_policy` is implied and should not be specified. A
         /// single `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. Key of the Field to disable.
         #[prost(string, tag = "2")]
         pub id: ::prost::alloc::string::String,
@@ -1808,6 +1874,7 @@ pub mod delta_update_label_request {
         pub disabled_policy: ::core::option::Option<super::lifecycle::DisabledPolicy>,
     }
     /// Request to enable the Field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EnableFieldRequest {
@@ -1816,6 +1883,7 @@ pub mod delta_update_label_request {
         pub id: ::prost::alloc::string::String,
     }
     /// Request to delete the Field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DeleteFieldRequest {
@@ -1824,6 +1892,7 @@ pub mod delta_update_label_request {
         pub id: ::prost::alloc::string::String,
     }
     /// Request to create a Field within a Label.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CreateFieldRequest {
@@ -1832,6 +1901,7 @@ pub mod delta_update_label_request {
         pub field: ::core::option::Option<super::Field>,
     }
     /// Request to update Field properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpdateFieldPropertiesRequest {
@@ -1839,7 +1909,7 @@ pub mod delta_update_label_request {
         /// The root `properties` is implied and should not be specified. A single
         /// `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. The Field to update.
         #[prost(string, tag = "2")]
         pub id: ::prost::alloc::string::String,
@@ -1848,6 +1918,7 @@ pub mod delta_update_label_request {
         pub properties: ::core::option::Option<super::field::Properties>,
     }
     /// Request to change the type of a Field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpdateFieldTypeRequest {
@@ -1855,7 +1926,7 @@ pub mod delta_update_label_request {
         /// The root of `type_options` is implied and should not be specified. A
         /// single `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. The Field to update.
         #[prost(string, tag = "2")]
         pub id: ::prost::alloc::string::String,
@@ -1867,6 +1938,7 @@ pub mod delta_update_label_request {
     }
     /// Nested message and enum types in `UpdateFieldTypeRequest`.
     pub mod update_field_type_request {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum TypeOptions {
@@ -1888,6 +1960,7 @@ pub mod delta_update_label_request {
         }
     }
     /// Request to create a Selection Choice.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CreateSelectionChoiceRequest {
@@ -1899,6 +1972,7 @@ pub mod delta_update_label_request {
         pub choice: ::core::option::Option<super::field::selection_options::Choice>,
     }
     /// Request to update a Choice properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpdateSelectionChoicePropertiesRequest {
@@ -1906,7 +1980,7 @@ pub mod delta_update_label_request {
         /// The root `properties` is implied and should not be specified. A single
         /// `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. The Selection Field to update.
         #[prost(string, tag = "2")]
         pub field_id: ::prost::alloc::string::String,
@@ -1920,6 +1994,7 @@ pub mod delta_update_label_request {
         >,
     }
     /// Request to delete a Choice.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DeleteSelectionChoiceRequest {
@@ -1931,6 +2006,7 @@ pub mod delta_update_label_request {
         pub id: ::prost::alloc::string::String,
     }
     /// Request to disable a Choice.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DisableSelectionChoiceRequest {
@@ -1938,7 +2014,7 @@ pub mod delta_update_label_request {
         /// The root `disabled_policy` is implied and should not be specified. A
         /// single `*` can be used as short-hand for updating every field.
         #[prost(message, optional, tag = "1")]
-        pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+        pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
         /// Required. The Selection Field in which a Choice will be disabled.
         #[prost(string, tag = "2")]
         pub field_id: ::prost::alloc::string::String,
@@ -1950,6 +2026,7 @@ pub mod delta_update_label_request {
         pub disabled_policy: ::core::option::Option<super::lifecycle::DisabledPolicy>,
     }
     /// Request to enable a Choice.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EnableSelectionChoiceRequest {
@@ -1962,6 +2039,7 @@ pub mod delta_update_label_request {
     }
 }
 /// Response for Label update.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeltaUpdateLabelResponse {
@@ -1978,6 +2056,7 @@ pub struct DeltaUpdateLabelResponse {
 /// Nested message and enum types in `DeltaUpdateLabelResponse`.
 pub mod delta_update_label_response {
     /// A single response from an update.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Response {
@@ -1991,6 +2070,7 @@ pub mod delta_update_label_response {
     /// Nested message and enum types in `Response`.
     pub mod response {
         /// The response for the corresponding request.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Response {
@@ -2035,10 +2115,12 @@ pub mod delta_update_label_response {
         }
     }
     /// Response following update to Label properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UpdateLabelPropertiesResponse {}
     /// Response following Field create.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CreateFieldResponse {
@@ -2052,8 +2134,9 @@ pub mod delta_update_label_response {
         pub priority: i32,
     }
     /// Response following update to Field properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UpdateFieldPropertiesResponse {
         /// The priority of the updated field. The priority may change from what
         /// was specified to assure contiguous priorities between fields (1-n).
@@ -2061,22 +2144,27 @@ pub mod delta_update_label_response {
         pub priority: i32,
     }
     /// Response following update to Field type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UpdateFieldTypeResponse {}
     /// Response following Field enable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct EnableFieldResponse {}
     /// Response following Field disable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisableFieldResponse {}
     /// Response following Field delete.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DeleteFieldResponse {}
     /// Response following Selection Choice create.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CreateSelectionChoiceResponse {
@@ -2088,8 +2176,9 @@ pub mod delta_update_label_response {
         pub id: ::prost::alloc::string::String,
     }
     /// Response following update to Selection Choice properties.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UpdateSelectionChoicePropertiesResponse {
         /// The priority of the updated choice. The priority may change from what
         /// was specified to assure contiguous priorities between choices (1-n).
@@ -2097,21 +2186,25 @@ pub mod delta_update_label_response {
         pub priority: i32,
     }
     /// Response following Choice enable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct EnableSelectionChoiceResponse {}
     /// Response following Choice disable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisableSelectionChoiceResponse {}
     /// Response following Choice delete.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DeleteSelectionChoiceResponse {}
 }
 /// Request to update the `CopyMode` of the given Label. Changes to this policy
 /// are not revisioned, do not require publishing, and take effect immediately.
 /// \
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateLabelCopyModeRequest {
@@ -2136,6 +2229,7 @@ pub struct UpdateLabelCopyModeRequest {
     pub view: i32,
 }
 /// Request to get the limits for a Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLabelLimitsRequest {
@@ -2145,6 +2239,7 @@ pub struct GetLabelLimitsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to list labels available to the current user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsRequest {
@@ -2182,8 +2277,9 @@ pub struct ListLabelsRequest {
 }
 /// Nested message and enum types in `ListLabelsRequest`.
 pub mod list_labels_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Access {
         /// Set to `true` in order to use the user's admin credentials. This will
         /// return all Labels within the customer.
@@ -2197,6 +2293,7 @@ pub mod list_labels_request {
     }
 }
 /// Response for listing Labels.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsResponse {
@@ -2209,6 +2306,7 @@ pub struct ListLabelsResponse {
 }
 /// Creates or updates a permission on the Label. Permissions affect the Label
 /// resource as a whole, are not revisioned, and do not require publishing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateLabelPermissionRequest {
@@ -2225,6 +2323,7 @@ pub struct CreateLabelPermissionRequest {
     pub use_admin_access: bool,
 }
 /// Request to list the permissions on a Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelPermissionsRequest {
@@ -2244,6 +2343,7 @@ pub struct ListLabelPermissionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for listing the permissions on a Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelPermissionsResponse {
@@ -2256,6 +2356,7 @@ pub struct ListLabelPermissionsResponse {
 }
 /// Updates a Label Permission. Permissions affect the Label resource as a whole,
 /// are not revisioned, and do not require publishing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateLabelPermissionRequest {
@@ -2272,6 +2373,7 @@ pub struct UpdateLabelPermissionRequest {
 }
 /// Deletes a Label Permission. Permissions affect the Label resource as a whole,
 /// are not revisioned, and do not require publishing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLabelPermissionRequest {
@@ -2284,6 +2386,7 @@ pub struct DeleteLabelPermissionRequest {
     pub use_admin_access: bool,
 }
 /// Updates one or more Label Permissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateLabelPermissionsRequest {
@@ -2305,6 +2408,7 @@ pub struct BatchUpdateLabelPermissionsRequest {
     pub use_admin_access: bool,
 }
 /// Response for updating one or more Label Permissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateLabelPermissionsResponse {
@@ -2313,6 +2417,7 @@ pub struct BatchUpdateLabelPermissionsResponse {
     pub permissions: ::prost::alloc::vec::Vec<LabelPermission>,
 }
 /// Deletes one of more Label Permissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchDeleteLabelPermissionsRequest {
@@ -2334,6 +2439,7 @@ pub struct BatchDeleteLabelPermissionsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request to deprecate a published Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableLabelRequest {
@@ -2341,7 +2447,7 @@ pub struct DisableLabelRequest {
     /// The root `disabled_policy` is implied and should not be specified. A
     /// single `*` can be used as short-hand for updating every field.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Label resource name.
     #[prost(string, tag = "2")]
     pub name: ::prost::alloc::string::String,
@@ -2362,6 +2468,7 @@ pub struct DisableLabelRequest {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Request to publish a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PublishLabelRequest {
@@ -2382,6 +2489,7 @@ pub struct PublishLabelRequest {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Request to enable a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableLabelRequest {
@@ -2402,6 +2510,7 @@ pub struct EnableLabelRequest {
     pub language_code: ::prost::alloc::string::String,
 }
 /// Request to delete a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLabelRequest {
@@ -2418,6 +2527,7 @@ pub struct DeleteLabelRequest {
     pub write_control: ::core::option::Option<WriteControl>,
 }
 /// A request to list the LabelLocks on a Label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelLocksRequest {
@@ -2433,6 +2543,7 @@ pub struct ListLabelLocksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response to a ListLabelLocksRequest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelLocksResponse {
@@ -2446,6 +2557,7 @@ pub struct ListLabelLocksResponse {
 /// Resource view that can be applied to label responses. The default value
 /// `LABEL_VIEW_BASIC` implies the field mask:
 /// `name,id,revision_id,label_type,properties.*`\
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LabelView {
@@ -2476,6 +2588,7 @@ impl LabelView {
     }
 }
 /// The capabilities of a user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserCapabilities {
@@ -2918,7 +3031,10 @@ pub mod label_service_client {
         pub async fn delete_label(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteLabelRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3046,7 +3162,10 @@ pub mod label_service_client {
         pub async fn delete_label_permission(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteLabelPermissionRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3109,7 +3228,10 @@ pub mod label_service_client {
         pub async fn batch_delete_label_permissions(
             &mut self,
             request: impl tonic::IntoRequest<super::BatchDeleteLabelPermissionsRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

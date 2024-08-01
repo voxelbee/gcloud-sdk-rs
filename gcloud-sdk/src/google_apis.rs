@@ -3747,6 +3747,14 @@ pub mod google {
             }
         }
     }
+    pub mod protobuf {
+        #[cfg(any(feature = "google-protobuf"))]
+        include_proto!("google.protobuf");
+        pub mod compiler {
+            #[cfg(any(feature = "google-protobuf-compiler"))]
+            include_proto!("google.protobuf.compiler");
+        }
+    }
     pub mod pubsub {
         pub mod v1 {
             #[cfg(any(feature = "google-pubsub-v1"))]
@@ -4526,4 +4534,8 @@ pub mod maps {
             include_proto!("maps.fleetengine.v1");
         }
     }
+}
+pub mod pb {
+    #[cfg(any(feature = "pb"))]
+    include_proto!("pb");
 }

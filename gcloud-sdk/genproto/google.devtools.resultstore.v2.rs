@@ -2,6 +2,7 @@
 /// Describes the status of a resource in both enum and string form.
 /// Only use description when conveying additional info not captured in the enum
 /// name.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatusAttributes {
@@ -13,6 +14,7 @@ pub struct StatusAttributes {
     pub description: ::prost::alloc::string::String,
 }
 /// A generic key-value property definition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
@@ -25,18 +27,20 @@ pub struct Property {
 }
 /// The timing of a particular Invocation, Action, etc. The start_time is
 /// specified, stop time can be calculated by adding duration to start_time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Timing {
     /// The time the resource started running. This is in UTC Epoch time.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The duration for which the resource ran.
     #[prost(message, optional, tag = "2")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Represents a dependency of a resource on another resource. This can be used
 /// to define a graph or a workflow paradigm through resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dependency {
@@ -59,6 +63,7 @@ pub mod dependency {
     /// ConfiguredTarget, or Action, with the appropriate components filled in.
     /// Invocation ID is elided, as this must point to a resource under this
     /// Invocation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -74,6 +79,7 @@ pub mod dependency {
     }
     /// The resource depended upon. It may be a Target, ConfiguredTarget, or
     /// Action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resource {
@@ -95,6 +101,7 @@ pub mod dependency {
     }
 }
 /// These correspond to the prefix of the rule name. Eg cc_test has language CC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Language {
@@ -204,6 +211,7 @@ impl Language {
     }
 }
 /// Status of a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Status {
@@ -292,6 +300,7 @@ impl Status {
 }
 /// Indicates the upload status of the invocation, whether it is
 /// post-processing, or immutable, etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum UploadStatus {
@@ -331,6 +340,7 @@ impl UploadStatus {
     }
 }
 /// Describes line coverage for a file
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineCoverage {
@@ -358,6 +368,7 @@ pub struct LineCoverage {
     pub executed_lines: ::prost::alloc::vec::Vec<u8>,
 }
 /// Describes branch coverage for a file
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BranchCoverage {
@@ -396,6 +407,7 @@ pub struct BranchCoverage {
     pub taken: ::prost::alloc::vec::Vec<u8>,
 }
 /// Describes code coverage for a particular file under test.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileCoverage {
@@ -411,6 +423,7 @@ pub struct FileCoverage {
 }
 /// Describes code coverage for a build or test Action. This is used to store
 /// baseline coverage for build Actions and test coverage for test Actions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActionCoverage {
@@ -421,6 +434,7 @@ pub struct ActionCoverage {
 /// Describes aggregate code coverage for a collection of build or test Actions.
 /// A line or branch is covered if and only if it is covered in any of the build
 /// or test actions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregateCoverage {
@@ -429,6 +443,7 @@ pub struct AggregateCoverage {
     pub file_coverages: ::prost::alloc::vec::Vec<FileCoverage>,
 }
 /// The metadata for a file or an archive file entry.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct File {
@@ -449,7 +464,7 @@ pub struct File {
     /// UI.  Omit if file is still being written or length is not known.  This
     /// could also be the length of an entire archive.
     #[prost(message, optional, tag = "3")]
-    pub length: ::core::option::Option<i64>,
+    pub length: ::core::option::Option<pb::Int64Value>,
     /// The content-type (aka MIME-type) of the file.  This is sent to the web
     /// browser so it knows how to handle the file. (e.g. text/plain, image/jpeg,
     /// text/html, etc). For zip archives, use "application/zip".
@@ -483,6 +498,7 @@ pub struct File {
 /// Nested message and enum types in `File`.
 pub mod file {
     /// If known, the hash function used to compute this digest.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -531,6 +547,7 @@ pub mod file {
     }
 }
 /// Information specific to an entry in an archive.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveEntry {
@@ -540,7 +557,7 @@ pub struct ArchiveEntry {
     /// The uncompressed length of the archive entry in bytes.  Allows the entry
     /// size to be shown in the UI.  Omit if the length is not known.
     #[prost(message, optional, tag = "2")]
-    pub length: ::core::option::Option<i64>,
+    pub length: ::core::option::Option<pb::Int64Value>,
     /// The content-type (aka MIME-type) of the archive entry. (e.g. text/plain,
     /// image/jpeg, text/html, etc). This is sent to the web browser so it knows
     /// how to handle the entry.
@@ -548,6 +565,7 @@ pub struct ArchiveEntry {
     pub content_type: ::prost::alloc::string::String,
 }
 /// Stores errors reading or parsing a file during post-processing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileProcessingErrors {
@@ -559,6 +577,7 @@ pub struct FileProcessingErrors {
     pub file_processing_errors: ::prost::alloc::vec::Vec<FileProcessingError>,
 }
 /// Stores an error reading or parsing a file during post-processing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileProcessingError {
@@ -570,6 +589,7 @@ pub struct FileProcessingError {
     pub message: ::prost::alloc::string::String,
 }
 /// Errors in file post-processing are categorized using this enum.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FileProcessingErrorType {
@@ -630,6 +650,7 @@ impl FileProcessingErrorType {
 }
 /// The result of running a test suite, as reported in a <testsuite> element of
 /// an XML log.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestSuite {
@@ -667,6 +688,7 @@ pub struct TestSuite {
 }
 /// The result of running a test case or test suite. JUnit3 TestDecorators are
 /// represented as a TestSuite with a single test.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Test {
@@ -677,6 +699,7 @@ pub struct Test {
 /// Nested message and enum types in `Test`.
 pub mod test {
     /// Either a TestCase of a TestSuite
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TestType {
@@ -690,6 +713,7 @@ pub mod test {
 }
 /// The result of running a test case, as reported in a <testcase> element of
 /// an XML log.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestCase {
@@ -741,6 +765,7 @@ pub struct TestCase {
 /// Nested message and enum types in `TestCase`.
 pub mod test_case {
     /// The result of running a test case.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -811,6 +836,7 @@ pub mod test_case {
 /// <testcase>. Some languages allow assertions to be made without stopping the
 /// test case when they're violated, leading to multiple TestFailures. For Java,
 /// multiple TestFailures are used to represent a chained exception.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestFailure {
@@ -847,6 +873,7 @@ pub struct TestFailure {
 /// Represents an exception that prevented a test case from completing, as
 /// reported in an <error> element within a <testcase>. For Java, multiple
 /// TestErrors are used to represent a chained exception.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestError {
@@ -876,6 +903,7 @@ pub struct TestError {
 /// least one build action should be created to represent the build result, and
 /// at least one test action should be created to represent the test result, if
 /// any.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Action {
@@ -965,6 +993,7 @@ pub struct Action {
 /// Nested message and enum types in `Action`.
 pub mod action {
     /// The resource ID components that identify the Action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -987,6 +1016,7 @@ pub mod action {
     /// populated in later methods or post-processing. A generic "untyped" action
     /// can be created by not setting any of these fields. An untyped action will
     /// be untyped for the lifetime of the invocation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ActionType {
@@ -999,6 +1029,7 @@ pub mod action {
     }
 }
 /// A build action, such as building a java library.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BuildAction {
@@ -1019,6 +1050,7 @@ pub struct BuildAction {
     pub primary_output_path: ::prost::alloc::string::String,
 }
 /// A test action, such as running a JUnit4 test binary.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestAction {
@@ -1058,6 +1090,7 @@ pub struct TestAction {
     pub estimated_memory_bytes: i64,
 }
 /// General attributes of an action
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActionAttributes {
@@ -1077,8 +1110,9 @@ pub struct ActionAttributes {
     pub input_file_info: ::core::option::Option<InputFileInfo>,
 }
 /// File count and size information for the input files to a configured target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InputFileInfo {
     /// The number of input files (counting every file, even if a duplicate).
     #[prost(int64, tag = "1")]
@@ -1098,30 +1132,32 @@ pub struct InputFileInfo {
     pub distinct_byte_limit: i64,
 }
 /// Timing data for tests executed locally on the machine running the build.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LocalTestTiming {
     /// Time taken by the test process, typically surrounded by a small wrapper
     /// script.
     #[prost(message, optional, tag = "1")]
-    pub test_process_duration: ::core::option::Option<::prost_types::Duration>,
+    pub test_process_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Timing data for one attempt to execute a test action remotely.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoteTestAttemptTiming {
     /// Idle period before the test process is invoked on the remote machine.
     #[prost(message, optional, tag = "1")]
-    pub queue_duration: ::core::option::Option<::prost_types::Duration>,
+    pub queue_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time to upload data dependencies from the local machine to the remote
     /// machine running the test, or to the distributed cache.
     #[prost(message, optional, tag = "2")]
-    pub upload_duration: ::core::option::Option<::prost_types::Duration>,
+    pub upload_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time to set up the remote machine.
     /// Not to be confused with setup time in
     /// xUnit test frameworks, which falls within the test_process_time.
     #[prost(message, optional, tag = "3")]
-    pub machine_setup_duration: ::core::option::Option<::prost_types::Duration>,
+    pub machine_setup_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time taken by the test process, typically surrounded by a small wrapper
     /// script.
     /// For Java tests, this includes JVM setup, flag parsing, class path setup,
@@ -1129,19 +1165,20 @@ pub struct RemoteTestAttemptTiming {
     /// In many cases, only a small fraction of the test process time is spent
     /// running the test methods.
     #[prost(message, optional, tag = "4")]
-    pub test_process_duration: ::core::option::Option<::prost_types::Duration>,
+    pub test_process_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Time spent retrieving test logs and any other test outputs, back to the
     /// local machine.
     #[prost(message, optional, tag = "5")]
-    pub download_duration: ::core::option::Option<::prost_types::Duration>,
+    pub download_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Timing data for the part of the test execution that is done remotely.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoteTestTiming {
     /// Time taken locally to determine what to do.
     #[prost(message, optional, tag = "1")]
-    pub local_analysis_duration: ::core::option::Option<::prost_types::Duration>,
+    pub local_analysis_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Normally there is only one attempt, but the system may retry on internal
     /// errors, leading to multiple attempts.
     #[prost(message, repeated, tag = "2")]
@@ -1149,6 +1186,7 @@ pub struct RemoteTestTiming {
 }
 /// Timing data for execution of a test action. The action may be performed
 /// locally, on the machine running the build, or remotely.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestTiming {
@@ -1156,13 +1194,13 @@ pub struct TestTiming {
     /// within the kernel, as opposed to library code. Time the test process spent
     /// blocked does not count towards this figure.
     #[prost(message, optional, tag = "3")]
-    pub system_time_duration: ::core::option::Option<::prost_types::Duration>,
+    pub system_time_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The amount of CPU time spent by the test process executing user-mode code
     /// outside the kernel, as opposed to library code. Time the test process
     /// spent blocked does not count towards this figure. You can add user_time to
     /// system_time to get total CPU time taken by the test process.
     #[prost(message, optional, tag = "4")]
-    pub user_time_duration: ::core::option::Option<::prost_types::Duration>,
+    pub user_time_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Most build systems cache build results to speed up incremental builds.
     /// Some also cache test results too. This indicates whether the test results
     /// were found in a cache, and where that cache was located.
@@ -1175,6 +1213,7 @@ pub struct TestTiming {
 /// Nested message and enum types in `TestTiming`.
 pub mod test_timing {
     /// Test timing for either a local or remote execution.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
@@ -1187,6 +1226,7 @@ pub mod test_timing {
     }
 }
 /// A warning from a test execution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TestWarning {
@@ -1195,6 +1235,7 @@ pub struct TestWarning {
     pub warning_message: ::prost::alloc::string::String,
 }
 /// Indicates how/where this Action was executed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ExecutionStrategy {
@@ -1238,6 +1279,7 @@ impl ExecutionStrategy {
 /// Most build systems cache build results to speed up incremental builds.
 /// Some also cache test results too. This indicates whether the test results
 /// were found in a cache, and where that cache was located.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TestCaching {
@@ -1277,6 +1319,7 @@ impl TestCaching {
 /// Represents a configuration within an Invocation associated with one or more
 /// ConfiguredTargets. It captures the environment and other settings that
 /// were used.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Configuration {
@@ -1310,6 +1353,7 @@ pub struct Configuration {
 /// Nested message and enum types in `Configuration`.
 pub mod configuration {
     /// The resource ID components that identify the Configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -1322,6 +1366,7 @@ pub mod configuration {
     }
 }
 /// Attributes that apply only to the configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigurationAttributes {
@@ -1334,6 +1379,7 @@ pub struct ConfigurationAttributes {
 /// Every ConfiguredTarget should have at least one Action as a child resource
 /// before the invocation is finalized. Refer to the Action's documentation for
 /// more info on this.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfiguredTarget {
@@ -1372,6 +1418,7 @@ pub struct ConfiguredTarget {
 /// Nested message and enum types in `ConfiguredTarget`.
 pub mod configured_target {
     /// The resource ID components that identify the ConfiguredTarget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -1387,8 +1434,9 @@ pub mod configured_target {
     }
 }
 /// Attributes that apply only to test actions under this configured target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ConfiguredTestAttributes {
     /// Total number of test runs. For example, in bazel this is specified with
     /// --runs_per_test. Zero if runs_per_test is not used.
@@ -1399,11 +1447,12 @@ pub struct ConfiguredTestAttributes {
     pub total_shard_count: i32,
     /// How long test is allowed to run.
     #[prost(message, optional, tag = "5")]
-    pub timeout_duration: ::core::option::Option<::prost_types::Duration>,
+    pub timeout_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Summary of line coverage
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineCoverageSummary {
     /// Number of lines instrumented for coverage.
     #[prost(int32, tag = "1")]
@@ -1417,8 +1466,9 @@ pub struct LineCoverageSummary {
 ///   * not executed.  Counted only in total.
 ///   * executed but not taken.  Appears in total and executed.
 ///   * executed and taken.  Appears in all three fields.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BranchCoverageSummary {
     /// The number of branches present in the file.
     #[prost(int32, tag = "1")]
@@ -1435,8 +1485,9 @@ pub struct BranchCoverageSummary {
     pub taken_branch_count: i32,
 }
 /// Summary of coverage in each language
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LanguageCoverageSummary {
     /// This summary is for all files written in this programming language.
     #[prost(enumeration = "Language", tag = "1")]
@@ -1449,6 +1500,7 @@ pub struct LanguageCoverageSummary {
     pub branch_summary: ::core::option::Option<BranchCoverageSummary>,
 }
 /// The download metadata for an invocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMetadata {
@@ -1464,17 +1516,17 @@ pub struct DownloadMetadata {
     /// This does not necessarily line up with the start time of the invocation.
     /// Please use invocation.timing.start_time for that purpose.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// If populated, the time when FinalizeInvocation is called or when invocation
     /// is automatically finalized. This field is populated when upload_status
     /// becomes POST_PROCESSING.
     #[prost(message, optional, tag = "4")]
-    pub finalize_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub finalize_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// If populated, the time when all post processing is done and the invocation
     /// is marked as immutable. This field is populated when upload_status becomes
     /// IMMUTABLE.
     #[prost(message, optional, tag = "5")]
-    pub immutable_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub immutable_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// This resource represents a set of Files and other (nested) FileSets.
 /// A FileSet is a node in the graph, and the file_sets field represents the
@@ -1489,6 +1541,7 @@ pub struct DownloadMetadata {
 /// Clients should prefer using Files directly under resources. Clients should
 /// not use FileSets unless their usecase requires a directed acyclic graph of
 /// Files.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileSet {
@@ -1513,6 +1566,7 @@ pub struct FileSet {
 /// Nested message and enum types in `FileSet`.
 pub mod file_set {
     /// The resource ID components that identify the FileSet.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -1527,6 +1581,7 @@ pub mod file_set {
 /// An Invocation typically represents the result of running a tool. Each has a
 /// unique ID, typically generated by the server. Target resources under each
 /// Invocation contain the bulk of the data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Invocation {
@@ -1592,6 +1647,7 @@ pub struct Invocation {
 /// Nested message and enum types in `Invocation`.
 pub mod invocation {
     /// The resource ID components that identify the Invocation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -1601,12 +1657,14 @@ pub mod invocation {
     }
 }
 /// If known, represents the state of the user/build-system workspace.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WorkspaceContext {}
 /// Describes the workspace under which the tool was invoked, this includes
 /// information that was fed into the command, the source code referenced, and
 /// the tool itself.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkspaceInfo {
@@ -1629,6 +1687,7 @@ pub struct WorkspaceInfo {
     pub command_lines: ::prost::alloc::vec::Vec<CommandLine>,
 }
 /// The command and arguments that produced this Invocation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommandLine {
@@ -1649,6 +1708,7 @@ pub struct CommandLine {
     pub command: ::prost::alloc::string::String,
 }
 /// Attributes that apply to all invocations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InvocationAttributes {
@@ -1692,6 +1752,7 @@ pub struct InvocationAttributes {
     pub exit_code: i32,
 }
 /// Describes the invocation context which includes a display name and URL.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InvocationContext {
@@ -1705,6 +1766,7 @@ pub struct InvocationContext {
 /// Each Target represents data for a given target in a given Invocation.
 /// ConfiguredTarget and Action resources under each Target contain the bulk of
 /// the data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Target {
@@ -1750,6 +1812,7 @@ pub struct Target {
 /// Nested message and enum types in `Target`.
 pub mod target {
     /// The resource ID components that identify the Target.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -1762,6 +1825,7 @@ pub mod target {
     }
 }
 /// Attributes that apply to all targets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetAttributes {
@@ -1780,14 +1844,16 @@ pub struct TargetAttributes {
     pub tags: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Attributes that apply only to test actions under this target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TestAttributes {
     /// Indicates how big the user indicated the test action was.
     #[prost(enumeration = "TestSize", tag = "1")]
     pub size: i32,
 }
 /// These correspond to the suffix of the rule name. Eg cc_test has type TEST.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TargetType {
@@ -1833,6 +1899,7 @@ impl TargetType {
     }
 }
 /// Indicates how big the user indicated the test action was.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TestSize {
@@ -1878,6 +1945,7 @@ impl TestSize {
     }
 }
 /// Request passed into GetInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInvocationRequest {
@@ -1888,6 +1956,7 @@ pub struct GetInvocationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into SearchInvocations
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchInvocationsRequest {
@@ -1937,6 +2006,7 @@ pub struct SearchInvocationsRequest {
 /// Nested message and enum types in `SearchInvocationsRequest`.
 pub mod search_invocations_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -1950,6 +2020,7 @@ pub mod search_invocations_request {
     }
 }
 /// Response from calling SearchInvocations
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchInvocationsResponse {
@@ -1963,6 +2034,7 @@ pub struct SearchInvocationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into ExportInvocationRequest
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportInvocationRequest {
@@ -2000,6 +2072,7 @@ pub struct ExportInvocationRequest {
 /// Nested message and enum types in `ExportInvocationRequest`.
 pub mod export_invocation_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2014,6 +2087,7 @@ pub mod export_invocation_request {
 }
 /// Response from calling ExportInvocationResponse.
 /// Possibly capped at request.page_size or a server limit.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportInvocationResponse {
@@ -2045,6 +2119,7 @@ pub struct ExportInvocationResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into GetInvocationDownloadMetadata
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInvocationDownloadMetadataRequest {
@@ -2055,6 +2130,7 @@ pub struct GetInvocationDownloadMetadataRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into GetConfiguration
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConfigurationRequest {
@@ -2064,6 +2140,7 @@ pub struct GetConfigurationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into ListConfigurations
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfigurationsRequest {
@@ -2087,6 +2164,7 @@ pub struct ListConfigurationsRequest {
 /// Nested message and enum types in `ListConfigurationsRequest`.
 pub mod list_configurations_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2099,6 +2177,7 @@ pub mod list_configurations_request {
     }
 }
 /// Response from calling ListConfigurations
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfigurationsResponse {
@@ -2112,6 +2191,7 @@ pub struct ListConfigurationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into GetTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTargetRequest {
@@ -2121,6 +2201,7 @@ pub struct GetTargetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into ListTargets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTargetsRequest {
@@ -2144,6 +2225,7 @@ pub struct ListTargetsRequest {
 /// Nested message and enum types in `ListTargetsRequest`.
 pub mod list_targets_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2156,6 +2238,7 @@ pub mod list_targets_request {
     }
 }
 /// Response from calling ListTargetsResponse
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTargetsResponse {
@@ -2169,6 +2252,7 @@ pub struct ListTargetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into GetConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConfiguredTargetRequest {
@@ -2179,6 +2263,7 @@ pub struct GetConfiguredTargetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into ListConfiguredTargets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfiguredTargetsRequest {
@@ -2204,6 +2289,7 @@ pub struct ListConfiguredTargetsRequest {
 /// Nested message and enum types in `ListConfiguredTargetsRequest`.
 pub mod list_configured_targets_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2216,6 +2302,7 @@ pub mod list_configured_targets_request {
     }
 }
 /// Response from calling ListConfiguredTargets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConfiguredTargetsResponse {
@@ -2229,6 +2316,7 @@ pub struct ListConfiguredTargetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into SearchConfiguredTargets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchConfiguredTargetsRequest {
@@ -2293,6 +2381,7 @@ pub struct SearchConfiguredTargetsRequest {
 /// Nested message and enum types in `SearchConfiguredTargetsRequest`.
 pub mod search_configured_targets_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2306,6 +2395,7 @@ pub mod search_configured_targets_request {
     }
 }
 /// Response from calling SearchConfiguredTargets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchConfiguredTargetsResponse {
@@ -2319,6 +2409,7 @@ pub struct SearchConfiguredTargetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into GetAction
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetActionRequest {
@@ -2328,6 +2419,7 @@ pub struct GetActionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into ListActions
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListActionsRequest {
@@ -2356,6 +2448,7 @@ pub struct ListActionsRequest {
 /// Nested message and enum types in `ListActionsRequest`.
 pub mod list_actions_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2368,6 +2461,7 @@ pub mod list_actions_request {
     }
 }
 /// Response from calling ListActions
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListActionsResponse {
@@ -2381,6 +2475,7 @@ pub struct ListActionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into BatchListActionsRequest
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchListActionsRequest {
@@ -2409,6 +2504,7 @@ pub struct BatchListActionsRequest {
 /// Nested message and enum types in `BatchListActionsRequest`.
 pub mod batch_list_actions_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2427,6 +2523,7 @@ pub mod batch_list_actions_request {
     }
 }
 /// Response from calling BatchListActionsResponse
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchListActionsResponse {
@@ -2443,6 +2540,7 @@ pub struct BatchListActionsResponse {
     pub not_found: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request passed into GetFileSet
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileSetRequest {
@@ -2452,6 +2550,7 @@ pub struct GetFileSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into ListFileSets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFileSetsRequest {
@@ -2475,6 +2574,7 @@ pub struct ListFileSetsRequest {
 /// Nested message and enum types in `ListFileSetsRequest`.
 pub mod list_file_sets_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2487,6 +2587,7 @@ pub mod list_file_sets_request {
     }
 }
 /// Response from calling ListFileSets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFileSetsResponse {
@@ -2500,6 +2601,7 @@ pub struct ListFileSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request passed into TraverseFileSets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraverseFileSetsRequest {
@@ -2527,6 +2629,7 @@ pub struct TraverseFileSetsRequest {
 /// Nested message and enum types in `TraverseFileSetsRequest`.
 pub mod traverse_file_sets_request {
     /// Options for pagination.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PageStart {
@@ -2545,6 +2648,7 @@ pub mod traverse_file_sets_request {
     }
 }
 /// Response from calling TraverseFileSets
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraverseFileSetsResponse {
@@ -3304,6 +3408,7 @@ pub mod result_store_download_client {
     }
 }
 /// Request object for GetFile
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileRequest {
@@ -3337,6 +3442,7 @@ pub struct GetFileRequest {
     pub archive_entry: ::prost::alloc::string::String,
 }
 /// Response object for GetFile
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileResponse {
@@ -3345,6 +3451,7 @@ pub struct GetFileResponse {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request object for GetFileTail
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileTailRequest {
@@ -3376,6 +3483,7 @@ pub struct GetFileTailRequest {
     pub archive_entry: ::prost::alloc::string::String,
 }
 /// Response object for GetFileTail
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileTailResponse {
@@ -3546,6 +3654,7 @@ pub mod result_store_file_download_client {
     }
 }
 /// The upload metadata for an invocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadMetadata {
@@ -3565,6 +3674,7 @@ pub struct UploadMetadata {
     pub uploader_state: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request passed into CreateInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInvocationRequest {
@@ -3606,7 +3716,7 @@ pub struct CreateInvocationRequest {
     /// hours. If you need auto-finalize to happen sooner, set this field to the
     /// time you'd like auto-finalize to occur.
     #[prost(message, optional, tag = "6")]
-    pub auto_finalize_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub auto_finalize_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Client provided unique token for batch upload to ensure data integrity and
     /// to provide a way to resume batch upload in case of a distributed failure on
     /// the client side. The standard uploading client is presumed to have many
@@ -3641,6 +3751,7 @@ pub struct CreateInvocationRequest {
     pub uploader_state: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request passed into UpdateInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInvocationRequest {
@@ -3650,13 +3761,14 @@ pub struct UpdateInvocationRequest {
     pub invocation: ::core::option::Option<Invocation>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into MergeInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeInvocationRequest {
@@ -3673,13 +3785,14 @@ pub struct MergeInvocationRequest {
     pub invocation: ::core::option::Option<Invocation>,
     /// Indicates which fields to merge.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into TouchInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TouchInvocationRequest {
@@ -3693,6 +3806,7 @@ pub struct TouchInvocationRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Response returned from TouchInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TouchInvocationResponse {
@@ -3705,6 +3819,7 @@ pub struct TouchInvocationResponse {
     pub id: ::core::option::Option<invocation::Id>,
 }
 /// Request passed into DeleteInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInvocationRequest {
@@ -3714,6 +3829,7 @@ pub struct DeleteInvocationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request passed into FinalizeInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeInvocationRequest {
@@ -3727,6 +3843,7 @@ pub struct FinalizeInvocationRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Response returned from FinalizeInvocation
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeInvocationResponse {
@@ -3739,6 +3856,7 @@ pub struct FinalizeInvocationResponse {
     pub id: ::core::option::Option<invocation::Id>,
 }
 /// Request passed into CreateTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTargetRequest {
@@ -3767,6 +3885,7 @@ pub struct CreateTargetRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into UpdateTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTargetRequest {
@@ -3777,7 +3896,7 @@ pub struct UpdateTargetRequest {
     pub target: ::core::option::Option<Target>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -3788,6 +3907,7 @@ pub struct UpdateTargetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into MergeTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeTargetRequest {
@@ -3805,7 +3925,7 @@ pub struct MergeTargetRequest {
     pub target: ::core::option::Option<Target>,
     /// Indicates which fields to merge.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -3816,6 +3936,7 @@ pub struct MergeTargetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into FinalizeTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeTargetRequest {
@@ -3829,6 +3950,7 @@ pub struct FinalizeTargetRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Response returned from FinalizeTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeTargetResponse {
@@ -3841,6 +3963,7 @@ pub struct FinalizeTargetResponse {
     pub id: ::core::option::Option<target::Id>,
 }
 /// Request passed into CreateConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConfiguredTargetRequest {
@@ -3871,6 +3994,7 @@ pub struct CreateConfiguredTargetRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into UpdateConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConfiguredTargetRequest {
@@ -3881,7 +4005,7 @@ pub struct UpdateConfiguredTargetRequest {
     pub configured_target: ::core::option::Option<ConfiguredTarget>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -3892,6 +4016,7 @@ pub struct UpdateConfiguredTargetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into MergeConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeConfiguredTargetRequest {
@@ -3909,7 +4034,7 @@ pub struct MergeConfiguredTargetRequest {
     pub configured_target: ::core::option::Option<ConfiguredTarget>,
     /// Indicates which fields to merge.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -3920,6 +4045,7 @@ pub struct MergeConfiguredTargetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into FinalizeConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeConfiguredTargetRequest {
@@ -3933,6 +4059,7 @@ pub struct FinalizeConfiguredTargetRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Response returned from FinalizeConfiguredTarget
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FinalizeConfiguredTargetResponse {
@@ -3945,6 +4072,7 @@ pub struct FinalizeConfiguredTargetResponse {
     pub id: ::core::option::Option<configured_target::Id>,
 }
 /// Request passed into CreateAction
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateActionRequest {
@@ -3982,6 +4110,7 @@ pub struct CreateActionRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into UpdateAction
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateActionRequest {
@@ -3992,7 +4121,7 @@ pub struct UpdateActionRequest {
     pub action: ::core::option::Option<Action>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -4003,6 +4132,7 @@ pub struct UpdateActionRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into MergeAction
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeActionRequest {
@@ -4020,7 +4150,7 @@ pub struct MergeActionRequest {
     pub action: ::core::option::Option<Action>,
     /// Indicates which fields to merge.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -4031,6 +4161,7 @@ pub struct MergeActionRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into CreateConfiguration
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConfigurationRequest {
@@ -4062,6 +4193,7 @@ pub struct CreateConfigurationRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into UpdateConfiguration
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConfigurationRequest {
@@ -4072,7 +4204,7 @@ pub struct UpdateConfigurationRequest {
     pub configuration: ::core::option::Option<Configuration>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "4")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "5")]
@@ -4083,6 +4215,7 @@ pub struct UpdateConfigurationRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into CreateFileSet
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFileSetRequest {
@@ -4111,6 +4244,7 @@ pub struct CreateFileSetRequest {
     pub authorization_token: ::prost::alloc::string::String,
 }
 /// Request passed into UpdateFileSet
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFileSetRequest {
@@ -4120,7 +4254,7 @@ pub struct UpdateFileSetRequest {
     pub file_set: ::core::option::Option<FileSet>,
     /// Indicates which fields to update.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "3")]
@@ -4131,6 +4265,7 @@ pub struct UpdateFileSetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into MergeFileSet
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeFileSetRequest {
@@ -4148,7 +4283,7 @@ pub struct MergeFileSetRequest {
     pub file_set: ::core::option::Option<FileSet>,
     /// Indicates which fields to merge.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// This is a token to authorize access to this invocation. It must be set to
     /// the same value that was provided in the CreateInvocationRequest.
     #[prost(string, tag = "4")]
@@ -4159,6 +4294,7 @@ pub struct MergeFileSetRequest {
     pub create_if_not_found: bool,
 }
 /// Request passed into UploadBatch
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadBatchRequest {
@@ -4206,10 +4342,12 @@ pub struct UploadBatchRequest {
     pub upload_requests: ::prost::alloc::vec::Vec<UploadRequest>,
 }
 /// Response for UploadBatch
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UploadBatchResponse {}
 /// The individual upload requests for this batch.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadRequest {
@@ -4244,7 +4382,7 @@ pub struct UploadRequest {
     /// ConfiguredTarget: \[files\].
     /// Action: \[files, file_processing_errors\].
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// If true then the Update, Merge operation will become a Create operation if
     /// the resource is NOT_FOUND. Not supported for Invocation resource.
     #[prost(bool, tag = "10")]
@@ -4256,6 +4394,7 @@ pub struct UploadRequest {
 /// Nested message and enum types in `UploadRequest`.
 pub mod upload_request {
     /// The resource ID components that identify the resource being uploaded.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Id {
@@ -4277,6 +4416,7 @@ pub mod upload_request {
         pub file_set_id: ::prost::alloc::string::String,
     }
     /// The operation for the request (e.g. Create(), Update(), etc.)
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4340,6 +4480,7 @@ pub mod upload_request {
         }
     }
     /// The proto of the resource being uploaded.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resource {
@@ -4364,6 +4505,7 @@ pub mod upload_request {
     }
 }
 /// Request passed into GetInvocationUploadMetadata
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInvocationUploadMetadataRequest {
@@ -4676,7 +4818,10 @@ pub mod result_store_upload_client {
         pub async fn delete_invocation(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteInvocationRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

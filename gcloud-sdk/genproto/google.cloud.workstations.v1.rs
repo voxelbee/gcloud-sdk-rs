@@ -3,6 +3,7 @@
 ///
 /// Defines a group of workstations in a particular region and the
 /// VPC network they're attached to.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkstationCluster {
@@ -37,13 +38,13 @@ pub struct WorkstationCluster {
     >,
     /// Output only. Time when this workstation cluster was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation cluster was most recently updated.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation cluster was soft-deleted.
     #[prost(message, optional, tag = "8")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Checksum computed by the server. May be sent on update and delete
     /// requests to make sure that the client has an up-to-date value before
     /// proceeding.
@@ -83,6 +84,7 @@ pub struct WorkstationCluster {
 /// Nested message and enum types in `WorkstationCluster`.
 pub mod workstation_cluster {
     /// Configuration options for private workstation clusters.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PrivateClusterConfig {
@@ -119,6 +121,7 @@ pub mod workstation_cluster {
 /// can also use [Identity and Access Management
 /// (IAM)](<https://cloud.google.com/iam/docs/overview>) rules to grant access to
 /// teams or to individual developers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkstationConfig {
@@ -153,14 +156,14 @@ pub struct WorkstationConfig {
     >,
     /// Output only. Time when this workstation configuration was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation configuration was most recently
     /// updated.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation configuration was soft-deleted.
     #[prost(message, optional, tag = "8")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Checksum computed by the server. May be sent on update and delete
     /// requests to make sure that the client has an up-to-date value before
     /// proceeding.
@@ -176,7 +179,7 @@ pub struct WorkstationConfig {
     /// terminated by `s` for seconds—for example, `"7200s"` (2 hours).
     /// The default is `"1200s"` (20 minutes).
     #[prost(message, optional, tag = "10")]
-    pub idle_timeout: ::core::option::Option<::prost_types::Duration>,
+    pub idle_timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. Number of seconds that a workstation can run until it is
     /// automatically shut down. We recommend that workstations be shut down daily
     /// to reduce costs and so that security updates can be applied upon restart.
@@ -200,7 +203,7 @@ pub struct WorkstationConfig {
     /// with this configuration have no maximum running time. This is strongly
     /// discouraged because you incur costs and will not pick up security updates.
     #[prost(message, optional, tag = "11")]
-    pub running_timeout: ::core::option::Option<::prost_types::Duration>,
+    pub running_timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. Runtime host for the workstation.
     #[prost(message, optional, tag = "12")]
     pub host: ::core::option::Option<workstation_config::Host>,
@@ -262,6 +265,7 @@ pub struct WorkstationConfig {
 /// Nested message and enum types in `WorkstationConfig`.
 pub mod workstation_config {
     /// Runtime host for a workstation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Host {
@@ -272,6 +276,7 @@ pub mod workstation_config {
     /// Nested message and enum types in `Host`.
     pub mod host {
         /// A runtime using a Compute Engine instance.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GceInstance {
@@ -391,8 +396,9 @@ pub mod workstation_config {
         /// Nested message and enum types in `GceInstance`.
         pub mod gce_instance {
             /// A set of Compute Engine Shielded instance options.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct GceShieldedInstanceConfig {
                 /// Optional. Whether the instance has Secure Boot enabled.
                 #[prost(bool, tag = "1")]
@@ -405,8 +411,9 @@ pub mod workstation_config {
                 pub enable_integrity_monitoring: bool,
             }
             /// A set of Compute Engine Confidential VM instance options.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct GceConfidentialInstanceConfig {
                 /// Optional. Whether the instance has confidential compute enabled.
                 #[prost(bool, tag = "1")]
@@ -414,6 +421,7 @@ pub mod workstation_config {
             }
         }
         /// Type of host that will be used for the workstation's runtime.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Config {
@@ -423,6 +431,7 @@ pub mod workstation_config {
         }
     }
     /// A directory to persist across workstation sessions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PersistentDirectory {
@@ -445,6 +454,7 @@ pub mod workstation_config {
         /// detaches when the session ends. If this field is empty, workstations
         /// created with this configuration do not have a persistent home
         /// directory.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GceRegionalPersistentDisk {
@@ -493,6 +503,7 @@ pub mod workstation_config {
         pub mod gce_regional_persistent_disk {
             /// Value representing what should happen to the disk after the workstation
             /// is deleted.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[derive(
                 Clone,
                 Copy,
@@ -538,6 +549,7 @@ pub mod workstation_config {
             }
         }
         /// How a persistent directory should be implemented.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum DirectoryType {
@@ -547,6 +559,7 @@ pub mod workstation_config {
         }
     }
     /// A Docker container.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Container {
@@ -591,6 +604,7 @@ pub mod workstation_config {
     /// We recommend that you use a separate service account and follow
     /// [Cloud KMS best
     /// practices](<https://cloud.google.com/kms/docs/separation-of-duties>).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomerEncryptionKey {
@@ -610,6 +624,7 @@ pub mod workstation_config {
         pub kms_key_service_account: ::prost::alloc::string::String,
     }
     /// A readiness check to be performed on a workstation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadinessCheck {
@@ -622,6 +637,7 @@ pub mod workstation_config {
     }
 }
 /// A single instance of a developer workstation with its own persistent storage.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Workstation {
@@ -655,17 +671,17 @@ pub struct Workstation {
     >,
     /// Output only. Time when this workstation was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation was most recently updated.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation was most recently successfully
     /// started, regardless of the workstation's initial state.
     #[prost(message, optional, tag = "14")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when this workstation was soft-deleted.
     #[prost(message, optional, tag = "8")]
-    pub delete_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub delete_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Checksum computed by the server. May be sent on update and delete
     /// requests to make sure that the client has an up-to-date value before
     /// proceeding.
@@ -685,6 +701,7 @@ pub struct Workstation {
 /// Nested message and enum types in `Workstation`.
 pub mod workstation {
     /// Whether a workstation is running and ready to receive user requests.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -739,6 +756,7 @@ pub mod workstation {
     }
 }
 /// Request message for GetWorkstationCluster.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationClusterRequest {
@@ -747,6 +765,7 @@ pub struct GetWorkstationClusterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstationClusters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationClustersRequest {
@@ -762,6 +781,7 @@ pub struct ListWorkstationClustersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstationClusters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationClustersResponse {
@@ -777,6 +797,7 @@ pub struct ListWorkstationClustersResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstationCluster.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationClusterRequest {
@@ -795,6 +816,7 @@ pub struct CreateWorkstationClusterRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstationCluster.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationClusterRequest {
@@ -804,7 +826,7 @@ pub struct UpdateWorkstationClusterRequest {
     /// Required. Mask that specifies which fields in the workstation cluster
     /// should be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. If set, validate the request and preview the review, but do not
     /// actually apply it.
     #[prost(bool, tag = "3")]
@@ -816,6 +838,7 @@ pub struct UpdateWorkstationClusterRequest {
     pub allow_missing: bool,
 }
 /// Message for deleting a workstation cluster.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationClusterRequest {
@@ -837,6 +860,7 @@ pub struct DeleteWorkstationClusterRequest {
     pub force: bool,
 }
 /// Request message for GetWorkstationConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationConfigRequest {
@@ -845,6 +869,7 @@ pub struct GetWorkstationConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstationConfigs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationConfigsRequest {
@@ -860,6 +885,7 @@ pub struct ListWorkstationConfigsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstationConfigs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationConfigsResponse {
@@ -875,6 +901,7 @@ pub struct ListWorkstationConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for ListUsableWorkstationConfigs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationConfigsRequest {
@@ -890,6 +917,7 @@ pub struct ListUsableWorkstationConfigsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListUsableWorkstationConfigs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationConfigsResponse {
@@ -905,6 +933,7 @@ pub struct ListUsableWorkstationConfigsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstationConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationConfigRequest {
@@ -923,6 +952,7 @@ pub struct CreateWorkstationConfigRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstationConfig.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationConfigRequest {
@@ -932,7 +962,7 @@ pub struct UpdateWorkstationConfigRequest {
     /// Required. Mask specifying which fields in the workstation configuration
     /// should be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. If set, validate the request and preview the review, but do not
     /// actually apply it.
     #[prost(bool, tag = "3")]
@@ -944,6 +974,7 @@ pub struct UpdateWorkstationConfigRequest {
     pub allow_missing: bool,
 }
 /// Message for deleting a workstation configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationConfigRequest {
@@ -965,6 +996,7 @@ pub struct DeleteWorkstationConfigRequest {
     pub force: bool,
 }
 /// Request message for GetWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWorkstationRequest {
@@ -973,6 +1005,7 @@ pub struct GetWorkstationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListWorkstations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationsRequest {
@@ -988,6 +1021,7 @@ pub struct ListWorkstationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListWorkstations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListWorkstationsResponse {
@@ -1003,6 +1037,7 @@ pub struct ListWorkstationsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for ListUsableWorkstations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationsRequest {
@@ -1018,6 +1053,7 @@ pub struct ListUsableWorkstationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListUsableWorkstations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsableWorkstationsResponse {
@@ -1033,6 +1069,7 @@ pub struct ListUsableWorkstationsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for creating a CreateWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateWorkstationRequest {
@@ -1051,6 +1088,7 @@ pub struct CreateWorkstationRequest {
     pub validate_only: bool,
 }
 /// Request message for UpdateWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateWorkstationRequest {
@@ -1060,7 +1098,7 @@ pub struct UpdateWorkstationRequest {
     /// Required. Mask specifying which fields in the workstation configuration
     /// should be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. If set, validate the request and preview the review, but do not
     /// actually apply it.
     #[prost(bool, tag = "3")]
@@ -1072,6 +1110,7 @@ pub struct UpdateWorkstationRequest {
     pub allow_missing: bool,
 }
 /// Request message for DeleteWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteWorkstationRequest {
@@ -1088,6 +1127,7 @@ pub struct DeleteWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for StartWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartWorkstationRequest {
@@ -1104,6 +1144,7 @@ pub struct StartWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for StopWorkstation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopWorkstationRequest {
@@ -1120,6 +1161,7 @@ pub struct StopWorkstationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Request message for GenerateAccessToken.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccessTokenRequest {
@@ -1134,23 +1176,25 @@ pub struct GenerateAccessTokenRequest {
 /// Nested message and enum types in `GenerateAccessTokenRequest`.
 pub mod generate_access_token_request {
     /// Desired expiration or lifetime of the access token.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Desired expiration time of the access token. This value must
         /// be at most 24 hours in the future. If a value is not specified, the
         /// token's expiration time will be set to a default value of 1 hour in the
         /// future.
         #[prost(message, tag = "2")]
-        ExpireTime(::prost_types::Timestamp),
+        ExpireTime(::prost_wkt_types::Timestamp),
         /// Desired lifetime duration of the access token. This value must
         /// be at most 24 hours. If a value is not specified, the token's lifetime
         /// will be set to a default value of 1 hour.
         #[prost(message, tag = "3")]
-        Ttl(::prost_types::Duration),
+        Ttl(::prost_wkt_types::Duration),
     }
 }
 /// Response message for GenerateAccessToken.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAccessTokenResponse {
@@ -1162,18 +1206,19 @@ pub struct GenerateAccessTokenResponse {
     pub access_token: ::prost::alloc::string::String,
     /// Time at which the generated token will expire.
     #[prost(message, optional, tag = "2")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Metadata for long-running operations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. Time that the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time that the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,

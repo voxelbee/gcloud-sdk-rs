@@ -5,6 +5,7 @@
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is made up of zero or more
 /// [SecretVersions][google.cloud.secretmanager.v1.SecretVersion] that represent
 /// the secret data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Secret {
@@ -22,7 +23,7 @@ pub struct Secret {
     /// Output only. The time at which the
     /// [Secret][google.cloud.secretmanager.v1.Secret] was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The labels assigned to this Secret.
     ///
     /// Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
@@ -92,7 +93,7 @@ pub struct Secret {
     /// on calling destroy instead the version goes to a disabled state and
     /// destruction happens after the TTL expires.
     #[prost(message, optional, tag = "14")]
-    pub version_destroy_ttl: ::core::option::Option<::prost_types::Duration>,
+    pub version_destroy_ttl: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. The customer-managed encryption configuration of the Regionalised
     /// Secrets. If no configuration is provided, Google-managed default encryption
     /// is used.
@@ -131,21 +132,23 @@ pub mod secret {
     /// Conditions](<https://cloud.google.com/secret-manager/docs/access-control#conditions>)
     /// is recommended for granting time-based permissions because the operation
     /// can be reversed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Optional. Timestamp in UTC when the
         /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to expire.
         /// This is always provided on output, regardless of what was sent on input.
         #[prost(message, tag = "6")]
-        ExpireTime(::prost_types::Timestamp),
+        ExpireTime(::prost_wkt_types::Timestamp),
         /// Input only. The TTL for the
         /// [Secret][google.cloud.secretmanager.v1.Secret].
         #[prost(message, tag = "7")]
-        Ttl(::prost_types::Duration),
+        Ttl(::prost_wkt_types::Duration),
     }
 }
 /// A secret version resource in the Secret Manager API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecretVersion {
@@ -161,14 +164,14 @@ pub struct SecretVersion {
     /// Output only. The time at which the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was created.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time this
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was destroyed.
     /// Only present if [state][google.cloud.secretmanager.v1.SecretVersion.state]
     /// is
     /// [DESTROYED][google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED].
     #[prost(message, optional, tag = "3")]
-    pub destroy_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub destroy_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The current state of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     #[prost(enumeration = "secret_version::State", tag = "4")]
@@ -196,7 +199,7 @@ pub struct SecretVersion {
     /// destruction. The version is destroyed only after the
     /// `scheduled_destroy_time`.
     #[prost(message, optional, tag = "8")]
-    pub scheduled_destroy_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub scheduled_destroy_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The customer-managed encryption status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
     /// populated if customer-managed encryption is used and
@@ -211,6 +214,7 @@ pub mod secret_version {
     /// The state of a
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion], indicating if
     /// it can be accessed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -266,6 +270,7 @@ pub mod secret_version {
     }
 }
 /// A policy that defines the replication and encryption configuration of data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Replication {
@@ -278,6 +283,7 @@ pub mod replication {
     /// A replication policy that replicates the
     /// [Secret][google.cloud.secretmanager.v1.Secret] payload without any
     /// restrictions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Automatic {
@@ -298,6 +304,7 @@ pub mod replication {
     /// A replication policy that replicates the
     /// [Secret][google.cloud.secretmanager.v1.Secret] payload into the locations
     /// specified in [Secret.replication.user_managed.replicas][]
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UserManaged {
@@ -312,6 +319,7 @@ pub mod replication {
     pub mod user_managed {
         /// Represents a Replica for this
         /// [Secret][google.cloud.secretmanager.v1.Secret].
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Replica {
@@ -335,6 +343,7 @@ pub mod replication {
         }
     }
     /// The replication policy for this secret.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Replication {
@@ -350,6 +359,7 @@ pub mod replication {
 }
 /// Configuration for encrypting secret payloads using customer-managed
 /// encryption keys (CMEK).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerManagedEncryption {
@@ -371,6 +381,7 @@ pub struct CustomerManagedEncryption {
 }
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationStatus {
@@ -389,6 +400,7 @@ pub mod replication_status {
     ///
     /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
     /// has an automatic replication policy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AutomaticStatus {
@@ -406,6 +418,7 @@ pub mod replication_status {
     ///
     /// Only populated if the parent [Secret][google.cloud.secretmanager.v1.Secret]
     /// has a user-managed replication policy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UserManagedStatus {
@@ -418,6 +431,7 @@ pub mod replication_status {
     pub mod user_managed_status {
         /// Describes the status of a user-managed replica for the
         /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ReplicaStatus {
@@ -436,6 +450,7 @@ pub mod replication_status {
     }
     /// The replication status of the
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ReplicationStatus {
@@ -460,6 +475,7 @@ pub mod replication_status {
     }
 }
 /// Describes the status of customer-managed encryption.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerManagedEncryptionStatus {
@@ -471,6 +487,7 @@ pub struct CustomerManagedEncryptionStatus {
 }
 /// A Pub/Sub topic which Secret Manager will publish to when control plane
 /// events occur on this secret.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Topic {
@@ -487,8 +504,9 @@ pub struct Topic {
 /// Manager will send a Pub/Sub notification to the topics configured on the
 /// Secret. [Secret.topics][google.cloud.secretmanager.v1.Secret.topics] must be
 /// set to configure rotation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Rotation {
     /// Optional. Timestamp in UTC at which the
     /// [Secret][google.cloud.secretmanager.v1.Secret] is scheduled to rotate.
@@ -500,7 +518,7 @@ pub struct Rotation {
     /// [rotation_period][google.cloud.secretmanager.v1.Rotation.rotation_period]
     /// is set.
     #[prost(message, optional, tag = "1")]
-    pub next_rotation_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub next_rotation_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Input only. The Duration between rotation notifications. Must be in seconds
     /// and at least 3600s (1h) and at most 3153600000s (100 years).
     ///
@@ -513,10 +531,11 @@ pub struct Rotation {
     /// will be advanced by this period when the service automatically sends
     /// rotation notifications.
     #[prost(message, optional, tag = "2")]
-    pub rotation_period: ::core::option::Option<::prost_types::Duration>,
+    pub rotation_period: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Request message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretsRequest {
@@ -544,6 +563,7 @@ pub struct ListSecretsRequest {
 }
 /// Response message for
 /// [SecretManagerService.ListSecrets][google.cloud.secretmanager.v1.SecretManagerService.ListSecrets].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretsResponse {
@@ -565,6 +585,7 @@ pub struct ListSecretsResponse {
 }
 /// Request message for
 /// [SecretManagerService.CreateSecret][google.cloud.secretmanager.v1.SecretManagerService.CreateSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSecretRequest {
@@ -587,6 +608,7 @@ pub struct CreateSecretRequest {
 }
 /// Request message for
 /// [SecretManagerService.AddSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.AddSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddSecretVersionRequest {
@@ -603,6 +625,7 @@ pub struct AddSecretVersionRequest {
 }
 /// Request message for
 /// [SecretManagerService.GetSecret][google.cloud.secretmanager.v1.SecretManagerService.GetSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecretRequest {
@@ -614,6 +637,7 @@ pub struct GetSecretRequest {
 }
 /// Request message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretVersionsRequest {
@@ -642,6 +666,7 @@ pub struct ListSecretVersionsRequest {
 }
 /// Response message for
 /// [SecretManagerService.ListSecretVersions][google.cloud.secretmanager.v1.SecretManagerService.ListSecretVersions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecretVersionsResponse {
@@ -664,6 +689,7 @@ pub struct ListSecretVersionsResponse {
 }
 /// Request message for
 /// [SecretManagerService.GetSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.GetSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecretVersionRequest {
@@ -681,6 +707,7 @@ pub struct GetSecretVersionRequest {
 }
 /// Request message for
 /// [SecretManagerService.UpdateSecret][google.cloud.secretmanager.v1.SecretManagerService.UpdateSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecretRequest {
@@ -690,10 +717,11 @@ pub struct UpdateSecretRequest {
     pub secret: ::core::option::Option<Secret>,
     /// Required. Specifies the fields to be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for
 /// [SecretManagerService.AccessSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessSecretVersionRequest {
@@ -711,6 +739,7 @@ pub struct AccessSecretVersionRequest {
 }
 /// Response message for
 /// [SecretManagerService.AccessSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.AccessSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessSecretVersionResponse {
@@ -726,6 +755,7 @@ pub struct AccessSecretVersionResponse {
 }
 /// Request message for
 /// [SecretManagerService.DeleteSecret][google.cloud.secretmanager.v1.SecretManagerService.DeleteSecret].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSecretRequest {
@@ -742,6 +772,7 @@ pub struct DeleteSecretRequest {
 }
 /// Request message for
 /// [SecretManagerService.DisableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DisableSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableSecretVersionRequest {
@@ -760,6 +791,7 @@ pub struct DisableSecretVersionRequest {
 }
 /// Request message for
 /// [SecretManagerService.EnableSecretVersion][google.cloud.secretmanager.v1.SecretManagerService.EnableSecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableSecretVersionRequest {
@@ -778,6 +810,7 @@ pub struct EnableSecretVersionRequest {
 }
 /// Request message for
 /// [SecretManagerService.DestroySecretVersion][google.cloud.secretmanager.v1.SecretManagerService.DestroySecretVersion].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestroySecretVersionRequest {
@@ -1037,7 +1070,10 @@ pub mod secret_manager_service_client {
         pub async fn delete_secret(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteSecretRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -2,6 +2,7 @@
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Virtual place where conferences are held. Only one active conference can be
 /// held in one space at any given time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Space {
@@ -26,6 +27,7 @@ pub struct Space {
     pub active_conference: ::core::option::Option<ActiveConference>,
 }
 /// Active conference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActiveConference {
@@ -36,8 +38,9 @@ pub struct ActiveConference {
     pub conference_record: ::prost::alloc::string::String,
 }
 /// The configuration pertaining to a meeting space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpaceConfig {
     /// Access type of the meeting space that determines who can join without
     /// knocking. Default: The user's default access settings.  Controlled by the
@@ -53,6 +56,7 @@ pub struct SpaceConfig {
 /// Nested message and enum types in `SpaceConfig`.
 pub mod space_config {
     /// Possible access types for a meeting space.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -105,6 +109,7 @@ pub mod space_config {
     }
     /// Entry points that can be used to join a meeting.  Example:
     /// `meet.google.com`, the Embed SDK Web, or a mobile application.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -152,6 +157,7 @@ pub mod space_config {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Single instance of a meeting held in a space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConferenceRecord {
@@ -162,22 +168,23 @@ pub struct ConferenceRecord {
     pub name: ::prost::alloc::string::String,
     /// Output only. Timestamp when the conference started, always set.
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp when the conference ended.
     /// Set for past conferences. Unset if the conference is ongoing.
     #[prost(message, optional, tag = "3")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server enforced expire time for when this conference record
     /// resource is deleted. The resource is deleted 30 days after the conference
     /// ends.
     #[prost(message, optional, tag = "4")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The space where the conference was held.
     #[prost(string, tag = "5")]
     pub space: ::prost::alloc::string::String,
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// User who attended or is attending a conference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Participant {
@@ -188,16 +195,17 @@ pub struct Participant {
     /// Output only. Time when the participant joined the meeting for the first
     /// time.
     #[prost(message, optional, tag = "7")]
-    pub earliest_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub earliest_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time when the participant left the meeting for the last time.
     /// This can be null if it is an active meeting.
     #[prost(message, optional, tag = "8")]
-    pub latest_end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub latest_end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     #[prost(oneof = "participant::User", tags = "4, 5, 6")]
     pub user: ::core::option::Option<participant::User>,
 }
 /// Nested message and enum types in `Participant`.
 pub mod participant {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum User {
@@ -218,6 +226,7 @@ pub mod participant {
 /// assigned. That means if a user joins a space multiple times from the same
 /// device, they're assigned different IDs, and are also be treated as different
 /// participant sessions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParticipantSession {
@@ -226,16 +235,17 @@ pub struct ParticipantSession {
     pub name: ::prost::alloc::string::String,
     /// Output only. Timestamp when the user session started.
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp when the user session ended. Unset if the user
     /// session hasn’t ended.
     #[prost(message, optional, tag = "3")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A signed-in user can be:
 /// a) An individual joining from a personal computer, mobile device, or through
 /// companion mode.
 /// b) A robot account used by conference room devices.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedinUser {
@@ -250,6 +260,7 @@ pub struct SignedinUser {
     pub display_name: ::prost::alloc::string::String,
 }
 /// User who joins anonymously (meaning not signed into a Google Account).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnonymousUser {
@@ -259,6 +270,7 @@ pub struct AnonymousUser {
 }
 /// User dialing in from a phone where the user's identity is unknown because
 /// they haven't signed in with a Google Account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhoneUser {
@@ -268,6 +280,7 @@ pub struct PhoneUser {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Metadata about a recording created during a conference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Recording {
@@ -282,16 +295,17 @@ pub struct Recording {
     pub state: i32,
     /// Output only. Timestamp when the recording started.
     #[prost(message, optional, tag = "4")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp when the recording ended.
     #[prost(message, optional, tag = "5")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     #[prost(oneof = "recording::Destination", tags = "6")]
     pub destination: ::core::option::Option<recording::Destination>,
 }
 /// Nested message and enum types in `Recording`.
 pub mod recording {
     /// Current state of the recording session.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -339,6 +353,7 @@ pub mod recording {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -350,6 +365,7 @@ pub mod recording {
     }
 }
 /// Export location where a recording file is saved in Google Drive.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DriveDestination {
@@ -368,6 +384,7 @@ pub struct DriveDestination {
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Metadata for a transcript generated from a conference. It refers to the ASR
 /// (Automatic Speech Recognition) result of user's speech during the conference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transcript {
@@ -382,16 +399,17 @@ pub struct Transcript {
     pub state: i32,
     /// Output only. Timestamp when the transcript started.
     #[prost(message, optional, tag = "4")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp when the transcript stopped.
     #[prost(message, optional, tag = "5")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     #[prost(oneof = "transcript::Destination", tags = "6")]
     pub destination: ::core::option::Option<transcript::Destination>,
 }
 /// Nested message and enum types in `Transcript`.
 pub mod transcript {
     /// Current state of the transcript session.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -439,6 +457,7 @@ pub mod transcript {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -448,6 +467,7 @@ pub mod transcript {
     }
 }
 /// Google Docs location where the transcript file is saved.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocsDestination {
@@ -466,6 +486,7 @@ pub struct DocsDestination {
 }
 /// [Developer Preview](<https://developers.google.com/workspace/preview>).
 /// Single entry for one user’s speech during a transcript session.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TranscriptEntry {
@@ -486,12 +507,13 @@ pub struct TranscriptEntry {
     pub language_code: ::prost::alloc::string::String,
     /// Output only. Timestamp when the transcript entry started.
     #[prost(message, optional, tag = "5")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Timestamp when the transcript entry ended.
     #[prost(message, optional, tag = "6")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request to create a space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSpaceRequest {
@@ -501,6 +523,7 @@ pub struct CreateSpaceRequest {
     pub space: ::core::option::Option<Space>,
 }
 /// Request to get a space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSpaceRequest {
@@ -509,6 +532,7 @@ pub struct GetSpaceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSpaceRequest {
@@ -520,9 +544,10 @@ pub struct UpdateSpaceRequest {
     /// fields provided in the request, including deleting fields not set in the
     /// request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request to end an ongoing conference of a space.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndActiveConferenceRequest {
@@ -531,6 +556,7 @@ pub struct EndActiveConferenceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to get a conference record.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConferenceRecordRequest {
@@ -539,6 +565,7 @@ pub struct GetConferenceRecordRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to fetch list of conference records per user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConferenceRecordsRequest {
@@ -564,6 +591,7 @@ pub struct ListConferenceRecordsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListConferenceRecords method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConferenceRecordsResponse {
@@ -576,6 +604,7 @@ pub struct ListConferenceRecordsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to get a Participant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetParticipantRequest {
@@ -584,6 +613,7 @@ pub struct GetParticipantRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to fetch list of participant per conference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantsRequest {
@@ -612,6 +642,7 @@ pub struct ListParticipantsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListParticipants method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantsResponse {
@@ -630,6 +661,7 @@ pub struct ListParticipantsResponse {
     pub total_size: i32,
 }
 /// Request to get a participant session.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetParticipantSessionRequest {
@@ -639,6 +671,7 @@ pub struct GetParticipantSessionRequest {
 }
 /// Request to fetch list of participant sessions per conference record per
 /// participant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantSessionsRequest {
@@ -667,6 +700,7 @@ pub struct ListParticipantSessionsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response of ListParticipants method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListParticipantSessionsResponse {
@@ -679,6 +713,7 @@ pub struct ListParticipantSessionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetRecording method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRecordingRequest {
@@ -687,6 +722,7 @@ pub struct GetRecordingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListRecordings method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRecordingsRequest {
@@ -705,6 +741,7 @@ pub struct ListRecordingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListRecordings method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRecordingsResponse {
@@ -717,6 +754,7 @@ pub struct ListRecordingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for GetTranscript method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTranscriptRequest {
@@ -725,6 +763,7 @@ pub struct GetTranscriptRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListTranscripts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptsRequest {
@@ -743,6 +782,7 @@ pub struct ListTranscriptsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListTranscripts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptsResponse {
@@ -755,6 +795,7 @@ pub struct ListTranscriptsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for GetTranscriptEntry method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTranscriptEntryRequest {
@@ -763,6 +804,7 @@ pub struct GetTranscriptEntryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListTranscriptEntries method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptEntriesRequest {
@@ -782,6 +824,7 @@ pub struct ListTranscriptEntriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListTranscriptEntries method
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTranscriptEntriesResponse {
@@ -968,7 +1011,10 @@ pub mod spaces_service_client {
         pub async fn end_active_conference(
             &mut self,
             request: impl tonic::IntoRequest<super::EndActiveConferenceRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -4,6 +4,7 @@
 /// of profile types supported by the agent. The creation call will hang until a
 /// profile of one of these types needs to be collected.
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateProfileRequest {
@@ -19,6 +20,7 @@ pub struct CreateProfileRequest {
 }
 /// CreateOfflineProfileRequest describes a profile resource offline creation
 /// request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateOfflineProfileRequest {
@@ -30,6 +32,7 @@ pub struct CreateOfflineProfileRequest {
     pub profile: ::core::option::Option<Profile>,
 }
 /// UpdateProfileRequest contains the profile to update.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProfileRequest {
@@ -41,9 +44,10 @@ pub struct UpdateProfileRequest {
     /// those fields can be specified in the mask. When no mask is provided, all
     /// fields are overwritten.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Profile resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Profile {
@@ -65,7 +69,7 @@ pub struct Profile {
     /// data, in case the profiling can't be stopped immediately (e.g. in case
     /// stopping the profiling is handled asynchronously).
     #[prost(message, optional, tag = "4")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Input only. Profile bytes, as a gzip compressed serialized proto, the
     /// format is <https://github.com/google/pprof/blob/master/proto/profile.proto.>
     #[prost(bytes = "vec", tag = "5")]
@@ -81,9 +85,10 @@ pub struct Profile {
     /// Output only. Start time for the profile.
     /// This output is only present in response from the ListProfiles method.
     #[prost(message, optional, tag = "7")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Deployment contains the deployment identification information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
@@ -120,6 +125,7 @@ pub struct Deployment {
 }
 /// ListProfilesRequest contains request parameters for listing profiles for
 /// deployments in projects which the user has permissions to view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesRequest {
@@ -140,6 +146,7 @@ pub struct ListProfilesRequest {
 }
 /// ListProfileResponse contains the list of collected profiles for deployments
 /// in projects which the user has permissions to view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesResponse {
@@ -160,6 +167,7 @@ pub struct ListProfilesResponse {
 /// ProfileType is type of profiling data.
 /// NOTE: the enumeration member names are used (in lowercase) as unique string
 /// identifiers of profile types, so they must not be renamed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ProfileType {

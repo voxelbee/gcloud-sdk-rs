@@ -2,6 +2,7 @@
 /// An `AccessLevel` is a label that can be applied to requests to Google Cloud
 /// services, along with a list of requirements necessary for the label to be
 /// applied.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessLevel {
@@ -19,10 +20,10 @@ pub struct AccessLevel {
     pub description: ::prost::alloc::string::String,
     /// Output only. Time the `AccessLevel` was created in UTC.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time the `AccessLevel` was updated in UTC.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. Describes the necessary conditions for the level to apply.
     #[prost(oneof = "access_level::Level", tags = "4, 5")]
     pub level: ::core::option::Option<access_level::Level>,
@@ -30,6 +31,7 @@ pub struct AccessLevel {
 /// Nested message and enum types in `AccessLevel`.
 pub mod access_level {
     /// Required. Describes the necessary conditions for the level to apply.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Level {
@@ -42,6 +44,7 @@ pub mod access_level {
     }
 }
 /// `BasicLevel` is an `AccessLevel` using a set of recommended features.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BasicLevel {
@@ -60,6 +63,7 @@ pub struct BasicLevel {
 pub mod basic_level {
     /// Options for how the `conditions` list should be combined to determine if
     /// this `AccessLevel` is applied. Default is AND.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -104,6 +108,7 @@ pub mod basic_level {
 /// of the listed subnetworks AND 2) the originating device complies with the
 /// listed device policy AND 3) all listed access levels are granted AND 4) the
 /// request was sent at a time allowed by the DateTimeRestriction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
@@ -149,6 +154,7 @@ pub struct Condition {
 /// `CustomLevel` is an `AccessLevel` using the Cloud Common Expression Language
 /// to represent the necessary conditions for the level to apply to a request.
 /// See CEL spec at: <https://github.com/google/cel-spec>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomLevel {
@@ -165,6 +171,7 @@ pub struct CustomLevel {
 /// DESKTOP_LINUX, encryption_status: ENCRYPTED}, then the DevicePolicy will be
 /// true for requests originating from encrypted Linux desktops and encrypted
 /// Windows desktops.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DevicePolicy {
@@ -190,6 +197,7 @@ pub struct DevicePolicy {
     pub require_corp_owned: bool,
 }
 /// A restriction on the OS type and version of devices making requests.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OsConstraint {
@@ -213,6 +221,7 @@ pub struct OsConstraint {
 /// define regions of services able to freely pass data within a perimeter). An
 /// access policy is globally visible within an organization, and the
 /// restrictions it specifies apply to all projects within an organization.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessPolicy {
@@ -246,10 +255,10 @@ pub struct AccessPolicy {
     pub scopes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Output only. Time the `AccessPolicy` was created in UTC.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time the `AccessPolicy` was updated in UTC.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. An opaque identifier for the current version of the
     /// `AccessPolicy`. This will always be a strongly validated etag, meaning that
     /// two Access Polices will be identical if and only if their etags are
@@ -267,6 +276,7 @@ pub struct AccessPolicy {
 /// Service Perimeter Bridges can contain only Google Cloud projects as members,
 /// a single Google Cloud project may belong to multiple Service Perimeter
 /// Bridges.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServicePerimeter {
@@ -285,10 +295,10 @@ pub struct ServicePerimeter {
     pub description: ::prost::alloc::string::String,
     /// Output only. Time the `ServicePerimeter` was created in UTC.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time the `ServicePerimeter` was updated in UTC.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Perimeter type indicator. A single project is
     /// allowed to be a member of single regular perimeter, but multiple service
     /// perimeter bridges. A project cannot be a included in a perimeter bridge
@@ -338,6 +348,7 @@ pub mod service_perimeter {
     /// Perimeter Bridges are typically useful when building more complex toplogies
     /// with many independent perimeters that need to share some data with a common
     /// perimeter, but should not be able to share data among themselves.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -379,6 +390,7 @@ pub mod service_perimeter {
 }
 /// `ServicePerimeterConfig` specifies a set of Google Cloud resources that
 /// describe specific Service Perimeter configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServicePerimeterConfig {
@@ -436,6 +448,7 @@ pub struct ServicePerimeterConfig {
 pub mod service_perimeter_config {
     /// Specifies how APIs are allowed to communicate within the Service
     /// Perimeter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VpcAccessibleServices {
@@ -452,6 +465,7 @@ pub mod service_perimeter_config {
     }
     /// An allowed method or permission of a service specified in \[ApiOperation\]
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation\].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MethodSelector {
@@ -462,6 +476,7 @@ pub mod service_perimeter_config {
     /// Nested message and enum types in `MethodSelector`.
     pub mod method_selector {
         /// The API method name or Cloud IAM permission name to allow.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
@@ -480,6 +495,7 @@ pub mod service_perimeter_config {
         }
     }
     /// Identification for an API Operation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ApiOperation {
@@ -504,6 +520,7 @@ pub mod service_perimeter_config {
     /// The source that \[IngressPolicy\]
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy\]
     /// authorizes access from.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IngressSource {
@@ -518,6 +535,7 @@ pub mod service_perimeter_config {
         /// Allowed ingress source. It can be one of \[AccessLevel\]
         /// \[google.identity.accesscontextmanager.v1.AccessLevel\] or Google
         /// Cloud resource.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Source {
@@ -557,6 +575,7 @@ pub mod service_perimeter_config {
     /// matches a request. Conditions are based on information about the source of
     /// the request. The request must satisfy what is defined in `sources` AND
     /// identity related fields in order to match.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IngressFrom {
@@ -584,6 +603,7 @@ pub mod service_perimeter_config {
     /// intended to be performed on the target resource of the request. The request
     /// must satisfy what is defined in `operations` AND `resources` in order to
     /// match.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IngressTo {
@@ -627,6 +647,7 @@ pub mod service_perimeter_config {
     ///
     /// Individual ingress policies can be limited by restricting which
     /// services and/or actions they match using the `ingress_to` field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IngressPolicy {
@@ -655,6 +676,7 @@ pub mod service_perimeter_config {
     /// an \[IngressPolicy\]
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy\]
     /// which allows access in order for this request to succeed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EgressFrom {
@@ -684,6 +706,7 @@ pub mod service_perimeter_config {
     /// which allows access in order for this request to succeed. The request must
     /// match `operations` AND `resources` fields in order to be allowed egress out
     /// of the perimeter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EgressTo {
@@ -742,6 +765,7 @@ pub mod service_perimeter_config {
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom\]
     /// and \[EgressTo\]
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo\].
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EgressPolicy {
@@ -764,6 +788,7 @@ pub mod service_perimeter_config {
     /// or \[EgressFrom\]
     /// \[google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom\]
     /// rules.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -813,6 +838,7 @@ pub mod service_perimeter_config {
 }
 /// Restricts access to Cloud Console and Google Cloud APIs for a set of users
 /// using Context-Aware Access.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcpUserAccessBinding {
@@ -840,6 +866,7 @@ pub struct GcpUserAccessBinding {
     pub access_levels: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A request to list all `AccessPolicies` for a container.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessPoliciesRequest {
@@ -859,6 +886,7 @@ pub struct ListAccessPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// A response to `ListAccessPoliciesRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessPoliciesResponse {
@@ -871,6 +899,7 @@ pub struct ListAccessPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request to get a particular `AccessPolicy`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccessPolicyRequest {
@@ -881,6 +910,7 @@ pub struct GetAccessPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request to update an `AccessPolicy`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccessPolicyRequest {
@@ -889,9 +919,10 @@ pub struct UpdateAccessPolicyRequest {
     pub policy: ::core::option::Option<AccessPolicy>,
     /// Required. Mask to control which fields get updated. Must be non-empty.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A request to delete an `AccessPolicy`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccessPolicyRequest {
@@ -902,6 +933,7 @@ pub struct DeleteAccessPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request to list all `AccessLevels` in an `AccessPolicy`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessLevelsRequest {
@@ -929,6 +961,7 @@ pub struct ListAccessLevelsRequest {
     pub access_level_format: i32,
 }
 /// A response to `ListAccessLevelsRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessLevelsResponse {
@@ -942,6 +975,7 @@ pub struct ListAccessLevelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request to get a particular `AccessLevel`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccessLevelRequest {
@@ -964,6 +998,7 @@ pub struct GetAccessLevelRequest {
     pub access_level_format: i32,
 }
 /// A request to create an `AccessLevel`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAccessLevelRequest {
@@ -982,6 +1017,7 @@ pub struct CreateAccessLevelRequest {
     pub access_level: ::core::option::Option<AccessLevel>,
 }
 /// A request to update an `AccessLevel`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccessLevelRequest {
@@ -994,9 +1030,10 @@ pub struct UpdateAccessLevelRequest {
     pub access_level: ::core::option::Option<AccessLevel>,
     /// Required. Mask to control which fields get updated. Must be non-empty.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A request to delete an `AccessLevel`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccessLevelRequest {
@@ -1010,6 +1047,7 @@ pub struct DeleteAccessLevelRequest {
 }
 /// A request to replace all existing Access Levels in an Access Policy with
 /// the Access Levels provided. This is done atomically.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplaceAccessLevelsRequest {
@@ -1040,6 +1078,7 @@ pub struct ReplaceAccessLevelsRequest {
 }
 /// A response to ReplaceAccessLevelsRequest. This will be put inside of
 /// Operation.response field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplaceAccessLevelsResponse {
@@ -1049,6 +1088,7 @@ pub struct ReplaceAccessLevelsResponse {
     pub access_levels: ::prost::alloc::vec::Vec<AccessLevel>,
 }
 /// A request to list all `ServicePerimeters` in an `AccessPolicy`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicePerimetersRequest {
@@ -1071,6 +1111,7 @@ pub struct ListServicePerimetersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// A response to `ListServicePerimetersRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicePerimetersResponse {
@@ -1084,6 +1125,7 @@ pub struct ListServicePerimetersResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request to get a particular `ServicePerimeter`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServicePerimeterRequest {
@@ -1096,6 +1138,7 @@ pub struct GetServicePerimeterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request to create a `ServicePerimeter`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServicePerimeterRequest {
@@ -1114,6 +1157,7 @@ pub struct CreateServicePerimeterRequest {
     pub service_perimeter: ::core::option::Option<ServicePerimeter>,
 }
 /// A request to update a `ServicePerimeter`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateServicePerimeterRequest {
@@ -1123,9 +1167,10 @@ pub struct UpdateServicePerimeterRequest {
     pub service_perimeter: ::core::option::Option<ServicePerimeter>,
     /// Required. Mask to control which fields get updated. Must be non-empty.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A request to delete a `ServicePerimeter`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServicePerimeterRequest {
@@ -1139,6 +1184,7 @@ pub struct DeleteServicePerimeterRequest {
 }
 /// A request to replace all existing Service Perimeters in an Access Policy
 /// with the Service Perimeters provided. This is done atomically.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplaceServicePerimetersRequest {
@@ -1169,6 +1215,7 @@ pub struct ReplaceServicePerimetersRequest {
 }
 /// A response to ReplaceServicePerimetersRequest. This will be put inside of
 /// Operation.response field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplaceServicePerimetersResponse {
@@ -1180,6 +1227,7 @@ pub struct ReplaceServicePerimetersResponse {
 /// A request to commit dry-run specs in all \[Service Perimeters\]
 /// \[google.identity.accesscontextmanager.v1.ServicePerimeter\] belonging to
 /// an [Access Policy][google.identity.accesscontextmanager.v1.AccessPolicy].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitServicePerimetersRequest {
@@ -1204,6 +1252,7 @@ pub struct CommitServicePerimetersRequest {
 }
 /// A response to CommitServicePerimetersRequest. This will be put inside of
 /// Operation.response field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitServicePerimetersResponse {
@@ -1216,6 +1265,7 @@ pub struct CommitServicePerimetersResponse {
 }
 /// Request of \[ListGcpUserAccessBindings\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.ListGcpUserAccessBindings\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGcpUserAccessBindingsRequest {
@@ -1235,6 +1285,7 @@ pub struct ListGcpUserAccessBindingsRequest {
 }
 /// Response of \[ListGcpUserAccessBindings\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.ListGcpUserAccessBindings\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGcpUserAccessBindingsResponse {
@@ -1248,6 +1299,7 @@ pub struct ListGcpUserAccessBindingsResponse {
 }
 /// Request of \[GetGcpUserAccessBinding\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.GetGcpUserAccessBinding\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGcpUserAccessBindingRequest {
@@ -1257,6 +1309,7 @@ pub struct GetGcpUserAccessBindingRequest {
 }
 /// Request of \[CreateGcpUserAccessBinding\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.CreateGcpUserAccessBinding\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGcpUserAccessBindingRequest {
@@ -1270,6 +1323,7 @@ pub struct CreateGcpUserAccessBindingRequest {
 }
 /// Request of \[UpdateGcpUserAccessBinding\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.UpdateGcpUserAccessBinding\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGcpUserAccessBindingRequest {
@@ -1284,10 +1338,11 @@ pub struct UpdateGcpUserAccessBindingRequest {
     /// paths: "access_levels"
     /// }
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request of \[DeleteGcpUserAccessBinding\]
 /// \[google.identity.accesscontextmanager.v1.AccessContextManager.DeleteGcpUserAccessBinding\].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGcpUserAccessBindingRequest {
@@ -1298,14 +1353,17 @@ pub struct DeleteGcpUserAccessBindingRequest {
 /// Currently, a completed operation means nothing. In the future, this metadata
 /// and a completed operation may indicate that the binding has taken effect and
 /// is affecting access decisions for all users.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GcpUserAccessBindingOperationMetadata {}
 /// Metadata of Access Context Manager's Long Running Operations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessContextManagerOperationMetadata {}
 /// The format used in an `AccessLevel`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LevelFormat {

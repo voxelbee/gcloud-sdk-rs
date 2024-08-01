@@ -2,6 +2,7 @@
 /// A trace describes how long it takes for an application to perform an
 /// operation. It consists of a set of spans, each of which represent a single
 /// timed event within the operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
@@ -18,6 +19,7 @@ pub struct Trace {
     pub spans: ::prost::alloc::vec::Vec<TraceSpan>,
 }
 /// List of new or updated traces.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Traces {
@@ -30,6 +32,7 @@ pub struct Traces {
 /// end-to-end latency of an operation and, optionally, one or more subspans for
 /// its suboperations. Spans do not need to be contiguous. There may be gaps
 /// between spans in a trace.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraceSpan {
@@ -53,10 +56,10 @@ pub struct TraceSpan {
     pub name: ::prost::alloc::string::String,
     /// Start time of the span in nanoseconds from the UNIX epoch.
     #[prost(message, optional, tag = "4")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// End time of the span in nanoseconds from the UNIX epoch.
     #[prost(message, optional, tag = "5")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. ID of the parent span, if any.
     #[prost(fixed64, tag = "6")]
     pub parent_span_id: u64,
@@ -105,6 +108,7 @@ pub struct TraceSpan {
 pub mod trace_span {
     /// Type of span. Can be used to specify additional relationships between spans
     /// in addition to a parent/child relationship.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -152,6 +156,7 @@ pub mod trace_span {
 }
 /// The request message for the `ListTraces` method. All fields are required
 /// unless specified.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesRequest {
@@ -174,11 +179,11 @@ pub struct ListTracesRequest {
     /// Start of the time interval (inclusive) during which the trace data was
     /// collected from the application.
     #[prost(message, optional, tag = "5")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// End of the time interval (inclusive) during which the trace data was
     /// collected from the application.
     #[prost(message, optional, tag = "6")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. A filter against labels for the request.
     ///
     /// By default, searches use prefix matching. To specify exact match, prepend
@@ -230,6 +235,7 @@ pub struct ListTracesRequest {
 /// Nested message and enum types in `ListTracesRequest`.
 pub mod list_traces_request {
     /// Type of data returned for traces in the list.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -282,6 +288,7 @@ pub mod list_traces_request {
     }
 }
 /// The response message for the `ListTraces` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesResponse {
@@ -295,6 +302,7 @@ pub struct ListTracesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request message for the `GetTrace` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTraceRequest {
@@ -306,6 +314,7 @@ pub struct GetTraceRequest {
     pub trace_id: ::prost::alloc::string::String,
 }
 /// The request message for the `PatchTraces` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchTracesRequest {
@@ -473,7 +482,10 @@ pub mod trace_service_client {
         pub async fn patch_traces(
             &mut self,
             request: impl tonic::IntoRequest<super::PatchTracesRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

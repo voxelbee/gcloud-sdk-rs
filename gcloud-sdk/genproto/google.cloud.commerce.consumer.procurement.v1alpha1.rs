@@ -9,6 +9,7 @@
 ///
 /// Customers typically choose a price plan for each Product purchased when
 /// they create an order and can change their plan later, if the product allows.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Order {
@@ -28,15 +29,16 @@ pub struct Order {
     pub cancelled_line_items: ::prost::alloc::vec::Vec<LineItem>,
     /// Output only. The creation timestamp.
     #[prost(message, optional, tag = "8")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last update timestamp.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The weak etag of the order.
     #[prost(string, tag = "11")]
     pub etag: ::prost::alloc::string::String,
 }
 /// A single item within an order.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItem {
@@ -60,6 +62,7 @@ pub struct LineItem {
     pub change_history: ::prost::alloc::vec::Vec<LineItemChange>,
 }
 /// A change made on a line item.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItemChange {
@@ -95,16 +98,17 @@ pub struct LineItemChange {
     /// Output only. A time at which the change became or will become (in case of
     /// pending change) effective.
     #[prost(message, optional, tag = "7")]
-    pub change_effective_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub change_effective_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time when change was initiated.
     #[prost(message, optional, tag = "8")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time when change was updated, e.g. approved/rejected by
     /// partners or cancelled by the user.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Line item information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItemInfo {
@@ -121,6 +125,7 @@ pub struct LineItemInfo {
     pub subscription: ::core::option::Option<Subscription>,
 }
 /// User-provided Parameters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Parameter {
@@ -133,6 +138,7 @@ pub struct Parameter {
 }
 /// Nested message and enum types in `Parameter`.
 pub mod parameter {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Value {
@@ -143,6 +149,7 @@ pub mod parameter {
     /// Nested message and enum types in `Value`.
     pub mod value {
         /// The kind of value.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
@@ -159,15 +166,16 @@ pub mod parameter {
     }
 }
 /// Subscription information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Subscription {
     /// The timestamp when the subscription begins, if applicable.
     #[prost(message, optional, tag = "3")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The timestamp when the subscription ends, if applicable.
     #[prost(message, optional, tag = "1")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Whether auto renewal is enabled by user choice on current subscription.
     /// This field indicates order/subscription status after pending plan change is
     /// cancelled or rejected.
@@ -175,6 +183,7 @@ pub struct Subscription {
     pub auto_renewal_enabled: bool,
 }
 /// Type of a line item change.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LineItemChangeType {
@@ -218,6 +227,7 @@ impl LineItemChangeType {
     }
 }
 /// State of a change.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LineItemChangeState {
@@ -275,6 +285,7 @@ impl LineItemChangeState {
     }
 }
 /// Predefined types for line item change state reason.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LineItemChangeStateReasonType {
@@ -326,6 +337,7 @@ impl LineItemChangeStateReasonType {
 }
 /// Request message for
 /// [ConsumerProcurementService.PlaceOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.PlaceOrder].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PlaceOrderRequest {
@@ -351,11 +363,13 @@ pub struct PlaceOrderRequest {
 }
 /// Message stored in the metadata field of the Operation returned by
 /// [ConsumerProcurementService.PlaceOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.PlaceOrder].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlaceOrderMetadata {}
 /// Request message for
 /// [ConsumerProcurementService.GetOrder][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.GetOrder]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrderRequest {
@@ -365,6 +379,7 @@ pub struct GetOrderRequest {
 }
 /// Request message for
 /// [ConsumerProcurementService.ListOrders][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.ListOrders].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersRequest {
@@ -400,6 +415,7 @@ pub struct ListOrdersRequest {
 }
 /// Response message for
 /// [ConsumerProcurementService.ListOrders][google.cloud.commerce.consumer.procurement.v1alpha1.ConsumerProcurementService.ListOrders].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersResponse {

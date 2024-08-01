@@ -2,6 +2,7 @@
 /// An individual endpoint that provides a
 /// [service][google.cloud.servicedirectory.v1beta1.Service]. The service must
 /// already exist to create an endpoint.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
@@ -60,10 +61,10 @@ pub struct Endpoint {
     pub network: ::prost::alloc::string::String,
     /// Output only. The timestamp when the endpoint was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the endpoint was last updated.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. A globally unique identifier (in UUID4 format) for this
     /// endpoint.
     #[prost(string, tag = "8")]
@@ -73,6 +74,7 @@ pub struct Endpoint {
 /// A service must exist before
 /// [endpoints][google.cloud.servicedirectory.v1beta1.Endpoint] can be
 /// added to it.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
@@ -113,12 +115,12 @@ pub struct Service {
     pub endpoints: ::prost::alloc::vec::Vec<Endpoint>,
     /// Output only. The timestamp when the service was created.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the service was last updated. Note:
     /// endpoints being created/deleted/updated within the service are not
     /// considered service updates for the purpose of this timestamp.
     #[prost(message, optional, tag = "7")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. A globally unique identifier (in UUID4 format) for this
     /// service.
     #[prost(string, tag = "8")]
@@ -127,6 +129,7 @@ pub struct Service {
 /// The request message for
 /// [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
 /// Looks up a service by its name, returns the service and its endpoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResolveServiceRequest {
@@ -179,6 +182,7 @@ pub struct ResolveServiceRequest {
 }
 /// The response message for
 /// [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResolveServiceResponse {
@@ -309,6 +313,7 @@ pub mod lookup_service_client {
 /// A container for [services][google.cloud.servicedirectory.v1beta1.Service].
 /// Namespaces allow administrators to group services together and define
 /// permissions for a collection of services.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
@@ -326,10 +331,10 @@ pub struct Namespace {
     >,
     /// Output only. The timestamp when the namespace was created.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the namespace was last updated.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. A globally unique identifier (in UUID4 format) for this
     /// namespace.
     #[prost(string, tag = "6")]
@@ -337,6 +342,7 @@ pub struct Namespace {
 }
 /// The request message for
 /// [RegistrationService.CreateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateNamespace].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateNamespaceRequest {
@@ -359,6 +365,7 @@ pub struct CreateNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesRequest {
@@ -420,6 +427,7 @@ pub struct ListNamespacesRequest {
 }
 /// The response message for
 /// [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesResponse {
@@ -433,6 +441,7 @@ pub struct ListNamespacesResponse {
 }
 /// The request message for
 /// [RegistrationService.GetNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.GetNamespace].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNamespaceRequest {
@@ -442,6 +451,7 @@ pub struct GetNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateNamespace].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateNamespaceRequest {
@@ -450,10 +460,11 @@ pub struct UpdateNamespaceRequest {
     pub namespace: ::core::option::Option<Namespace>,
     /// Required. List of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request message for
 /// [RegistrationService.DeleteNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteNamespace].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteNamespaceRequest {
@@ -463,6 +474,7 @@ pub struct DeleteNamespaceRequest {
 }
 /// The request message for
 /// [RegistrationService.CreateService][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateService].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServiceRequest {
@@ -484,6 +496,7 @@ pub struct CreateServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesRequest {
@@ -548,6 +561,7 @@ pub struct ListServicesRequest {
 }
 /// The response message for
 /// [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServicesResponse {
@@ -563,6 +577,7 @@ pub struct ListServicesResponse {
 /// [RegistrationService.GetService][google.cloud.servicedirectory.v1beta1.RegistrationService.GetService].
 /// This should not be used for looking up a service. Instead, use the `resolve`
 /// method as it contains all endpoints and associated metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServiceRequest {
@@ -572,6 +587,7 @@ pub struct GetServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateService][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateService].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateServiceRequest {
@@ -580,10 +596,11 @@ pub struct UpdateServiceRequest {
     pub service: ::core::option::Option<Service>,
     /// Required. List of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request message for
 /// [RegistrationService.DeleteService][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteService].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServiceRequest {
@@ -593,6 +610,7 @@ pub struct DeleteServiceRequest {
 }
 /// The request message for
 /// [RegistrationService.CreateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateEndpoint].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEndpointRequest {
@@ -614,6 +632,7 @@ pub struct CreateEndpointRequest {
 }
 /// The request message for
 /// [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsRequest {
@@ -680,6 +699,7 @@ pub struct ListEndpointsRequest {
 }
 /// The response message for
 /// [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsResponse {
@@ -695,6 +715,7 @@ pub struct ListEndpointsResponse {
 /// [RegistrationService.GetEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.GetEndpoint].
 /// This should not be used to lookup endpoints at runtime. Instead, use
 /// the `resolve` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEndpointRequest {
@@ -704,6 +725,7 @@ pub struct GetEndpointRequest {
 }
 /// The request message for
 /// [RegistrationService.UpdateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateEndpoint].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEndpointRequest {
@@ -712,10 +734,11 @@ pub struct UpdateEndpointRequest {
     pub endpoint: ::core::option::Option<Endpoint>,
     /// Required. List of fields to be updated in this request.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request message for
 /// [RegistrationService.DeleteEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteEndpoint].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEndpointRequest {
@@ -943,7 +966,10 @@ pub mod registration_service_client {
         pub async fn delete_namespace(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteNamespaceRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1087,7 +1113,10 @@ pub mod registration_service_client {
         pub async fn delete_service(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteServiceRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1230,7 +1259,10 @@ pub mod registration_service_client {
         pub async fn delete_endpoint(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteEndpointRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

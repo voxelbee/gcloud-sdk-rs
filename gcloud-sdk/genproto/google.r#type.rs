@@ -4,8 +4,9 @@
 /// specified otherwise, this must conform to the
 /// <a href="<http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84>
 /// standard</a>. Values must be within normalized ranges.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LatLng {
     /// The latitude in degrees. It must be in the range \[-90.0, +90.0\].
     #[prost(double, tag = "1")]
@@ -27,8 +28,9 @@ pub struct LatLng {
 ///
 /// Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
 /// `google.protobuf.Timestamp`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Date {
     /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
     /// a year.
@@ -68,6 +70,7 @@ pub struct Date {
 ///
 /// This type is more flexible than some applications may want. Make sure to
 /// document and validate your application's limitations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateTime {
@@ -113,6 +116,7 @@ pub mod date_time {
     /// in the future (for example, a country modifies their DST start/end dates,
     /// and future DateTimes in the affected range had already been stored).
     /// If omitted, the DateTime is considered to be in local time.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TimeOffset {
@@ -120,7 +124,7 @@ pub mod date_time {
         /// For example, a UTC offset of -4:00 would be represented as
         /// { seconds: -14400 }.
         #[prost(message, tag = "8")]
-        UtcOffset(::prost_types::Duration),
+        UtcOffset(::prost_wkt_types::Duration),
         /// Time zone.
         #[prost(message, tag = "9")]
         TimeZone(super::TimeZone),
@@ -128,6 +132,7 @@ pub mod date_time {
 }
 /// Represents a time zone from the
 /// [IANA Time Zone Database](<https://www.iana.org/time-zones>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimeZone {
@@ -139,6 +144,7 @@ pub struct TimeZone {
     pub version: ::prost::alloc::string::String,
 }
 /// Represents an amount of money with its currency type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Money {
@@ -282,8 +288,9 @@ pub struct Money {
 ///      };
 ///
 ///      // ...
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Color {
     /// The amount of red in the color as a value in the interval \[0, 1\].
     #[prost(float, tag = "1")]
@@ -306,7 +313,7 @@ pub struct Color {
     /// If omitted, this color object is rendered as a solid color
     /// (as if the alpha value had been explicitly given a value of 1.0).
     #[prost(message, optional, tag = "4")]
-    pub alpha: ::core::option::Option<f32>,
+    pub alpha: ::core::option::Option<pb::FloatValue>,
 }
 /// Represents a textual expression in the Common Expression Language (CEL)
 /// syntax. CEL is a C-like expression language. The syntax and semantics of CEL
@@ -339,6 +346,7 @@ pub struct Color {
 /// The exact variables and functions that may be referenced within an expression
 /// are determined by the service that evaluates it. See the service
 /// documentation for additional information.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Expr {
@@ -366,23 +374,25 @@ pub struct Expr {
 /// The start must be less than or equal to the end.
 /// When the start equals the end, the interval is empty (matches no time).
 /// When both start and end are unspecified, the interval matches any time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Interval {
     /// Optional. Inclusive start of the interval.
     ///
     /// If specified, a Timestamp matching this interval will have to be the same
     /// or after the start.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Exclusive end of the interval.
     ///
     /// If specified, a Timestamp matching this interval will have to be before the
     /// end.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Represents a day of the week.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DayOfWeek {
@@ -439,8 +449,9 @@ impl DayOfWeek {
 /// or are specified elsewhere. An API may choose to allow leap seconds. Related
 /// types are [google.type.Date][google.type.Date] and
 /// `google.protobuf.Timestamp`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeOfDay {
     /// Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
     /// to allow the value "24:00:00" for scenarios like business closing time.
@@ -474,6 +485,7 @@ pub struct TimeOfDay {
 ///
 /// For more guidance on how to use this schema, please see:
 /// <https://support.google.com/business/answer/6397478>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostalAddress {
@@ -576,6 +588,7 @@ pub struct PostalAddress {
 /// \[BigDecimal\]:
 /// <https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html>
 /// \[decimal.Decimal\]: <https://docs.python.org/3/library/decimal.html>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Decimal {
@@ -643,6 +656,7 @@ pub struct Decimal {
     pub value: ::prost::alloc::string::String,
 }
 /// Localized variant of a text in a particular language.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedText {
@@ -659,6 +673,7 @@ pub struct LocalizedText {
 /// A `CalendarPeriod` represents the abstract concept of a time period that has
 /// a canonical start. Grammatically, "the start of the current
 /// `CalendarPeriod`." All calendar times begin at midnight UTC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum CalendarPeriod {
@@ -741,6 +756,7 @@ impl CalendarPeriod {
 ///
 ///   Reference(s):
 ///    - <https://github.com/google/libphonenumber>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhoneNumber {
@@ -772,6 +788,7 @@ pub mod phone_number {
     /// dialable, which means the same short code can exist in different regions,
     /// with different usage and pricing, even if those regions share the same
     /// country calling code (e.g. US and CA).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShortCode {
@@ -790,6 +807,7 @@ pub mod phone_number {
     /// Required.  Either a regular number, or a short code.  New fields may be
     /// added to the oneof below in the future, so clients should ignore phone
     /// numbers for which none of the fields they coded against are set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
@@ -819,8 +837,9 @@ pub mod phone_number {
     }
 }
 /// Represents a fraction in terms of a numerator divided by a denominator.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Fraction {
     /// The numerator in the fraction, e.g. 2 in 2/3.
     #[prost(int64, tag = "1")]
@@ -831,6 +850,7 @@ pub struct Fraction {
     pub denominator: i64,
 }
 /// Represents a month in the Gregorian calendar.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Month {
@@ -959,8 +979,9 @@ impl Month {
 /// kept positive, which can be achieved by changing all the signs when `w` is
 /// negative.
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// The x component.
     #[prost(double, tag = "1")]

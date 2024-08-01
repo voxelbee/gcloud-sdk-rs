@@ -19,6 +19,7 @@
 /// not match the context project ID ) are discouraged.
 /// Reads and writes of foreign partition IDs may fail if the project is not in
 /// an active state.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionId {
@@ -37,6 +38,7 @@ pub struct PartitionId {
 /// If a key's partition ID or any of its path kinds or names are
 /// reserved/read-only, the key is reserved/read-only.
 /// A reserved/read-only key is forbidden in certain documented contexts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Key {
@@ -70,6 +72,7 @@ pub mod key {
     ///
     /// If either name or ID is set, the element is complete.
     /// If neither is set, the element is incomplete.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PathElement {
@@ -91,6 +94,7 @@ pub mod key {
     /// Nested message and enum types in `PathElement`.
     pub mod path_element {
         /// The type of ID.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum IdType {
@@ -115,6 +119,7 @@ pub mod key {
     }
 }
 /// An array value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrayValue {
@@ -126,6 +131,7 @@ pub struct ArrayValue {
 }
 /// A message that can hold any of the supported value types and associated
 /// metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Value {
@@ -143,11 +149,12 @@ pub struct Value {
 /// Nested message and enum types in `Value`.
 pub mod value {
     /// Must have a value set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ValueType {
         /// A null value.
-        #[prost(enumeration = "::prost_types::NullValue", tag = "11")]
+        #[prost(enumeration = "::prost_wkt_types::NullValue", tag = "11")]
         NullValue(i32),
         /// A boolean value.
         #[prost(bool, tag = "1")]
@@ -162,7 +169,7 @@ pub mod value {
         /// When stored in the Datastore, precise only to microseconds;
         /// any additional precision is rounded down.
         #[prost(message, tag = "10")]
-        TimestampValue(::prost_types::Timestamp),
+        TimestampValue(::prost_wkt_types::Timestamp),
         /// A key value.
         #[prost(message, tag = "5")]
         KeyValue(super::Key),
@@ -198,6 +205,7 @@ pub mod value {
 /// A Datastore data object.
 ///
 /// Must not exceed 1 MiB - 4 bytes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Entity {
@@ -219,6 +227,7 @@ pub struct Entity {
     pub properties: ::std::collections::HashMap<::prost::alloc::string::String, Value>,
 }
 /// The result of fetching an entity from Datastore.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntityResult {
@@ -241,13 +250,13 @@ pub struct EntityResult {
     /// [`FULL`][google.datastore.v1.EntityResult.ResultType.FULL] entity results.
     /// If this entity is missing, this field will not be set.
     #[prost(message, optional, tag = "6")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which the entity was last changed.
     /// This field is set for
     /// [`FULL`][google.datastore.v1.EntityResult.ResultType.FULL] entity results.
     /// If this entity is missing, this field will not be set.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A cursor that points to the position after the result entity.
     /// Set only when the `EntityResult` is part of a `QueryResultBatch` message.
     #[prost(bytes = "vec", tag = "3")]
@@ -260,6 +269,7 @@ pub mod entity_result {
     /// from `datastore.proto`, it is always `KEY_ONLY`) or specified by context
     /// (for example, in message `QueryResultBatch`, field `entity_result_type`
     /// specifies a `ResultType` for all the values in field `entity_results`).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -308,6 +318,7 @@ pub mod entity_result {
     }
 }
 /// A query for entities.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Query {
@@ -355,10 +366,11 @@ pub struct Query {
     /// Unspecified is interpreted as no limit.
     /// Must be >= 0 if specified.
     #[prost(message, optional, tag = "12")]
-    pub limit: ::core::option::Option<i32>,
+    pub limit: ::core::option::Option<pb::Int32Value>,
 }
 /// Datastore query for running an aggregation over a
 /// [Query][google.datastore.v1.Query].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregationQuery {
@@ -377,6 +389,7 @@ pub struct AggregationQuery {
 /// Nested message and enum types in `AggregationQuery`.
 pub mod aggregation_query {
     /// Defines an aggregation that produces a single result.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Aggregation {
@@ -427,8 +440,9 @@ pub mod aggregation_query {
         ///
         /// The `COUNT(*)` aggregation function operates on the entire entity
         /// so it does not require a field reference.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Count {
             /// Optional. Optional constraint on the maximum number of entities to
             /// count.
@@ -451,7 +465,7 @@ pub mod aggregation_query {
             ///
             /// * Must be non-negative when present.
             #[prost(message, optional, tag = "1")]
-            pub up_to: ::core::option::Option<i64>,
+            pub up_to: ::core::option::Option<pb::Int64Value>,
         }
         /// Sum of the values of the requested property.
         ///
@@ -474,6 +488,7 @@ pub mod aggregation_query {
         /// the underlying values could produce slightly different results each
         /// time. In those cases, values should be stored as integers over
         /// floating-point numbers.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Sum {
@@ -492,6 +507,7 @@ pub mod aggregation_query {
         /// * If the aggregated value set is empty, returns `NULL`.
         ///
         /// * Always returns the result as a double.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Avg {
@@ -500,6 +516,7 @@ pub mod aggregation_query {
             pub property: ::core::option::Option<super::super::PropertyReference>,
         }
         /// The type of aggregation to perform, required.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Operator {
@@ -515,6 +532,7 @@ pub mod aggregation_query {
         }
     }
     /// The base query to aggregate over.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum QueryType {
@@ -524,6 +542,7 @@ pub mod aggregation_query {
     }
 }
 /// A representation of a kind.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KindExpression {
@@ -532,6 +551,7 @@ pub struct KindExpression {
     pub name: ::prost::alloc::string::String,
 }
 /// A reference to a property relative to the kind expressions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertyReference {
@@ -546,6 +566,7 @@ pub struct PropertyReference {
     pub name: ::prost::alloc::string::String,
 }
 /// A representation of a property in a projection.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Projection {
@@ -554,6 +575,7 @@ pub struct Projection {
     pub property: ::core::option::Option<PropertyReference>,
 }
 /// The desired order for a specific property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertyOrder {
@@ -567,6 +589,7 @@ pub struct PropertyOrder {
 /// Nested message and enum types in `PropertyOrder`.
 pub mod property_order {
     /// The sort direction.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -611,6 +634,7 @@ pub mod property_order {
     }
 }
 /// A holder for any type of filter.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Filter {
@@ -621,6 +645,7 @@ pub struct Filter {
 /// Nested message and enum types in `Filter`.
 pub mod filter {
     /// The type of filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum FilterType {
@@ -633,6 +658,7 @@ pub mod filter {
     }
 }
 /// A filter that merges multiple other filters using the given operator.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompositeFilter {
@@ -650,6 +676,7 @@ pub struct CompositeFilter {
 /// Nested message and enum types in `CompositeFilter`.
 pub mod composite_filter {
     /// A composite filter operator.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -694,6 +721,7 @@ pub mod composite_filter {
     }
 }
 /// A filter on a specific property.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertyFilter {
@@ -710,6 +738,7 @@ pub struct PropertyFilter {
 /// Nested message and enum types in `PropertyFilter`.
 pub mod property_filter {
     /// A property filter operator.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -821,6 +850,7 @@ pub mod property_filter {
 }
 /// A [GQL
 /// query](<https://cloud.google.com/datastore/docs/apis/gql/gql_reference>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GqlQuery {
@@ -853,6 +883,7 @@ pub struct GqlQuery {
     pub positional_bindings: ::prost::alloc::vec::Vec<GqlQueryParameter>,
 }
 /// A binding parameter for a GQL query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GqlQueryParameter {
@@ -863,6 +894,7 @@ pub struct GqlQueryParameter {
 /// Nested message and enum types in `GqlQueryParameter`.
 pub mod gql_query_parameter {
     /// The type of parameter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ParameterType {
@@ -876,6 +908,7 @@ pub mod gql_query_parameter {
     }
 }
 /// A batch of results produced by a query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryResultBatch {
@@ -920,11 +953,12 @@ pub struct QueryResultBatch {
     /// This value will not be set for eventually consistent queries in Cloud
     /// Datastore.
     #[prost(message, optional, tag = "8")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `QueryResultBatch`.
 pub mod query_result_batch {
     /// The possible values for the `more_results` field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -982,6 +1016,7 @@ pub mod query_result_batch {
 /// The keys of `aggregate_properties` are the same for all results in an
 /// aggregation query, unlike entity queries which can have different fields
 /// present for each result.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregationResult {
@@ -998,6 +1033,7 @@ pub struct AggregationResult {
     >,
 }
 /// A batch of aggregation results produced by an aggregation query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregationResultBatch {
@@ -1015,11 +1051,12 @@ pub struct AggregationResultBatch {
     /// can have a greater timestamp. Each batch's read timestamp
     /// is valid for all preceding batches.
     #[prost(message, optional, tag = "3")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Explain options for the query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExplainOptions {
     /// Optional. Whether to execute this query.
     ///
@@ -1032,6 +1069,7 @@ pub struct ExplainOptions {
     pub analyze: bool,
 }
 /// Explain metrics for the query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExplainMetrics {
@@ -1045,6 +1083,7 @@ pub struct ExplainMetrics {
     pub execution_stats: ::core::option::Option<ExecutionStats>,
 }
 /// Planning phase information for the query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PlanSummary {
@@ -1054,9 +1093,10 @@ pub struct PlanSummary {
     ///     {"query_scope": "Collection", "properties": "(bar ASC, __name__ ASC)"}
     ///   ]
     #[prost(message, repeated, tag = "1")]
-    pub indexes_used: ::prost::alloc::vec::Vec<::prost_types::Struct>,
+    pub indexes_used: ::prost::alloc::vec::Vec<::prost_wkt_types::Struct>,
 }
 /// Execution statistics for the query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionStats {
@@ -1066,7 +1106,7 @@ pub struct ExecutionStats {
     pub results_returned: i64,
     /// Total time to execute the query in the backend.
     #[prost(message, optional, tag = "3")]
-    pub execution_duration: ::core::option::Option<::prost_types::Duration>,
+    pub execution_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Total billable read operations.
     #[prost(int64, tag = "4")]
     pub read_operations: i64,
@@ -1083,9 +1123,10 @@ pub struct ExecutionStats {
     ///     }
     ///   }
     #[prost(message, optional, tag = "5")]
-    pub debug_stats: ::core::option::Option<::prost_types::Struct>,
+    pub debug_stats: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// The request for [Datastore.Lookup][google.datastore.v1.Datastore.Lookup].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRequest {
@@ -1114,6 +1155,7 @@ pub struct LookupRequest {
     pub property_mask: ::core::option::Option<PropertyMask>,
 }
 /// The response for [Datastore.Lookup][google.datastore.v1.Datastore.Lookup].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupResponse {
@@ -1143,9 +1185,10 @@ pub struct LookupResponse {
     pub transaction: ::prost::alloc::vec::Vec<u8>,
     /// The time at which these entities were read or found missing.
     #[prost(message, optional, tag = "7")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The request for [Datastore.RunQuery][google.datastore.v1.Datastore.RunQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunQueryRequest {
@@ -1185,6 +1228,7 @@ pub struct RunQueryRequest {
 /// Nested message and enum types in `RunQueryRequest`.
 pub mod run_query_request {
     /// The type of query.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum QueryType {
@@ -1198,6 +1242,7 @@ pub mod run_query_request {
 }
 /// The response for
 /// [Datastore.RunQuery][google.datastore.v1.Datastore.RunQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunQueryResponse {
@@ -1224,6 +1269,7 @@ pub struct RunQueryResponse {
 }
 /// The request for
 /// [Datastore.RunAggregationQuery][google.datastore.v1.Datastore.RunAggregationQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAggregationQueryRequest {
@@ -1256,6 +1302,7 @@ pub struct RunAggregationQueryRequest {
 /// Nested message and enum types in `RunAggregationQueryRequest`.
 pub mod run_aggregation_query_request {
     /// The type of query.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum QueryType {
@@ -1269,6 +1316,7 @@ pub mod run_aggregation_query_request {
 }
 /// The response for
 /// [Datastore.RunAggregationQuery][google.datastore.v1.Datastore.RunAggregationQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAggregationQueryResponse {
@@ -1295,6 +1343,7 @@ pub struct RunAggregationQueryResponse {
 }
 /// The request for
 /// [Datastore.BeginTransaction][google.datastore.v1.Datastore.BeginTransaction].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionRequest {
@@ -1313,6 +1362,7 @@ pub struct BeginTransactionRequest {
 }
 /// The response for
 /// [Datastore.BeginTransaction][google.datastore.v1.Datastore.BeginTransaction].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionResponse {
@@ -1321,6 +1371,7 @@ pub struct BeginTransactionResponse {
     pub transaction: ::prost::alloc::vec::Vec<u8>,
 }
 /// The request for [Datastore.Rollback][google.datastore.v1.Datastore.Rollback].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackRequest {
@@ -1341,10 +1392,12 @@ pub struct RollbackRequest {
 /// The response for
 /// [Datastore.Rollback][google.datastore.v1.Datastore.Rollback]. (an empty
 /// message).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollbackResponse {}
 /// The request for [Datastore.Commit][google.datastore.v1.Datastore.Commit].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitRequest {
@@ -1384,6 +1437,7 @@ pub struct CommitRequest {
 /// Nested message and enum types in `CommitRequest`.
 pub mod commit_request {
     /// The modes available for commits.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1429,6 +1483,7 @@ pub mod commit_request {
         }
     }
     /// Must be set when mode is `TRANSACTIONAL`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TransactionSelector {
@@ -1446,6 +1501,7 @@ pub mod commit_request {
     }
 }
 /// The response for [Datastore.Commit][google.datastore.v1.Datastore.Commit].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitResponse {
@@ -1459,10 +1515,11 @@ pub struct CommitResponse {
     pub index_updates: i32,
     /// The transaction commit timestamp. Not set for non-transactional commits.
     #[prost(message, optional, tag = "8")]
-    pub commit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub commit_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The request for
 /// [Datastore.AllocateIds][google.datastore.v1.Datastore.AllocateIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllocateIdsRequest {
@@ -1482,6 +1539,7 @@ pub struct AllocateIdsRequest {
 }
 /// The response for
 /// [Datastore.AllocateIds][google.datastore.v1.Datastore.AllocateIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllocateIdsResponse {
@@ -1492,6 +1550,7 @@ pub struct AllocateIdsResponse {
 }
 /// The request for
 /// [Datastore.ReserveIds][google.datastore.v1.Datastore.ReserveIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReserveIdsRequest {
@@ -1511,10 +1570,12 @@ pub struct ReserveIdsRequest {
 }
 /// The response for
 /// [Datastore.ReserveIds][google.datastore.v1.Datastore.ReserveIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReserveIdsResponse {}
 /// A mutation to apply to an entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Mutation {
@@ -1556,6 +1617,7 @@ pub mod mutation {
     ///    not even a property in an entity in a value.
     /// - No value in the entity may have meaning 18,
     ///    not even a value in an entity in another value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Operation {
@@ -1579,8 +1641,9 @@ pub mod mutation {
     /// When set, the server will detect whether or not this mutation conflicts
     /// with the current version of the entity on the server. Conflicting mutations
     /// are not applied, and are marked as such in MutationResult.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ConflictDetectionStrategy {
         /// The version of the entity that this mutation is being applied
         /// to. If this does not match the current version on the server, the
@@ -1591,10 +1654,11 @@ pub mod mutation {
         /// to. If this does not match the current update time on the server, the
         /// mutation conflicts.
         #[prost(message, tag = "11")]
-        UpdateTime(::prost_types::Timestamp),
+        UpdateTime(::prost_wkt_types::Timestamp),
     }
 }
 /// The result of applying a mutation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MutationResult {
@@ -1611,13 +1675,13 @@ pub struct MutationResult {
     pub version: i64,
     /// The create time of the entity. This field will not be set after a 'delete'.
     #[prost(message, optional, tag = "7")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The update time of the entity on the server after processing the mutation.
     /// If the mutation doesn't change anything on the server, then the timestamp
     /// will be the update timestamp of the current entity. This field will not be
     /// set after a 'delete'.
     #[prost(message, optional, tag = "6")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Whether a conflict was detected for this mutation. Always false when a
     /// conflict detection strategy field is not set in the mutation.
     #[prost(bool, tag = "5")]
@@ -1625,6 +1689,7 @@ pub struct MutationResult {
 }
 /// The set of arbitrarily nested property paths used to restrict an operation to
 /// only a subset of properties in an entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertyMask {
@@ -1643,6 +1708,7 @@ pub struct PropertyMask {
     pub paths: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The options shared by read requests.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadOptions {
@@ -1662,6 +1728,7 @@ pub struct ReadOptions {
 /// Nested message and enum types in `ReadOptions`.
 pub mod read_options {
     /// The possible values for read consistencies.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1714,6 +1781,7 @@ pub mod read_options {
     /// Explicitly setting `read_consistency`=`EVENTUAL` will result in eventually
     /// consistent lookups & queries in both Cloud Datastore & Cloud Firestore in
     /// Datastore mode.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConsistencyType {
@@ -1741,7 +1809,7 @@ pub mod read_options {
         /// or if Point-in-Time Recovery is enabled, can additionally be a whole
         /// minute timestamp within the past 7 days.
         #[prost(message, tag = "4")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// Options for beginning a new transaction.
@@ -1751,6 +1819,7 @@ pub mod read_options {
 /// or implicitly by setting
 /// [ReadOptions.new_transaction][google.datastore.v1.ReadOptions.new_transaction]
 /// in read requests.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionOptions {
@@ -1762,6 +1831,7 @@ pub struct TransactionOptions {
 /// Nested message and enum types in `TransactionOptions`.
 pub mod transaction_options {
     /// Options specific to read / write transactions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadWrite {
@@ -1770,8 +1840,9 @@ pub mod transaction_options {
         pub previous_transaction: ::prost::alloc::vec::Vec<u8>,
     }
     /// Options specific to read-only transactions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReadOnly {
         /// Reads entities at the given time.
         ///
@@ -1779,10 +1850,11 @@ pub mod transaction_options {
         /// or if Point-in-Time Recovery is enabled, can additionally be a whole
         /// minute timestamp within the past 7 days.
         #[prost(message, optional, tag = "1")]
-        pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// The `mode` of the transaction, indicating whether write operations are
     /// supported.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mode {

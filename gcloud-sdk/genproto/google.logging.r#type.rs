@@ -14,6 +14,7 @@
 /// one of these standard levels. For example, you might map all of Java's FINE,
 /// FINER, and FINEST levels to `LogSeverity.DEBUG`. You can preserve the
 /// original severity level in the log entry payload if you wish.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LogSeverity {
@@ -74,6 +75,7 @@ impl LogSeverity {
 /// A common proto for logging HTTP requests. Only contains semantics
 /// defined by the HTTP specification. Product-specific logging
 /// information MUST be defined in a separate message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpRequest {
@@ -120,7 +122,7 @@ pub struct HttpRequest {
     /// The request processing latency on the server, from the time the request was
     /// received until the response was sent.
     #[prost(message, optional, tag = "14")]
-    pub latency: ::core::option::Option<::prost_types::Duration>,
+    pub latency: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Whether or not a cache lookup was attempted.
     #[prost(bool, tag = "11")]
     pub cache_lookup: bool,

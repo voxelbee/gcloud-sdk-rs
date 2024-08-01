@@ -30,6 +30,7 @@
 ///      if large numbers of tasks suddenly become available to dispatch (due to
 ///      spikes in create task rates, the queue being unpaused, or many tasks
 ///      that are scheduled at the same time).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpRequest {
@@ -103,6 +104,7 @@ pub mod http_request {
     /// If specified, all `Authorization` headers in the
     /// [HttpRequest.headers][google.cloud.tasks.v2.HttpRequest.headers] field will
     /// be overridden.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AuthorizationHeader {
@@ -191,6 +193,7 @@ pub mod http_request {
 /// temporarily throttle the queue's dispatches. Unlike other types of task
 /// targets, a `429` (Too Many Requests) response from an app handler does not
 /// cause traffic congestion control to throttle the queue.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineHttpRequest {
@@ -298,6 +301,7 @@ pub struct AppEngineHttpRequest {
 /// and the following scope:
 ///
 /// `<https://www.googleapis.com/auth/cloud-platform`>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineRouting {
@@ -373,6 +377,7 @@ pub struct AppEngineRouting {
 /// [OAuth token](<https://developers.google.com/identity/protocols/OAuth2>).
 /// This type of authorization should generally only be used when calling Google
 /// APIs hosted on *.googleapis.com.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthToken {
@@ -395,6 +400,7 @@ pub struct OAuthToken {
 /// This type of authorization can be used for many scenarios, including
 /// calling Cloud Run, or endpoints where you intend to validate the token
 /// yourself.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OidcToken {
@@ -411,6 +417,7 @@ pub struct OidcToken {
     pub audience: ::prost::alloc::string::String,
 }
 /// The HTTP method used to deliver the task.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum HttpMethod {
@@ -466,6 +473,7 @@ impl HttpMethod {
 /// A queue is a container of related tasks. Queues are configured to manage
 /// how those tasks are dispatched. Configurable properties include rate limits,
 /// retry options, queue types, and others.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Queue {
@@ -569,7 +577,7 @@ pub struct Queue {
     /// Purge time will be truncated to the nearest microsecond. Purge
     /// time will be unset if the queue has never been purged.
     #[prost(message, optional, tag = "6")]
-    pub purge_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub purge_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Configuration options for writing logs to
     /// [Stackdriver Logging](<https://cloud.google.com/logging/docs/>). If this
     /// field is unset, then no logs are written.
@@ -579,6 +587,7 @@ pub struct Queue {
 /// Nested message and enum types in `Queue`.
 pub mod queue {
     /// State of the queue.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -656,8 +665,9 @@ pub mod queue {
 /// Note: The debugging command,
 /// [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask], will run a task even if
 /// the queue has reached its [RateLimits][google.cloud.tasks.v2.RateLimits].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RateLimits {
     /// The maximum rate at which tasks are dispatched from this queue.
     ///
@@ -728,8 +738,9 @@ pub struct RateLimits {
 /// Retry config.
 ///
 /// These settings determine when a failed task attempt is retried.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryConfig {
     /// Number of attempts per task.
     ///
@@ -766,7 +777,7 @@ pub struct RetryConfig {
     /// [task_age_limit in
     /// queue.yaml/xml](<https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters>).
     #[prost(message, optional, tag = "2")]
-    pub max_retry_duration: ::core::option::Option<::prost_types::Duration>,
+    pub max_retry_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// A task will be [scheduled][google.cloud.tasks.v2.Task.schedule_time] for
     /// retry between [min_backoff][google.cloud.tasks.v2.RetryConfig.min_backoff]
     /// and [max_backoff][google.cloud.tasks.v2.RetryConfig.max_backoff] duration
@@ -784,7 +795,7 @@ pub struct RetryConfig {
     /// [min_backoff_seconds in
     /// queue.yaml/xml](<https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters>).
     #[prost(message, optional, tag = "3")]
-    pub min_backoff: ::core::option::Option<::prost_types::Duration>,
+    pub min_backoff: ::core::option::Option<::prost_wkt_types::Duration>,
     /// A task will be [scheduled][google.cloud.tasks.v2.Task.schedule_time] for
     /// retry between [min_backoff][google.cloud.tasks.v2.RetryConfig.min_backoff]
     /// and [max_backoff][google.cloud.tasks.v2.RetryConfig.max_backoff] duration
@@ -802,7 +813,7 @@ pub struct RetryConfig {
     /// [max_backoff_seconds in
     /// queue.yaml/xml](<https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters>).
     #[prost(message, optional, tag = "4")]
-    pub max_backoff: ::core::option::Option<::prost_types::Duration>,
+    pub max_backoff: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The time between retries will double `max_doublings` times.
     ///
     /// A task's retry interval starts at
@@ -835,8 +846,9 @@ pub struct RetryConfig {
 }
 /// Configuration options for writing logs to
 /// [Stackdriver Logging](<https://cloud.google.com/logging/docs/>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StackdriverLoggingConfig {
     /// Specifies the fraction of operations to write to
     /// [Stackdriver Logging](<https://cloud.google.com/logging/docs/>).
@@ -846,6 +858,7 @@ pub struct StackdriverLoggingConfig {
     pub sampling_ratio: f64,
 }
 /// A unit of scheduled work.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Task {
@@ -876,12 +889,12 @@ pub struct Task {
     ///
     /// `schedule_time` will be truncated to the nearest microsecond.
     #[prost(message, optional, tag = "4")]
-    pub schedule_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub schedule_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time that the task was created.
     ///
     /// `create_time` will be truncated to the nearest second.
     #[prost(message, optional, tag = "5")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The deadline for requests sent to the worker. If the worker does not
     /// respond by this deadline then the request is cancelled and the attempt
     /// is marked as a `DEADLINE_EXCEEDED` failure. Cloud Tasks will retry the
@@ -916,7 +929,7 @@ pub struct Task {
     /// `dispatch_deadline` will be truncated to the nearest millisecond. The
     /// deadline is an approximate deadline.
     #[prost(message, optional, tag = "6")]
-    pub dispatch_deadline: ::core::option::Option<::prost_types::Duration>,
+    pub dispatch_deadline: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Output only. The number of attempts dispatched.
     ///
     /// This count includes attempts which have been dispatched but haven't
@@ -953,6 +966,7 @@ pub mod task {
     /// payloads, might be desirable to return only when needed because
     /// of its large size or because of the sensitivity of data that it
     /// contains.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1008,6 +1022,7 @@ pub mod task {
         }
     }
     /// Required. The message to send to the worker.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum MessageType {
@@ -1026,6 +1041,7 @@ pub mod task {
     }
 }
 /// The status of a task attempt.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Attempt {
@@ -1033,17 +1049,17 @@ pub struct Attempt {
     ///
     /// `schedule_time` will be truncated to the nearest microsecond.
     #[prost(message, optional, tag = "1")]
-    pub schedule_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub schedule_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time that this attempt was dispatched.
     ///
     /// `dispatch_time` will be truncated to the nearest microsecond.
     #[prost(message, optional, tag = "2")]
-    pub dispatch_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub dispatch_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time that this attempt response was received.
     ///
     /// `response_time` will be truncated to the nearest microsecond.
     #[prost(message, optional, tag = "3")]
-    pub response_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub response_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The response from the worker for this attempt.
     ///
     /// If `response_time` is unset, then the task has not been attempted or is
@@ -1053,6 +1069,7 @@ pub struct Attempt {
 }
 /// Request message for
 /// [ListQueues][google.cloud.tasks.v2.CloudTasks.ListQueues].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQueuesRequest {
@@ -1096,6 +1113,7 @@ pub struct ListQueuesRequest {
 }
 /// Response message for
 /// [ListQueues][google.cloud.tasks.v2.CloudTasks.ListQueues].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListQueuesResponse {
@@ -1115,6 +1133,7 @@ pub struct ListQueuesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for [GetQueue][google.cloud.tasks.v2.CloudTasks.GetQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetQueueRequest {
@@ -1125,6 +1144,7 @@ pub struct GetQueueRequest {
 }
 /// Request message for
 /// [CreateQueue][google.cloud.tasks.v2.CloudTasks.CreateQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateQueueRequest {
@@ -1145,6 +1165,7 @@ pub struct CreateQueueRequest {
 }
 /// Request message for
 /// [UpdateQueue][google.cloud.tasks.v2.CloudTasks.UpdateQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateQueueRequest {
@@ -1161,10 +1182,11 @@ pub struct UpdateQueueRequest {
     ///
     /// If empty, then all fields will be updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for
 /// [DeleteQueue][google.cloud.tasks.v2.CloudTasks.DeleteQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteQueueRequest {
@@ -1175,6 +1197,7 @@ pub struct DeleteQueueRequest {
 }
 /// Request message for
 /// [PurgeQueue][google.cloud.tasks.v2.CloudTasks.PurgeQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PurgeQueueRequest {
@@ -1185,6 +1208,7 @@ pub struct PurgeQueueRequest {
 }
 /// Request message for
 /// [PauseQueue][google.cloud.tasks.v2.CloudTasks.PauseQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseQueueRequest {
@@ -1195,6 +1219,7 @@ pub struct PauseQueueRequest {
 }
 /// Request message for
 /// [ResumeQueue][google.cloud.tasks.v2.CloudTasks.ResumeQueue].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeQueueRequest {
@@ -1205,6 +1230,7 @@ pub struct ResumeQueueRequest {
 }
 /// Request message for listing tasks using
 /// [ListTasks][google.cloud.tasks.v2.CloudTasks.ListTasks].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksRequest {
@@ -1250,6 +1276,7 @@ pub struct ListTasksRequest {
 }
 /// Response message for listing tasks using
 /// [ListTasks][google.cloud.tasks.v2.CloudTasks.ListTasks].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTasksResponse {
@@ -1268,6 +1295,7 @@ pub struct ListTasksResponse {
 }
 /// Request message for getting a task using
 /// [GetTask][google.cloud.tasks.v2.CloudTasks.GetTask].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTaskRequest {
@@ -1292,6 +1320,7 @@ pub struct GetTaskRequest {
 }
 /// Request message for
 /// [CreateTask][google.cloud.tasks.v2.CloudTasks.CreateTask].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTaskRequest {
@@ -1353,6 +1382,7 @@ pub struct CreateTaskRequest {
 }
 /// Request message for deleting a task using
 /// [DeleteTask][google.cloud.tasks.v2.CloudTasks.DeleteTask].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTaskRequest {
@@ -1363,6 +1393,7 @@ pub struct DeleteTaskRequest {
 }
 /// Request message for forcing a task to run now using
 /// [RunTask][google.cloud.tasks.v2.CloudTasks.RunTask].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunTaskRequest {
@@ -1616,7 +1647,10 @@ pub mod cloud_tasks_client {
         pub async fn delete_queue(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteQueueRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1953,7 +1987,10 @@ pub mod cloud_tasks_client {
         pub async fn delete_task(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteTaskRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

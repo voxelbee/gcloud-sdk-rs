@@ -3,6 +3,7 @@
 /// policies represent the desired state for VM instance guest environments
 /// including packages to install or remove, package repository configurations,
 /// and software to install.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GuestPolicy {
@@ -17,10 +18,10 @@ pub struct GuestPolicy {
     pub description: ::prost::alloc::string::String,
     /// Output only. Time this guest policy was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Last time this guest policy was updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. Specifies the VM instances that are assigned to this policy. This allows
     /// you to target sets or groups of VM instances by different parameters such
     /// as labels, names, OS, or zones.
@@ -57,6 +58,7 @@ pub struct GuestPolicy {
 /// targeted VM instances must meet all the criteria specified. So if both
 /// labels and zones are specified, the policy applies to VM instances with those
 /// labels and in those zones.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Assignment {
@@ -102,6 +104,7 @@ pub struct Assignment {
 pub mod assignment {
     /// Represents a group of VM intances that can be identified as having all
     /// these labels, for example "env=prod and app=web".
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GroupLabel {
@@ -114,6 +117,7 @@ pub mod assignment {
         >,
     }
     /// Defines the criteria for selecting VM Instances by OS type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct OsType {
@@ -154,6 +158,7 @@ pub mod assignment {
 /// Googet
 /// install: `googet -noconfirm install package1 package2 package3`
 /// remove: `googet -noconfirm remove package1 package2 package3`
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Package {
@@ -181,6 +186,7 @@ pub struct Package {
 /// Nested message and enum types in `Package`.
 pub mod package {
     /// Types of package managers that may be used to manage this package.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -239,6 +245,7 @@ pub mod package {
 /// Represents a single Apt package repository. This repository is added to
 /// a repo file that is stored at
 /// `/etc/apt/sources.list.d/google_osconfig.list`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AptRepository {
@@ -263,6 +270,7 @@ pub struct AptRepository {
 /// Nested message and enum types in `AptRepository`.
 pub mod apt_repository {
     /// Type of archive.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -308,6 +316,7 @@ pub mod apt_repository {
 }
 /// Represents a single Yum package repository. This repository is added to a
 /// repo file that is stored at `/etc/yum.repos.d/google_osconfig.repo`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct YumRepository {
@@ -329,6 +338,7 @@ pub struct YumRepository {
 }
 /// Represents a single Zypper package repository. This repository is added to a
 /// repo file that is stored at `/etc/zypp/repos.d/google_osconfig.repo`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ZypperRepository {
@@ -350,6 +360,7 @@ pub struct ZypperRepository {
 }
 /// Represents a Goo package repository. These is added to a repo file
 /// that is stored at C:/ProgramData/GooGet/repos/google_osconfig.repo.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GooRepository {
@@ -361,6 +372,7 @@ pub struct GooRepository {
     pub url: ::prost::alloc::string::String,
 }
 /// A package repository.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PackageRepository {
@@ -371,6 +383,7 @@ pub struct PackageRepository {
 /// Nested message and enum types in `PackageRepository`.
 pub mod package_repository {
     /// A specific type of repository.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Repository {
@@ -411,6 +424,7 @@ pub mod package_repository {
 ///
 /// Each script or execution step is run in its own temporary directory which
 /// is deleted after completing the step.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SoftwareRecipe {
@@ -456,6 +470,7 @@ pub struct SoftwareRecipe {
 /// Nested message and enum types in `SoftwareRecipe`.
 pub mod software_recipe {
     /// Specifies a resource to be used in the recipe.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Artifact {
@@ -478,6 +493,7 @@ pub mod software_recipe {
     /// Nested message and enum types in `Artifact`.
     pub mod artifact {
         /// Specifies an artifact available via some URI.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Remote {
@@ -494,6 +510,7 @@ pub mod software_recipe {
             pub checksum: ::prost::alloc::string::String,
         }
         /// Specifies an artifact available as a Google Cloud Storage object.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Gcs {
@@ -519,6 +536,7 @@ pub mod software_recipe {
             pub generation: i64,
         }
         /// A specific type of artifact.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Artifact {
@@ -531,6 +549,7 @@ pub mod software_recipe {
         }
     }
     /// An action that can be taken as part of installing or updating a recipe.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Step {
@@ -541,6 +560,7 @@ pub mod software_recipe {
     /// Nested message and enum types in `Step`.
     pub mod step {
         /// Copies the artifact to the specified path on the instance.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CopyFile {
@@ -572,6 +592,7 @@ pub mod software_recipe {
             pub permissions: ::prost::alloc::string::String,
         }
         /// Extracts an archive of the type specified in the specified directory.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ExtractArchive {
@@ -589,6 +610,7 @@ pub mod software_recipe {
         /// Nested message and enum types in `ExtractArchive`.
         pub mod extract_archive {
             /// Specifying the type of archive.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[derive(
                 Clone,
                 Copy,
@@ -649,6 +671,7 @@ pub mod software_recipe {
             }
         }
         /// Installs an MSI file.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct InstallMsi {
@@ -665,6 +688,7 @@ pub mod software_recipe {
             pub allowed_exit_codes: ::prost::alloc::vec::Vec<i32>,
         }
         /// Installs a deb via dpkg.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct InstallDpkg {
@@ -673,6 +697,7 @@ pub mod software_recipe {
             pub artifact_id: ::prost::alloc::string::String,
         }
         /// Installs an rpm file via the rpm utility.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct InstallRpm {
@@ -681,6 +706,7 @@ pub mod software_recipe {
             pub artifact_id: ::prost::alloc::string::String,
         }
         /// Executes an artifact or local file.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ExecFile {
@@ -698,6 +724,7 @@ pub mod software_recipe {
         /// Nested message and enum types in `ExecFile`.
         pub mod exec_file {
             /// Location of the file to execute.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum LocationType {
@@ -710,6 +737,7 @@ pub mod software_recipe {
             }
         }
         /// Runs a script through an interpreter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct RunScript {
@@ -730,6 +758,7 @@ pub mod software_recipe {
         /// Nested message and enum types in `RunScript`.
         pub mod run_script {
             /// The interpreter used to execute a script.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[derive(
                 Clone,
                 Copy,
@@ -775,6 +804,7 @@ pub mod software_recipe {
             }
         }
         /// A specific type of step.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Step {
@@ -803,6 +833,7 @@ pub mod software_recipe {
     }
 }
 /// A request message for creating a guest policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGuestPolicyRequest {
@@ -825,6 +856,7 @@ pub struct CreateGuestPolicyRequest {
     pub guest_policy: ::core::option::Option<GuestPolicy>,
 }
 /// A request message for retrieving a guest policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGuestPolicyRequest {
@@ -834,6 +866,7 @@ pub struct GetGuestPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request message for listing guest policies.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGuestPoliciesRequest {
@@ -850,6 +883,7 @@ pub struct ListGuestPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// A response message for listing guest policies.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGuestPoliciesResponse {
@@ -862,6 +896,7 @@ pub struct ListGuestPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request message for updating a guest policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGuestPolicyRequest {
@@ -871,9 +906,10 @@ pub struct UpdateGuestPolicyRequest {
     /// Field mask that controls which fields of the guest policy should be
     /// updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A request message for deleting a guest policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGuestPolicyRequest {
@@ -884,6 +920,7 @@ pub struct DeleteGuestPolicyRequest {
 }
 /// A request message for getting the effective guest policy assigned to the
 /// instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupEffectiveGuestPolicyRequest {
@@ -907,6 +944,7 @@ pub struct LookupEffectiveGuestPolicyRequest {
     pub os_architecture: ::prost::alloc::string::String,
 }
 /// The effective guest policy that applies to a VM instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EffectiveGuestPolicy {
@@ -927,6 +965,7 @@ pub struct EffectiveGuestPolicy {
 /// Nested message and enum types in `EffectiveGuestPolicy`.
 pub mod effective_guest_policy {
     /// A guest policy package including its source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SourcedPackage {
@@ -938,6 +977,7 @@ pub mod effective_guest_policy {
         pub package: ::core::option::Option<super::Package>,
     }
     /// A guest policy package repository including its source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SourcedPackageRepository {
@@ -949,6 +989,7 @@ pub mod effective_guest_policy {
         pub package_repository: ::core::option::Option<super::PackageRepository>,
     }
     /// A guest policy recipe including its source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SourcedSoftwareRecipe {
@@ -961,6 +1002,7 @@ pub mod effective_guest_policy {
     }
 }
 /// The desired state that the OS Config agent maintains on the VM instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum DesiredState {
@@ -1001,8 +1043,9 @@ impl DesiredState {
 }
 /// Message encapsulating a value that can be either absolute ("fixed") or
 /// relative ("percent") to a value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FixedOrPercent {
     /// Type of the value.
     #[prost(oneof = "fixed_or_percent::Mode", tags = "1, 2")]
@@ -1011,8 +1054,9 @@ pub struct FixedOrPercent {
 /// Nested message and enum types in `FixedOrPercent`.
 pub mod fixed_or_percent {
     /// Type of the value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Mode {
         /// Specifies a fixed value.
         #[prost(int32, tag = "1")]
@@ -1024,6 +1068,7 @@ pub mod fixed_or_percent {
     }
 }
 /// A request message to initiate patching across Compute Engine instances.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutePatchJobRequest {
@@ -1045,7 +1090,7 @@ pub struct ExecutePatchJobRequest {
     /// Duration of the patch job. After the duration ends, the patch job
     /// times out.
     #[prost(message, optional, tag = "5")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// If this patch is a dry-run only, instances are contacted but
     /// will do nothing.
     #[prost(bool, tag = "6")]
@@ -1058,6 +1103,7 @@ pub struct ExecutePatchJobRequest {
     pub rollout: ::core::option::Option<PatchRollout>,
 }
 /// Request to get an active or completed patch job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPatchJobRequest {
@@ -1066,6 +1112,7 @@ pub struct GetPatchJobRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to list details for all instances that are part of a patch job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchJobInstanceDetailsRequest {
@@ -1086,6 +1133,7 @@ pub struct ListPatchJobInstanceDetailsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// A response message for listing the instances details for a patch job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchJobInstanceDetailsResponse {
@@ -1100,6 +1148,7 @@ pub struct ListPatchJobInstanceDetailsResponse {
 /// instance details, see
 /// [Listing all VM instance details for a specific patch
 /// job](<https://cloud.google.com/compute/docs/os-patch-management/manage-patch-jobs#list-instance-details>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchJobInstanceDetails {
@@ -1121,6 +1170,7 @@ pub struct PatchJobInstanceDetails {
     pub attempt_count: i64,
 }
 /// A request message for listing patch jobs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchJobsRequest {
@@ -1141,6 +1191,7 @@ pub struct ListPatchJobsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// A response message for listing patch jobs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchJobsResponse {
@@ -1160,6 +1211,7 @@ pub struct ListPatchJobsResponse {
 /// For more information about patch jobs, see
 /// [Creating patch
 /// jobs](<https://cloud.google.com/compute/docs/os-patch-management/create-patch-job>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchJob {
@@ -1176,10 +1228,10 @@ pub struct PatchJob {
     pub description: ::prost::alloc::string::String,
     /// Time this patch job was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Last time this patch job was updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The current state of the PatchJob.
     #[prost(enumeration = "patch_job::State", tag = "5")]
     pub state: i32,
@@ -1192,7 +1244,7 @@ pub struct PatchJob {
     /// Duration of the patch job. After the duration ends, the
     /// patch job times out.
     #[prost(message, optional, tag = "8")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Summary of instance details.
     #[prost(message, optional, tag = "9")]
     pub instance_details_summary: ::core::option::Option<
@@ -1223,8 +1275,9 @@ pub mod patch_job {
     /// job affects. Contains counts of instances in different states. These states
     /// map to `InstancePatchState`. List patch job instance details to see the
     /// specific states of each instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct InstanceDetailsSummary {
         /// Number of instances pending patch job.
         #[prost(int64, tag = "1")]
@@ -1276,6 +1329,7 @@ pub mod patch_job {
     }
     /// Enumeration of the various states a patch job passes through as it
     /// executes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1341,6 +1395,7 @@ pub mod patch_job {
 }
 /// Patch configuration specifications. Contains details on how to apply the
 /// patch(es) to a VM instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchConfig {
@@ -1379,6 +1434,7 @@ pub struct PatchConfig {
 /// Nested message and enum types in `PatchConfig`.
 pub mod patch_config {
     /// Post-patch reboot settings.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1430,12 +1486,14 @@ pub mod patch_config {
     }
 }
 /// Namespace for instance state enums.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Instance {}
 /// Nested message and enum types in `Instance`.
 pub mod instance {
     /// Patch state of an instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1534,6 +1592,7 @@ pub mod instance {
     }
 }
 /// Message for canceling a patch job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelPatchJobRequest {
@@ -1543,6 +1602,7 @@ pub struct CancelPatchJobRequest {
 }
 /// Apt patching is completed by executing `apt-get update && apt-get
 /// upgrade`. Additional options can be set to control how this is executed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AptSettings {
@@ -1563,6 +1623,7 @@ pub struct AptSettings {
 /// Nested message and enum types in `AptSettings`.
 pub mod apt_settings {
     /// Apt patch type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1610,6 +1671,7 @@ pub mod apt_settings {
 /// can be set to control how this is executed.
 ///
 /// Note that not all settings are supported on all platforms.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct YumSettings {
@@ -1632,11 +1694,13 @@ pub struct YumSettings {
     pub exclusive_packages: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Googet patching is performed by running `googet update`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GooSettings {}
 /// Zypper patching is performed by running `zypper patch`.
 /// See also <https://en.opensuse.org/SDB:Zypper_manual.>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ZypperSettings {
@@ -1664,6 +1728,7 @@ pub struct ZypperSettings {
     pub exclusive_patches: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Windows patching is performed using the Windows Update Agent.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WindowsUpdateSettings {
@@ -1689,6 +1754,7 @@ pub mod windows_update_settings {
     /// Microsoft Windows update classifications as defined in
     /// \[1\]
     /// <https://support.microsoft.com/en-us/help/824684/description-of-the-standard-terminology-that-is-used-to-describe-micro>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1778,6 +1844,7 @@ pub mod windows_update_settings {
     }
 }
 /// A step that runs an executable for a PatchJob.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecStep {
@@ -1789,6 +1856,7 @@ pub struct ExecStep {
     pub windows_exec_step_config: ::core::option::Option<ExecStepConfig>,
 }
 /// Common configurations for an ExecStep.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecStepConfig {
@@ -1809,6 +1877,7 @@ pub struct ExecStepConfig {
 /// Nested message and enum types in `ExecStepConfig`.
 pub mod exec_step_config {
     /// The interpreter used to execute the a file.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1856,6 +1925,7 @@ pub mod exec_step_config {
         }
     }
     /// Location of the executable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Executable {
@@ -1868,6 +1938,7 @@ pub mod exec_step_config {
     }
 }
 /// Google Cloud Storage object representation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GcsObject {
@@ -1886,6 +1957,7 @@ pub struct GcsObject {
 /// VMs must meet all criteria specified. So if both labels and zones are
 /// specified, the patch job targets only VMs with those labels and in those
 /// zones.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchInstanceFilter {
@@ -1917,6 +1989,7 @@ pub struct PatchInstanceFilter {
 pub mod patch_instance_filter {
     /// Represents a group of VMs that can be identified as having all these
     /// labels, for example "env=prod and app=web".
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GroupLabel {
@@ -1931,8 +2004,9 @@ pub mod patch_instance_filter {
 }
 /// Patch rollout configuration specifications. Contains details on the
 /// concurrency control when applying patch(es) to all targeted VMs.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PatchRollout {
     /// Mode of the patch rollout.
     #[prost(enumeration = "patch_rollout::Mode", tag = "1")]
@@ -1966,6 +2040,7 @@ pub struct PatchRollout {
 /// Nested message and enum types in `PatchRollout`.
 pub mod patch_rollout {
     /// Type of the rollout.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2019,6 +2094,7 @@ pub mod patch_rollout {
 /// repository settings, and a schedule. For more information about creating and
 /// managing patch deployments, see [Scheduling patch
 /// jobs](<https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchDeployment {
@@ -2040,20 +2116,20 @@ pub struct PatchDeployment {
     pub patch_config: ::core::option::Option<PatchConfig>,
     /// Optional. Duration of the patch. After the duration ends, the patch times out.
     #[prost(message, optional, tag = "5")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Output only. Time the patch deployment was created. Timestamp is in
     /// [RFC3339](<https://www.ietf.org/rfc/rfc3339.txt>) text format.
     #[prost(message, optional, tag = "8")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Time the patch deployment was last updated. Timestamp is in
     /// [RFC3339](<https://www.ietf.org/rfc/rfc3339.txt>) text format.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last time a patch job was started by this deployment.
     /// Timestamp is in [RFC3339](<https://www.ietf.org/rfc/rfc3339.txt>) text
     /// format.
     #[prost(message, optional, tag = "10")]
-    pub last_execute_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_execute_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Rollout strategy of the patch job.
     #[prost(message, optional, tag = "11")]
     pub rollout: ::core::option::Option<PatchRollout>,
@@ -2067,6 +2143,7 @@ pub struct PatchDeployment {
 /// Nested message and enum types in `PatchDeployment`.
 pub mod patch_deployment {
     /// Represents state of patch peployment.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2111,6 +2188,7 @@ pub mod patch_deployment {
         }
     }
     /// Schedule for the patch.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Schedule {
@@ -2124,14 +2202,16 @@ pub mod patch_deployment {
 }
 /// Sets the time for a one time patch deployment. Timestamp is in
 /// [RFC3339](<https://www.ietf.org/rfc/rfc3339.txt>) text format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OneTimeSchedule {
     /// Required. The desired patch job execution time.
     #[prost(message, optional, tag = "1")]
-    pub execute_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub execute_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Sets the time for recurring patch deployments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecurringSchedule {
@@ -2142,11 +2222,11 @@ pub struct RecurringSchedule {
     /// Optional. The time that the recurring schedule becomes effective.
     /// Defaults to `create_time` of the patch deployment.
     #[prost(message, optional, tag = "2")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The end time at which a recurring patch deployment schedule is no longer
     /// active.
     #[prost(message, optional, tag = "3")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. Time of the day to run a recurring deployment.
     #[prost(message, optional, tag = "4")]
     pub time_of_day: ::core::option::Option<super::super::super::r#type::TimeOfDay>,
@@ -2155,10 +2235,10 @@ pub struct RecurringSchedule {
     pub frequency: i32,
     /// Output only. The time the last patch job ran successfully.
     #[prost(message, optional, tag = "9")]
-    pub last_execute_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_execute_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the next patch job is scheduled to run.
     #[prost(message, optional, tag = "10")]
-    pub next_execute_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub next_execute_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Configurations for this recurring schedule.
     /// Configurations must match frequency.
     #[prost(oneof = "recurring_schedule::ScheduleConfig", tags = "6, 7")]
@@ -2167,6 +2247,7 @@ pub struct RecurringSchedule {
 /// Nested message and enum types in `RecurringSchedule`.
 pub mod recurring_schedule {
     /// Specifies the frequency of the recurring patch deployments.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2218,8 +2299,9 @@ pub mod recurring_schedule {
     }
     /// Configurations for this recurring schedule.
     /// Configurations must match frequency.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ScheduleConfig {
         /// Required. Schedule with weekly executions.
         #[prost(message, tag = "6")]
@@ -2230,8 +2312,9 @@ pub mod recurring_schedule {
     }
 }
 /// Represents a weekly schedule.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WeeklySchedule {
     /// Required. Day of the week.
     #[prost(enumeration = "super::super::super::r#type::DayOfWeek", tag = "1")]
@@ -2239,8 +2322,9 @@ pub struct WeeklySchedule {
 }
 /// Represents a monthly schedule. An example of a valid monthly schedule is
 /// "on the third Tuesday of the month" or "on the 15th of the month".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MonthlySchedule {
     /// One day in a month.
     #[prost(oneof = "monthly_schedule::DayOfMonth", tags = "1, 2")]
@@ -2249,8 +2333,9 @@ pub struct MonthlySchedule {
 /// Nested message and enum types in `MonthlySchedule`.
 pub mod monthly_schedule {
     /// One day in a month.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum DayOfMonth {
         /// Required. Week day in a month.
         #[prost(message, tag = "1")]
@@ -2264,8 +2349,9 @@ pub mod monthly_schedule {
     }
 }
 /// Represents one week day in a month. An example is "the 4th Sunday".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct WeekDayOfMonth {
     /// Required. Week number in a month. 1-4 indicates the 1st to 4th week of the month. -1
     /// indicates the last week of the month.
@@ -2285,6 +2371,7 @@ pub struct WeekDayOfMonth {
     pub day_offset: i32,
 }
 /// A request message for creating a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePatchDeploymentRequest {
@@ -2305,6 +2392,7 @@ pub struct CreatePatchDeploymentRequest {
     pub patch_deployment: ::core::option::Option<PatchDeployment>,
 }
 /// A request message for retrieving a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPatchDeploymentRequest {
@@ -2314,6 +2402,7 @@ pub struct GetPatchDeploymentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request message for listing patch deployments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchDeploymentsRequest {
@@ -2329,6 +2418,7 @@ pub struct ListPatchDeploymentsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// A response message for listing patch deployments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPatchDeploymentsResponse {
@@ -2341,6 +2431,7 @@ pub struct ListPatchDeploymentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request message for deleting a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePatchDeploymentRequest {
@@ -2350,6 +2441,7 @@ pub struct DeletePatchDeploymentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request message for updating a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePatchDeploymentRequest {
@@ -2359,9 +2451,10 @@ pub struct UpdatePatchDeploymentRequest {
     /// Optional. Field mask that controls which fields of the patch deployment should be
     /// updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// A request message for pausing a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PausePatchDeploymentRequest {
@@ -2371,6 +2464,7 @@ pub struct PausePatchDeploymentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A request message for resuming a patch deployment.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumePatchDeploymentRequest {
@@ -2713,7 +2807,10 @@ pub mod os_config_service_client {
         pub async fn delete_patch_deployment(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePatchDeploymentRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2951,7 +3048,10 @@ pub mod os_config_service_client {
         pub async fn delete_guest_policy(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteGuestPolicyRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

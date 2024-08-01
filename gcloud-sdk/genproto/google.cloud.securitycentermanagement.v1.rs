@@ -4,6 +4,7 @@
 /// module settings. Service settings can be configured at the organization,
 /// folder, or project level. Service settings at the organization or folder
 /// level are inherited by those in child folders and projects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityCenterService {
@@ -48,17 +49,18 @@ pub struct SecurityCenterService {
     /// explicit user update or due to a side effect of another system change such
     /// as billing subscription expiry.
     #[prost(message, optional, tag = "5")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Additional service specific configuration. Not all services will
     /// utilize this field.
     #[prost(message, optional, tag = "6")]
-    pub service_config: ::core::option::Option<::prost_types::Struct>,
+    pub service_config: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// Nested message and enum types in `SecurityCenterService`.
 pub mod security_center_service {
     /// The settings for individual modules.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ModuleSettings {
         /// Optional. The intended state of enablement for the module at its level of
         /// the resource hierarchy.
@@ -75,6 +77,7 @@ pub mod security_center_service {
     }
     /// Represents the possible intended states of enablement for a service or
     /// module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -138,6 +141,7 @@ pub mod security_center_service {
 /// For example, if the module is enabled in a parent organization or folder, the
 /// effective enablement_state for the module in all child folders or projects is
 /// also `enabled`. EffectiveSecurityHealthAnalyticsCustomModule is read-only.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EffectiveSecurityHealthAnalyticsCustomModule {
@@ -168,6 +172,7 @@ pub struct EffectiveSecurityHealthAnalyticsCustomModule {
 /// Nested message and enum types in `EffectiveSecurityHealthAnalyticsCustomModule`.
 pub mod effective_security_health_analytics_custom_module {
     /// The enablement state of the module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -213,6 +218,7 @@ pub mod effective_security_health_analytics_custom_module {
 }
 /// Request message for listing effective Security Health Analytics custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
@@ -234,6 +240,7 @@ pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesRequest {
 }
 /// Response message for listing effective Security Health Analytics custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
@@ -247,6 +254,7 @@ pub struct ListEffectiveSecurityHealthAnalyticsCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EffectiveSecurityHealthAnalyticsCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
@@ -264,6 +272,7 @@ pub struct GetEffectiveSecurityHealthAnalyticsCustomModuleRequest {
 /// updated time. You can create a custom module at the organization, folder, or
 /// project level. Custom modules that you create at the organization or folder
 /// level are inherited by the child folders and projects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SecurityHealthAnalyticsCustomModule {
@@ -289,7 +298,7 @@ pub struct SecurityHealthAnalyticsCustomModule {
     pub enablement_state: i32,
     /// Output only. The time at which the custom module was last updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The editor that last updated the custom module.
     #[prost(string, tag = "5")]
     pub last_editor: ::prost::alloc::string::String,
@@ -306,6 +315,7 @@ pub struct SecurityHealthAnalyticsCustomModule {
 /// Nested message and enum types in `SecurityHealthAnalyticsCustomModule`.
 pub mod security_health_analytics_custom_module {
     /// Possible enablement states of a custom module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -360,6 +370,7 @@ pub mod security_health_analytics_custom_module {
 /// Defines the properties in a custom module configuration for Security
 /// Health Analytics. Use the custom module configuration to create custom
 /// detectors that generate custom findings for resources that you specify.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConfig {
@@ -398,6 +409,7 @@ pub mod custom_config {
     /// return with each finding that is generated by the custom module. The custom
     /// source properties that are defined here are included in the finding JSON
     /// under `sourceProperties`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomOutputSpec {
@@ -408,6 +420,7 @@ pub mod custom_config {
     /// Nested message and enum types in `CustomOutputSpec`.
     pub mod custom_output_spec {
         /// An individual name-value pair that defines a custom source property.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Property {
@@ -424,6 +437,7 @@ pub mod custom_config {
         }
     }
     /// Resource for selecting resource type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResourceSelector {
@@ -432,6 +446,7 @@ pub mod custom_config {
         pub resource_types: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Defines the valid value options for the severity of a finding.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -484,6 +499,7 @@ pub mod custom_config {
     }
 }
 /// Request message for listing Security Health Analytics custom modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityHealthAnalyticsCustomModulesRequest {
@@ -504,6 +520,7 @@ pub struct ListSecurityHealthAnalyticsCustomModulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing Security Health Analytics custom modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityHealthAnalyticsCustomModulesResponse {
@@ -518,6 +535,7 @@ pub struct ListSecurityHealthAnalyticsCustomModulesResponse {
 }
 /// Request message for listing descendant Security Health Analytics custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
@@ -539,6 +557,7 @@ pub struct ListDescendantSecurityHealthAnalyticsCustomModulesRequest {
 }
 /// Response message for listing descendant Security Health Analytics custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantSecurityHealthAnalyticsCustomModulesResponse {
@@ -552,6 +571,7 @@ pub struct ListDescendantSecurityHealthAnalyticsCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a SecurityHealthAnalyticsCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecurityHealthAnalyticsCustomModuleRequest {
@@ -560,6 +580,7 @@ pub struct GetSecurityHealthAnalyticsCustomModuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a SecurityHealthAnalyticsCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSecurityHealthAnalyticsCustomModuleRequest {
@@ -588,6 +609,7 @@ pub struct CreateSecurityHealthAnalyticsCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for updating a SecurityHealthAnalyticsCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecurityHealthAnalyticsCustomModuleRequest {
@@ -596,7 +618,7 @@ pub struct UpdateSecurityHealthAnalyticsCustomModuleRequest {
     /// wildcard value `*`, both `enablement_state` and `custom_config` are
     /// updated.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The resource being updated
     #[prost(message, optional, tag = "2")]
     pub security_health_analytics_custom_module: ::core::option::Option<
@@ -613,6 +635,7 @@ pub struct UpdateSecurityHealthAnalyticsCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for deleting a SecurityHealthAnalyticsCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSecurityHealthAnalyticsCustomModuleRequest {
@@ -637,6 +660,7 @@ pub struct DeleteSecurityHealthAnalyticsCustomModuleRequest {
 }
 /// Request message to simulate a CustomConfig against a given test resource.
 /// Maximum size of the request is 4 MB by default.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulateSecurityHealthAnalyticsCustomModuleRequest {
@@ -661,6 +685,7 @@ pub mod simulate_security_health_analytics_custom_module_request {
     /// Manually constructed resource name. If the custom module evaluates against
     /// only the resource data, you can omit the `iam_policy_data` field. If it
     /// evaluates only the `iam_policy_data` field, you can omit the resource data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SimulatedResource {
@@ -671,7 +696,7 @@ pub mod simulate_security_health_analytics_custom_module_request {
         /// Optional. A representation of the Google Cloud resource. Should match the
         /// Google Cloud resource JSON format.
         #[prost(message, optional, tag = "2")]
-        pub resource_data: ::core::option::Option<::prost_types::Struct>,
+        pub resource_data: ::core::option::Option<::prost_wkt_types::Struct>,
         /// Optional. A representation of the IAM policy.
         #[prost(message, optional, tag = "3")]
         pub iam_policy_data: ::core::option::Option<
@@ -681,6 +706,7 @@ pub mod simulate_security_health_analytics_custom_module_request {
 }
 /// A subset of the fields of the Security Center Finding proto. The minimum set
 /// of fields needed to represent a simulated finding from a SHA custom module.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulatedFinding {
@@ -722,7 +748,7 @@ pub struct SimulatedFinding {
     #[prost(map = "string, message", tag = "6")]
     pub source_properties: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::Value,
+        ::prost_wkt_types::Value,
     >,
     /// The time the finding was first detected. If an existing finding is updated,
     /// then this is the time the update occurred.
@@ -732,7 +758,7 @@ pub struct SimulatedFinding {
     /// then this time reflects when the finding was resolved. This must not
     /// be set to a value greater than the current timestamp.
     #[prost(message, optional, tag = "7")]
-    pub event_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub event_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The severity of the finding. This field is managed by the source that
     /// writes the finding.
     #[prost(enumeration = "simulated_finding::Severity", tag = "8")]
@@ -744,6 +770,7 @@ pub struct SimulatedFinding {
 /// Nested message and enum types in `SimulatedFinding`.
 pub mod simulated_finding {
     /// The state of the finding.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -788,6 +815,7 @@ pub mod simulated_finding {
         }
     }
     /// The severity of the finding.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -881,6 +909,7 @@ pub mod simulated_finding {
         }
     }
     /// Represents what kind of Finding it is.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -950,6 +979,7 @@ pub mod simulated_finding {
 }
 /// Response message for simulating a `SecurityHealthAnalyticsCustomModule`
 /// against a given resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SimulateSecurityHealthAnalyticsCustomModuleResponse {
@@ -962,6 +992,7 @@ pub struct SimulateSecurityHealthAnalyticsCustomModuleResponse {
 /// Nested message and enum types in `SimulateSecurityHealthAnalyticsCustomModuleResponse`.
 pub mod simulate_security_health_analytics_custom_module_response {
     /// Possible test result.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SimulatedResult {
@@ -970,6 +1001,7 @@ pub mod simulate_security_health_analytics_custom_module_response {
     }
     /// Nested message and enum types in `SimulatedResult`.
     pub mod simulated_result {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Result {
@@ -979,7 +1011,7 @@ pub mod simulate_security_health_analytics_custom_module_response {
             Finding(super::super::SimulatedFinding),
             /// Indicates that the test case does not trigger any violation.
             #[prost(message, tag = "2")]
-            NoViolation(()),
+            NoViolation(::prost_wkt_types::Empty),
             /// Error encountered during the test.
             #[prost(message, tag = "3")]
             Error(super::super::super::super::super::rpc::Status),
@@ -993,6 +1025,7 @@ pub mod simulate_security_health_analytics_custom_module_response {
 /// will have enablement_state set to ENABLED. Similarly, if module.inherited is
 /// set, then effective module's config will contain the ancestor's config
 /// details. EffectiveEventThreatDetectionCustomModule is read-only.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EffectiveEventThreatDetectionCustomModule {
@@ -1007,7 +1040,7 @@ pub struct EffectiveEventThreatDetectionCustomModule {
     pub name: ::prost::alloc::string::String,
     /// Output only. Config for the effective module.
     #[prost(message, optional, tag = "2")]
-    pub config: ::core::option::Option<::prost_types::Struct>,
+    pub config: ::core::option::Option<::prost_wkt_types::Struct>,
     /// Output only. The effective state of enablement for the module at the given
     /// level of the hierarchy.
     #[prost(
@@ -1028,6 +1061,7 @@ pub struct EffectiveEventThreatDetectionCustomModule {
 /// Nested message and enum types in `EffectiveEventThreatDetectionCustomModule`.
 pub mod effective_event_threat_detection_custom_module {
     /// The enablement state of the module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1073,6 +1107,7 @@ pub mod effective_event_threat_detection_custom_module {
 }
 /// Request message for listing effective Event Threat Detection custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveEventThreatDetectionCustomModulesRequest {
@@ -1093,6 +1128,7 @@ pub struct ListEffectiveEventThreatDetectionCustomModulesRequest {
 }
 /// Response message for listing effective Event Threat Detection custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEffectiveEventThreatDetectionCustomModulesResponse {
@@ -1106,6 +1142,7 @@ pub struct ListEffectiveEventThreatDetectionCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EffectiveEventThreatDetectionCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectiveEventThreatDetectionCustomModuleRequest {
@@ -1122,6 +1159,7 @@ pub struct GetEffectiveEventThreatDetectionCustomModuleRequest {
 /// An event threat detection custom module is a Cloud SCC resource that contains
 /// the configuration and enablement state of a custom module, which enables ETD
 /// to write certain findings to Cloud SCC.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventThreatDetectionCustomModule {
@@ -1138,7 +1176,7 @@ pub struct EventThreatDetectionCustomModule {
     /// is defined at this level. For the inherited module, its config value is
     /// inherited from the ancestor module.
     #[prost(message, optional, tag = "2")]
-    pub config: ::core::option::Option<::prost_types::Struct>,
+    pub config: ::core::option::Option<::prost_wkt_types::Struct>,
     /// Output only. The closest ancestor module that this module inherits the
     /// enablement state from. If empty, indicates that the custom module was
     /// created in the requesting parent organization, folder, or project. The
@@ -1163,7 +1201,7 @@ pub struct EventThreatDetectionCustomModule {
     pub description: ::prost::alloc::string::String,
     /// Output only. The time the module was last updated.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The editor the module was last updated by.
     #[prost(string, tag = "9")]
     pub last_editor: ::prost::alloc::string::String,
@@ -1171,6 +1209,7 @@ pub struct EventThreatDetectionCustomModule {
 /// Nested message and enum types in `EventThreatDetectionCustomModule`.
 pub mod event_threat_detection_custom_module {
     /// The enablement state of the module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1223,6 +1262,7 @@ pub mod event_threat_detection_custom_module {
     }
 }
 /// Request message for listing Event Threat Detection custom modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventThreatDetectionCustomModulesRequest {
@@ -1249,6 +1289,7 @@ pub struct ListEventThreatDetectionCustomModulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing Event Threat Detection custom modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventThreatDetectionCustomModulesResponse {
@@ -1263,6 +1304,7 @@ pub struct ListEventThreatDetectionCustomModulesResponse {
 }
 /// Request message for listing descendant Event Threat Detection custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantEventThreatDetectionCustomModulesRequest {
@@ -1284,6 +1326,7 @@ pub struct ListDescendantEventThreatDetectionCustomModulesRequest {
 }
 /// Response message for listing descendant Event Threat Detection custom
 /// modules.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDescendantEventThreatDetectionCustomModulesResponse {
@@ -1297,6 +1340,7 @@ pub struct ListDescendantEventThreatDetectionCustomModulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a EventThreatDetectionCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventThreatDetectionCustomModuleRequest {
@@ -1311,6 +1355,7 @@ pub struct GetEventThreatDetectionCustomModuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a EventThreatDetectionCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventThreatDetectionCustomModuleRequest {
@@ -1339,6 +1384,7 @@ pub struct CreateEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for updating a EventThreatDetectionCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEventThreatDetectionCustomModuleRequest {
@@ -1348,7 +1394,7 @@ pub struct UpdateEventThreatDetectionCustomModuleRequest {
     /// the full request. A field will be overwritten if it is in the mask. If the
     /// user does not provide a mask then all fields will be overwritten.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The module being updated
     #[prost(message, optional, tag = "2")]
     pub event_threat_detection_custom_module: ::core::option::Option<
@@ -1365,6 +1411,7 @@ pub struct UpdateEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Message for deleting a EventThreatDetectionCustomModule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventThreatDetectionCustomModuleRequest {
@@ -1388,6 +1435,7 @@ pub struct DeleteEventThreatDetectionCustomModuleRequest {
     pub validate_only: bool,
 }
 /// Request to validate an Event Threat Detection custom module.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateEventThreatDetectionCustomModuleRequest {
@@ -1407,6 +1455,7 @@ pub struct ValidateEventThreatDetectionCustomModuleRequest {
     pub r#type: ::prost::alloc::string::String,
 }
 /// Response to validating an Event Threat Detection custom module.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateEventThreatDetectionCustomModuleResponse {
@@ -1421,6 +1470,7 @@ pub struct ValidateEventThreatDetectionCustomModuleResponse {
 pub mod validate_event_threat_detection_custom_module_response {
     /// An error encountered while validating the uploaded configuration of an
     /// Event Threat Detection Custom Module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomModuleValidationError {
@@ -1443,8 +1493,9 @@ pub mod validate_event_threat_detection_custom_module_response {
         pub end: ::core::option::Option<Position>,
     }
     /// A position in the uploaded text version of a module.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Position {
         /// The line position in the text
         #[prost(int32, tag = "1")]
@@ -1455,6 +1506,7 @@ pub mod validate_event_threat_detection_custom_module_response {
     }
 }
 /// Request message for getting a Security Command Center service.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSecurityCenterServiceRequest {
@@ -1481,6 +1533,7 @@ pub struct GetSecurityCenterServiceRequest {
     pub show_eligible_modules_only: bool,
 }
 /// Request message for listing Security Command Center services.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityCenterServicesRequest {
@@ -1506,6 +1559,7 @@ pub struct ListSecurityCenterServicesRequest {
     pub show_eligible_modules_only: bool,
 }
 /// Response message for listing Security Command Center services.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSecurityCenterServicesResponse {
@@ -1517,6 +1571,7 @@ pub struct ListSecurityCenterServicesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for updating a Security Command Center service.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSecurityCenterServiceRequest {
@@ -1528,7 +1583,7 @@ pub struct UpdateSecurityCenterServiceRequest {
     ///    * "intended_enablement_state"
     ///    * "modules"
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. When set to true, only validations (including IAM checks) will be
     /// done for the request (service will not be updated). An OK response
     /// indicates that the request is valid, while an error response indicates that
@@ -1883,7 +1938,10 @@ pub mod security_center_management_client {
             request: impl tonic::IntoRequest<
                 super::DeleteSecurityHealthAnalyticsCustomModuleRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2202,7 +2260,10 @@ pub mod security_center_management_client {
             request: impl tonic::IntoRequest<
                 super::DeleteEventThreatDetectionCustomModuleRequest,
             >,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

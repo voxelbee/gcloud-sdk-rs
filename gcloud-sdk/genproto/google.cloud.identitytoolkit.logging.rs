@@ -3,6 +3,7 @@
 /// google.cloud.audit.AuditLog so that consumers can easily query
 /// for requests regardless of whether those requests were logged via
 /// Cloud Audit Logging or Identitytoolkit request logging.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestLog {
@@ -27,7 +28,7 @@ pub struct RequestLog {
     /// When the JSON object represented here has a proto equivalent, the proto
     /// name will be indicated in the `@type` property.
     #[prost(message, optional, tag = "4")]
-    pub request: ::core::option::Option<::prost_types::Struct>,
+    pub request: ::core::option::Option<::prost_wkt_types::Struct>,
     /// The operation response. This may not include all response elements,
     /// such as those that are too large, privacy-sensitive, or duplicated
     /// elsewhere in the log record.
@@ -35,7 +36,7 @@ pub struct RequestLog {
     /// When the JSON object represented here has a proto equivalent, the proto
     /// name will be indicated in the `@type` property.
     #[prost(message, optional, tag = "5")]
-    pub response: ::core::option::Option<::prost_types::Struct>,
+    pub response: ::core::option::Option<::prost_wkt_types::Struct>,
     /// The number of items returned from a List or Query API method,
     /// if applicable.
     #[prost(int64, tag = "6")]
@@ -43,9 +44,10 @@ pub struct RequestLog {
     /// Other service-specific data about the request, response, and other
     /// information associated with the current event.
     #[prost(message, optional, tag = "7")]
-    pub metadata: ::core::option::Option<::prost_types::Struct>,
+    pub metadata: ::core::option::Option<::prost_wkt_types::Struct>,
 }
 /// Metadata about the request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestMetadata {

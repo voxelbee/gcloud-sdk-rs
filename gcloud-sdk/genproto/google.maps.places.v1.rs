@@ -2,6 +2,7 @@
 /// Information about the author of the UGC data. Used in
 /// [Photo][google.maps.places.v1.Photo], and
 /// [Review][google.maps.places.v1.Review].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorAttribution {
@@ -20,6 +21,7 @@ pub struct AuthorAttribution {
     pub photo_uri: ::prost::alloc::string::String,
 }
 /// Information about a review of a place.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Review {
@@ -48,13 +50,14 @@ pub struct Review {
     pub author_attribution: ::core::option::Option<AuthorAttribution>,
     /// Timestamp for the review.
     #[prost(message, optional, tag = "14")]
-    pub publish_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub publish_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Experimental: See
 /// <https://developers.google.com/maps/documentation/places/web-service/experimental/places-generative>
 /// for more details.
 ///
 /// Reference that the generative content is related to.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct References {
@@ -67,6 +70,7 @@ pub struct References {
     pub places: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A block of content that can be served individually.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentBlock {
@@ -85,6 +89,7 @@ pub struct ContentBlock {
     pub references: ::core::option::Option<References>,
 }
 /// Information about a photo of a place.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Photo {
@@ -108,6 +113,7 @@ pub struct Photo {
 /// for more details.
 ///
 /// Content that is contextual to the place query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContextualContent {
@@ -134,6 +140,7 @@ pub mod contextual_content {
     ///
     /// Justifications for the place. Justifications answers the question of why a
     /// place could interest an end user.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Justification {
@@ -150,6 +157,7 @@ pub mod contextual_content {
         /// that would interest an end user. For instance, if the search query is
         /// "firewood pizza", the review justification highlights the text relevant
         /// to the search query.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ReviewJustification {
@@ -167,6 +175,7 @@ pub mod contextual_content {
             /// review itself. The exact word to highlight is marked by the
             /// HighlightedTextRange. There could be several words in the text being
             /// highlighted.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct HighlightedText {
@@ -181,8 +190,9 @@ pub mod contextual_content {
             /// Nested message and enum types in `HighlightedText`.
             pub mod highlighted_text {
                 /// The range of highlighted text.
+                #[derive(serde::Serialize, serde::Deserialize)]
                 #[allow(clippy::derive_partial_eq_without_eq)]
-                #[derive(Clone, PartialEq, ::prost::Message)]
+                #[derive(Clone, Copy, PartialEq, ::prost::Message)]
                 pub struct HighlightedTextRange {
                     #[prost(int32, tag = "1")]
                     pub start_index: i32,
@@ -196,8 +206,9 @@ pub mod contextual_content {
         /// for more details.
         /// BusinessAvailabilityAttributes justifications. This shows some attributes
         /// a business has that could interest an end user.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct BusinessAvailabilityAttributesJustification {
             /// If a place provides takeout.
             #[prost(bool, tag = "1")]
@@ -209,6 +220,7 @@ pub mod contextual_content {
             #[prost(bool, tag = "3")]
             pub dine_in: bool,
         }
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Justification {
@@ -232,6 +244,7 @@ pub mod contextual_content {
 /// <https://afdc.energy.gov/fuels/electricity_infrastructure.html> One port
 /// could charge one car at a time. One port has one or more connectors. One
 /// station has one or more ports.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvChargeOptions {
@@ -253,8 +266,9 @@ pub mod ev_charge_options {
     /// EV charging information grouped by \[type, max_charge_rate_kw\].
     /// Shows EV charge aggregation of connectors that have the same type and max
     /// charge rate in kw.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ConnectorAggregation {
         /// The connector type of this aggregation.
         #[prost(enumeration = "super::EvConnectorType", tag = "1")]
@@ -276,12 +290,13 @@ pub mod ev_charge_options {
         /// aggregation was last updated.
         #[prost(message, optional, tag = "6")]
         pub availability_last_update_time: ::core::option::Option<
-            ::prost_types::Timestamp,
+            ::prost_wkt_types::Timestamp,
         >,
     }
 }
 /// See <http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6872107> for
 /// additional information/context on EV charging connector types.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum EvConnectorType {
@@ -355,6 +370,7 @@ impl EvConnectorType {
 }
 /// The most recent information about fuel options in a gas station. This
 /// information is updated regularly.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FuelOptions {
@@ -366,6 +382,7 @@ pub struct FuelOptions {
 /// Nested message and enum types in `FuelOptions`.
 pub mod fuel_options {
     /// Fuel price information for a given type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FuelPrice {
@@ -377,11 +394,12 @@ pub mod fuel_options {
         pub price: ::core::option::Option<super::super::super::super::r#type::Money>,
         /// The time the fuel price was last updated.
         #[prost(message, optional, tag = "3")]
-        pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// Nested message and enum types in `FuelPrice`.
     pub mod fuel_price {
         /// Types of fuel.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -491,8 +509,9 @@ pub mod fuel_options {
     }
 }
 /// Circle with a LatLng as center and radius.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Circle {
     /// Required. Center latitude and longitude.
     ///
@@ -506,6 +525,7 @@ pub struct Circle {
     pub radius: f64,
 }
 /// All the information representing a Place.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Place {
@@ -767,6 +787,7 @@ pub struct Place {
 pub mod place {
     /// The structured components that form the formatted address, if this
     /// information is available.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AddressComponent {
@@ -790,6 +811,7 @@ pub mod place {
     /// Plus code (<http://plus.codes>) is a location reference with two formats:
     /// global code defining a 14mx14m (1/8000th of a degree) or smaller rectangle,
     /// and compound code, replacing the prefix with a reference location.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PlusCode {
@@ -804,6 +826,7 @@ pub mod place {
         pub compound_code: ::prost::alloc::string::String,
     }
     /// Information about business hour of the place.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct OpeningHours {
@@ -838,8 +861,9 @@ pub mod place {
     /// Nested message and enum types in `OpeningHours`.
     pub mod opening_hours {
         /// A period the place remains in open_now status.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Period {
             /// The time that the place starts to be open.
             #[prost(message, optional, tag = "1")]
@@ -851,8 +875,9 @@ pub mod place {
         /// Nested message and enum types in `Period`.
         pub mod period {
             /// Status changing points.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct Point {
                 /// A day of the week, as an integer in the range 0-6.  0 is Sunday, 1 is
                 /// Monday, etc.
@@ -881,8 +906,9 @@ pub mod place {
         /// Structured information for special days that fall within the period that
         /// the returned opening hours cover. Special days are days that could impact
         /// the business hours of a place, e.g. Christmas day.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct SpecialDay {
             /// The date of this special day.
             #[prost(message, optional, tag = "1")]
@@ -891,6 +917,7 @@ pub mod place {
             >,
         }
         /// A type used to identify the type of secondary hours.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -979,6 +1006,7 @@ pub mod place {
         }
     }
     /// Information about data providers of this place.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Attribution {
@@ -990,8 +1018,9 @@ pub mod place {
         pub provider_uri: ::prost::alloc::string::String,
     }
     /// Payment options the place accepts.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PaymentOptions {
         /// Place accepts credit cards as payment.
         #[prost(bool, optional, tag = "1")]
@@ -1009,8 +1038,9 @@ pub mod place {
     }
     /// Information about parking options for the place. A parking lot could
     /// support more than one option at the same time.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ParkingOptions {
         /// Place offers free parking lots.
         #[prost(bool, optional, tag = "1")]
@@ -1036,6 +1066,7 @@ pub mod place {
     }
     /// Place resource name and id of sub destinations that relate to the place.
     /// For example, different terminals are different destinations of an airport.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubDestination {
@@ -1047,8 +1078,9 @@ pub mod place {
         pub id: ::prost::alloc::string::String,
     }
     /// Information about the accessibility options a place offers.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AccessibilityOptions {
         /// Place offers wheelchair accessible parking.
         #[prost(bool, optional, tag = "1")]
@@ -1068,6 +1100,7 @@ pub mod place {
     /// for more details.
     ///
     /// AI-generated summary of the place.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GenerativeSummary {
@@ -1090,6 +1123,7 @@ pub mod place {
     /// for more details.
     ///
     /// AI-generated summary of the area that the place is in.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AreaSummary {
@@ -1099,6 +1133,7 @@ pub mod place {
         pub content_blocks: ::prost::alloc::vec::Vec<super::ContentBlock>,
     }
     /// Business status for the place.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1147,6 +1182,7 @@ pub mod place {
     }
 }
 /// Price level of the place.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PriceLevel {
@@ -1194,6 +1230,7 @@ impl PriceLevel {
 /// Request proto for Search Nearby.
 ///
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchNearbyRequest {
@@ -1314,16 +1351,18 @@ pub struct SearchNearbyRequest {
 /// Nested message and enum types in `SearchNearbyRequest`.
 pub mod search_nearby_request {
     /// The region to search.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "2")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A circle defined by center point and radius.
             #[prost(message, tag = "2")]
@@ -1331,6 +1370,7 @@ pub mod search_nearby_request {
         }
     }
     /// How results will be ranked in the response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1376,6 +1416,7 @@ pub mod search_nearby_request {
 }
 /// Response proto for Search Nearby.
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchNearbyResponse {
@@ -1387,6 +1428,7 @@ pub struct SearchNearbyResponse {
 /// Request proto for SearchText.
 ///
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTextRequest {
@@ -1468,16 +1510,18 @@ pub struct SearchTextRequest {
 pub mod search_text_request {
     /// The region to search. This location serves as a bias which means results
     /// around given location might be returned.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationBias {
         #[prost(oneof = "location_bias::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_bias::Type>,
     }
     /// Nested message and enum types in `LocationBias`.
     pub mod location_bias {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A rectangle box defined by northeast and southwest corner.
             /// `rectangle.high()` must be the northeast point of the rectangle
@@ -1494,16 +1538,18 @@ pub mod search_text_request {
     }
     /// The region to search. This location serves as a restriction which means
     /// results outside given location will not be returned.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "1")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A rectangle box defined by northeast and southwest corner.
             /// `rectangle.high()` must be the northeast point of the rectangle
@@ -1516,6 +1562,7 @@ pub mod search_text_request {
         }
     }
     /// Searchable EV options of a place search request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EvOptions {
@@ -1534,6 +1581,7 @@ pub mod search_text_request {
         pub connector_types: ::prost::alloc::vec::Vec<i32>,
     }
     /// How results will be ranked in the response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1582,6 +1630,7 @@ pub mod search_text_request {
 }
 /// Response proto for SearchText.
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTextResponse {
@@ -1603,6 +1652,7 @@ pub struct SearchTextResponse {
     pub contextual_contents: ::prost::alloc::vec::Vec<ContextualContent>,
 }
 /// Request for fetching a photo of a place using a photo resource name.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPhotoMediaRequest {
@@ -1649,6 +1699,7 @@ pub struct GetPhotoMediaRequest {
     pub skip_http_redirect: bool,
 }
 /// A photo media from Places API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhotoMedia {
@@ -1662,6 +1713,7 @@ pub struct PhotoMedia {
 }
 /// Request for fetching a Place based on its resource name, which is a string in
 /// the `places/{place_id}` format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPlaceRequest {
@@ -1716,6 +1768,7 @@ pub struct GetPlaceRequest {
     pub session_token: ::prost::alloc::string::String,
 }
 /// Request proto for AutocompletePlaces.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutocompletePlacesRequest {
@@ -1815,16 +1868,18 @@ pub struct AutocompletePlacesRequest {
 pub mod autocomplete_places_request {
     /// The region to search. The results may be biased around the specified
     /// region.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationBias {
         #[prost(oneof = "location_bias::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_bias::Type>,
     }
     /// Nested message and enum types in `LocationBias`.
     pub mod location_bias {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A viewport defined by a northeast and a southwest corner.
             #[prost(message, tag = "1")]
@@ -1836,16 +1891,18 @@ pub mod autocomplete_places_request {
     }
     /// The region to search. The results will be restricted to the specified
     /// region.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocationRestriction {
         #[prost(oneof = "location_restriction::Type", tags = "1, 2")]
         pub r#type: ::core::option::Option<location_restriction::Type>,
     }
     /// Nested message and enum types in `LocationRestriction`.
     pub mod location_restriction {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum Type {
             /// A viewport defined by a northeast and a southwest corner.
             #[prost(message, tag = "1")]
@@ -1857,6 +1914,7 @@ pub mod autocomplete_places_request {
     }
 }
 /// Response proto for AutocompletePlaces.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutocompletePlacesResponse {
@@ -1867,6 +1925,7 @@ pub struct AutocompletePlacesResponse {
 /// Nested message and enum types in `AutocompletePlacesResponse`.
 pub mod autocomplete_places_response {
     /// An Autocomplete suggestion result.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Suggestion {
@@ -1876,8 +1935,9 @@ pub mod autocomplete_places_response {
     /// Nested message and enum types in `Suggestion`.
     pub mod suggestion {
         /// Identifies a substring within a given text.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct StringRange {
             /// Zero-based offset of the first Unicode character of the string
             /// (inclusive).
@@ -1889,6 +1949,7 @@ pub mod autocomplete_places_response {
         }
         /// Text representing a Place or query prediction. The text may be used as is
         /// or formatted.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct FormattableText {
@@ -1914,6 +1975,7 @@ pub mod autocomplete_places_response {
         ///
         /// The secondary text contains additional disambiguating features (such as a
         /// city or region) to further identify the Place or refine the query.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StructuredFormat {
@@ -1926,6 +1988,7 @@ pub mod autocomplete_places_response {
             pub secondary_text: ::core::option::Option<FormattableText>,
         }
         /// Prediction results for a Place Autocomplete prediction.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PlacePrediction {
@@ -1979,6 +2042,7 @@ pub mod autocomplete_places_response {
             pub distance_meters: i32,
         }
         /// Prediction results for a Query Autocomplete prediction.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct QueryPrediction {
@@ -2009,6 +2073,7 @@ pub mod autocomplete_places_response {
             #[prost(message, optional, tag = "2")]
             pub structured_format: ::core::option::Option<StructuredFormat>,
         }
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {

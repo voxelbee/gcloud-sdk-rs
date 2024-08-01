@@ -5,6 +5,7 @@
 /// managers of the customer and shared with this customer - in addition to
 /// strategies owned by this customer. This resource does not provide metrics and
 /// only exposes a limited subset of the BiddingStrategy attributes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessibleBiddingStrategy {
@@ -43,8 +44,9 @@ pub struct AccessibleBiddingStrategy {
 pub mod accessible_bidding_strategy {
     /// An automated bidding strategy to help get the most conversion value for
     /// your campaigns while spending your budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MaximizeConversionValue {
         /// Output only. The target return on ad spend (ROAS) option. If set, the bid
         /// strategy will maximize revenue while averaging the target return on ad
@@ -56,8 +58,9 @@ pub mod accessible_bidding_strategy {
     }
     /// An automated bidding strategy to help get the most conversions for your
     /// campaigns while spending your budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MaximizeConversions {
         /// Output only. The target cost per acquisition (CPA) option. This is the
         /// average amount that you would like to spend per acquisition.
@@ -66,8 +69,9 @@ pub mod accessible_bidding_strategy {
     }
     /// An automated bid strategy that sets bids to help get as many conversions as
     /// possible at the target cost-per-acquisition (CPA) you set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TargetCpa {
         /// Output only. Average CPA target.
         /// This target should be greater than or equal to minimum billable unit
@@ -78,8 +82,9 @@ pub mod accessible_bidding_strategy {
     /// An automated bidding strategy that sets bids so that a certain percentage
     /// of search ads are shown at the top of the first page (or other targeted
     /// location).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TargetImpressionShare {
         /// Output only. The targeted location on the search results page.
         #[prost(
@@ -99,8 +104,9 @@ pub mod accessible_bidding_strategy {
     }
     /// An automated bidding strategy that helps you maximize revenue while
     /// averaging a specific target return on ad spend (ROAS).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TargetRoas {
         /// Output only. The chosen revenue (based on conversion data) per unit of
         /// spend.
@@ -109,8 +115,9 @@ pub mod accessible_bidding_strategy {
     }
     /// An automated bid strategy that sets your bids to help get as many clicks
     /// as possible within your budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TargetSpend {
         /// Output only. The spend target under which to maximize clicks.
         /// A TargetSpend bidder will attempt to spend the smaller of this value
@@ -130,8 +137,9 @@ pub mod accessible_bidding_strategy {
     /// The bidding scheme.
     ///
     /// Only one can be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Scheme {
         /// Output only. An automated bidding strategy to help get the most
         /// conversion value for your campaigns while spending your budget.
@@ -175,6 +183,7 @@ pub mod accessible_bidding_strategy {
 /// Once approved, a budget may be subject to adjustments, such as credit
 /// adjustments.  Adjustments create differences between the 'approved' and
 /// 'adjusted' fields, which would otherwise be identical.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountBudget {
@@ -273,6 +282,7 @@ pub struct AccountBudget {
 pub mod account_budget {
     /// A pending proposal associated with the enclosing account-level budget,
     /// if applicable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PendingAccountBudgetProposal {
@@ -325,6 +335,7 @@ pub mod account_budget {
     /// Nested message and enum types in `PendingAccountBudgetProposal`.
     pub mod pending_account_budget_proposal {
         /// The end time of the account-level budget.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum EndTime {
@@ -339,8 +350,9 @@ pub mod account_budget {
             EndTimeType(i32),
         }
         /// The spending limit.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum SpendingLimit {
             /// Output only. The spending limit in micros.  One million is equivalent
             /// to one unit.
@@ -356,6 +368,7 @@ pub mod account_budget {
         }
     }
     /// The proposed end time of the account-level budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ProposedEndTime {
@@ -374,6 +387,7 @@ pub mod account_budget {
     ///
     /// For example, if a budget's end time is updated and the proposal is approved
     /// after the proposed end time, the approved end time is the time of approval.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ApprovedEndTime {
@@ -389,8 +403,9 @@ pub mod account_budget {
         ApprovedEndTimeType(i32),
     }
     /// The proposed spending limit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ProposedSpendingLimit {
         /// Output only. The proposed spending limit in micros.  One million is
         /// equivalent to one unit.
@@ -409,8 +424,9 @@ pub mod account_budget {
     /// For example, if the amount already spent by the account exceeds the
     /// proposed spending limit at the time the proposal is approved, the approved
     /// spending limit is set to the amount already spent.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ApprovedSpendingLimit {
         /// Output only. The approved spending limit in micros.  One million is
         /// equivalent to one unit.  This will only be populated if the proposed
@@ -431,8 +447,9 @@ pub mod account_budget {
     /// stored in total_adjustments_micros.
     ///
     /// This value has the final say on how much the account is allowed to spend.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum AdjustedSpendingLimit {
         /// Output only. The adjusted spending limit in micros.  One million is
         /// equivalent to one unit.
@@ -468,6 +485,7 @@ pub mod account_budget {
 ///
 /// Note that the proposal type (proposal_type) changes which fields are
 /// required and which must remain empty.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountBudgetProposal {
@@ -557,6 +575,7 @@ pub struct AccountBudgetProposal {
 pub mod account_budget_proposal {
     /// The proposed start date time of the account-level budget, which cannot be
     /// in the past.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ProposedStartTime {
@@ -573,6 +592,7 @@ pub mod account_budget_proposal {
     }
     /// The proposed end date time of the account-level budget, which cannot be in
     /// the past.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ProposedEndTime {
@@ -588,6 +608,7 @@ pub mod account_budget_proposal {
         ProposedEndTimeType(i32),
     }
     /// The approved end date time of the account-level budget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ApprovedEndTime {
@@ -603,8 +624,9 @@ pub mod account_budget_proposal {
         ApprovedEndTimeType(i32),
     }
     /// The proposed spending limit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ProposedSpendingLimit {
         /// Immutable. The proposed spending limit in micros.  One million is
         /// equivalent to one unit.
@@ -619,8 +641,9 @@ pub mod account_budget_proposal {
         ProposedSpendingLimitType(i32),
     }
     /// The approved spending limit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ApprovedSpendingLimit {
         /// Output only. The approved spending limit in micros.  One million is
         /// equivalent to one unit.
@@ -637,6 +660,7 @@ pub mod account_budget_proposal {
 }
 /// Represents the data sharing connection between a Google Ads account and
 /// another account
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountLink {
@@ -668,6 +692,7 @@ pub struct AccountLink {
 /// Nested message and enum types in `AccountLink`.
 pub mod account_link {
     /// An account linked to this Google Ads account.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LinkedAccount {
@@ -686,6 +711,7 @@ pub mod account_link {
     }
 }
 /// The identifiers of a Third Party App Analytics Link.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ThirdPartyAppAnalyticsLinkIdentifier {
@@ -719,8 +745,9 @@ pub struct ThirdPartyAppAnalyticsLinkIdentifier {
     pub app_vendor: i32,
 }
 /// The identifier for Data Partner account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DataPartnerLinkIdentifier {
     /// Immutable. The customer ID of the Data partner account.
     /// This field is required and should not be empty when creating a new
@@ -730,6 +757,7 @@ pub struct DataPartnerLinkIdentifier {
     pub data_partner_id: ::core::option::Option<i64>,
 }
 /// The identifier for Google Ads account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsLinkIdentifier {
@@ -741,6 +769,7 @@ pub struct GoogleAdsLinkIdentifier {
     pub customer: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// The identifier for the Advertising Partner Google Ads account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdvertisingPartnerLinkIdentifier {
@@ -752,6 +781,7 @@ pub struct AdvertisingPartnerLinkIdentifier {
     pub customer: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// An ad.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Ad {
@@ -834,6 +864,7 @@ pub struct Ad {
 /// Nested message and enum types in `Ad`.
 pub mod ad {
     /// Details pertinent to the ad type. Exactly one value must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AdData {
@@ -921,6 +952,7 @@ pub mod ad {
     }
 }
 /// An ad group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroup {
@@ -1091,8 +1123,9 @@ pub struct AdGroup {
 /// Nested message and enum types in `AdGroup`.
 pub mod ad_group {
     /// Settings for the audience targeting.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AudienceSetting {
         /// Immutable. If true, this ad group uses an Audience resource for audience
         /// targeting. If false, this ad group may use audience segment criteria
@@ -1102,6 +1135,7 @@ pub mod ad_group {
     }
 }
 /// An ad group ad.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAd {
@@ -1139,6 +1173,7 @@ pub struct AdGroupAd {
     pub labels: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Contains policy information for an ad.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAdPolicySummary {
@@ -1162,6 +1197,7 @@ pub struct AdGroupAdPolicySummary {
 /// A view on the usage of ad group ad asset combination.
 /// Now we only support AdGroupAdAssetCombinationView for Responsive Search Ads,
 /// with more ad types planned for the future.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAdAssetCombinationView {
@@ -1186,6 +1222,7 @@ pub struct AdGroupAdAssetCombinationView {
 /// A link between an AdGroupAd and an Asset.
 /// Currently we only support AdGroupAdAssetView for AppAds and Responsive Search
 /// Ads.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAdAssetView {
@@ -1237,6 +1274,7 @@ pub struct AdGroupAdAssetView {
     pub source: i32,
 }
 /// Contains policy information for an ad group ad asset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAdAssetPolicySummary {
@@ -1258,6 +1296,7 @@ pub struct AdGroupAdAssetPolicySummary {
     pub approval_status: i32,
 }
 /// A relationship between an ad group ad and a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAdLabel {
@@ -1274,6 +1313,7 @@ pub struct AdGroupAdLabel {
     pub label: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A link between an ad group and an asset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAsset {
@@ -1333,6 +1373,7 @@ pub struct AdGroupAsset {
 }
 /// AdGroupAssetSet is the linkage between an ad group and an asset set.
 /// Creating an AdGroupAssetSet links an asset set with an ad group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAssetSet {
@@ -1359,6 +1400,7 @@ pub struct AdGroupAssetSet {
 /// Includes performance data from interests and remarketing lists for Display
 /// Network and YouTube Network ads, and remarketing lists for search ads (RLSA),
 /// aggregated at the audience level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupAudienceView {
@@ -1370,6 +1412,7 @@ pub struct AdGroupAudienceView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// Represents an ad group bid modifier.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupBidModifier {
@@ -1416,6 +1459,7 @@ pub mod ad_group_bid_modifier {
     /// The criterion of this ad group bid modifier.
     ///
     /// Required in create operations starting in V5.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
@@ -1442,6 +1486,7 @@ pub mod ad_group_bid_modifier {
     }
 }
 /// An ad group criterion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupCriterion {
@@ -1607,8 +1652,9 @@ pub struct AdGroupCriterion {
 /// Nested message and enum types in `AdGroupCriterion`.
 pub mod ad_group_criterion {
     /// A container for ad group criterion quality information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct QualityInfo {
         /// Output only. The quality score.
         ///
@@ -1637,8 +1683,9 @@ pub mod ad_group_criterion {
         pub search_predicted_ctr: i32,
     }
     /// Estimates for criterion bids at various positions.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PositionEstimates {
         /// Output only. The estimate of the CPC bid required for ad to be shown on
         /// first page of search results.
@@ -1664,6 +1711,7 @@ pub mod ad_group_criterion {
     /// The ad group criterion.
     ///
     /// Exactly one must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
@@ -1743,6 +1791,7 @@ pub mod ad_group_criterion {
 }
 /// A customizer value for the associated CustomizerAttribute at the
 /// AdGroupCriterion level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupCriterionCustomizer {
@@ -1772,6 +1821,7 @@ pub struct AdGroupCriterionCustomizer {
     pub value: ::core::option::Option<super::common::CustomizerValue>,
 }
 /// A relationship between an ad group criterion and a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupCriterionLabel {
@@ -1797,6 +1847,7 @@ pub struct AdGroupCriterionLabel {
 /// 3. SHOPPING - LISTING_GROUP - CPC_BID - UNIFORM
 /// 4. HOTEL - LISTING_GROUP - CPC_BID - UNIFORM
 /// 5. HOTEL - LISTING_GROUP - PERCENT_CPC_BID - UNIFORM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupCriterionSimulation {
@@ -1839,6 +1890,7 @@ pub struct AdGroupCriterionSimulation {
 /// Nested message and enum types in `AdGroupCriterionSimulation`.
 pub mod ad_group_criterion_simulation {
     /// List of simulation points.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PointList {
@@ -1852,6 +1904,7 @@ pub mod ad_group_criterion_simulation {
 }
 /// A customizer value for the associated CustomizerAttribute at the AdGroup
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupCustomizer {
@@ -1880,6 +1933,7 @@ pub struct AdGroupCustomizer {
     pub value: ::core::option::Option<super::common::CustomizerValue>,
 }
 /// An ad group extension setting.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupExtensionSetting {
@@ -1912,6 +1966,7 @@ pub struct AdGroupExtensionSetting {
     pub device: i32,
 }
 /// An ad group feed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupFeed {
@@ -1949,6 +2004,7 @@ pub struct AdGroupFeed {
     pub status: i32,
 }
 /// A relationship between an ad group and a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupLabel {
@@ -1975,6 +2031,7 @@ pub struct AdGroupLabel {
 /// 5. DISPLAY - CPC_BID - DEFAULT
 /// 6. DISPLAY - CPC_BID - UNIFORM
 /// 7. DISPLAY - TARGET_CPA - UNIFORM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdGroupSimulation {
@@ -2014,6 +2071,7 @@ pub struct AdGroupSimulation {
 /// Nested message and enum types in `AdGroupSimulation`.
 pub mod ad_group_simulation {
     /// List of simulation points.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PointList {
@@ -2037,6 +2095,7 @@ pub mod ad_group_simulation {
 /// parameter_index = 1 and one with parameter_index = 2.)
 /// In the ad the parameters are referenced by a placeholder of the form
 /// "{param#:value}". For example, "{param1:$17}"
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdParameter {
@@ -2070,6 +2129,7 @@ pub struct AdParameter {
 }
 /// An ad schedule view summarizes the performance of campaigns by
 /// AdSchedule criteria.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdScheduleView {
@@ -2081,6 +2141,7 @@ pub struct AdScheduleView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// An age range view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AgeRangeView {
@@ -2092,6 +2153,7 @@ pub struct AgeRangeView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// An Android privacy shared key view for Google ad group key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AndroidPrivacySharedKeyGoogleAdGroup {
@@ -2131,6 +2193,7 @@ pub struct AndroidPrivacySharedKeyGoogleAdGroup {
     pub shared_ad_group_key: ::prost::alloc::string::String,
 }
 /// An Android privacy shared key view for Google campaign key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AndroidPrivacySharedKeyGoogleCampaign {
@@ -2161,6 +2224,7 @@ pub struct AndroidPrivacySharedKeyGoogleCampaign {
     pub shared_campaign_key: ::prost::alloc::string::String,
 }
 /// An Android privacy shared key view for Google network type key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AndroidPrivacySharedKeyGoogleNetworkType {
@@ -2200,6 +2264,7 @@ pub struct AndroidPrivacySharedKeyGoogleNetworkType {
 /// It can be an image (ImageAsset), a video (YoutubeVideoAsset), etc.
 /// Assets are immutable and cannot be removed. To stop an asset from serving,
 /// remove the asset from the entity that is using it.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
@@ -2256,6 +2321,7 @@ pub struct Asset {
 /// Nested message and enum types in `Asset`.
 pub mod asset {
     /// The specific type of the asset.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AssetData {
@@ -2343,6 +2409,7 @@ pub mod asset {
     }
 }
 /// Contains policy information for an asset under AssetFieldType context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetFieldTypePolicySummary {
@@ -2365,6 +2432,7 @@ pub struct AssetFieldTypePolicySummary {
     pub policy_summary_info: ::core::option::Option<AssetPolicySummary>,
 }
 /// Contains policy information for an asset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetPolicySummary {
@@ -2388,6 +2456,7 @@ pub struct AssetPolicySummary {
 /// An asset field type view.
 /// This view reports non-overcounted metrics for each asset field type when the
 /// asset is used as extension.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetFieldTypeView {
@@ -2407,6 +2476,7 @@ pub struct AssetFieldTypeView {
 /// An asset group.
 /// AssetGroupAsset is used to link an asset to the asset group.
 /// AssetGroupSignal is used to associate a signal to an asset group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroup {
@@ -2473,6 +2543,7 @@ pub struct AssetGroup {
 }
 /// AssetGroupAsset is the link between an asset and an asset group.
 /// Adding an AssetGroupAsset links an asset with an asset group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupAsset {
@@ -2542,6 +2613,7 @@ pub struct AssetGroupAsset {
 }
 /// AssetGroupListingGroupFilter represents a listing group filter tree node in
 /// an asset group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupListingGroupFilter {
@@ -2583,6 +2655,7 @@ pub struct AssetGroupListingGroupFilter {
     pub path: ::core::option::Option<ListingGroupFilterDimensionPath>,
 }
 /// The path defining of dimensions defining a listing group filter.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListingGroupFilterDimensionPath {
@@ -2592,6 +2665,7 @@ pub struct ListingGroupFilterDimensionPath {
     pub dimensions: ::prost::alloc::vec::Vec<ListingGroupFilterDimension>,
 }
 /// Listing dimensions for the asset group listing group filter.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListingGroupFilterDimension {
@@ -2609,8 +2683,9 @@ pub mod listing_group_filter_dimension {
     /// up to 5 levels. The user must specify a dimension type that indicates the
     /// level of the category. All cases of the same subdivision must have the same
     /// dimension type (category level).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ProductCategory {
         /// ID of the product category.
         ///
@@ -2626,6 +2701,7 @@ pub mod listing_group_filter_dimension {
         pub level: i32,
     }
     /// Brand of the product.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProductBrand {
@@ -2634,8 +2710,9 @@ pub mod listing_group_filter_dimension {
         pub value: ::core::option::Option<::prost::alloc::string::String>,
     }
     /// Locality of a product offer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ProductChannel {
         /// Value of the locality.
         #[prost(
@@ -2645,8 +2722,9 @@ pub mod listing_group_filter_dimension {
         pub channel: i32,
     }
     /// Condition of a product offer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ProductCondition {
         /// Value of the condition.
         #[prost(
@@ -2656,6 +2734,7 @@ pub mod listing_group_filter_dimension {
         pub condition: i32,
     }
     /// Custom attribute of a product offer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProductCustomAttribute {
@@ -2670,6 +2749,7 @@ pub mod listing_group_filter_dimension {
         pub index: i32,
     }
     /// Item id of a product offer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProductItemId {
@@ -2678,6 +2758,7 @@ pub mod listing_group_filter_dimension {
         pub value: ::core::option::Option<::prost::alloc::string::String>,
     }
     /// Type of a product offer.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProductType {
@@ -2694,6 +2775,7 @@ pub mod listing_group_filter_dimension {
     /// Filters for URLs in a page feed and URLs from the advertiser web domain.
     /// Several root nodes with this dimension are allowed in an asset group and
     /// their conditions are considered in OR.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Webpage {
@@ -2713,6 +2795,7 @@ pub mod listing_group_filter_dimension {
         pub conditions: ::prost::alloc::vec::Vec<WebpageCondition>,
     }
     /// Matching condition for URL filtering.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WebpageCondition {
@@ -2723,6 +2806,7 @@ pub mod listing_group_filter_dimension {
     /// Nested message and enum types in `WebpageCondition`.
     pub mod webpage_condition {
         /// Condition for filtering the URLs.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Condition {
@@ -2738,6 +2822,7 @@ pub mod listing_group_filter_dimension {
         }
     }
     /// Dimension of one of the types below is always present.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Dimension {
@@ -2768,6 +2853,7 @@ pub mod listing_group_filter_dimension {
     }
 }
 /// An asset group product group view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupProductGroupView {
@@ -2788,6 +2874,7 @@ pub struct AssetGroupProductGroupView {
 /// signal tells the performance max campaign who's most likely to convert.
 /// Performance Max uses the signal to look for new people with similar or
 /// stronger intent to find conversions across Search, Display, Video, and more.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupSignal {
@@ -2819,6 +2906,7 @@ pub struct AssetGroupSignal {
 /// Nested message and enum types in `AssetGroupSignal`.
 pub mod asset_group_signal {
     /// The signal of the asset group.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Signal {
@@ -2842,6 +2930,7 @@ pub mod asset_group_signal {
     }
 }
 /// A view on the usage of ad group ad asset combination.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupTopCombinationView {
@@ -2857,6 +2946,7 @@ pub struct AssetGroupTopCombinationView {
     >,
 }
 /// Asset group asset combination data
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetGroupAssetCombinationData {
@@ -2868,6 +2958,7 @@ pub struct AssetGroupAssetCombinationData {
 }
 /// An asset set representing a collection of assets.
 /// Use AssetSetAsset to link an asset to the asset set.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetSet {
@@ -2914,6 +3005,7 @@ pub struct AssetSet {
 /// Nested message and enum types in `AssetSet`.
 pub mod asset_set {
     /// Merchant ID and Feed Label from Google Merchant Center.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MerchantCenterFeed {
@@ -2926,6 +3018,7 @@ pub mod asset_set {
     }
     /// For Performance Max for travel goals campaigns with a Hotel
     /// Center account link. Read-only.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct HotelPropertyData {
@@ -2938,6 +3031,7 @@ pub mod asset_set {
     }
     /// Asset set data specific to each asset set type. Not all types have specific
     /// data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AssetSetSource {
@@ -2957,6 +3051,7 @@ pub mod asset_set {
 }
 /// AssetSetAsset is the link between an asset and an asset set.
 /// Adding an AssetSetAsset links an asset with an asset set.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetSetAsset {
@@ -2983,6 +3078,7 @@ pub struct AssetSetAsset {
 /// This view reports non-overcounted metrics for each asset set type. Child
 /// asset set types are not included in this report. Their stats are aggregated
 /// under the parent asset set type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssetSetTypeView {
@@ -3000,6 +3096,7 @@ pub struct AssetSetTypeView {
 /// intersect different segment attributes, such as detailed demographics and
 /// affinities, to create audiences that represent sections of your target
 /// segments.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Audience {
@@ -3052,6 +3149,7 @@ pub struct Audience {
 /// A list of mutates being processed asynchronously. The mutates are uploaded
 /// by the user. The mutates themselves aren't readable and the results of the
 /// job can only be read using BatchJobService.ListBatchJobResults.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchJob {
@@ -3087,6 +3185,7 @@ pub struct BatchJob {
 pub mod batch_job {
     /// Additional information about the batch job. This message is also used as
     /// metadata returned in batch job Long Running Operations.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BatchJobMetadata {
@@ -3124,6 +3223,7 @@ pub mod batch_job {
 ///
 /// See "About data exclusions" at
 /// <https://support.google.com/google-ads/answer/10370710.>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BiddingDataExclusion {
@@ -3199,6 +3299,7 @@ pub struct BiddingDataExclusion {
 ///
 /// See "About seasonality adjustments" at
 /// <https://support.google.com/google-ads/answer/10369906.>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BiddingSeasonalityAdjustment {
@@ -3276,6 +3377,7 @@ pub struct BiddingSeasonalityAdjustment {
     pub advertising_channel_types: ::prost::alloc::vec::Vec<i32>,
 }
 /// A bidding strategy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BiddingStrategy {
@@ -3363,8 +3465,9 @@ pub mod bidding_strategy {
     /// The bidding scheme.
     ///
     /// Only one can be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Scheme {
         /// A bidding strategy that raises bids for clicks that seem more likely to
         /// lead to a conversion and lowers them for clicks where they seem less
@@ -3402,6 +3505,7 @@ pub mod bidding_strategy {
 ///
 /// 1. TARGET_CPA - UNIFORM
 /// 2. TARGET_ROAS - UNIFORM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BiddingStrategySimulation {
@@ -3441,6 +3545,7 @@ pub struct BiddingStrategySimulation {
 /// Nested message and enum types in `BiddingStrategySimulation`.
 pub mod bidding_strategy_simulation {
     /// List of simulation points.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PointList {
@@ -3454,6 +3559,7 @@ pub mod bidding_strategy_simulation {
 }
 /// A billing setup, which associates a payments account and an advertiser. A
 /// billing setup is specific to one advertiser.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BillingSetup {
@@ -3507,6 +3613,7 @@ pub struct BillingSetup {
 /// Nested message and enum types in `BillingSetup`.
 pub mod billing_setup {
     /// Container of payments account information for this billing.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PaymentsAccountInfo {
@@ -3556,6 +3663,7 @@ pub mod billing_setup {
     /// When fetching an existing billing setup, this is the requested start time.
     /// However, if the setup was approved (see status) after the requested start
     /// time, then this is the approval time.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StartTime {
@@ -3572,6 +3680,7 @@ pub mod billing_setup {
     }
     /// When the billing setup ends / ended. This is either FOREVER or the start
     /// time of the next scheduled billing setup.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EndTime {
@@ -3589,6 +3698,7 @@ pub mod billing_setup {
 }
 /// A call view that includes data for call tracking of call-only ads or call
 /// extensions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallView {
@@ -3631,6 +3741,7 @@ pub struct CallView {
     pub call_status: i32,
 }
 /// A campaign.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Campaign {
@@ -3951,6 +4062,7 @@ pub struct Campaign {
 /// Nested message and enum types in `Campaign`.
 pub mod campaign {
     /// Information about a campaign being upgraded to Performance Max.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PerformanceMaxUpgrade {
@@ -3970,8 +4082,9 @@ pub mod campaign {
         pub status: i32,
     }
     /// The network settings for the campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NetworkSettings {
         /// Whether ads will be served with google.com search results.
         #[prost(bool, optional, tag = "5")]
@@ -3996,14 +4109,16 @@ pub mod campaign {
         pub target_google_tv_network: ::core::option::Option<bool>,
     }
     /// Campaign-level settings for hotel ads.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct HotelSettingInfo {
         /// Immutable. The linked Hotel Center account.
         #[prost(int64, optional, tag = "2")]
         pub hotel_center_id: ::core::option::Option<i64>,
     }
     /// The setting for controlling Dynamic Search Ads (DSA).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DynamicSearchAdsSetting {
@@ -4025,6 +4140,7 @@ pub mod campaign {
     /// The setting for Shopping campaigns. Defines the universe of products that
     /// can be advertised by the campaign, and how this campaign interacts with
     /// other Shopping campaigns.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingSetting {
@@ -4063,6 +4179,7 @@ pub mod campaign {
         pub advertising_partner_ids: ::prost::alloc::vec::Vec<i64>,
     }
     /// Campaign-level settings for tracking information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TrackingSetting {
@@ -4071,8 +4188,9 @@ pub mod campaign {
         pub tracking_url: ::core::option::Option<::prost::alloc::string::String>,
     }
     /// Represents a collection of settings related to ads geotargeting.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct GeoTargetTypeSetting {
         /// The setting used for positive geotargeting in this particular campaign.
         #[prost(
@@ -4088,8 +4206,9 @@ pub mod campaign {
         pub negative_geo_target_type: i32,
     }
     /// Campaign setting for local campaigns.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LocalCampaignSetting {
         /// The location source type for this local campaign.
         #[prost(
@@ -4099,6 +4218,7 @@ pub mod campaign {
         pub location_source_type: i32,
     }
     /// Campaign-level settings for App Campaigns.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AppCampaignSetting {
@@ -4120,8 +4240,9 @@ pub mod campaign {
         pub app_store: i32,
     }
     /// Describes how unbranded pharma ads will be displayed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VanityPharma {
         /// The display mode for vanity pharma URLs.
         #[prost(
@@ -4142,6 +4263,7 @@ pub mod campaign {
     /// This feature only applies to app campaigns that use MULTI_CHANNEL as
     /// AdvertisingChannelType and APP_CAMPAIGN or APP_CAMPAIGN_FOR_ENGAGEMENT as
     /// AdvertisingChannelSubType.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SelectiveOptimization {
@@ -4151,6 +4273,7 @@ pub mod campaign {
     }
     /// Optimization goal setting for this campaign, which includes a set of
     /// optimization goal types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct OptimizationGoalSetting {
@@ -4163,8 +4286,9 @@ pub mod campaign {
         pub optimization_goal_types: ::prost::alloc::vec::Vec<i32>,
     }
     /// Settings for the audience targeting.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AudienceSetting {
         /// Immutable. If true, this campaign uses an Audience resource for audience
         /// targeting. If false, this campaign may use audience segment criteria
@@ -4173,6 +4297,7 @@ pub mod campaign {
         pub use_audience_grouped: ::core::option::Option<bool>,
     }
     /// Settings for LocalServicesCampaign subresource.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LocalServicesCampaignSettings {
@@ -4181,6 +4306,7 @@ pub mod campaign {
         pub category_bids: ::prost::alloc::vec::Vec<CategoryBid>,
     }
     /// Category bids in LocalServicesReportingCampaignSettings.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CategoryBid {
@@ -4195,16 +4321,18 @@ pub mod campaign {
         pub manual_cpa_bid_micros: ::core::option::Option<i64>,
     }
     /// Settings for Travel campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TravelCampaignSettings {
         /// Immutable. The Travel account ID associated with the Travel campaign.
         #[prost(int64, optional, tag = "1")]
         pub travel_account_id: ::core::option::Option<i64>,
     }
     /// Settings for Discovery campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DiscoveryCampaignSettings {
         /// Immutable. Specifies whether this campaign uses upgraded targeting
         /// options. When this field is set to `true`, you can use location and
@@ -4216,8 +4344,9 @@ pub mod campaign {
     }
     /// Asset automation setting contains pair of AssetAutomationType and the
     /// asset automation opt-in/out status
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AssetAutomationSetting {
         /// The asset automation type advertiser would like to opt-in/out.
         #[prost(
@@ -4238,6 +4367,7 @@ pub mod campaign {
     ///
     /// Must be either portfolio (created through BiddingStrategy service) or
     /// standard, that is embedded into the campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CampaignBiddingStrategy {
@@ -4301,6 +4431,7 @@ pub mod campaign {
     }
 }
 /// A link between a Campaign and an Asset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignAsset {
@@ -4361,6 +4492,7 @@ pub struct CampaignAsset {
 }
 /// CampaignAssetSet is the linkage between a campaign and an asset set.
 /// Adding a CampaignAssetSet links an asset set with a campaign.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignAssetSet {
@@ -4388,6 +4520,7 @@ pub struct CampaignAssetSet {
 /// Network and YouTube Network ads, and remarketing lists for search ads (RLSA),
 /// aggregated by campaign and audience criterion. This view only includes
 /// audiences attached at the campaign level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignAudienceView {
@@ -4399,6 +4532,7 @@ pub struct CampaignAudienceView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// Represents a bid-modifiable only criterion at the campaign level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignBidModifier {
@@ -4430,8 +4564,9 @@ pub mod campaign_bid_modifier {
     /// The criterion of this campaign bid modifier.
     ///
     /// Required in create operations starting in V5.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
         /// Immutable. Criterion for interaction type. Only supported for search
         /// campaigns.
@@ -4440,6 +4575,7 @@ pub mod campaign_bid_modifier {
     }
 }
 /// A campaign budget.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignBudget {
@@ -4571,6 +4707,7 @@ pub struct CampaignBudget {
 }
 /// The biddability setting for the specified campaign only for all
 /// conversion actions with a matching category and origin.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignConversionGoal {
@@ -4601,6 +4738,7 @@ pub struct CampaignConversionGoal {
     pub biddable: bool,
 }
 /// A campaign criterion.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignCriterion {
@@ -4654,6 +4792,7 @@ pub mod campaign_criterion {
     /// The campaign criterion.
     ///
     /// Exactly one must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
@@ -4760,6 +4899,7 @@ pub mod campaign_criterion {
 }
 /// A customizer value for the associated CustomizerAttribute at the Campaign
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignCustomizer {
@@ -4788,6 +4928,7 @@ pub struct CampaignCustomizer {
     pub value: ::core::option::Option<super::common::CustomizerValue>,
 }
 /// A campaign draft.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignDraft {
@@ -4839,6 +4980,7 @@ pub struct CampaignDraft {
     pub long_running_operation: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A campaign extension setting.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignExtensionSetting {
@@ -4872,6 +5014,7 @@ pub struct CampaignExtensionSetting {
     pub device: i32,
 }
 /// A campaign feed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignFeed {
@@ -4909,6 +5052,7 @@ pub struct CampaignFeed {
     pub status: i32,
 }
 /// A campaign group.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignGroup {
@@ -4940,6 +5084,7 @@ pub struct CampaignGroup {
     pub status: i32,
 }
 /// Represents a relationship between a campaign and a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignLabel {
@@ -4956,6 +5101,7 @@ pub struct CampaignLabel {
     pub label: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Campaign level customer lifecycle goal settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignLifecycleGoal {
@@ -4976,8 +5122,9 @@ pub struct CampaignLifecycleGoal {
     >,
 }
 /// The customer acquisition goal settings for the campaign.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomerAcquisitionGoalSettings {
     /// Output only. Customer acquisition optimization mode of this campaign.
     #[prost(
@@ -4993,6 +5140,7 @@ pub struct CustomerAcquisitionGoalSettings {
 }
 /// A Campaign search term view.
 /// Historical data is available starting March 2023.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignSearchTermInsight {
@@ -5015,6 +5163,7 @@ pub struct CampaignSearchTermInsight {
 }
 /// CampaignSharedSets are used for managing the shared sets associated with a
 /// campaign.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignSharedSet {
@@ -5061,6 +5210,7 @@ pub struct CampaignSharedSet {
 /// * PERFORMANCE_MAX - TARGET_CPA - UNIFORM
 /// * PERFORMANCE_MAX - TARGET_ROAS - UNIFORM
 /// * PERFORMANCE_MAX - BUDGET - UNIFORM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CampaignSimulation {
@@ -5100,6 +5250,7 @@ pub struct CampaignSimulation {
 /// Nested message and enum types in `CampaignSimulation`.
 pub mod campaign_simulation {
     /// List of simulation points.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PointList {
@@ -5124,6 +5275,7 @@ pub mod campaign_simulation {
     }
 }
 /// A carrier criterion that can be used in campaign targeting.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CarrierConstant {
@@ -5145,6 +5297,7 @@ pub struct CarrierConstant {
     pub country_code: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A link between a customer and an asset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerAsset {
@@ -5200,6 +5353,7 @@ pub struct CustomerAsset {
     pub primary_status_reasons: ::prost::alloc::vec::Vec<i32>,
 }
 /// A feed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Feed {
@@ -5243,6 +5397,7 @@ pub struct Feed {
 /// Nested message and enum types in `Feed`.
 pub mod feed {
     /// Data used to configure a location feed populated from Business Profile.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PlacesLocationFeedData {
@@ -5282,6 +5437,7 @@ pub mod feed {
     /// Nested message and enum types in `PlacesLocationFeedData`.
     pub mod places_location_feed_data {
         /// Data used for authorization using OAuth.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct OAuthInfo {
@@ -5300,6 +5456,7 @@ pub mod feed {
     }
     /// Data used to configure an affiliate location feed populated with the
     /// specified chains.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AffiliateLocationFeedData {
@@ -5316,6 +5473,7 @@ pub mod feed {
     }
     /// The system data for the Feed. This data specifies information for
     /// generating the feed items of the system generated feed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SystemFeedGenerationData {
@@ -5332,6 +5490,7 @@ pub mod feed {
 /// single FeedAttribute specifies the expected type of the FeedItemAttributes
 /// with the same FeedAttributeId. Optionally, a FeedAttribute can be marked as
 /// being part of a FeedItem's unique key.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedAttribute {
@@ -5355,6 +5514,7 @@ pub struct FeedAttribute {
     pub is_part_of_key: ::core::option::Option<bool>,
 }
 /// Operation to be performed on a feed attribute list in a mutate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedAttributeOperation {
@@ -5368,6 +5528,7 @@ pub struct FeedAttributeOperation {
 /// Nested message and enum types in `FeedAttributeOperation`.
 pub mod feed_attribute_operation {
     /// The operator.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5412,6 +5573,7 @@ pub mod feed_attribute_operation {
     }
 }
 /// A feed item.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItem {
@@ -5470,6 +5632,7 @@ pub struct FeedItem {
     pub policy_infos: ::prost::alloc::vec::Vec<FeedItemPlaceholderPolicyInfo>,
 }
 /// A feed item attribute value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemAttributeValue {
@@ -5525,6 +5688,7 @@ pub struct FeedItemAttributeValue {
 }
 /// Policy, validation, and quality approval info for a feed item for the
 /// specified placeholder type.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemPlaceholderPolicyInfo {
@@ -5582,6 +5746,7 @@ pub struct FeedItemPlaceholderPolicyInfo {
 }
 /// Stores a validation error and the set of offending feed attributes which
 /// together are responsible for causing a feed item validation error.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemValidationError {
@@ -5611,6 +5776,7 @@ pub struct FeedItemValidationError {
 /// types. Changes made through the UI or API in the past 30 days are included.
 /// Previous and new values of the changed fields are shown. ChangeEvent could
 /// have up to 3 minutes delay to reflect a new change.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeEvent {
@@ -5658,7 +5824,7 @@ pub struct ChangeEvent {
     pub resource_change_operation: i32,
     /// Output only. A list of fields that are changed in the returned resource.
     #[prost(message, optional, tag = "10")]
-    pub changed_fields: ::core::option::Option<::prost_types::FieldMask>,
+    pub changed_fields: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Output only. The Campaign affected by this change.
     #[prost(string, tag = "11")]
     pub campaign: ::prost::alloc::string::String,
@@ -5679,6 +5845,7 @@ pub struct ChangeEvent {
 pub mod change_event {
     /// A wrapper proto presenting all supported resources.
     /// Only the resource of the change_resource_type will be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ChangedResource {
@@ -5743,6 +5910,7 @@ pub mod change_event {
 }
 /// Describes the status of returned resource. ChangeStatus could have up to 3
 /// minutes delay to reflect a new change.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeStatus {
@@ -5828,6 +5996,7 @@ pub struct ChangeStatus {
 /// Queries including ClickView must have a filter limiting the results to one
 /// day and can be requested for dates back to 90 days before the time of the
 /// request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClickView {
@@ -5870,6 +6039,7 @@ pub struct ClickView {
 }
 /// Describe a resource for combined audiences which includes different
 /// audiences.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CombinedAudience {
@@ -5898,6 +6068,7 @@ pub struct CombinedAudience {
     pub description: ::prost::alloc::string::String,
 }
 /// A conversion action.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionAction {
@@ -6020,8 +6191,9 @@ pub struct ConversionAction {
 /// Nested message and enum types in `ConversionAction`.
 pub mod conversion_action {
     /// Settings related to this conversion action's attribution model.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AttributionModelSettings {
         /// The attribution model type of this conversion action.
         #[prost(
@@ -6039,6 +6211,7 @@ pub mod conversion_action {
     }
     /// Settings related to the value for conversion events associated with this
     /// conversion action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ValueSettings {
@@ -6061,6 +6234,7 @@ pub mod conversion_action {
         pub always_use_default_value: ::core::option::Option<bool>,
     }
     /// Settings related to a third party app analytics conversion action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ThirdPartyAppAnalyticsSettings {
@@ -6072,6 +6246,7 @@ pub mod conversion_action {
         pub provider_name: ::prost::alloc::string::String,
     }
     /// Settings related to a Firebase conversion action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FirebaseSettings {
@@ -6089,6 +6264,7 @@ pub mod conversion_action {
         pub property_name: ::prost::alloc::string::String,
     }
     /// Settings related to a Google Analytics 4 conversion action.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GoogleAnalytics4Settings {
@@ -6106,6 +6282,7 @@ pub mod conversion_action {
 /// A conversion custom variable
 /// See "About custom variables for conversions" at
 /// <https://support.google.com/google-ads/answer/9964350>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionCustomVariable {
@@ -6144,6 +6321,7 @@ pub struct ConversionCustomVariable {
     pub owner_customer: ::prost::alloc::string::String,
 }
 /// Conversion goal settings for a Campaign.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionGoalCampaignConfig {
@@ -6168,6 +6346,7 @@ pub struct ConversionGoalCampaignConfig {
     pub custom_conversion_goal: ::prost::alloc::string::String,
 }
 /// A conversion value rule
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionValueRule {
@@ -6217,8 +6396,9 @@ pub struct ConversionValueRule {
 /// Nested message and enum types in `ConversionValueRule`.
 pub mod conversion_value_rule {
     /// Action applied when rule is applied.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ValueRuleAction {
         /// Specifies applied operation.
         #[prost(
@@ -6231,6 +6411,7 @@ pub mod conversion_value_rule {
         pub value: f64,
     }
     /// Condition on Geo dimension.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ValueRuleGeoLocationCondition {
@@ -6258,6 +6439,7 @@ pub mod conversion_value_rule {
         pub geo_match_type: i32,
     }
     /// Condition on Device dimension.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ValueRuleDeviceCondition {
@@ -6270,6 +6452,7 @@ pub mod conversion_value_rule {
         pub device_types: ::prost::alloc::vec::Vec<i32>,
     }
     /// Condition on Audience dimension.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ValueRuleAudienceCondition {
@@ -6285,6 +6468,7 @@ pub mod conversion_value_rule {
     }
 }
 /// A conversion value rule set
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionValueRuleSet {
@@ -6348,6 +6532,7 @@ pub struct ConversionValueRuleSet {
     pub conversion_action_categories: ::prost::alloc::vec::Vec<i32>,
 }
 /// A currency constant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CurrencyConstant {
@@ -6373,6 +6558,7 @@ pub struct CurrencyConstant {
     pub billable_unit_micros: ::core::option::Option<i64>,
 }
 /// A custom audience. This is a list of users by interest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomAudience {
@@ -6416,6 +6602,7 @@ pub struct CustomAudience {
 }
 /// A member of custom audience. A member can be a KEYWORD, URL,
 /// PLACE_CATEGORY or APP. It can only be created or removed but not changed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomAudienceMember {
@@ -6434,6 +6621,7 @@ pub struct CustomAudienceMember {
 pub mod custom_audience_member {
     /// The CustomAudienceMember value. One field is populated depending on the
     /// member type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
@@ -6457,6 +6645,7 @@ pub mod custom_audience_member {
     }
 }
 /// Custom conversion goal that can make arbitrary conversion actions biddable.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConversionGoal {
@@ -6483,6 +6672,7 @@ pub struct CustomConversionGoal {
     pub status: i32,
 }
 /// A custom interest. This is a list of users by interest.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomInterest {
@@ -6525,6 +6715,7 @@ pub struct CustomInterest {
 }
 /// A member of custom interest audience. A member can be a keyword or url.
 /// It is immutable, that is, it can only be created or removed but not changed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomInterestMember {
@@ -6540,6 +6731,7 @@ pub struct CustomInterestMember {
     pub parameter: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Customer {
@@ -6664,6 +6856,7 @@ pub struct Customer {
     pub local_services_settings: ::core::option::Option<LocalServicesSettings>,
 }
 /// Call reporting setting for a customer. Only mutable in an `update` operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallReportingSetting {
@@ -6682,6 +6875,7 @@ pub struct CallReportingSetting {
 }
 /// A collection of customer-wide settings related to Google Ads Conversion
 /// Tracking.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionTrackingSetting {
@@ -6723,6 +6917,7 @@ pub struct ConversionTrackingSetting {
     pub google_ads_conversion_customer: ::prost::alloc::string::String,
 }
 /// Remarketing setting for a customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemarketingSetting {
@@ -6731,14 +6926,16 @@ pub struct RemarketingSetting {
     pub google_global_site_tag: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Customer Agreement Setting for a customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomerAgreementSetting {
     /// Output only. Whether the customer has accepted lead form term of service.
     #[prost(bool, tag = "1")]
     pub accepted_lead_form_terms: bool,
 }
 /// Settings for Local Services customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalServicesSettings {
@@ -6750,6 +6947,7 @@ pub struct LocalServicesSettings {
     pub granular_insurance_statuses: ::prost::alloc::vec::Vec<GranularInsuranceStatus>,
 }
 /// License status at geo + vertical level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GranularLicenseStatus {
@@ -6774,6 +6972,7 @@ pub struct GranularLicenseStatus {
     pub verification_status: ::core::option::Option<i32>,
 }
 /// Insurance status at geo + vertical level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GranularInsuranceStatus {
@@ -6799,6 +6998,7 @@ pub struct GranularInsuranceStatus {
 }
 /// CustomerAssetSet is the linkage between a customer and an asset set.
 /// Adding a CustomerAssetSet links an asset set with a customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerAssetSet {
@@ -6824,6 +7024,7 @@ pub struct CustomerAssetSet {
 /// A link between the given customer and a client customer. CustomerClients only
 /// exist for manager customers. All direct and indirect client customers are
 /// included, as well as the manager itself.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerClient {
@@ -6880,6 +7081,7 @@ pub struct CustomerClient {
     pub status: i32,
 }
 /// Represents customer client link relationship.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerClientLink {
@@ -6908,6 +7110,7 @@ pub struct CustomerClientLink {
 }
 /// Biddability control for conversion actions with a matching category and
 /// origin.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerConversionGoal {
@@ -6938,6 +7141,7 @@ pub struct CustomerConversionGoal {
 }
 /// A customizer value for the associated CustomizerAttribute at the Customer
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerCustomizer {
@@ -6963,6 +7167,7 @@ pub struct CustomerCustomizer {
     pub value: ::core::option::Option<super::common::CustomizerValue>,
 }
 /// A customer extension setting.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerExtensionSetting {
@@ -6989,6 +7194,7 @@ pub struct CustomerExtensionSetting {
     pub device: i32,
 }
 /// A customer feed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerFeed {
@@ -7025,6 +7231,7 @@ pub struct CustomerFeed {
 /// Represents a relationship between a customer and a label. This customer may
 /// not have access to all the labels attached to it. Additional CustomerLabels
 /// may be returned by increasing permissions with login-customer-id.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerLabel {
@@ -7045,6 +7252,7 @@ pub struct CustomerLabel {
     pub label: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Account level customer lifecycle goal settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerLifecycleGoal {
@@ -7071,6 +7279,7 @@ pub mod customer_lifecycle_goal {
     /// Lifecycle goal common settings, including existing user lists and existing
     /// high lifetime value user lists, shared among different types of lifecycle
     /// goals.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LifecycleGoalCustomerDefinitionSettings {
@@ -7089,6 +7298,7 @@ pub mod customer_lifecycle_goal {
     }
 }
 /// Represents customer-manager link relationship.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerManagerLink {
@@ -7111,6 +7321,7 @@ pub struct CustomerManagerLink {
     pub status: i32,
 }
 /// A negative criterion for exclusions at the customer level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerNegativeCriterion {
@@ -7140,6 +7351,7 @@ pub mod customer_negative_criterion {
     /// The customer negative criterion.
     ///
     /// Exactly one must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
@@ -7168,6 +7380,7 @@ pub mod customer_negative_criterion {
 }
 /// A Customer search term view.
 /// Historical data is available starting March 2023.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerSearchTermInsight {
@@ -7186,6 +7399,7 @@ pub struct CustomerSearchTermInsight {
     pub id: ::core::option::Option<i64>,
 }
 /// A CustomerSkAdNetworkConversionValueSchema.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerSkAdNetworkConversionValueSchema {
@@ -7203,6 +7417,7 @@ pub struct CustomerSkAdNetworkConversionValueSchema {
 /// Nested message and enum types in `CustomerSkAdNetworkConversionValueSchema`.
 pub mod customer_sk_ad_network_conversion_value_schema {
     /// The CustomerLink specific SkAdNetworkConversionValueSchema.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SkAdNetworkConversionValueSchema {
@@ -7224,6 +7439,7 @@ pub mod customer_sk_ad_network_conversion_value_schema {
     /// Nested message and enum types in `SkAdNetworkConversionValueSchema`.
     pub mod sk_ad_network_conversion_value_schema {
         /// Mappings for fine grained conversion value.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct FineGrainedConversionValueMappings {
@@ -7238,6 +7454,7 @@ pub mod customer_sk_ad_network_conversion_value_schema {
         }
         /// Represents mapping from one conversion value to one or more conversion
         /// events.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ConversionValueMapping {
@@ -7255,6 +7472,7 @@ pub mod customer_sk_ad_network_conversion_value_schema {
             pub mapped_events: ::prost::alloc::vec::Vec<Event>,
         }
         /// Defines a Google conversion event that the conversion value is mapped to.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Event {
@@ -7275,8 +7493,9 @@ pub mod customer_sk_ad_network_conversion_value_schema {
         /// Nested message and enum types in `Event`.
         pub mod event {
             /// Defines a range for revenue values.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct RevenueRange {
                 /// Output only. For revenue ranges, the minimum value in `currency_code`
                 /// for which this conversion value would be updated. A value of 0 will
@@ -7290,8 +7509,9 @@ pub mod customer_sk_ad_network_conversion_value_schema {
                 pub max_event_revenue: f64,
             }
             /// Defines a range for event counter values.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Message)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct EventOccurrenceRange {
                 /// Output only. For event counter ranges, the minimum of the defined
                 /// range. A value of 0 will be treated as unset.
@@ -7303,8 +7523,9 @@ pub mod customer_sk_ad_network_conversion_value_schema {
                 pub max_event_count: i64,
             }
             /// Either a range or specific value for event revenue.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Oneof)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum RevenueRate {
                 /// Output only. The event revenue range.
                 #[prost(message, tag = "3")]
@@ -7314,8 +7535,9 @@ pub mod customer_sk_ad_network_conversion_value_schema {
                 EventRevenueValue(f64),
             }
             /// Either a range or specific value for event counter.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
-            #[derive(Clone, PartialEq, ::prost::Oneof)]
+            #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum EventRate {
                 /// Output only. The event counter range.
                 #[prost(message, tag = "5")]
@@ -7328,6 +7550,7 @@ pub mod customer_sk_ad_network_conversion_value_schema {
     }
 }
 /// Represents the permission of a single user onto a single customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerUserAccess {
@@ -7363,6 +7586,7 @@ pub struct CustomerUserAccess {
     >,
 }
 /// Represent an invitation to a new user on this customer account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomerUserAccessInvitation {
@@ -7401,6 +7625,7 @@ pub struct CustomerUserAccessInvitation {
 /// AdGroupCriterionCustomizer to associate a customizer attribute and
 /// set its value at the customer, campaign, ad group, or ad group criterion
 /// level, respectively.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomizerAttribute {
@@ -7432,6 +7657,7 @@ pub struct CustomizerAttribute {
     pub status: i32,
 }
 /// A view with metrics aggregated by ad group and URL or YouTube video.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DetailPlacementView {
@@ -7466,6 +7692,7 @@ pub struct DetailPlacementView {
 }
 /// A detailed demographic: a particular interest-based vertical to be targeted
 /// to reach users based on long-term life facts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DetailedDemographic {
@@ -7496,6 +7723,7 @@ pub struct DetailedDemographic {
     >,
 }
 /// A display keyword view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisplayKeywordView {
@@ -7511,6 +7739,7 @@ pub struct DisplayKeywordView {
 /// impressions that fall within its distance and a single impression will
 /// contribute to the metrics for all DistanceBuckets that include the user's
 /// distance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DistanceView {
@@ -7535,6 +7764,7 @@ pub struct DistanceView {
 /// the DynamicSearchAdsSetting, then domain categories will be generated for
 /// the domain. The categories can be targeted using WebpageConditionInfo.
 /// See: <https://support.google.com/google-ads/answer/2471185>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DomainCategory {
@@ -7579,6 +7809,7 @@ pub struct DomainCategory {
     pub recommended_cpc_bid_micros: ::core::option::Option<i64>,
 }
 /// A dynamic search ads search term view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DynamicSearchAdsSearchTermView {
@@ -7626,6 +7857,7 @@ pub struct DynamicSearchAdsSearchTermView {
 }
 /// A landing page view with metrics aggregated at the expanded final URL
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedLandingPageView {
@@ -7641,6 +7873,7 @@ pub struct ExpandedLandingPageView {
 }
 /// A Google ads experiment for users to experiment changes on multiple
 /// campaigns, compare the performance, and apply the effective changes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Experiment {
@@ -7713,6 +7946,7 @@ pub struct Experiment {
 }
 /// A Google ads experiment for users to experiment changes on multiple
 /// campaigns, compare the performance, and apply the effective changes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExperimentArm {
@@ -7745,6 +7979,7 @@ pub struct ExperimentArm {
     pub in_design_campaigns: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// An extension feed item.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExtensionFeedItem {
@@ -7818,6 +8053,7 @@ pub struct ExtensionFeedItem {
 /// Nested message and enum types in `ExtensionFeedItem`.
 pub mod extension_feed_item {
     /// Extension type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Extension {
@@ -7862,6 +8098,7 @@ pub mod extension_feed_item {
     }
     /// Targeting at either the campaign or ad group level. Feed items that target
     /// a campaign or ad group will only serve with that resource.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ServingResourceTargeting {
@@ -7876,6 +8113,7 @@ pub mod extension_feed_item {
 /// Represents a set of feed items. The set can be used and shared among certain
 /// feed item features. For instance, the set can be referenced within the
 /// matching functions of CustomerFeed, CampaignFeed, and AdGroupFeed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemSet {
@@ -7910,6 +8148,7 @@ pub struct FeedItemSet {
 pub mod feed_item_set {
     /// Represents a filter on locations in a feed item set.
     /// Only applicable if the parent Feed of the FeedItemSet is a LOCATION feed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DynamicSetFilter {
@@ -7927,6 +8166,7 @@ pub mod feed_item_set {
     }
 }
 /// Represents a link between a FeedItem and a FeedItemSet.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemSetLink {
@@ -7943,6 +8183,7 @@ pub struct FeedItemSetLink {
     pub feed_item_set: ::prost::alloc::string::String,
 }
 /// A feed item target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedItemTarget {
@@ -7978,6 +8219,7 @@ pub struct FeedItemTarget {
 /// Nested message and enum types in `FeedItemTarget`.
 pub mod feed_item_target {
     /// The targeted resource.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
@@ -8005,6 +8247,7 @@ pub mod feed_item_target {
     }
 }
 /// A feed mapping.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedMapping {
@@ -8040,8 +8283,9 @@ pub struct FeedMapping {
 pub mod feed_mapping {
     /// Feed mapping target. Can be either a placeholder or a criterion. For a
     /// given feed, the active FeedMappings must have unique targets. Required.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Target {
         /// Immutable. The placeholder type of this mapping (for example, if the
         /// mapping maps feed attributes to placeholder fields).
@@ -8060,8 +8304,9 @@ pub mod feed_mapping {
     }
 }
 /// Maps from feed attribute id to a placeholder or criterion field id.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AttributeFieldMapping {
     /// Immutable. Feed attribute from which to map.
     #[prost(int64, optional, tag = "24")]
@@ -8083,8 +8328,9 @@ pub struct AttributeFieldMapping {
 pub mod attribute_field_mapping {
     /// Placeholder or criterion field to be populated using data from
     /// the above feed attribute. Required.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Field {
         /// Immutable. Sitelink Placeholder Fields.
         #[prost(
@@ -8222,6 +8468,7 @@ pub mod attribute_field_mapping {
     }
 }
 /// A feed placeholder view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeedPlaceholderView {
@@ -8239,6 +8486,7 @@ pub struct FeedPlaceholderView {
     pub placeholder_type: i32,
 }
 /// A gender view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenderView {
@@ -8250,6 +8498,7 @@ pub struct GenderView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A geo target constant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeoTargetConstant {
@@ -8295,6 +8544,7 @@ pub struct GeoTargetConstant {
 /// one row per country. It reports metrics at either actual physical location of
 /// the user or an area of interest. If other segment fields are used, you may
 /// get more than one row per country.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeographicView {
@@ -8315,6 +8565,7 @@ pub struct GeographicView {
     pub country_criterion_id: ::core::option::Option<i64>,
 }
 /// A field or resource (artifact) used by GoogleAdsService.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsField {
@@ -8387,6 +8638,7 @@ pub struct GoogleAdsField {
     pub is_repeated: ::core::option::Option<bool>,
 }
 /// A group placement view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupPlacementView {
@@ -8414,6 +8666,7 @@ pub struct GroupPlacementView {
     pub placement_type: i32,
 }
 /// A hotel group view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HotelGroupView {
@@ -8425,6 +8678,7 @@ pub struct HotelGroupView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A hotel performance view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HotelPerformanceView {
@@ -8438,6 +8692,7 @@ pub struct HotelPerformanceView {
 /// A hotel reconciliation. It contains conversion information from Hotel
 /// bookings to reconcile with advertiser records. These rows may be updated
 /// or canceled before billing through Bulk Uploads.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HotelReconciliation {
@@ -8504,6 +8759,7 @@ pub struct HotelReconciliation {
     pub status: i32,
 }
 /// An income range view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IncomeRangeView {
@@ -8517,6 +8773,7 @@ pub struct IncomeRangeView {
 /// An invoice. All invoice information is snapshotted to match the PDF invoice.
 /// For invoices older than the launch of InvoiceService, the snapshotted
 /// information may not match the PDF invoice.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Invoice {
@@ -8649,6 +8906,7 @@ pub struct Invoice {
 /// Nested message and enum types in `Invoice`.
 pub mod invoice {
     /// Represents a summarized view at account level.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AccountSummary {
@@ -8715,6 +8973,7 @@ pub mod invoice {
         pub total_amount_micros: ::core::option::Option<i64>,
     }
     /// Represents a summarized account budget billable cost.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AccountBudgetSummary {
@@ -8791,6 +9050,7 @@ pub mod invoice {
     }
     /// Details about the invalid activity for the invoice that contain
     /// additional details about invoice against which corrections are made.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InvalidActivitySummary {
@@ -8832,6 +9092,7 @@ pub mod invoice {
 /// A Keyword Planner plan.
 /// Max number of saved keyword plans: 10000.
 /// It's possible to remove plans if limit is reached.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlan {
@@ -8855,6 +9116,7 @@ pub struct KeywordPlan {
     pub forecast_period: ::core::option::Option<KeywordPlanForecastPeriod>,
 }
 /// The forecasting period associated with the keyword plan.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanForecastPeriod {
@@ -8865,6 +9127,7 @@ pub struct KeywordPlanForecastPeriod {
 /// Nested message and enum types in `KeywordPlanForecastPeriod`.
 pub mod keyword_plan_forecast_period {
     /// Required. The date used for forecasting the Plan.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Interval {
@@ -8885,6 +9148,7 @@ pub mod keyword_plan_forecast_period {
 }
 /// A Keyword Planner ad group.
 /// Max number of keyword plan ad groups per plan: 200.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanAdGroup {
@@ -8914,6 +9178,7 @@ pub struct KeywordPlanAdGroup {
 }
 /// A Keyword Plan ad group keyword.
 /// Max number of keyword plan keywords per plan: 10000.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanAdGroupKeyword {
@@ -8950,6 +9215,7 @@ pub struct KeywordPlanAdGroupKeyword {
 }
 /// A Keyword Plan campaign.
 /// Max number of keyword plan campaigns per plan allowed: 1.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanCampaign {
@@ -8997,6 +9263,7 @@ pub struct KeywordPlanCampaign {
     pub geo_targets: ::prost::alloc::vec::Vec<KeywordPlanGeoTarget>,
 }
 /// A geo target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanGeoTarget {
@@ -9006,6 +9273,7 @@ pub struct KeywordPlanGeoTarget {
 }
 /// A Keyword Plan Campaign keyword.
 /// Only negative keywords are supported for Campaign Keyword.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordPlanCampaignKeyword {
@@ -9036,6 +9304,7 @@ pub struct KeywordPlanCampaignKeyword {
     pub negative: ::core::option::Option<bool>,
 }
 /// A Smart Campaign keyword theme constant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordThemeConstant {
@@ -9060,6 +9329,7 @@ pub struct KeywordThemeConstant {
     pub display_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A keyword view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeywordView {
@@ -9071,6 +9341,7 @@ pub struct KeywordView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Label {
@@ -9098,6 +9369,7 @@ pub struct Label {
 }
 /// A landing page view with metrics aggregated at the unexpanded final URL
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LandingPageView {
@@ -9112,6 +9384,7 @@ pub struct LandingPageView {
     pub unexpanded_final_url: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A language.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LanguageConstant {
@@ -9137,6 +9410,7 @@ pub struct LanguageConstant {
     pub targetable: ::core::option::Option<bool>,
 }
 /// Data from lead form submissions.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LeadFormSubmissionData {
@@ -9179,6 +9453,7 @@ pub struct LeadFormSubmissionData {
     pub submission_date_time: ::prost::alloc::string::String,
 }
 /// Fields in the submitted lead form.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LeadFormSubmissionField {
@@ -9193,6 +9468,7 @@ pub struct LeadFormSubmissionField {
     pub field_value: ::prost::alloc::string::String,
 }
 /// Fields in the submitted custom question
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomLeadFormSubmissionField {
@@ -9207,6 +9483,7 @@ pub struct CustomLeadFormSubmissionField {
 }
 /// A life event: a particular interest-based vertical to be targeted to reach
 /// users when they are in the midst of important life milestones.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LifeEvent {
@@ -9239,6 +9516,7 @@ pub struct LifeEvent {
 /// Contains details of Lead which is generated when user calls, messages or
 /// books service from advertiser.
 /// More info: <https://ads.google.com/local-services-ads>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalServicesLead {
@@ -9295,6 +9573,7 @@ pub struct LocalServicesLead {
     pub lead_charged: bool,
 }
 /// Fields containing consumer contact details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContactDetails {
@@ -9311,6 +9590,7 @@ pub struct ContactDetails {
 }
 /// Represents a note added to a lead by the advertiser. Advertisers can edit
 /// notes, which will reset edit time and change description.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Note {
@@ -9327,6 +9607,7 @@ pub struct Note {
 /// Contains details of Lead Conversation which is generated when user calls,
 /// messages or books service from advertiser. These are appended to a Lead.
 /// More info: <https://ads.google.com/local-services-ads>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalServicesLeadConversation {
@@ -9371,6 +9652,7 @@ pub struct LocalServicesLeadConversation {
     pub message_details: ::core::option::Option<MessageDetails>,
 }
 /// Represents details of a phone call conversation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhoneCallDetails {
@@ -9382,6 +9664,7 @@ pub struct PhoneCallDetails {
     pub call_recording_url: ::prost::alloc::string::String,
 }
 /// Represents details of text message in case of email, message or SMS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessageDetails {
@@ -9390,6 +9673,7 @@ pub struct MessageDetails {
     pub text: ::prost::alloc::string::String,
 }
 /// A local services verification resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalServicesVerificationArtifact {
@@ -9431,6 +9715,7 @@ pub struct LocalServicesVerificationArtifact {
 /// Nested message and enum types in `LocalServicesVerificationArtifact`.
 pub mod local_services_verification_artifact {
     /// The types of verification info.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ArtifactData {
@@ -9446,6 +9731,7 @@ pub mod local_services_verification_artifact {
     }
 }
 /// A proto holding information specific to local services background check.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackgroundCheckVerificationArtifact {
@@ -9462,6 +9748,7 @@ pub struct BackgroundCheckVerificationArtifact {
     >,
 }
 /// A proto holding information specific to a local services insurance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsuranceVerificationArtifact {
@@ -9484,6 +9771,7 @@ pub struct InsuranceVerificationArtifact {
     >,
 }
 /// A proto holding information specific to a local services license.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LicenseVerificationArtifact {
@@ -9515,6 +9803,7 @@ pub struct LicenseVerificationArtifact {
 }
 /// A location view summarizes the performance of campaigns by
 /// Location criteria.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocationView {
@@ -9526,6 +9815,7 @@ pub struct LocationView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A managed placement view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ManagedPlacementView {
@@ -9537,6 +9827,7 @@ pub struct ManagedPlacementView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A media file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaFile {
@@ -9573,6 +9864,7 @@ pub struct MediaFile {
 /// Nested message and enum types in `MediaFile`.
 pub mod media_file {
     /// The specific type of the media file.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mediatype {
@@ -9592,6 +9884,7 @@ pub mod media_file {
     }
 }
 /// Encapsulates an Image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaImage {
@@ -9606,6 +9899,7 @@ pub struct MediaImage {
     pub preview_size_image_url: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Represents a ZIP archive media the content of which contains HTML5 assets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaBundle {
@@ -9619,14 +9913,16 @@ pub struct MediaBundle {
     pub url: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Encapsulates an Audio.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MediaAudio {
     /// Output only. The duration of the Audio in milliseconds.
     #[prost(int64, optional, tag = "2")]
     pub ad_duration_millis: ::core::option::Option<i64>,
 }
 /// Encapsulates a Video.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaVideo {
@@ -9649,6 +9945,7 @@ pub struct MediaVideo {
     pub isci_code: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A mobile application category constant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MobileAppCategoryConstant {
@@ -9666,6 +9963,7 @@ pub struct MobileAppCategoryConstant {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A mobile device constant.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MobileDeviceConstant {
@@ -9695,6 +9993,7 @@ pub struct MobileDeviceConstant {
     pub r#type: i32,
 }
 /// Offline conversion upload client summary.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OfflineConversionUploadClientSummary {
@@ -9744,6 +10043,7 @@ pub struct OfflineConversionUploadClientSummary {
     pub alerts: ::prost::alloc::vec::Vec<OfflineConversionAlert>,
 }
 /// Historical upload summary, grouped by upload date or job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OfflineConversionSummary {
@@ -9760,6 +10060,7 @@ pub struct OfflineConversionSummary {
 /// Nested message and enum types in `OfflineConversionSummary`.
 pub mod offline_conversion_summary {
     /// Dimension key for summary.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DimensionKey {
@@ -9772,8 +10073,9 @@ pub mod offline_conversion_summary {
     }
 }
 /// Alert for offline conversion client summary.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OfflineConversionAlert {
     /// Output only. Error for offline conversion client alert.
     #[prost(message, optional, tag = "1")]
@@ -9784,8 +10086,9 @@ pub struct OfflineConversionAlert {
     pub error_percentage: f64,
 }
 /// Possible errors for offline conversion client summary.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OfflineConversionError {
     /// Error with description.
     #[prost(
@@ -9797,8 +10100,9 @@ pub struct OfflineConversionError {
 /// Nested message and enum types in `OfflineConversionError`.
 pub mod offline_conversion_error {
     /// Error with description.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ErrorCode {
         /// Output only. Collection size error.
         #[prost(
@@ -9866,6 +10170,7 @@ pub mod offline_conversion_error {
 /// that will be processed asynchronously. The uploaded data isn't readable and
 /// the processing results of the job can only be read using
 /// GoogleAdsService.Search/SearchStream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OfflineUserDataJob {
@@ -9909,6 +10214,7 @@ pub struct OfflineUserDataJob {
 /// Nested message and enum types in `OfflineUserDataJob`.
 pub mod offline_user_data_job {
     /// Metadata of the job.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Metadata {
@@ -9923,8 +10229,9 @@ pub mod offline_user_data_job {
     }
 }
 /// Metadata of offline user data job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct OfflineUserDataJobMetadata {
     /// Output only. Match rate of the Customer Match user list upload. Describes
     /// the estimated match rate when the status of the job is "RUNNING" and final
@@ -9939,6 +10246,7 @@ pub struct OfflineUserDataJobMetadata {
 /// A mobile operating system version or a range of versions, depending on
 /// `operator_type`. List of available mobile platforms at
 /// <https://developers.google.com/google-ads/api/reference/data/codes-formats#mobile-platforms>
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperatingSystemVersionConstant {
@@ -9970,6 +10278,7 @@ pub struct OperatingSystemVersionConstant {
 }
 /// A paid organic search term view providing a view of search stats across
 /// ads and organic listings aggregated by search term at the ad group level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PaidOrganicSearchTermView {
@@ -9985,6 +10294,7 @@ pub struct PaidOrganicSearchTermView {
     pub search_term: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A parental status view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParentalStatusView {
@@ -9996,6 +10306,7 @@ pub struct ParentalStatusView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A payments account, which can be used to set up billing for an Ads customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PaymentsAccount {
@@ -10034,6 +10345,7 @@ pub struct PaymentsAccount {
 /// A per store view.
 /// This view provides per store impression reach and local action conversion
 /// stats for advertisers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PerStoreView {
@@ -10048,6 +10360,7 @@ pub struct PerStoreView {
     pub place_id: ::prost::alloc::string::String,
 }
 /// A Product Category.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductCategoryConstant {
@@ -10089,6 +10402,7 @@ pub struct ProductCategoryConstant {
 /// Nested message and enum types in `ProductCategoryConstant`.
 pub mod product_category_constant {
     /// Localization for the product category.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ProductCategoryLocalization {
@@ -10106,6 +10420,7 @@ pub mod product_category_constant {
     }
 }
 /// A product group view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductGroupView {
@@ -10118,6 +10433,7 @@ pub struct ProductGroupView {
 }
 /// Represents the data sharing connection between  a Google
 /// Ads customer and another product.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductLink {
@@ -10144,6 +10460,7 @@ pub struct ProductLink {
 /// Nested message and enum types in `ProductLink`.
 pub mod product_link {
     /// A product linked to this account.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LinkedProduct {
@@ -10159,8 +10476,9 @@ pub mod product_link {
     }
 }
 /// The identifier for Data Partner account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DataPartnerIdentifier {
     /// Immutable. The customer ID of the Data partner account.
     /// This field is required and should not be empty when creating a new
@@ -10170,6 +10488,7 @@ pub struct DataPartnerIdentifier {
     pub data_partner_id: ::core::option::Option<i64>,
 }
 /// The identifier for Google Ads account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsIdentifier {
@@ -10181,8 +10500,9 @@ pub struct GoogleAdsIdentifier {
     pub customer: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// The identifier for Google Merchant Center account
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MerchantCenterIdentifier {
     /// Immutable. The customer ID of the Google Merchant Center account.
     /// This field is required and should not be empty when creating a new
@@ -10193,6 +10513,7 @@ pub struct MerchantCenterIdentifier {
 }
 /// Represents an invitation for data sharing connection between a Google Ads
 /// account and another account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProductLinkInvitation {
@@ -10228,8 +10549,9 @@ pub struct ProductLinkInvitation {
 /// Nested message and enum types in `ProductLinkInvitation`.
 pub mod product_link_invitation {
     /// An account invited to link to this Google Ads account.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum InvitedAccount {
         /// Output only. Hotel link invitation.
         #[prost(message, tag = "4")]
@@ -10240,8 +10562,9 @@ pub mod product_link_invitation {
     }
 }
 /// The identifier for Hotel account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct HotelCenterLinkInvitationIdentifier {
     /// Output only. The hotel center id of the hotel account.
     /// This field is read only
@@ -10249,8 +10572,9 @@ pub struct HotelCenterLinkInvitationIdentifier {
     pub hotel_center_id: i64,
 }
 /// The identifier for Merchant Center Account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MerchantCenterLinkInvitationIdentifier {
     /// Output only. The Merchant Center id of the Merchant account.
     /// This field is read only
@@ -10258,6 +10582,7 @@ pub struct MerchantCenterLinkInvitationIdentifier {
     pub merchant_center_id: i64,
 }
 /// Qualifying Questions for Lead Form.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QualifyingQuestion {
@@ -10277,6 +10602,7 @@ pub struct QualifyingQuestion {
     pub text: ::prost::alloc::string::String,
 }
 /// A recommendation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Recommendation {
@@ -10353,6 +10679,7 @@ pub struct Recommendation {
 /// Nested message and enum types in `Recommendation`.
 pub mod recommendation {
     /// The Merchant Center account details.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MerchantInfo {
@@ -10369,8 +10696,9 @@ pub mod recommendation {
     }
     /// The impact of making the change as described in the recommendation.
     /// Some types of recommendations may not have impact information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RecommendationImpact {
         /// Output only. Base metrics at the time the recommendation was generated.
         #[prost(message, optional, tag = "1")]
@@ -10381,8 +10709,9 @@ pub mod recommendation {
     }
     /// Weekly account performance metrics. For some recommendation types, these
     /// are averaged over the past 90-day period and hence can be fractional.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RecommendationMetrics {
         /// Output only. Number of ad impressions.
         #[prost(double, optional, tag = "6")]
@@ -10402,6 +10731,7 @@ pub mod recommendation {
         pub video_views: ::core::option::Option<f64>,
     }
     /// The budget recommendation for budget constrained campaigns.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CampaignBudgetRecommendation {
@@ -10421,8 +10751,9 @@ pub mod recommendation {
     /// Nested message and enum types in `CampaignBudgetRecommendation`.
     pub mod campaign_budget_recommendation {
         /// The impact estimates for a given budget amount.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct CampaignBudgetRecommendationOption {
             /// Output only. The budget amount for this option.
             #[prost(int64, optional, tag = "3")]
@@ -10434,6 +10765,7 @@ pub mod recommendation {
         }
     }
     /// The keyword recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeywordRecommendation {
@@ -10451,6 +10783,7 @@ pub mod recommendation {
     /// Nested message and enum types in `KeywordRecommendation`.
     pub mod keyword_recommendation {
         /// Information about a search term as related to a keyword recommendation.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct SearchTerm {
@@ -10464,6 +10797,7 @@ pub mod recommendation {
         }
     }
     /// The text ad recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TextAdRecommendation {
@@ -10480,6 +10814,7 @@ pub mod recommendation {
         pub auto_apply_date: ::core::option::Option<::prost::alloc::string::String>,
     }
     /// The Target CPA opt-in recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TargetCpaOptInRecommendation {
@@ -10497,8 +10832,9 @@ pub mod recommendation {
     /// Nested message and enum types in `TargetCpaOptInRecommendation`.
     pub mod target_cpa_opt_in_recommendation {
         /// The Target CPA opt-in option with impact estimate.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct TargetCpaOptInRecommendationOption {
             /// Output only. The goal achieved by this option.
             #[prost(
@@ -10520,24 +10856,28 @@ pub mod recommendation {
         }
     }
     /// The Maximize Conversions Opt-In recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MaximizeConversionsOptInRecommendation {
         /// Output only. The recommended new budget amount.
         #[prost(int64, optional, tag = "2")]
         pub recommended_budget_amount_micros: ::core::option::Option<i64>,
     }
     /// The Enhanced Cost-Per-Click Opt-In recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct EnhancedCpcOptInRecommendation {}
     /// The Search Partners Opt-In recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SearchPartnersOptInRecommendation {}
     /// The Maximize Clicks opt-in recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MaximizeClicksOptInRecommendation {
         /// Output only. The recommended new budget amount.
         /// Only set if the current budget is too high.
@@ -10545,10 +10885,12 @@ pub mod recommendation {
         pub recommended_budget_amount_micros: ::core::option::Option<i64>,
     }
     /// The Optimize Ad Rotation recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct OptimizeAdRotationRecommendation {}
     /// The callout asset recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CalloutAssetRecommendation {
@@ -10562,6 +10904,7 @@ pub mod recommendation {
         pub recommended_customer_callout_assets: ::prost::alloc::vec::Vec<super::Asset>,
     }
     /// The sitelink asset recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SitelinkAssetRecommendation {
@@ -10573,10 +10916,12 @@ pub mod recommendation {
         pub recommended_customer_sitelink_assets: ::prost::alloc::vec::Vec<super::Asset>,
     }
     /// The call asset recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct CallAssetRecommendation {}
     /// The keyword match type recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeywordMatchTypeRecommendation {
@@ -10592,6 +10937,7 @@ pub mod recommendation {
         pub recommended_match_type: i32,
     }
     /// The move unused budget recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MoveUnusedBudgetRecommendation {
@@ -10605,8 +10951,9 @@ pub mod recommendation {
         pub budget_recommendation: ::core::option::Option<CampaignBudgetRecommendation>,
     }
     /// The Target ROAS opt-in recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct TargetRoasOptInRecommendation {
         /// Output only. The recommended target ROAS (revenue per unit of spend).
         /// The value is between 0.01 and 1000.0, inclusive.
@@ -10619,6 +10966,7 @@ pub mod recommendation {
         pub required_campaign_budget_amount_micros: ::core::option::Option<i64>,
     }
     /// The add responsive search ad asset recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResponsiveSearchAdAssetRecommendation {
@@ -10631,6 +10979,7 @@ pub mod recommendation {
         pub recommended_assets: ::core::option::Option<super::Ad>,
     }
     /// The responsive search ad improve ad strength recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResponsiveSearchAdImproveAdStrengthRecommendation {
@@ -10642,6 +10991,7 @@ pub mod recommendation {
         pub recommended_ad: ::core::option::Option<super::Ad>,
     }
     /// The add responsive search ad recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ResponsiveSearchAdRecommendation {
@@ -10650,6 +11000,7 @@ pub mod recommendation {
         pub ad: ::core::option::Option<super::Ad>,
     }
     /// The use broad match keyword recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UseBroadMatchKeywordRecommendation {
@@ -10673,6 +11024,7 @@ pub mod recommendation {
     }
     /// The upgrade a Smart Shopping campaign to a Performance Max campaign
     /// recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpgradeSmartShoppingCampaignToPerformanceMaxRecommendation {
@@ -10685,8 +11037,9 @@ pub mod recommendation {
         pub sales_country_code: ::prost::alloc::string::String,
     }
     /// The raise target CPA bid too low recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RaiseTargetCpaBidTooLowRecommendation {
         /// Output only. A number greater than 1.0 indicating the factor by which we
         /// recommend the target CPA should be increased.
@@ -10698,14 +11051,17 @@ pub mod recommendation {
         pub average_target_cpa_micros: ::core::option::Option<i64>,
     }
     /// The Display Expansion opt-in recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DisplayExpansionOptInRecommendation {}
     /// The Upgrade Local campaign to Performance Max campaign recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UpgradeLocalCampaignToPerformanceMaxRecommendation {}
     /// The forecasting set target ROAS recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ForecastingSetTargetRoasRecommendation {
@@ -10719,6 +11075,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to add an attribute to offers that are demoted
     /// because it is missing.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingOfferAttributeRecommendation {
@@ -10738,6 +11095,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to fix disapproved products in a Shopping
     /// Campaign Inventory.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingFixDisapprovedProductsRecommendation {
@@ -10757,6 +11115,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to create a catch-all campaign that targets all
     /// offers.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingTargetAllOffersRecommendation {
@@ -10772,6 +11131,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to add products to a Shopping Campaign
     /// Inventory.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingAddProductsToCampaignRecommendation {
@@ -10790,6 +11150,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to fix Merchant Center account suspension
     /// issues.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingMerchantCenterAccountSuspensionRecommendation {
@@ -10803,6 +11164,7 @@ pub mod recommendation {
     }
     /// The shopping recommendation to migrate Regular Shopping Campaign targeted
     /// offers to Performance Max campaigns.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation {
@@ -10815,6 +11177,7 @@ pub mod recommendation {
         pub feed_label: ::prost::alloc::string::String,
     }
     /// Information of a target adjustment recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TargetAdjustmentInfo {
@@ -10833,6 +11196,7 @@ pub mod recommendation {
         pub current_average_target_micros: i64,
     }
     /// Recommendation to raise Target CPA.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RaiseTargetCpaRecommendation {
@@ -10850,6 +11214,7 @@ pub mod recommendation {
         pub app_bidding_goal: ::core::option::Option<i32>,
     }
     /// Recommendation to lower Target ROAS.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LowerTargetRoasRecommendation {
@@ -10861,10 +11226,12 @@ pub mod recommendation {
     /// Recommendation to enable dynamic image extensions on the account,
     /// allowing Google to find the best images from ad landing pages and
     /// complement text ads.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DynamicImageExtensionOptInRecommendation {}
     /// A campaign budget shared amongst various budget recommendation types.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CampaignBudget {
@@ -10882,11 +11249,13 @@ pub mod recommendation {
         pub new_start_date: ::prost::alloc::string::String,
     }
     /// The Performance Max Opt In recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PerformanceMaxOptInRecommendation {}
     /// Recommendation to improve the asset group strength of a Performance Max
     /// campaign to an "Excellent" rating.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ImprovePerformanceMaxAdStrengthRecommendation {
@@ -10895,6 +11264,7 @@ pub mod recommendation {
         pub asset_group: ::prost::alloc::string::String,
     }
     /// The Dynamic Search Ads to Performance Max migration recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation {
@@ -10904,6 +11274,7 @@ pub mod recommendation {
         pub apply_link: ::prost::alloc::string::String,
     }
     /// The set target CPA recommendations.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ForecastingSetTargetCpaRecommendation {
@@ -10915,6 +11286,7 @@ pub mod recommendation {
         pub campaign_budget: ::core::option::Option<CampaignBudget>,
     }
     /// The details of recommendation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Recommendation {
@@ -11092,6 +11464,7 @@ pub mod recommendation {
     }
 }
 /// Recommendation Subscription resource
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RecommendationSubscription {
@@ -11127,6 +11500,7 @@ pub struct RecommendationSubscription {
 /// A remarketing action. A snippet of JavaScript code that will collect the
 /// product id and the type of page people visited (product page, shopping cart
 /// page, purchase page, general site visit) on an advertiser's website.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemarketingAction {
@@ -11151,6 +11525,7 @@ pub struct RemarketingAction {
 }
 /// A search term view with metrics aggregated by search term at the ad group
 /// level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTermView {
@@ -11175,6 +11550,7 @@ pub struct SearchTermView {
     pub status: i32,
 }
 /// A criterion belonging to a shared set.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SharedCriterion {
@@ -11206,6 +11582,7 @@ pub mod shared_criterion {
     /// The criterion.
     ///
     /// Exactly one must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Criterion {
@@ -11234,6 +11611,7 @@ pub mod shared_criterion {
 }
 /// SharedSets are used for sharing criterion exclusions across multiple
 /// campaigns.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SharedSet {
@@ -11281,6 +11659,7 @@ pub struct SharedSet {
 /// category, custom attributes, product condition and product type will reflect
 /// the state of each dimension as of the date and time when the corresponding
 /// event was recorded.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShoppingPerformanceView {
@@ -11291,6 +11670,7 @@ pub struct ShoppingPerformanceView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A Smart campaign search term view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SmartCampaignSearchTermView {
@@ -11308,6 +11688,7 @@ pub struct SmartCampaignSearchTermView {
     pub campaign: ::prost::alloc::string::String,
 }
 /// Settings for configuring Smart campaigns.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SmartCampaignSetting {
@@ -11340,6 +11721,7 @@ pub struct SmartCampaignSetting {
 /// Nested message and enum types in `SmartCampaignSetting`.
 pub mod smart_campaign_setting {
     /// Phone number and country code in smart campaign settings.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PhoneNumber {
@@ -11352,8 +11734,9 @@ pub mod smart_campaign_setting {
     }
     /// Settings for configuring a business profile optimized for ads as this
     /// campaign's landing page.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AdOptimizedBusinessProfileSetting {
         /// Enabling a lead form on your business profile enables prospective
         /// customers to contact your business by filling out a simple form,
@@ -11362,6 +11745,7 @@ pub mod smart_campaign_setting {
         pub include_lead_form: ::core::option::Option<bool>,
     }
     /// The landing page of this campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LandingPage {
@@ -11376,6 +11760,7 @@ pub mod smart_campaign_setting {
         AdOptimizedBusinessProfileSetting(AdOptimizedBusinessProfileSetting),
     }
     /// The business setting of this campaign.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BusinessSetting {
@@ -11396,6 +11781,7 @@ pub mod smart_campaign_setting {
 }
 /// A data sharing connection, allowing the import of third party app analytics
 /// into a Google Ads Customer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ThirdPartyAppAnalyticsLink {
@@ -11414,6 +11800,7 @@ pub struct ThirdPartyAppAnalyticsLink {
 /// Use topics to target or exclude placements in the Google Display Network
 /// based on the category into which the placement falls (for example,
 /// "Pets & Animals/Pets/Dogs").
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TopicConstant {
@@ -11438,6 +11825,7 @@ pub struct TopicConstant {
     pub path: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A topic view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TopicView {
@@ -11449,6 +11837,7 @@ pub struct TopicView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A travel activity group view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TravelActivityGroupView {
@@ -11460,6 +11849,7 @@ pub struct TravelActivityGroupView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A travel activity performance view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TravelActivityPerformanceView {
@@ -11471,6 +11861,7 @@ pub struct TravelActivityPerformanceView {
     pub resource_name: ::prost::alloc::string::String,
 }
 /// A user interest: a particular interest-based vertical to be targeted.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserInterest {
@@ -11506,6 +11897,7 @@ pub struct UserInterest {
     >,
 }
 /// A user list. This is a list of users a customer may target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserList {
@@ -11639,6 +12031,7 @@ pub mod user_list {
     /// The user list.
     ///
     /// Exactly one must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum UserList {
@@ -11669,6 +12062,7 @@ pub mod user_list {
 /// one row per country. It reports metrics at the actual physical location of
 /// the user by targeted or not targeted location. If other segment fields are
 /// used, you may get more than one row per country.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserLocationView {
@@ -11686,6 +12080,7 @@ pub struct UserLocationView {
     pub targeting_location: ::core::option::Option<bool>,
 }
 /// A video.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Video {
@@ -11709,6 +12104,7 @@ pub struct Video {
     pub title: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A webpage view.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WebpageView {

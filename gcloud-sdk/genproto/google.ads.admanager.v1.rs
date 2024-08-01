@@ -2,6 +2,7 @@
 /// Represents a set of declarations about what (if any) ad partners
 /// are associated with a given creative. This can be set at the network level,
 /// as a default for all creatives, or overridden for a particular creative.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdPartnerDeclaration {
@@ -15,12 +16,14 @@ pub struct AdPartnerDeclaration {
 }
 /// Wrapper message for
 /// [DeclarationTypeEnum][google.ads.admanager.v1.DeclarationTypeEnum].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeclarationTypeEnum {}
 /// Nested message and enum types in `DeclarationTypeEnum`.
 pub mod declaration_type_enum {
     /// The declaration about third party data usage on the associated entity.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -65,6 +68,7 @@ pub mod declaration_type_enum {
     }
 }
 /// The AdPartner resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdPartner {
@@ -74,6 +78,7 @@ pub struct AdPartner {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetAdPartner method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdPartnerRequest {
@@ -83,6 +88,7 @@ pub struct GetAdPartnerRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListAdPartners method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdPartnersRequest {
@@ -119,6 +125,7 @@ pub struct ListAdPartnersRequest {
 }
 /// Response object for ListAdPartnersRequest containing matching AdPartner
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdPartnersResponse {
@@ -292,12 +299,14 @@ pub mod ad_partner_service_client {
 }
 /// Wrapper message for
 /// [AppliedAdsenseEnabled][google.ads.admanager.v1.AppliedAdsenseEnabledEnum.AppliedAdsenseEnabled]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AppliedAdsenseEnabledEnum {}
 /// Nested message and enum types in `AppliedAdsenseEnabledEnum`.
 pub mod applied_adsense_enabled_enum {
     /// Specifies if serving ads from the AdSense content network is enabled.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -346,12 +355,14 @@ pub mod applied_adsense_enabled_enum {
 }
 /// Wrapper message for
 /// [EnvironmentType][google.ads.admanager.v1.EnvironmentTypeEnum.EnvironmentType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EnvironmentTypeEnum {}
 /// Nested message and enum types in `EnvironmentTypeEnum`.
 pub mod environment_type_enum {
     /// The different environments in which an ad can be shown.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -396,8 +407,9 @@ pub mod environment_type_enum {
     }
 }
 /// Represents the dimensions of an AdUnit, LineItem, or Creative.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Size {
     /// Required. The width of the [Creative](google.ads.admanager.v1.Creative),
     /// [AdUnit](google.ads.admanager.v1.AdUnit), or
@@ -418,12 +430,14 @@ pub struct Size {
 }
 /// Wrapper message for
 /// [SizeType][google.ads.admanager.v1.SizeTypeEnum.SizeType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SizeTypeEnum {}
 /// Nested message and enum types in `SizeTypeEnum`.
 pub mod size_type_enum {
     /// The different Size types for an ad.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -494,6 +508,7 @@ pub mod size_type_enum {
     }
 }
 /// Represents the size, environment, and companions of an ad in an ad unit.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnitSize {
@@ -510,6 +525,7 @@ pub struct AdUnitSize {
     pub companions: ::prost::alloc::vec::Vec<Size>,
 }
 /// Represents a Label that can be applied to an entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppliedLabel {
@@ -522,8 +538,9 @@ pub struct AppliedLabel {
     pub negated: bool,
 }
 /// Represents a Frequency Cap that can be applied to an entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FrequencyCap {
     /// The maximum number of impressions for this frequency cap.
     #[prost(int64, optional, tag = "1")]
@@ -536,12 +553,14 @@ pub struct FrequencyCap {
     pub time_unit: ::core::option::Option<i32>,
 }
 /// Wrapper message for TimeUnit.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TimeUnitEnum {}
 /// Nested message and enum types in `TimeUnitEnum`.
 pub mod time_unit_enum {
     /// Unit of time for the frequency cap.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -611,6 +630,7 @@ pub mod time_unit_enum {
     }
 }
 /// The AdUnit resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnit {
@@ -672,7 +692,7 @@ pub struct AdUnit {
     pub has_children: bool,
     /// Output only. The instant this AdUnit was last modified.
     #[prost(message, optional, tag = "8")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. The sizes that can be served inside this ad unit.
     #[prost(message, repeated, tag = "14")]
     pub ad_unit_sizes: ::prost::alloc::vec::Vec<AdUnitSize>,
@@ -684,7 +704,7 @@ pub struct AdUnit {
     /// This is only valid for ad units in mobile apps. If not set, the ad unit
     /// will not refresh.
     #[prost(message, optional, tag = "19")]
-    pub refresh_delay: ::core::option::Option<::prost_types::Duration>,
+    pub refresh_delay: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional. The ID of the CTV application that this ad unit is within.
     #[prost(int64, tag = "20")]
     pub ctv_application_id: i64,
@@ -727,6 +747,7 @@ pub struct AdUnit {
 /// Nested message and enum types in `AdUnit`.
 pub mod ad_unit {
     /// The status of an AdUnit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -775,6 +796,7 @@ pub mod ad_unit {
     }
 }
 /// The summary of a parent AdUnit.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdUnitParent {
@@ -792,13 +814,15 @@ pub struct AdUnitParent {
 }
 /// Wrapper message for
 /// [TargetWindow][google.ads.admanager.v1.TargetWindowEnum.TargetWindow].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TargetWindowEnum {}
 /// Nested message and enum types in `TargetWindowEnum`.
 pub mod target_window_enum {
     /// Corresponds to an HTML link's target attribute.
     /// See <http://www.w3.org/TR/html401/present/frames.html#adef-target>
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -843,6 +867,7 @@ pub mod target_window_enum {
     }
 }
 /// Frequency cap using a label.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelFrequencyCap {
@@ -856,13 +881,15 @@ pub struct LabelFrequencyCap {
 }
 /// Wrapper message for
 /// [SmartSizeMode][google.ads.admanager.v1.SmartSizeModeEnum.SmartSizeMode].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SmartSizeModeEnum {}
 /// Nested message and enum types in `SmartSizeModeEnum`.
 pub mod smart_size_mode_enum {
     /// The smart size mode for this ad unit. This attribute is optional and
     /// defaults to SmartSizeMode.NONE for fixed sizes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -911,6 +938,7 @@ pub mod smart_size_mode_enum {
     }
 }
 /// Request object for GetAdUnit method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdUnitRequest {
@@ -920,6 +948,7 @@ pub struct GetAdUnitRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListAdUnits method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdUnitsRequest {
@@ -955,6 +984,7 @@ pub struct ListAdUnitsRequest {
     pub skip: i32,
 }
 /// Response object for ListAdUnitsRequest containing matching AdUnit resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdUnitsResponse {
@@ -1128,6 +1158,7 @@ pub mod ad_unit_service_client {
 /// /
 /// / At least one AdManagerError should be included in all error messages sent
 /// to / the client.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdManagerError {
@@ -1148,12 +1179,13 @@ pub struct AdManagerError {
     pub stack_trace: ::prost::alloc::string::String,
     /// A list of messages that carry any additional error details.
     #[prost(message, repeated, tag = "6")]
-    pub details: ::prost::alloc::vec::Vec<::prost_types::Any>,
+    pub details: ::prost::alloc::vec::Vec<::prost_wkt_types::Any>,
 }
 /// Wrapper message for
 /// [CompanyCreditStatus][google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CompanyCreditStatusEnum {}
 /// Nested message and enum types in `CompanyCreditStatusEnum`.
 pub mod company_credit_status_enum {
@@ -1168,6 +1200,7 @@ pub mod company_credit_status_enum {
     /// [INACTIVE][google.ads.admanager.v1.CompanyCreditStatusEnum.CompanyCreditStatus.INACTIVE]
     /// credit statuses are applicable. In advance settings, all credit statuses
     /// are applicable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1262,12 +1295,14 @@ pub mod company_credit_status_enum {
 }
 /// Wrapper message for
 /// [CompanyType][google.ads.admanager.v1.CompanyTypeEnum.CompanyType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CompanyTypeEnum {}
 /// Nested message and enum types in `CompanyTypeEnum`.
 pub mod company_type_enum {
     /// The type of a company.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1329,6 +1364,7 @@ pub mod company_type_enum {
     }
 }
 /// The `Company` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Company {
@@ -1396,6 +1432,7 @@ pub struct Company {
     pub applied_teams: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request object for `GetCompany` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCompanyRequest {
@@ -1405,6 +1442,7 @@ pub struct GetCompanyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCompanies` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCompaniesRequest {
@@ -1441,6 +1479,7 @@ pub struct ListCompaniesRequest {
 }
 /// Response object for `ListCompaniesRequest` containing matching `Company`
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCompaniesResponse {
@@ -1614,13 +1653,15 @@ pub mod company_service_client {
 }
 /// Wrapper message for
 /// [ComputedStatus][google.ads.admanager.v1.ComputedStatusEnum.ComputedStatus].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ComputedStatusEnum {}
 /// Nested message and enum types in `ComputedStatusEnum`.
 pub mod computed_status_enum {
     /// Describes the computed LineItem status that is derived from the
     /// current state of the LineItem.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1705,6 +1746,7 @@ pub mod computed_status_enum {
     }
 }
 /// The Contact resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Contact {
@@ -1717,6 +1759,7 @@ pub struct Contact {
     pub contact_id: i64,
 }
 /// Request object for GetContact method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetContactRequest {
@@ -1726,6 +1769,7 @@ pub struct GetContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListContacts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsRequest {
@@ -1762,6 +1806,7 @@ pub struct ListContactsRequest {
 }
 /// Response object for ListContactsRequest containing matching Contact
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsResponse {
@@ -1936,6 +1981,7 @@ pub mod contact_service_client {
 /// Describes a slot that a creative is expected to fill. This is used in
 /// forecasting and to validate that the correct creatives are associated with
 /// the line item.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreativePlaceholder {
@@ -1969,6 +2015,7 @@ pub struct CreativePlaceholder {
     pub creative_targeting_display_name: ::prost::alloc::string::String,
 }
 /// The Creative resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Creative {
@@ -1990,7 +2037,7 @@ pub struct Creative {
     pub advertiser: ::prost::alloc::string::String,
     /// Output only. The instant this Creative was last modified.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The URL of the creative for previewing the media.
     #[prost(string, tag = "4")]
     pub preview_url: ::prost::alloc::string::String,
@@ -2006,6 +2053,7 @@ pub struct Creative {
     pub ad_partner_declaration: ::core::option::Option<AdPartnerDeclaration>,
 }
 /// Request object for GetCreative method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCreativeRequest {
@@ -2015,6 +2063,7 @@ pub struct GetCreativeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListCreatives method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCreativesRequest {
@@ -2051,6 +2100,7 @@ pub struct ListCreativesRequest {
 }
 /// Response object for ListCreativesRequest containing matching Creative
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCreativesResponse {
@@ -2224,12 +2274,14 @@ pub mod creative_service_client {
 }
 /// Wrapper message for
 /// [CustomFieldDataType][google.ads.admanager.v1.CustomFieldDataTypeEnum.CustomFieldDataType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldDataTypeEnum {}
 /// Nested message and enum types in `CustomFieldDataTypeEnum`.
 pub mod custom_field_data_type_enum {
     /// The data type for a CustomField.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2285,12 +2337,14 @@ pub mod custom_field_data_type_enum {
 }
 /// Wrapper message for
 /// [CustomFieldEntityType][google.ads.admanager.v1.CustomFieldEntityTypeEnum.CustomFieldEntityType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldEntityTypeEnum {}
 /// Nested message and enum types in `CustomFieldEntityTypeEnum`.
 pub mod custom_field_entity_type_enum {
     /// The types of entities that a CustomField can be applied to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2350,12 +2404,14 @@ pub mod custom_field_entity_type_enum {
 }
 /// Wrapper message for
 /// [CustomFieldStatus][google.ads.admanager.v1.CustomFieldStatusEnum.CustomFieldStatus]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldStatusEnum {}
 /// Nested message and enum types in `CustomFieldStatusEnum`.
 pub mod custom_field_status_enum {
     /// The status of the CustomField.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2401,12 +2457,14 @@ pub mod custom_field_status_enum {
 }
 /// Wrapper message for
 /// [CustomFieldVisibility][google.ads.admanager.v1.CustomFieldVisibilityEnum.CustomFieldVisibility]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomFieldVisibilityEnum {}
 /// Nested message and enum types in `CustomFieldVisibilityEnum`.
 pub mod custom_field_visibility_enum {
     /// The visibility level of a CustomField.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2458,6 +2516,7 @@ pub mod custom_field_visibility_enum {
     }
 }
 /// The `CustomField` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomField {
@@ -2503,6 +2562,7 @@ pub struct CustomField {
     pub options: ::prost::alloc::vec::Vec<CustomFieldOption>,
 }
 /// An option for a drop-down `CustomField`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomFieldOption {
@@ -2516,6 +2576,7 @@ pub struct CustomFieldOption {
     pub display_name: ::prost::alloc::string::String,
 }
 /// Request object for `GetCustomField` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomFieldRequest {
@@ -2525,6 +2586,7 @@ pub struct GetCustomFieldRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomFields` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomFieldsRequest {
@@ -2559,6 +2621,7 @@ pub struct ListCustomFieldsRequest {
 }
 /// Response object for `ListCustomFieldsRequest` containing matching
 /// `CustomField` objects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomFieldsResponse {
@@ -2732,12 +2795,14 @@ pub mod custom_field_service_client {
 }
 /// Wrapper message for
 /// [CustomTargetingKeyStatus][google.ads.admanager.v1.CustomTargetingKeyStatusEnum.CustomTargetingKeyStatus]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyStatusEnum {}
 /// Nested message and enum types in `CustomTargetingKeyStatusEnum`.
 pub mod custom_targeting_key_status_enum {
     /// Status of the custom targeting key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2785,12 +2850,14 @@ pub mod custom_targeting_key_status_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingKeyType][google.ads.admanager.v1.CustomTargetingKeyTypeEnum.CustomTargetingKeyType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyTypeEnum {}
 /// Nested message and enum types in `CustomTargetingKeyTypeEnum`.
 pub mod custom_targeting_key_type_enum {
     /// Type of the custom targeting key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2838,12 +2905,14 @@ pub mod custom_targeting_key_type_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingKeyReportableType][google.ads.admanager.v1.CustomTargetingKeyReportableTypeEnum.CustomTargetingKeyReportableType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKeyReportableTypeEnum {}
 /// Nested message and enum types in `CustomTargetingKeyReportableTypeEnum`.
 pub mod custom_targeting_key_reportable_type_enum {
     /// Reportable type of the custom targeting key.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2896,6 +2965,7 @@ pub mod custom_targeting_key_reportable_type_enum {
     }
 }
 /// The `CustomTargetingKey` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetingKey {
@@ -2937,6 +3007,7 @@ pub struct CustomTargetingKey {
     pub reportable_type: i32,
 }
 /// Request object for `GetCustomTargetingKey` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomTargetingKeyRequest {
@@ -2947,6 +3018,7 @@ pub struct GetCustomTargetingKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomTargetingKeys` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingKeysRequest {
@@ -2983,6 +3055,7 @@ pub struct ListCustomTargetingKeysRequest {
 }
 /// Response object for `ListCustomTargetingKeysRequest` containing matching
 /// `CustomTargetingKey` objects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingKeysResponse {
@@ -3161,12 +3234,14 @@ pub mod custom_targeting_key_service_client {
 }
 /// Wrapper message for
 /// [CustomTargetingValueStatus][google.ads.admanager.v1.CustomTargetingValueStatusEnum.CustomTargetingValueStatus]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValueStatusEnum {}
 /// Nested message and enum types in `CustomTargetingValueStatusEnum`.
 pub mod custom_targeting_value_status_enum {
     /// Status of the custom targeting value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3214,12 +3289,14 @@ pub mod custom_targeting_value_status_enum {
 }
 /// Wrapper message for
 /// [CustomTargetingValueMatchType][google.ads.admanager.v1.CustomTargetingValueMatchTypeEnum.CustomTargetingValueMatchType]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValueMatchTypeEnum {}
 /// Nested message and enum types in `CustomTargetingValueMatchTypeEnum`.
 pub mod custom_targeting_value_match_type_enum {
     /// Match type of the custom targeting value.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3305,6 +3382,7 @@ pub mod custom_targeting_value_match_type_enum {
     }
 }
 /// The `CustomTargetingValue` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetingValue {
@@ -3338,6 +3416,7 @@ pub struct CustomTargetingValue {
     pub status: i32,
 }
 /// Request object for `GetCustomTargetingValue` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomTargetingValueRequest {
@@ -3348,6 +3427,7 @@ pub struct GetCustomTargetingValueRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListCustomTargetingValues` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingValuesRequest {
@@ -3387,6 +3467,7 @@ pub struct ListCustomTargetingValuesRequest {
 }
 /// Response object for `ListCustomTargetingValuesRequest` containing matching
 /// `CustomTargetingValue` objects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetingValuesResponse {
@@ -3566,8 +3647,9 @@ pub mod custom_targeting_value_service_client {
 /// Defines the criteria a [LineItem][google.ads.admanager.v1.LineItem] needs to
 /// satisfy to meet its delivery
 ///   goal.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Goal {
     /// The type of the goal for the LineItem. It defines the period over which the
     /// goal should be reached.
@@ -3598,12 +3680,14 @@ pub struct Goal {
 }
 /// Wrapper message for
 /// [GoalType][google.ads.admanager.v1.GoalTypeEnum.GoalType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GoalTypeEnum {}
 /// Nested message and enum types in `GoalTypeEnum`.
 pub mod goal_type_enum {
     /// Specifies the type of the goal for a LineItem.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3681,8 +3765,9 @@ pub mod goal_type_enum {
 }
 /// Wrapper message for
 /// [UnitType][google.ads.admanager.v1.UnitTypeEnum.UnitType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UnitTypeEnum {}
 /// Nested message and enum types in `UnitTypeEnum`.
 pub mod unit_type_enum {
@@ -3690,6 +3775,7 @@ pub mod unit_type_enum {
     /// [LineItem.cost_type][google.ads.admanager.v1.LineItem.cost_type] can differ
     /// from the UnitType - an ad can have an impression goal, but be billed by its
     /// click. Usually CostType and UnitType will refer to the same unit.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3779,6 +3865,7 @@ pub mod unit_type_enum {
     }
 }
 /// The Label resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Label {
@@ -3788,6 +3875,7 @@ pub struct Label {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetLabel method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLabelRequest {
@@ -3797,6 +3885,7 @@ pub struct GetLabelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListLabels method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsRequest {
@@ -3832,6 +3921,7 @@ pub struct ListLabelsRequest {
 }
 /// Response object for ListLabelsRequest containing matching Label
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLabelsResponse {
@@ -3999,12 +4089,14 @@ pub mod label_service_client {
 }
 /// Wrapper message for
 /// [LineItemCostType][google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemCostTypeEnum {}
 /// Nested message and enum types in `LineItemCostTypeEnum`.
 pub mod line_item_cost_type_enum {
     /// Describes the LineItem actions that are billable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4106,14 +4198,16 @@ pub mod line_item_cost_type_enum {
 }
 /// Wrapper message for
 /// [CreativeRotationType][google.ads.admanager.v1.CreativeRotationTypeEnum.CreativeRotationType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreativeRotationTypeEnum {}
 /// Nested message and enum types in `CreativeRotationTypeEnum`.
 pub mod creative_rotation_type_enum {
     /// The strategy to use for displaying multiple
     /// [creatives][google.ads.admanager.v1.Creative] that are associated with a
     /// line item.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4170,13 +4264,15 @@ pub mod creative_rotation_type_enum {
 }
 /// Wrapper message for
 /// [DeliveryRateType][google.ads.admanager.v1.DeliveryRateTypeEnum.DeliveryRateType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeliveryRateTypeEnum {}
 /// Nested message and enum types in `DeliveryRateTypeEnum`.
 pub mod delivery_rate_type_enum {
     /// Possible delivery rates for a line item. It dictates the manner in which
     /// the line item is served.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4232,12 +4328,14 @@ pub mod delivery_rate_type_enum {
 }
 /// Wrapper message for
 /// [LineItemDiscountType][google.ads.admanager.v1.LineItemDiscountTypeEnum.LineItemDiscountType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemDiscountTypeEnum {}
 /// Nested message and enum types in `LineItemDiscountTypeEnum`.
 pub mod line_item_discount_type_enum {
     /// Describes the possible discount types on the cost of booking a line item.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4285,13 +4383,15 @@ pub mod line_item_discount_type_enum {
 }
 /// Wrapper message for
 /// [LineItemType][google.ads.admanager.v1.LineItemTypeEnum.LineItemType].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LineItemTypeEnum {}
 /// Nested message and enum types in `LineItemTypeEnum`.
 pub mod line_item_type_enum {
     /// Indicates the priority of a LineItem, determined by the way in which
     /// impressions are reserved to be served for it.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4395,12 +4495,14 @@ pub mod line_item_type_enum {
 }
 /// Wrapper message for
 /// [ReservationStatus][google.ads.admanager.v1.ReservationStatusEnum.ReservationStatus].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReservationStatusEnum {}
 /// Nested message and enum types in `ReservationStatusEnum`.
 pub mod reservation_status_enum {
     /// Defines the different reservation statuses of a line item.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4445,6 +4547,7 @@ pub mod reservation_status_enum {
     }
 }
 /// The LineItem resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LineItem {
@@ -4483,10 +4586,10 @@ pub struct LineItem {
     /// Output only. The instant at which the LineItem was created. This attribute
     /// may be null for line items created before this feature was introduced.
     #[prost(message, optional, tag = "12")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The instant at which the LineItem was last updated
     #[prost(message, optional, tag = "31")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required. The strategy used for displaying multiple
     /// [creatives][google.ads.admanager.v1.Creative] that are associated with the
     /// line item.
@@ -4529,7 +4632,7 @@ pub struct LineItem {
     /// Required. Time at which the LineItem will begin serving. This attribute
     /// must be in the future when creating a LineItem.
     #[prost(message, optional, tag = "6")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Time at which the LineItem will stop serving. This attribute is
     /// ignored when
     /// [unlimited_end_time][google.ads.admanager.v1.LineItem.unlimited_end_time]
@@ -4538,7 +4641,7 @@ pub struct LineItem {
     /// does not include
     /// [auto_extension_days][google.ads.admanager.v1.LineItem.auto_extension_days].
     #[prost(message, optional, tag = "7")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Number of days to allow a LineItem to deliver past its
     /// [end_time][google.ads.admanager.v1.LineItem.end_time]. A maximum of 7 days
     /// is allowed. This feature is only available for Ad Manager 360 accounts.
@@ -4640,6 +4743,7 @@ pub struct LineItem {
     pub impression_limit: ::core::option::Option<Goal>,
 }
 /// Request object for GetLineItem method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLineItemRequest {
@@ -4650,6 +4754,7 @@ pub struct GetLineItemRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListLineItems method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLineItemsRequest {
@@ -4686,6 +4791,7 @@ pub struct ListLineItemsRequest {
 }
 /// Response object for ListLineItemsRequest containing matching LineItem
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLineItemsResponse {
@@ -4858,6 +4964,7 @@ pub mod line_item_service_client {
     }
 }
 /// The Network resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Network {
@@ -4900,6 +5007,7 @@ pub struct Network {
     pub network_id: i64,
 }
 /// Request to get Network
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNetworkRequest {
@@ -5025,6 +5133,7 @@ pub mod network_service_client {
     }
 }
 /// The `Order` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Order {
@@ -5085,12 +5194,12 @@ pub struct Order {
     /// are eligible to begin serving. This attribute is derived from the line item
     /// of the order that has the earliest LineItem.start_time.
     #[prost(message, optional, tag = "19")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The instant at which the Order and its associated line items
     /// stop being served. This attribute is derived from the line item of the
     /// order that has the latest LineItem.end_time.
     #[prost(message, optional, tag = "12")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. An arbitrary ID to associate to the Order, which can be used as a
     /// key to an external system.
     #[prost(int64, tag = "13")]
@@ -5104,7 +5213,7 @@ pub struct Order {
     pub last_modified_by_app: ::prost::alloc::string::String,
     /// Output only. The instant this Order was last modified.
     #[prost(message, optional, tag = "16")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Provides any additional notes that may annotate the Order. This
     /// attribute has a maximum length of 65,535 characters.
     #[prost(string, tag = "17")]
@@ -5141,6 +5250,7 @@ pub struct Order {
 /// Nested message and enum types in `Order`.
 pub mod order {
     /// The status of an Order.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5208,6 +5318,7 @@ pub mod order {
     }
 }
 /// Request object for `GetOrder` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrderRequest {
@@ -5217,6 +5328,7 @@ pub struct GetOrderRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListOrders` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersRequest {
@@ -5253,6 +5365,7 @@ pub struct ListOrdersRequest {
 }
 /// Response object for `ListOrdersRequest` containing matching `Order`
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrdersResponse {
@@ -5425,12 +5538,14 @@ pub mod order_service_client {
 }
 /// Wrapper message for
 /// [PlacementStatus][google.ads.admanager.v1.PlacementStatusEnum.PlacementStatus]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PlacementStatusEnum {}
 /// Nested message and enum types in `PlacementStatusEnum`.
 pub mod placement_status_enum {
     /// Status of the placement.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5479,6 +5594,7 @@ pub mod placement_status_enum {
     }
 }
 /// The `Placement` resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Placement {
@@ -5511,9 +5627,10 @@ pub struct Placement {
     pub targeted_ad_units: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Output only. The instant this Placement was last modified.
     #[prost(message, optional, tag = "9")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request object for `GetPlacement` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPlacementRequest {
@@ -5523,6 +5640,7 @@ pub struct GetPlacementRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for `ListPlacements` method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPlacementsRequest {
@@ -5559,6 +5677,7 @@ pub struct ListPlacementsRequest {
 }
 /// Response object for `ListPlacementsRequest` containing matching `Placement`
 /// objects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPlacementsResponse {
@@ -5731,6 +5850,7 @@ pub mod placement_service_client {
     }
 }
 /// The Report resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Report {
@@ -5741,6 +5861,7 @@ pub struct Report {
     pub name: ::prost::alloc::string::String,
 }
 /// Request proto for the configuration of a report run.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportRequest {
@@ -5775,6 +5896,7 @@ pub struct ExportSavedReportRequest {
 /// Nested message and enum types in `ExportSavedReportRequest`.
 pub mod export_saved_report_request {
     /// Supported file formats.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5829,8 +5951,9 @@ pub mod export_saved_report_request {
 }
 /// The message stored in the google.longrunning.Operation.metadata field.
 /// Contains metadata regarding this execution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportMetadata {
     /// The result generated in this report run.
     #[prost(int64, tag = "1")]
@@ -5838,6 +5961,7 @@ pub struct ExportSavedReportMetadata {
 }
 /// Message included in the longrunning Operation result.response field when
 /// the report completes successfully.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSavedReportResponse {
@@ -5970,6 +6094,7 @@ pub mod report_service_client {
     }
 }
 /// The Role resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Role {
@@ -5979,6 +6104,7 @@ pub struct Role {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetRole method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRoleRequest {
@@ -5988,6 +6114,7 @@ pub struct GetRoleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListRoles method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesRequest {
@@ -6023,6 +6150,7 @@ pub struct ListRolesRequest {
 }
 /// Response object for ListRolesRequest containing matching Role
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesResponse {
@@ -6189,6 +6317,7 @@ pub mod role_service_client {
     }
 }
 /// The Team resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Team {
@@ -6198,6 +6327,7 @@ pub struct Team {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for GetTeam method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTeamRequest {
@@ -6207,6 +6337,7 @@ pub struct GetTeamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListTeams method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTeamsRequest {
@@ -6242,6 +6373,7 @@ pub struct ListTeamsRequest {
 }
 /// Response object for ListTeamsRequest containing matching Team
 /// resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTeamsResponse {
@@ -6408,6 +6540,7 @@ pub mod team_service_client {
     }
 }
 /// The User resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
@@ -6450,6 +6583,7 @@ pub struct User {
     pub orders_ui_local_time_zone: ::prost::alloc::string::String,
 }
 /// Request object for GetUser method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserRequest {
@@ -6459,6 +6593,7 @@ pub struct GetUserRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request object for ListUsers method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersRequest {
@@ -6493,6 +6628,7 @@ pub struct ListUsersRequest {
     pub skip: i32,
 }
 /// Response object for ListUsersRequest containing matching User resources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListUsersResponse {

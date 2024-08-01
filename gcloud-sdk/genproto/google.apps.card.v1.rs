@@ -103,6 +103,7 @@
 ///    ]
 /// }
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Card {
@@ -200,6 +201,7 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardHeader {
@@ -231,6 +233,7 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Section {
@@ -276,6 +279,7 @@ pub mod card {
     ///
     /// [Google Workspace
     /// Add-ons](<https://developers.google.com/workspace/add-ons>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardAction {
@@ -300,6 +304,7 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardFixedFooter {
@@ -322,6 +327,7 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -369,6 +375,7 @@ pub mod card {
     ///
     /// [Google Workspace
     /// Add-ons](<https://developers.google.com/workspace/add-ons>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -420,6 +427,7 @@ pub mod card {
 ///
 /// A widget is a composite object that can represent one of text, images,
 /// buttons, and other object types.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Widget {
@@ -437,6 +445,7 @@ pub mod widget {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -480,6 +489,7 @@ pub mod widget {
     /// Specifies whether widgets align to the left, right, or center of a column.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -532,6 +542,7 @@ pub mod widget {
     }
     /// A widget can only have one of the following items. You can use multiple
     /// widget fields to display more items.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
@@ -820,6 +831,7 @@ pub mod widget {
 ///
 /// [Google Workspace Add-ons and
 /// Chat apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextParagraph {
@@ -833,6 +845,7 @@ pub struct TextParagraph {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Image {
@@ -865,8 +878,9 @@ pub struct Image {
 /// ```
 /// "divider": {}
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Divider {}
 /// A widget that displays text with optional decorations such as a label above
 /// or below the text, an icon in front of the text, a selection widget, or a
@@ -876,6 +890,7 @@ pub struct Divider {}
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DecoratedText {
@@ -926,6 +941,7 @@ pub mod decorated_text {
     /// apps](<https://developers.google.com/workspace/extend>):
     ///
     /// Only supported in the `decoratedText` widget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SwitchControl {
@@ -961,6 +977,7 @@ pub mod decorated_text {
         ///
         /// [Google Workspace Add-ons
         /// and Chat apps](<https://developers.google.com/workspace/extend>):
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1006,6 +1023,7 @@ pub mod decorated_text {
     }
     /// A button, switch, checkbox, or image that appears to the right-hand side
     /// of text in the `decoratedText` widget.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Control {
@@ -1042,6 +1060,7 @@ pub mod decorated_text {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextInput {
@@ -1134,6 +1153,7 @@ pub mod text_input {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1191,6 +1211,7 @@ pub mod text_input {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Suggestions {
@@ -1205,6 +1226,7 @@ pub mod suggestions {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SuggestionItem {
@@ -1213,6 +1235,7 @@ pub mod suggestions {
     }
     /// Nested message and enum types in `SuggestionItem`.
     pub mod suggestion_item {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Content {
@@ -1230,6 +1253,7 @@ pub mod suggestions {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ButtonList {
@@ -1252,6 +1276,7 @@ pub struct ButtonList {
 ///
 /// [Google Workspace Add-ons
 /// and Chat apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelectionInput {
@@ -1314,6 +1339,7 @@ pub mod selection_input {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SelectionItem {
@@ -1349,8 +1375,9 @@ pub mod selection_input {
     /// items in a multiselect menu.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PlatformDataSource {
         /// The data source.
         #[prost(oneof = "platform_data_source::DataSource", tags = "1")]
@@ -1363,6 +1390,7 @@ pub mod selection_input {
         /// (<https://developers.google.com/workspace/chat/api/reference/rest/v1/HostApp>).
         ///
         /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1403,8 +1431,9 @@ pub mod selection_input {
             }
         }
         /// The data source.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum DataSource {
             /// A data source shared by all Google Workspace applications, such as
             /// users in a Google Workspace organization.
@@ -1421,6 +1450,7 @@ pub mod selection_input {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1497,6 +1527,7 @@ pub mod selection_input {
     /// selection items.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum MultiSelectDataSource {
@@ -1518,6 +1549,7 @@ pub mod selection_input {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateTimePicker {
@@ -1565,6 +1597,7 @@ pub mod date_time_picker {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1620,6 +1653,7 @@ pub mod date_time_picker {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Button {
@@ -1693,6 +1727,7 @@ pub struct Button {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Icon {
@@ -1720,6 +1755,7 @@ pub struct Icon {
 /// Nested message and enum types in `Icon`.
 pub mod icon {
     /// The icon displayed in the widget on the card.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Icons {
@@ -1778,6 +1814,7 @@ pub mod icon {
 /// ```
 ///
 /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MaterialIcon {
@@ -1827,8 +1864,9 @@ pub struct MaterialIcon {
 ///   "aspectRatio": 16/9
 /// }
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ImageCropStyle {
     /// The crop type.
     #[prost(enumeration = "image_crop_style::ImageCropType", tag = "1")]
@@ -1852,6 +1890,7 @@ pub mod image_crop_style {
     ///
     /// [Google Workspace Add-ons
     /// and Chat apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1909,8 +1948,9 @@ pub mod image_crop_style {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BorderStyle {
     /// The border type.
     #[prost(enumeration = "border_style::BorderType", tag = "1")]
@@ -1928,6 +1968,7 @@ pub mod border_style {
     ///
     /// [Google Workspace Add-ons
     /// and Chat apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1975,6 +2016,7 @@ pub mod border_style {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageComponent {
@@ -2038,6 +2080,7 @@ pub struct ImageComponent {
 ///    }
 /// }
 /// ```
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Grid {
@@ -2068,6 +2111,7 @@ pub mod grid {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GridItem {
@@ -2094,6 +2138,7 @@ pub mod grid {
         ///
         /// [Google Workspace Add-ons and Chat
         /// apps](<https://developers.google.com/workspace/extend>):
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2168,6 +2213,7 @@ pub mod grid {
 /// apps](<https://developers.google.com/workspace/extend>):
 /// Columns for Google Workspace Add-ons are in
 /// Developer Preview.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Columns {
@@ -2183,6 +2229,7 @@ pub mod columns {
     /// apps](<https://developers.google.com/workspace/extend>):
     /// Columns for Google Workspace Add-ons are in
     /// Developer Preview.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Column {
@@ -2210,6 +2257,7 @@ pub mod columns {
         /// apps](<https://developers.google.com/workspace/extend>):
         /// Columns for Google Workspace Add-ons are in
         /// Developer Preview.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Widgets {
@@ -2218,6 +2266,7 @@ pub mod columns {
         }
         /// Nested message and enum types in `Widgets`.
         pub mod widgets {
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum Data {
@@ -2252,6 +2301,7 @@ pub mod columns {
         /// apps](<https://developers.google.com/workspace/extend>):
         /// Columns for Google Workspace Add-ons are in
         /// Developer Preview.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2306,6 +2356,7 @@ pub mod columns {
         /// apps](<https://developers.google.com/workspace/extend>):
         /// Columns for Google Workspace Add-ons are in
         /// Developer Preview.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -2359,6 +2410,7 @@ pub mod columns {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnClick {
@@ -2367,6 +2419,7 @@ pub struct OnClick {
 }
 /// Nested message and enum types in `OnClick`.
 pub mod on_click {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
@@ -2397,6 +2450,7 @@ pub mod on_click {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpenLink {
@@ -2427,6 +2481,7 @@ pub mod open_link {
     ///
     /// [Google Workspace
     /// Add-ons](<https://developers.google.com/workspace/add-ons>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2476,6 +2531,7 @@ pub mod open_link {
     ///
     /// [Google Workspace
     /// Add-ons](<https://developers.google.com/workspace/add-ons>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2526,6 +2582,7 @@ pub mod open_link {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Action {
@@ -2595,6 +2652,7 @@ pub mod action {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ActionParameter {
@@ -2610,6 +2668,7 @@ pub mod action {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2665,6 +2724,7 @@ pub mod action {
     /// an add-on, the entire card is stripped and nothing is shown in the client.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

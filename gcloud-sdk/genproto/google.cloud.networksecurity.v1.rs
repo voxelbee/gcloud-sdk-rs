@@ -3,6 +3,7 @@
 /// should authorize incoming connections. This resource in itself does
 /// not change the configuration unless it's attached to a target https
 /// proxy or endpoint config selector resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorizationPolicy {
@@ -15,10 +16,10 @@ pub struct AuthorizationPolicy {
     pub description: ::prost::alloc::string::String,
     /// Output only. The timestamp when the resource was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the resource was updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Set of label tags associated with the AuthorizationPolicy resource.
     #[prost(map = "string, string", tag = "5")]
     pub labels: ::std::collections::HashMap<
@@ -39,6 +40,7 @@ pub struct AuthorizationPolicy {
 /// Nested message and enum types in `AuthorizationPolicy`.
 pub mod authorization_policy {
     /// Specification of rules.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Rule {
@@ -59,6 +61,7 @@ pub mod authorization_policy {
     /// Nested message and enum types in `Rule`.
     pub mod rule {
         /// Specification of traffic source attributes.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Source {
@@ -79,6 +82,7 @@ pub mod authorization_policy {
             pub ip_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         }
         /// Specification of traffic destination attributes.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Destination {
@@ -106,6 +110,7 @@ pub mod authorization_policy {
         /// Nested message and enum types in `Destination`.
         pub mod destination {
             /// Specification of HTTP header match attributes.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct HttpHeaderMatch {
@@ -120,6 +125,7 @@ pub mod authorization_policy {
             }
             /// Nested message and enum types in `HttpHeaderMatch`.
             pub mod http_header_match {
+                #[derive(serde::Serialize, serde::Deserialize)]
                 #[allow(clippy::derive_partial_eq_without_eq)]
                 #[derive(Clone, PartialEq, ::prost::Oneof)]
                 pub enum Type {
@@ -137,6 +143,7 @@ pub mod authorization_policy {
         }
     }
     /// Possible values that define what action to take.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -183,6 +190,7 @@ pub mod authorization_policy {
     }
 }
 /// Request used with the ListAuthorizationPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAuthorizationPoliciesRequest {
@@ -202,6 +210,7 @@ pub struct ListAuthorizationPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListAuthorizationPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAuthorizationPoliciesResponse {
@@ -215,6 +224,7 @@ pub struct ListAuthorizationPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetAuthorizationPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAuthorizationPolicyRequest {
@@ -224,6 +234,7 @@ pub struct GetAuthorizationPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateAuthorizationPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAuthorizationPolicyRequest {
@@ -242,6 +253,7 @@ pub struct CreateAuthorizationPolicyRequest {
     pub authorization_policy: ::core::option::Option<AuthorizationPolicy>,
 }
 /// Request used by the UpdateAuthorizationPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAuthorizationPolicyRequest {
@@ -251,12 +263,13 @@ pub struct UpdateAuthorizationPolicyRequest {
     /// the full request. A field will be overwritten if it is in the mask. If the
     /// user does not provide a mask then all fields will be overwritten.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Updated AuthorizationPolicy resource.
     #[prost(message, optional, tag = "2")]
     pub authorization_policy: ::core::option::Option<AuthorizationPolicy>,
 }
 /// Request used by the DeleteAuthorizationPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAuthorizationPolicyRequest {
@@ -266,6 +279,7 @@ pub struct DeleteAuthorizationPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Specification of the GRPC Endpoint.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GrpcEndpoint {
@@ -276,6 +290,7 @@ pub struct GrpcEndpoint {
 }
 /// Specification of ValidationCA. Defines the mechanism to obtain the
 /// Certificate Authority certificate to validate the peer certificate.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidationCa {
@@ -286,6 +301,7 @@ pub struct ValidationCa {
 /// Nested message and enum types in `ValidationCA`.
 pub mod validation_ca {
     /// The type of certificate provider which provides the CA certificate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
@@ -304,6 +320,7 @@ pub mod validation_ca {
 /// or more CertificateProvider instances (plugins) and one of them is enabled
 /// and configured by specifying this message. Workloads use the values from this
 /// message to locate and load the CertificateProvider instance configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateProviderInstance {
@@ -315,6 +332,7 @@ pub struct CertificateProviderInstance {
 }
 /// Specification of certificate provider. Defines the mechanism to obtain the
 /// certificate and private key for peer to peer authentication.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateProvider {
@@ -327,6 +345,7 @@ pub struct CertificateProvider {
 pub mod certificate_provider {
     /// The type of certificate provider which provides the certificates and
     /// private keys.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
@@ -344,6 +363,7 @@ pub mod certificate_provider {
 /// ClientTlsPolicy is a resource that specifies how a client should authenticate
 /// connections to backends of a service. This resource itself does not affect
 /// configuration unless it is attached to a backend service resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClientTlsPolicy {
@@ -356,10 +376,10 @@ pub struct ClientTlsPolicy {
     pub description: ::prost::alloc::string::String,
     /// Output only. The timestamp when the resource was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the resource was updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. Set of label tags associated with the resource.
     #[prost(map = "string, string", tag = "5")]
     pub labels: ::std::collections::HashMap<
@@ -381,6 +401,7 @@ pub struct ClientTlsPolicy {
     pub server_validation_ca: ::prost::alloc::vec::Vec<ValidationCa>,
 }
 /// Request used by the ListClientTlsPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListClientTlsPoliciesRequest {
@@ -399,6 +420,7 @@ pub struct ListClientTlsPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListClientTlsPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListClientTlsPoliciesResponse {
@@ -412,6 +434,7 @@ pub struct ListClientTlsPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetClientTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetClientTlsPolicyRequest {
@@ -421,6 +444,7 @@ pub struct GetClientTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateClientTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateClientTlsPolicyRequest {
@@ -438,6 +462,7 @@ pub struct CreateClientTlsPolicyRequest {
     pub client_tls_policy: ::core::option::Option<ClientTlsPolicy>,
 }
 /// Request used by UpdateClientTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateClientTlsPolicyRequest {
@@ -448,12 +473,13 @@ pub struct UpdateClientTlsPolicyRequest {
     /// mask. If the user does not provide a mask then all fields will be
     /// overwritten.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Updated ClientTlsPolicy resource.
     #[prost(message, optional, tag = "2")]
     pub client_tls_policy: ::core::option::Option<ClientTlsPolicy>,
 }
 /// Request used by the DeleteClientTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteClientTlsPolicyRequest {
@@ -463,15 +489,16 @@ pub struct DeleteClientTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,
@@ -494,6 +521,7 @@ pub struct OperationMetadata {
 /// ServerTlsPolicy is a resource that specifies how a server should authenticate
 /// incoming requests. This resource itself does not affect configuration unless
 /// it is attached to a target https proxy or endpoint config selector resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerTlsPolicy {
@@ -506,10 +534,10 @@ pub struct ServerTlsPolicy {
     pub description: ::prost::alloc::string::String,
     /// Output only. The timestamp when the resource was created.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The timestamp when the resource was updated.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Set of label tags associated with the resource.
     #[prost(map = "string, string", tag = "5")]
     pub labels: ::std::collections::HashMap<
@@ -546,6 +574,7 @@ pub struct ServerTlsPolicy {
 /// Nested message and enum types in `ServerTlsPolicy`.
 pub mod server_tls_policy {
     /// Specification of the MTLSPolicy.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MtlsPolicy {
@@ -557,6 +586,7 @@ pub mod server_tls_policy {
     }
 }
 /// Request used by the ListServerTlsPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServerTlsPoliciesRequest {
@@ -575,6 +605,7 @@ pub struct ListServerTlsPoliciesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response returned by the ListServerTlsPolicies method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServerTlsPoliciesResponse {
@@ -588,6 +619,7 @@ pub struct ListServerTlsPoliciesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request used by the GetServerTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServerTlsPolicyRequest {
@@ -597,6 +629,7 @@ pub struct GetServerTlsPolicyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request used by the CreateServerTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServerTlsPolicyRequest {
@@ -614,6 +647,7 @@ pub struct CreateServerTlsPolicyRequest {
     pub server_tls_policy: ::core::option::Option<ServerTlsPolicy>,
 }
 /// Request used by UpdateServerTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateServerTlsPolicyRequest {
@@ -624,12 +658,13 @@ pub struct UpdateServerTlsPolicyRequest {
     /// mask. If the user does not provide a mask then all fields will be
     /// overwritten.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. Updated ServerTlsPolicy resource.
     #[prost(message, optional, tag = "2")]
     pub server_tls_policy: ::core::option::Option<ServerTlsPolicy>,
 }
 /// Request used by the DeleteServerTlsPolicy method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServerTlsPolicyRequest {

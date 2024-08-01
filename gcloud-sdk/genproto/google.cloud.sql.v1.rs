@@ -91,6 +91,7 @@ pub mod sql_available_database_versions_service_client {
     }
 }
 /// An entry for an Access Control list.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AclEntry {
@@ -101,7 +102,7 @@ pub struct AclEntry {
     /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "2")]
-    pub expiration_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expiration_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. A label to identify this entry.
     #[prost(string, tag = "3")]
     pub name: ::prost::alloc::string::String,
@@ -110,6 +111,7 @@ pub struct AclEntry {
     pub kind: ::prost::alloc::string::String,
 }
 /// An Admin API warning message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApiWarning {
@@ -125,6 +127,7 @@ pub struct ApiWarning {
 }
 /// Nested message and enum types in `ApiWarning`.
 pub mod api_warning {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -182,8 +185,9 @@ pub mod api_warning {
 }
 /// We currently only support backup retention by specifying the number
 /// of backups we will retain.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BackupRetentionSettings {
     /// The unit that 'retained_backups' represents.
     #[prost(enumeration = "backup_retention_settings::RetentionUnit", tag = "1")]
@@ -192,11 +196,12 @@ pub struct BackupRetentionSettings {
     /// if a backup needs to be deleted.  If retention_unit is 'COUNT', we will
     /// retain this many backups.
     #[prost(message, optional, tag = "2")]
-    pub retained_backups: ::core::option::Option<i32>,
+    pub retained_backups: ::core::option::Option<pb::Int32Value>,
 }
 /// Nested message and enum types in `BackupRetentionSettings`.
 pub mod backup_retention_settings {
     /// The units that retained_backups specifies, we only support COUNT.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -237,6 +242,7 @@ pub mod backup_retention_settings {
     }
 }
 /// Database instance backup configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupConfiguration {
@@ -246,30 +252,36 @@ pub struct BackupConfiguration {
     pub start_time: ::prost::alloc::string::String,
     /// Whether this configuration is enabled.
     #[prost(message, optional, tag = "2")]
-    pub enabled: ::core::option::Option<bool>,
+    pub enabled: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// This is always `sql#backupConfiguration`.
     #[prost(string, tag = "3")]
     pub kind: ::prost::alloc::string::String,
     /// (MySQL only) Whether binary log is enabled. If backup configuration is
     /// disabled, binarylog must be disabled as well.
     #[prost(message, optional, tag = "4")]
-    pub binary_log_enabled: ::core::option::Option<bool>,
+    pub binary_log_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Reserved for future use.
     #[prost(message, optional, tag = "5")]
-    pub replication_log_archiving_enabled: ::core::option::Option<bool>,
+    pub replication_log_archiving_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Location of the backup
     #[prost(string, tag = "6")]
     pub location: ::prost::alloc::string::String,
     /// Whether point in time recovery is enabled.
     #[prost(message, optional, tag = "7")]
-    pub point_in_time_recovery_enabled: ::core::option::Option<bool>,
+    pub point_in_time_recovery_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Backup retention settings.
     #[prost(message, optional, tag = "8")]
     pub backup_retention_settings: ::core::option::Option<BackupRetentionSettings>,
     /// The number of days of transaction logs we retain for point in time
     /// restore, from 1-7.
     #[prost(message, optional, tag = "9")]
-    pub transaction_log_retention_days: ::core::option::Option<i32>,
+    pub transaction_log_retention_days: ::core::option::Option<pb::Int32Value>,
     /// Output only. This value contains the storage location of transactional logs
     /// used to perform point-in-time recovery (PITR) for the database.
     #[prost(
@@ -283,6 +295,7 @@ pub struct BackupConfiguration {
 pub mod backup_configuration {
     /// This value contains the storage location of the transactional logs
     /// used to perform point-in-time recovery (PITR) for the database.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -347,14 +360,16 @@ pub mod backup_configuration {
     }
 }
 /// Perform disk shrink context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PerformDiskShrinkContext {
     /// The target disk shrink size in GigaBytes.
     #[prost(int64, tag = "1")]
     pub target_size_gb: i64,
 }
 /// Backup context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupContext {
@@ -366,6 +381,7 @@ pub struct BackupContext {
     pub kind: ::prost::alloc::string::String,
 }
 /// Represents a SQL database on the Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Database {
@@ -401,6 +417,7 @@ pub struct Database {
 }
 /// Nested message and enum types in `Database`.
 pub mod database {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DatabaseDetails {
@@ -409,6 +426,7 @@ pub mod database {
     }
 }
 /// Represents a Sql Server database on the Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlServerDatabaseDetails {
@@ -420,6 +438,7 @@ pub struct SqlServerDatabaseDetails {
     pub recovery_model: ::prost::alloc::string::String,
 }
 /// Database flags for Cloud SQL instances.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatabaseFlags {
@@ -437,6 +456,7 @@ pub struct DatabaseFlags {
     pub value: ::prost::alloc::string::String,
 }
 /// MySQL-specific external server sync settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MySqlSyncConfig {
@@ -446,6 +466,7 @@ pub struct MySqlSyncConfig {
 }
 /// Initial sync flags for certain Cloud SQL APIs.
 /// Currently used for the MySQL external server initial dump.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SyncFlags {
@@ -458,6 +479,7 @@ pub struct SyncFlags {
     pub value: ::prost::alloc::string::String,
 }
 /// Reference to another Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceReference {
@@ -475,6 +497,7 @@ pub struct InstanceReference {
 }
 /// Read-replica configuration for connecting to the on-premises primary
 /// instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DemoteMasterConfiguration {
@@ -493,6 +516,7 @@ pub struct DemoteMasterConfiguration {
     >,
 }
 /// Read-replica configuration specific to MySQL databases.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DemoteMasterMySqlReplicaConfiguration {
@@ -518,6 +542,7 @@ pub struct DemoteMasterMySqlReplicaConfiguration {
     pub ca_certificate: ::prost::alloc::string::String,
 }
 /// Database instance export context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportContext {
@@ -557,13 +582,14 @@ pub struct ExportContext {
     pub file_type: i32,
     /// Option for export offload.
     #[prost(message, optional, tag = "8")]
-    pub offload: ::core::option::Option<bool>,
+    pub offload: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// Options for exporting data as BAK files.
     #[prost(message, optional, tag = "9")]
     pub bak_export_options: ::core::option::Option<export_context::SqlBakExportOptions>,
 }
 /// Nested message and enum types in `ExportContext`.
 pub mod export_context {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlCsvExportOptions {
@@ -586,6 +612,7 @@ pub mod export_context {
         #[prost(string, tag = "6")]
         pub lines_terminated_by: ::prost::alloc::string::String,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlExportOptions {
@@ -596,23 +623,28 @@ pub mod export_context {
         pub tables: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         /// Export only schemas.
         #[prost(message, optional, tag = "2")]
-        pub schema_only: ::core::option::Option<bool>,
+        pub schema_only: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         #[prost(message, optional, tag = "3")]
         pub mysql_export_options: ::core::option::Option<
             sql_export_options::MysqlExportOptions,
         >,
         /// Optional. The number of threads to use for parallel export.
         #[prost(message, optional, tag = "4")]
-        pub threads: ::core::option::Option<i32>,
+        pub threads: ::core::option::Option<pb::Int32Value>,
         /// Optional. Whether or not the export should be parallel.
         #[prost(message, optional, tag = "5")]
-        pub parallel: ::core::option::Option<bool>,
+        pub parallel: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
     }
     /// Nested message and enum types in `SqlExportOptions`.
     pub mod sql_export_options {
         /// Options for exporting from MySQL.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Message)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct MysqlExportOptions {
             /// Option to include SQL statement required to set up replication. If set
             /// to `1`, the dump file includes a CHANGE MASTER TO statement with the
@@ -621,35 +653,43 @@ pub mod export_context {
             /// has no effect. If set to any value other than `1`, --set-gtid-purged
             /// is set to OFF.
             #[prost(message, optional, tag = "1")]
-            pub master_data: ::core::option::Option<i32>,
+            pub master_data: ::core::option::Option<pb::Int32Value>,
         }
     }
     /// Options for exporting BAK files (SQL Server-only)
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SqlBakExportOptions {
         /// Whether or not the export should be striped.
         #[prost(message, optional, tag = "1")]
-        pub striped: ::core::option::Option<bool>,
+        pub striped: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         /// Option for specifying how many stripes to use for the export.
         /// If blank, and the value of the striped field is true,
         /// the number of stripes is automatically chosen.
         #[prost(message, optional, tag = "2")]
-        pub stripe_count: ::core::option::Option<i32>,
+        pub stripe_count: ::core::option::Option<pb::Int32Value>,
         /// Type of this bak file will be export, FULL or DIFF, SQL Server only
         #[prost(enumeration = "super::BakType", tag = "4")]
         pub bak_type: i32,
         /// Deprecated: copy_only is deprecated. Use differential_base instead
         #[deprecated]
         #[prost(message, optional, tag = "5")]
-        pub copy_only: ::core::option::Option<bool>,
+        pub copy_only: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         /// Whether or not the backup can be used as a differential base
         /// copy_only backup can not be served as differential base
         #[prost(message, optional, tag = "6")]
-        pub differential_base: ::core::option::Option<bool>,
+        pub differential_base: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
     }
 }
 /// Database instance import context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportContext {
@@ -687,16 +727,20 @@ pub struct ImportContext {
 }
 /// Nested message and enum types in `ImportContext`.
 pub mod import_context {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SqlImportOptions {
         /// Optional. The number of threads to use for parallel import.
         #[prost(message, optional, tag = "1")]
-        pub threads: ::core::option::Option<i32>,
+        pub threads: ::core::option::Option<pb::Int32Value>,
         /// Optional. Whether or not the import should be parallel.
         #[prost(message, optional, tag = "2")]
-        pub parallel: ::core::option::Option<bool>,
+        pub parallel: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlCsvImportOptions {
@@ -723,6 +767,7 @@ pub mod import_context {
         #[prost(string, tag = "8")]
         pub lines_terminated_by: ::prost::alloc::string::String,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlBakImportOptions {
@@ -733,18 +778,24 @@ pub mod import_context {
         /// Whether or not the backup set being restored is striped.
         /// Applies only to Cloud SQL for SQL Server.
         #[prost(message, optional, tag = "2")]
-        pub striped: ::core::option::Option<bool>,
+        pub striped: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         /// Whether or not the backup importing will restore database
         /// with NORECOVERY option
         /// Applies only to Cloud SQL for SQL Server.
         #[prost(message, optional, tag = "4")]
-        pub no_recovery: ::core::option::Option<bool>,
+        pub no_recovery: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         /// Whether or not the backup importing request will just bring database
         /// online without downloading Bak content only one of "no_recovery" and
         /// "recovery_only" can be true otherwise error will return. Applies only to
         /// Cloud SQL for SQL Server.
         #[prost(message, optional, tag = "5")]
-        pub recovery_only: ::core::option::Option<bool>,
+        pub recovery_only: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
         /// Type of the bak content, FULL or DIFF
         #[prost(enumeration = "super::BakType", tag = "6")]
         pub bak_type: i32,
@@ -753,7 +804,7 @@ pub mod import_context {
         /// `2023-10-01T16:19:00.094`). This field is equivalent to the STOPAT
         /// keyword and applies to Cloud SQL for SQL Server only.
         #[prost(message, optional, tag = "7")]
-        pub stop_at: ::core::option::Option<::prost_types::Timestamp>,
+        pub stop_at: ::core::option::Option<::prost_wkt_types::Timestamp>,
         /// Optional. The marked transaction where the import should stop. This field
         /// is equivalent to the STOPATMARK keyword and applies to Cloud SQL for SQL
         /// Server only.
@@ -762,6 +813,7 @@ pub mod import_context {
     }
     /// Nested message and enum types in `SqlBakImportOptions`.
     pub mod sql_bak_import_options {
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EncryptionOptions {
@@ -782,12 +834,13 @@ pub mod import_context {
     }
 }
 /// IP Management configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpConfiguration {
     /// Whether the instance is assigned a public IP address or not.
     #[prost(message, optional, tag = "1")]
-    pub ipv4_enabled: ::core::option::Option<bool>,
+    pub ipv4_enabled: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// The resource link for the VPC network from which the Cloud SQL instance is
     /// accessible for private IP. For example,
     /// `/projects/myProject/global/networks/default`. This setting can
@@ -804,7 +857,7 @@ pub struct IpConfiguration {
     /// the requirement for valid client certificates, then use the `ssl_mode` flag
     /// instead of the `require_ssl` flag.
     #[prost(message, optional, tag = "3")]
-    pub require_ssl: ::core::option::Option<bool>,
+    pub require_ssl: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// The list of external networks that are allowed to connect to the instance
     /// using the IP. In 'CIDR' notation, also known as 'slash' notation (for
     /// example: `157.197.200.0/24`).
@@ -821,7 +874,9 @@ pub struct IpConfiguration {
     /// Controls connectivity to private IP instances from Google services,
     /// such as BigQuery.
     #[prost(message, optional, tag = "7")]
-    pub enable_private_path_for_google_cloud_services: ::core::option::Option<bool>,
+    pub enable_private_path_for_google_cloud_services: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Specify how SSL/TLS is enforced in database connections. If you must use
     /// the `require_ssl` flag for backward compatibility, then only the following
     /// value pairs are valid:
@@ -853,6 +908,7 @@ pub struct IpConfiguration {
 /// Nested message and enum types in `IpConfiguration`.
 pub mod ip_configuration {
     /// The SSL options for database connections.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -932,6 +988,7 @@ pub mod ip_configuration {
     }
 }
 /// PSC settings for a Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PscConfig {
@@ -953,6 +1010,7 @@ pub struct PscConfig {
 /// Note that if the preferred location is not available, the instance will be
 /// located as close as possible within the region. Only one location may be
 /// specified.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocationPreference {
@@ -976,15 +1034,16 @@ pub struct LocationPreference {
 }
 /// Maintenance window. This specifies when a Cloud SQL instance is
 /// restarted for system maintenance purposes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MaintenanceWindow {
     /// hour of day - 0 to 23.
     #[prost(message, optional, tag = "1")]
-    pub hour: ::core::option::Option<i32>,
+    pub hour: ::core::option::Option<pb::Int32Value>,
     /// day of week (1-7), starting on Monday.
     #[prost(message, optional, tag = "2")]
-    pub day: ::core::option::Option<i32>,
+    pub day: ::core::option::Option<pb::Int32Value>,
     /// Maintenance timing setting: `canary` (Earlier) or `stable` (Later).
     /// [Learn
     /// more](<https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen>).
@@ -996,6 +1055,7 @@ pub struct MaintenanceWindow {
 }
 /// Deny maintenance Periods. This specifies a date range during when all CSA
 /// rollout will be denied.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DenyMaintenancePeriod {
@@ -1018,8 +1078,9 @@ pub struct DenyMaintenancePeriod {
 }
 /// Insights configuration. This specifies when Cloud SQL Insights feature is
 /// enabled and optional configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InsightsConfig {
     /// Whether Query Insights feature is enabled.
     #[prost(bool, tag = "1")]
@@ -1036,13 +1097,14 @@ pub struct InsightsConfig {
     /// truncated to this value. When unset, query length will be the default
     /// value. Changing query length will restart the database.
     #[prost(message, optional, tag = "4")]
-    pub query_string_length: ::core::option::Option<i32>,
+    pub query_string_length: ::core::option::Option<pb::Int32Value>,
     /// Number of query execution plans captured by Insights per minute
     /// for all queries combined. Default is 5.
     #[prost(message, optional, tag = "5")]
-    pub query_plans_per_minute: ::core::option::Option<i32>,
+    pub query_plans_per_minute: ::core::option::Option<pb::Int32Value>,
 }
 /// Read-replica configuration specific to MySQL databases.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MySqlReplicaConfiguration {
@@ -1062,10 +1124,10 @@ pub struct MySqlReplicaConfiguration {
     pub password: ::prost::alloc::string::String,
     /// Seconds to wait between connect retries. MySQL's default is 60 seconds.
     #[prost(message, optional, tag = "4")]
-    pub connect_retry_interval: ::core::option::Option<i32>,
+    pub connect_retry_interval: ::core::option::Option<pb::Int32Value>,
     /// Interval in milliseconds between replication heartbeats.
     #[prost(message, optional, tag = "5")]
-    pub master_heartbeat_period: ::core::option::Option<i64>,
+    pub master_heartbeat_period: ::core::option::Option<pb::Int64Value>,
     /// PEM representation of the trusted CA's x509 certificate.
     #[prost(string, tag = "6")]
     pub ca_certificate: ::prost::alloc::string::String,
@@ -1082,12 +1144,15 @@ pub struct MySqlReplicaConfiguration {
     /// Whether or not to check the primary instance's Common Name value in the
     /// certificate that it sends during the SSL handshake.
     #[prost(message, optional, tag = "10")]
-    pub verify_server_certificate: ::core::option::Option<bool>,
+    pub verify_server_certificate: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// This is always `sql#mysqlReplicaConfiguration`.
     #[prost(string, tag = "11")]
     pub kind: ::prost::alloc::string::String,
 }
 /// Disk encryption configuration for an instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DiskEncryptionConfiguration {
@@ -1099,6 +1164,7 @@ pub struct DiskEncryptionConfiguration {
     pub kind: ::prost::alloc::string::String,
 }
 /// Disk encryption status for an instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DiskEncryptionStatus {
@@ -1110,6 +1176,7 @@ pub struct DiskEncryptionStatus {
     pub kind: ::prost::alloc::string::String,
 }
 /// Database instance IP mapping
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IpMapping {
@@ -1127,11 +1194,12 @@ pub struct IpMapping {
     /// `2012-11-15T16:19:00.094Z`. This field is only available when
     /// the IP is scheduled to be retired.
     #[prost(message, optional, tag = "3")]
-    pub time_to_retire: ::core::option::Option<::prost_types::Timestamp>,
+    pub time_to_retire: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// An Operation resource.&nbsp;For successful operations that return an
 /// Operation resource, only the fields relevant to the operation are populated
 /// in the resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
@@ -1150,17 +1218,17 @@ pub struct Operation {
     /// 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "5")]
-    pub insert_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub insert_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation actually started in UTC timezone in [RFC
     /// 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "6")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time this operation finished in UTC timezone in [RFC
     /// 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "7")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// If errors occurred during processing of this operation, this field will be
     /// populated.
     #[prost(message, optional, tag = "8")]
@@ -1213,6 +1281,7 @@ pub struct Operation {
 /// Nested message and enum types in `Operation`.
 pub mod operation {
     /// The type of Cloud SQL operation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1438,6 +1507,7 @@ pub mod operation {
         }
     }
     /// The status of an operation.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1486,6 +1556,7 @@ pub mod operation {
     }
 }
 /// Database instance operation error.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationError {
@@ -1500,6 +1571,7 @@ pub struct OperationError {
     pub message: ::prost::alloc::string::String,
 }
 /// Database instance operation errors list wrapper.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationErrors {
@@ -1511,37 +1583,45 @@ pub struct OperationErrors {
     pub errors: ::prost::alloc::vec::Vec<OperationError>,
 }
 /// Database instance local user password validation policy
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PasswordValidationPolicy {
     /// Minimum number of characters allowed.
     #[prost(message, optional, tag = "1")]
-    pub min_length: ::core::option::Option<i32>,
+    pub min_length: ::core::option::Option<pb::Int32Value>,
     /// The complexity of the password.
     #[prost(enumeration = "password_validation_policy::Complexity", tag = "2")]
     pub complexity: i32,
     /// Number of previous passwords that cannot be reused.
     #[prost(message, optional, tag = "3")]
-    pub reuse_interval: ::core::option::Option<i32>,
+    pub reuse_interval: ::core::option::Option<pb::Int32Value>,
     /// Disallow username as a part of the password.
     #[prost(message, optional, tag = "4")]
-    pub disallow_username_substring: ::core::option::Option<bool>,
+    pub disallow_username_substring: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Minimum interval after which the password can be changed. This flag is only
     /// supported for PostgreSQL.
     #[prost(message, optional, tag = "5")]
-    pub password_change_interval: ::core::option::Option<::prost_types::Duration>,
+    pub password_change_interval: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Whether the password policy is enabled or not.
     #[prost(message, optional, tag = "6")]
-    pub enable_password_policy: ::core::option::Option<bool>,
+    pub enable_password_policy: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// This field is deprecated and will be removed in a future version of the
     /// API.
     #[deprecated]
     #[prost(message, optional, tag = "7")]
-    pub disallow_compromised_credentials: ::core::option::Option<bool>,
+    pub disallow_compromised_credentials: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// Nested message and enum types in `PasswordValidationPolicy`.
 pub mod password_validation_policy {
     /// The complexity choices of the password.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1583,14 +1663,16 @@ pub mod password_validation_policy {
     }
 }
 /// Data cache configurations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DataCacheConfig {
     /// Whether data cache is enabled for the instance.
     #[prost(bool, tag = "1")]
     pub data_cache_enabled: bool,
 }
 /// Database instance settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Settings {
@@ -1599,7 +1681,7 @@ pub struct Settings {
     /// use the most recent settingsVersion value for this instance and do not try
     /// to update this value.
     #[prost(message, optional, tag = "1")]
-    pub settings_version: ::core::option::Option<i64>,
+    pub settings_version: ::core::option::Option<pb::Int64Value>,
     /// The App Engine app IDs that can access this instance.
     /// (Deprecated) Applied to First Generation instances only.
     #[deprecated]
@@ -1644,7 +1726,7 @@ pub struct Settings {
     /// The maximum size to which storage capacity can be automatically increased.
     /// The default value is 0, which specifies that there is no limit.
     #[prost(message, optional, tag = "9")]
-    pub storage_auto_resize_limit: ::core::option::Option<i64>,
+    pub storage_auto_resize_limit: ::core::option::Option<pb::Int64Value>,
     /// The activation policy specifies when the instance is activated; it is
     /// applicable only when the instance state is RUNNABLE. Valid values:
     /// *  `ALWAYS`: The instance is on, and remains so even in the absence of
@@ -1661,7 +1743,9 @@ pub struct Settings {
     /// Configuration to increase storage size automatically. The default value is
     /// true.
     #[prost(message, optional, tag = "12")]
-    pub storage_auto_resize: ::core::option::Option<bool>,
+    pub storage_auto_resize: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// The location preference settings. This allows the instance to be located as
     /// near as possible to either an App Engine app or Compute Engine zone for
     /// better performance. App Engine co-location was only applicable to First
@@ -1686,16 +1770,20 @@ pub struct Settings {
     /// replication is enabled or not. WARNING: Changing this restarts the
     /// instance.
     #[prost(message, optional, tag = "18")]
-    pub database_replication_enabled: ::core::option::Option<bool>,
+    pub database_replication_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Configuration specific to read replica instances. Indicates whether
     /// database flags for crash-safe replication are enabled. This property was
     /// only applicable to First Generation instances.
     #[deprecated]
     #[prost(message, optional, tag = "19")]
-    pub crash_safe_replication_enabled: ::core::option::Option<bool>,
+    pub crash_safe_replication_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// The size of data disk, in GB. The data disk size minimum is 10GB.
     #[prost(message, optional, tag = "20")]
-    pub data_disk_size_gb: ::core::option::Option<i64>,
+    pub data_disk_size_gb: ::core::option::Option<pb::Int64Value>,
     /// Active Directory configuration, relevant only for Cloud SQL for SQL Server.
     #[prost(message, optional, tag = "22")]
     pub active_directory_config: ::core::option::Option<SqlActiveDirectoryConfig>,
@@ -1731,7 +1819,9 @@ pub struct Settings {
     pub connector_enforcement: i32,
     /// Configuration to protect against accidental instance deletion.
     #[prost(message, optional, tag = "33")]
-    pub deletion_protection_enabled: ::core::option::Option<bool>,
+    pub deletion_protection_enabled: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Server timezone, relevant only for Cloud SQL for SQL Server.
     #[prost(string, tag = "34")]
     pub time_zone: ::prost::alloc::string::String,
@@ -1747,16 +1837,21 @@ pub struct Settings {
     /// insights to the AI. The default value is false. This applies only to Cloud
     /// SQL for PostgreSQL instances.
     #[prost(message, optional, tag = "40")]
-    pub enable_google_ml_integration: ::core::option::Option<bool>,
+    pub enable_google_ml_integration: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Optional. By default, Cloud SQL instances have schema extraction disabled
     /// for Dataplex. When this parameter is set to true, schema extraction for
     /// Dataplex on Cloud SQL instances is activated.
     #[prost(message, optional, tag = "41")]
-    pub enable_dataplex_integration: ::core::option::Option<bool>,
+    pub enable_dataplex_integration: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// Nested message and enum types in `Settings`.
 pub mod settings {
     /// Specifies when the instance is activated.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1804,6 +1899,7 @@ pub mod settings {
         }
     }
     /// The edition of the instance, can be ENTERPRISE or ENTERPRISE_PLUS.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1847,6 +1943,7 @@ pub mod settings {
         }
     }
     /// The options for enforcing Cloud SQL connectors in the instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1893,14 +1990,16 @@ pub mod settings {
     }
 }
 /// Specifies options for controlling advanced machine features.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AdvancedMachineFeatures {
     /// The number of threads per physical core.
     #[prost(int32, tag = "1")]
     pub threads_per_core: i32,
 }
 /// SslCerts Resource
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCert {
@@ -1917,7 +2016,7 @@ pub struct SslCert {
     /// 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User supplied name.  Constrained to \[a-zA-Z.-_ \]+.
     #[prost(string, tag = "5")]
     pub common_name: ::prost::alloc::string::String,
@@ -1925,7 +2024,7 @@ pub struct SslCert {
     /// 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "6")]
-    pub expiration_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expiration_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Sha1 Fingerprint.
     #[prost(string, tag = "7")]
     pub sha1_fingerprint: ::prost::alloc::string::String,
@@ -1937,6 +2036,7 @@ pub struct SslCert {
     pub self_link: ::prost::alloc::string::String,
 }
 /// SslCertDetail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCertDetail {
@@ -1949,6 +2049,7 @@ pub struct SslCertDetail {
     pub cert_private_key: ::prost::alloc::string::String,
 }
 /// Active Directory configuration, relevant only for Cloud SQL for SQL Server.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlActiveDirectoryConfig {
@@ -1960,6 +2061,7 @@ pub struct SqlActiveDirectoryConfig {
     pub domain: ::prost::alloc::string::String,
 }
 /// SQL Server specific audit configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlServerAuditConfig {
@@ -1971,12 +2073,13 @@ pub struct SqlServerAuditConfig {
     pub bucket: ::prost::alloc::string::String,
     /// How long to keep generated audit files.
     #[prost(message, optional, tag = "3")]
-    pub retention_interval: ::core::option::Option<::prost_types::Duration>,
+    pub retention_interval: ::core::option::Option<::prost_wkt_types::Duration>,
     /// How often to upload generated audit files.
     #[prost(message, optional, tag = "4")]
-    pub upload_interval: ::core::option::Option<::prost_types::Duration>,
+    pub upload_interval: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Acquire SSRS lease context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcquireSsrsLeaseContext {
@@ -1993,8 +2096,9 @@ pub struct AcquireSsrsLeaseContext {
     pub report_database: ::core::option::Option<::prost::alloc::string::String>,
     /// Lease duration needed for SSRS setup.
     #[prost(message, optional, tag = "4")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlFileType {
@@ -2030,6 +2134,7 @@ impl SqlFileType {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum BakType {
@@ -2066,6 +2171,7 @@ impl BakType {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlBackendType {
@@ -2102,6 +2208,7 @@ impl SqlBackendType {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlIpAddressType {
@@ -2149,6 +2256,7 @@ impl SqlIpAddressType {
     }
 }
 /// The database engine type and version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlDatabaseVersion {
@@ -2346,6 +2454,7 @@ impl SqlDatabaseVersion {
     }
 }
 /// The pricing plan for this instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlPricingPlan {
@@ -2378,6 +2487,7 @@ impl SqlPricingPlan {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlReplicationType {
@@ -2415,6 +2525,7 @@ impl SqlReplicationType {
     }
 }
 /// The type of disk that is used for a v2 instance to use.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlDataDiskType {
@@ -2453,6 +2564,7 @@ impl SqlDataDiskType {
     }
 }
 /// The availability type of the given Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlAvailabilityType {
@@ -2485,6 +2597,7 @@ impl SqlAvailabilityType {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlUpdateTrack {
@@ -2529,6 +2642,7 @@ impl SqlUpdateTrack {
     }
 }
 /// Backup runs delete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlBackupRunsDeleteRequest {
@@ -2545,6 +2659,7 @@ pub struct SqlBackupRunsDeleteRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Backup runs get request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlBackupRunsGetRequest {
@@ -2559,6 +2674,7 @@ pub struct SqlBackupRunsGetRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Backup runs insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlBackupRunsInsertRequest {
@@ -2572,6 +2688,7 @@ pub struct SqlBackupRunsInsertRequest {
     pub body: ::core::option::Option<BackupRun>,
 }
 /// Backup runs list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlBackupRunsListRequest {
@@ -2591,6 +2708,7 @@ pub struct SqlBackupRunsListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// A BackupRun resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupRun {
@@ -2604,7 +2722,7 @@ pub struct BackupRun {
     /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "3")]
-    pub enqueued_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub enqueued_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The identifier for this backup run. Unique only for a specific Cloud SQL
     /// instance.
     #[prost(int64, tag = "4")]
@@ -2613,12 +2731,12 @@ pub struct BackupRun {
     /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "5")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time the backup operation completed in UTC timezone in
     /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "6")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Information about why the backup operation failed. This is only present if
     /// the run has the FAILED status.
     #[prost(message, optional, tag = "7")]
@@ -2635,7 +2753,7 @@ pub struct BackupRun {
     /// attempted in [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for
     /// example `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "10")]
-    pub window_start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub window_start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Name of the database instance.
     #[prost(string, tag = "11")]
     pub instance: ::prost::alloc::string::String,
@@ -2662,6 +2780,7 @@ pub struct BackupRun {
     pub time_zone: ::prost::alloc::string::String,
 }
 /// Backup run list results.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackupRunsListResponse {
@@ -2677,6 +2796,7 @@ pub struct BackupRunsListResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The status of a backup run.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlBackupRunStatus {
@@ -2741,6 +2861,7 @@ impl SqlBackupRunStatus {
     }
 }
 /// Defines the supported backup kinds.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlBackupKind {
@@ -2774,6 +2895,7 @@ impl SqlBackupKind {
     }
 }
 /// Type of backup (i.e. automated, on demand, etc).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlBackupRunType {
@@ -3000,6 +3122,7 @@ pub mod sql_backup_runs_service_client {
     }
 }
 /// Connect settings retrieval request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConnectSettingsRequest {
@@ -3012,9 +3135,10 @@ pub struct GetConnectSettingsRequest {
     /// Optional. Optional snapshot read timestamp to trade freshness for
     /// performance.
     #[prost(message, optional, tag = "7")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Connect settings retrieval response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectSettings {
@@ -3058,6 +3182,7 @@ pub struct ConnectSettings {
     pub dns_name: ::prost::alloc::string::String,
 }
 /// Ephemeral certificate creation request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateEphemeralCertRequest {
@@ -3076,12 +3201,13 @@ pub struct GenerateEphemeralCertRequest {
     /// Optional. Optional snapshot read timestamp to trade freshness for
     /// performance.
     #[prost(message, optional, tag = "7")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional. If set, it will contain the cert valid duration.
     #[prost(message, optional, tag = "12")]
-    pub valid_duration: ::core::option::Option<::prost_types::Duration>,
+    pub valid_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Ephemeral certificate creation request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateEphemeralCertResponse {
@@ -3243,6 +3369,7 @@ pub mod sql_connect_service_client {
     }
 }
 /// Database delete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlDatabasesDeleteRequest {
@@ -3257,6 +3384,7 @@ pub struct SqlDatabasesDeleteRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Database get request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlDatabasesGetRequest {
@@ -3271,6 +3399,7 @@ pub struct SqlDatabasesGetRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Database insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlDatabasesInsertRequest {
@@ -3284,6 +3413,7 @@ pub struct SqlDatabasesInsertRequest {
     pub body: ::core::option::Option<Database>,
 }
 /// Database list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlDatabasesListRequest {
@@ -3295,6 +3425,7 @@ pub struct SqlDatabasesListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Database update request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlDatabasesUpdateRequest {
@@ -3311,6 +3442,7 @@ pub struct SqlDatabasesUpdateRequest {
     pub body: ::core::option::Option<Database>,
 }
 /// Database list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatabasesListResponse {
@@ -3658,6 +3790,7 @@ pub mod sql_events_service_client {
     }
 }
 /// Flags list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlFlagsListRequest {
@@ -3667,6 +3800,7 @@ pub struct SqlFlagsListRequest {
     pub database_version: ::prost::alloc::string::String,
 }
 /// Flags list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlagsListResponse {
@@ -3678,6 +3812,7 @@ pub struct FlagsListResponse {
     pub items: ::prost::alloc::vec::Vec<Flag>,
 }
 /// A flag resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Flag {
@@ -3707,25 +3842,28 @@ pub struct Flag {
     pub allowed_string_values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// For `INTEGER` flags, the minimum allowed value.
     #[prost(message, optional, tag = "5")]
-    pub min_value: ::core::option::Option<i64>,
+    pub min_value: ::core::option::Option<pb::Int64Value>,
     /// For `INTEGER` flags, the maximum allowed value.
     #[prost(message, optional, tag = "6")]
-    pub max_value: ::core::option::Option<i64>,
+    pub max_value: ::core::option::Option<pb::Int64Value>,
     /// Indicates whether changing this flag will trigger a database restart. Only
     /// applicable to Second Generation instances.
     #[prost(message, optional, tag = "7")]
-    pub requires_restart: ::core::option::Option<bool>,
+    pub requires_restart: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// This is always `sql#flag`.
     #[prost(string, tag = "8")]
     pub kind: ::prost::alloc::string::String,
     /// Whether or not the flag is considered in beta.
     #[prost(message, optional, tag = "9")]
-    pub in_beta: ::core::option::Option<bool>,
+    pub in_beta: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// Use this field if only certain integers are accepted. Can be combined
     /// with min_value and max_value to add additional values.
     #[prost(int64, repeated, tag = "10")]
     pub allowed_int_values: ::prost::alloc::vec::Vec<i64>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlFlagType {
@@ -4072,6 +4210,7 @@ pub mod sql_instance_names_service_client {
     }
 }
 /// Instance add server CA request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesAddServerCaRequest {
@@ -4083,6 +4222,7 @@ pub struct SqlInstancesAddServerCaRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance clone request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesCloneRequest {
@@ -4097,6 +4237,7 @@ pub struct SqlInstancesCloneRequest {
     pub body: ::core::option::Option<InstancesCloneRequest>,
 }
 /// Instance delete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesDeleteRequest {
@@ -4108,6 +4249,7 @@ pub struct SqlInstancesDeleteRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance demote master request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesDemoteMasterRequest {
@@ -4121,6 +4263,7 @@ pub struct SqlInstancesDemoteMasterRequest {
     pub body: ::core::option::Option<InstancesDemoteMasterRequest>,
 }
 /// Instance demote request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesDemoteRequest {
@@ -4135,6 +4278,7 @@ pub struct SqlInstancesDemoteRequest {
     pub body: ::core::option::Option<InstancesDemoteRequest>,
 }
 /// Instance export request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesExportRequest {
@@ -4148,6 +4292,7 @@ pub struct SqlInstancesExportRequest {
     pub body: ::core::option::Option<InstancesExportRequest>,
 }
 /// Instance failover request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesFailoverRequest {
@@ -4161,6 +4306,7 @@ pub struct SqlInstancesFailoverRequest {
     pub body: ::core::option::Option<InstancesFailoverRequest>,
 }
 /// Instance get request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesGetRequest {
@@ -4172,6 +4318,7 @@ pub struct SqlInstancesGetRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance import request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesImportRequest {
@@ -4185,6 +4332,7 @@ pub struct SqlInstancesImportRequest {
     pub body: ::core::option::Option<InstancesImportRequest>,
 }
 /// Instance insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesInsertRequest {
@@ -4196,6 +4344,7 @@ pub struct SqlInstancesInsertRequest {
     pub body: ::core::option::Option<DatabaseInstance>,
 }
 /// Instance list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesListRequest {
@@ -4225,6 +4374,7 @@ pub struct SqlInstancesListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance list server CAs request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesListServerCasRequest {
@@ -4236,6 +4386,7 @@ pub struct SqlInstancesListServerCasRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance patch request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesPatchRequest {
@@ -4249,6 +4400,7 @@ pub struct SqlInstancesPatchRequest {
     pub body: ::core::option::Option<DatabaseInstance>,
 }
 /// Instance promote replica request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesPromoteReplicaRequest {
@@ -4269,6 +4421,7 @@ pub struct SqlInstancesPromoteReplicaRequest {
     pub failover: bool,
 }
 /// Instance switchover request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesSwitchoverRequest {
@@ -4282,9 +4435,10 @@ pub struct SqlInstancesSwitchoverRequest {
     /// sum of all database operations. Default value is 10 minutes and can be
     /// modified to a maximum value of 24 hours.
     #[prost(message, optional, tag = "3")]
-    pub db_timeout: ::core::option::Option<::prost_types::Duration>,
+    pub db_timeout: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Instance reset SSL config request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesResetSslConfigRequest {
@@ -4296,6 +4450,7 @@ pub struct SqlInstancesResetSslConfigRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance restart request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesRestartRequest {
@@ -4307,6 +4462,7 @@ pub struct SqlInstancesRestartRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance restore backup request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesRestoreBackupRequest {
@@ -4320,6 +4476,7 @@ pub struct SqlInstancesRestoreBackupRequest {
     pub body: ::core::option::Option<InstancesRestoreBackupRequest>,
 }
 /// Instance rotate server CA request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesRotateServerCaRequest {
@@ -4333,6 +4490,7 @@ pub struct SqlInstancesRotateServerCaRequest {
     pub body: ::core::option::Option<InstancesRotateServerCaRequest>,
 }
 /// Instance start replica request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesStartReplicaRequest {
@@ -4344,6 +4502,7 @@ pub struct SqlInstancesStartReplicaRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance stop replica request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesStopReplicaRequest {
@@ -4355,6 +4514,7 @@ pub struct SqlInstancesStopReplicaRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance truncate log request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesTruncateLogRequest {
@@ -4368,6 +4528,7 @@ pub struct SqlInstancesTruncateLogRequest {
     pub body: ::core::option::Option<InstancesTruncateLogRequest>,
 }
 /// Instance perform disk shrink request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesPerformDiskShrinkRequest {
@@ -4382,6 +4543,7 @@ pub struct SqlInstancesPerformDiskShrinkRequest {
     pub body: ::core::option::Option<PerformDiskShrinkContext>,
 }
 /// Instance update request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesUpdateRequest {
@@ -4395,6 +4557,7 @@ pub struct SqlInstancesUpdateRequest {
     pub body: ::core::option::Option<DatabaseInstance>,
 }
 /// Instance reschedule maintenance request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesRescheduleMaintenanceRequest {
@@ -4408,6 +4571,7 @@ pub struct SqlInstancesRescheduleMaintenanceRequest {
     pub body: ::core::option::Option<SqlInstancesRescheduleMaintenanceRequestBody>,
 }
 /// Instance reencrypt request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesReencryptRequest {
@@ -4422,16 +4586,18 @@ pub struct SqlInstancesReencryptRequest {
     pub body: ::core::option::Option<InstancesReencryptRequest>,
 }
 /// Database Instance reencrypt request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InstancesReencryptRequest {
     /// Configuration specific to backup re-encryption
     #[prost(message, optional, tag = "1")]
     pub backup_reencryption_config: ::core::option::Option<BackupReencryptionConfig>,
 }
 /// Backup Reencryption Config
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BackupReencryptionConfig {
     /// Backup re-encryption limit
     #[prost(int32, optional, tag = "1")]
@@ -4443,6 +4609,7 @@ pub struct BackupReencryptionConfig {
 /// Nested message and enum types in `BackupReencryptionConfig`.
 pub mod backup_reencryption_config {
     /// Backup type for re-encryption
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4487,6 +4654,7 @@ pub mod backup_reencryption_config {
     }
 }
 /// Instance get disk shrink config request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesGetDiskShrinkConfigRequest {
@@ -4498,6 +4666,7 @@ pub struct SqlInstancesGetDiskShrinkConfigRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance verify external sync settings request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesVerifyExternalSyncSettingsRequest {
@@ -4541,6 +4710,7 @@ pub struct SqlInstancesVerifyExternalSyncSettingsRequest {
 }
 /// Nested message and enum types in `SqlInstancesVerifyExternalSyncSettingsRequest`.
 pub mod sql_instances_verify_external_sync_settings_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4587,6 +4757,7 @@ pub mod sql_instances_verify_external_sync_settings_request {
     }
     /// MigrationType determines whether the migration is a physical file-based
     /// migration or a logical dump file-based migration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4629,6 +4800,7 @@ pub mod sql_instances_verify_external_sync_settings_request {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SyncConfig {
@@ -4638,6 +4810,7 @@ pub mod sql_instances_verify_external_sync_settings_request {
     }
 }
 /// Instance start external sync request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesStartExternalSyncRequest {
@@ -4675,6 +4848,7 @@ pub struct SqlInstancesStartExternalSyncRequest {
 }
 /// Nested message and enum types in `SqlInstancesStartExternalSyncRequest`.
 pub mod sql_instances_start_external_sync_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SyncConfig {
@@ -4684,6 +4858,7 @@ pub mod sql_instances_start_external_sync_request {
     }
 }
 /// Instance reset replica size request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesResetReplicaSizeRequest {
@@ -4695,6 +4870,7 @@ pub struct SqlInstancesResetReplicaSizeRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance create ephemeral certificate request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesCreateEphemeralCertRequest {
@@ -4708,6 +4884,7 @@ pub struct SqlInstancesCreateEphemeralCertRequest {
     pub body: ::core::option::Option<SslCertsCreateEphemeralRequest>,
 }
 /// Database instance clone request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesCloneRequest {
@@ -4716,6 +4893,7 @@ pub struct InstancesCloneRequest {
     pub clone_context: ::core::option::Option<CloneContext>,
 }
 /// Database demote primary instance request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesDemoteMasterRequest {
@@ -4725,6 +4903,7 @@ pub struct InstancesDemoteMasterRequest {
 }
 /// This request is used to demote an existing standalone instance to be a
 /// Cloud SQL read replica for an external database server.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesDemoteRequest {
@@ -4733,6 +4912,7 @@ pub struct InstancesDemoteRequest {
     pub demote_context: ::core::option::Option<DemoteContext>,
 }
 /// Database instance export request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesExportRequest {
@@ -4741,6 +4921,7 @@ pub struct InstancesExportRequest {
     pub export_context: ::core::option::Option<ExportContext>,
 }
 /// Instance failover request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesFailoverRequest {
@@ -4749,6 +4930,7 @@ pub struct InstancesFailoverRequest {
     pub failover_context: ::core::option::Option<FailoverContext>,
 }
 /// SslCerts create ephemeral certificate request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCertsCreateEphemeralRequest {
@@ -4760,6 +4942,7 @@ pub struct SslCertsCreateEphemeralRequest {
     pub access_token: ::prost::alloc::string::String,
 }
 /// Database instance import request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesImportRequest {
@@ -4768,6 +4951,7 @@ pub struct InstancesImportRequest {
     pub import_context: ::core::option::Option<ImportContext>,
 }
 /// Database instances list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesListResponse {
@@ -4786,6 +4970,7 @@ pub struct InstancesListResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Instances ListServerCas response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesListServerCasResponse {
@@ -4799,6 +4984,7 @@ pub struct InstancesListServerCasResponse {
     pub kind: ::prost::alloc::string::String,
 }
 /// Database instance restore backup request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesRestoreBackupRequest {
@@ -4807,6 +4993,7 @@ pub struct InstancesRestoreBackupRequest {
     pub restore_backup_context: ::core::option::Option<RestoreBackupContext>,
 }
 /// Rotate server CA request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesRotateServerCaRequest {
@@ -4815,6 +5002,7 @@ pub struct InstancesRotateServerCaRequest {
     pub rotate_server_ca_context: ::core::option::Option<RotateServerCaContext>,
 }
 /// Instance truncate log request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesTruncateLogRequest {
@@ -4823,6 +5011,7 @@ pub struct InstancesTruncateLogRequest {
     pub truncate_log_context: ::core::option::Option<TruncateLogContext>,
 }
 /// Request to acquire a lease for SSRS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstancesAcquireSsrsLeaseRequest {
@@ -4831,6 +5020,7 @@ pub struct InstancesAcquireSsrsLeaseRequest {
     pub acquire_ssrs_lease_context: ::core::option::Option<AcquireSsrsLeaseContext>,
 }
 /// Instance verify external sync settings response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesVerifyExternalSyncSettingsResponse {
@@ -4845,6 +5035,7 @@ pub struct SqlInstancesVerifyExternalSyncSettingsResponse {
     pub warnings: ::prost::alloc::vec::Vec<SqlExternalSyncSettingError>,
 }
 /// Instance get disk shrink config response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesGetDiskShrinkConfigResponse {
@@ -4859,6 +5050,7 @@ pub struct SqlInstancesGetDiskShrinkConfigResponse {
     pub message: ::prost::alloc::string::String,
 }
 /// Instance get latest recovery time request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesGetLatestRecoveryTimeRequest {
@@ -4870,6 +5062,7 @@ pub struct SqlInstancesGetLatestRecoveryTimeRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance get latest recovery time response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesGetLatestRecoveryTimeResponse {
@@ -4878,9 +5071,10 @@ pub struct SqlInstancesGetLatestRecoveryTimeResponse {
     pub kind: ::prost::alloc::string::String,
     /// Timestamp, identifies the latest recovery time of the source instance.
     #[prost(message, optional, tag = "2")]
-    pub latest_recovery_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub latest_recovery_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Database instance clone context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloneContext {
@@ -4901,7 +5095,7 @@ pub struct CloneContext {
     /// Timestamp, if specified, identifies the time to which the source instance
     /// is cloned.
     #[prost(message, optional, tag = "5")]
-    pub point_in_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub point_in_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The name of the allocated ip range for the private ip Cloud SQL instance.
     /// For example: "google-managed-services-default". If set, the cloned instance
     /// ip will be created in the allocated range. The range name must comply with
@@ -4922,6 +5116,7 @@ pub struct CloneContext {
     pub preferred_zone: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Binary log coordinates.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BinLogCoordinates {
@@ -4936,6 +5131,7 @@ pub struct BinLogCoordinates {
     pub kind: ::prost::alloc::string::String,
 }
 /// A Cloud SQL instance resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatabaseInstance {
@@ -4969,7 +5165,7 @@ pub struct DatabaseInstance {
     /// The maximum disk size of the instance in bytes.
     #[deprecated]
     #[prost(message, optional, tag = "9")]
-    pub max_disk_size: ::core::option::Option<i64>,
+    pub max_disk_size: ::core::option::Option<pb::Int64Value>,
     /// The current disk usage of the instance in bytes. This property has been
     /// deprecated. Use the
     /// "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud
@@ -4978,7 +5174,7 @@ pub struct DatabaseInstance {
     /// for details.
     #[deprecated]
     #[prost(message, optional, tag = "10")]
-    pub current_disk_size: ::core::option::Option<i64>,
+    pub current_disk_size: ::core::option::Option<pb::Int64Value>,
     /// The assigned IP addresses for the instance.
     #[prost(message, repeated, tag = "11")]
     pub ip_addresses: ::prost::alloc::vec::Vec<IpMapping>,
@@ -5071,7 +5267,7 @@ pub struct DatabaseInstance {
     ///
     /// The status is reserved for future use.
     #[prost(message, optional, tag = "35")]
-    pub satisfies_pzs: ::core::option::Option<bool>,
+    pub satisfies_pzs: ::core::option::Option<super::super::super::protobuf::BoolValue>,
     /// Output only. Stores the current database version running on the instance
     /// including minor version such as `MYSQL_8_0_18`.
     #[prost(string, tag = "40")]
@@ -5090,7 +5286,7 @@ pub struct DatabaseInstance {
     /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
     /// `2012-11-15T16:19:00.094Z`.
     #[prost(message, optional, tag = "39")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. List all maintenance versions applicable on the instance
     #[prost(string, repeated, tag = "41")]
     pub available_maintenance_versions: ::prost::alloc::vec::Vec<
@@ -5135,6 +5331,7 @@ pub struct DatabaseInstance {
 }
 /// Nested message and enum types in `DatabaseInstance`.
 pub mod database_instance {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SqlFailoverReplica {
@@ -5147,15 +5344,18 @@ pub mod database_instance {
         /// that the failover replica is out of sync. The primary instance can only
         /// failover to the failover replica when the status is true.
         #[prost(message, optional, tag = "2")]
-        pub available: ::core::option::Option<bool>,
+        pub available: ::core::option::Option<
+            super::super::super::super::protobuf::BoolValue,
+        >,
     }
     /// Any scheduled maintenance for this instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SqlScheduledMaintenance {
         /// The start time of any upcoming scheduled maintenance for this instance.
         #[prost(message, optional, tag = "1")]
-        pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
         #[deprecated]
         #[prost(bool, tag = "2")]
         pub can_defer: bool,
@@ -5164,11 +5364,12 @@ pub mod database_instance {
         pub can_reschedule: bool,
         /// Maintenance cannot be rescheduled to start beyond this deadline.
         #[prost(message, optional, tag = "4")]
-        pub schedule_deadline_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub schedule_deadline_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
     /// This message wraps up the information written by out-of-disk detection job.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SqlOutOfDiskReport {
         /// This field represents the state generated by the proactive database
         /// wellness job for OutOfDisk issues.
@@ -5193,6 +5394,7 @@ pub mod database_instance {
     /// Nested message and enum types in `SqlOutOfDiskReport`.
     pub mod sql_out_of_disk_report {
         /// This enum lists all possible states regarding out-of-disk issues.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -5238,6 +5440,7 @@ pub mod database_instance {
         }
     }
     /// The current serving state of the database instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5302,6 +5505,7 @@ pub mod database_instance {
         }
     }
     /// The SQL network architecture for the instance.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5351,8 +5555,9 @@ pub mod database_instance {
     }
 }
 /// Gemini instance configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GeminiInstanceConfig {
     /// Output only. Whether Gemini is enabled.
     #[prost(bool, optional, tag = "1")]
@@ -5377,6 +5582,7 @@ pub struct GeminiInstanceConfig {
 /// A DR replica is a cross-region replica that you designate for failover in
 /// the event that the primary instance experiences regional failure.
 /// Only applicable to MySQL.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationCluster {
@@ -5403,6 +5609,7 @@ pub struct ReplicationCluster {
     pub dr_replica: bool,
 }
 /// An available database version. It can be a major or a minor version.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AvailableDatabaseVersion {
@@ -5418,8 +5625,9 @@ pub struct AvailableDatabaseVersion {
     pub display_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Reschedule options for maintenance windows.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SqlInstancesRescheduleMaintenanceRequestBody {
     /// Required. The type of the reschedule the user wants.
     #[prost(message, optional, tag = "3")]
@@ -5429,8 +5637,9 @@ pub struct SqlInstancesRescheduleMaintenanceRequestBody {
 }
 /// Nested message and enum types in `SqlInstancesRescheduleMaintenanceRequestBody`.
 pub mod sql_instances_reschedule_maintenance_request_body {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Reschedule {
         /// Required. The type of the reschedule.
         #[prost(enumeration = "RescheduleType", tag = "1")]
@@ -5440,8 +5649,9 @@ pub mod sql_instances_reschedule_maintenance_request_body {
         /// [RFC 3339](<https://tools.ietf.org/html/rfc3339>) format, for example
         /// `2012-11-15T16:19:00.094Z`.
         #[prost(message, optional, tag = "2")]
-        pub schedule_time: ::core::option::Option<::prost_types::Timestamp>,
+        pub schedule_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5490,6 +5700,7 @@ pub mod sql_instances_reschedule_maintenance_request_body {
     }
 }
 /// Database instance demote primary instance context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DemoteMasterContext {
@@ -5504,7 +5715,9 @@ pub struct DemoteMasterContext {
     /// for the GTID divergence and are confident that doing so will not cause any
     /// replication issues.
     #[prost(message, optional, tag = "2")]
-    pub verify_gtid_consistency: ::core::option::Option<bool>,
+    pub verify_gtid_consistency: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// The name of the instance which will act as on-premises primary instance
     /// in the replication setup.
     #[prost(string, tag = "3")]
@@ -5519,6 +5732,7 @@ pub struct DemoteMasterContext {
 }
 /// This context is used to demote an existing standalone instance to be
 /// a Cloud SQL read replica for an external database server.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DemoteContext {
@@ -5531,6 +5745,7 @@ pub struct DemoteContext {
     pub source_representative_instance_name: ::prost::alloc::string::String,
 }
 /// Database instance failover context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FailoverContext {
@@ -5544,6 +5759,7 @@ pub struct FailoverContext {
 }
 /// Database instance restore from backup context.
 /// Backup context contains source instance id and project id.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreBackupContext {
@@ -5561,6 +5777,7 @@ pub struct RestoreBackupContext {
     pub project: ::prost::alloc::string::String,
 }
 /// Instance rotate server CA context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RotateServerCaContext {
@@ -5573,6 +5790,7 @@ pub struct RotateServerCaContext {
     pub next_version: ::prost::alloc::string::String,
 }
 /// Database Instance truncate log context.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TruncateLogContext {
@@ -5585,6 +5803,7 @@ pub struct TruncateLogContext {
     pub log_type: ::prost::alloc::string::String,
 }
 /// External primary instance migration setting error/warning.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlExternalSyncSettingError {
@@ -5604,6 +5823,7 @@ pub struct SqlExternalSyncSettingError {
 }
 /// Nested message and enum types in `SqlExternalSyncSettingError`.
 pub mod sql_external_sync_setting_error {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -5952,6 +6172,7 @@ pub mod sql_external_sync_setting_error {
     }
 }
 /// On-premises instance configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnPremisesConfiguration {
@@ -5985,6 +6206,7 @@ pub struct OnPremisesConfiguration {
     pub source_instance: ::core::option::Option<InstanceReference>,
 }
 /// Read-replica configuration for connecting to the primary instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicaConfiguration {
@@ -6005,14 +6227,19 @@ pub struct ReplicaConfiguration {
     /// primary instance. Only one replica can be specified as failover target, and
     /// the replica has to be in different zone with the primary instance.
     #[prost(message, optional, tag = "3")]
-    pub failover_target: ::core::option::Option<bool>,
+    pub failover_target: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
     /// Optional. Specifies if a SQL Server replica is a cascadable replica. A
     /// cascadable replica is a SQL Server cross region replica that supports
     /// replica(s) under it.
     #[prost(message, optional, tag = "5")]
-    pub cascadable_replica: ::core::option::Option<bool>,
+    pub cascadable_replica: ::core::option::Option<
+        super::super::super::protobuf::BoolValue,
+    >,
 }
 /// Request to acquire a lease for SSRS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesAcquireSsrsLeaseRequest {
@@ -6031,6 +6258,7 @@ pub struct SqlInstancesAcquireSsrsLeaseRequest {
     pub body: ::core::option::Option<InstancesAcquireSsrsLeaseRequest>,
 }
 /// Response for the acquire SSRS lease request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesAcquireSsrsLeaseResponse {
@@ -6039,6 +6267,7 @@ pub struct SqlInstancesAcquireSsrsLeaseResponse {
     pub operation_id: ::prost::alloc::string::String,
 }
 /// Request to release a lease for SSRS.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesReleaseSsrsLeaseRequest {
@@ -6053,6 +6282,7 @@ pub struct SqlInstancesReleaseSsrsLeaseRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Response for the release SSRS lease request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlInstancesReleaseSsrsLeaseResponse {
@@ -6061,6 +6291,7 @@ pub struct SqlInstancesReleaseSsrsLeaseResponse {
     pub operation_id: ::prost::alloc::string::String,
 }
 /// External Sync parallel level.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ExternalSyncParallelLevel {
@@ -6099,6 +6330,7 @@ impl ExternalSyncParallelLevel {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlInstanceType {
@@ -6138,6 +6370,7 @@ impl SqlInstanceType {
     }
 }
 /// The suspension reason of the database instance if the state is SUSPENDED.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum SqlSuspensionReason {
@@ -7255,6 +7488,7 @@ pub mod sql_instances_service_client {
     }
 }
 /// Operations get request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlOperationsGetRequest {
@@ -7266,6 +7500,7 @@ pub struct SqlOperationsGetRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Operations list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlOperationsListRequest {
@@ -7284,6 +7519,7 @@ pub struct SqlOperationsListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Operations list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationsListResponse {
@@ -7299,6 +7535,7 @@ pub struct OperationsListResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Operations cancel request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlOperationsCancelRequest {
@@ -7453,7 +7690,10 @@ pub mod sql_operations_service_client {
         pub async fn cancel(
             &mut self,
             request: impl tonic::IntoRequest<super::SqlOperationsCancelRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -7565,6 +7805,7 @@ pub mod sql_regions_service_client {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlSslCertsDeleteRequest {
@@ -7578,6 +7819,7 @@ pub struct SqlSslCertsDeleteRequest {
     #[prost(string, tag = "3")]
     pub sha1_fingerprint: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlSslCertsGetRequest {
@@ -7591,6 +7833,7 @@ pub struct SqlSslCertsGetRequest {
     #[prost(string, tag = "3")]
     pub sha1_fingerprint: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlSslCertsInsertRequest {
@@ -7603,6 +7846,7 @@ pub struct SqlSslCertsInsertRequest {
     #[prost(message, optional, tag = "100")]
     pub body: ::core::option::Option<SslCertsInsertRequest>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlSslCertsListRequest {
@@ -7614,6 +7858,7 @@ pub struct SqlSslCertsListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// SslCerts insert request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCertsInsertRequest {
@@ -7623,6 +7868,7 @@ pub struct SslCertsInsertRequest {
     pub common_name: ::prost::alloc::string::String,
 }
 /// SslCert insert response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCertsInsertResponse {
@@ -7642,6 +7888,7 @@ pub struct SslCertsInsertResponse {
     pub client_cert: ::core::option::Option<SslCertDetail>,
 }
 /// SslCerts list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SslCertsListResponse {
@@ -7852,6 +8099,7 @@ pub mod sql_ssl_certs_service_client {
     }
 }
 /// Tiers list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlTiersListRequest {
@@ -7860,6 +8108,7 @@ pub struct SqlTiersListRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Tiers list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TiersListResponse {
@@ -7871,6 +8120,7 @@ pub struct TiersListResponse {
     pub items: ::prost::alloc::vec::Vec<Tier>,
 }
 /// A Google Cloud SQL service tier resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Tier {
@@ -8007,6 +8257,7 @@ pub mod sql_tiers_service_client {
         }
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlUsersDeleteRequest {
@@ -8024,6 +8275,7 @@ pub struct SqlUsersDeleteRequest {
     pub project: ::prost::alloc::string::String,
 }
 /// Request message for Users Get RPC
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlUsersGetRequest {
@@ -8040,6 +8292,7 @@ pub struct SqlUsersGetRequest {
     #[prost(string, tag = "4")]
     pub host: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlUsersInsertRequest {
@@ -8052,6 +8305,7 @@ pub struct SqlUsersInsertRequest {
     #[prost(message, optional, tag = "100")]
     pub body: ::core::option::Option<User>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlUsersListRequest {
@@ -8062,6 +8316,7 @@ pub struct SqlUsersListRequest {
     #[prost(string, tag = "2")]
     pub project: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlUsersUpdateRequest {
@@ -8081,15 +8336,18 @@ pub struct SqlUsersUpdateRequest {
     pub body: ::core::option::Option<User>,
 }
 /// User level password validation policy.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UserPasswordValidationPolicy {
     /// Number of failed login attempts allowed before user get locked.
     #[prost(int32, tag = "1")]
     pub allowed_failed_attempts: i32,
     /// Expiration duration after password is updated.
     #[prost(message, optional, tag = "2")]
-    pub password_expiration_duration: ::core::option::Option<::prost_types::Duration>,
+    pub password_expiration_duration: ::core::option::Option<
+        ::prost_wkt_types::Duration,
+    >,
     /// If true, failed login attempts check will be enabled.
     #[prost(bool, tag = "3")]
     pub enable_failed_attempts_check: bool,
@@ -8102,17 +8360,19 @@ pub struct UserPasswordValidationPolicy {
     pub enable_password_verification: bool,
 }
 /// Read-only password status.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PasswordStatus {
     /// If true, user does not have login privileges.
     #[prost(bool, tag = "1")]
     pub locked: bool,
     /// The expiration time of the current password.
     #[prost(message, optional, tag = "2")]
-    pub password_expiration_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub password_expiration_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A Cloud SQL user resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct User {
@@ -8164,6 +8424,7 @@ pub struct User {
 /// Nested message and enum types in `User`.
 pub mod user {
     /// The user type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -8223,6 +8484,7 @@ pub mod user {
         }
     }
     /// The type of retained password.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -8270,6 +8532,7 @@ pub mod user {
         }
     }
     /// User details for specific database type
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum UserDetails {
@@ -8278,6 +8541,7 @@ pub mod user {
     }
 }
 /// Represents a Sql Server user on the Cloud SQL instance.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SqlServerUserDetails {
@@ -8289,6 +8553,7 @@ pub struct SqlServerUserDetails {
     pub server_roles: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// User list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsersListResponse {

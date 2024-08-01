@@ -2,6 +2,7 @@
 /// A data exchange is a container that lets you share data. Along with the
 /// descriptive information about the data exchange, it contains listings that
 /// reference shared datasets.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataExchange {
@@ -42,6 +43,7 @@ pub struct DataExchange {
     pub icon: ::prost::alloc::vec::Vec<u8>,
 }
 /// Contains details of the data provider.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataProvider {
@@ -54,6 +56,7 @@ pub struct DataProvider {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains details of the listing publisher.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Publisher {
@@ -66,6 +69,7 @@ pub struct Publisher {
     pub primary_contact: ::prost::alloc::string::String,
 }
 /// Contains the reference that identifies a destination bigquery dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDatasetReference {
@@ -79,6 +83,7 @@ pub struct DestinationDatasetReference {
     pub project_id: ::prost::alloc::string::String,
 }
 /// Defines the destination bigquery dataset.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DestinationDataset {
@@ -87,10 +92,14 @@ pub struct DestinationDataset {
     pub dataset_reference: ::core::option::Option<DestinationDatasetReference>,
     /// Optional. A descriptive name for the dataset.
     #[prost(message, optional, tag = "2")]
-    pub friendly_name: ::core::option::Option<::prost::alloc::string::String>,
+    pub friendly_name: ::core::option::Option<
+        super::super::super::super::protobuf::StringValue,
+    >,
     /// Optional. A user-friendly description of the dataset.
     #[prost(message, optional, tag = "3")]
-    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    pub description: ::core::option::Option<
+        super::super::super::super::protobuf::StringValue,
+    >,
     /// Optional. The labels associated with this dataset. You can use these
     /// to organize and group your datasets.
     /// You can set this property when inserting or updating a dataset.
@@ -111,6 +120,7 @@ pub struct DestinationDataset {
 /// subscribe to. It contains a reference to the data source along with
 /// descriptive information that will help subscribers find and subscribe the
 /// data.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Listing {
@@ -177,6 +187,7 @@ pub mod listing {
     /// dataset in
     /// the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
     /// dataset that serves as a _symbolic link_ to a shared dataset.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BigQueryDatasetSource {
@@ -186,6 +197,7 @@ pub mod listing {
         pub dataset: ::prost::alloc::string::String,
     }
     /// State of the listing.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -226,6 +238,7 @@ pub mod listing {
         }
     }
     /// Listing categories.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -327,6 +340,7 @@ pub mod listing {
         }
     }
     /// Listing source.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
@@ -336,6 +350,7 @@ pub mod listing {
     }
 }
 /// Message for requesting the list of data exchanges.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesRequest {
@@ -353,6 +368,7 @@ pub struct ListDataExchangesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of data exchanges.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataExchangesResponse {
@@ -365,6 +381,7 @@ pub struct ListDataExchangesResponse {
 }
 /// Message for requesting the list of data exchanges from projects in an
 /// organization and location.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesRequest {
@@ -383,6 +400,7 @@ pub struct ListOrgDataExchangesRequest {
 }
 /// Message for response to listing data exchanges in an organization and
 /// location.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrgDataExchangesResponse {
@@ -394,6 +412,7 @@ pub struct ListOrgDataExchangesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a data exchange.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataExchangeRequest {
@@ -403,6 +422,7 @@ pub struct GetDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a data exchange.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataExchangeRequest {
@@ -422,6 +442,7 @@ pub struct CreateDataExchangeRequest {
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for updating a data exchange.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataExchangeRequest {
@@ -429,12 +450,13 @@ pub struct UpdateDataExchangeRequest {
     /// resource. The fields specified in the
     /// `updateMask` are relative to the resource and are not a full request.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The data exchange to update.
     #[prost(message, optional, tag = "2")]
     pub data_exchange: ::core::option::Option<DataExchange>,
 }
 /// Message for deleting a data exchange.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataExchangeRequest {
@@ -444,6 +466,7 @@ pub struct DeleteDataExchangeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting the list of listings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsRequest {
@@ -461,6 +484,7 @@ pub struct ListListingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response to the list of Listings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListListingsResponse {
@@ -472,6 +496,7 @@ pub struct ListListingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for getting a listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetListingRequest {
@@ -481,6 +506,7 @@ pub struct GetListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateListingRequest {
@@ -500,6 +526,7 @@ pub struct CreateListingRequest {
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for updating a Listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateListingRequest {
@@ -507,12 +534,13 @@ pub struct UpdateListingRequest {
     /// fields specified in the `updateMask` are relative to the resource and are
     /// not a full request.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The listing to update.
     #[prost(message, optional, tag = "2")]
     pub listing: ::core::option::Option<Listing>,
 }
 /// Message for deleting a listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteListingRequest {
@@ -522,6 +550,7 @@ pub struct DeleteListingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for subscribing to a listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeListingRequest {
@@ -536,6 +565,7 @@ pub struct SubscribeListingRequest {
 /// Nested message and enum types in `SubscribeListingRequest`.
 pub mod subscribe_listing_request {
     /// Resulting destination of the listing that you subscribed to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Destination {
@@ -545,8 +575,9 @@ pub mod subscribe_listing_request {
     }
 }
 /// Message for response when you subscribe to a listing.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SubscribeListingResponse {}
 /// Generated client implementations.
 pub mod analytics_hub_service_client {
@@ -790,7 +821,10 @@ pub mod analytics_hub_service_client {
         pub async fn delete_data_exchange(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDataExchangeRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -933,7 +967,10 @@ pub mod analytics_hub_service_client {
         pub async fn delete_listing(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteListingRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

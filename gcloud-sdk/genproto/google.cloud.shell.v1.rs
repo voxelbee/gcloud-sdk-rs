@@ -3,6 +3,7 @@
 /// image specifying what is installed on the environment and a home directory
 /// containing the user's data that will remain across sessions. Each user has
 /// at least an environment with the ID "default".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Environment {
@@ -51,6 +52,7 @@ pub struct Environment {
 /// Nested message and enum types in `Environment`.
 pub mod environment {
     /// Possible execution states for an environment.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -108,6 +110,7 @@ pub mod environment {
 }
 /// Request message for
 /// [GetEnvironment][google.cloud.shell.v1.CloudShellService.GetEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEnvironmentRequest {
@@ -118,16 +121,19 @@ pub struct GetEnvironmentRequest {
 }
 /// Message included in the metadata field of operations returned from
 /// [CreateEnvironment][google.cloud.shell.v1.CloudShellService.CreateEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateEnvironmentMetadata {}
 /// Message included in the metadata field of operations returned from
 /// [DeleteEnvironment][google.cloud.shell.v1.CloudShellService.DeleteEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteEnvironmentMetadata {}
 /// Request message for
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentRequest {
@@ -148,6 +154,7 @@ pub struct StartEnvironmentRequest {
 }
 /// Request message for
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentRequest {
@@ -165,22 +172,25 @@ pub struct AuthorizeEnvironmentRequest {
     /// The time when the credentials expire. If not set, defaults to one hour from
     /// when the server received the request.
     #[prost(message, optional, tag = "3")]
-    pub expire_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub expire_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Response message for
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentResponse {}
 /// Message included in the metadata field of operations returned from
 /// [AuthorizeEnvironment][google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AuthorizeEnvironmentMetadata {}
 /// Message included in the metadata field of operations returned from
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentMetadata {
     /// Current state of the environment being started.
     #[prost(enumeration = "start_environment_metadata::State", tag = "1")]
@@ -193,6 +203,7 @@ pub mod start_environment_metadata {
     /// show a progress message to the user. An environment won't necessarily go
     /// through all of these states when starting. More states are likely to be
     /// added in the future.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -255,6 +266,7 @@ pub mod start_environment_metadata {
 /// Message included in the response field of operations returned from
 /// [StartEnvironment][google.cloud.shell.v1.CloudShellService.StartEnvironment]
 /// once the operation is complete.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartEnvironmentResponse {
@@ -264,6 +276,7 @@ pub struct StartEnvironmentResponse {
 }
 /// Request message for
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyRequest {
@@ -282,6 +295,7 @@ pub struct AddPublicKeyRequest {
 }
 /// Response message for
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyResponse {
@@ -291,11 +305,13 @@ pub struct AddPublicKeyResponse {
 }
 /// Message included in the metadata field of operations returned from
 /// [AddPublicKey][google.cloud.shell.v1.CloudShellService.AddPublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddPublicKeyMetadata {}
 /// Request message for
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyRequest {
@@ -309,18 +325,21 @@ pub struct RemovePublicKeyRequest {
 }
 /// Response message for
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyResponse {}
 /// Message included in the metadata field of operations returned from
 /// [RemovePublicKey][google.cloud.shell.v1.CloudShellService.RemovePublicKey].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemovePublicKeyMetadata {}
 /// Cloud-shell specific information that will be included as details in failure
 /// responses.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CloudShellErrorDetails {
     /// Code indicating the specific error the occurred.
     #[prost(enumeration = "cloud_shell_error_details::CloudShellErrorCode", tag = "1")]
@@ -329,6 +348,7 @@ pub struct CloudShellErrorDetails {
 /// Nested message and enum types in `CloudShellErrorDetails`.
 pub mod cloud_shell_error_details {
     /// Set of possible errors returned from API calls.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

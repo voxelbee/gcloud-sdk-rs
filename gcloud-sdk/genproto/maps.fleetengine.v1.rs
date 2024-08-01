@@ -2,8 +2,9 @@
 /// Traffic density indicator on a contiguous segment of a path. Given a path
 /// with points P_0, P_1, ... , P_N (zero-based index), the SpeedReadingInterval
 /// defines an interval and describes its traffic using the following categories.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpeedReadingInterval {
     /// The starting index of this interval in the path.
     /// In JSON, when the index is 0, the field will appear to be unpopulated.
@@ -20,6 +21,7 @@ pub struct SpeedReadingInterval {
 /// Nested message and enum types in `SpeedReadingInterval`.
 pub mod speed_reading_interval {
     /// The classification of polyline speed based on traffic data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -68,6 +70,7 @@ pub mod speed_reading_interval {
     }
 }
 /// Traffic density along a Vehicle's path.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConsumableTrafficPolyline {
@@ -84,6 +87,7 @@ pub struct ConsumableTrafficPolyline {
 }
 /// Deprecated: TerminalPoints are no longer supported in Fleet Engine. Use
 /// `TerminalLocation.point` instead.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminalPointId {
@@ -98,6 +102,7 @@ pub struct TerminalPointId {
 /// Nested message and enum types in `TerminalPointId`.
 pub mod terminal_point_id {
     /// Deprecated.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Id {
@@ -110,6 +115,7 @@ pub mod terminal_point_id {
     }
 }
 /// Describes the location of a waypoint.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminalLocation {
@@ -135,6 +141,7 @@ pub struct TerminalLocation {
 }
 /// Describes a stopping point on a vehicle's route or an ending point on a
 /// vehicle's trip.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TripWaypoint {
@@ -167,18 +174,19 @@ pub struct TripWaypoint {
     /// The path distance from the previous waypoint to the current waypoint.
     /// Undefined for the first waypoint in a list.
     #[prost(message, optional, tag = "6")]
-    pub distance_meters: ::core::option::Option<i32>,
+    pub distance_meters: ::core::option::Option<pb::Int32Value>,
     /// The estimated time of arrival at this waypoint. Undefined for the first
     /// waypoint in a list.
     #[prost(message, optional, tag = "7")]
-    pub eta: ::core::option::Option<::prost_types::Timestamp>,
+    pub eta: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The travel time from previous waypoint to this point. Undefined for the
     /// first waypoint in a list.
     #[prost(message, optional, tag = "8")]
-    pub duration: ::core::option::Option<::prost_types::Duration>,
+    pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Describes a vehicle attribute as a key-value pair. The "key:value" string
 /// length cannot exceed 256 characters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleAttribute {
@@ -197,6 +205,7 @@ pub struct VehicleAttribute {
 /// Nested message and enum types in `VehicleAttribute`.
 pub mod vehicle_attribute {
     /// The attribute's value, can be in string, bool, or double type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum VehicleAttributeValue {
@@ -218,8 +227,9 @@ pub mod vehicle_attribute {
     }
 }
 /// The location, speed, and heading of a vehicle at a point in time.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VehicleLocation {
     /// The location of the vehicle.
     /// When it is sent to Fleet Engine, the vehicle's location is a GPS location.
@@ -231,69 +241,91 @@ pub struct VehicleLocation {
     /// Deprecated: Use `latlng_accuracy` instead.
     #[deprecated]
     #[prost(message, optional, tag = "8")]
-    pub horizontal_accuracy: ::core::option::Option<f64>,
+    pub horizontal_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Accuracy of `location` in meters as a radius.
     #[prost(message, optional, tag = "22")]
-    pub latlng_accuracy: ::core::option::Option<f64>,
+    pub latlng_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Direction the vehicle is moving in degrees.  0 represents North.
     /// The valid range is [0,360).
     #[prost(message, optional, tag = "2")]
-    pub heading: ::core::option::Option<i32>,
+    pub heading: ::core::option::Option<pb::Int32Value>,
     /// Deprecated: Use `heading_accuracy` instead.
     #[deprecated]
     #[prost(message, optional, tag = "10")]
-    pub bearing_accuracy: ::core::option::Option<f64>,
+    pub bearing_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Accuracy of `heading` in degrees.
     #[prost(message, optional, tag = "23")]
-    pub heading_accuracy: ::core::option::Option<f64>,
+    pub heading_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Altitude in meters above WGS84.
     #[prost(message, optional, tag = "5")]
-    pub altitude: ::core::option::Option<f64>,
+    pub altitude: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Deprecated: Use `altitude_accuracy` instead.
     #[deprecated]
     #[prost(message, optional, tag = "9")]
-    pub vertical_accuracy: ::core::option::Option<f64>,
+    pub vertical_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Accuracy of `altitude` in meters.
     #[prost(message, optional, tag = "24")]
-    pub altitude_accuracy: ::core::option::Option<f64>,
+    pub altitude_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Speed of the vehicle in kilometers per hour.
     /// Deprecated: Use `speed` instead.
     #[deprecated]
     #[prost(message, optional, tag = "3")]
-    pub speed_kmph: ::core::option::Option<i32>,
+    pub speed_kmph: ::core::option::Option<pb::Int32Value>,
     /// Speed of the vehicle in meters/second
     #[prost(message, optional, tag = "6")]
-    pub speed: ::core::option::Option<f64>,
+    pub speed: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Accuracy of `speed` in meters/second.
     #[prost(message, optional, tag = "7")]
-    pub speed_accuracy: ::core::option::Option<f64>,
+    pub speed_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// The time when `location` was reported by the sensor according to the
     /// sensor's clock.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time when the server received the location information.
     #[prost(message, optional, tag = "13")]
-    pub server_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub server_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Provider of location data (for example, `GPS`).
     #[prost(enumeration = "LocationSensor", tag = "11")]
     pub location_sensor: i32,
     /// Whether `location` is snapped to a road.
     #[prost(message, optional, tag = "27")]
-    pub is_road_snapped: ::core::option::Option<bool>,
+    pub is_road_snapped: ::core::option::Option<
+        super::super::super::google::protobuf::BoolValue,
+    >,
     /// Input only. Indicates whether the GPS sensor is enabled on the mobile
     /// device.
     #[prost(message, optional, tag = "12")]
-    pub is_gps_sensor_enabled: ::core::option::Option<bool>,
+    pub is_gps_sensor_enabled: ::core::option::Option<
+        super::super::super::google::protobuf::BoolValue,
+    >,
     /// Input only. Time (in seconds) since this location was first sent to the
     /// server. This will be zero for the first update. If the time is unknown (for
     /// example, when the app restarts), this value resets to zero.
     #[prost(message, optional, tag = "14")]
-    pub time_since_update: ::core::option::Option<i32>,
+    pub time_since_update: ::core::option::Option<pb::Int32Value>,
     /// Input only. Deprecated: Other signals are now used to determine if a
     /// location is stale.
     #[deprecated]
     #[prost(message, optional, tag = "15")]
-    pub num_stale_updates: ::core::option::Option<i32>,
+    pub num_stale_updates: ::core::option::Option<pb::Int32Value>,
     /// Raw vehicle location (unprocessed by road-snapper).
     #[prost(message, optional, tag = "16")]
     pub raw_location: ::core::option::Option<
@@ -301,13 +333,15 @@ pub struct VehicleLocation {
     >,
     /// Timestamp associated with the raw location.
     #[prost(message, optional, tag = "17")]
-    pub raw_location_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub raw_location_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Source of the raw location. Defaults to `GPS`.
     #[prost(enumeration = "LocationSensor", tag = "28")]
     pub raw_location_sensor: i32,
     /// Accuracy of `raw_location` as a radius, in meters.
     #[prost(message, optional, tag = "25")]
-    pub raw_location_accuracy: ::core::option::Option<f64>,
+    pub raw_location_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Supplemental location provided by the integrating app.
     #[prost(message, optional, tag = "18")]
     pub supplemental_location: ::core::option::Option<
@@ -315,20 +349,23 @@ pub struct VehicleLocation {
     >,
     /// Timestamp associated with the supplemental location.
     #[prost(message, optional, tag = "19")]
-    pub supplemental_location_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub supplemental_location_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Source of the supplemental location. Defaults to
     /// `CUSTOMER_SUPPLIED_LOCATION`.
     #[prost(enumeration = "LocationSensor", tag = "20")]
     pub supplemental_location_sensor: i32,
     /// Accuracy of `supplemental_location` as a radius, in meters.
     #[prost(message, optional, tag = "21")]
-    pub supplemental_location_accuracy: ::core::option::Option<f64>,
+    pub supplemental_location_accuracy: ::core::option::Option<
+        super::super::super::google::protobuf::DoubleValue,
+    >,
     /// Deprecated: Use `is_road_snapped` instead.
     #[deprecated]
     #[prost(bool, tag = "26")]
     pub road_snapped: bool,
 }
 /// The type of a trip.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TripType {
@@ -362,6 +399,7 @@ impl TripType {
     }
 }
 /// The type of waypoint.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum WaypointType {
@@ -403,6 +441,7 @@ impl WaypointType {
     }
 }
 /// The type of polyline format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PolylineFormatType {
@@ -437,6 +476,7 @@ impl PolylineFormatType {
     }
 }
 /// The vehicle's navigation status.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum NavigationStatus {
@@ -479,6 +519,7 @@ impl NavigationStatus {
     }
 }
 /// The sensor or methodology used to determine the location.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LocationSensor {
@@ -545,6 +586,7 @@ impl LocationSensor {
     }
 }
 /// A RequestHeader contains fields common to all Fleet Engine RPC requests.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestHeader {
@@ -601,6 +643,7 @@ pub struct RequestHeader {
 /// Nested message and enum types in `RequestHeader`.
 pub mod request_header {
     /// Possible types of SDK.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -648,6 +691,7 @@ pub mod request_header {
         }
     }
     /// The platform of the calling SDK.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -696,6 +740,7 @@ pub mod request_header {
     }
 }
 /// Trip metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trip {
@@ -728,7 +773,7 @@ pub struct Trip {
     /// Output only. Either the estimated future time when the rider(s) will be
     /// picked up, or the actual time when they were picked up.
     #[prost(message, optional, tag = "6")]
-    pub pickup_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub pickup_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Intermediate stops in order that the trip requests (in addition
     /// to pickup and dropoff). Initially this will not be supported for shared
     /// trips.
@@ -740,7 +785,7 @@ pub struct Trip {
     /// `intermediate_destinations` is not changed.
     #[prost(message, optional, tag = "25")]
     pub intermediate_destinations_version: ::core::option::Option<
-        ::prost_types::Timestamp,
+        ::prost_wkt_types::Timestamp,
     >,
     /// When `TripStatus` is `ENROUTE_TO_INTERMEDIATE_DESTINATION`, a number
     /// between \[0..N-1\] indicating which intermediate destination the vehicle will
@@ -775,7 +820,7 @@ pub struct Trip {
     /// dropped off at the final destination, or the actual time when they were
     /// dropped off.
     #[prost(message, optional, tag = "8")]
-    pub dropoff_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub dropoff_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The full path from the current location to the dropoff point,
     /// inclusive. This path could include waypoints from other trips.
     #[prost(message, repeated, tag = "16")]
@@ -804,7 +849,9 @@ pub struct Trip {
     /// Note: This field is intended only for use by the Driver SDK and Consumer
     /// SDK.
     #[prost(message, optional, tag = "17")]
-    pub current_route_segment_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub current_route_segment_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// Output only. Indicates the traffic conditions along the
     /// `current_route_segment` when they're available.
     ///
@@ -819,7 +866,7 @@ pub struct Trip {
     /// SDK.
     #[prost(message, optional, tag = "30")]
     pub current_route_segment_traffic_version: ::core::option::Option<
-        ::prost_types::Timestamp,
+        ::prost_wkt_types::Timestamp,
     >,
     /// Output only. The waypoint where `current_route_segment` ends.
     #[prost(message, optional, tag = "24")]
@@ -828,24 +875,26 @@ pub struct Trip {
     /// field. The value is unspecified if the trip is not assigned to a vehicle,
     /// or the trip is completed or cancelled.
     #[prost(message, optional, tag = "12")]
-    pub remaining_distance_meters: ::core::option::Option<i32>,
+    pub remaining_distance_meters: ::core::option::Option<pb::Int32Value>,
     /// Output only. The ETA to the next waypoint (the first entry in the
     /// `remaining_waypoints` field). The value is unspecified if the trip is not
     /// assigned to a vehicle, or the trip is inactive (completed or cancelled).
     #[prost(message, optional, tag = "13")]
-    pub eta_to_first_waypoint: ::core::option::Option<::prost_types::Timestamp>,
+    pub eta_to_first_waypoint: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The duration from when the Trip data is returned to the time
     /// in `Trip.eta_to_first_waypoint`. The value is unspecified if the trip is
     /// not assigned to a vehicle, or the trip is inactive (completed or
     /// cancelled).
     #[prost(message, optional, tag = "27")]
     pub remaining_time_to_first_waypoint: ::core::option::Option<
-        ::prost_types::Duration,
+        ::prost_wkt_types::Duration,
     >,
     /// Output only. Indicates the last time that `remaining_waypoints` was changed
     /// (a waypoint was added, removed, or changed).
     #[prost(message, optional, tag = "19")]
-    pub remaining_waypoints_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub remaining_waypoints_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// Output only. Indicates the last time the
     /// `remaining_waypoints.path_to_waypoint` and
     /// `remaining_waypoints.traffic_to_waypoint` were modified. Your client app
@@ -853,7 +902,7 @@ pub struct Trip {
     /// paths and traffic for `remaining_waypoints` are only returned if updated.
     #[prost(message, optional, tag = "29")]
     pub remaining_waypoints_route_version: ::core::option::Option<
-        ::prost_types::Timestamp,
+        ::prost_wkt_types::Timestamp,
     >,
     /// Immutable. Indicates the number of passengers on this trip and does not
     /// include the driver. A vehicle must have available capacity to be returned
@@ -876,21 +925,23 @@ pub struct Trip {
     pub view: i32,
 }
 /// The actual location where a stop (pickup/dropoff) happened.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StopLocation {
     /// Required. Denotes the actual location.
     #[prost(message, optional, tag = "1")]
     pub point: ::core::option::Option<super::super::super::google::r#type::LatLng>,
     /// Indicates when the stop happened.
     #[prost(message, optional, tag = "2")]
-    pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
+    pub timestamp: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Input only. Deprecated.  Use the timestamp field.
     #[deprecated]
     #[prost(message, optional, tag = "3")]
-    pub stop_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub stop_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The status of a trip indicating its progression.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TripStatus {
@@ -960,6 +1011,7 @@ impl TripStatus {
     }
 }
 /// A set of values that indicate upon which platform the request was issued.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum BillingPlatformIdentifier {
@@ -1009,6 +1061,7 @@ impl BillingPlatformIdentifier {
 /// Selector for different sets of Trip fields in a `GetTrip` response.  See
 /// [AIP-157](<https://google.aip.dev/157>) for context. Additional views are
 /// likely to be added.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum TripView {
@@ -1046,6 +1099,7 @@ impl TripView {
     }
 }
 /// CreateTrip request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTripRequest {
@@ -1108,6 +1162,7 @@ pub struct CreateTripRequest {
     pub trip: ::core::option::Option<Trip>,
 }
 /// GetTrip request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTripRequest {
@@ -1128,13 +1183,17 @@ pub struct GetTripRequest {
     /// unchanged since this timestamp, the route field is not set in the response.
     /// If a minimum is unspecified, the route data are always retrieved.
     #[prost(message, optional, tag = "6")]
-    pub current_route_segment_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub current_route_segment_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// Indicates the minimum timestamp (exclusive) for which
     /// `Trip.remaining_waypoints` are retrieved. If they are unchanged since this
     /// timestamp, the `remaining_waypoints` are not set in the response. If this
     /// field is unspecified, `remaining_waypoints` is always retrieved.
     #[prost(message, optional, tag = "7")]
-    pub remaining_waypoints_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub remaining_waypoints_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
     /// or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
     /// is `LAT_LNG_LIST_TYPE`.
@@ -1148,7 +1207,7 @@ pub struct GetTripRequest {
     /// Rides and Deliveries Solution customers.
     #[prost(message, optional, tag = "9")]
     pub current_route_segment_traffic_version: ::core::option::Option<
-        ::prost_types::Timestamp,
+        ::prost_wkt_types::Timestamp,
     >,
     /// Indicates the minimum timestamp (exclusive) for which
     /// `Trip.remaining_waypoints.traffic_to_waypoint` and
@@ -1158,10 +1217,11 @@ pub struct GetTripRequest {
     /// unspecified, traffic and path are always retrieved.
     #[prost(message, optional, tag = "10")]
     pub remaining_waypoints_route_version: ::core::option::Option<
-        ::prost_types::Timestamp,
+        ::prost_wkt_types::Timestamp,
     >,
 }
 /// ReportBillableTrip request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReportBillableTripRequest {
@@ -1193,6 +1253,7 @@ pub struct ReportBillableTripRequest {
 /// Nested message and enum types in `ReportBillableTripRequest`.
 pub mod report_billable_trip_request {
     /// Selector for different solution types of a reported trip.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1239,6 +1300,7 @@ pub mod report_billable_trip_request {
     }
 }
 /// UpdateTrip request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTripRequest {
@@ -1297,9 +1359,10 @@ pub struct UpdateTripRequest {
     /// Required. The field mask indicating which fields in Trip to update.
     /// The `update_mask` must contain at least one field.
     #[prost(message, optional, tag = "5")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// SearchTrips request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTripsRequest {
@@ -1335,9 +1398,10 @@ pub struct SearchTripsRequest {
     /// If specified, returns the trips that have not been updated after the time
     /// `(current - minimum_staleness)`.
     #[prost(message, optional, tag = "8")]
-    pub minimum_staleness: ::core::option::Option<::prost_types::Duration>,
+    pub minimum_staleness: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// SearchTrips response message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchTripsResponse {
@@ -1488,7 +1552,10 @@ pub mod trip_service_client {
         pub async fn report_billable_trip(
             &mut self,
             request: impl tonic::IntoRequest<super::ReportBillableTripRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1568,6 +1635,7 @@ pub mod trip_service_client {
     }
 }
 /// Vehicle metadata.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Vehicle {
@@ -1623,7 +1691,9 @@ pub struct Vehicle {
     /// the client and passed in future `GetVehicle` requests to prevent returning
     /// routes that haven't changed.
     #[prost(message, optional, tag = "15")]
-    pub current_route_segment_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub current_route_segment_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// The waypoint where `current_route_segment` ends. This can be supplied by
     /// drivers on `UpdateVehicle` calls either as a full trip waypoint, a waypoint
     /// `LatLng`, or as the last `LatLng` of the `current_route_segment`. Fleet
@@ -1637,7 +1707,7 @@ pub struct Vehicle {
     /// active trips assigned to the vehicle. The value is unspecified if the
     /// `current_route_segment` field is empty.
     #[prost(message, optional, tag = "18")]
-    pub remaining_distance_meters: ::core::option::Option<i32>,
+    pub remaining_distance_meters: ::core::option::Option<pb::Int32Value>,
     /// The ETA to the first entry in the `waypoints` field.  The value is
     /// unspecified if the `waypoints` field is empty or the
     /// `Vehicle.current_route_segment` field is empty.
@@ -1645,7 +1715,7 @@ pub struct Vehicle {
     /// When updating a vehicle, `remaining_time_seconds` takes precedence over
     /// `eta_to_first_waypoint` in the same request.
     #[prost(message, optional, tag = "19")]
-    pub eta_to_first_waypoint: ::core::option::Option<::prost_types::Timestamp>,
+    pub eta_to_first_waypoint: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Input only. The remaining driving time for the `current_route_segment`. The
     /// value is unspecified if the `waypoints` field is empty or the
     /// `Vehicle.current_route_segment` field is empty. This value should match
@@ -1655,7 +1725,7 @@ pub struct Vehicle {
     /// When updating a vehicle, `remaining_time_seconds` takes precedence over
     /// `eta_to_first_waypoint` in the same request.
     #[prost(message, optional, tag = "25")]
-    pub remaining_time_seconds: ::core::option::Option<i32>,
+    pub remaining_time_seconds: ::core::option::Option<pb::Int32Value>,
     /// The remaining waypoints assigned to this Vehicle.
     #[prost(message, repeated, tag = "22")]
     pub waypoints: ::prost::alloc::vec::Vec<TripWaypoint>,
@@ -1663,7 +1733,7 @@ pub struct Vehicle {
     /// cache this value and pass it in `GetVehicleRequest` to ensure the
     /// `waypoints` field is only returned if it is updated.
     #[prost(message, optional, tag = "16")]
-    pub waypoints_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub waypoints_version: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Indicates if the driver accepts back-to-back trips. If `true`,
     /// `SearchVehicles` may include the vehicle even if it is currently assigned
     /// to a trip. The default value is `false`.
@@ -1680,8 +1750,9 @@ pub struct Vehicle {
 /// Nested message and enum types in `Vehicle`.
 pub mod vehicle {
     /// The type of vehicle.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct VehicleType {
         /// Vehicle type category
         #[prost(enumeration = "vehicle_type::Category", tag = "1")]
@@ -1690,6 +1761,7 @@ pub mod vehicle {
     /// Nested message and enum types in `VehicleType`.
     pub mod vehicle_type {
         /// Vehicle type categories
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1752,8 +1824,9 @@ pub mod vehicle {
     }
 }
 /// Information about the device's battery.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BatteryInfo {
     /// Status of the battery, whether full or charging etc.
     #[prost(enumeration = "BatteryStatus", tag = "1")]
@@ -1766,8 +1839,9 @@ pub struct BatteryInfo {
     pub battery_percentage: f32,
 }
 /// Information about various settings on the mobile device.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeviceSettings {
     /// How location features are set to behave on the device when battery saver is
     /// on.
@@ -1786,6 +1860,7 @@ pub struct DeviceSettings {
 /// The license plate information of the Vehicle.  To avoid storing
 /// personally-identifiable information, only the minimum information
 /// about the license plate is stored as part of the entity.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LicensePlate {
@@ -1804,6 +1879,7 @@ pub struct LicensePlate {
 }
 /// Describes how clients should color one portion of the polyline along the
 /// route.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VisualTrafficReportPolylineRendering {
@@ -1821,8 +1897,9 @@ pub struct VisualTrafficReportPolylineRendering {
 /// Nested message and enum types in `VisualTrafficReportPolylineRendering`.
 pub mod visual_traffic_report_polyline_rendering {
     /// One road stretch that should be rendered.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RoadStretch {
         /// Required. The style to apply.
         #[prost(enumeration = "road_stretch::Style", tag = "1")]
@@ -1838,6 +1915,7 @@ pub mod visual_traffic_report_polyline_rendering {
     /// Nested message and enum types in `RoadStretch`.
     pub mod road_stretch {
         /// The traffic style, indicating traffic speed.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -1883,6 +1961,7 @@ pub mod visual_traffic_report_polyline_rendering {
     }
 }
 /// Traffic conditions along the expected vehicle route.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TrafficPolylineData {
@@ -1892,6 +1971,7 @@ pub struct TrafficPolylineData {
     pub traffic_rendering: ::core::option::Option<VisualTrafficReportPolylineRendering>,
 }
 /// The state of a `Vehicle`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum VehicleState {
@@ -1928,6 +2008,7 @@ impl VehicleState {
 /// How location features are configured to behave on the mobile device when the
 /// devices "battery saver" feature is on.
 /// (<https://developer.android.com/reference/android/os/PowerManager#getLocationPowerSaveMode(>))
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum LocationPowerSaveMode {
@@ -1996,6 +2077,7 @@ impl LocationPowerSaveMode {
     }
 }
 /// Status of the battery, whether full or charging etc.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum BatteryStatus {
@@ -2041,6 +2123,7 @@ impl BatteryStatus {
     }
 }
 /// Type of the charger being used to charge the battery.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PowerSource {
@@ -2082,6 +2165,7 @@ impl PowerSource {
     }
 }
 /// `CreateVehicle` request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVehicleRequest {
@@ -2135,6 +2219,7 @@ pub struct CreateVehicleRequest {
     pub vehicle: ::core::option::Option<Vehicle>,
 }
 /// `GetVehicle` request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVehicleRequest {
@@ -2154,15 +2239,18 @@ pub struct GetVehicleRequest {
     /// field is not set in the response. If a minimum is unspecified, the
     /// `current_route_segment` is always retrieved.
     #[prost(message, optional, tag = "4")]
-    pub current_route_segment_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub current_route_segment_version: ::core::option::Option<
+        ::prost_wkt_types::Timestamp,
+    >,
     /// Indicates the minimum timestamp (exclusive) for which `Vehicle.waypoints`
     /// data is retrieved. If the waypoints are unchanged since this timestamp, the
     /// `vehicle.waypoints` data is not set in the response. If this field is
     /// unspecified, `vehicle.waypoints` is always retrieved.
     #[prost(message, optional, tag = "5")]
-    pub waypoints_version: ::core::option::Option<::prost_types::Timestamp>,
+    pub waypoints_version: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// `UpdateVehicle request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleRequest {
@@ -2197,9 +2285,10 @@ pub struct UpdateVehicleRequest {
     /// Required. A field mask indicating which fields of the `Vehicle` to update.
     /// At least one field name must be provided.
     #[prost(message, optional, tag = "5")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// `UpdateVehicleAttributes` request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleAttributesRequest {
@@ -2218,6 +2307,7 @@ pub struct UpdateVehicleAttributesRequest {
     pub attributes: ::prost::alloc::vec::Vec<VehicleAttribute>,
 }
 /// `UpdateVehicleAttributes` response message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVehicleAttributesResponse {
@@ -2227,6 +2317,7 @@ pub struct UpdateVehicleAttributesResponse {
     pub attributes: ::prost::alloc::vec::Vec<VehicleAttribute>,
 }
 /// `SearchVehicles` request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVehiclesRequest {
@@ -2270,7 +2361,7 @@ pub struct SearchVehiclesRequest {
     /// transmitting their locations are not considered stale. If this field is not
     /// set, the server uses five minutes as the default value.
     #[prost(message, optional, tag = "10")]
-    pub maximum_staleness: ::core::option::Option<::prost_types::Duration>,
+    pub maximum_staleness: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Required. Restricts the search to vehicles with one of the specified types.
     /// At least one vehicle type must be specified. VehicleTypes with a category
     /// of `UNKNOWN` are not allowed.
@@ -2385,6 +2476,7 @@ pub struct SearchVehiclesRequest {
 /// Nested message and enum types in `SearchVehiclesRequest`.
 pub mod search_vehicles_request {
     /// Specifies the order of the vehicle matches in the response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2451,6 +2543,7 @@ pub mod search_vehicles_request {
         }
     }
     /// Specifies the types of restrictions on a vehicle's current trips.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2499,6 +2592,7 @@ pub mod search_vehicles_request {
     }
 }
 /// `SearchVehicles` response message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVehiclesResponse {
@@ -2508,6 +2602,7 @@ pub struct SearchVehiclesResponse {
     pub matches: ::prost::alloc::vec::Vec<VehicleMatch>,
 }
 /// `ListVehicles` request message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVehiclesRequest {
@@ -2534,7 +2629,7 @@ pub struct ListVehiclesRequest {
     /// returned will have a `maximum_capacity` greater than or equal to this
     /// value. If set, must be greater or equal to 0.
     #[prost(message, optional, tag = "6")]
-    pub minimum_capacity: ::core::option::Option<i32>,
+    pub minimum_capacity: ::core::option::Option<pb::Int32Value>,
     /// Restricts the response to vehicles that support at least one of the
     /// specified trip types.
     #[prost(enumeration = "TripType", repeated, tag = "7")]
@@ -2544,7 +2639,7 @@ pub struct ListVehiclesRequest {
     /// transmitting their locations are not considered stale. If present, must be
     /// a valid positive duration.
     #[prost(message, optional, tag = "8")]
-    pub maximum_staleness: ::core::option::Option<::prost_types::Duration>,
+    pub maximum_staleness: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Required. Restricts the response to vehicles with one of the specified type
     /// categories. `UNKNOWN` is not allowed.
     #[prost(
@@ -2657,6 +2752,7 @@ pub struct ListVehiclesRequest {
     >,
 }
 /// `ListVehicles` response message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVehiclesResponse {
@@ -2677,18 +2773,20 @@ pub struct ListVehiclesResponse {
 /// Describes intermediate points along a route for a `VehicleMatch` in a
 /// `SearchVehiclesResponse`. This concept is represented as a `TripWaypoint` in
 /// all other endpoints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Waypoint {
     /// The location of this waypoint.
     #[prost(message, optional, tag = "1")]
     pub lat_lng: ::core::option::Option<super::super::super::google::r#type::LatLng>,
     /// The estimated time that the vehicle will arrive at this waypoint.
     #[prost(message, optional, tag = "2")]
-    pub eta: ::core::option::Option<::prost_types::Timestamp>,
+    pub eta: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Contains the vehicle and related estimates for a vehicle that match the
 /// points of active trips for the vehicle `SearchVehiclesRequest`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleMatch {
@@ -2701,7 +2799,7 @@ pub struct VehicleMatch {
     /// this vehicle has an active trip, `vehicle_pickup_eta` includes the time
     /// required to complete the current active trip.
     #[prost(message, optional, tag = "2")]
-    pub vehicle_pickup_eta: ::core::option::Option<::prost_types::Timestamp>,
+    pub vehicle_pickup_eta: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The distance from the Vehicle's current location to the pickup point
     /// specified in the request, including any intermediate pickup or dropoff
     /// points for existing trips. This distance comprises the calculated driving
@@ -2710,18 +2808,20 @@ pub struct VehicleMatch {
     /// navigation end point and the requested pickup point is typically small.) An
     /// empty value indicates an error in calculating the distance.
     #[prost(message, optional, tag = "3")]
-    pub vehicle_pickup_distance_meters: ::core::option::Option<i32>,
+    pub vehicle_pickup_distance_meters: ::core::option::Option<pb::Int32Value>,
     /// Required. The straight-line distance between the vehicle and the pickup
     /// point specified in the request.
     #[prost(message, optional, tag = "11")]
-    pub vehicle_pickup_straight_line_distance_meters: ::core::option::Option<i32>,
+    pub vehicle_pickup_straight_line_distance_meters: ::core::option::Option<
+        pb::Int32Value,
+    >,
     /// The complete vehicle's driving ETA to the drop off point specified in the
     /// request. The ETA includes stopping at any waypoints before the
     /// `dropoff_point` specified in the request. The value will only be populated
     /// when a drop off point is specified in the request. An empty value indicates
     /// an error calculating the ETA.
     #[prost(message, optional, tag = "4")]
-    pub vehicle_dropoff_eta: ::core::option::Option<::prost_types::Timestamp>,
+    pub vehicle_dropoff_eta: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The vehicle's driving distance (in meters) from the pickup point
     /// to the drop off point specified in the request. The distance is only
     /// between the two points and does not include the vehicle location or any
@@ -2731,7 +2831,9 @@ pub struct VehicleMatch {
     /// a failure in calculating the distance from the pickup to
     /// drop off point specified in the request.
     #[prost(message, optional, tag = "5")]
-    pub vehicle_pickup_to_dropoff_distance_meters: ::core::option::Option<i32>,
+    pub vehicle_pickup_to_dropoff_distance_meters: ::core::option::Option<
+        pb::Int32Value,
+    >,
     /// Required. The trip type of the request that was used to calculate the ETA
     /// to the pickup point.
     #[prost(enumeration = "TripType", tag = "6")]
@@ -2759,6 +2861,7 @@ pub struct VehicleMatch {
 /// Nested message and enum types in `VehicleMatch`.
 pub mod vehicle_match {
     /// Type of vehicle match.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2816,6 +2919,7 @@ pub mod vehicle_match {
     }
 }
 /// A list-of-lists datatype for vehicle attributes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VehicleAttributeList {

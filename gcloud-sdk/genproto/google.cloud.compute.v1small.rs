@@ -17,6 +17,7 @@
 /// For more information, read reserved IP address.
 ///
 /// (== resource_for {$api_version}.addresses ==) (== resource_for {$api_version}.globalAddresses ==)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Address {
@@ -86,6 +87,7 @@ pub struct Address {
 /// Nested message and enum types in `Address`.
 pub mod address {
     /// The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -130,6 +132,7 @@ pub mod address {
         }
     }
     /// The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -176,6 +179,7 @@ pub mod address {
     /// This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Global forwarding rules can only be Premium Tier. Regional forwarding rules can be either Premium or Standard Tier. Standard Tier addresses applied to regional forwarding rules can be used with any external load balancer. Regional forwarding rules in Premium Tier can only be used with a network load balancer.
     ///
     /// If this field is not specified, it is assumed to be PREMIUM.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -221,6 +225,7 @@ pub mod address {
     /// - `DNS_RESOLVER` for a DNS resolver address in a subnetwork
     /// - `VPC_PEERING` for addresses that are reserved for VPC peer networks.
     /// - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -268,6 +273,7 @@ pub mod address {
         }
     }
     /// \[Output Only\] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -313,6 +319,7 @@ pub mod address {
     }
 }
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressAggregatedList {
@@ -339,6 +346,7 @@ pub struct AddressAggregatedList {
     pub warning: ::core::option::Option<Warning>,
 }
 /// Contains a list of addresses.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressList {
@@ -362,6 +370,7 @@ pub struct AddressList {
     pub warning: ::core::option::Option<Warning>,
 }
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressesScopedList {
@@ -373,6 +382,7 @@ pub struct AddressesScopedList {
     pub warning: ::core::option::Option<Warning>,
 }
 /// A request message for Addresses.AggregatedList. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregatedListAddressesRequest {
@@ -406,6 +416,7 @@ pub struct AggregatedListAddressesRequest {
     pub project: ::prost::alloc::string::String,
 }
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Data {
@@ -417,6 +428,7 @@ pub struct Data {
     pub value: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for Addresses.Delete. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAddressRequest {
@@ -438,6 +450,7 @@ pub struct DeleteAddressRequest {
     pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Output Only\] If errors are generated during processing of the operation, this field will be populated.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Error {
@@ -446,6 +459,7 @@ pub struct Error {
     pub errors: ::prost::alloc::vec::Vec<Errors>,
 }
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Errors {
@@ -460,6 +474,7 @@ pub struct Errors {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for RegionOperations.Get. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRegionOperationRequest {
@@ -474,6 +489,7 @@ pub struct GetRegionOperationRequest {
     pub region: ::prost::alloc::string::String,
 }
 /// A request message for Addresses.Insert. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertAddressRequest {
@@ -495,6 +511,7 @@ pub struct InsertAddressRequest {
     pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for Addresses.List. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAddressesRequest {
@@ -541,6 +558,7 @@ pub struct ListAddressesRequest {
 /// - For zonal operations, use the zoneOperations resource.
 ///
 /// For more information, read  Global, Regional, and Zonal Resources. (== resource_for {$api_version}.globalOperations ==) (== resource_for {$api_version}.regionOperations ==) (== resource_for {$api_version}.zoneOperations ==)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
@@ -617,6 +635,7 @@ pub struct Operation {
 /// Nested message and enum types in `Operation`.
 pub mod operation {
     /// \[Output Only\] The status of the operation, which can be one of the following: PENDING, RUNNING, or DONE.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -662,6 +681,7 @@ pub mod operation {
     }
 }
 /// A request message for RegionOperations.Wait. See the method description for details.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WaitRegionOperationRequest {
@@ -676,6 +696,7 @@ pub struct WaitRegionOperationRequest {
     pub region: ::prost::alloc::string::String,
 }
 /// \[Output Only\] Informational warning message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Warning {
@@ -694,6 +715,7 @@ pub struct Warning {
 /// Nested message and enum types in `Warning`.
 pub mod warning {
     /// \[Output Only\] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -811,6 +833,7 @@ pub mod warning {
     }
 }
 ///
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Warnings {
@@ -829,6 +852,7 @@ pub struct Warnings {
 /// Nested message and enum types in `Warnings`.
 pub mod warnings {
     /// \[Output Only\] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

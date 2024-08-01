@@ -2,6 +2,7 @@
 /// An annotation set is a logical grouping of annotations that share consistent
 /// type information and provenance. Examples of annotation sets include 'all
 /// genes from refseq', and 'all variant annotations from ClinVar'.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotationSet {
@@ -30,7 +31,7 @@ pub struct AnnotationSet {
     #[prost(map = "string, message", tag = "17")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// An annotation describes a region of reference genome. The value of an
@@ -39,6 +40,7 @@ pub struct AnnotationSet {
 /// sample or individual (though a client could choose to use annotations in
 /// this way). Example canonical annotation types are `GENE` and
 /// `VARIANT`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Annotation {
@@ -78,13 +80,14 @@ pub struct Annotation {
     #[prost(map = "string, message", tag = "12")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
     #[prost(oneof = "annotation::Value", tags = "10, 11")]
     pub value: ::core::option::Option<annotation::Value>,
 }
 /// Nested message and enum types in `Annotation`.
 pub mod annotation {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
@@ -102,6 +105,7 @@ pub mod annotation {
         Transcript(super::Transcript),
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantAnnotation {
@@ -137,6 +141,7 @@ pub struct VariantAnnotation {
 }
 /// Nested message and enum types in `VariantAnnotation`.
 pub mod variant_annotation {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ClinicalCondition {
@@ -155,6 +160,7 @@ pub mod variant_annotation {
         #[prost(string, tag = "4")]
         pub omim_id: ::prost::alloc::string::String,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -220,6 +226,7 @@ pub mod variant_annotation {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -296,6 +303,7 @@ pub mod variant_annotation {
             }
         }
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -376,6 +384,7 @@ pub mod variant_annotation {
 }
 /// A transcript represents the assertion that a particular region of the
 /// reference genome may be transcribed as RNA.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transcript {
@@ -416,8 +425,9 @@ pub struct Transcript {
 }
 /// Nested message and enum types in `Transcript`.
 pub mod transcript {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Exon {
         /// The start position of the exon on this annotation's reference sequence,
         /// 0-based inclusive. Note that this is relative to the reference start, and
@@ -443,10 +453,11 @@ pub mod transcript {
         /// of a transcript, the frame must be populated for all or none of the
         /// coding exons.
         #[prost(message, optional, tag = "3")]
-        pub frame: ::core::option::Option<i32>,
+        pub frame: ::core::option::Option<pb::Int32Value>,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct CodingSequence {
         /// The start of the coding sequence on this annotation's reference sequence,
         /// 0-based inclusive. Note that this position is relative to the reference
@@ -460,6 +471,7 @@ pub mod transcript {
         pub end: i64,
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExternalId {
@@ -470,6 +482,7 @@ pub struct ExternalId {
     #[prost(string, tag = "2")]
     pub id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAnnotationSetRequest {
@@ -477,6 +490,7 @@ pub struct CreateAnnotationSetRequest {
     #[prost(message, optional, tag = "1")]
     pub annotation_set: ::core::option::Option<AnnotationSet>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotationSetRequest {
@@ -484,6 +498,7 @@ pub struct GetAnnotationSetRequest {
     #[prost(string, tag = "1")]
     pub annotation_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAnnotationSetRequest {
@@ -499,8 +514,9 @@ pub struct UpdateAnnotationSetRequest {
     /// [info][google.genomics.v1.AnnotationSet.info]. If unspecified, all
     /// mutable fields will be updated.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotationSetRequest {
@@ -508,6 +524,7 @@ pub struct DeleteAnnotationSetRequest {
     #[prost(string, tag = "1")]
     pub annotation_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationSetsRequest {
@@ -537,6 +554,7 @@ pub struct SearchAnnotationSetsRequest {
     #[prost(int32, tag = "6")]
     pub page_size: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationSetsResponse {
@@ -549,6 +567,7 @@ pub struct SearchAnnotationSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAnnotationRequest {
@@ -556,6 +575,7 @@ pub struct CreateAnnotationRequest {
     #[prost(message, optional, tag = "1")]
     pub annotation: ::core::option::Option<Annotation>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAnnotationsRequest {
@@ -573,6 +593,7 @@ pub struct BatchCreateAnnotationsRequest {
     #[prost(string, tag = "2")]
     pub request_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAnnotationsResponse {
@@ -583,6 +604,7 @@ pub struct BatchCreateAnnotationsResponse {
 }
 /// Nested message and enum types in `BatchCreateAnnotationsResponse`.
 pub mod batch_create_annotations_response {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entry {
@@ -594,6 +616,7 @@ pub mod batch_create_annotations_response {
         pub annotation: ::core::option::Option<super::Annotation>,
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAnnotationRequest {
@@ -601,6 +624,7 @@ pub struct GetAnnotationRequest {
     #[prost(string, tag = "1")]
     pub annotation_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAnnotationRequest {
@@ -617,8 +641,9 @@ pub struct UpdateAnnotationRequest {
     /// [info][google.genomics.v1.Annotation.info]. If unspecified, all mutable
     /// fields will be updated.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAnnotationRequest {
@@ -626,6 +651,7 @@ pub struct DeleteAnnotationRequest {
     #[prost(string, tag = "1")]
     pub annotation_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationsRequest {
@@ -663,6 +689,7 @@ pub struct SearchAnnotationsRequest {
 /// Nested message and enum types in `SearchAnnotationsRequest`.
 pub mod search_annotations_request {
     /// Required. `reference_id` or `reference_name` must be set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Reference {
@@ -675,6 +702,7 @@ pub mod search_annotations_request {
         ReferenceName(::prost::alloc::string::String),
     }
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAnnotationsResponse {
@@ -690,6 +718,7 @@ pub struct SearchAnnotationsResponse {
 /// When an [Annotation][google.genomics.v1.Annotation] or
 /// [AnnotationSet][google.genomics.v1.AnnotationSet] is created, if `type` is
 /// not specified it will be set to `GENERIC`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum AnnotationType {
@@ -923,7 +952,10 @@ pub mod annotation_service_v1_client {
         pub async fn delete_annotation_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAnnotationSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1138,7 +1170,10 @@ pub mod annotation_service_v1_client {
         pub async fn delete_annotation(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAnnotationRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1202,6 +1237,7 @@ pub mod annotation_service_v1_client {
     }
 }
 /// A single CIGAR operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CigarUnit {
@@ -1221,6 +1257,7 @@ pub struct CigarUnit {
 pub mod cigar_unit {
     /// Describes the different types of CIGAR alignment operations that exist.
     /// Used wherever CIGAR alignments are used.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1321,6 +1358,7 @@ pub mod cigar_unit {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
@@ -1335,9 +1373,10 @@ pub struct Dataset {
     pub name: ::prost::alloc::string::String,
     /// The time this dataset was created, in seconds from the epoch.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The dataset list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsRequest {
@@ -1355,6 +1394,7 @@ pub struct ListDatasetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The dataset list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDatasetsResponse {
@@ -1367,6 +1407,7 @@ pub struct ListDatasetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDatasetRequest {
@@ -1374,6 +1415,7 @@ pub struct CreateDatasetRequest {
     #[prost(message, optional, tag = "1")]
     pub dataset: ::core::option::Option<Dataset>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDatasetRequest {
@@ -1388,8 +1430,9 @@ pub struct UpdateDatasetRequest {
     /// acceptable value is "name". If unspecified, all mutable fields will be
     /// updated.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDatasetRequest {
@@ -1397,6 +1440,7 @@ pub struct DeleteDatasetRequest {
     #[prost(string, tag = "1")]
     pub dataset_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteDatasetRequest {
@@ -1404,6 +1448,7 @@ pub struct UndeleteDatasetRequest {
     #[prost(string, tag = "1")]
     pub dataset_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatasetRequest {
@@ -1640,7 +1685,10 @@ pub mod dataset_service_v1_client {
         pub async fn delete_dataset(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDatasetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1822,6 +1870,7 @@ pub mod dataset_service_v1_client {
     }
 }
 /// Metadata describing an [Operation][google.longrunning.Operation].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
@@ -1830,18 +1879,18 @@ pub struct OperationMetadata {
     pub project_id: ::prost::alloc::string::String,
     /// The time at which the job was submitted to the Genomics service.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which the job began to run.
     #[prost(message, optional, tag = "3")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which the job stopped running.
     #[prost(message, optional, tag = "4")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The original request that started the operation. Note that this will be in
     /// current version of the API. If the operation was started with v1beta2 API
     /// and a GetOperation is performed on v1 API, a v1 request will be returned.
     #[prost(message, optional, tag = "5")]
-    pub request: ::core::option::Option<::prost_types::Any>,
+    pub request: ::core::option::Option<::prost_wkt_types::Any>,
     /// Optional event messages that were generated during the job's execution.
     /// This also contains any warnings that were generated during import
     /// or export.
@@ -1853,7 +1902,7 @@ pub struct OperationMetadata {
     pub client_id: ::prost::alloc::string::String,
     /// Runtime metadata on this Operation.
     #[prost(message, optional, tag = "8")]
-    pub runtime_metadata: ::core::option::Option<::prost_types::Any>,
+    pub runtime_metadata: ::core::option::Option<::prost_wkt_types::Any>,
     /// Optionally provided by the caller when submitting the request that creates
     /// the operation.
     #[prost(map = "string, string", tag = "9")]
@@ -1863,16 +1912,17 @@ pub struct OperationMetadata {
     >,
 }
 /// An event that occurred during an [Operation][google.longrunning.Operation].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationEvent {
     /// Optional time of when event started.
     #[prost(message, optional, tag = "1")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Optional time of when event finished. An event can have a start time and no
     /// finish time. If an event has a finish time, there must be a start time.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Required description of event.
     #[prost(string, tag = "3")]
     pub description: ::prost::alloc::string::String,
@@ -1881,6 +1931,7 @@ pub struct OperationEvent {
 /// already known reference. For now, represents a genomic position as a
 /// reference name, a base number on that reference (0-based), and a
 /// determination of forward or reverse strand.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Position {
@@ -1896,6 +1947,7 @@ pub struct Position {
     pub reverse_strand: bool,
 }
 /// A 0-based half-open genomic coordinate range for search requests.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Range {
@@ -1912,6 +1964,7 @@ pub struct Range {
 }
 /// A linear alignment can be represented by one CIGAR string. Describes the
 /// mapped position and local alignment of the read to the reference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LinearAlignment {
@@ -2012,6 +2065,7 @@ pub struct LinearAlignment {
 ///        cigarStr += c.operationLength + cigarMap\[c.operation\]
 ///      }
 ///      return cigarStr
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Read {
@@ -2106,10 +2160,11 @@ pub struct Read {
     #[prost(map = "string, message", tag = "17")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// A read group is all the data that's processed the same way by the sequencer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadGroup {
@@ -2151,11 +2206,12 @@ pub struct ReadGroup {
     #[prost(map = "string, message", tag = "12")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// Nested message and enum types in `ReadGroup`.
 pub mod read_group {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Experiment {
@@ -2178,6 +2234,7 @@ pub mod read_group {
         #[prost(string, tag = "4")]
         pub instrument_model: ::prost::alloc::string::String,
     }
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Program {
@@ -2211,6 +2268,7 @@ pub mod read_group {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadGroupSet {
@@ -2238,10 +2296,11 @@ pub struct ReadGroupSet {
     #[prost(map = "string, message", tag = "7")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// The read group set search request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadGroupSetsRequest {
@@ -2264,6 +2323,7 @@ pub struct SearchReadGroupSetsRequest {
     pub page_size: i32,
 }
 /// The read group set search response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadGroupSetsResponse {
@@ -2277,6 +2337,7 @@ pub struct SearchReadGroupSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The read group set import request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportReadGroupSetsRequest {
@@ -2312,6 +2373,7 @@ pub struct ImportReadGroupSetsRequest {
 }
 /// Nested message and enum types in `ImportReadGroupSetsRequest`.
 pub mod import_read_group_sets_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2364,6 +2426,7 @@ pub mod import_read_group_sets_request {
     }
 }
 /// The read group set import response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportReadGroupSetsResponse {
@@ -2372,6 +2435,7 @@ pub struct ImportReadGroupSetsResponse {
     pub read_group_set_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The read group set export request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportReadGroupSetRequest {
@@ -2394,6 +2458,7 @@ pub struct ExportReadGroupSetRequest {
     #[prost(string, repeated, tag = "4")]
     pub reference_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateReadGroupSetRequest {
@@ -2413,8 +2478,9 @@ pub struct UpdateReadGroupSetRequest {
     /// Leaving `updateMask` unset is equivalent to specifying all mutable
     /// fields.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteReadGroupSetRequest {
@@ -2423,6 +2489,7 @@ pub struct DeleteReadGroupSetRequest {
     #[prost(string, tag = "1")]
     pub read_group_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReadGroupSetRequest {
@@ -2430,6 +2497,7 @@ pub struct GetReadGroupSetRequest {
     #[prost(string, tag = "1")]
     pub read_group_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCoverageBucketsRequest {
@@ -2470,6 +2538,7 @@ pub struct ListCoverageBucketsRequest {
 }
 /// A bucket over which read coverage has been precomputed. A bucket corresponds
 /// to a specific range of the reference sequence.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CoverageBucket {
@@ -2481,6 +2550,7 @@ pub struct CoverageBucket {
     #[prost(float, tag = "2")]
     pub mean_coverage: f32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCoverageBucketsResponse {
@@ -2503,6 +2573,7 @@ pub struct ListCoverageBucketsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The read search request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadsRequest {
@@ -2541,6 +2612,7 @@ pub struct SearchReadsRequest {
     pub page_size: i32,
 }
 /// The read search response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReadsResponse {
@@ -2557,6 +2629,7 @@ pub struct SearchReadsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The stream reads request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamReadsRequest {
@@ -2605,6 +2678,7 @@ pub struct StreamReadsRequest {
     #[prost(int32, tag = "7")]
     pub total_shards: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamReadsResponse {
@@ -2984,7 +3058,10 @@ pub mod read_service_v1_client {
         pub async fn delete_read_group_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteReadGroupSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -3143,6 +3220,7 @@ pub mod read_service_v1_client {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Reference {
@@ -3180,6 +3258,7 @@ pub struct Reference {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReferenceSet {
@@ -3218,6 +3297,7 @@ pub struct ReferenceSet {
     #[prost(string, repeated, tag = "8")]
     pub source_accessions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferenceSetsRequest {
@@ -3245,6 +3325,7 @@ pub struct SearchReferenceSetsRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferenceSetsResponse {
@@ -3257,6 +3338,7 @@ pub struct SearchReferenceSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReferenceSetRequest {
@@ -3264,6 +3346,7 @@ pub struct GetReferenceSetRequest {
     #[prost(string, tag = "1")]
     pub reference_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferencesRequest {
@@ -3290,6 +3373,7 @@ pub struct SearchReferencesRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchReferencesResponse {
@@ -3302,6 +3386,7 @@ pub struct SearchReferencesResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReferenceRequest {
@@ -3309,6 +3394,7 @@ pub struct GetReferenceRequest {
     #[prost(string, tag = "1")]
     pub reference_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBasesRequest {
@@ -3333,6 +3419,7 @@ pub struct ListBasesRequest {
     #[prost(int32, tag = "5")]
     pub page_size: i32,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBasesResponse {
@@ -3622,6 +3709,7 @@ pub mod reference_service_v1_client {
 /// These data include a top level key and either a single value string (value)
 /// or a list of key-value pairs (info.)
 /// Value and info are mutually exclusive.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantSetMetadata {
@@ -3652,11 +3740,12 @@ pub struct VariantSetMetadata {
     #[prost(map = "string, message", tag = "3")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// Nested message and enum types in `VariantSetMetadata`.
 pub mod variant_set_metadata {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3711,6 +3800,7 @@ pub mod variant_set_metadata {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantSet {
@@ -3758,6 +3848,7 @@ pub struct VariantSet {
 /// to the occurrence of a SNP named rs1234 in a sample named NA12345. A call
 /// belongs to a call set, which contains related calls typically from one
 /// sample.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Variant {
@@ -3807,7 +3898,7 @@ pub struct Variant {
     #[prost(map = "string, message", tag = "10")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
     /// The variant calls for this particular variant. Each one represents the
     /// determination of genotype with respect to this variant.
@@ -3818,6 +3909,7 @@ pub struct Variant {
 /// variant. It may include associated information such as quality and phasing.
 /// For example, a call might assign a probability of 0.32 to the occurrence of
 /// a SNP named rs1234 in a call set with the name NA12345.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantCall {
@@ -3861,7 +3953,7 @@ pub struct VariantCall {
     #[prost(map = "string, message", tag = "2")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// A call set is a collection of variant calls, typically for one sample. It
@@ -3869,6 +3961,7 @@ pub struct VariantCall {
 ///
 /// For more genomics resource definitions, see [Fundamentals of Google
 /// Genomics](<https://cloud.google.com/genomics/fundamentals-of-google-genomics>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallSet {
@@ -3896,11 +3989,12 @@ pub struct CallSet {
     #[prost(map = "string, message", tag = "4")]
     pub info: ::std::collections::HashMap<
         ::prost::alloc::string::String,
-        ::prost_types::ListValue,
+        ::prost_wkt_types::ListValue,
     >,
 }
 /// ReferenceBound records an upper bound for the starting coordinate of
 /// variants in a particular reference.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReferenceBound {
@@ -3913,6 +4007,7 @@ pub struct ReferenceBound {
     pub upper_bound: i64,
 }
 /// The variant data import request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportVariantsRequest {
@@ -3950,6 +4045,7 @@ pub struct ImportVariantsRequest {
 }
 /// Nested message and enum types in `ImportVariantsRequest`.
 pub mod import_variants_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -3995,6 +4091,7 @@ pub mod import_variants_request {
     }
 }
 /// The variant data import response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportVariantsResponse {
@@ -4003,6 +4100,7 @@ pub struct ImportVariantsResponse {
     pub call_set_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The CreateVariantSet request
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVariantSetRequest {
@@ -4011,6 +4109,7 @@ pub struct CreateVariantSetRequest {
     pub variant_set: ::core::option::Option<VariantSet>,
 }
 /// The variant data export request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportVariantSetRequest {
@@ -4042,6 +4141,7 @@ pub struct ExportVariantSetRequest {
 }
 /// Nested message and enum types in `ExportVariantSetRequest`.
 pub mod export_variant_set_request {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -4081,6 +4181,7 @@ pub mod export_variant_set_request {
     }
 }
 /// The variant set request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVariantSetRequest {
@@ -4089,6 +4190,7 @@ pub struct GetVariantSetRequest {
     pub variant_set_id: ::prost::alloc::string::String,
 }
 /// The search variant sets request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantSetsRequest {
@@ -4107,6 +4209,7 @@ pub struct SearchVariantSetsRequest {
     pub page_size: i32,
 }
 /// The search variant sets response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantSetsResponse {
@@ -4120,6 +4223,7 @@ pub struct SearchVariantSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The delete variant set request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVariantSetRequest {
@@ -4127,6 +4231,7 @@ pub struct DeleteVariantSetRequest {
     #[prost(string, tag = "1")]
     pub variant_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVariantSetRequest {
@@ -4146,9 +4251,10 @@ pub struct UpdateVariantSetRequest {
     /// Leaving `updateMask` unset is equivalent to specifying all mutable
     /// fields.
     #[prost(message, optional, tag = "5")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The variant search request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantsRequest {
@@ -4193,6 +4299,7 @@ pub struct SearchVariantsRequest {
     pub max_calls: i32,
 }
 /// The variant search response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchVariantsResponse {
@@ -4205,6 +4312,7 @@ pub struct SearchVariantsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVariantRequest {
@@ -4212,6 +4320,7 @@ pub struct CreateVariantRequest {
     #[prost(message, optional, tag = "1")]
     pub variant: ::core::option::Option<Variant>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVariantRequest {
@@ -4226,8 +4335,9 @@ pub struct UpdateVariantRequest {
     /// [info][google.genomics.v1.Variant.info]. Acceptable values are "names" and
     /// "info". If unspecified, all mutable fields will be updated.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVariantRequest {
@@ -4235,6 +4345,7 @@ pub struct DeleteVariantRequest {
     #[prost(string, tag = "1")]
     pub variant_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVariantRequest {
@@ -4242,6 +4353,7 @@ pub struct GetVariantRequest {
     #[prost(string, tag = "1")]
     pub variant_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MergeVariantsRequest {
@@ -4260,6 +4372,7 @@ pub struct MergeVariantsRequest {
     >,
 }
 /// The call set search request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCallSetsRequest {
@@ -4282,6 +4395,7 @@ pub struct SearchCallSetsRequest {
     pub page_size: i32,
 }
 /// The call set search response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchCallSetsResponse {
@@ -4294,6 +4408,7 @@ pub struct SearchCallSetsResponse {
     #[prost(string, tag = "2")]
     pub next_page_token: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCallSetRequest {
@@ -4301,6 +4416,7 @@ pub struct CreateCallSetRequest {
     #[prost(message, optional, tag = "1")]
     pub call_set: ::core::option::Option<CallSet>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCallSetRequest {
@@ -4315,8 +4431,9 @@ pub struct UpdateCallSetRequest {
     /// acceptable value is "name". If unspecified, all mutable fields will be
     /// updated.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCallSetRequest {
@@ -4324,6 +4441,7 @@ pub struct DeleteCallSetRequest {
     #[prost(string, tag = "1")]
     pub call_set_id: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCallSetRequest {
@@ -4332,6 +4450,7 @@ pub struct GetCallSetRequest {
     pub call_set_id: ::prost::alloc::string::String,
 }
 /// The stream variants request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamVariantsRequest {
@@ -4359,6 +4478,7 @@ pub struct StreamVariantsRequest {
     #[prost(int64, tag = "6")]
     pub end: i64,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamVariantsResponse {
@@ -4369,6 +4489,7 @@ pub struct StreamVariantsResponse {
 /// These operations are set for each info field in the info_merge_config
 /// map of ImportVariantsRequest, which is plumbed down to the
 /// MergeVariantRequests generated by the import job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum InfoMergeOperation {
@@ -4808,7 +4929,10 @@ pub mod variant_service_v1_client {
         pub async fn delete_variant_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteVariantSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -4977,7 +5101,10 @@ pub mod variant_service_v1_client {
         pub async fn delete_variant(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteVariantRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5124,7 +5251,10 @@ pub mod variant_service_v1_client {
         pub async fn merge_variants(
             &mut self,
             request: impl tonic::IntoRequest<super::MergeVariantsRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -5260,7 +5390,10 @@ pub mod variant_service_v1_client {
         pub async fn delete_call_set(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteCallSetRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -3,6 +3,7 @@
 /// Each notification will be categorized by the sender into one of the following
 /// categories. All contacts that are subscribed to that category will receive
 /// the notification.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum NotificationCategory {
@@ -68,6 +69,7 @@ impl NotificationCategory {
 }
 /// A contact's validation state indicates whether or not it is the correct
 /// contact to be receiving notifications for a particular resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ValidationState {
@@ -103,6 +105,7 @@ impl ValidationState {
     }
 }
 /// A contact that will receive notifications from Google Cloud.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Contact {
@@ -132,9 +135,10 @@ pub struct Contact {
     /// automatically. A contact is considered stale if its validation state was
     /// updated more than 1 year ago.
     #[prost(message, optional, tag = "9")]
-    pub validate_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub validate_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Request message for the ListContacts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsRequest {
@@ -157,6 +161,7 @@ pub struct ListContactsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ListContacts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListContactsResponse {
@@ -171,6 +176,7 @@ pub struct ListContactsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the GetContact method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetContactRequest {
@@ -182,6 +188,7 @@ pub struct GetContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the DeleteContact method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteContactRequest {
@@ -193,6 +200,7 @@ pub struct DeleteContactRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for the CreateContact method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateContactRequest {
@@ -207,6 +215,7 @@ pub struct CreateContactRequest {
     pub contact: ::core::option::Option<Contact>,
 }
 /// Request message for the UpdateContact method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateContactRequest {
@@ -218,9 +227,10 @@ pub struct UpdateContactRequest {
     /// definition, see
     /// <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask>
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for the ComputeContacts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeContactsRequest {
@@ -248,6 +258,7 @@ pub struct ComputeContactsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the ComputeContacts method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeContactsResponse {
@@ -264,6 +275,7 @@ pub struct ComputeContactsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the SendTestMessage method.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendTestMessageRequest {
@@ -493,7 +505,10 @@ pub mod essential_contacts_service_client {
         pub async fn delete_contact(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteContactRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -555,7 +570,10 @@ pub mod essential_contacts_service_client {
         pub async fn send_test_message(
             &mut self,
             request: impl tonic::IntoRequest<super::SendTestMessageRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

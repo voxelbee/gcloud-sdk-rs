@@ -2,6 +2,7 @@
 /// A subscription to receive events about a Google Workspace resource. To learn
 /// more about subscriptions, see the [Google Workspace Events API
 /// overview](<https://developers.google.com/workspace/events>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subscription {
@@ -73,10 +74,10 @@ pub struct Subscription {
     pub authority: ::prost::alloc::string::String,
     /// Output only. The time when the subscription is created.
     #[prost(message, optional, tag = "11")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The last time that the subscription is updated.
     #[prost(message, optional, tag = "12")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. If `true`, the subscription is in the process of being
     /// updated.
     #[prost(bool, tag = "15")]
@@ -116,6 +117,7 @@ pub struct Subscription {
 /// Nested message and enum types in `Subscription`.
 pub mod subscription {
     /// Possible states for the subscription.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -167,6 +169,7 @@ pub mod subscription {
         }
     }
     /// Possible errors for a subscription.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -261,21 +264,23 @@ pub mod subscription {
     /// [`UpdateSubscription`][google.apps.events.subscriptions.v1.SubscriptionsService.UpdateSubscription]
     /// method to extend its expiration date. For details, see [Update or renew a
     /// subscription](<https://developers.google.com/workspace/events/guides/update-subscription>).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Non-empty default. The timestamp in UTC when the subscription expires.
         /// Always displayed on output, regardless of what was used on input.
         #[prost(message, tag = "13")]
-        ExpireTime(::prost_types::Timestamp),
+        ExpireTime(::prost_wkt_types::Timestamp),
         /// Input only. The time-to-live (TTL) or duration for the subscription. If
         /// unspecified or set to `0`, uses the maximum possible duration.
         #[prost(message, tag = "14")]
-        Ttl(::prost_types::Duration),
+        Ttl(::prost_wkt_types::Duration),
     }
 }
 /// Options about what data to include in the event payload. Only supported for
 /// Google Chat events.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PayloadOptions {
@@ -296,9 +301,10 @@ pub struct PayloadOptions {
     /// If you specify a field that doesn't exist for the resource, the system
     /// ignores the field.
     #[prost(message, optional, tag = "2")]
-    pub field_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub field_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The endpoint where the subscription delivers events.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NotificationEndpoint {
@@ -307,6 +313,7 @@ pub struct NotificationEndpoint {
 }
 /// Nested message and enum types in `NotificationEndpoint`.
 pub mod notification_endpoint {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Endpoint {
@@ -328,6 +335,7 @@ pub mod notification_endpoint {
 }
 /// The request message for
 /// [SubscriptionsService.CreateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.CreateSubscription].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubscriptionRequest {
@@ -341,6 +349,7 @@ pub struct CreateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.DeleteSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.DeleteSubscription].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSubscriptionRequest {
@@ -366,6 +375,7 @@ pub struct DeleteSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.GetSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.GetSubscription].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSubscriptionRequest {
@@ -377,6 +387,7 @@ pub struct GetSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.UpdateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.UpdateSubscription].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSubscriptionRequest {
@@ -396,7 +407,7 @@ pub struct UpdateSubscriptionRequest {
     /// time-to-live (TTL) or duration of the
     ///    subscription.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Optional. If set to `true`, validates and previews the request, but doesn't
     /// update the subscription.
     #[prost(bool, tag = "3")]
@@ -404,6 +415,7 @@ pub struct UpdateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.ReactivateSubscription][google.apps.events.subscriptions.v1.SubscriptionsService.ReactivateSubscription].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReactivateSubscriptionRequest {
@@ -415,6 +427,7 @@ pub struct ReactivateSubscriptionRequest {
 }
 /// The request message for
 /// [SubscriptionsService.ListSubscriptions][google.apps.events.subscriptions.v1.SubscriptionsService.ListSubscriptions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsRequest {
@@ -467,6 +480,7 @@ pub struct ListSubscriptionsRequest {
 }
 /// The response message for
 /// [SubscriptionsService.ListSubscriptions][google.apps.events.subscriptions.v1.SubscriptionsService.ListSubscriptions].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubscriptionsResponse {
@@ -479,20 +493,24 @@ pub struct ListSubscriptionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Metadata for UpdateSubscription LRO.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UpdateSubscriptionMetadata {}
 /// Metadata for CreateSubscription LRO.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateSubscriptionMetadata {}
 /// Metadata for DeleteSubscription LRO.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeleteSubscriptionMetadata {}
 /// Metadata for ReactivateSubscription LRO.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReactivateSubscriptionMetadata {}
 /// Generated client implementations.
 pub mod subscriptions_service_client {

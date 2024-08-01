@@ -2,6 +2,7 @@
 /// GeneratePackagesSummaryRequest is the request body for the
 /// GeneratePackagesSummary API method. It just takes a single name argument,
 /// referring to the resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeneratePackagesSummaryRequest {
@@ -11,6 +12,7 @@ pub struct GeneratePackagesSummaryRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A summary of the packages found within the given resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PackagesSummaryResponse {
@@ -27,6 +29,7 @@ pub struct PackagesSummaryResponse {
 /// Nested message and enum types in `PackagesSummaryResponse`.
 pub mod packages_summary_response {
     /// Per license count
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LicensesSummary {
@@ -41,6 +44,7 @@ pub mod packages_summary_response {
     }
 }
 /// The request to a call of ExportSBOM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSbomRequest {
@@ -50,6 +54,7 @@ pub struct ExportSbomRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The response from a call to ExportSBOM
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportSbomResponse {

@@ -2,6 +2,7 @@
 /// Entity sets describe the pre-defined set of entities that the values of
 /// built-in intent parameters can come from. Entity sets can be referenced from
 /// entity_set in built-in intent parameters.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntitySet {
@@ -12,6 +13,7 @@ pub struct EntitySet {
 /// Nested message and enum types in `EntitySet`.
 pub mod entity_set {
     /// An entity a built-in intent parameter value can come from.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Entity {
@@ -25,6 +27,7 @@ pub mod entity_set {
 }
 /// Defines a handler to be executed after an event. Examples of events are
 /// intent and condition based events in a scene.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventHandler {
@@ -38,6 +41,7 @@ pub struct EventHandler {
 /// Nested message and enum types in `EventHandler`.
 pub mod event_handler {
     /// Prompts can either be inlined or referenced by name.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Prompt {
@@ -59,6 +63,7 @@ pub mod event_handler {
 /// used to deep link users into specific flows when they invoke an Action.
 ///
 /// Note, the intent name is specified in the name of the file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalIntentEvent {
@@ -77,6 +82,7 @@ pub struct GlobalIntentEvent {
 /// (NLU). Intent matches can trigger events in your conversation design to
 /// progress the user's conversation.
 /// The intent name is specified in the name of the file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Intent {
@@ -103,6 +109,7 @@ pub struct Intent {
 /// Nested message and enum types in `Intent`.
 pub mod intent {
     /// Definition of a parameter which can be used inside training phrases.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IntentParameter {
@@ -118,6 +125,7 @@ pub mod intent {
     /// Nested message and enum types in `IntentParameter`.
     pub mod intent_parameter {
         /// Entity set references for an intent parameter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct EntitySetReferences {
@@ -130,6 +138,7 @@ pub mod intent {
         /// Nested message and enum types in `EntitySetReferences`.
         pub mod entity_set_references {
             /// A reference to the set of allowed entities for this intent parameter.
+            #[derive(serde::Serialize, serde::Deserialize)]
             #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct EntitySetReference {
@@ -141,6 +150,7 @@ pub mod intent {
             }
         }
         /// The type of the intent parameter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ParameterType {
@@ -157,6 +167,7 @@ pub mod intent {
     }
 }
 /// Registers events that trigger as the result of a true condition.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConditionalEvent {
@@ -189,6 +200,7 @@ pub struct ConditionalEvent {
     pub handler: ::core::option::Option<EventHandler>,
 }
 /// Registers Events which trigger as the result of an intent match.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IntentEvent {
@@ -208,6 +220,7 @@ pub struct IntentEvent {
 /// Configuration for a slot. Slots are single units of data that can be filled
 /// through natural language (ie. intent parameters), session parameters, and
 /// other sources.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slot {
@@ -249,7 +262,7 @@ pub struct Slot {
     ///       }
     ///     }
     #[prost(message, optional, tag = "6")]
-    pub config: ::core::option::Option<::prost_types::Value>,
+    pub config: ::core::option::Option<::prost_wkt_types::Value>,
     /// Optional. Configuration to populate a default value for this slot.
     #[prost(message, optional, tag = "7")]
     pub default_value: ::core::option::Option<slot::DefaultValue>,
@@ -257,6 +270,7 @@ pub struct Slot {
 /// Nested message and enum types in `Slot`.
 pub mod slot {
     /// A single place where slot prompts are defined.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PromptSettings {
@@ -293,6 +307,7 @@ pub mod slot {
     }
     /// Message describing the commit behavior associated with the slot after it
     /// has been successfully filled.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CommitBehavior {
@@ -305,6 +320,7 @@ pub mod slot {
         pub write_session_param: ::prost::alloc::string::String,
     }
     /// Configuration to populate a default value for this slot.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultValue {
@@ -319,13 +335,14 @@ pub mod slot {
         /// for this slot was not populated through the `session_param`. The
         /// type for this value must match the type of the slot.
         #[prost(message, optional, tag = "2")]
-        pub constant: ::core::option::Option<::prost_types::Value>,
+        pub constant: ::core::option::Option<::prost_wkt_types::Value>,
     }
 }
 /// Scene is the basic unit of control flow when designing a conversation. They
 /// can be chained together with other scenes, generate prompts for the end user,
 /// and define slots.
 /// The scene name is specified in the name of the file.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Scene {

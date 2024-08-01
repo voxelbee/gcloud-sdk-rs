@@ -2,6 +2,7 @@
 /// Encoding of an input element such as an audio, video, or text track.
 /// Elementary streams must be packaged before mapping and sharing between
 /// different output formats.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ElementaryStream {
@@ -15,6 +16,7 @@ pub struct ElementaryStream {
 /// Nested message and enum types in `ElementaryStream`.
 pub mod elementary_stream {
     /// Required. Encoding of an audio, video, or text track.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ElementaryStream {
@@ -30,6 +32,7 @@ pub mod elementary_stream {
     }
 }
 /// Multiplexing settings for output stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MuxStream {
@@ -62,6 +65,7 @@ pub struct MuxStream {
     pub encryption_id: ::prost::alloc::string::String,
 }
 /// Manifest configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Manifest {
@@ -96,7 +100,7 @@ pub struct Manifest {
     /// player has, but were already deleted from the output Google Cloud Storage
     /// bucket. Default value is `60s`.
     #[prost(message, optional, tag = "5")]
-    pub segment_keep_duration: ::core::option::Option<::prost_types::Duration>,
+    pub segment_keep_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Whether to use the timecode, as specified in timecode config, when setting:
     ///
     /// - `availabilityStartTime` attribute in DASH manifests.
@@ -110,6 +114,7 @@ pub struct Manifest {
 /// Nested message and enum types in `Manifest`.
 pub mod manifest {
     /// The manifest type can be either `HLS` or `DASH`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -154,6 +159,7 @@ pub mod manifest {
     }
 }
 /// Sprite sheet configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpriteSheet {
@@ -189,7 +195,7 @@ pub struct SpriteSheet {
     /// Create sprites at regular intervals. Valid range is \[1 second, 1 hour\] and
     /// the default value is `10s`.
     #[prost(message, optional, tag = "7")]
-    pub interval: ::core::option::Option<::prost_types::Duration>,
+    pub interval: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The quality of the generated sprite sheet. Enter a value between 1
     /// and 100, where 1 is the lowest quality and 100 is the highest quality.
     /// The default is 100. A high quality value corresponds to a low image data
@@ -198,8 +204,9 @@ pub struct SpriteSheet {
     pub quality: i32,
 }
 /// Preprocessing configurations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PreprocessingConfig {
     /// Audio preprocessing configuration.
     #[prost(message, optional, tag = "1")]
@@ -214,8 +221,9 @@ pub struct PreprocessingConfig {
 /// Nested message and enum types in `PreprocessingConfig`.
 pub mod preprocessing_config {
     /// Audio preprocessing configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Audio {
         /// Specify audio loudness normalization in loudness units relative to full
         /// scale (LUFS). Enter a value between -24 and 0 according to the following:
@@ -233,8 +241,9 @@ pub mod preprocessing_config {
     }
     /// Video cropping configuration for the input video. The cropped input video
     /// is scaled to match the output resolution.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Crop {
         /// The number of pixels to crop from the top. The default is 0.
         #[prost(int32, tag = "1")]
@@ -251,8 +260,9 @@ pub mod preprocessing_config {
     }
     /// Pad filter configuration for the input video. The padded input video
     /// is scaled after padding with black to match the output resolution.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Pad {
         /// The number of pixels to add to the top. The default is 0.
         #[prost(int32, tag = "1")]
@@ -269,6 +279,7 @@ pub mod preprocessing_config {
     }
 }
 /// Video stream resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoStream {
@@ -279,6 +290,7 @@ pub struct VideoStream {
 /// Nested message and enum types in `VideoStream`.
 pub mod video_stream {
     /// H264 codec settings.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct H264CodecSettings {
@@ -373,8 +385,9 @@ pub mod video_stream {
     /// Nested message and enum types in `H264CodecSettings`.
     pub mod h264_codec_settings {
         /// GOP mode can be either by frame count or duration.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum GopMode {
             /// Select the GOP size based on the specified frame count.
             /// If GOP frame count is set instead of GOP duration, GOP duration will be
@@ -392,10 +405,11 @@ pub mod video_stream {
             ///
             /// All video streams in the same channel must have the same GOP size.
             #[prost(message, tag = "8")]
-            GopDuration(::prost_types::Duration),
+            GopDuration(::prost_wkt_types::Duration),
         }
     }
     /// Codec settings.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CodecSettings {
@@ -405,6 +419,7 @@ pub mod video_stream {
     }
 }
 /// Audio stream resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioStream {
@@ -451,6 +466,7 @@ pub struct AudioStream {
 /// Nested message and enum types in `AudioStream`.
 pub mod audio_stream {
     /// The mapping for the input streams and audio channels.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AudioMapping {
@@ -482,6 +498,7 @@ pub mod audio_stream {
     }
 }
 /// Encoding of a text stream. For example, closed captions or subtitles.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextStream {
@@ -495,8 +512,9 @@ pub struct TextStream {
     pub codec: ::prost::alloc::string::String,
 }
 /// Segment settings for `fmp4` and `ts`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SegmentSettings {
     /// Duration of the segments in seconds. The default is `6s`. Note that
     /// `segmentDuration` must be greater than or equal to
@@ -508,9 +526,10 @@ pub struct SegmentSettings {
     /// All [mux_streams][google.cloud.video.livestream.v1.Manifest.mux_streams] in
     /// the same manifest must have the same segment duration.
     #[prost(message, optional, tag = "1")]
-    pub segment_duration: ::core::option::Option<::prost_types::Duration>,
+    pub segment_duration: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Timecode configuration.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimecodeConfig {
@@ -528,6 +547,7 @@ pub struct TimecodeConfig {
 /// Nested message and enum types in `TimecodeConfig`.
 pub mod timecode_config {
     /// The source of timecode.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -573,12 +593,13 @@ pub mod timecode_config {
     /// For EMBEDDED_TIMECODE source only.
     /// Used to interpret the embedded timecode (which contains only the time part
     /// and no date). We assume all inputs are live.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TimeOffset {
         /// UTC offset. Must be whole seconds, between -18 hours and +18 hours.
         #[prost(message, tag = "2")]
-        UtcOffset(::prost_types::Duration),
+        UtcOffset(::prost_wkt_types::Duration),
         /// Time zone e.g. "America/Los_Angeles".
         #[prost(message, tag = "3")]
         TimeZone(super::super::super::super::super::r#type::TimeZone),
@@ -586,6 +607,7 @@ pub mod timecode_config {
 }
 /// Input resource represents the endpoint from which the channel ingests
 /// the input stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Input {
@@ -595,10 +617,10 @@ pub struct Input {
     pub name: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The update time.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User-defined key/value metadata.
     #[prost(map = "string, string", tag = "4")]
     pub labels: ::std::collections::HashMap<
@@ -638,6 +660,7 @@ pub mod input {
     /// Security rules for access control. Each field represents one security rule.
     /// Only when the source of the input stream satisfies all the fields, this
     /// input stream can be accepted.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecurityRule {
@@ -648,6 +671,7 @@ pub mod input {
         pub ip_ranges: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// The type of the input.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -691,6 +715,7 @@ pub mod input {
         }
     }
     /// Tier of the input specification.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -743,6 +768,7 @@ pub mod input {
 /// input, transcoding it to multiple renditions, and publishing output live
 /// streams in certain formats (for example, HLS or DASH) to the specified
 /// location.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Channel {
@@ -752,10 +778,10 @@ pub struct Channel {
     pub name: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The update time.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User-defined key/value metadata.
     #[prost(map = "string, string", tag = "4")]
     pub labels: ::std::collections::HashMap<
@@ -819,6 +845,7 @@ pub struct Channel {
 /// Nested message and enum types in `Channel`.
 pub mod channel {
     /// Location of output file(s) in a Google Cloud Storage bucket.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Output {
@@ -827,6 +854,7 @@ pub mod channel {
         pub uri: ::prost::alloc::string::String,
     }
     /// State of streaming operation that the channel is running.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -896,8 +924,9 @@ pub mod channel {
     }
 }
 /// Configuration for the input sources of a channel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct InputConfig {
     /// Input switch mode. Default mode is `FAILOVER_PREFER_PRIMARY`.
     #[prost(enumeration = "input_config::InputSwitchMode", tag = "1")]
@@ -906,6 +935,7 @@ pub struct InputConfig {
 /// Nested message and enum types in `InputConfig`.
 pub mod input_config {
     /// Input switch mode.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -961,8 +991,9 @@ pub mod input_config {
 /// See [Using and managing platform
 /// logs](<https://cloud.google.com/logging/docs/api/platform-logs#managing-logs>)
 /// for more information about how to view platform logs through Cloud Logging.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LogConfig {
     /// The severity level of platform logging for this resource.
     #[prost(enumeration = "log_config::LogSeverity", tag = "1")]
@@ -978,6 +1009,7 @@ pub mod log_config {
     /// See
     /// [LogSeverity](<https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity>)
     /// for more information.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1034,13 +1066,14 @@ pub mod log_config {
     }
 }
 /// Properties of the input stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputStreamProperty {
     /// The time that the current input stream is accepted and the connection is
     /// established.
     #[prost(message, optional, tag = "1")]
-    pub last_establish_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_establish_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Properties of the video streams.
     #[prost(message, repeated, tag = "2")]
     pub video_streams: ::prost::alloc::vec::Vec<VideoStreamProperty>,
@@ -1049,6 +1082,7 @@ pub struct InputStreamProperty {
     pub audio_streams: ::prost::alloc::vec::Vec<AudioStreamProperty>,
 }
 /// Properties of the video stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamProperty {
@@ -1060,6 +1094,7 @@ pub struct VideoStreamProperty {
     pub video_format: ::core::option::Option<VideoFormat>,
 }
 /// Properties of the video format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoFormat {
@@ -1077,6 +1112,7 @@ pub struct VideoFormat {
     pub frame_rate: f64,
 }
 /// Properties of the audio stream.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioStreamProperty {
@@ -1088,6 +1124,7 @@ pub struct AudioStreamProperty {
     pub audio_format: ::core::option::Option<AudioFormat>,
 }
 /// Properties of the audio format.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioFormat {
@@ -1102,6 +1139,7 @@ pub struct AudioFormat {
     pub channel_layout: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A group of information for attaching an input resource to this channel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InputAttachment {
@@ -1119,6 +1157,7 @@ pub struct InputAttachment {
 /// Nested message and enum types in `InputAttachment`.
 pub mod input_attachment {
     /// Configurations to follow when automatic failover happens.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AutomaticFailover {
@@ -1132,6 +1171,7 @@ pub mod input_attachment {
 }
 /// Event is a sub-resource of a channel, which can be scheduled by the user to
 /// execute operations on a channel resource without having to stop the channel.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
@@ -1141,10 +1181,10 @@ pub struct Event {
     pub name: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The update time.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User-defined key/value metadata.
     #[prost(map = "string, string", tag = "4")]
     pub labels: ::std::collections::HashMap<
@@ -1166,7 +1206,7 @@ pub struct Event {
     /// `false`, then you must set this field to at least 10 seconds in the future
     /// or else the event can't be created.
     #[prost(message, optional, tag = "10")]
-    pub execution_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub execution_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The state of the event.
     #[prost(enumeration = "event::State", tag = "11")]
     pub state: i32,
@@ -1181,6 +1221,7 @@ pub struct Event {
 /// Nested message and enum types in `Event`.
 pub mod event {
     /// Switches to another input stream. Automatic failover is then disabled.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InputSwitchTask {
@@ -1191,21 +1232,23 @@ pub mod event {
         pub input_key: ::prost::alloc::string::String,
     }
     /// Inserts a new ad opportunity.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct AdBreakTask {
         /// Duration of an ad opportunity. Must be greater than 0.
         #[prost(message, optional, tag = "1")]
-        pub duration: ::core::option::Option<::prost_types::Duration>,
+        pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     }
     /// Inserts a slate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SlateTask {
         /// Optional. Duration of the slate. Must be greater than 0 if specified.
         /// Omit this field for a long running slate.
         #[prost(message, optional, tag = "1")]
-        pub duration: ::core::option::Option<::prost_types::Duration>,
+        pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
         /// Slate asset to use for the duration. If its duration is less than the
         /// duration of the SlateTask, then it will be looped. The slate must be
         /// represented in the form of:
@@ -1215,24 +1258,28 @@ pub mod event {
     }
     /// Stops any events which are currently running. This only applies to events
     /// with a duration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReturnToProgramTask {}
     /// Mutes the stream.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MuteTask {
         /// Duration for which the stream should be muted. If omitted, the stream
         /// will be muted until an UnmuteTask event is sent.
         #[prost(message, optional, tag = "1")]
-        pub duration: ::core::option::Option<::prost_types::Duration>,
+        pub duration: ::core::option::Option<::prost_wkt_types::Duration>,
     }
     /// Unmutes the stream. The task will fail if the stream is not
     /// currently muted.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UnmuteTask {}
     /// State of the event
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1292,6 +1339,7 @@ pub mod event {
         }
     }
     /// Required. Operation to be executed by this event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Task {
@@ -1316,6 +1364,7 @@ pub mod event {
     }
 }
 /// An asset represents a video or an image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
@@ -1325,10 +1374,10 @@ pub struct Asset {
     pub name: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The update time.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User-defined key/value metadata.
     #[prost(map = "string, string", tag = "4")]
     pub labels: ::std::collections::HashMap<
@@ -1363,6 +1412,7 @@ pub mod asset {
     /// VideoAsset represents a video. The supported formats are MP4, MPEG-TS, and
     /// FLV. The supported video codec is H264. The supported audio codecs are
     /// AAC, AC3, MP2, and MP3.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VideoAsset {
@@ -1371,6 +1421,7 @@ pub mod asset {
         pub uri: ::prost::alloc::string::String,
     }
     /// Image represents an image. The supported format is JPEG.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ImageAsset {
@@ -1379,6 +1430,7 @@ pub mod asset {
         pub uri: ::prost::alloc::string::String,
     }
     /// State of the asset resource.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1431,6 +1483,7 @@ pub mod asset {
     }
     /// The reference to the asset.
     /// The maximum size of the resource is 250 MB.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resource {
@@ -1443,6 +1496,7 @@ pub mod asset {
     }
 }
 /// Encryption settings.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Encryption {
@@ -1462,6 +1516,7 @@ pub struct Encryption {
 /// Nested message and enum types in `Encryption`.
 pub mod encryption {
     /// Configuration for secrets stored in Google Secret Manager.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SecretManagerSource {
@@ -1471,25 +1526,30 @@ pub mod encryption {
         pub secret_version: ::prost::alloc::string::String,
     }
     /// Widevine configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Widevine {}
     /// Fairplay configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Fairplay {}
     /// Playready configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Playready {}
     /// Clearkey configuration.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Clearkey {}
     /// Defines configuration for DRM systems in use. If a field is omitted,
     /// that DRM system will be considered to be disabled.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct DrmSystems {
         /// Widevine configuration.
         #[prost(message, optional, tag = "1")]
@@ -1505,14 +1565,17 @@ pub mod encryption {
         pub clearkey: ::core::option::Option<Clearkey>,
     }
     /// Configuration for HLS AES-128 encryption.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Aes128Encryption {}
     /// Configuration for HLS SAMPLE-AES encryption.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SampleAesEncryption {}
     /// Configuration for MPEG-Dash Common Encryption (MPEG-CENC).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MpegCommonEncryption {
@@ -1523,6 +1586,7 @@ pub mod encryption {
         pub scheme: ::prost::alloc::string::String,
     }
     /// Defines where content keys are stored.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SecretSource {
@@ -1531,6 +1595,7 @@ pub mod encryption {
         SecretManagerKeySource(SecretManagerSource),
     }
     /// Encryption modes for HLS and MPEG-Dash.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum EncryptionMode {
@@ -1549,6 +1614,7 @@ pub mod encryption {
 /// location. Currently we support only one pool resource per project per
 /// location. After the creation of the first input, a default pool is created
 /// automatically at "projects/{project}/locations/{location}/pools/default".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pool {
@@ -1558,10 +1624,10 @@ pub struct Pool {
     pub name: ::prost::alloc::string::String,
     /// Output only. The creation time.
     #[prost(message, optional, tag = "2")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The update time.
     #[prost(message, optional, tag = "3")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// User-defined key/value metadata.
     #[prost(map = "string, string", tag = "4")]
     pub labels: ::std::collections::HashMap<
@@ -1575,6 +1641,7 @@ pub struct Pool {
 /// Nested message and enum types in `Pool`.
 pub mod pool {
     /// Defines the network configuration for the pool.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NetworkConfig {
@@ -1590,6 +1657,7 @@ pub mod pool {
     }
 }
 /// Request message for "LivestreamService.CreateAsset".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAssetRequest {
@@ -1622,6 +1690,7 @@ pub struct CreateAssetRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteAsset".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAssetRequest {
@@ -1646,6 +1715,7 @@ pub struct DeleteAssetRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListAssets".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
@@ -1668,6 +1738,7 @@ pub struct ListAssetsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListAssets".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
@@ -1682,6 +1753,7 @@ pub struct ListAssetsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetAsset".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAssetRequest {
@@ -1691,6 +1763,7 @@ pub struct GetAssetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelRequest {
@@ -1723,6 +1796,7 @@ pub struct CreateChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListChannels".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsRequest {
@@ -1749,6 +1823,7 @@ pub struct ListChannelsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListChannels".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelsResponse {
@@ -1764,6 +1839,7 @@ pub struct ListChannelsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelRequest {
@@ -1773,6 +1849,7 @@ pub struct GetChannelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelRequest {
@@ -1803,6 +1880,7 @@ pub struct DeleteChannelRequest {
     pub force: bool,
 }
 /// Request message for "LivestreamService.UpdateChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChannelRequest {
@@ -1827,7 +1905,7 @@ pub struct UpdateChannelRequest {
     /// if the field appears in the request payload. To unset a field, add the
     /// field to the update mask and remove it from the request payload.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The channel resource to be updated.
     #[prost(message, optional, tag = "2")]
     pub channel: ::core::option::Option<Channel>,
@@ -1848,6 +1926,7 @@ pub struct UpdateChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.StartChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartChannelRequest {
@@ -1872,6 +1951,7 @@ pub struct StartChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.StopChannel".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopChannelRequest {
@@ -1896,6 +1976,7 @@ pub struct StopChannelRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateInput".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInputRequest {
@@ -1928,6 +2009,7 @@ pub struct CreateInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListInputs".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInputsRequest {
@@ -1954,6 +2036,7 @@ pub struct ListInputsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListInputs".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInputsResponse {
@@ -1969,6 +2052,7 @@ pub struct ListInputsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetInput".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInputRequest {
@@ -1978,6 +2062,7 @@ pub struct GetInputRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteInput".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInputRequest {
@@ -2002,6 +2087,7 @@ pub struct DeleteInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.UpdateInput".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInputRequest {
@@ -2018,7 +2104,7 @@ pub struct UpdateInputRequest {
     /// if the field appears in the request payload. To unset a field, add the
     /// field to the update mask and remove it from the request payload.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The input resource to be updated.
     #[prost(message, optional, tag = "2")]
     pub input: ::core::option::Option<Input>,
@@ -2039,6 +2125,7 @@ pub struct UpdateInputRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.CreateEvent".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventRequest {
@@ -2071,6 +2158,7 @@ pub struct CreateEventRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.ListEvents".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsRequest {
@@ -2097,6 +2185,7 @@ pub struct ListEventsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for "LivestreamService.ListEvents".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsResponse {
@@ -2112,6 +2201,7 @@ pub struct ListEventsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for "LivestreamService.GetEvent".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventRequest {
@@ -2121,6 +2211,7 @@ pub struct GetEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.DeleteEvent".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventRequest {
@@ -2145,19 +2236,21 @@ pub struct DeleteEventRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Response message for Start/Stop Channel long-running operations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ChannelOperationResponse {}
 /// Represents the metadata of the long-running operation.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
     #[prost(message, optional, tag = "1")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the operation finished running.
     #[prost(message, optional, tag = "2")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. Server-defined resource path for the target of the operation.
     #[prost(string, tag = "3")]
     pub target: ::prost::alloc::string::String,
@@ -2176,6 +2269,7 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.GetPool".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPoolRequest {
@@ -2185,6 +2279,7 @@ pub struct GetPoolRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for "LivestreamService.UpdatePool".
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePoolRequest {
@@ -2196,7 +2291,7 @@ pub struct UpdatePoolRequest {
     /// The fields specified in the update_mask are relative to the resource, not
     /// the full request. A field will be overwritten if it is in the mask.
     #[prost(message, optional, tag = "1")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
     /// Required. The pool resource to be updated.
     #[prost(message, optional, tag = "2")]
     pub pool: ::core::option::Option<Pool>,
@@ -2766,7 +2861,10 @@ pub mod livestream_service_client {
         pub async fn delete_event(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteEventRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

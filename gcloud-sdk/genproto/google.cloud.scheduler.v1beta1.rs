@@ -6,6 +6,7 @@
 /// response code in the range \[200 - 299\]. A failure to receive a response
 /// constitutes a failed execution. For a redirected request, the response
 /// returned by the redirected request is considered.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpTarget {
@@ -65,6 +66,7 @@ pub mod http_target {
     /// If specified, all `Authorization` headers in the
     /// [HttpTarget.headers][google.cloud.scheduler.v1beta1.HttpTarget.headers]
     /// field will be overridden.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AuthorizationHeader {
@@ -98,6 +100,7 @@ pub mod http_target {
 /// will be retried regardless of retry configuration and not counted against
 /// retry counts. Any other response code, or a failure to receive a response
 /// before the deadline, constitutes a failed attempt.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineHttpTarget {
@@ -169,6 +172,7 @@ pub struct AppEngineHttpTarget {
 }
 /// Pub/Sub target. The job will be delivered by publishing a message to
 /// the given Pub/Sub topic.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PubsubTarget {
@@ -208,6 +212,7 @@ pub struct PubsubTarget {
 /// routing](<https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed>),
 /// and [App Engine Flex request
 /// routing](<https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineRouting {
@@ -311,6 +316,7 @@ pub struct AppEngineRouting {
 /// [OAuth token](<https://developers.google.com/identity/protocols/OAuth2>).
 /// This type of authorization should generally only be used when calling Google
 /// APIs hosted on *.googleapis.com.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthToken {
@@ -332,6 +338,7 @@ pub struct OAuthToken {
 /// This type of authorization can be used for many scenarios, including
 /// calling Cloud Run, or endpoints where you intend to validate the token
 /// yourself.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OidcToken {
@@ -347,6 +354,7 @@ pub struct OidcToken {
     pub audience: ::prost::alloc::string::String,
 }
 /// The HTTP method used to execute the job.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum HttpMethod {
@@ -401,6 +409,7 @@ impl HttpMethod {
 }
 /// Configuration for a job.
 /// The maximum allowed size for a job is 1MB.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
@@ -473,7 +482,7 @@ pub struct Job {
     pub time_zone: ::prost::alloc::string::String,
     /// Output only. The creation time of the job.
     #[prost(message, optional, tag = "9")]
-    pub user_update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub user_update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. State of the job.
     #[prost(enumeration = "job::State", tag = "10")]
     pub state: i32,
@@ -484,10 +493,10 @@ pub struct Job {
     /// retry of a previously failed attempt or the next execution time
     /// according to the schedule.
     #[prost(message, optional, tag = "17")]
-    pub schedule_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub schedule_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time the last job attempt started.
     #[prost(message, optional, tag = "18")]
-    pub last_attempt_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub last_attempt_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Settings that determine the retry behavior.
     #[prost(message, optional, tag = "19")]
     pub retry_config: ::core::option::Option<RetryConfig>,
@@ -514,7 +523,7 @@ pub struct Job {
     /// * For [Pub/Sub targets][google.cloud.scheduler.v1beta1.Job.pubsub_target],
     /// this field is ignored.
     #[prost(message, optional, tag = "22")]
-    pub attempt_deadline: ::core::option::Option<::prost_types::Duration>,
+    pub attempt_deadline: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Immutable. This field is used to manage the legacy App Engine Cron jobs
     /// using the Cloud Scheduler API. If the field is set to true, the job will be
     /// considered a legacy job. Note that App Engine Cron jobs have fewer
@@ -531,6 +540,7 @@ pub struct Job {
 /// Nested message and enum types in `Job`.
 pub mod job {
     /// State of the job.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -591,6 +601,7 @@ pub mod job {
     /// Required.
     ///
     /// Delivery settings containing destination and parameters.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
@@ -611,8 +622,9 @@ pub mod job {
 /// an acknowledgement is not received from the handler, then it will be retried
 /// with exponential backoff according to the settings in
 /// [RetryConfig][google.cloud.scheduler.v1beta1.RetryConfig].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryConfig {
     /// The number of attempts that the system will make to run a job using the
     /// exponential backoff procedure described by
@@ -640,19 +652,19 @@ pub struct RetryConfig {
     /// The default value for max_retry_duration is zero, which means retry
     /// duration is unlimited.
     #[prost(message, optional, tag = "2")]
-    pub max_retry_duration: ::core::option::Option<::prost_types::Duration>,
+    pub max_retry_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The minimum amount of time to wait before retrying a job after
     /// it fails.
     ///
     /// The default value of this field is 5 seconds.
     #[prost(message, optional, tag = "3")]
-    pub min_backoff_duration: ::core::option::Option<::prost_types::Duration>,
+    pub min_backoff_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The maximum amount of time to wait before retrying a job after
     /// it fails.
     ///
     /// The default value of this field is 1 hour.
     #[prost(message, optional, tag = "4")]
-    pub max_backoff_duration: ::core::option::Option<::prost_types::Duration>,
+    pub max_backoff_duration: ::core::option::Option<::prost_wkt_types::Duration>,
     /// The time between retries will double `max_doublings` times.
     ///
     /// A job's retry interval starts at
@@ -682,6 +694,7 @@ pub struct RetryConfig {
 }
 /// Request message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsRequest {
@@ -727,6 +740,7 @@ pub struct ListJobsRequest {
 }
 /// Response message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1beta1.CloudScheduler.ListJobs].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsResponse {
@@ -746,6 +760,7 @@ pub struct ListJobsResponse {
 }
 /// Request message for
 /// [GetJob][google.cloud.scheduler.v1beta1.CloudScheduler.GetJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetJobRequest {
@@ -756,6 +771,7 @@ pub struct GetJobRequest {
 }
 /// Request message for
 /// [CreateJob][google.cloud.scheduler.v1beta1.CloudScheduler.CreateJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateJobRequest {
@@ -774,6 +790,7 @@ pub struct CreateJobRequest {
 }
 /// Request message for
 /// [UpdateJob][google.cloud.scheduler.v1beta1.CloudScheduler.UpdateJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateJobRequest {
@@ -786,10 +803,11 @@ pub struct UpdateJobRequest {
     pub job: ::core::option::Option<Job>,
     /// A  mask used to specify which fields of the job are being updated.
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// Request message for deleting a job using
 /// [DeleteJob][google.cloud.scheduler.v1beta1.CloudScheduler.DeleteJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteJobRequest {
@@ -805,6 +823,7 @@ pub struct DeleteJobRequest {
 }
 /// Request message for
 /// [PauseJob][google.cloud.scheduler.v1beta1.CloudScheduler.PauseJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseJobRequest {
@@ -815,6 +834,7 @@ pub struct PauseJobRequest {
 }
 /// Request message for
 /// [ResumeJob][google.cloud.scheduler.v1beta1.CloudScheduler.ResumeJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeJobRequest {
@@ -825,6 +845,7 @@ pub struct ResumeJobRequest {
 }
 /// Request message for forcing a job to run now using
 /// [RunJob][google.cloud.scheduler.v1beta1.CloudScheduler.RunJob].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunJobRequest {
@@ -1053,7 +1074,10 @@ pub mod cloud_scheduler_client {
         pub async fn delete_job(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteJobRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

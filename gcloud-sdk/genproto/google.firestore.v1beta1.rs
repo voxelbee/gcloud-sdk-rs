@@ -4,6 +4,7 @@
 /// fields.
 /// This is different from standard field masks, as this is always scoped to a
 /// [Document][google.firestore.v1beta1.Document], and takes in account the dynamic nature of [Value][google.firestore.v1beta1.Value].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentMask {
@@ -13,8 +14,9 @@ pub struct DocumentMask {
     pub field_paths: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A precondition on a document, used for conditional operations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Precondition {
     /// The type of precondition.
     #[prost(oneof = "precondition::ConditionType", tags = "1, 2")]
@@ -23,8 +25,9 @@ pub struct Precondition {
 /// Nested message and enum types in `Precondition`.
 pub mod precondition {
     /// The type of precondition.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ConditionType {
         /// When set to `true`, the target document must exist.
         /// When set to `false`, the target document must not exist.
@@ -33,10 +36,11 @@ pub mod precondition {
         /// When set, the target document must exist and have been last updated at
         /// that time.
         #[prost(message, tag = "2")]
-        UpdateTime(::prost_types::Timestamp),
+        UpdateTime(::prost_wkt_types::Timestamp),
     }
 }
 /// Options for creating a new transaction.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionOptions {
@@ -47,6 +51,7 @@ pub struct TransactionOptions {
 /// Nested message and enum types in `TransactionOptions`.
 pub mod transaction_options {
     /// Options for a transaction that can be used to read and write documents.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadWrite {
@@ -55,8 +60,9 @@ pub mod transaction_options {
         pub retry_transaction: ::prost::alloc::vec::Vec<u8>,
     }
     /// Options for a transaction that can only be used to read documents.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReadOnly {
         /// The consistency mode for this transaction. If not set, defaults to strong
         /// consistency.
@@ -67,16 +73,18 @@ pub mod transaction_options {
     pub mod read_only {
         /// The consistency mode for this transaction. If not set, defaults to strong
         /// consistency.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum ConsistencySelector {
             /// Reads documents at the given time.
             /// This may not be older than 60 seconds.
             #[prost(message, tag = "2")]
-            ReadTime(::prost_types::Timestamp),
+            ReadTime(::prost_wkt_types::Timestamp),
         }
     }
     /// The mode of the transaction.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mode {
@@ -91,6 +99,7 @@ pub mod transaction_options {
 /// A Firestore document.
 ///
 /// Must not exceed 1 MiB - 4 bytes.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Document {
@@ -130,16 +139,17 @@ pub struct Document {
     /// recreated. It can also be compared to values from other documents and
     /// the `read_time` of a query.
     #[prost(message, optional, tag = "3")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// Output only. The time at which the document was last changed.
     ///
     /// This value is initially set to the `create_time` then increases
     /// monotonically with each change to the document. It can also be
     /// compared to values from other documents and the `read_time` of a query.
     #[prost(message, optional, tag = "4")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A message that can hold any of the supported value types.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Value {
@@ -150,11 +160,12 @@ pub struct Value {
 /// Nested message and enum types in `Value`.
 pub mod value {
     /// Must have a value set.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ValueType {
         /// A null value.
-        #[prost(enumeration = "::prost_types::NullValue", tag = "11")]
+        #[prost(enumeration = "::prost_wkt_types::NullValue", tag = "11")]
         NullValue(i32),
         /// A boolean value.
         #[prost(bool, tag = "1")]
@@ -170,7 +181,7 @@ pub mod value {
         /// Precise only to microseconds. When stored, any additional precision is
         /// rounded down.
         #[prost(message, tag = "10")]
-        TimestampValue(::prost_types::Timestamp),
+        TimestampValue(::prost_wkt_types::Timestamp),
         /// A string value.
         ///
         /// The string, represented as UTF-8, must not exceed 1 MiB - 89 bytes.
@@ -203,6 +214,7 @@ pub mod value {
     }
 }
 /// An array value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrayValue {
@@ -211,6 +223,7 @@ pub struct ArrayValue {
     pub values: ::prost::alloc::vec::Vec<Value>,
 }
 /// A map value.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MapValue {
@@ -224,6 +237,7 @@ pub struct MapValue {
     pub fields: ::std::collections::HashMap<::prost::alloc::string::String, Value>,
 }
 /// A Firestore query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StructuredQuery {
@@ -273,11 +287,12 @@ pub struct StructuredQuery {
     /// Applies after all other constraints.
     /// Must be >= 0 if specified.
     #[prost(message, optional, tag = "5")]
-    pub limit: ::core::option::Option<i32>,
+    pub limit: ::core::option::Option<pb::Int32Value>,
 }
 /// Nested message and enum types in `StructuredQuery`.
 pub mod structured_query {
     /// A selection of a collection, such as `messages as m1`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CollectionSelector {
@@ -292,6 +307,7 @@ pub mod structured_query {
         pub all_descendants: bool,
     }
     /// A filter.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Filter {
@@ -302,6 +318,7 @@ pub mod structured_query {
     /// Nested message and enum types in `Filter`.
     pub mod filter {
         /// The type of filter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum FilterType {
@@ -317,6 +334,7 @@ pub mod structured_query {
         }
     }
     /// A filter that merges multiple other filters using the given operator.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CompositeFilter {
@@ -331,6 +349,7 @@ pub mod structured_query {
     /// Nested message and enum types in `CompositeFilter`.
     pub mod composite_filter {
         /// A composite filter operator.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -371,6 +390,7 @@ pub mod structured_query {
         }
     }
     /// A filter on a specific field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldFilter {
@@ -387,6 +407,7 @@ pub mod structured_query {
     /// Nested message and enum types in `FieldFilter`.
     pub mod field_filter {
         /// A field filter operator.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -502,6 +523,7 @@ pub mod structured_query {
         }
     }
     /// A filter with a single operand.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UnaryFilter {
@@ -515,6 +537,7 @@ pub mod structured_query {
     /// Nested message and enum types in `UnaryFilter`.
     pub mod unary_filter {
         /// A unary operator.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -576,6 +599,7 @@ pub mod structured_query {
             }
         }
         /// The argument to the filter.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum OperandType {
@@ -585,6 +609,7 @@ pub mod structured_query {
         }
     }
     /// A reference to a field, such as `max(messages.time) as max_time`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldReference {
@@ -592,6 +617,7 @@ pub mod structured_query {
         pub field_path: ::prost::alloc::string::String,
     }
     /// An order on a field.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Order {
@@ -603,6 +629,7 @@ pub mod structured_query {
         pub direction: i32,
     }
     /// The projection of document's fields to return.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Projection {
@@ -614,6 +641,7 @@ pub mod structured_query {
         pub fields: ::prost::alloc::vec::Vec<FieldReference>,
     }
     /// A sort direction.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -658,6 +686,7 @@ pub mod structured_query {
     }
 }
 /// A position in a query result set.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Cursor {
@@ -673,6 +702,7 @@ pub struct Cursor {
     pub before: bool,
 }
 /// A write on a document.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Write {
@@ -707,6 +737,7 @@ pub struct Write {
 /// Nested message and enum types in `Write`.
 pub mod write {
     /// The operation to execute.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Operation {
@@ -723,6 +754,7 @@ pub mod write {
     }
 }
 /// A transformation of a document.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentTransform {
@@ -738,6 +770,7 @@ pub struct DocumentTransform {
 /// Nested message and enum types in `DocumentTransform`.
 pub mod document_transform {
     /// A transformation of a field of the document.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldTransform {
@@ -752,6 +785,7 @@ pub mod document_transform {
     /// Nested message and enum types in `FieldTransform`.
     pub mod field_transform {
         /// A value that is calculated by the server.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[derive(
             Clone,
             Copy,
@@ -793,6 +827,7 @@ pub mod document_transform {
             }
         }
         /// The transformation to apply on the field.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum TransformType {
@@ -869,6 +904,7 @@ pub mod document_transform {
     }
 }
 /// The result of applying a write.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteResult {
@@ -878,7 +914,7 @@ pub struct WriteResult {
     /// If the write did not actually change the document, this will be the
     /// previous update_time.
     #[prost(message, optional, tag = "1")]
-    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub update_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The results of applying each [DocumentTransform.FieldTransform][google.firestore.v1beta1.DocumentTransform.FieldTransform], in the
     /// same order.
     #[prost(message, repeated, tag = "2")]
@@ -891,6 +927,7 @@ pub struct WriteResult {
 ///
 /// Multiple [DocumentChange][google.firestore.v1beta1.DocumentChange] messages may be returned for the same logical
 /// change, if multiple targets are affected.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentChange {
@@ -913,6 +950,7 @@ pub struct DocumentChange {
 ///
 /// Multiple [DocumentDelete][google.firestore.v1beta1.DocumentDelete] messages may be returned for the same logical
 /// delete, if multiple targets are affected.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentDelete {
@@ -926,7 +964,7 @@ pub struct DocumentDelete {
     ///
     /// Greater or equal to the `commit_time` of the delete.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A [Document][google.firestore.v1beta1.Document] has been removed from the view of the targets.
 ///
@@ -936,6 +974,7 @@ pub struct DocumentDelete {
 ///
 /// Multiple [DocumentRemove][google.firestore.v1beta1.DocumentRemove] messages may be returned for the same logical
 /// write or delete, if multiple targets are affected.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentRemove {
@@ -949,11 +988,12 @@ pub struct DocumentRemove {
     ///
     /// Greater or equal to the `commit_time` of the change/delete/remove.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A digest of all the documents that match a given target.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExistenceFilter {
     /// The target ID to which this filter applies.
     #[prost(int32, tag = "1")]
@@ -966,6 +1006,7 @@ pub struct ExistenceFilter {
     pub count: i32,
 }
 /// The request for [Firestore.GetDocument][google.firestore.v1beta1.Firestore.GetDocument].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDocumentRequest {
@@ -990,6 +1031,7 @@ pub struct GetDocumentRequest {
 pub mod get_document_request {
     /// The consistency mode for this transaction.
     /// If not set, defaults to strong consistency.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConsistencySelector {
@@ -999,10 +1041,11 @@ pub mod get_document_request {
         /// Reads the version of the document at the given time.
         /// This may not be older than 270 seconds.
         #[prost(message, tag = "5")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// The request for [Firestore.ListDocuments][google.firestore.v1beta1.Firestore.ListDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsRequest {
@@ -1053,6 +1096,7 @@ pub struct ListDocumentsRequest {
 pub mod list_documents_request {
     /// The consistency mode for this transaction.
     /// If not set, defaults to strong consistency.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConsistencySelector {
@@ -1062,10 +1106,11 @@ pub mod list_documents_request {
         /// Reads documents as they were at the given time.
         /// This may not be older than 270 seconds.
         #[prost(message, tag = "10")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// The response for [Firestore.ListDocuments][google.firestore.v1beta1.Firestore.ListDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsResponse {
@@ -1077,6 +1122,7 @@ pub struct ListDocumentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request for [Firestore.CreateDocument][google.firestore.v1beta1.Firestore.CreateDocument].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDocumentRequest {
@@ -1104,6 +1150,7 @@ pub struct CreateDocumentRequest {
     pub mask: ::core::option::Option<DocumentMask>,
 }
 /// The request for [Firestore.UpdateDocument][google.firestore.v1beta1.Firestore.UpdateDocument].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDocumentRequest {
@@ -1132,6 +1179,7 @@ pub struct UpdateDocumentRequest {
     pub current_document: ::core::option::Option<Precondition>,
 }
 /// The request for [Firestore.DeleteDocument][google.firestore.v1beta1.Firestore.DeleteDocument].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDocumentRequest {
@@ -1145,6 +1193,7 @@ pub struct DeleteDocumentRequest {
     pub current_document: ::core::option::Option<Precondition>,
 }
 /// The request for [Firestore.BatchGetDocuments][google.firestore.v1beta1.Firestore.BatchGetDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetDocumentsRequest {
@@ -1178,6 +1227,7 @@ pub struct BatchGetDocumentsRequest {
 pub mod batch_get_documents_request {
     /// The consistency mode for this transaction.
     /// If not set, defaults to strong consistency.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConsistencySelector {
@@ -1193,10 +1243,11 @@ pub mod batch_get_documents_request {
         /// Reads documents as they were at the given time.
         /// This may not be older than 270 seconds.
         #[prost(message, tag = "7")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// The streamed response for [Firestore.BatchGetDocuments][google.firestore.v1beta1.Firestore.BatchGetDocuments].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetDocumentsResponse {
@@ -1210,7 +1261,7 @@ pub struct BatchGetDocumentsResponse {
     /// the result stream are guaranteed not to have changed between their
     /// read_time and this one.
     #[prost(message, optional, tag = "4")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A single result.
     /// This can be empty if the server is just returning a transaction.
     #[prost(oneof = "batch_get_documents_response::Result", tags = "1, 2")]
@@ -1220,6 +1271,7 @@ pub struct BatchGetDocumentsResponse {
 pub mod batch_get_documents_response {
     /// A single result.
     /// This can be empty if the server is just returning a transaction.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
@@ -1233,6 +1285,7 @@ pub mod batch_get_documents_response {
     }
 }
 /// The request for [Firestore.BeginTransaction][google.firestore.v1beta1.Firestore.BeginTransaction].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionRequest {
@@ -1246,6 +1299,7 @@ pub struct BeginTransactionRequest {
     pub options: ::core::option::Option<TransactionOptions>,
 }
 /// The response for [Firestore.BeginTransaction][google.firestore.v1beta1.Firestore.BeginTransaction].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionResponse {
@@ -1254,6 +1308,7 @@ pub struct BeginTransactionResponse {
     pub transaction: ::prost::alloc::vec::Vec<u8>,
 }
 /// The request for [Firestore.Commit][google.firestore.v1beta1.Firestore.Commit].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitRequest {
@@ -1271,6 +1326,7 @@ pub struct CommitRequest {
     pub transaction: ::prost::alloc::vec::Vec<u8>,
 }
 /// The response for [Firestore.Commit][google.firestore.v1beta1.Firestore.Commit].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitResponse {
@@ -1283,9 +1339,10 @@ pub struct CommitResponse {
     /// The time at which the commit occurred. Any read with an equal or greater
     /// `read_time` is guaranteed to see the effects of the commit.
     #[prost(message, optional, tag = "2")]
-    pub commit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub commit_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// The request for [Firestore.Rollback][google.firestore.v1beta1.Firestore.Rollback].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackRequest {
@@ -1298,6 +1355,7 @@ pub struct RollbackRequest {
     pub transaction: ::prost::alloc::vec::Vec<u8>,
 }
 /// The request for [Firestore.RunQuery][google.firestore.v1beta1.Firestore.RunQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunQueryRequest {
@@ -1322,6 +1380,7 @@ pub struct RunQueryRequest {
 /// Nested message and enum types in `RunQueryRequest`.
 pub mod run_query_request {
     /// The query to run.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum QueryType {
@@ -1331,6 +1390,7 @@ pub mod run_query_request {
     }
     /// The consistency mode for this transaction.
     /// If not set, defaults to strong consistency.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ConsistencySelector {
@@ -1346,10 +1406,11 @@ pub mod run_query_request {
         /// Reads documents as they were at the given time.
         /// This may not be older than 270 seconds.
         #[prost(message, tag = "7")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// The response for [Firestore.RunQuery][google.firestore.v1beta1.Firestore.RunQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunQueryResponse {
@@ -1371,13 +1432,14 @@ pub struct RunQueryResponse {
     /// `document` will be sent, and this represents the time at which the query
     /// was run.
     #[prost(message, optional, tag = "3")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The number of results that have been skipped due to an offset between
     /// the last response and the current response.
     #[prost(int32, tag = "4")]
     pub skipped_results: i32,
 }
 /// The request for [Firestore.PartitionQuery][google.firestore.v1beta1.Firestore.PartitionQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionQueryRequest {
@@ -1428,6 +1490,7 @@ pub struct PartitionQueryRequest {
 /// Nested message and enum types in `PartitionQueryRequest`.
 pub mod partition_query_request {
     /// The query to partition.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum QueryType {
@@ -1440,6 +1503,7 @@ pub mod partition_query_request {
     }
 }
 /// The response for [Firestore.PartitionQuery][google.firestore.v1beta1.Firestore.PartitionQuery].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionQueryResponse {
@@ -1478,6 +1542,7 @@ pub struct PartitionQueryResponse {
 /// When resuming a stream, the server first streams any responses later than the
 /// given token, then a response containing only an up-to-date token, to use in
 /// the next request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteRequest {
@@ -1523,6 +1588,7 @@ pub struct WriteRequest {
     >,
 }
 /// The response for [Firestore.Write][google.firestore.v1beta1.Firestore.Write].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteResponse {
@@ -1545,9 +1611,10 @@ pub struct WriteResponse {
     /// The time at which the commit occurred. Any read with an equal or greater
     /// `read_time` is guaranteed to see the effects of the write.
     #[prost(message, optional, tag = "4")]
-    pub commit_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub commit_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// A request for [Firestore.Listen][google.firestore.v1beta1.Firestore.Listen]
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListenRequest {
@@ -1568,6 +1635,7 @@ pub struct ListenRequest {
 /// Nested message and enum types in `ListenRequest`.
 pub mod listen_request {
     /// The supported target changes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TargetChange {
@@ -1580,6 +1648,7 @@ pub mod listen_request {
     }
 }
 /// The response for [Firestore.Listen][google.firestore.v1beta1.Firestore.Listen].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListenResponse {
@@ -1590,6 +1659,7 @@ pub struct ListenResponse {
 /// Nested message and enum types in `ListenResponse`.
 pub mod listen_response {
     /// The supported responses.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ResponseType {
@@ -1616,6 +1686,7 @@ pub mod listen_response {
     }
 }
 /// A specification of a set of documents to listen to.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Target {
@@ -1639,6 +1710,7 @@ pub struct Target {
 /// Nested message and enum types in `Target`.
 pub mod target {
     /// A target specified by a set of documents names.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DocumentsTarget {
@@ -1650,6 +1722,7 @@ pub mod target {
         pub documents: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// A target specified by a query.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct QueryTarget {
@@ -1668,6 +1741,7 @@ pub mod target {
     /// Nested message and enum types in `QueryTarget`.
     pub mod query_target {
         /// The query to run.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum QueryType {
@@ -1677,6 +1751,7 @@ pub mod target {
         }
     }
     /// The type of target to listen to.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TargetType {
@@ -1691,6 +1766,7 @@ pub mod target {
     ///
     /// If not specified, all matching Documents are returned before any
     /// subsequent changes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ResumeType {
@@ -1703,10 +1779,11 @@ pub mod target {
         ///
         /// The client must know the state of matching documents at this time.
         #[prost(message, tag = "11")]
-        ReadTime(::prost_types::Timestamp),
+        ReadTime(::prost_wkt_types::Timestamp),
     }
 }
 /// Targets being watched have changed.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetChange {
@@ -1740,11 +1817,12 @@ pub struct TargetChange {
     /// For a given stream, `read_time` is guaranteed to be monotonically
     /// increasing.
     #[prost(message, optional, tag = "6")]
-    pub read_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub read_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `TargetChange`.
 pub mod target_change {
     /// The type of change.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1808,6 +1886,7 @@ pub mod target_change {
     }
 }
 /// The request for [Firestore.ListCollectionIds][google.firestore.v1beta1.Firestore.ListCollectionIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCollectionIdsRequest {
@@ -1826,6 +1905,7 @@ pub struct ListCollectionIdsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response from [Firestore.ListCollectionIds][google.firestore.v1beta1.Firestore.ListCollectionIds].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCollectionIdsResponse {
@@ -1837,6 +1917,7 @@ pub struct ListCollectionIdsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request for [Firestore.BatchWrite][google.firestore.v1beta1.Firestore.BatchWrite].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchWriteRequest {
@@ -1859,6 +1940,7 @@ pub struct BatchWriteRequest {
     >,
 }
 /// The response from [Firestore.BatchWrite][google.firestore.v1beta1.Firestore.BatchWrite].
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchWriteResponse {
@@ -2056,7 +2138,10 @@ pub mod firestore_client {
         pub async fn delete_document(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteDocumentRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2172,7 +2257,10 @@ pub mod firestore_client {
         pub async fn rollback(
             &mut self,
             request: impl tonic::IntoRequest<super::RollbackRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2406,6 +2494,7 @@ pub mod firestore_client {
 /// A message signifying an event that cannot be delivered to Cloud Functions
 /// from Firestore using [Cloud Firestore triggers 1st
 /// gen](<https://cloud.google.com/functions/docs/calling/cloud-firestore>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeliverableFirstGenEvent {
@@ -2430,11 +2519,12 @@ pub struct UndeliverableFirstGenEvent {
     pub function_name: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The commit time of triggered write operation.
     #[prost(message, optional, tag = "6")]
-    pub triggered_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub triggered_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
 }
 /// Nested message and enum types in `UndeliverableFirstGenEvent`.
 pub mod undeliverable_first_gen_event {
     /// Reason for events being undeliverable.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -2474,6 +2564,7 @@ pub mod undeliverable_first_gen_event {
         }
     }
     /// Document change type.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,

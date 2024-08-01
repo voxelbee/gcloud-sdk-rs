@@ -2,6 +2,7 @@
 /// Audit log information specific to Cloud IAM admin APIs. This message is
 /// serialized as an `Any` type in the `ServiceData` message of an
 /// `AuditLog` message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuditData {
@@ -13,6 +14,7 @@ pub struct AuditData {
 pub mod audit_data {
     /// A PermissionDelta message to record the added_permissions and
     /// removed_permissions inside a role.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PermissionDelta {
@@ -37,6 +39,7 @@ pub mod audit_data {
 /// service account, as well as a name that must be unique within the project.
 /// IAM uses these values to create an email address that identifies the service
 /// account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccount {
@@ -95,6 +98,7 @@ pub struct ServiceAccount {
     pub disabled: bool,
 }
 /// The service account create request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServiceAccountRequest {
@@ -115,6 +119,7 @@ pub struct CreateServiceAccountRequest {
     pub service_account: ::core::option::Option<ServiceAccount>,
 }
 /// The service account list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServiceAccountsRequest {
@@ -136,6 +141,7 @@ pub struct ListServiceAccountsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The service account list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServiceAccountsResponse {
@@ -149,6 +155,7 @@ pub struct ListServiceAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The service account get request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServiceAccountRequest {
@@ -161,6 +168,7 @@ pub struct GetServiceAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The service account delete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServiceAccountRequest {
@@ -179,15 +187,17 @@ pub struct DeleteServiceAccountRequest {
 ///
 /// Only the fields specified in the request are guaranteed to be returned in
 /// the response. Other fields may be empty in the response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchServiceAccountRequest {
     #[prost(message, optional, tag = "1")]
     pub service_account: ::core::option::Option<ServiceAccount>,
     #[prost(message, optional, tag = "2")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The service account undelete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteServiceAccountRequest {
@@ -198,6 +208,7 @@ pub struct UndeleteServiceAccountRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteServiceAccountResponse {
@@ -206,6 +217,7 @@ pub struct UndeleteServiceAccountResponse {
     pub restored_account: ::core::option::Option<ServiceAccount>,
 }
 /// The service account enable request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableServiceAccountRequest {
@@ -218,6 +230,7 @@ pub struct EnableServiceAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The service account disable request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableServiceAccountRequest {
@@ -230,6 +243,7 @@ pub struct DisableServiceAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The service account keys list request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServiceAccountKeysRequest {
@@ -255,6 +269,7 @@ pub struct ListServiceAccountKeysRequest {
 pub mod list_service_account_keys_request {
     /// `KeyType` filters to selectively retrieve certain varieties
     /// of keys.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -300,6 +315,7 @@ pub mod list_service_account_keys_request {
     }
 }
 /// The service account keys list response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListServiceAccountKeysResponse {
@@ -308,6 +324,7 @@ pub struct ListServiceAccountKeysResponse {
     pub keys: ::prost::alloc::vec::Vec<ServiceAccountKey>,
 }
 /// The service account key get by id request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetServiceAccountKeyRequest {
@@ -348,6 +365,7 @@ pub struct GetServiceAccountKeyRequest {
 ///
 /// Public keys for all service accounts are also published at the OAuth2
 /// Service Account API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccountKey {
@@ -380,13 +398,13 @@ pub struct ServiceAccountKey {
     pub public_key_data: ::prost::alloc::vec::Vec<u8>,
     /// The key can be used after this timestamp.
     #[prost(message, optional, tag = "4")]
-    pub valid_after_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub valid_after_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The key can be used before this timestamp.
     /// For system-managed key pairs, this timestamp is the end time for the
     /// private key signing operation. The public key could still be used
     /// for verification for a few hours after this time.
     #[prost(message, optional, tag = "5")]
-    pub valid_before_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub valid_before_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The key origin.
     #[prost(enumeration = "ServiceAccountKeyOrigin", tag = "9")]
     pub key_origin: i32,
@@ -398,6 +416,7 @@ pub struct ServiceAccountKey {
     pub disabled: bool,
 }
 /// The service account key create request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateServiceAccountKeyRequest {
@@ -420,6 +439,7 @@ pub struct CreateServiceAccountKeyRequest {
     pub key_algorithm: i32,
 }
 /// The service account key upload request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadServiceAccountKeyRequest {
@@ -438,6 +458,7 @@ pub struct UploadServiceAccountKeyRequest {
     pub public_key_data: ::prost::alloc::vec::Vec<u8>,
 }
 /// The service account key delete request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteServiceAccountKeyRequest {
@@ -450,6 +471,7 @@ pub struct DeleteServiceAccountKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The service account key disable request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableServiceAccountKeyRequest {
@@ -463,6 +485,7 @@ pub struct DisableServiceAccountKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The service account key enable request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableServiceAccountKeyRequest {
@@ -479,6 +502,7 @@ pub struct EnableServiceAccountKeyRequest {
 /// API](<https://cloud.google.com/iam/help/credentials/migrate-api>).
 ///
 /// The service account sign blob request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignBlobRequest {
@@ -505,6 +529,7 @@ pub struct SignBlobRequest {
 /// API](<https://cloud.google.com/iam/help/credentials/migrate-api>).
 ///
 /// The service account sign blob response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignBlobResponse {
@@ -527,6 +552,7 @@ pub struct SignBlobResponse {
 /// API](<https://cloud.google.com/iam/help/credentials/migrate-api>).
 ///
 /// The service account sign JWT request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignJwtRequest {
@@ -562,6 +588,7 @@ pub struct SignJwtRequest {
 /// API](<https://cloud.google.com/iam/help/credentials/migrate-api>).
 ///
 /// The service account sign JWT response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignJwtResponse {
@@ -581,6 +608,7 @@ pub struct SignJwtResponse {
     pub signed_jwt: ::prost::alloc::string::String,
 }
 /// A role in the Identity and Access Management API.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Role {
@@ -619,6 +647,7 @@ pub struct Role {
 /// Nested message and enum types in `Role`.
 pub mod role {
     /// A stage representing a role's lifecycle phase.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -678,6 +707,7 @@ pub mod role {
     }
 }
 /// The grantable role query request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryGrantableRolesRequest {
@@ -701,6 +731,7 @@ pub struct QueryGrantableRolesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The grantable role query response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryGrantableRolesResponse {
@@ -713,6 +744,7 @@ pub struct QueryGrantableRolesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to get all roles defined under a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesRequest {
@@ -767,6 +799,7 @@ pub struct ListRolesRequest {
     pub show_deleted: bool,
 }
 /// The response containing the roles defined under a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolesResponse {
@@ -779,6 +812,7 @@ pub struct ListRolesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request to get the definition of an existing role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRoleRequest {
@@ -817,6 +851,7 @@ pub struct GetRoleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request to create a new role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRoleRequest {
@@ -857,6 +892,7 @@ pub struct CreateRoleRequest {
     pub role: ::core::option::Option<Role>,
 }
 /// The request to update a role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateRoleRequest {
@@ -890,9 +926,10 @@ pub struct UpdateRoleRequest {
     pub role: ::core::option::Option<Role>,
     /// A mask describing which fields in the Role have changed.
     #[prost(message, optional, tag = "3")]
-    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    pub update_mask: ::core::option::Option<::prost_wkt_types::FieldMask>,
 }
 /// The request to delete an existing role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRoleRequest {
@@ -926,6 +963,7 @@ pub struct DeleteRoleRequest {
     pub etag: ::prost::alloc::vec::Vec<u8>,
 }
 /// The request to undelete an existing role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteRoleRequest {
@@ -959,6 +997,7 @@ pub struct UndeleteRoleRequest {
     pub etag: ::prost::alloc::vec::Vec<u8>,
 }
 /// A permission which can be included by a role.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Permission {
@@ -992,6 +1031,7 @@ pub struct Permission {
 /// Nested message and enum types in `Permission`.
 pub mod permission {
     /// A stage representing a permission's lifecycle phase.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1039,6 +1079,7 @@ pub mod permission {
         }
     }
     /// The state of the permission with regards to custom roles.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1083,6 +1124,7 @@ pub mod permission {
     }
 }
 /// A request to get permissions which can be tested on a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryTestablePermissionsRequest {
@@ -1105,6 +1147,7 @@ pub struct QueryTestablePermissionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// The response containing permissions which can be tested on a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryTestablePermissionsResponse {
@@ -1117,6 +1160,7 @@ pub struct QueryTestablePermissionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A request to get the list of auditable services for a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryAuditableServicesRequest {
@@ -1130,6 +1174,7 @@ pub struct QueryAuditableServicesRequest {
     pub full_resource_name: ::prost::alloc::string::String,
 }
 /// A response containing a list of auditable services for a resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryAuditableServicesResponse {
@@ -1142,6 +1187,7 @@ pub struct QueryAuditableServicesResponse {
 /// Nested message and enum types in `QueryAuditableServicesResponse`.
 pub mod query_auditable_services_response {
     /// Contains information about an auditable service.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AuditableService {
@@ -1152,6 +1198,7 @@ pub mod query_auditable_services_response {
     }
 }
 /// The request to lint a Cloud IAM policy object.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LintPolicyRequest {
@@ -1173,6 +1220,7 @@ pub struct LintPolicyRequest {
 /// Nested message and enum types in `LintPolicyRequest`.
 pub mod lint_policy_request {
     /// Required. The Cloud IAM object to be linted.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LintObject {
@@ -1182,6 +1230,7 @@ pub mod lint_policy_request {
     }
 }
 /// Structured response of a single validation unit.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LintResult {
@@ -1217,6 +1266,7 @@ pub struct LintResult {
 pub mod lint_result {
     /// Possible Level values of a validation unit corresponding to its domain
     /// of discourse.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1257,6 +1307,7 @@ pub mod lint_result {
         }
     }
     /// Possible Severity values of an issued result.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -1329,6 +1380,7 @@ pub mod lint_result {
 }
 /// The response of a lint operation. An empty response indicates
 /// the operation was able to fully execute and no lint issue was found.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LintPolicyResponse {
@@ -1337,6 +1389,7 @@ pub struct LintPolicyResponse {
     pub lint_results: ::prost::alloc::vec::Vec<LintResult>,
 }
 /// Supported key algorithms.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ServiceAccountKeyAlgorithm {
@@ -1370,6 +1423,7 @@ impl ServiceAccountKeyAlgorithm {
     }
 }
 /// Supported private key output formats.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ServiceAccountPrivateKeyType {
@@ -1407,6 +1461,7 @@ impl ServiceAccountPrivateKeyType {
     }
 }
 /// Supported public key output formats.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ServiceAccountPublicKeyType {
@@ -1440,6 +1495,7 @@ impl ServiceAccountPublicKeyType {
     }
 }
 /// Service Account Key Origin.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum ServiceAccountKeyOrigin {
@@ -1473,6 +1529,7 @@ impl ServiceAccountKeyOrigin {
     }
 }
 /// A view for Role objects.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum RoleView {
@@ -1765,7 +1822,10 @@ pub mod iam_client {
         pub async fn delete_service_account(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteServiceAccountRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1832,7 +1892,10 @@ pub mod iam_client {
         pub async fn enable_service_account(
             &mut self,
             request: impl tonic::IntoRequest<super::EnableServiceAccountRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -1872,7 +1935,10 @@ pub mod iam_client {
         pub async fn disable_service_account(
             &mut self,
             request: impl tonic::IntoRequest<super::DisableServiceAccountRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2015,7 +2081,10 @@ pub mod iam_client {
         pub async fn delete_service_account_key(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteServiceAccountKeyRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2041,7 +2110,10 @@ pub mod iam_client {
         pub async fn disable_service_account_key(
             &mut self,
             request: impl tonic::IntoRequest<super::DisableServiceAccountKeyRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -2069,7 +2141,10 @@ pub mod iam_client {
         pub async fn enable_service_account_key(
             &mut self,
             request: impl tonic::IntoRequest<super::EnableServiceAccountKeyRequest>,
-        ) -> std::result::Result<tonic::Response<()>, tonic::Status> {
+        ) -> std::result::Result<
+            tonic::Response<::prost_wkt_types::Empty>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

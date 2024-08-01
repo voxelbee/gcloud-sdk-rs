@@ -2,6 +2,7 @@
 /// The arguments to the `RunPipeline` method. The requesting user must have
 /// the `iam.serviceAccounts.actAs` permission for the Cloud Life Sciences
 /// service account or the request will fail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunPipelineRequest {
@@ -31,10 +32,12 @@ pub struct RunPipelineRequest {
 }
 /// The response to the RunPipeline method, returned in the operation's result
 /// field on success.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RunPipelineResponse {}
 /// Specifies a series of actions to execute, expressed as Docker containers.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pipeline {
@@ -68,9 +71,10 @@ pub struct Pipeline {
     ///
     /// If unspecified, it will default to 7 days.
     #[prost(message, optional, tag = "4")]
-    pub timeout: ::core::option::Option<::prost_types::Duration>,
+    pub timeout: ::core::option::Option<::prost_wkt_types::Duration>,
 }
 /// Specifies a single action that runs a Docker container.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Action {
@@ -194,7 +198,7 @@ pub struct Action {
     /// status will be non-zero. The pipeline will continue or terminate based
     /// on the rules defined by the `ALWAYS_RUN` and `IGNORE_EXIT_STATUS` flags.
     #[prost(message, optional, tag = "12")]
-    pub timeout: ::core::option::Option<::prost_types::Duration>,
+    pub timeout: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Normally, a non-zero exit status causes the pipeline to fail. This flag
     /// allows execution of other actions to continue instead.
     #[prost(bool, tag = "13")]
@@ -244,6 +248,7 @@ pub struct Action {
 }
 /// Holds encrypted information that is only decrypted and stored in RAM
 /// by the worker VM when running the pipeline.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Secret {
@@ -258,6 +263,7 @@ pub struct Secret {
     pub cipher_text: ::prost::alloc::string::String,
 }
 /// Carries information about a particular disk mount inside a container.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Mount {
@@ -274,6 +280,7 @@ pub struct Mount {
 /// The system resources for the pipeline run.
 ///
 /// At least one zone or region must be specified or the pipeline run will fail.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Resources {
@@ -290,6 +297,7 @@ pub struct Resources {
     pub virtual_machine: ::core::option::Option<VirtualMachine>,
 }
 /// Carries information about a Compute Engine VM resource.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VirtualMachine {
@@ -397,6 +405,7 @@ pub struct VirtualMachine {
     pub reservation: ::prost::alloc::string::String,
 }
 /// Carries information about a Google Cloud service account.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServiceAccount {
@@ -410,6 +419,7 @@ pub struct ServiceAccount {
     pub scopes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Carries information about an accelerator that can be attached to a VM.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Accelerator {
@@ -428,6 +438,7 @@ pub struct Accelerator {
     pub count: i64,
 }
 /// VM networking options.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Network {
@@ -465,6 +476,7 @@ pub struct Network {
 ///
 /// Specify either [`Volume`][google.cloud.lifesciences.v2beta.Volume] or
 /// [`Disk`][google.cloud.lifesciences.v2beta.Disk], but not both.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Disk {
@@ -493,6 +505,7 @@ pub struct Disk {
 ///
 /// Specify either [`Volume`][google.cloud.lifesciences.v2beta.Volume] or
 /// [`Disk`][google.cloud.lifesciences.v2beta.Disk], but not both.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Volume {
@@ -507,6 +520,7 @@ pub struct Volume {
 }
 /// Nested message and enum types in `Volume`.
 pub mod volume {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Storage {
@@ -525,6 +539,7 @@ pub mod volume {
 ///
 /// See <https://cloud.google.com/compute/docs/disks/performance> for more
 /// information about disk type, size, and performance considerations.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PersistentDisk {
@@ -545,6 +560,7 @@ pub struct PersistentDisk {
     pub source_image: ::prost::alloc::string::String,
 }
 /// Configuration for an existing disk to be attached to the VM.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExistingDisk {
@@ -562,6 +578,7 @@ pub struct ExistingDisk {
     pub disk: ::prost::alloc::string::String,
 }
 /// Configuration for an `NFSMount` to be attached to the VM.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NfsMount {
@@ -571,6 +588,7 @@ pub struct NfsMount {
 }
 /// Carries information about the pipeline execution that is returned
 /// in the long running operation's metadata field.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metadata {
@@ -589,25 +607,26 @@ pub struct Metadata {
     pub events: ::prost::alloc::vec::Vec<Event>,
     /// The time at which the operation was created by the API.
     #[prost(message, optional, tag = "4")]
-    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub create_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The first time at which resources were allocated to execute the pipeline.
     #[prost(message, optional, tag = "5")]
-    pub start_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub start_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The time at which execution was completed and resources were cleaned up.
     #[prost(message, optional, tag = "6")]
-    pub end_time: ::core::option::Option<::prost_types::Timestamp>,
+    pub end_time: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// The name of the Cloud Pub/Sub topic where notifications of operation status
     /// changes are sent.
     #[prost(string, tag = "7")]
     pub pub_sub_topic: ::prost::alloc::string::String,
 }
 /// Carries information about events that occur during pipeline execution.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
     /// The time at which the event occurred.
     #[prost(message, optional, tag = "1")]
-    pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
+    pub timestamp: ::core::option::Option<::prost_wkt_types::Timestamp>,
     /// A human-readable description of the event. Note that these strings can
     /// change at any time without notice. Any application logic must use the
     /// information in the `details` field.
@@ -620,6 +639,7 @@ pub struct Event {
 /// Nested message and enum types in `Event`.
 pub mod event {
     /// Machine-readable details about the event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Details {
@@ -667,6 +687,7 @@ pub mod event {
 }
 /// An event generated whenever a resource limitation or transient error
 /// delays execution of a pipeline that was otherwise ready to run.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DelayedEvent {
@@ -684,6 +705,7 @@ pub struct DelayedEvent {
 }
 /// An event generated after a worker VM has been assigned to run the
 /// pipeline.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerAssignedEvent {
@@ -699,6 +721,7 @@ pub struct WorkerAssignedEvent {
 }
 /// An event generated when the worker VM that was assigned to the pipeline
 /// has been released (deleted).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WorkerReleasedEvent {
@@ -710,6 +733,7 @@ pub struct WorkerReleasedEvent {
     pub instance: ::prost::alloc::string::String,
 }
 /// An event generated when the worker starts pulling an image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PullStartedEvent {
@@ -718,6 +742,7 @@ pub struct PullStartedEvent {
     pub image_uri: ::prost::alloc::string::String,
 }
 /// An event generated when the worker stops pulling an image.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PullStoppedEvent {
@@ -726,6 +751,7 @@ pub struct PullStoppedEvent {
     pub image_uri: ::prost::alloc::string::String,
 }
 /// An event generated when a container starts.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStartedEvent {
@@ -745,6 +771,7 @@ pub struct ContainerStartedEvent {
     pub ip_address: ::prost::alloc::string::String,
 }
 /// An event generated when a container exits.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContainerStoppedEvent {
@@ -769,8 +796,9 @@ pub struct ContainerStoppedEvent {
 /// non-zero exit status that was not otherwise ignored. Execution will
 /// continue, but only actions that are flagged as `ALWAYS_RUN` will be
 /// executed. Other actions will be skipped.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UnexpectedExitStatusEvent {
     /// The numeric ID of the action that started the container.
     #[prost(int32, tag = "1")]
@@ -782,8 +810,9 @@ pub struct UnexpectedExitStatusEvent {
 /// An event generated when a container is forcibly terminated by the
 /// worker. Currently, this only occurs when the container outlives the
 /// timeout specified by the user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ContainerKilledEvent {
     /// The numeric ID of the action that started the container.
     #[prost(int32, tag = "1")]
@@ -791,6 +820,7 @@ pub struct ContainerKilledEvent {
 }
 /// An event generated when the execution of a pipeline has failed. Note
 /// that other events can continue to occur after this event.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FailedEvent {

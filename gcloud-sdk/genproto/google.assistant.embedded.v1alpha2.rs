@@ -4,6 +4,7 @@
 /// contain a `config` message and must not contain `audio_in` data. All
 /// subsequent messages must contain `audio_in` data and must not contain a
 /// `config` message.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssistRequest {
@@ -14,6 +15,7 @@ pub struct AssistRequest {
 /// Nested message and enum types in `AssistRequest`.
 pub mod assist_request {
     /// Exactly one of these fields must be specified in each `AssistRequest`.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
@@ -36,6 +38,7 @@ pub mod assist_request {
 }
 /// The top-level message received by the client. A series of one or more
 /// `AssistResponse` messages are streamed back to the client.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssistResponse {
@@ -72,6 +75,7 @@ pub struct AssistResponse {
 /// Nested message and enum types in `AssistResponse`.
 pub mod assist_response {
     /// Indicates the type of event.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -118,6 +122,7 @@ pub mod assist_response {
 }
 /// Debug info for developer. Only returned if request set `return_debug_info`
 /// to true.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DebugInfo {
@@ -130,6 +135,7 @@ pub struct DebugInfo {
     pub aog_agent_to_assistant_json: ::prost::alloc::string::String,
 }
 /// Specifies how to process the `AssistRequest` messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssistConfig {
@@ -154,6 +160,7 @@ pub struct AssistConfig {
 }
 /// Nested message and enum types in `AssistConfig`.
 pub mod assist_config {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
@@ -172,8 +179,9 @@ pub mod assist_config {
 /// subsequent requests. For recommended settings, see the Google Assistant SDK
 /// [best
 /// practices](<https://developers.google.com/assistant/sdk/guides/service/python/best-practices/audio>).
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AudioInConfig {
     /// *Required* Encoding of audio data sent in all `audio_in` messages.
     #[prost(enumeration = "audio_in_config::Encoding", tag = "1")]
@@ -190,6 +198,7 @@ pub struct AudioInConfig {
 pub mod audio_in_config {
     /// Audio encoding of the data sent in the audio message.
     /// Audio must be one-channel (mono).
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -242,8 +251,9 @@ pub mod audio_in_config {
 }
 /// Specifies the desired format for the server to use when it returns
 /// `audio_out` messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AudioOutConfig {
     /// *Required* The encoding of audio data to be returned in all `audio_out`
     /// messages.
@@ -262,6 +272,7 @@ pub struct AudioOutConfig {
 pub mod audio_out_config {
     /// Audio encoding of the data returned in the audio message. All encodings are
     /// raw audio bytes with no header, except as indicated below.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -314,8 +325,9 @@ pub mod audio_out_config {
 }
 /// Specifies the desired format for the server to use when it returns
 /// `screen_out` response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScreenOutConfig {
     /// Current visual screen-mode for the device while issuing the query.
     #[prost(enumeration = "screen_out_config::ScreenMode", tag = "1")]
@@ -324,6 +336,7 @@ pub struct ScreenOutConfig {
 /// Nested message and enum types in `ScreenOutConfig`.
 pub mod screen_out_config {
     /// Possible modes for visual screen-output on the device.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -372,6 +385,7 @@ pub mod screen_out_config {
     }
 }
 /// Provides information about the current dialog state.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DialogStateIn {
@@ -414,6 +428,7 @@ pub struct DialogStateIn {
 /// Schemas](<https://developers.google.com/assistant/sdk/reference/device-registration/model-and-instance-schemas>)
 /// *   [Device
 /// Proto](<https://developers.google.com/assistant/sdk/reference/rpc/google.assistant.devices.v1alpha2#device>)
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceConfig {
@@ -434,6 +449,7 @@ pub struct DeviceConfig {
 }
 /// The audio containing the Assistant's response to the query. Sequential chunks
 /// of audio data are received in sequential `AssistResponse` messages.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudioOut {
@@ -445,6 +461,7 @@ pub struct AudioOut {
 }
 /// The Assistant's visual output response to query. Enabled by
 /// `screen_out_config`.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScreenOut {
@@ -459,6 +476,7 @@ pub struct ScreenOut {
 /// Nested message and enum types in `ScreenOut`.
 pub mod screen_out {
     /// Possible formats of the screen data.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -505,6 +523,7 @@ pub mod screen_out {
 /// Action. For example, a device which supports the query *Turn on the light*
 /// would receive a `DeviceAction` with a JSON payload containing the semantics
 /// of the request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeviceAction {
@@ -517,6 +536,7 @@ pub struct DeviceAction {
 }
 /// The estimated transcription of a phrase the user has spoken. This could be
 /// a single segment or the full guess of the user's spoken query.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SpeechRecognitionResult {
@@ -532,6 +552,7 @@ pub struct SpeechRecognitionResult {
 }
 /// The dialog state resulting from the user's query. Multiple of these messages
 /// may be received.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DialogStateOut {
@@ -568,6 +589,7 @@ pub struct DialogStateOut {
 /// Nested message and enum types in `DialogStateOut`.
 pub mod dialog_state_out {
     /// Possible states of the microphone after a `Assist` RPC completes.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -615,8 +637,9 @@ pub mod dialog_state_out {
     }
 }
 /// Debugging parameters for the current request.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DebugConfig {
     /// When this field is set to true, the `debug_info` field in `AssistResponse`
     /// may be populated. However it will significantly increase latency of
@@ -632,16 +655,18 @@ pub struct DebugConfig {
 ///     device. This location is used if `DeviceLocation` is not specified.
 /// 3. Inferred location based on IP address. This is used only if neither of the
 ///     above are specified.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeviceLocation {
     #[prost(oneof = "device_location::Type", tags = "1")]
     pub r#type: ::core::option::Option<device_location::Type>,
 }
 /// Nested message and enum types in `DeviceLocation`.
 pub mod device_location {
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Type {
         /// Latitude and longitude of device.
         #[prost(message, tag = "1")]

@@ -3,6 +3,7 @@
 /// This can be used in conjunction with the `first_simple` field in the
 /// containing prompt to speak to the user in addition to displaying a
 /// interactive canvas response.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticCanvasPrompt {
@@ -14,7 +15,7 @@ pub struct StaticCanvasPrompt {
     /// values defined in this Canvas prompt will be added after data values
     /// defined in previous Canvas prompts.
     #[prost(message, repeated, tag = "2")]
-    pub data: ::prost::alloc::vec::Vec<::prost_types::Value>,
+    pub data: ::prost::alloc::vec::Vec<::prost_wkt_types::Value>,
     /// Optional. A true value means that the mic won't be opened for capturing input after
     /// this immersive response is presented to the user.
     #[prost(bool, tag = "3")]
@@ -31,6 +32,7 @@ pub struct StaticCanvasPrompt {
     pub enable_full_screen: bool,
 }
 /// An image displayed in the card.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticImagePrompt {
@@ -54,6 +56,7 @@ pub mod static_image_prompt {
     /// Possible image display options for affecting the presentation of the image.
     /// This should be used for when the image's aspect ratio does not match the
     /// image container's aspect ratio.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -108,6 +111,7 @@ pub mod static_image_prompt {
 }
 /// Defines a link which will be displayed as a suggestion chip and can be opened
 /// by the user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticLinkPrompt {
@@ -119,6 +123,7 @@ pub struct StaticLinkPrompt {
     pub open: ::core::option::Option<OpenUrl>,
 }
 /// Defines behavior when the user opens the link.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpenUrl {
@@ -131,6 +136,7 @@ pub struct OpenUrl {
     pub hint: i32,
 }
 /// Different types of url hints.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum UrlHint {
@@ -161,6 +167,7 @@ impl UrlHint {
     }
 }
 /// A basic card for displaying some information, e.g. an image and/or text.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticCardPrompt {
@@ -186,6 +193,7 @@ pub struct StaticCardPrompt {
 }
 /// Presents a set of web documents as a collection of large-tile items. Items
 /// may be selected to launch their associated web document in a web viewer.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticCollectionBrowsePrompt {
@@ -202,6 +210,7 @@ pub struct StaticCollectionBrowsePrompt {
 /// Nested message and enum types in `StaticCollectionBrowsePrompt`.
 pub mod static_collection_browse_prompt {
     /// Item in the collection.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CollectionBrowseItem {
@@ -224,6 +233,7 @@ pub mod static_collection_browse_prompt {
     }
 }
 /// A card for presenting a collection of options to select from.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticCollectionPrompt {
@@ -243,6 +253,7 @@ pub struct StaticCollectionPrompt {
 /// Nested message and enum types in `StaticCollectionPrompt`.
 pub mod static_collection_prompt {
     /// An item in the collection.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CollectionItem {
@@ -265,6 +276,7 @@ pub mod static_collection_prompt {
     }
 }
 /// A card for presenting a list of options to select from.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticListPrompt {
@@ -281,6 +293,7 @@ pub struct StaticListPrompt {
 /// Nested message and enum types in `StaticListPrompt`.
 pub mod static_list_prompt {
     /// An item in the list.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ListItem {
@@ -303,6 +316,7 @@ pub mod static_list_prompt {
 }
 /// Contains information about the media, such as name, description, url, etc.
 /// Next id: 11
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticMediaPrompt {
@@ -311,7 +325,7 @@ pub struct StaticMediaPrompt {
     pub media_type: i32,
     /// Start offset of the first media object.
     #[prost(message, optional, tag = "5")]
-    pub start_offset: ::core::option::Option<::prost_types::Duration>,
+    pub start_offset: ::core::option::Option<::prost_wkt_types::Duration>,
     /// Optional media control types this media response session can support.
     /// If set, request will be made to 3p when a certain media event happens.
     /// If not set, 3p must still handle two default control type, FINISHED and
@@ -332,6 +346,7 @@ pub struct StaticMediaPrompt {
 /// Nested message and enum types in `StaticMediaPrompt`.
 pub mod static_media_prompt {
     /// Media type of this response.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -375,6 +390,7 @@ pub mod static_media_prompt {
         }
     }
     /// Media control types the media response can supported optionally
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -420,6 +436,7 @@ pub mod static_media_prompt {
         }
     }
     /// The types of repeat mode for a list of media objects.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -465,6 +482,7 @@ pub mod static_media_prompt {
     }
 }
 /// Represents a single media object.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaObject {
@@ -482,6 +500,7 @@ pub struct MediaObject {
     pub image: ::core::option::Option<MediaImage>,
 }
 /// Image to be shown inside a MediaPrompt.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MediaImage {
@@ -492,6 +511,7 @@ pub struct MediaImage {
 /// Nested message and enum types in `MediaImage`.
 pub mod media_image {
     /// Only one type of MediaImage is allowed.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Image {
@@ -505,6 +525,7 @@ pub mod media_image {
     }
 }
 /// A table card for displaying a table of text.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticTablePrompt {
@@ -532,6 +553,7 @@ pub struct StaticTablePrompt {
     pub button: ::core::option::Option<StaticLinkPrompt>,
 }
 /// Describes a column in the table.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableColumn {
@@ -546,6 +568,7 @@ pub struct TableColumn {
 /// Nested message and enum types in `TableColumn`.
 pub mod table_column {
     /// The alignment of the content within the cell.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -594,6 +617,7 @@ pub mod table_column {
     }
 }
 /// Describes a cell in a row.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableCell {
@@ -602,6 +626,7 @@ pub struct TableCell {
     pub text: ::prost::alloc::string::String,
 }
 /// Describes a row in the table.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableRow {
@@ -615,6 +640,7 @@ pub struct TableRow {
     pub divider: bool,
 }
 /// A placeholder for the Content part of a StaticPrompt.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticContentPrompt {
@@ -625,6 +651,7 @@ pub struct StaticContentPrompt {
 /// Nested message and enum types in `StaticContentPrompt`.
 pub mod static_content_prompt {
     /// Only one type of content can be present in a Prompt.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Content {
@@ -652,6 +679,7 @@ pub mod static_content_prompt {
     }
 }
 /// Represents a simple prompt to be send to a user.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticSimplePrompt {
@@ -662,6 +690,7 @@ pub struct StaticSimplePrompt {
 /// Nested message and enum types in `StaticSimplePrompt`.
 pub mod static_simple_prompt {
     /// Represents a variant which is part of the simple prompt.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Variant {
@@ -683,6 +712,7 @@ pub mod static_simple_prompt {
     }
 }
 /// Represents a suggestion chip, a UI element shown to the user for convenience.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Suggestion {
@@ -694,6 +724,7 @@ pub struct Suggestion {
     pub title: ::prost::alloc::string::String,
 }
 /// Represents the surface the user is using to make a request to the Action.
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SurfaceCapabilities {
@@ -709,6 +740,7 @@ pub struct SurfaceCapabilities {
 /// Nested message and enum types in `SurfaceCapabilities`.
 pub mod surface_capabilities {
     /// Capabilities the device surface supports at the time of the request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[derive(
         Clone,
         Copy,
@@ -771,6 +803,7 @@ pub mod surface_capabilities {
 /// Represents a list of prompt candidates, one of which will be selected as the
 /// prompt to be shown in the response to the user.
 /// **This message is localizable.**
+#[derive(serde::Serialize, serde::Deserialize)]
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaticPrompt {
@@ -783,6 +816,7 @@ pub struct StaticPrompt {
 /// Nested message and enum types in `StaticPrompt`.
 pub mod static_prompt {
     /// Represents a static prompt candidate.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StaticPromptCandidate {
@@ -800,6 +834,7 @@ pub mod static_prompt {
     pub mod static_prompt_candidate {
         /// Represents structured responses to send to the user, such as text,
         /// speech, cards, canvas data, suggestion chips, etc.
+        #[derive(serde::Serialize, serde::Deserialize)]
         #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StaticPromptResponse {
@@ -842,6 +877,7 @@ pub mod static_prompt {
         }
     }
     /// Defines the criteria for whether a prompt matches a request.
+    #[derive(serde::Serialize, serde::Deserialize)]
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Selector {
