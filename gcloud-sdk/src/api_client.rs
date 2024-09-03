@@ -71,28 +71,31 @@ where
 }
 
 #[derive(Clone)]
-pub struct GoogleApiClientBuilderFunction<C>
+pub struct GoogleApiClientBuilderFunction<C, F>
 where
     C: Clone + Send,
+    F: Fn(GoogleAuthMiddlewareService<Channel>) -> C,
 {
-    f: fn(GoogleAuthMiddlewareService<Channel>) -> C,
+    f: F,
 }
 
-impl<C> GoogleApiClientBuilder<C> for GoogleApiClientBuilderFunction<C>
+impl<C, F> GoogleApiClientBuilder<C> for GoogleApiClientBuilderFunction<C, F>
 where
     C: Clone + Send,
+    F: Fn(GoogleAuthMiddlewareService<Channel>) -> C,
 {
     fn create_client(&self, channel: GoogleAuthMiddlewareService<Channel>) -> C {
         (self.f)(channel)
     }
 }
 
-impl<C> GoogleApiClient<GoogleApiClientBuilderFunction<C>, C>
+impl<C, F> GoogleApiClient<GoogleApiClientBuilderFunction<C, F>, C>
 where
     C: Clone + Send,
+    F: Fn(GoogleAuthMiddlewareService<Channel>) -> C,
 {
     pub async fn from_function<S: AsRef<str>>(
-        builder_fn: fn(GoogleAuthMiddlewareService<Channel>) -> C,
+        builder_fn: F,
         google_api_url: S,
         cloud_resource_prefix_meta: Option<String>,
     ) -> crate::error::Result<Self> {
@@ -106,7 +109,7 @@ where
     }
 
     pub async fn from_function_with_scopes<S: AsRef<str>>(
-        builder_fn: fn(GoogleAuthMiddlewareService<Channel>) -> C,
+        builder_fn: F,
         google_api_url: S,
         cloud_resource_prefix_meta: Option<String>,
         token_scopes: Vec<String>,
@@ -122,13 +125,13 @@ where
     }
 
     pub async fn from_function_with_token_source<S: AsRef<str>>(
-        builder_fn: fn(GoogleAuthMiddlewareService<Channel>) -> C,
+        builder_fn: F,
         google_api_url: S,
         cloud_resource_prefix_meta: Option<String>,
         token_scopes: Vec<String>,
         token_source_type: TokenSourceType,
     ) -> crate::error::Result<Self> {
-        let builder: GoogleApiClientBuilderFunction<C> =
+        let builder: GoogleApiClientBuilderFunction<C, F> =
             GoogleApiClientBuilderFunction { f: builder_fn };
 
         Self::with_token_source(
@@ -143,7 +146,7 @@ where
 }
 
 pub type GoogleAuthMiddleware = GoogleAuthMiddlewareService<Channel>;
-pub type GoogleApi<C> = GoogleApiClient<GoogleApiClientBuilderFunction<C>, C>;
+pub type GoogleApi<C, F> = GoogleApiClient<GoogleApiClientBuilderFunction<C, F>, C>;
 
 pub struct GoogleEnvironment;
 
