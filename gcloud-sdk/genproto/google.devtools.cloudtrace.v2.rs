@@ -7,7 +7,6 @@
 /// A trace can also contain multiple root spans, or none at all.
 /// Spans do not need to be contiguous. There might be
 /// gaps or overlaps between spans in a trace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Span {
     /// Required. The resource name of the span in the following format:
@@ -86,7 +85,6 @@ pub struct Span {
 /// Nested message and enum types in `Span`.
 pub mod span {
     /// A set of attributes as key-value pairs.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Attributes {
         /// A set of attributes. Each attribute's key can be up to 128 bytes
@@ -108,7 +106,6 @@ pub mod span {
         pub dropped_attributes_count: i32,
     }
     /// A time-stamped annotation or message event in the Span.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TimeEvent {
         /// The timestamp indicating the time the event occurred.
@@ -122,7 +119,6 @@ pub mod span {
     /// Nested message and enum types in `TimeEvent`.
     pub mod time_event {
         /// Text annotation with a set of attributes.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Annotation {
             /// A user-supplied message describing the event. The maximum length for
@@ -135,7 +131,6 @@ pub mod span {
             pub attributes: ::core::option::Option<super::Attributes>,
         }
         /// An event describing a message sent/received between Spans.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct MessageEvent {
             /// Type of MessageEvent. Indicates whether the message was sent or
@@ -185,9 +180,9 @@ pub mod span {
                 /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                 pub fn as_str_name(&self) -> &'static str {
                     match self {
-                        Type::Unspecified => "TYPE_UNSPECIFIED",
-                        Type::Sent => "SENT",
-                        Type::Received => "RECEIVED",
+                        Self::Unspecified => "TYPE_UNSPECIFIED",
+                        Self::Sent => "SENT",
+                        Self::Received => "RECEIVED",
                     }
                 }
                 /// Creates an enum from field names used in the ProtoBuf definition.
@@ -203,7 +198,6 @@ pub mod span {
         }
         /// A `TimeEvent` can contain either an `Annotation` object or a
         /// `MessageEvent` object, but not both.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Value {
             /// Text annotation with a set of attributes.
@@ -217,7 +211,6 @@ pub mod span {
     /// A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
     /// on the span, consisting of either user-supplied key:value pairs, or
     /// details of a message sent/received between Spans.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TimeEvents {
         /// A collection of `TimeEvent`s.
@@ -236,7 +229,6 @@ pub mod span {
     /// different trace. For example, this can be used in batching operations,
     /// where a single batch handler processes multiple requests from different
     /// traces or when the handler receives a request from a different project.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Link {
         /// The `\[TRACE_ID\]` for a trace within a project.
@@ -284,9 +276,9 @@ pub mod span {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Type::Unspecified => "TYPE_UNSPECIFIED",
-                    Type::ChildLinkedSpan => "CHILD_LINKED_SPAN",
-                    Type::ParentLinkedSpan => "PARENT_LINKED_SPAN",
+                    Self::Unspecified => "TYPE_UNSPECIFIED",
+                    Self::ChildLinkedSpan => "CHILD_LINKED_SPAN",
+                    Self::ParentLinkedSpan => "PARENT_LINKED_SPAN",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -302,7 +294,6 @@ pub mod span {
     }
     /// A collection of links, which are references from this span to a span
     /// in the same or different trace.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Links {
         /// A collection of links.
@@ -357,12 +348,12 @@ pub mod span {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SpanKind::Unspecified => "SPAN_KIND_UNSPECIFIED",
-                SpanKind::Internal => "INTERNAL",
-                SpanKind::Server => "SERVER",
-                SpanKind::Client => "CLIENT",
-                SpanKind::Producer => "PRODUCER",
-                SpanKind::Consumer => "CONSUMER",
+                Self::Unspecified => "SPAN_KIND_UNSPECIFIED",
+                Self::Internal => "INTERNAL",
+                Self::Server => "SERVER",
+                Self::Client => "CLIENT",
+                Self::Producer => "PRODUCER",
+                Self::Consumer => "CONSUMER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -380,7 +371,6 @@ pub mod span {
     }
 }
 /// The allowed types for `\[VALUE\]` in a `\[KEY\]:[VALUE]` attribute.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributeValue {
     /// The type of the value.
@@ -390,7 +380,6 @@ pub struct AttributeValue {
 /// Nested message and enum types in `AttributeValue`.
 pub mod attribute_value {
     /// The type of the value.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         /// A string up to 256 bytes long.
@@ -405,7 +394,6 @@ pub mod attribute_value {
     }
 }
 /// A call stack appearing in a trace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StackTrace {
     /// Stack frames in this stack trace. A maximum of 128 frames are allowed.
@@ -426,7 +414,6 @@ pub struct StackTrace {
 /// Nested message and enum types in `StackTrace`.
 pub mod stack_trace {
     /// Represents a single stack frame in a stack trace.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StackFrame {
         /// The fully-qualified name that uniquely identifies the function or
@@ -458,7 +445,6 @@ pub mod stack_trace {
         pub source_version: ::core::option::Option<super::TruncatableString>,
     }
     /// A collection of stack frames, which can be truncated.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StackFrames {
         /// Stack frames in this call stack.
@@ -472,7 +458,6 @@ pub mod stack_trace {
     }
 }
 /// Binary module.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Module {
     /// For example: main binary, kernel modules, and dynamic libraries
@@ -485,7 +470,6 @@ pub struct Module {
     pub build_id: ::core::option::Option<TruncatableString>,
 }
 /// Represents a string that might be shortened to a specified length.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TruncatableString {
     /// The shortened string. For example, if the original string is 500
@@ -503,7 +487,6 @@ pub struct TruncatableString {
     pub truncated_byte_count: i32,
 }
 /// The request message for the `BatchWriteSpans` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchWriteSpansRequest {
     /// Required. The name of the project where the spans belong. The format is
@@ -517,7 +500,13 @@ pub struct BatchWriteSpansRequest {
 }
 /// Generated client implementations.
 pub mod trace_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service for collecting and viewing traces and spans within a trace.
@@ -546,8 +535,8 @@ pub mod trace_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -572,7 +561,7 @@ pub mod trace_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             TraceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -617,8 +606,7 @@ pub mod trace_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -645,8 +633,7 @@ pub mod trace_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

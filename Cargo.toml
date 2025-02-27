@@ -11,4 +11,6 @@ members = [
     "examples/text-to-speech-client",
     "examples/kms-client",
     "examples/id-token",
+    "examples/iam-client",
+    "examples/artifact-registry-client",
 ]

@@ -2,7 +2,6 @@
 /// Dimensions are attributes of your data. For example, the dimension
 /// `userEmail` indicates the email of the user that accessed reporting data.
 /// Dimension values in report responses are strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimension {
     /// The API name of the dimension. See [Data Access
@@ -15,7 +14,6 @@ pub struct AccessDimension {
 }
 /// The quantitative measurements of a report. For example, the metric
 /// `accessCount` is the total number of data access records.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetric {
     /// The API name of the metric. See [Data Access
@@ -27,7 +25,6 @@ pub struct AccessMetric {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// A contiguous range of days: startDate, startDate + 1, ..., endDate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDateRange {
     /// The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot
@@ -45,7 +42,6 @@ pub struct AccessDateRange {
 }
 /// Expresses dimension or metric filters. The fields in the same expression need
 /// to be either all dimensions or all metrics.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpression {
     /// Specify one type of filter expression for `FilterExpression`.
@@ -55,7 +51,6 @@ pub struct AccessFilterExpression {
 /// Nested message and enum types in `AccessFilterExpression`.
 pub mod access_filter_expression {
     /// Specify one type of filter expression for `FilterExpression`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneExpression {
         /// Each of the FilterExpressions in the and_group has an AND relationship.
@@ -74,7 +69,6 @@ pub mod access_filter_expression {
     }
 }
 /// A list of filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpressionList {
     /// A list of filter expressions.
@@ -82,7 +76,6 @@ pub struct AccessFilterExpressionList {
     pub expressions: ::prost::alloc::vec::Vec<AccessFilterExpression>,
 }
 /// An expression to filter dimension or metric values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilter {
     /// The dimension name or metric name.
@@ -95,7 +88,6 @@ pub struct AccessFilter {
 /// Nested message and enum types in `AccessFilter`.
 pub mod access_filter {
     /// Specify one type of filter for `Filter`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// Strings related filter.
@@ -113,7 +105,6 @@ pub mod access_filter {
     }
 }
 /// The filter for strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessStringFilter {
     /// The match type for this filter.
@@ -164,13 +155,13 @@ pub mod access_string_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                MatchType::Exact => "EXACT",
-                MatchType::BeginsWith => "BEGINS_WITH",
-                MatchType::EndsWith => "ENDS_WITH",
-                MatchType::Contains => "CONTAINS",
-                MatchType::FullRegexp => "FULL_REGEXP",
-                MatchType::PartialRegexp => "PARTIAL_REGEXP",
+                Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                Self::Exact => "EXACT",
+                Self::BeginsWith => "BEGINS_WITH",
+                Self::EndsWith => "ENDS_WITH",
+                Self::Contains => "CONTAINS",
+                Self::FullRegexp => "FULL_REGEXP",
+                Self::PartialRegexp => "PARTIAL_REGEXP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -189,7 +180,6 @@ pub mod access_string_filter {
     }
 }
 /// The result needs to be in a list of string values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessInListFilter {
     /// The list of string values. Must be non-empty.
@@ -200,7 +190,6 @@ pub struct AccessInListFilter {
     pub case_sensitive: bool,
 }
 /// Filters for numeric or date values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessNumericFilter {
     /// The operation type for this filter.
@@ -246,12 +235,12 @@ pub mod access_numeric_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::Equal => "EQUAL",
-                Operation::LessThan => "LESS_THAN",
-                Operation::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
-                Operation::GreaterThan => "GREATER_THAN",
-                Operation::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::Equal => "EQUAL",
+                Self::LessThan => "LESS_THAN",
+                Self::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                Self::GreaterThan => "GREATER_THAN",
+                Self::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -269,7 +258,6 @@ pub mod access_numeric_filter {
     }
 }
 /// To express that the result needs to be between two numbers (inclusive).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessBetweenFilter {
     /// Begins with this number.
@@ -280,7 +268,6 @@ pub struct AccessBetweenFilter {
     pub to_value: ::core::option::Option<NumericValue>,
 }
 /// To represent a number.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NumericValue {
     /// One of a numeric value
@@ -290,7 +277,6 @@ pub struct NumericValue {
 /// Nested message and enum types in `NumericValue`.
 pub mod numeric_value {
     /// One of a numeric value
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum OneValue {
         /// Integer value
@@ -304,7 +290,6 @@ pub mod numeric_value {
 /// Order bys define how rows will be sorted in the response. For example,
 /// ordering rows by descending access count is one ordering, and ordering rows
 /// by the country string is a different ordering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessOrderBy {
     /// If true, sorts by descending order. If false or unspecified, sorts in
@@ -318,7 +303,6 @@ pub struct AccessOrderBy {
 /// Nested message and enum types in `AccessOrderBy`.
 pub mod access_order_by {
     /// Sorts by metric values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricOrderBy {
         /// A metric name in the request to order by.
@@ -326,7 +310,6 @@ pub mod access_order_by {
         pub metric_name: ::prost::alloc::string::String,
     }
     /// Sorts by dimension values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DimensionOrderBy {
         /// A dimension name in the request to order by.
@@ -373,12 +356,10 @@ pub mod access_order_by {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    OrderType::Unspecified => "ORDER_TYPE_UNSPECIFIED",
-                    OrderType::Alphanumeric => "ALPHANUMERIC",
-                    OrderType::CaseInsensitiveAlphanumeric => {
-                        "CASE_INSENSITIVE_ALPHANUMERIC"
-                    }
-                    OrderType::Numeric => "NUMERIC",
+                    Self::Unspecified => "ORDER_TYPE_UNSPECIFIED",
+                    Self::Alphanumeric => "ALPHANUMERIC",
+                    Self::CaseInsensitiveAlphanumeric => "CASE_INSENSITIVE_ALPHANUMERIC",
+                    Self::Numeric => "NUMERIC",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -396,7 +377,6 @@ pub mod access_order_by {
         }
     }
     /// Specify one type of order by for `OrderBy`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneOrderBy {
         /// Sorts results by a metric's values.
@@ -411,7 +391,6 @@ pub mod access_order_by {
 /// produce column entries within rows and DimensionHeaders. However, dimensions
 /// used exclusively within filters or expressions do not produce columns in a
 /// report; correspondingly, those dimensions do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionHeader {
     /// The dimension's name; for example 'userEmail'.
@@ -422,7 +401,6 @@ pub struct AccessDimensionHeader {
 /// report produce column entries within rows and MetricHeaders. However,
 /// metrics used exclusively within filters or expressions do not produce columns
 /// in a report; correspondingly, those metrics do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricHeader {
     /// The metric's name; for example 'accessCount'.
@@ -430,7 +408,6 @@ pub struct AccessMetricHeader {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// Access report data for each row.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessRow {
     /// List of dimension values. These values are in the same order as specified
@@ -443,7 +420,6 @@ pub struct AccessRow {
     pub metric_values: ::prost::alloc::vec::Vec<AccessMetricValue>,
 }
 /// The value of a dimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionValue {
     /// The dimension value. For example, this value may be 'France' for the
@@ -452,7 +428,6 @@ pub struct AccessDimensionValue {
     pub value: ::prost::alloc::string::String,
 }
 /// The value of a metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricValue {
     /// The measurement value. For example, this value may be '13'.
@@ -462,7 +437,6 @@ pub struct AccessMetricValue {
 /// Current state of all quotas for this Analytics property. If any quota for a
 /// property is exhausted, all requests to that property will return Resource
 /// Exhausted errors.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuota {
     /// Properties can use 250,000 tokens per day. Most requests consume fewer than
@@ -489,7 +463,6 @@ pub struct AccessQuota {
     pub tokens_per_project_per_hour: ::core::option::Option<AccessQuotaStatus>,
 }
 /// Current state for a particular quota group.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuotaStatus {
     /// Quota consumed by this request.
@@ -500,7 +473,6 @@ pub struct AccessQuotaStatus {
     pub remaining: i32,
 }
 /// A specific filter for a single dimension or metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceDimensionOrMetricFilter {
     /// Required. Immutable. The dimension name or metric name to filter. If the
@@ -544,7 +516,6 @@ pub struct AudienceDimensionOrMetricFilter {
 /// Nested message and enum types in `AudienceDimensionOrMetricFilter`.
 pub mod audience_dimension_or_metric_filter {
     /// A filter for a string-type dimension that matches a particular pattern.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
         /// Required. The match type for the string filter.
@@ -594,12 +565,12 @@ pub mod audience_dimension_or_metric_filter {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                    MatchType::Exact => "EXACT",
-                    MatchType::BeginsWith => "BEGINS_WITH",
-                    MatchType::EndsWith => "ENDS_WITH",
-                    MatchType::Contains => "CONTAINS",
-                    MatchType::FullRegexp => "FULL_REGEXP",
+                    Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                    Self::Exact => "EXACT",
+                    Self::BeginsWith => "BEGINS_WITH",
+                    Self::EndsWith => "ENDS_WITH",
+                    Self::Contains => "CONTAINS",
+                    Self::FullRegexp => "FULL_REGEXP",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -617,7 +588,6 @@ pub mod audience_dimension_or_metric_filter {
         }
     }
     /// A filter for a string dimension that matches a particular list of options.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
         /// Required. The list of possible string values to match against. Must be
@@ -630,7 +600,6 @@ pub mod audience_dimension_or_metric_filter {
         pub case_sensitive: bool,
     }
     /// To represent a number.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NumericValue {
         /// One of a numeric value.
@@ -640,7 +609,6 @@ pub mod audience_dimension_or_metric_filter {
     /// Nested message and enum types in `NumericValue`.
     pub mod numeric_value {
         /// One of a numeric value.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum OneValue {
             /// Integer value.
@@ -652,7 +620,6 @@ pub mod audience_dimension_or_metric_filter {
         }
     }
     /// A filter for numeric or date values on a dimension or metric.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct NumericFilter {
         /// Required. The operation applied to a numeric filter.
@@ -694,10 +661,10 @@ pub mod audience_dimension_or_metric_filter {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                    Operation::Equal => "EQUAL",
-                    Operation::LessThan => "LESS_THAN",
-                    Operation::GreaterThan => "GREATER_THAN",
+                    Self::Unspecified => "OPERATION_UNSPECIFIED",
+                    Self::Equal => "EQUAL",
+                    Self::LessThan => "LESS_THAN",
+                    Self::GreaterThan => "GREATER_THAN",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -714,7 +681,6 @@ pub mod audience_dimension_or_metric_filter {
     }
     /// A filter for numeric or date values between certain values on a dimension
     /// or metric.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BetweenFilter {
         /// Required. Begins with this number, inclusive.
@@ -725,7 +691,6 @@ pub mod audience_dimension_or_metric_filter {
         pub to_value: ::core::option::Option<NumericValue>,
     }
     /// One of the above filters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// A filter for a string-type dimension that matches a particular pattern.
@@ -747,7 +712,6 @@ pub mod audience_dimension_or_metric_filter {
 /// A filter that matches events of a single event name. If an event parameter
 /// is specified, only the subset of events that match both the single event name
 /// and the parameter filter expressions match this event filter.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceEventFilter {
     /// Required. Immutable. The name of the event to match against.
@@ -766,7 +730,6 @@ pub struct AudienceEventFilter {
     >,
 }
 /// A logical expression of Audience dimension, metric, or event filters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterExpression {
     /// The expression applied to a filter.
@@ -776,7 +739,6 @@ pub struct AudienceFilterExpression {
 /// Nested message and enum types in `AudienceFilterExpression`.
 pub mod audience_filter_expression {
     /// The expression applied to a filter.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
         /// A list of expressions to be AND’ed together. It can only contain
@@ -804,7 +766,6 @@ pub mod audience_filter_expression {
     }
 }
 /// A list of Audience filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterExpressionList {
     /// A list of Audience filter expressions.
@@ -813,7 +774,6 @@ pub struct AudienceFilterExpressionList {
 }
 /// Defines a simple filter that a user must satisfy to be a member of the
 /// Audience.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceSimpleFilter {
     /// Required. Immutable. Specifies the scope for this filter.
@@ -826,7 +786,6 @@ pub struct AudienceSimpleFilter {
 }
 /// Defines filters that must occur in a specific order for the user to be a
 /// member of the Audience.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceSequenceFilter {
     /// Required. Immutable. Specifies the scope for this filter.
@@ -846,7 +805,6 @@ pub struct AudienceSequenceFilter {
 pub mod audience_sequence_filter {
     /// A condition that must occur in the specified step order for this user
     /// to match the sequence.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AudienceSequenceStep {
         /// Required. Immutable. Specifies the scope for this step.
@@ -875,7 +833,6 @@ pub mod audience_sequence_filter {
 /// inclusive (For example, users satisfying the filter clause are included in
 /// the Audience) or exclusive (For example, users satisfying the filter clause
 /// are excluded from the Audience).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceFilterClause {
     /// Required. Specifies whether this is an include or exclude filter clause.
@@ -914,9 +871,9 @@ pub mod audience_filter_clause {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AudienceClauseType::Unspecified => "AUDIENCE_CLAUSE_TYPE_UNSPECIFIED",
-                AudienceClauseType::Include => "INCLUDE",
-                AudienceClauseType::Exclude => "EXCLUDE",
+                Self::Unspecified => "AUDIENCE_CLAUSE_TYPE_UNSPECIFIED",
+                Self::Include => "INCLUDE",
+                Self::Exclude => "EXCLUDE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -929,7 +886,6 @@ pub mod audience_filter_clause {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// A simple filter that a user must satisfy to be a member of the Audience.
@@ -942,7 +898,6 @@ pub mod audience_filter_clause {
     }
 }
 /// Specifies an event to log when a user joins the Audience.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AudienceEventTrigger {
     /// Required. The event name that will be logged.
@@ -983,9 +938,9 @@ pub mod audience_event_trigger {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LogCondition::Unspecified => "LOG_CONDITION_UNSPECIFIED",
-                LogCondition::AudienceJoined => "AUDIENCE_JOINED",
-                LogCondition::AudienceMembershipRenewed => "AUDIENCE_MEMBERSHIP_RENEWED",
+                Self::Unspecified => "LOG_CONDITION_UNSPECIFIED",
+                Self::AudienceJoined => "AUDIENCE_JOINED",
+                Self::AudienceMembershipRenewed => "AUDIENCE_MEMBERSHIP_RENEWED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -999,8 +954,7 @@ pub mod audience_event_trigger {
         }
     }
 }
-/// A resource message representing a GA4 Audience.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A resource message representing an Audience.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Audience {
     /// Output only. The resource name for this Audience resource.
@@ -1070,15 +1024,9 @@ pub mod audience {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AudienceExclusionDurationMode::Unspecified => {
-                    "AUDIENCE_EXCLUSION_DURATION_MODE_UNSPECIFIED"
-                }
-                AudienceExclusionDurationMode::ExcludeTemporarily => {
-                    "EXCLUDE_TEMPORARILY"
-                }
-                AudienceExclusionDurationMode::ExcludePermanently => {
-                    "EXCLUDE_PERMANENTLY"
-                }
+                Self::Unspecified => "AUDIENCE_EXCLUSION_DURATION_MODE_UNSPECIFIED",
+                Self::ExcludeTemporarily => "EXCLUDE_TEMPORARILY",
+                Self::ExcludePermanently => "EXCLUDE_PERMANENTLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1115,16 +1063,10 @@ impl AudienceFilterScope {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AudienceFilterScope::Unspecified => "AUDIENCE_FILTER_SCOPE_UNSPECIFIED",
-            AudienceFilterScope::WithinSameEvent => {
-                "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_EVENT"
-            }
-            AudienceFilterScope::WithinSameSession => {
-                "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_SESSION"
-            }
-            AudienceFilterScope::AcrossAllSessions => {
-                "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS"
-            }
+            Self::Unspecified => "AUDIENCE_FILTER_SCOPE_UNSPECIFIED",
+            Self::WithinSameEvent => "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_EVENT",
+            Self::WithinSameSession => "AUDIENCE_FILTER_SCOPE_WITHIN_SAME_SESSION",
+            Self::AcrossAllSessions => "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1139,7 +1081,6 @@ impl AudienceFilterScope {
     }
 }
 /// A specific filter for a single dimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilter {
     /// Required. Immutable. The dimension name to filter.
@@ -1152,7 +1093,6 @@ pub struct ChannelGroupFilter {
 /// Nested message and enum types in `ChannelGroupFilter`.
 pub mod channel_group_filter {
     /// Filter where the field value is a String. The match is case insensitive.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
         /// Required. The match type for the string filter.
@@ -1200,13 +1140,13 @@ pub mod channel_group_filter {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                    MatchType::Exact => "EXACT",
-                    MatchType::BeginsWith => "BEGINS_WITH",
-                    MatchType::EndsWith => "ENDS_WITH",
-                    MatchType::Contains => "CONTAINS",
-                    MatchType::FullRegexp => "FULL_REGEXP",
-                    MatchType::PartialRegexp => "PARTIAL_REGEXP",
+                    Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                    Self::Exact => "EXACT",
+                    Self::BeginsWith => "BEGINS_WITH",
+                    Self::EndsWith => "ENDS_WITH",
+                    Self::Contains => "CONTAINS",
+                    Self::FullRegexp => "FULL_REGEXP",
+                    Self::PartialRegexp => "PARTIAL_REGEXP",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1226,7 +1166,6 @@ pub mod channel_group_filter {
     }
     /// A filter for a string dimension that matches a particular list of options.
     /// The match is case insensitive.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
         /// Required. The list of possible string values to match against. Must be
@@ -1235,7 +1174,6 @@ pub mod channel_group_filter {
         pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// A StringFilter or InListFilter that defines this filters behavior.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ValueFilter {
         /// A filter for a string-type dimension that matches a particular pattern.
@@ -1248,7 +1186,6 @@ pub mod channel_group_filter {
     }
 }
 /// A logical expression of Channel Group dimension filters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilterExpression {
     /// The expression applied to a filter.
@@ -1258,7 +1195,6 @@ pub struct ChannelGroupFilterExpression {
 /// Nested message and enum types in `ChannelGroupFilterExpression`.
 pub mod channel_group_filter_expression {
     /// The expression applied to a filter.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
         /// A list of expressions to be AND’ed together. It can only contain
@@ -1282,7 +1218,6 @@ pub mod channel_group_filter_expression {
     }
 }
 /// A list of Channel Group filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroupFilterExpressionList {
     /// A list of Channel Group filter expressions.
@@ -1290,7 +1225,6 @@ pub struct ChannelGroupFilterExpressionList {
     pub filter_expressions: ::prost::alloc::vec::Vec<ChannelGroupFilterExpression>,
 }
 /// The rules that govern how traffic is grouped into one channel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroupingRule {
     /// Required. Customer defined display name for the channel.
@@ -1301,7 +1235,6 @@ pub struct GroupingRule {
     pub expression: ::core::option::Option<ChannelGroupFilterExpression>,
 }
 /// A resource message representing a Channel Group.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChannelGroup {
     /// Output only. The resource name for this Channel Group resource.
@@ -1333,7 +1266,6 @@ pub struct ChannelGroup {
     pub primary: bool,
 }
 /// Defines an event parameter to mutate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ParameterMutation {
     /// Required. The name of the parameter to mutate.
@@ -1363,7 +1295,6 @@ pub struct ParameterMutation {
 ///
 /// Event Edit and Event Create rules can't be used to modify an event created
 /// from an Event Create rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventCreateRule {
     /// Output only. Resource name for this EventCreateRule resource.
@@ -1404,7 +1335,6 @@ pub struct EventCreateRule {
 ///
 /// Event Edit rules can't be used to modify an event created from an Event
 /// Create rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventEditRule {
     /// Identifier. Resource name for this EventEditRule resource.
@@ -1435,7 +1365,6 @@ pub struct EventEditRule {
 }
 /// Defines a condition for when an Event Edit or Event Creation rule applies to
 /// an event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MatchingCondition {
     /// Required. The name of the field that is compared against for the condition.
@@ -1514,23 +1443,21 @@ pub mod matching_condition {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ComparisonType::Unspecified => "COMPARISON_TYPE_UNSPECIFIED",
-                ComparisonType::Equals => "EQUALS",
-                ComparisonType::EqualsCaseInsensitive => "EQUALS_CASE_INSENSITIVE",
-                ComparisonType::Contains => "CONTAINS",
-                ComparisonType::ContainsCaseInsensitive => "CONTAINS_CASE_INSENSITIVE",
-                ComparisonType::StartsWith => "STARTS_WITH",
-                ComparisonType::StartsWithCaseInsensitive => {
-                    "STARTS_WITH_CASE_INSENSITIVE"
-                }
-                ComparisonType::EndsWith => "ENDS_WITH",
-                ComparisonType::EndsWithCaseInsensitive => "ENDS_WITH_CASE_INSENSITIVE",
-                ComparisonType::GreaterThan => "GREATER_THAN",
-                ComparisonType::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
-                ComparisonType::LessThan => "LESS_THAN",
-                ComparisonType::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
-                ComparisonType::RegularExpression => "REGULAR_EXPRESSION",
-                ComparisonType::RegularExpressionCaseInsensitive => {
+                Self::Unspecified => "COMPARISON_TYPE_UNSPECIFIED",
+                Self::Equals => "EQUALS",
+                Self::EqualsCaseInsensitive => "EQUALS_CASE_INSENSITIVE",
+                Self::Contains => "CONTAINS",
+                Self::ContainsCaseInsensitive => "CONTAINS_CASE_INSENSITIVE",
+                Self::StartsWith => "STARTS_WITH",
+                Self::StartsWithCaseInsensitive => "STARTS_WITH_CASE_INSENSITIVE",
+                Self::EndsWith => "ENDS_WITH",
+                Self::EndsWithCaseInsensitive => "ENDS_WITH_CASE_INSENSITIVE",
+                Self::GreaterThan => "GREATER_THAN",
+                Self::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                Self::LessThan => "LESS_THAN",
+                Self::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                Self::RegularExpression => "REGULAR_EXPRESSION",
+                Self::RegularExpressionCaseInsensitive => {
                     "REGULAR_EXPRESSION_CASE_INSENSITIVE"
                 }
             }
@@ -1561,7 +1488,6 @@ pub mod matching_condition {
     }
 }
 /// A specific filter for a single dimension
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilter {
     /// Required. The dimension name to filter.
@@ -1574,7 +1500,6 @@ pub struct ExpandedDataSetFilter {
 /// Nested message and enum types in `ExpandedDataSetFilter`.
 pub mod expanded_data_set_filter {
     /// A filter for a string-type dimension that matches a particular pattern.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
         /// Required. The match type for the string filter.
@@ -1620,9 +1545,9 @@ pub mod expanded_data_set_filter {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                    MatchType::Exact => "EXACT",
-                    MatchType::Contains => "CONTAINS",
+                    Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                    Self::Exact => "EXACT",
+                    Self::Contains => "CONTAINS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1637,7 +1562,6 @@ pub mod expanded_data_set_filter {
         }
     }
     /// A filter for a string dimension that matches a particular list of options.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InListFilter {
         /// Required. The list of possible string values to match against. Must be
@@ -1651,7 +1575,6 @@ pub mod expanded_data_set_filter {
         pub case_sensitive: bool,
     }
     /// One of the above filters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// A filter for a string-type dimension that matches a particular pattern.
@@ -1664,7 +1587,6 @@ pub mod expanded_data_set_filter {
     }
 }
 /// A logical expression of EnhancedDataSet dimension filters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilterExpression {
     /// The expression applied to a filter.
@@ -1674,7 +1596,6 @@ pub struct ExpandedDataSetFilterExpression {
 /// Nested message and enum types in `ExpandedDataSetFilterExpression`.
 pub mod expanded_data_set_filter_expression {
     /// The expression applied to a filter.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
         /// A list of expressions to be AND’ed together. It must contain a
@@ -1697,15 +1618,13 @@ pub mod expanded_data_set_filter_expression {
     }
 }
 /// A list of ExpandedDataSet filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSetFilterExpressionList {
     /// A list of ExpandedDataSet filter expressions.
     #[prost(message, repeated, tag = "1")]
     pub filter_expressions: ::prost::alloc::vec::Vec<ExpandedDataSetFilterExpression>,
 }
-/// A resource message representing a GA4 ExpandedDataSet.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A resource message representing an `ExpandedDataSet`.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandedDataSet {
     /// Output only. The resource name for this ExpandedDataSet resource.
@@ -1745,7 +1664,6 @@ pub struct ExpandedDataSet {
     pub data_collection_start_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// A resource message representing a Google Analytics account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Account {
     /// Output only. Resource name of this account.
@@ -1775,8 +1693,7 @@ pub struct Account {
     #[prost(string, tag = "7")]
     pub gmp_organization: ::prost::alloc::string::String,
 }
-/// A resource message representing a Google Analytics GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A resource message representing a Google Analytics property.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
     /// Output only. Resource name of this property.
@@ -1849,7 +1766,6 @@ pub struct Property {
     pub account: ::prost::alloc::string::String,
 }
 /// A resource message representing a data stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataStream {
     /// Output only. Resource name of this Data Stream.
@@ -1881,7 +1797,6 @@ pub struct DataStream {
 /// Nested message and enum types in `DataStream`.
 pub mod data_stream {
     /// Data specific to web streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WebStreamData {
         /// Output only. Analytics Measurement ID.
@@ -1899,7 +1814,6 @@ pub mod data_stream {
         pub default_uri: ::prost::alloc::string::String,
     }
     /// Data specific to Android app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AndroidAppStreamData {
         /// Output only. ID of the corresponding Android app in Firebase, if any.
@@ -1912,7 +1826,6 @@ pub mod data_stream {
         pub package_name: ::prost::alloc::string::String,
     }
     /// Data specific to iOS app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IosAppStreamData {
         /// Output only. ID of the corresponding iOS app in Firebase, if any.
@@ -1954,10 +1867,10 @@ pub mod data_stream {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DataStreamType::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
-                DataStreamType::WebDataStream => "WEB_DATA_STREAM",
-                DataStreamType::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
-                DataStreamType::IosAppDataStream => "IOS_APP_DATA_STREAM",
+                Self::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
+                Self::WebDataStream => "WEB_DATA_STREAM",
+                Self::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
+                Self::IosAppDataStream => "IOS_APP_DATA_STREAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1973,7 +1886,6 @@ pub mod data_stream {
     }
     /// Data for specific data stream types. The message that will be
     /// set corresponds to the type of this stream.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StreamData {
         /// Data specific to web streams. Must be populated if type is
@@ -1990,8 +1902,7 @@ pub mod data_stream {
         IosAppStreamData(IosAppStreamData),
     }
 }
-/// A link between a GA4 property and a Firebase project.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Firebase project.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirebaseLink {
     /// Output only. Example format: properties/1234/firebaseLinks/5678
@@ -2012,7 +1923,6 @@ pub struct FirebaseLink {
 }
 /// Read-only resource with the tag for sending data from a website to a
 /// DataStream. Only present for web DataStream resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalSiteTag {
     /// Output only. Resource name for this GlobalSiteTag resource.
@@ -2025,8 +1935,7 @@ pub struct GlobalSiteTag {
     #[prost(string, tag = "2")]
     pub snippet: ::prost::alloc::string::String,
 }
-/// A link between a GA4 property and a Google Ads account.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Google Ads account.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsLink {
     /// Output only. Format:
@@ -2060,7 +1969,6 @@ pub struct GoogleAdsLink {
 }
 /// A resource message representing data sharing settings of a Google Analytics
 /// account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataSharingSettings {
     /// Output only. Resource name.
@@ -2089,8 +1997,7 @@ pub struct DataSharingSettings {
     pub sharing_with_others_enabled: bool,
 }
 /// A virtual resource representing an overview of an account and
-/// all its child GA4 properties.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// all its child Google Analytics properties.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountSummary {
     /// Resource name for this account summary.
@@ -2110,8 +2017,7 @@ pub struct AccountSummary {
     #[prost(message, repeated, tag = "4")]
     pub property_summaries: ::prost::alloc::vec::Vec<PropertySummary>,
 }
-/// A virtual resource representing metadata for a GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A virtual resource representing metadata for a Google Analytics property.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertySummary {
     /// Resource name of property referred to by this property summary
@@ -2134,7 +2040,6 @@ pub struct PropertySummary {
     pub parent: ::prost::alloc::string::String,
 }
 /// A secret value used for sending hits to Measurement Protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MeasurementProtocolSecret {
     /// Output only. Resource name of this secret. This secret may be a child of
@@ -2152,7 +2057,6 @@ pub struct MeasurementProtocolSecret {
     pub secret_value: ::prost::alloc::string::String,
 }
 /// SKAdNetwork conversion value schema of an iOS stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkAdNetworkConversionValueSchema {
     /// Output only. Resource name of the schema. This will be child of ONLY an iOS
@@ -2195,7 +2099,6 @@ pub struct SkAdNetworkConversionValueSchema {
     pub apply_conversion_values: bool,
 }
 /// Settings for a SKAdNetwork conversion postback window.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostbackWindow {
     /// Ordering of the repeated field will be used to prioritize the conversion
@@ -2216,7 +2119,6 @@ pub struct PostbackWindow {
 }
 /// Conversion value settings for a postback window for SKAdNetwork conversion
 /// value schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionValues {
     /// Display name of the SKAdNetwork conversion value.
@@ -2248,10 +2150,9 @@ pub struct ConversionValues {
     pub lock_enabled: bool,
 }
 /// Event setting conditions to match an event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventMapping {
-    /// Required. Name of the GA4 event. It must always be set.
+    /// Required. Name of the Google Analytics event. It must always be set.
     /// The max allowed display name length is 40 UTF-16 code units.
     #[prost(string, tag = "1")]
     pub event_name: ::prost::alloc::string::String,
@@ -2280,7 +2181,6 @@ pub struct EventMapping {
 /// that resulted from the same cause. Common causes would be updates made in the
 /// Google Analytics UI, changes from customer support, or automatic Google
 /// Analytics system changes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryEvent {
     /// ID of this change history event. This ID is unique across Google Analytics.
@@ -2307,7 +2207,6 @@ pub struct ChangeHistoryEvent {
     pub changes: ::prost::alloc::vec::Vec<ChangeHistoryChange>,
 }
 /// A description of a change to a single Google Analytics resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryChange {
     /// Resource name of the resource whose changes are described by this entry.
@@ -2333,7 +2232,6 @@ pub struct ChangeHistoryChange {
 pub mod change_history_change {
     /// A snapshot of a resource as before or after the result of a change in
     /// change history.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ChangeHistoryResource {
         #[prost(
@@ -2344,7 +2242,6 @@ pub mod change_history_change {
     }
     /// Nested message and enum types in `ChangeHistoryResource`.
     pub mod change_history_resource {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Resource {
             /// A snapshot of an Account resource in change history.
@@ -2432,8 +2329,8 @@ pub mod change_history_change {
         }
     }
 }
-/// A link between a GA4 property and a Display & Video 360 advertiser.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Display & Video 360
+/// advertiser.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisplayVideo360AdvertiserLink {
     /// Output only. The resource name for this DisplayVideo360AdvertiserLink
@@ -2454,26 +2351,25 @@ pub struct DisplayVideo360AdvertiserLink {
     #[prost(message, optional, tag = "4")]
     pub ads_personalization_enabled: ::core::option::Option<bool>,
     /// Immutable. Enables the import of campaign data from Display & Video 360
-    /// into the GA4 property. After link creation, this can only be updated from
-    /// the Display & Video 360 product. If this field is not set on create, it
-    /// will be defaulted to true.
+    /// into the Google Analytics property. After link creation, this can only be
+    /// updated from the Display & Video 360 product. If this field is not set on
+    /// create, it will be defaulted to true.
     #[prost(message, optional, tag = "5")]
     pub campaign_data_sharing_enabled: ::core::option::Option<bool>,
     /// Immutable. Enables the import of cost data from Display & Video 360 into
-    /// the GA4 property. This can only be enabled if campaign_data_sharing_enabled
-    /// is enabled. After link creation, this can only be updated from the Display
-    /// & Video 360 product. If this field is not set on create, it will be
-    /// defaulted to true.
+    /// the Google Analytics property. This can only be enabled if
+    /// `campaign_data_sharing_enabled` is true. After link creation, this can
+    /// only be updated from the Display & Video 360 product. If this field is not
+    /// set on create, it will be defaulted to true.
     #[prost(message, optional, tag = "6")]
     pub cost_data_sharing_enabled: ::core::option::Option<bool>,
 }
-/// A proposal for a link between a GA4 property and a Display & Video 360
-/// advertiser.
+/// A proposal for a link between a Google Analytics property and a Display &
+/// Video 360 advertiser.
 ///
 /// A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
 /// Google Analytics admins approve inbound proposals while Display & Video 360
 /// admins approve outbound proposals.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisplayVideo360AdvertiserLinkProposal {
     /// Output only. The resource name for this
@@ -2515,8 +2411,7 @@ pub struct DisplayVideo360AdvertiserLinkProposal {
     #[prost(message, optional, tag = "8")]
     pub cost_data_sharing_enabled: ::core::option::Option<bool>,
 }
-/// A link between a GA4 property and a Search Ads 360 entity.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Search Ads 360 entity.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchAds360Link {
     /// Output only. The resource name for this SearchAds360Link resource.
@@ -2530,16 +2425,16 @@ pub struct SearchAds360Link {
     #[prost(string, tag = "2")]
     pub advertiser_id: ::prost::alloc::string::String,
     /// Immutable. Enables the import of campaign data from Search Ads 360 into the
-    /// GA4 property. After link creation, this can only be updated from the Search
-    /// Ads 360 product.
-    /// If this field is not set on create, it will be defaulted to true.
+    /// Google Analytics property. After link creation, this can only be updated
+    /// from the Search Ads 360 product. If this field is not set on create, it
+    /// will be defaulted to true.
     #[prost(message, optional, tag = "3")]
     pub campaign_data_sharing_enabled: ::core::option::Option<bool>,
-    /// Immutable. Enables the import of cost data from Search Ads 360 to the GA4
-    /// property. This can only be enabled if campaign_data_sharing_enabled is
-    /// enabled. After link creation, this can only be updated from
-    /// the Search Ads 360 product.
-    /// If this field is not set on create, it will be defaulted to true.
+    /// Immutable. Enables the import of cost data from Search Ads 360 to the
+    /// Google Analytics property. This can only be enabled if
+    /// campaign_data_sharing_enabled is enabled. After link creation, this can
+    /// only be updated from the Search Ads 360 product. If this field is not set
+    /// on create, it will be defaulted to true.
     #[prost(message, optional, tag = "4")]
     pub cost_data_sharing_enabled: ::core::option::Option<bool>,
     /// Output only. The display name of the Search Ads 360 Advertiser.
@@ -2556,7 +2451,6 @@ pub struct SearchAds360Link {
     pub site_stats_sharing_enabled: ::core::option::Option<bool>,
 }
 /// Status information for a link proposal.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LinkProposalStatusDetails {
     /// Output only. The source of this proposal.
@@ -2570,7 +2464,6 @@ pub struct LinkProposalStatusDetails {
     pub link_proposal_state: i32,
 }
 /// A conversion event in a Google Analytics property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionEvent {
     /// Output only. Resource name of this conversion event.
@@ -2611,7 +2504,6 @@ pub struct ConversionEvent {
 pub mod conversion_event {
     /// Defines a default value/currency for a conversion event. Both value and
     /// currency must be provided.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultConversionValue {
         /// This value will be used to populate the value for all conversions
@@ -2655,11 +2547,9 @@ pub mod conversion_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConversionCountingMethod::Unspecified => {
-                    "CONVERSION_COUNTING_METHOD_UNSPECIFIED"
-                }
-                ConversionCountingMethod::OncePerEvent => "ONCE_PER_EVENT",
-                ConversionCountingMethod::OncePerSession => "ONCE_PER_SESSION",
+                Self::Unspecified => "CONVERSION_COUNTING_METHOD_UNSPECIFIED",
+                Self::OncePerEvent => "ONCE_PER_EVENT",
+                Self::OncePerSession => "ONCE_PER_SESSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2674,7 +2564,6 @@ pub mod conversion_event {
     }
 }
 /// A key event in a Google Analytics property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyEvent {
     /// Output only. Resource name of this key event.
@@ -2710,7 +2599,6 @@ pub struct KeyEvent {
 /// Nested message and enum types in `KeyEvent`.
 pub mod key_event {
     /// Defines a default value/currency for a key event.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultValue {
         /// Required. This will be used to populate the "value" parameter for all
@@ -2756,9 +2644,9 @@ pub mod key_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CountingMethod::Unspecified => "COUNTING_METHOD_UNSPECIFIED",
-                CountingMethod::OncePerEvent => "ONCE_PER_EVENT",
-                CountingMethod::OncePerSession => "ONCE_PER_SESSION",
+                Self::Unspecified => "COUNTING_METHOD_UNSPECIFIED",
+                Self::OncePerEvent => "ONCE_PER_EVENT",
+                Self::OncePerSession => "ONCE_PER_SESSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2773,7 +2661,6 @@ pub mod key_event {
     }
 }
 /// Settings values for Google Signals.  This is a singleton resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleSignalsSettings {
     /// Output only. Resource name of this setting.
@@ -2789,7 +2676,6 @@ pub struct GoogleSignalsSettings {
     pub consent: i32,
 }
 /// A definition for a CustomDimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomDimension {
     /// Output only. Resource name for this CustomDimension resource.
@@ -2863,10 +2749,10 @@ pub mod custom_dimension {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DimensionScope::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
-                DimensionScope::Event => "EVENT",
-                DimensionScope::User => "USER",
-                DimensionScope::Item => "ITEM",
+                Self::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
+                Self::User => "USER",
+                Self::Item => "ITEM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2882,7 +2768,6 @@ pub mod custom_dimension {
     }
 }
 /// A definition for a custom metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetric {
     /// Output only. Resource name for this CustomMetric resource.
@@ -2975,17 +2860,17 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MeasurementUnit::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
-                MeasurementUnit::Standard => "STANDARD",
-                MeasurementUnit::Currency => "CURRENCY",
-                MeasurementUnit::Feet => "FEET",
-                MeasurementUnit::Meters => "METERS",
-                MeasurementUnit::Kilometers => "KILOMETERS",
-                MeasurementUnit::Miles => "MILES",
-                MeasurementUnit::Milliseconds => "MILLISECONDS",
-                MeasurementUnit::Seconds => "SECONDS",
-                MeasurementUnit::Minutes => "MINUTES",
-                MeasurementUnit::Hours => "HOURS",
+                Self::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
+                Self::Standard => "STANDARD",
+                Self::Currency => "CURRENCY",
+                Self::Feet => "FEET",
+                Self::Meters => "METERS",
+                Self::Kilometers => "KILOMETERS",
+                Self::Miles => "MILES",
+                Self::Milliseconds => "MILLISECONDS",
+                Self::Seconds => "SECONDS",
+                Self::Minutes => "MINUTES",
+                Self::Hours => "HOURS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3032,8 +2917,8 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MetricScope::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
-                MetricScope::Event => "EVENT",
+                Self::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3074,9 +2959,9 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RestrictedMetricType::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
-                RestrictedMetricType::CostData => "COST_DATA",
-                RestrictedMetricType::RevenueData => "REVENUE_DATA",
+                Self::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+                Self::CostData => "COST_DATA",
+                Self::RevenueData => "REVENUE_DATA",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3091,7 +2976,6 @@ pub mod custom_metric {
     }
 }
 /// A definition for a calculated metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CalculatedMetric {
     /// Output only. Resource name for this CalculatedMetric.
@@ -3185,17 +3069,17 @@ pub mod calculated_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MetricUnit::Unspecified => "METRIC_UNIT_UNSPECIFIED",
-                MetricUnit::Standard => "STANDARD",
-                MetricUnit::Currency => "CURRENCY",
-                MetricUnit::Feet => "FEET",
-                MetricUnit::Miles => "MILES",
-                MetricUnit::Meters => "METERS",
-                MetricUnit::Kilometers => "KILOMETERS",
-                MetricUnit::Milliseconds => "MILLISECONDS",
-                MetricUnit::Seconds => "SECONDS",
-                MetricUnit::Minutes => "MINUTES",
-                MetricUnit::Hours => "HOURS",
+                Self::Unspecified => "METRIC_UNIT_UNSPECIFIED",
+                Self::Standard => "STANDARD",
+                Self::Currency => "CURRENCY",
+                Self::Feet => "FEET",
+                Self::Miles => "MILES",
+                Self::Meters => "METERS",
+                Self::Kilometers => "KILOMETERS",
+                Self::Milliseconds => "MILLISECONDS",
+                Self::Seconds => "SECONDS",
+                Self::Minutes => "MINUTES",
+                Self::Hours => "HOURS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3245,9 +3129,9 @@ pub mod calculated_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RestrictedMetricType::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
-                RestrictedMetricType::CostData => "COST_DATA",
-                RestrictedMetricType::RevenueData => "REVENUE_DATA",
+                Self::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+                Self::CostData => "COST_DATA",
+                Self::RevenueData => "REVENUE_DATA",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3262,16 +3146,18 @@ pub mod calculated_metric {
     }
 }
 /// Settings values for data retention. This is a singleton resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRetentionSettings {
     /// Output only. Resource name for this DataRetentionSetting resource.
     /// Format: properties/{property}/dataRetentionSettings
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
-    /// The length of time that event-level data is retained.
+    /// Required. The length of time that event-level data is retained.
     #[prost(enumeration = "data_retention_settings::RetentionDuration", tag = "2")]
     pub event_data_retention: i32,
+    /// Required. The length of time that user-level data is retained.
+    #[prost(enumeration = "data_retention_settings::RetentionDuration", tag = "4")]
+    pub user_data_retention: i32,
     /// If true, reset the retention period for the user identifier with every
     /// event from that user.
     #[prost(bool, tag = "3")]
@@ -3300,13 +3186,13 @@ pub mod data_retention_settings {
         /// The data retention time duration is 14 months.
         FourteenMonths = 3,
         /// The data retention time duration is 26 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         TwentySixMonths = 4,
         /// The data retention time duration is 38 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         ThirtyEightMonths = 5,
         /// The data retention time duration is 50 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         FiftyMonths = 6,
     }
     impl RetentionDuration {
@@ -3316,12 +3202,12 @@ pub mod data_retention_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RetentionDuration::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
-                RetentionDuration::TwoMonths => "TWO_MONTHS",
-                RetentionDuration::FourteenMonths => "FOURTEEN_MONTHS",
-                RetentionDuration::TwentySixMonths => "TWENTY_SIX_MONTHS",
-                RetentionDuration::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
-                RetentionDuration::FiftyMonths => "FIFTY_MONTHS",
+                Self::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
+                Self::TwoMonths => "TWO_MONTHS",
+                Self::FourteenMonths => "FOURTEEN_MONTHS",
+                Self::TwentySixMonths => "TWENTY_SIX_MONTHS",
+                Self::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
+                Self::FiftyMonths => "FIFTY_MONTHS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3340,7 +3226,6 @@ pub mod data_retention_settings {
 }
 /// The attribution settings used for a given property. This is a singleton
 /// resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributionSettings {
     /// Output only. Resource name of this attribution settings resource.
@@ -3410,13 +3295,13 @@ pub mod attribution_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AcquisitionConversionEventLookbackWindow::Unspecified => {
+                Self::Unspecified => {
                     "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED"
                 }
-                AcquisitionConversionEventLookbackWindow::AcquisitionConversionEventLookbackWindow7Days => {
+                Self::AcquisitionConversionEventLookbackWindow7Days => {
                     "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS"
                 }
-                AcquisitionConversionEventLookbackWindow::AcquisitionConversionEventLookbackWindow30Days => {
+                Self::AcquisitionConversionEventLookbackWindow30Days => {
                     "ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS"
                 }
             }
@@ -3469,16 +3354,14 @@ pub mod attribution_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                OtherConversionEventLookbackWindow::Unspecified => {
-                    "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED"
-                }
-                OtherConversionEventLookbackWindow::OtherConversionEventLookbackWindow30Days => {
+                Self::Unspecified => "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED",
+                Self::OtherConversionEventLookbackWindow30Days => {
                     "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS"
                 }
-                OtherConversionEventLookbackWindow::OtherConversionEventLookbackWindow60Days => {
+                Self::OtherConversionEventLookbackWindow60Days => {
                     "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS"
                 }
-                OtherConversionEventLookbackWindow::OtherConversionEventLookbackWindow90Days => {
+                Self::OtherConversionEventLookbackWindow90Days => {
                     "OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS"
                 }
             }
@@ -3541,18 +3424,14 @@ pub mod attribution_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ReportingAttributionModel::Unspecified => {
-                    "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED"
-                }
-                ReportingAttributionModel::PaidAndOrganicChannelsDataDriven => {
+                Self::Unspecified => "REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED",
+                Self::PaidAndOrganicChannelsDataDriven => {
                     "PAID_AND_ORGANIC_CHANNELS_DATA_DRIVEN"
                 }
-                ReportingAttributionModel::PaidAndOrganicChannelsLastClick => {
+                Self::PaidAndOrganicChannelsLastClick => {
                     "PAID_AND_ORGANIC_CHANNELS_LAST_CLICK"
                 }
-                ReportingAttributionModel::GooglePaidChannelsLastClick => {
-                    "GOOGLE_PAID_CHANNELS_LAST_CLICK"
-                }
+                Self::GooglePaidChannelsLastClick => "GOOGLE_PAID_CHANNELS_LAST_CLICK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3608,16 +3487,10 @@ pub mod attribution_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AdsWebConversionDataExportScope::Unspecified => {
-                    "ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED"
-                }
-                AdsWebConversionDataExportScope::NotSelectedYet => "NOT_SELECTED_YET",
-                AdsWebConversionDataExportScope::PaidAndOrganicChannels => {
-                    "PAID_AND_ORGANIC_CHANNELS"
-                }
-                AdsWebConversionDataExportScope::GooglePaidChannels => {
-                    "GOOGLE_PAID_CHANNELS"
-                }
+                Self::Unspecified => "ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED",
+                Self::NotSelectedYet => "NOT_SELECTED_YET",
+                Self::PaidAndOrganicChannels => "PAID_AND_ORGANIC_CHANNELS",
+                Self::GooglePaidChannels => "GOOGLE_PAID_CHANNELS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3635,7 +3508,6 @@ pub mod attribution_settings {
     }
 }
 /// A binding of a user to a set of roles.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessBinding {
     /// Output only. Resource name of this binding.
@@ -3668,7 +3540,6 @@ pub struct AccessBinding {
 /// Nested message and enum types in `AccessBinding`.
 pub mod access_binding {
     /// The target for which to set roles for.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AccessTarget {
         /// If set, the email address of the user to set roles for.
@@ -3677,8 +3548,7 @@ pub mod access_binding {
         User(::prost::alloc::string::String),
     }
 }
-/// A link between a GA4 Property and BigQuery project.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and BigQuery project.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryLink {
     /// Output only. Resource name of this BigQuery link.
@@ -3727,7 +3597,6 @@ pub struct BigQueryLink {
 }
 /// Singleton resource under a web DataStream, configuring measurement of
 /// additional site interactions and content.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnhancedMeasurementSettings {
     /// Output only. Resource name of the Enhanced Measurement Settings.
@@ -3782,7 +3651,6 @@ pub struct EnhancedMeasurementSettings {
     pub uri_query_parameter: ::prost::alloc::string::String,
 }
 /// Configuration for a specific Connected Site Tag.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectedSiteTag {
     /// Required. User-provided display name for the connected site tag. Must be
@@ -3796,7 +3664,6 @@ pub struct ConnectedSiteTag {
 }
 /// Settings for client-side data redaction. Singleton resource under a Web
 /// Stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRedactionSettings {
     /// Output only. Name of this Data Redaction Settings resource.
@@ -3824,8 +3691,8 @@ pub struct DataRedactionSettings {
     #[prost(string, repeated, tag = "4")]
     pub query_parameter_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// A link between a GA4 Property and an AdSense for Content ad client.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and an AdSense for Content ad
+/// client.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdSenseLink {
     /// Output only. The resource name for this AdSense Link resource.
@@ -3833,13 +3700,12 @@ pub struct AdSenseLink {
     /// Example: properties/1234/adSenseLinks/6789
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
-    /// Immutable. The AdSense ad client code that the GA4 property is linked to.
-    /// Example format: "ca-pub-1234567890"
+    /// Immutable. The AdSense ad client code that the Google Analytics property is
+    /// linked to. Example format: "ca-pub-1234567890"
     #[prost(string, tag = "2")]
     pub ad_client_code: ::prost::alloc::string::String,
 }
 /// A link that references a source property under the parent rollup property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollupPropertySourceLink {
     /// Output only. Resource name of this RollupPropertySourceLink.
@@ -3920,35 +3786,33 @@ impl IndustryCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            IndustryCategory::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
-            IndustryCategory::Automotive => "AUTOMOTIVE",
-            IndustryCategory::BusinessAndIndustrialMarkets => {
-                "BUSINESS_AND_INDUSTRIAL_MARKETS"
-            }
-            IndustryCategory::Finance => "FINANCE",
-            IndustryCategory::Healthcare => "HEALTHCARE",
-            IndustryCategory::Technology => "TECHNOLOGY",
-            IndustryCategory::Travel => "TRAVEL",
-            IndustryCategory::Other => "OTHER",
-            IndustryCategory::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
-            IndustryCategory::BeautyAndFitness => "BEAUTY_AND_FITNESS",
-            IndustryCategory::BooksAndLiterature => "BOOKS_AND_LITERATURE",
-            IndustryCategory::FoodAndDrink => "FOOD_AND_DRINK",
-            IndustryCategory::Games => "GAMES",
-            IndustryCategory::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
-            IndustryCategory::HomeAndGarden => "HOME_AND_GARDEN",
-            IndustryCategory::InternetAndTelecom => "INTERNET_AND_TELECOM",
-            IndustryCategory::LawAndGovernment => "LAW_AND_GOVERNMENT",
-            IndustryCategory::News => "NEWS",
-            IndustryCategory::OnlineCommunities => "ONLINE_COMMUNITIES",
-            IndustryCategory::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
-            IndustryCategory::PetsAndAnimals => "PETS_AND_ANIMALS",
-            IndustryCategory::RealEstate => "REAL_ESTATE",
-            IndustryCategory::Reference => "REFERENCE",
-            IndustryCategory::Science => "SCIENCE",
-            IndustryCategory::Sports => "SPORTS",
-            IndustryCategory::JobsAndEducation => "JOBS_AND_EDUCATION",
-            IndustryCategory::Shopping => "SHOPPING",
+            Self::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
+            Self::Automotive => "AUTOMOTIVE",
+            Self::BusinessAndIndustrialMarkets => "BUSINESS_AND_INDUSTRIAL_MARKETS",
+            Self::Finance => "FINANCE",
+            Self::Healthcare => "HEALTHCARE",
+            Self::Technology => "TECHNOLOGY",
+            Self::Travel => "TRAVEL",
+            Self::Other => "OTHER",
+            Self::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
+            Self::BeautyAndFitness => "BEAUTY_AND_FITNESS",
+            Self::BooksAndLiterature => "BOOKS_AND_LITERATURE",
+            Self::FoodAndDrink => "FOOD_AND_DRINK",
+            Self::Games => "GAMES",
+            Self::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
+            Self::HomeAndGarden => "HOME_AND_GARDEN",
+            Self::InternetAndTelecom => "INTERNET_AND_TELECOM",
+            Self::LawAndGovernment => "LAW_AND_GOVERNMENT",
+            Self::News => "NEWS",
+            Self::OnlineCommunities => "ONLINE_COMMUNITIES",
+            Self::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
+            Self::PetsAndAnimals => "PETS_AND_ANIMALS",
+            Self::RealEstate => "REAL_ESTATE",
+            Self::Reference => "REFERENCE",
+            Self::Science => "SCIENCE",
+            Self::Sports => "SPORTS",
+            Self::JobsAndEducation => "JOBS_AND_EDUCATION",
+            Self::Shopping => "SHOPPING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4003,9 +3867,9 @@ impl ServiceLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ServiceLevel::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
-            ServiceLevel::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
-            ServiceLevel::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
+            Self::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
+            Self::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
+            Self::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4039,10 +3903,10 @@ impl ActorType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActorType::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
-            ActorType::User => "USER",
-            ActorType::System => "SYSTEM",
-            ActorType::Support => "SUPPORT",
+            Self::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
+            Self::User => "USER",
+            Self::System => "SYSTEM",
+            Self::Support => "SUPPORT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4076,10 +3940,10 @@ impl ActionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
-            ActionType::Created => "CREATED",
-            ActionType::Updated => "UPDATED",
-            ActionType::Deleted => "DELETED",
+            Self::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+            Self::Created => "CREATED",
+            Self::Updated => "UPDATED",
+            Self::Deleted => "DELETED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4157,44 +4021,36 @@ impl ChangeHistoryResourceType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ChangeHistoryResourceType::Unspecified => {
-                "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED"
-            }
-            ChangeHistoryResourceType::Account => "ACCOUNT",
-            ChangeHistoryResourceType::Property => "PROPERTY",
-            ChangeHistoryResourceType::FirebaseLink => "FIREBASE_LINK",
-            ChangeHistoryResourceType::GoogleAdsLink => "GOOGLE_ADS_LINK",
-            ChangeHistoryResourceType::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
-            ChangeHistoryResourceType::ConversionEvent => "CONVERSION_EVENT",
-            ChangeHistoryResourceType::MeasurementProtocolSecret => {
-                "MEASUREMENT_PROTOCOL_SECRET"
-            }
-            ChangeHistoryResourceType::CustomDimension => "CUSTOM_DIMENSION",
-            ChangeHistoryResourceType::CustomMetric => "CUSTOM_METRIC",
-            ChangeHistoryResourceType::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLink => {
-                "DISPLAY_VIDEO_360_ADVERTISER_LINK"
-            }
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLinkProposal => {
+            Self::Unspecified => "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED",
+            Self::Account => "ACCOUNT",
+            Self::Property => "PROPERTY",
+            Self::FirebaseLink => "FIREBASE_LINK",
+            Self::GoogleAdsLink => "GOOGLE_ADS_LINK",
+            Self::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
+            Self::ConversionEvent => "CONVERSION_EVENT",
+            Self::MeasurementProtocolSecret => "MEASUREMENT_PROTOCOL_SECRET",
+            Self::CustomDimension => "CUSTOM_DIMENSION",
+            Self::CustomMetric => "CUSTOM_METRIC",
+            Self::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
+            Self::DisplayVideo360AdvertiserLink => "DISPLAY_VIDEO_360_ADVERTISER_LINK",
+            Self::DisplayVideo360AdvertiserLinkProposal => {
                 "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL"
             }
-            ChangeHistoryResourceType::SearchAds360Link => "SEARCH_ADS_360_LINK",
-            ChangeHistoryResourceType::DataStream => "DATA_STREAM",
-            ChangeHistoryResourceType::AttributionSettings => "ATTRIBUTION_SETTINGS",
-            ChangeHistoryResourceType::ExpandedDataSet => "EXPANDED_DATA_SET",
-            ChangeHistoryResourceType::ChannelGroup => "CHANNEL_GROUP",
-            ChangeHistoryResourceType::BigqueryLink => "BIGQUERY_LINK",
-            ChangeHistoryResourceType::EnhancedMeasurementSettings => {
-                "ENHANCED_MEASUREMENT_SETTINGS"
-            }
-            ChangeHistoryResourceType::DataRedactionSettings => "DATA_REDACTION_SETTINGS",
-            ChangeHistoryResourceType::SkadnetworkConversionValueSchema => {
+            Self::SearchAds360Link => "SEARCH_ADS_360_LINK",
+            Self::DataStream => "DATA_STREAM",
+            Self::AttributionSettings => "ATTRIBUTION_SETTINGS",
+            Self::ExpandedDataSet => "EXPANDED_DATA_SET",
+            Self::ChannelGroup => "CHANNEL_GROUP",
+            Self::BigqueryLink => "BIGQUERY_LINK",
+            Self::EnhancedMeasurementSettings => "ENHANCED_MEASUREMENT_SETTINGS",
+            Self::DataRedactionSettings => "DATA_REDACTION_SETTINGS",
+            Self::SkadnetworkConversionValueSchema => {
                 "SKADNETWORK_CONVERSION_VALUE_SCHEMA"
             }
-            ChangeHistoryResourceType::AdsenseLink => "ADSENSE_LINK",
-            ChangeHistoryResourceType::Audience => "AUDIENCE",
-            ChangeHistoryResourceType::EventCreateRule => "EVENT_CREATE_RULE",
-            ChangeHistoryResourceType::CalculatedMetric => "CALCULATED_METRIC",
+            Self::AdsenseLink => "ADSENSE_LINK",
+            Self::Audience => "AUDIENCE",
+            Self::EventCreateRule => "EVENT_CREATE_RULE",
+            Self::CalculatedMetric => "CALCULATED_METRIC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4255,9 +4111,9 @@ impl GoogleSignalsState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            GoogleSignalsState::Unspecified => "GOOGLE_SIGNALS_STATE_UNSPECIFIED",
-            GoogleSignalsState::GoogleSignalsEnabled => "GOOGLE_SIGNALS_ENABLED",
-            GoogleSignalsState::GoogleSignalsDisabled => "GOOGLE_SIGNALS_DISABLED",
+            Self::Unspecified => "GOOGLE_SIGNALS_STATE_UNSPECIFIED",
+            Self::GoogleSignalsEnabled => "GOOGLE_SIGNALS_ENABLED",
+            Self::GoogleSignalsDisabled => "GOOGLE_SIGNALS_DISABLED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4290,9 +4146,9 @@ impl GoogleSignalsConsent {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            GoogleSignalsConsent::Unspecified => "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED",
-            GoogleSignalsConsent::Consented => "GOOGLE_SIGNALS_CONSENT_CONSENTED",
-            GoogleSignalsConsent::NotConsented => "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED",
+            Self::Unspecified => "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED",
+            Self::Consented => "GOOGLE_SIGNALS_CONSENT_CONSENTED",
+            Self::NotConsented => "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4324,11 +4180,9 @@ impl LinkProposalInitiatingProduct {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LinkProposalInitiatingProduct::Unspecified => {
-                "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED"
-            }
-            LinkProposalInitiatingProduct::GoogleAnalytics => "GOOGLE_ANALYTICS",
-            LinkProposalInitiatingProduct::LinkedProduct => "LINKED_PRODUCT",
+            Self::Unspecified => "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED",
+            Self::GoogleAnalytics => "GOOGLE_ANALYTICS",
+            Self::LinkedProduct => "LINKED_PRODUCT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4375,17 +4229,17 @@ impl LinkProposalState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LinkProposalState::Unspecified => "LINK_PROPOSAL_STATE_UNSPECIFIED",
-            LinkProposalState::AwaitingReviewFromGoogleAnalytics => {
+            Self::Unspecified => "LINK_PROPOSAL_STATE_UNSPECIFIED",
+            Self::AwaitingReviewFromGoogleAnalytics => {
                 "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS"
             }
-            LinkProposalState::AwaitingReviewFromLinkedProduct => {
+            Self::AwaitingReviewFromLinkedProduct => {
                 "AWAITING_REVIEW_FROM_LINKED_PRODUCT"
             }
-            LinkProposalState::Withdrawn => "WITHDRAWN",
-            LinkProposalState::Declined => "DECLINED",
-            LinkProposalState::Expired => "EXPIRED",
-            LinkProposalState::Obsolete => "OBSOLETE",
+            Self::Withdrawn => "WITHDRAWN",
+            Self::Declined => "DECLINED",
+            Self::Expired => "EXPIRED",
+            Self::Obsolete => "OBSOLETE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4406,17 +4260,17 @@ impl LinkProposalState {
         }
     }
 }
-/// Types of Property resources.
+/// Types of `Property` resources.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PropertyType {
     /// Unknown or unspecified property type
     Unspecified = 0,
-    /// Ordinary GA4 property
+    /// Ordinary Google Analytics property
     Ordinary = 1,
-    /// GA4 subproperty
+    /// Google Analytics subproperty
     Subproperty = 2,
-    /// GA4 rollup property
+    /// Google Analytics rollup property
     Rollup = 3,
 }
 impl PropertyType {
@@ -4426,10 +4280,10 @@ impl PropertyType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PropertyType::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
-            PropertyType::Ordinary => "PROPERTY_TYPE_ORDINARY",
-            PropertyType::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
-            PropertyType::Rollup => "PROPERTY_TYPE_ROLLUP",
+            Self::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
+            Self::Ordinary => "PROPERTY_TYPE_ORDINARY",
+            Self::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
+            Self::Rollup => "PROPERTY_TYPE_ROLLUP",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4466,10 +4320,10 @@ impl CoarseValue {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CoarseValue::Unspecified => "COARSE_VALUE_UNSPECIFIED",
-            CoarseValue::Low => "COARSE_VALUE_LOW",
-            CoarseValue::Medium => "COARSE_VALUE_MEDIUM",
-            CoarseValue::High => "COARSE_VALUE_HIGH",
+            Self::Unspecified => "COARSE_VALUE_UNSPECIFIED",
+            Self::Low => "COARSE_VALUE_LOW",
+            Self::Medium => "COARSE_VALUE_MEDIUM",
+            Self::High => "COARSE_VALUE_HIGH",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4484,7 +4338,6 @@ impl CoarseValue {
     }
 }
 /// A specific filter expression
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterCondition {
     /// Required. The field that is being filtered.
@@ -4498,7 +4351,6 @@ pub struct SubpropertyEventFilterCondition {
 /// Nested message and enum types in `SubpropertyEventFilterCondition`.
 pub mod subproperty_event_filter_condition {
     /// A filter for a string-type dimension that matches a particular pattern.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StringFilter {
         /// Required. The match type for the string filter.
@@ -4550,13 +4402,13 @@ pub mod subproperty_event_filter_condition {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                    MatchType::Exact => "EXACT",
-                    MatchType::BeginsWith => "BEGINS_WITH",
-                    MatchType::EndsWith => "ENDS_WITH",
-                    MatchType::Contains => "CONTAINS",
-                    MatchType::FullRegexp => "FULL_REGEXP",
-                    MatchType::PartialRegexp => "PARTIAL_REGEXP",
+                    Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                    Self::Exact => "EXACT",
+                    Self::BeginsWith => "BEGINS_WITH",
+                    Self::EndsWith => "ENDS_WITH",
+                    Self::Contains => "CONTAINS",
+                    Self::FullRegexp => "FULL_REGEXP",
+                    Self::PartialRegexp => "PARTIAL_REGEXP",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4574,7 +4426,6 @@ pub mod subproperty_event_filter_condition {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// A filter for null values.
@@ -4586,7 +4437,6 @@ pub mod subproperty_event_filter_condition {
     }
 }
 /// A logical expression of Subproperty event filters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterExpression {
     /// The expression applied to a filter.
@@ -4596,7 +4446,6 @@ pub struct SubpropertyEventFilterExpression {
 /// Nested message and enum types in `SubpropertyEventFilterExpression`.
 pub mod subproperty_event_filter_expression {
     /// The expression applied to a filter.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Expr {
         /// A list of expressions to OR’ed together. Must only contain
@@ -4617,7 +4466,6 @@ pub mod subproperty_event_filter_expression {
     }
 }
 /// A list of Subproperty event filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterExpressionList {
     /// Required. Unordered list. A list of Subproperty event filter expressions
@@ -4628,7 +4476,6 @@ pub struct SubpropertyEventFilterExpressionList {
 /// the filter clause are included in the subproperty's data) or exclusive
 /// (events satisfying the filter clause are excluded from the subproperty's
 /// data).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilterClause {
     /// Required. The type for the filter clause.
@@ -4673,9 +4520,9 @@ pub mod subproperty_event_filter_clause {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FilterClauseType::Unspecified => "FILTER_CLAUSE_TYPE_UNSPECIFIED",
-                FilterClauseType::Include => "INCLUDE",
-                FilterClauseType::Exclude => "EXCLUDE",
+                Self::Unspecified => "FILTER_CLAUSE_TYPE_UNSPECIFIED",
+                Self::Include => "INCLUDE",
+                Self::Exclude => "EXCLUDE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4689,8 +4536,7 @@ pub mod subproperty_event_filter_clause {
         }
     }
 }
-/// A resource message representing a GA4 Subproperty event filter.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A resource message representing a Google Analytics subproperty event filter.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubpropertyEventFilter {
     /// Output only. Format:
@@ -4708,7 +4554,6 @@ pub struct SubpropertyEventFilter {
     pub filter_clauses: ::prost::alloc::vec::Vec<SubpropertyEventFilterClause>,
 }
 /// The request for a Data Access Record Report.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportRequest {
     /// The Data Access Report supports requesting at the property level or account
@@ -4716,9 +4561,9 @@ pub struct RunAccessReportRequest {
     /// access for all properties under that account.
     ///
     /// To request at the property level, entity should be for example
-    /// 'properties/123' if "123" is your GA4 property ID. To request at the
-    /// account level, entity should be for example 'accounts/1234' if "1234" is
-    /// your GA4 Account ID.
+    /// 'properties/123' if "123" is your Google Analytics property ID. To request
+    /// at the account level, entity should be for example 'accounts/1234' if
+    /// "1234" is your Google Analytics Account ID.
     #[prost(string, tag = "1")]
     pub entity: ::prost::alloc::string::String,
     /// The dimensions requested and displayed in the response. Requests are
@@ -4803,7 +4648,6 @@ pub struct RunAccessReportRequest {
     pub expand_groups: bool,
 }
 /// The customized Data Access Record Report response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportResponse {
     /// The header for a column in the report that corresponds to a specific
@@ -4835,7 +4679,6 @@ pub struct RunAccessReportResponse {
     pub quota: ::core::option::Option<AccessQuota>,
 }
 /// Request message for GetAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountRequest {
     /// Required. The name of the account to lookup.
@@ -4845,7 +4688,6 @@ pub struct GetAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsRequest {
     /// The maximum number of resources to return. The service may return
@@ -4867,7 +4709,6 @@ pub struct ListAccountsRequest {
     pub show_deleted: bool,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsResponse {
     /// Results that were accessible to the caller.
@@ -4879,7 +4720,6 @@ pub struct ListAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccountRequest {
     /// Required. The name of the Account to soft-delete.
@@ -4889,7 +4729,6 @@ pub struct DeleteAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountRequest {
     /// Required. The account to update.
@@ -4904,7 +4743,6 @@ pub struct UpdateAccountRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketRequest {
     /// The account to create.
@@ -4916,7 +4754,6 @@ pub struct ProvisionAccountTicketRequest {
     pub redirect_uri: ::prost::alloc::string::String,
 }
 /// Response message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketResponse {
     /// The param to be passed in the ToS link.
@@ -4924,7 +4761,6 @@ pub struct ProvisionAccountTicketResponse {
     pub account_ticket_id: ::prost::alloc::string::String,
 }
 /// Request message for GetProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPropertyRequest {
     /// Required. The name of the property to lookup.
@@ -4934,7 +4770,6 @@ pub struct GetPropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesRequest {
     /// Required. An expression for filtering the results of the request.
@@ -4974,7 +4809,6 @@ pub struct ListPropertiesRequest {
     pub show_deleted: bool,
 }
 /// Response message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesResponse {
     /// Results that matched the filter criteria and were accessible to the caller.
@@ -4986,7 +4820,6 @@ pub struct ListPropertiesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePropertyRequest {
     /// Required. The property to update.
@@ -5002,7 +4835,6 @@ pub struct UpdatePropertyRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePropertyRequest {
     /// Required. The property to create.
@@ -5011,7 +4843,6 @@ pub struct CreatePropertyRequest {
     pub property: ::core::option::Option<Property>,
 }
 /// Request message for DeleteProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePropertyRequest {
     /// Required. The name of the Property to soft-delete.
@@ -5021,7 +4852,6 @@ pub struct DeletePropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}
@@ -5034,7 +4864,6 @@ pub struct CreateFirebaseLinkRequest {
     pub firebase_link: ::core::option::Option<FirebaseLink>,
 }
 /// Request message for DeleteFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}/firebaseLinks/{firebase_link_id}
@@ -5044,7 +4873,6 @@ pub struct DeleteFirebaseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksRequest {
     /// Required. Format: properties/{property_id}
@@ -5066,7 +4894,6 @@ pub struct ListFirebaseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksResponse {
     /// List of FirebaseLinks. This will have at most one value.
@@ -5080,7 +4907,6 @@ pub struct ListFirebaseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetGlobalSiteTag RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGlobalSiteTagRequest {
     /// Required. The name of the site tag to lookup.
@@ -5092,7 +4918,6 @@ pub struct GetGlobalSiteTagRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234
@@ -5103,7 +4928,6 @@ pub struct CreateGoogleAdsLinkRequest {
     pub google_ads_link: ::core::option::Option<GoogleAdsLink>,
 }
 /// Request message for UpdateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleAdsLinkRequest {
     /// The GoogleAdsLink to update
@@ -5117,7 +4941,6 @@ pub struct UpdateGoogleAdsLinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteGoogleAdsLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234/googleAdsLinks/5678
@@ -5125,7 +4948,6 @@ pub struct DeleteGoogleAdsLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksRequest {
     /// Required. Example format: properties/1234
@@ -5145,7 +4967,6 @@ pub struct ListGoogleAdsLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksResponse {
     /// List of GoogleAdsLinks.
@@ -5157,7 +4978,6 @@ pub struct ListGoogleAdsLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataSharingSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataSharingSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -5168,7 +4988,6 @@ pub struct GetDataSharingSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesRequest {
     /// The maximum number of AccountSummary resources to return. The service may
@@ -5185,7 +5004,6 @@ pub struct ListAccountSummariesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesResponse {
     /// Account summaries of all accounts the caller has access to.
@@ -5197,7 +5015,6 @@ pub struct ListAccountSummariesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionRequest {
     /// Required. The property for which to acknowledge user data collection.
@@ -5215,11 +5032,9 @@ pub struct AcknowledgeUserDataCollectionRequest {
     pub acknowledgement: ::prost::alloc::string::String,
 }
 /// Response message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionResponse {}
 /// Request message for SearchChangeHistoryEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsRequest {
     /// Required. The account resource for which to return change history
@@ -5259,9 +5074,14 @@ pub struct SearchChangeHistoryEventsRequest {
     #[prost(message, optional, tag = "7")]
     pub latest_change_time: ::core::option::Option<::prost_types::Timestamp>,
     /// Optional. The maximum number of ChangeHistoryEvent items to return.
-    /// The service may return fewer than this value, even if there are additional
-    /// pages. If unspecified, at most 50 items will be returned.
-    /// The maximum value is 200 (higher values will be coerced to the maximum).
+    /// If unspecified, at most 50 items will be returned. The maximum value is 200
+    /// (higher values will be coerced to the maximum).
+    ///
+    /// Note that the service may return a page with fewer items than this value
+    /// specifies (potentially even zero), and that there still may be additional
+    /// pages. If you want a particular number of items, you'll need to continue
+    /// requesting additional pages using `page_token` until you get the needed
+    /// number.
     #[prost(int32, tag = "8")]
     pub page_size: i32,
     /// Optional. A page token, received from a previous
@@ -5273,7 +5093,6 @@ pub struct SearchChangeHistoryEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for SearchAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsResponse {
     /// Results that were accessible to the caller.
@@ -5285,7 +5104,6 @@ pub struct SearchChangeHistoryEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetMeasurementProtocolSecret RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMeasurementProtocolSecretRequest {
     /// Required. The name of the measurement protocol secret to lookup.
@@ -5295,7 +5113,6 @@ pub struct GetMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMeasurementProtocolSecretRequest {
     /// Required. The parent resource where this secret will be created.
@@ -5307,7 +5124,6 @@ pub struct CreateMeasurementProtocolSecretRequest {
     pub measurement_protocol_secret: ::core::option::Option<MeasurementProtocolSecret>,
 }
 /// Request message for DeleteMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMeasurementProtocolSecretRequest {
     /// Required. The name of the MeasurementProtocolSecret to delete.
@@ -5317,7 +5133,6 @@ pub struct DeleteMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateMeasurementProtocolSecretRequest {
     /// Required. The measurement protocol secret to update.
@@ -5329,7 +5144,6 @@ pub struct UpdateMeasurementProtocolSecretRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsRequest {
     /// Required. The resource name of the parent stream.
@@ -5350,7 +5164,6 @@ pub struct ListMeasurementProtocolSecretsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsResponse {
     /// A list of secrets for the parent stream specified in the request.
@@ -5364,7 +5177,6 @@ pub struct ListMeasurementProtocolSecretsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetSKAdNetworkConversionValueSchema RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSkAdNetworkConversionValueSchemaRequest {
     /// Required. The resource name of SKAdNetwork conversion value schema to look
@@ -5374,7 +5186,6 @@ pub struct GetSkAdNetworkConversionValueSchemaRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateSKAdNetworkConversionValueSchema RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSkAdNetworkConversionValueSchemaRequest {
     /// Required. The parent resource where this schema will be created.
@@ -5388,7 +5199,6 @@ pub struct CreateSkAdNetworkConversionValueSchemaRequest {
     >,
 }
 /// Request message for DeleteSKAdNetworkConversionValueSchema RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSkAdNetworkConversionValueSchemaRequest {
     /// Required. The name of the SKAdNetworkConversionValueSchema to delete.
@@ -5398,7 +5208,6 @@ pub struct DeleteSkAdNetworkConversionValueSchemaRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSKAdNetworkConversionValueSchema RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSkAdNetworkConversionValueSchemaRequest {
     /// Required. SKAdNetwork conversion value schema to update.
@@ -5412,7 +5221,6 @@ pub struct UpdateSkAdNetworkConversionValueSchemaRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListSKAdNetworkConversionValueSchemas RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkAdNetworkConversionValueSchemasRequest {
     /// Required. The DataStream resource to list schemas for.
@@ -5436,7 +5244,6 @@ pub struct ListSkAdNetworkConversionValueSchemasRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSKAdNetworkConversionValueSchemas RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSkAdNetworkConversionValueSchemasResponse {
     /// List of SKAdNetworkConversionValueSchemas. This will have at most one
@@ -5454,7 +5261,6 @@ pub struct ListSkAdNetworkConversionValueSchemasResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetGoogleSignalsSettings RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGoogleSignalsSettingsRequest {
     /// Required. The name of the google signals settings to retrieve.
@@ -5463,7 +5269,6 @@ pub struct GetGoogleSignalsSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateGoogleSignalsSettings RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleSignalsSettingsRequest {
     /// Required. The settings to update.
@@ -5478,7 +5283,6 @@ pub struct UpdateGoogleSignalsSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConversionEventRequest {
     /// Required. The conversion event to create.
@@ -5490,7 +5294,6 @@ pub struct CreateConversionEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConversionEventRequest {
     /// Required. The conversion event to update.
@@ -5505,7 +5308,6 @@ pub struct UpdateConversionEventRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConversionEventRequest {
     /// Required. The resource name of the conversion event to retrieve.
@@ -5515,7 +5317,6 @@ pub struct GetConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConversionEventRequest {
     /// Required. The resource name of the conversion event to delete.
@@ -5525,7 +5326,6 @@ pub struct DeleteConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListConversionEvents RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsRequest {
     /// Required. The resource name of the parent property.
@@ -5545,7 +5345,6 @@ pub struct ListConversionEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListConversionEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsResponse {
     /// The requested conversion events
@@ -5557,7 +5356,6 @@ pub struct ListConversionEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateKeyEventRequest {
     /// Required. The Key Event to create.
@@ -5569,7 +5367,6 @@ pub struct CreateKeyEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateKeyEventRequest {
     /// Required. The Key Event to update.
@@ -5584,7 +5381,6 @@ pub struct UpdateKeyEventRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetKeyEventRequest {
     /// Required. The resource name of the Key Event to retrieve.
@@ -5594,7 +5390,6 @@ pub struct GetKeyEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteKeyEventRequest {
     /// Required. The resource name of the Key Event to delete.
@@ -5604,7 +5399,6 @@ pub struct DeleteKeyEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListKeyEvents RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListKeyEventsRequest {
     /// Required. The resource name of the parent property.
@@ -5624,7 +5418,6 @@ pub struct ListKeyEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListKeyEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListKeyEventsResponse {
     /// The requested Key Events
@@ -5636,7 +5429,6 @@ pub struct ListKeyEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDisplayVideo360AdvertiserLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDisplayVideo360AdvertiserLinkRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLink to get.
@@ -5645,7 +5437,6 @@ pub struct GetDisplayVideo360AdvertiserLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDisplayVideo360AdvertiserLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinksRequest {
     /// Required. Example format: properties/1234
@@ -5666,7 +5457,6 @@ pub struct ListDisplayVideo360AdvertiserLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDisplayVideo360AdvertiserLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinksResponse {
     /// List of DisplayVideo360AdvertiserLinks.
@@ -5680,7 +5470,6 @@ pub struct ListDisplayVideo360AdvertiserLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateDisplayVideo360AdvertiserLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDisplayVideo360AdvertiserLinkRequest {
     /// Required. Example format: properties/1234
@@ -5693,7 +5482,6 @@ pub struct CreateDisplayVideo360AdvertiserLinkRequest {
     >,
 }
 /// Request message for DeleteDisplayVideo360AdvertiserLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDisplayVideo360AdvertiserLinkRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLink to delete.
@@ -5702,7 +5490,6 @@ pub struct DeleteDisplayVideo360AdvertiserLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDisplayVideo360AdvertiserLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDisplayVideo360AdvertiserLinkRequest {
     /// The DisplayVideo360AdvertiserLink to update
@@ -5717,7 +5504,6 @@ pub struct UpdateDisplayVideo360AdvertiserLinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDisplayVideo360AdvertiserLinkProposalRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLinkProposal to get.
@@ -5726,7 +5512,6 @@ pub struct GetDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListDisplayVideo360AdvertiserLinkProposals RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinkProposalsRequest {
     /// Required. Example format: properties/1234
@@ -5748,7 +5533,6 @@ pub struct ListDisplayVideo360AdvertiserLinkProposalsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDisplayVideo360AdvertiserLinkProposals RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDisplayVideo360AdvertiserLinkProposalsResponse {
     /// List of DisplayVideo360AdvertiserLinkProposals.
@@ -5762,7 +5546,6 @@ pub struct ListDisplayVideo360AdvertiserLinkProposalsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDisplayVideo360AdvertiserLinkProposalRequest {
     /// Required. Example format: properties/1234
@@ -5775,7 +5558,6 @@ pub struct CreateDisplayVideo360AdvertiserLinkProposalRequest {
     >,
 }
 /// Request message for DeleteDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDisplayVideo360AdvertiserLinkProposalRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLinkProposal to delete.
@@ -5784,7 +5566,6 @@ pub struct DeleteDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApproveDisplayVideo360AdvertiserLinkProposalRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLinkProposal to approve.
@@ -5793,7 +5574,6 @@ pub struct ApproveDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApproveDisplayVideo360AdvertiserLinkProposalResponse {
     /// The DisplayVideo360AdvertiserLink created as a result of approving the
@@ -5804,7 +5584,6 @@ pub struct ApproveDisplayVideo360AdvertiserLinkProposalResponse {
     >,
 }
 /// Request message for CancelDisplayVideo360AdvertiserLinkProposal RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelDisplayVideo360AdvertiserLinkProposalRequest {
     /// Required. The name of the DisplayVideo360AdvertiserLinkProposal to cancel.
@@ -5813,7 +5592,6 @@ pub struct CancelDisplayVideo360AdvertiserLinkProposalRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetSearchAds360Link RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSearchAds360LinkRequest {
     /// Required. The name of the SearchAds360Link to get.
@@ -5822,7 +5600,6 @@ pub struct GetSearchAds360LinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListSearchAds360Links RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSearchAds360LinksRequest {
     /// Required. Example format: properties/1234
@@ -5843,7 +5620,6 @@ pub struct ListSearchAds360LinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSearchAds360Links RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSearchAds360LinksResponse {
     /// List of SearchAds360Links.
@@ -5855,7 +5631,6 @@ pub struct ListSearchAds360LinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateSearchAds360Link RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSearchAds360LinkRequest {
     /// Required. Example format: properties/1234
@@ -5866,7 +5641,6 @@ pub struct CreateSearchAds360LinkRequest {
     pub search_ads_360_link: ::core::option::Option<SearchAds360Link>,
 }
 /// Request message for DeleteSearchAds360Link RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSearchAds360LinkRequest {
     /// Required. The name of the SearchAds360Link to delete.
@@ -5875,7 +5649,6 @@ pub struct DeleteSearchAds360LinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSearchAds360Link RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSearchAds360LinkRequest {
     /// The SearchAds360Link to update
@@ -5888,7 +5661,6 @@ pub struct UpdateSearchAds360LinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomDimensionRequest {
     /// Required. Example format: properties/1234
@@ -5899,7 +5671,6 @@ pub struct CreateCustomDimensionRequest {
     pub custom_dimension: ::core::option::Option<CustomDimension>,
 }
 /// Request message for UpdateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomDimensionRequest {
     /// The CustomDimension to update
@@ -5912,7 +5683,6 @@ pub struct UpdateCustomDimensionRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsRequest {
     /// Required. Example format: properties/1234
@@ -5932,7 +5702,6 @@ pub struct ListCustomDimensionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsResponse {
     /// List of CustomDimensions.
@@ -5944,7 +5713,6 @@ pub struct ListCustomDimensionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomDimensionRequest {
     /// Required. The name of the CustomDimension to archive.
@@ -5953,7 +5721,6 @@ pub struct ArchiveCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomDimensionRequest {
     /// Required. The name of the CustomDimension to get.
@@ -5962,7 +5729,6 @@ pub struct GetCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomMetricRequest {
     /// Required. Example format: properties/1234
@@ -5973,7 +5739,6 @@ pub struct CreateCustomMetricRequest {
     pub custom_metric: ::core::option::Option<CustomMetric>,
 }
 /// Request message for UpdateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomMetricRequest {
     /// The CustomMetric to update
@@ -5986,7 +5751,6 @@ pub struct UpdateCustomMetricRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsRequest {
     /// Required. Example format: properties/1234
@@ -6006,7 +5770,6 @@ pub struct ListCustomMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsResponse {
     /// List of CustomMetrics.
@@ -6018,7 +5781,6 @@ pub struct ListCustomMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomMetricRequest {
     /// Required. The name of the CustomMetric to archive.
@@ -6027,7 +5789,6 @@ pub struct ArchiveCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomMetricRequest {
     /// Required. The name of the CustomMetric to get.
@@ -6036,7 +5797,6 @@ pub struct GetCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCalculatedMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCalculatedMetricRequest {
     /// Required. Format: properties/{property_id}
@@ -6058,7 +5818,6 @@ pub struct CreateCalculatedMetricRequest {
     pub calculated_metric: ::core::option::Option<CalculatedMetric>,
 }
 /// Request message for UpdateCalculatedMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCalculatedMetricRequest {
     /// Required. The CalculatedMetric to update
@@ -6071,7 +5830,6 @@ pub struct UpdateCalculatedMetricRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteCalculatedMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCalculatedMetricRequest {
     /// Required. The name of the CalculatedMetric to delete.
@@ -6081,7 +5839,6 @@ pub struct DeleteCalculatedMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListCalculatedMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCalculatedMetricsRequest {
     /// Required. Example format: properties/1234
@@ -6101,7 +5858,6 @@ pub struct ListCalculatedMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCalculatedMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCalculatedMetricsResponse {
     /// List of CalculatedMetrics.
@@ -6113,7 +5869,6 @@ pub struct ListCalculatedMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetCalculatedMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCalculatedMetricRequest {
     /// Required. The name of the CalculatedMetric to get.
@@ -6123,7 +5878,6 @@ pub struct GetCalculatedMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRetentionSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -6134,7 +5888,6 @@ pub struct GetDataRetentionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRetentionSettingsRequest {
     /// Required. The settings to update.
@@ -6149,7 +5902,6 @@ pub struct UpdateDataRetentionSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataStreamRequest {
     /// Required. Example format: properties/1234
@@ -6160,7 +5912,6 @@ pub struct CreateDataStreamRequest {
     pub data_stream: ::core::option::Option<DataStream>,
 }
 /// Request message for DeleteDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataStreamRequest {
     /// Required. The name of the DataStream to delete.
@@ -6169,7 +5920,6 @@ pub struct DeleteDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataStreamRequest {
     /// The DataStream to update
@@ -6182,7 +5932,6 @@ pub struct UpdateDataStreamRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsRequest {
     /// Required. Example format: properties/1234
@@ -6202,7 +5951,6 @@ pub struct ListDataStreamsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsResponse {
     /// List of DataStreams.
@@ -6214,7 +5962,6 @@ pub struct ListDataStreamsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataStreamRequest {
     /// Required. The name of the DataStream to get.
@@ -6223,7 +5970,6 @@ pub struct GetDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetAudience RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAudienceRequest {
     /// Required. The name of the Audience to get.
@@ -6232,7 +5978,6 @@ pub struct GetAudienceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAudiences RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAudiencesRequest {
     /// Required. Example format: properties/1234
@@ -6252,7 +5997,6 @@ pub struct ListAudiencesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAudiences RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAudiencesResponse {
     /// List of Audiences.
@@ -6264,7 +6008,6 @@ pub struct ListAudiencesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateAudience RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAudienceRequest {
     /// Required. Example format: properties/1234
@@ -6275,7 +6018,6 @@ pub struct CreateAudienceRequest {
     pub audience: ::core::option::Option<Audience>,
 }
 /// Request message for UpdateAudience RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAudienceRequest {
     /// Required. The audience to update.
@@ -6290,7 +6032,6 @@ pub struct UpdateAudienceRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ArchiveAudience RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveAudienceRequest {
     /// Required. Example format: properties/1234/audiences/5678
@@ -6298,7 +6039,6 @@ pub struct ArchiveAudienceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetAttributionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAttributionSettingsRequest {
     /// Required. The name of the attribution settings to retrieve.
@@ -6307,7 +6047,6 @@ pub struct GetAttributionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAttributionSettings RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAttributionSettingsRequest {
     /// Required. The attribution settings to update.
@@ -6322,7 +6061,6 @@ pub struct UpdateAttributionSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetAccessBinding RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccessBindingRequest {
     /// Required. The name of the access binding to retrieve.
@@ -6333,7 +6071,6 @@ pub struct GetAccessBindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for BatchGetAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetAccessBindingsRequest {
     /// Required. The account or property that owns the access bindings. The parent
@@ -6352,7 +6089,6 @@ pub struct BatchGetAccessBindingsRequest {
     pub names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for BatchGetAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchGetAccessBindingsResponse {
     /// The requested access bindings.
@@ -6360,7 +6096,6 @@ pub struct BatchGetAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for ListAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessBindingsRequest {
     /// Required. Formats:
@@ -6382,7 +6117,6 @@ pub struct ListAccessBindingsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccessBindingsResponse {
     /// List of AccessBindings. These will be ordered stably, but in an arbitrary
@@ -6395,7 +6129,6 @@ pub struct ListAccessBindingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateAccessBinding RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAccessBindingRequest {
     /// Required. Formats:
@@ -6408,7 +6141,6 @@ pub struct CreateAccessBindingRequest {
     pub access_binding: ::core::option::Option<AccessBinding>,
 }
 /// Request message for BatchCreateAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAccessBindingsRequest {
     /// Required. The account or property that owns the access bindings. The parent
@@ -6424,7 +6156,6 @@ pub struct BatchCreateAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<CreateAccessBindingRequest>,
 }
 /// Response message for BatchCreateAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateAccessBindingsResponse {
     /// The access bindings created.
@@ -6432,7 +6163,6 @@ pub struct BatchCreateAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for UpdateAccessBinding RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccessBindingRequest {
     /// Required. The access binding to update.
@@ -6440,7 +6170,6 @@ pub struct UpdateAccessBindingRequest {
     pub access_binding: ::core::option::Option<AccessBinding>,
 }
 /// Request message for BatchUpdateAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateAccessBindingsRequest {
     /// Required. The account or property that owns the access bindings. The parent
@@ -6457,7 +6186,6 @@ pub struct BatchUpdateAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<UpdateAccessBindingRequest>,
 }
 /// Response message for BatchUpdateAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateAccessBindingsResponse {
     /// The access bindings updated.
@@ -6465,7 +6193,6 @@ pub struct BatchUpdateAccessBindingsResponse {
     pub access_bindings: ::prost::alloc::vec::Vec<AccessBinding>,
 }
 /// Request message for DeleteAccessBinding RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccessBindingRequest {
     /// Required. Formats:
@@ -6475,7 +6202,6 @@ pub struct DeleteAccessBindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for BatchDeleteAccessBindings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchDeleteAccessBindingsRequest {
     /// Required. The account or property that owns the access bindings. The parent
@@ -6491,7 +6217,6 @@ pub struct BatchDeleteAccessBindingsRequest {
     pub requests: ::prost::alloc::vec::Vec<DeleteAccessBindingRequest>,
 }
 /// Request message for CreateExpandedDataSet RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateExpandedDataSetRequest {
     /// Required. Example format: properties/1234
@@ -6502,7 +6227,6 @@ pub struct CreateExpandedDataSetRequest {
     pub expanded_data_set: ::core::option::Option<ExpandedDataSet>,
 }
 /// Request message for UpdateExpandedDataSet RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateExpandedDataSetRequest {
     /// Required. The ExpandedDataSet to update.
@@ -6518,7 +6242,6 @@ pub struct UpdateExpandedDataSetRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteExpandedDataSet RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteExpandedDataSetRequest {
     /// Required. Example format: properties/1234/expandedDataSets/5678
@@ -6526,7 +6249,6 @@ pub struct DeleteExpandedDataSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetExpandedDataSet RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetExpandedDataSetRequest {
     /// Required. The name of the ExpandedDataSet to get.
@@ -6535,7 +6257,6 @@ pub struct GetExpandedDataSetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListExpandedDataSets RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExpandedDataSetsRequest {
     /// Required. Example format: properties/1234
@@ -6555,7 +6276,6 @@ pub struct ListExpandedDataSetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListExpandedDataSets RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListExpandedDataSetsResponse {
     /// List of ExpandedDataSet. These will be ordered stably, but in an arbitrary
@@ -6568,7 +6288,6 @@ pub struct ListExpandedDataSetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateChannelGroup RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChannelGroupRequest {
     /// Required. The property for which to create a ChannelGroup.
@@ -6580,7 +6299,6 @@ pub struct CreateChannelGroupRequest {
     pub channel_group: ::core::option::Option<ChannelGroup>,
 }
 /// Request message for UpdateChannelGroup RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChannelGroupRequest {
     /// Required. The ChannelGroup to update.
@@ -6596,7 +6314,6 @@ pub struct UpdateChannelGroupRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteChannelGroup RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChannelGroupRequest {
     /// Required. The ChannelGroup to delete.
@@ -6605,7 +6322,6 @@ pub struct DeleteChannelGroupRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetChannelGroup RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChannelGroupRequest {
     /// Required. The ChannelGroup to get.
@@ -6614,7 +6330,6 @@ pub struct GetChannelGroupRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListChannelGroups RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelGroupsRequest {
     /// Required. The property for which to list ChannelGroups.
@@ -6635,7 +6350,6 @@ pub struct ListChannelGroupsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListChannelGroups RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChannelGroupsResponse {
     /// List of ChannelGroup. These will be ordered stably, but in an arbitrary
@@ -6648,7 +6362,6 @@ pub struct ListChannelGroupsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for setting the opt out status for the automated GA4 setup process.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAutomatedGa4ConfigurationOptOutRequest {
     /// Required. The UA property to set the opt out status. Note this request uses
@@ -6663,11 +6376,9 @@ pub struct SetAutomatedGa4ConfigurationOptOutRequest {
 }
 /// Response message for setting the opt out status for the automated GA4 setup
 /// process.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetAutomatedGa4ConfigurationOptOutResponse {}
 /// Request for fetching the opt out status for the automated GA4 setup process.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchAutomatedGa4ConfigurationOptOutRequest {
     /// Required. The UA property to get the opt out status. Note this request uses
@@ -6679,7 +6390,6 @@ pub struct FetchAutomatedGa4ConfigurationOptOutRequest {
 }
 /// Response message for fetching the opt out status for the automated GA4 setup
 /// process.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FetchAutomatedGa4ConfigurationOptOutResponse {
     /// The opt out status for the UA property.
@@ -6687,7 +6397,6 @@ pub struct FetchAutomatedGa4ConfigurationOptOutResponse {
     pub opt_out: bool,
 }
 /// Request message for CreateBigQueryLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBigQueryLinkRequest {
     /// Required. Example format: properties/1234
@@ -6698,7 +6407,6 @@ pub struct CreateBigQueryLinkRequest {
     pub bigquery_link: ::core::option::Option<BigQueryLink>,
 }
 /// Request message for GetBigQueryLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBigQueryLinkRequest {
     /// Required. The name of the BigQuery link to lookup.
@@ -6708,7 +6416,6 @@ pub struct GetBigQueryLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListBigQueryLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBigQueryLinksRequest {
     /// Required. The name of the property to list BigQuery links under.
@@ -6730,7 +6437,6 @@ pub struct ListBigQueryLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListBigQueryLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBigQueryLinksResponse {
     /// List of BigQueryLinks.
@@ -6742,7 +6448,6 @@ pub struct ListBigQueryLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateBigQueryLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBigQueryLinkRequest {
     /// Required. The settings to update.
@@ -6757,7 +6462,6 @@ pub struct UpdateBigQueryLinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteBigQueryLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBigQueryLinkRequest {
     /// Required. The BigQueryLink to delete.
@@ -6766,7 +6470,6 @@ pub struct DeleteBigQueryLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetEnhancedMeasurementSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEnhancedMeasurementSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -6777,7 +6480,6 @@ pub struct GetEnhancedMeasurementSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateEnhancedMeasurementSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEnhancedMeasurementSettingsRequest {
     /// Required. The settings to update.
@@ -6794,7 +6496,6 @@ pub struct UpdateEnhancedMeasurementSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetDataRedactionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRedactionSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -6805,7 +6506,6 @@ pub struct GetDataRedactionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRedactionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRedactionSettingsRequest {
     /// Required. The settings to update.
@@ -6820,7 +6520,6 @@ pub struct UpdateDataRedactionSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateConnectedSiteTag RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConnectedSiteTagRequest {
     /// The Universal Analytics property to create connected site tags for.
@@ -6834,11 +6533,9 @@ pub struct CreateConnectedSiteTagRequest {
     pub connected_site_tag: ::core::option::Option<ConnectedSiteTag>,
 }
 /// Response message for CreateConnectedSiteTag RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateConnectedSiteTagResponse {}
 /// Request message for DeleteConnectedSiteTag RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConnectedSiteTagRequest {
     /// The Universal Analytics property to delete connected site tags for.
@@ -6853,7 +6550,6 @@ pub struct DeleteConnectedSiteTagRequest {
     pub tag_id: ::prost::alloc::string::String,
 }
 /// Request message for ListConnectedSiteTags RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectedSiteTagsRequest {
     /// The Universal Analytics property to fetch connected site tags for.
@@ -6864,7 +6560,6 @@ pub struct ListConnectedSiteTagsRequest {
     pub property: ::prost::alloc::string::String,
 }
 /// Response message for ListConnectedSiteTags RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectedSiteTagsResponse {
     /// The site tags for the Universal Analytics property. A maximum of 20
@@ -6873,7 +6568,6 @@ pub struct ListConnectedSiteTagsResponse {
     pub connected_site_tags: ::prost::alloc::vec::Vec<ConnectedSiteTag>,
 }
 /// Request message to be passed to CreateAdSenseLink method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAdSenseLinkRequest {
     /// Required. The property for which to create an AdSense Link.
@@ -6886,7 +6580,6 @@ pub struct CreateAdSenseLinkRequest {
     pub adsense_link: ::core::option::Option<AdSenseLink>,
 }
 /// Request message to be passed to GetAdSenseLink method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAdSenseLinkRequest {
     /// Required. Unique identifier for the AdSense Link requested.
@@ -6896,7 +6589,6 @@ pub struct GetAdSenseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message to be passed to DeleteAdSenseLink method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAdSenseLinkRequest {
     /// Required. Unique identifier for the AdSense Link to be deleted.
@@ -6906,7 +6598,6 @@ pub struct DeleteAdSenseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message to be passed to ListAdSenseLinks method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdSenseLinksRequest {
     /// Required. Resource name of the parent property.
@@ -6928,7 +6619,6 @@ pub struct ListAdSenseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAdSenseLinks method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAdSenseLinksResponse {
     /// List of AdSenseLinks.
@@ -6940,7 +6630,6 @@ pub struct ListAdSenseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for looking up GA4 property connected to a UA property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchConnectedGa4PropertyRequest {
     /// Required. The UA property for which to look up the connected GA4 property.
@@ -6952,7 +6641,6 @@ pub struct FetchConnectedGa4PropertyRequest {
     pub property: ::prost::alloc::string::String,
 }
 /// Response for looking up GA4 property connected to a UA property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchConnectedGa4PropertyResponse {
     /// The GA4 property connected to the UA property. An empty string is returned
@@ -6963,7 +6651,6 @@ pub struct FetchConnectedGa4PropertyResponse {
     pub property: ::prost::alloc::string::String,
 }
 /// Request message for CreateEventCreateRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventCreateRuleRequest {
     /// Required. Example format: properties/123/dataStreams/456
@@ -6974,7 +6661,6 @@ pub struct CreateEventCreateRuleRequest {
     pub event_create_rule: ::core::option::Option<EventCreateRule>,
 }
 /// Request message for UpdateEventCreateRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEventCreateRuleRequest {
     /// Required. The EventCreateRule to update.
@@ -6990,7 +6676,6 @@ pub struct UpdateEventCreateRuleRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteEventCreateRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventCreateRuleRequest {
     /// Required. Example format:
@@ -6999,7 +6684,6 @@ pub struct DeleteEventCreateRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetEventCreateRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventCreateRuleRequest {
     /// Required. The name of the EventCreateRule to get.
@@ -7008,7 +6692,6 @@ pub struct GetEventCreateRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListEventCreateRules RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventCreateRulesRequest {
     /// Required. Example format: properties/123/dataStreams/456
@@ -7028,7 +6711,6 @@ pub struct ListEventCreateRulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListEventCreateRules RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventCreateRulesResponse {
     /// List of EventCreateRules. These will be ordered stably, but in an arbitrary
@@ -7041,7 +6723,6 @@ pub struct ListEventCreateRulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateEventEditRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateEventEditRuleRequest {
     /// Required. Example format: properties/123/dataStreams/456
@@ -7052,7 +6733,6 @@ pub struct CreateEventEditRuleRequest {
     pub event_edit_rule: ::core::option::Option<EventEditRule>,
 }
 /// Request message for UpdateEventEditRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateEventEditRuleRequest {
     /// Required. The EventEditRule to update.
@@ -7068,7 +6748,6 @@ pub struct UpdateEventEditRuleRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteEventEditRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteEventEditRuleRequest {
     /// Required. Example format: properties/123/dataStreams/456/eventEditRules/789
@@ -7076,7 +6755,6 @@ pub struct DeleteEventEditRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetEventEditRule RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventEditRuleRequest {
     /// Required. The name of the EventEditRule to get.
@@ -7085,7 +6763,6 @@ pub struct GetEventEditRuleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListEventEditRules RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventEditRulesRequest {
     /// Required. Example format: properties/123/dataStreams/456
@@ -7105,7 +6782,6 @@ pub struct ListEventEditRulesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListEventEditRules RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventEditRulesResponse {
     /// List of EventEditRules. These will be ordered stably, but in an arbitrary
@@ -7118,7 +6794,6 @@ pub struct ListEventEditRulesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ReorderEventEditRules RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReorderEventEditRulesRequest {
     /// Required. Example format: properties/123/dataStreams/456
@@ -7131,7 +6806,6 @@ pub struct ReorderEventEditRulesRequest {
     pub event_edit_rules: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for CreateRollupProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertyRequest {
     /// Required. The roll-up property to create.
@@ -7143,7 +6817,6 @@ pub struct CreateRollupPropertyRequest {
     pub source_properties: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response message for CreateRollupProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertyResponse {
     /// The created roll-up property.
@@ -7154,7 +6827,6 @@ pub struct CreateRollupPropertyResponse {
     pub rollup_property_source_links: ::prost::alloc::vec::Vec<RollupPropertySourceLink>,
 }
 /// Request message for GetRollupPropertySourceLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRollupPropertySourceLinkRequest {
     /// Required. The name of the roll-up property source link to lookup.
@@ -7165,7 +6837,6 @@ pub struct GetRollupPropertySourceLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListRollupPropertySourceLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRollupPropertySourceLinksRequest {
     /// Required. The name of the roll-up property to list roll-up property source
@@ -7187,7 +6858,6 @@ pub struct ListRollupPropertySourceLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListRollupPropertySourceLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRollupPropertySourceLinksResponse {
     /// List of RollupPropertySourceLinks.
@@ -7199,7 +6869,6 @@ pub struct ListRollupPropertySourceLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateRollupPropertySourceLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRollupPropertySourceLinkRequest {
     /// Required. Format: properties/{property_id}
@@ -7211,7 +6880,6 @@ pub struct CreateRollupPropertySourceLinkRequest {
     pub rollup_property_source_link: ::core::option::Option<RollupPropertySourceLink>,
 }
 /// Request message for DeleteRollupPropertySourceLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRollupPropertySourceLinkRequest {
     /// Required. Format:
@@ -7221,7 +6889,6 @@ pub struct DeleteRollupPropertySourceLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateSubproperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionSubpropertyRequest {
     /// Required. The subproperty to create.
@@ -7232,7 +6899,6 @@ pub struct ProvisionSubpropertyRequest {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Response message for ProvisionSubproperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionSubpropertyResponse {
     /// The created subproperty.
@@ -7243,7 +6909,6 @@ pub struct ProvisionSubpropertyResponse {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Request message for CreateSubpropertyEventFilter RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSubpropertyEventFilterRequest {
     /// Required. The ordinary property for which to create a subproperty event
@@ -7255,7 +6920,6 @@ pub struct CreateSubpropertyEventFilterRequest {
     pub subproperty_event_filter: ::core::option::Option<SubpropertyEventFilter>,
 }
 /// Request message for GetSubpropertyEventFilter RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSubpropertyEventFilterRequest {
     /// Required. Resource name of the subproperty event filter to lookup.
@@ -7266,7 +6930,6 @@ pub struct GetSubpropertyEventFilterRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListSubpropertyEventFilters RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubpropertyEventFiltersRequest {
     /// Required. Resource name of the ordinary property.
@@ -7289,7 +6952,6 @@ pub struct ListSubpropertyEventFiltersRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListSubpropertyEventFilter RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSubpropertyEventFiltersResponse {
     /// List of subproperty event filters.
@@ -7301,7 +6963,6 @@ pub struct ListSubpropertyEventFiltersResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateSubpropertyEventFilter RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateSubpropertyEventFilterRequest {
     /// Required. The subproperty event filter to update.
@@ -7315,7 +6976,6 @@ pub struct UpdateSubpropertyEventFilterRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteSubpropertyEventFilter RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSubpropertyEventFilterRequest {
     /// Required. Resource name of the subproperty event filter to delete.
@@ -7327,10 +6987,16 @@ pub struct DeleteSubpropertyEventFilterRequest {
 }
 /// Generated client implementations.
 pub mod analytics_admin_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
-    /// Service Interface for the Analytics Admin API (GA4).
+    /// Service Interface for the Google Analytics Admin API.
     #[derive(Debug, Clone)]
     pub struct AnalyticsAdminServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -7350,8 +7016,8 @@ pub mod analytics_admin_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -7376,7 +7042,7 @@ pub mod analytics_admin_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AnalyticsAdminServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -7420,8 +7086,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7441,7 +7106,7 @@ pub mod analytics_admin_service_client {
         }
         /// Returns all accounts accessible by the caller.
         ///
-        /// Note that these accounts might not currently have GA4 properties.
+        /// Note that these accounts might not currently have GA properties.
         /// Soft-deleted (ie: "trashed") accounts are excluded by default.
         /// Returns an empty list if no relevant accounts are found.
         pub async fn list_accounts(
@@ -7455,8 +7120,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7493,8 +7157,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7521,8 +7184,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7552,8 +7214,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7583,8 +7244,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7602,7 +7262,7 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lookup for a single "GA4" Property.
+        /// Lookup for a single GA Property.
         pub async fn get_property(
             &mut self,
             request: impl tonic::IntoRequest<super::GetPropertyRequest>,
@@ -7611,8 +7271,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7632,7 +7291,6 @@ pub mod analytics_admin_service_client {
         }
         /// Returns child Properties under the specified parent Account.
         ///
-        /// Only "GA4" properties will be returned.
         /// Properties will be excluded if the caller does not have access.
         /// Soft-deleted (ie: "trashed") properties are excluded by default.
         /// Returns an empty list if no relevant properties are found.
@@ -7647,8 +7305,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7666,7 +7323,8 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Creates an "GA4" property with the specified location and attributes.
+        /// Creates a Google Analytics property with the specified location and
+        /// attributes.
         pub async fn create_property(
             &mut self,
             request: impl tonic::IntoRequest<super::CreatePropertyRequest>,
@@ -7675,8 +7333,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7704,7 +7361,7 @@ pub mod analytics_admin_service_client {
         /// will be permanently purged.
         /// https://support.google.com/analytics/answer/6154772
         ///
-        /// Returns an error if the target is not found, or is not a GA4 Property.
+        /// Returns an error if the target is not found.
         pub async fn delete_property(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePropertyRequest>,
@@ -7713,8 +7370,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7741,8 +7397,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7771,8 +7426,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7799,8 +7453,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7831,8 +7484,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7860,8 +7512,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7888,8 +7539,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7916,8 +7566,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7944,8 +7593,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -7975,8 +7623,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8007,8 +7654,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8026,7 +7672,7 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lookup for a single "GA4" MeasurementProtocolSecret.
+        /// Lookup for a single MeasurementProtocolSecret.
         pub async fn get_measurement_protocol_secret(
             &mut self,
             request: impl tonic::IntoRequest<super::GetMeasurementProtocolSecretRequest>,
@@ -8038,8 +7684,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8072,8 +7717,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8105,8 +7749,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8135,8 +7778,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8168,8 +7810,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8203,8 +7844,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8236,8 +7876,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8269,8 +7908,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8299,8 +7937,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8332,8 +7969,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8366,8 +8002,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8387,6 +8022,9 @@ pub mod analytics_admin_service_client {
         }
         /// Searches through all changes to an account or its children given the
         /// specified set of filters.
+        ///
+        /// Only returns the subset of changes supported by the API. The UI may return
+        /// additional changes.
         pub async fn search_change_history_events(
             &mut self,
             request: impl tonic::IntoRequest<super::SearchChangeHistoryEventsRequest>,
@@ -8398,8 +8036,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8429,8 +8066,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8460,8 +8096,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8481,6 +8116,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `CreateKeyEvent` instead.
         /// Creates a conversion event with the specified attributes.
+        #[deprecated]
         pub async fn create_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateConversionEventRequest>,
@@ -8492,8 +8128,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8513,6 +8148,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `UpdateKeyEvent` instead.
         /// Updates a conversion event with the specified attributes.
+        #[deprecated]
         pub async fn update_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateConversionEventRequest>,
@@ -8524,8 +8160,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8545,6 +8180,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `GetKeyEvent` instead.
         /// Retrieve a single conversion event.
+        #[deprecated]
         pub async fn get_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::GetConversionEventRequest>,
@@ -8556,8 +8192,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8577,6 +8212,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `DeleteKeyEvent` instead.
         /// Deletes a conversion event in a property.
+        #[deprecated]
         pub async fn delete_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteConversionEventRequest>,
@@ -8585,8 +8221,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8608,6 +8243,7 @@ pub mod analytics_admin_service_client {
         /// Returns a list of conversion events in the specified parent property.
         ///
         /// Returns an empty list if no conversion events are found.
+        #[deprecated]
         pub async fn list_conversion_events(
             &mut self,
             request: impl tonic::IntoRequest<super::ListConversionEventsRequest>,
@@ -8619,8 +8255,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8647,8 +8282,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8675,8 +8309,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8703,8 +8336,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8731,8 +8363,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8763,8 +8394,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8796,8 +8426,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8829,8 +8458,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8866,8 +8494,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8896,8 +8523,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8929,8 +8555,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8962,8 +8587,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -8995,8 +8619,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9028,8 +8651,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9059,8 +8681,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9094,8 +8715,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9131,8 +8751,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9162,8 +8781,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9193,8 +8811,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9224,8 +8841,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9252,8 +8868,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9283,8 +8898,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9311,8 +8925,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9339,8 +8952,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9370,8 +8982,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9398,8 +9009,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9426,8 +9036,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9457,8 +9066,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9488,8 +9096,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9516,8 +9123,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9544,8 +9150,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9572,8 +9177,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9603,8 +9207,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9631,8 +9234,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9661,8 +9263,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9694,8 +9295,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9722,8 +9322,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9750,8 +9349,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9778,8 +9376,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9809,8 +9406,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9840,8 +9436,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9871,8 +9466,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9899,8 +9493,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9930,8 +9523,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9961,8 +9553,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -9992,8 +9583,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10020,12 +9610,17 @@ pub mod analytics_admin_service_client {
         /// only be requested on Google Analytics 360 properties. This method is only
         /// available to Administrators.
         ///
-        /// These data access records include GA4 UI Reporting, GA4 UI Explorations,
-        /// GA4 Data API, and other products like Firebase & Admob that can retrieve
+        /// These data access records include GA UI Reporting, GA UI Explorations,
+        /// GA Data API, and other products like Firebase & Admob that can retrieve
         /// data from Google Analytics through a linkage. These records don't include
         /// property configuration changes like adding a stream or changing a
         /// property's time zone. For configuration change history, see
         /// [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+        ///
+        /// To give your feedback on this API, complete the [Google Analytics Access
+        /// Reports
+        /// feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform)
+        /// form.
         pub async fn run_access_report(
             &mut self,
             request: impl tonic::IntoRequest<super::RunAccessReportRequest>,
@@ -10037,8 +9632,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10065,8 +9659,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10093,8 +9686,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10121,8 +9713,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10149,8 +9740,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10180,8 +9770,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10215,8 +9804,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10246,8 +9834,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10278,8 +9865,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10306,8 +9892,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10337,8 +9922,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10368,8 +9952,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10399,8 +9982,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10430,8 +10012,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10458,8 +10039,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10486,8 +10066,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10517,8 +10096,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10545,8 +10123,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10573,8 +10150,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10601,8 +10177,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10636,8 +10211,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10671,8 +10245,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10699,8 +10272,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10727,8 +10299,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10758,8 +10329,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10786,8 +10356,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10814,8 +10383,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10849,8 +10417,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10884,8 +10451,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10917,8 +10483,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10946,8 +10511,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -10979,8 +10543,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11011,8 +10574,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11039,8 +10601,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11067,8 +10628,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11095,8 +10655,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11126,8 +10685,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11157,8 +10715,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11188,8 +10745,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11219,8 +10775,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11250,8 +10805,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11278,8 +10832,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11306,8 +10859,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11337,8 +10889,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11365,8 +10916,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11393,8 +10943,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11421,8 +10970,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11449,8 +10997,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11480,8 +11027,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11511,8 +11057,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11542,8 +11087,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11573,8 +11117,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11604,8 +11147,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11635,8 +11177,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11663,8 +11204,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11694,8 +11234,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11727,8 +11266,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11760,8 +11298,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11795,8 +11332,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11827,8 +11363,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11859,8 +11394,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11890,8 +11424,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11921,8 +11454,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11952,8 +11484,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -11983,8 +11514,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -12011,8 +11541,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

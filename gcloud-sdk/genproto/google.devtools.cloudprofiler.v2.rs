@@ -4,7 +4,6 @@
 /// of profile types supported by the agent. The creation call will hang until a
 /// profile of one of these types needs to be collected.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateProfileRequest {
     /// Parent project to create the profile in.
@@ -19,7 +18,6 @@ pub struct CreateProfileRequest {
 }
 /// CreateOfflineProfileRequest describes a profile resource offline creation
 /// request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateOfflineProfileRequest {
     /// Parent project to create the profile in.
@@ -30,7 +28,6 @@ pub struct CreateOfflineProfileRequest {
     pub profile: ::core::option::Option<Profile>,
 }
 /// UpdateProfileRequest contains the profile to update.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProfileRequest {
     /// Profile to update.
@@ -44,7 +41,6 @@ pub struct UpdateProfileRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Profile resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Profile {
     /// Output only. Opaque, server-assigned, unique ID for this profile.
@@ -84,7 +80,6 @@ pub struct Profile {
     pub start_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Deployment contains the deployment identification information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Deployment {
     /// Project ID is the ID of a cloud project.
@@ -120,7 +115,6 @@ pub struct Deployment {
 }
 /// ListProfilesRequest contains request parameters for listing profiles for
 /// deployments in projects which the user has permissions to view.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesRequest {
     /// Required. The parent, which owns this collection of profiles.
@@ -140,7 +134,6 @@ pub struct ListProfilesRequest {
 }
 /// ListProfileResponse contains the list of collected profiles for deployments
 /// in projects which the user has permissions to view.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProfilesResponse {
     /// List of profiles fetched.
@@ -193,14 +186,14 @@ impl ProfileType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ProfileType::Unspecified => "PROFILE_TYPE_UNSPECIFIED",
-            ProfileType::Cpu => "CPU",
-            ProfileType::Wall => "WALL",
-            ProfileType::Heap => "HEAP",
-            ProfileType::Threads => "THREADS",
-            ProfileType::Contention => "CONTENTION",
-            ProfileType::PeakHeap => "PEAK_HEAP",
-            ProfileType::HeapAlloc => "HEAP_ALLOC",
+            Self::Unspecified => "PROFILE_TYPE_UNSPECIFIED",
+            Self::Cpu => "CPU",
+            Self::Wall => "WALL",
+            Self::Heap => "HEAP",
+            Self::Threads => "THREADS",
+            Self::Contention => "CONTENTION",
+            Self::PeakHeap => "PEAK_HEAP",
+            Self::HeapAlloc => "HEAP_ALLOC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -220,7 +213,13 @@ impl ProfileType {
 }
 /// Generated client implementations.
 pub mod profiler_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Manage the collection of continuous profiling data provided by profiling
@@ -247,8 +246,8 @@ pub mod profiler_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -273,7 +272,7 @@ pub mod profiler_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ProfilerServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -335,8 +334,7 @@ pub mod profiler_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -370,8 +368,7 @@ pub mod profiler_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -406,8 +403,7 @@ pub mod profiler_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -429,7 +425,13 @@ pub mod profiler_service_client {
 }
 /// Generated client implementations.
 pub mod export_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service allows existing Cloud Profiler customers to export their profile data
@@ -453,8 +455,8 @@ pub mod export_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -479,7 +481,7 @@ pub mod export_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ExportServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -527,8 +529,7 @@ pub mod export_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

@@ -62,15 +62,15 @@ impl FieldBehavior {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            FieldBehavior::Unspecified => "FIELD_BEHAVIOR_UNSPECIFIED",
-            FieldBehavior::Optional => "OPTIONAL",
-            FieldBehavior::Required => "REQUIRED",
-            FieldBehavior::OutputOnly => "OUTPUT_ONLY",
-            FieldBehavior::InputOnly => "INPUT_ONLY",
-            FieldBehavior::Immutable => "IMMUTABLE",
-            FieldBehavior::UnorderedList => "UNORDERED_LIST",
-            FieldBehavior::NonEmptyDefault => "NON_EMPTY_DEFAULT",
-            FieldBehavior::Identifier => "IDENTIFIER",
+            Self::Unspecified => "FIELD_BEHAVIOR_UNSPECIFIED",
+            Self::Optional => "OPTIONAL",
+            Self::Required => "REQUIRED",
+            Self::OutputOnly => "OUTPUT_ONLY",
+            Self::InputOnly => "INPUT_ONLY",
+            Self::Immutable => "IMMUTABLE",
+            Self::UnorderedList => "UNORDERED_LIST",
+            Self::NonEmptyDefault => "NON_EMPTY_DEFAULT",
+            Self::Identifier => "IDENTIFIER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -136,7 +136,6 @@ impl FieldBehavior {
 ///        pattern: "folders/{folder}/logs/{log}"
 ///        pattern: "organizations/{organization}/logs/{log}"
 ///        pattern: "billingAccounts/{billing_account}/logs/{log}"
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceDescriptor {
     /// The resource type. It must be in the format of
@@ -253,9 +252,9 @@ pub mod resource_descriptor {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                History::Unspecified => "HISTORY_UNSPECIFIED",
-                History::OriginallySinglePattern => "ORIGINALLY_SINGLE_PATTERN",
-                History::FutureMultiPattern => "FUTURE_MULTI_PATTERN",
+                Self::Unspecified => "HISTORY_UNSPECIFIED",
+                Self::OriginallySinglePattern => "ORIGINALLY_SINGLE_PATTERN",
+                Self::FutureMultiPattern => "FUTURE_MULTI_PATTERN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -301,8 +300,8 @@ pub mod resource_descriptor {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Style::Unspecified => "STYLE_UNSPECIFIED",
-                Style::DeclarativeFriendly => "DECLARATIVE_FRIENDLY",
+                Self::Unspecified => "STYLE_UNSPECIFIED",
+                Self::DeclarativeFriendly => "DECLARATIVE_FRIENDLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -317,7 +316,6 @@ pub mod resource_descriptor {
 }
 /// Defines a proto annotation that describes a string field that refers to
 /// an API resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceReference {
     /// The resource type that the annotated field references.
@@ -359,7 +357,6 @@ pub struct ResourceReference {
 /// Defines the HTTP configuration for an API service. It contains a list of
 /// [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
 /// to one or more HTTP REST API methods.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Http {
     /// A list of HTTP configuration rules that apply to individual API methods.
@@ -640,7 +637,6 @@ pub struct Http {
 /// If an API needs to use a JSON array for request or response body, it can map
 /// the request or response body to a repeated field. However, some gRPC
 /// Transcoding implementations may not support this feature.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpRule {
     /// Selects a method to which this rule applies.
@@ -681,7 +677,6 @@ pub mod http_rule {
     /// Determines the URL pattern is matched by this rules. This pattern can be
     /// used with any of the {get|put|post|delete|patch} methods. A custom method
     /// can be defined using the 'custom' field.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Pattern {
         /// Maps to HTTP GET. Used for listing and getting information about
@@ -709,7 +704,6 @@ pub mod http_rule {
     }
 }
 /// A custom pattern is used for defining custom HTTP verb.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomHttpPattern {
     /// The name of this custom HTTP verb.
@@ -769,14 +763,14 @@ impl LaunchStage {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LaunchStage::Unspecified => "LAUNCH_STAGE_UNSPECIFIED",
-            LaunchStage::Unimplemented => "UNIMPLEMENTED",
-            LaunchStage::Prelaunch => "PRELAUNCH",
-            LaunchStage::EarlyAccess => "EARLY_ACCESS",
-            LaunchStage::Alpha => "ALPHA",
-            LaunchStage::Beta => "BETA",
-            LaunchStage::Ga => "GA",
-            LaunchStage::Deprecated => "DEPRECATED",
+            Self::Unspecified => "LAUNCH_STAGE_UNSPECIFIED",
+            Self::Unimplemented => "UNIMPLEMENTED",
+            Self::Prelaunch => "PRELAUNCH",
+            Self::EarlyAccess => "EARLY_ACCESS",
+            Self::Alpha => "ALPHA",
+            Self::Beta => "BETA",
+            Self::Ga => "GA",
+            Self::Deprecated => "DEPRECATED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -795,7 +789,6 @@ impl LaunchStage {
     }
 }
 /// Required information for every language.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommonLanguageSettings {
     /// Link to automatically generated reference documentation.  Example:
@@ -806,9 +799,11 @@ pub struct CommonLanguageSettings {
     /// The destination where API teams want this client library to be published.
     #[prost(enumeration = "ClientLibraryDestination", repeated, tag = "2")]
     pub destinations: ::prost::alloc::vec::Vec<i32>,
+    /// Configuration for which RPCs should be generated in the GAPIC client.
+    #[prost(message, optional, tag = "3")]
+    pub selective_gapic_generation: ::core::option::Option<SelectiveGapicGeneration>,
 }
 /// Details about how and where to publish client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClientLibrarySettings {
     /// Version of the API to apply these settings to. This is the full protobuf
@@ -851,7 +846,6 @@ pub struct ClientLibrarySettings {
 /// This message configures the settings for publishing [Google Cloud Client
 /// libraries](<https://cloud.google.com/apis/docs/cloud-client-libraries>)
 /// generated from the service config.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Publishing {
     /// A list of API method settings, e.g. the behavior for methods that use the
@@ -900,7 +894,6 @@ pub struct Publishing {
     pub rest_reference_documentation_uri: ::prost::alloc::string::String,
 }
 /// Settings for Java client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JavaSettings {
     /// The package name to use in Java. Clobbers the java_package option
@@ -940,7 +933,6 @@ pub struct JavaSettings {
     pub common: ::core::option::Option<CommonLanguageSettings>,
 }
 /// Settings for C++ client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CppSettings {
     /// Some settings.
@@ -948,7 +940,6 @@ pub struct CppSettings {
     pub common: ::core::option::Option<CommonLanguageSettings>,
 }
 /// Settings for Php client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhpSettings {
     /// Some settings.
@@ -956,15 +947,39 @@ pub struct PhpSettings {
     pub common: ::core::option::Option<CommonLanguageSettings>,
 }
 /// Settings for Python client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PythonSettings {
     /// Some settings.
     #[prost(message, optional, tag = "1")]
     pub common: ::core::option::Option<CommonLanguageSettings>,
+    /// Experimental features to be included during client library generation.
+    #[prost(message, optional, tag = "2")]
+    pub experimental_features: ::core::option::Option<
+        python_settings::ExperimentalFeatures,
+    >,
+}
+/// Nested message and enum types in `PythonSettings`.
+pub mod python_settings {
+    /// Experimental features to be included during client library generation.
+    /// These fields will be deprecated once the feature graduates and is enabled
+    /// by default.
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct ExperimentalFeatures {
+        /// Enables generation of asynchronous REST clients if `rest` transport is
+        /// enabled. By default, asynchronous REST clients will not be generated.
+        /// This feature will be enabled by default 1 month after launching the
+        /// feature in preview packages.
+        #[prost(bool, tag = "1")]
+        pub rest_async_io_enabled: bool,
+        /// Enables generation of protobuf code using new types that are more
+        /// Pythonic which are included in `protobuf>=5.29.x`. This feature will be
+        /// enabled by default 1 month after launching the feature in preview
+        /// packages.
+        #[prost(bool, tag = "2")]
+        pub protobuf_pythonic_types_enabled: bool,
+    }
 }
 /// Settings for Node client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeSettings {
     /// Some settings.
@@ -972,7 +987,6 @@ pub struct NodeSettings {
     pub common: ::core::option::Option<CommonLanguageSettings>,
 }
 /// Settings for Dotnet client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DotnetSettings {
     /// Some settings.
@@ -1018,7 +1032,6 @@ pub struct DotnetSettings {
     pub handwritten_signatures: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Settings for Ruby client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RubySettings {
     /// Some settings.
@@ -1026,15 +1039,26 @@ pub struct RubySettings {
     pub common: ::core::option::Option<CommonLanguageSettings>,
 }
 /// Settings for Go client libraries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoSettings {
     /// Some settings.
     #[prost(message, optional, tag = "1")]
     pub common: ::core::option::Option<CommonLanguageSettings>,
+    /// Map of service names to renamed services. Keys are the package relative
+    /// service names and values are the name to be used for the service client
+    /// and call options.
+    ///
+    /// publishing:
+    ///    go_settings:
+    ///      renamed_services:
+    ///        Publisher: TopicAdmin
+    #[prost(map = "string, string", tag = "2")]
+    pub renamed_services: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
 }
 /// Describes the generator configuration for a method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MethodSettings {
     /// The fully qualified name of the method, for which the options below apply.
@@ -1085,7 +1109,6 @@ pub mod method_settings {
     /// All default values below are from those used in the client library
     /// generators (e.g.
     /// [Java](<https://github.com/googleapis/gapic-generator-java/blob/04c2faa191a9b5a10b92392fe8482279c4404803/src/main/java/com/google/api/generator/gapic/composer/common/RetrySettingsComposer.java>)).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LongRunning {
         /// Initial delay after which the first poll request will be made.
@@ -1106,6 +1129,23 @@ pub mod method_settings {
         #[prost(message, optional, tag = "4")]
         pub total_poll_timeout: ::core::option::Option<::prost_types::Duration>,
     }
+}
+/// This message is used to configure the generation of a subset of the RPCs in
+/// a service for client libraries.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SelectiveGapicGeneration {
+    /// An allowlist of the fully qualified names of RPCs that should be included
+    /// on public client surfaces.
+    #[prost(string, repeated, tag = "1")]
+    pub methods: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Setting this to true indicates to the client generators that methods
+    /// that would be excluded from the generation should instead be generated
+    /// in a way that indicates these methods should not be consumed by
+    /// end users. How this is expressed is up to individual language
+    /// implementations to decide. Some examples may be: added annotations,
+    /// obfuscated identifiers, or other language idiomatic patterns.
+    #[prost(bool, tag = "2")]
+    pub generate_omitted_as_internal: bool,
 }
 /// The organization for which the client libraries are being published.
 /// Affects the url where generated docs are published, etc.
@@ -1136,16 +1176,14 @@ impl ClientLibraryOrganization {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ClientLibraryOrganization::Unspecified => {
-                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED"
-            }
-            ClientLibraryOrganization::Cloud => "CLOUD",
-            ClientLibraryOrganization::Ads => "ADS",
-            ClientLibraryOrganization::Photos => "PHOTOS",
-            ClientLibraryOrganization::StreetView => "STREET_VIEW",
-            ClientLibraryOrganization::Shopping => "SHOPPING",
-            ClientLibraryOrganization::Geo => "GEO",
-            ClientLibraryOrganization::GenerativeAi => "GENERATIVE_AI",
+            Self::Unspecified => "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED",
+            Self::Cloud => "CLOUD",
+            Self::Ads => "ADS",
+            Self::Photos => "PHOTOS",
+            Self::StreetView => "STREET_VIEW",
+            Self::Shopping => "SHOPPING",
+            Self::Geo => "GEO",
+            Self::GenerativeAi => "GENERATIVE_AI",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1183,11 +1221,9 @@ impl ClientLibraryDestination {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ClientLibraryDestination::Unspecified => {
-                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED"
-            }
-            ClientLibraryDestination::Github => "GITHUB",
-            ClientLibraryDestination::PackageManager => "PACKAGE_MANAGER",
+            Self::Unspecified => "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED",
+            Self::Github => "GITHUB",
+            Self::PackageManager => "PACKAGE_MANAGER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1218,7 +1254,6 @@ impl ClientLibraryDestination {
 ///        - selector: google.calendar.Delegate
 ///          oauth:
 ///            canonical_scopes: <https://www.googleapis.com/auth/calendar.read>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Authentication {
     /// A list of authentication rules that apply to individual API methods.
@@ -1239,7 +1274,6 @@ pub struct Authentication {
 ///
 /// If a method doesn't have any auth requirements, request credentials will be
 /// ignored.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthenticationRule {
     /// Selects the methods to which this rule applies.
@@ -1260,7 +1294,6 @@ pub struct AuthenticationRule {
     pub requirements: ::prost::alloc::vec::Vec<AuthRequirement>,
 }
 /// Specifies a location to extract JWT from an API request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JwtLocation {
     /// The value prefix. The value format is "value_prefix{token}"
@@ -1278,7 +1311,6 @@ pub struct JwtLocation {
 }
 /// Nested message and enum types in `JwtLocation`.
 pub mod jwt_location {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum In {
         /// Specifies HTTP header name to extract JWT token.
@@ -1295,7 +1327,6 @@ pub mod jwt_location {
 /// Configuration for an authentication provider, including support for
 /// [JSON Web Token
 /// (JWT)](<https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthProvider {
     /// The unique identifier of the auth provider. It will be referred to by
@@ -1388,7 +1419,6 @@ pub struct AuthProvider {
 /// Please note that even though each of the canonical scopes is enough for a
 /// request to be accepted and passed to the backend, a request can still fail
 /// due to the backend requiring additional scopes or permissions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthRequirements {
     /// The list of publicly documented OAuth scopes that are allowed access. An
@@ -1404,7 +1434,6 @@ pub struct OAuthRequirements {
 /// User-defined authentication requirements, including support for
 /// [JSON Web Token
 /// (JWT)](<https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthRequirement {
     /// [id][google.api.AuthProvider.id] from authentication provider.
@@ -1434,7 +1463,6 @@ pub struct AuthRequirement {
     pub audiences: ::prost::alloc::string::String,
 }
 /// `Backend` defines the backend configuration for a service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Backend {
     /// A list of API backend rules that apply to individual API methods.
@@ -1444,7 +1472,6 @@ pub struct Backend {
     pub rules: ::prost::alloc::vec::Vec<BackendRule>,
 }
 /// A backend rule provides configuration for an individual API element.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BackendRule {
     /// Selects the methods to which this rule applies.
@@ -1610,9 +1637,9 @@ pub mod backend_rule {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PathTranslation::Unspecified => "PATH_TRANSLATION_UNSPECIFIED",
-                PathTranslation::ConstantAddress => "CONSTANT_ADDRESS",
-                PathTranslation::AppendPathToAddress => "APPEND_PATH_TO_ADDRESS",
+                Self::Unspecified => "PATH_TRANSLATION_UNSPECIFIED",
+                Self::ConstantAddress => "CONSTANT_ADDRESS",
+                Self::AppendPathToAddress => "APPEND_PATH_TO_ADDRESS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1639,7 +1666,6 @@ pub mod backend_rule {
     ///
     /// Refer to <https://developers.google.com/identity/protocols/OpenIDConnect> for
     /// JWT ID token.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Authentication {
         /// The JWT audience is used when generating a JWT ID token for the backend.
@@ -1687,7 +1713,6 @@ pub mod backend_rule {
 ///        - monitored_resource: library.googleapis.com/billing_branch
 ///          metrics:
 ///          - library.googleapis.com/book/borrowed_count
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Billing {
     /// Billing configurations for sending metrics to the consumer project.
@@ -1701,7 +1726,6 @@ pub struct Billing {
 pub mod billing {
     /// Configuration of a specific billing destination (Currently only support
     /// bill against consumer project).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BillingDestination {
         /// The monitored resource type. The type must be defined in
@@ -1722,7 +1746,6 @@ pub mod billing {
 /// Includes detailed information about a field that have changed with
 /// applicable advice about potential consequences for the change, such as
 /// backwards-incompatibility.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigChange {
     /// Object hierarchy path to the change, with levels separated by a '.'
@@ -1754,7 +1777,6 @@ pub struct ConfigChange {
 }
 /// Generated advice about this change, used for providing more
 /// information about how a change will affect the existing service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Advice {
     /// Useful description for why this advice was applied and what actions should
@@ -1786,10 +1808,10 @@ impl ChangeType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ChangeType::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
-            ChangeType::Added => "ADDED",
-            ChangeType::Removed => "REMOVED",
-            ChangeType::Modified => "MODIFIED",
+            Self::Unspecified => "CHANGE_TYPE_UNSPECIFIED",
+            Self::Added => "ADDED",
+            Self::Removed => "REMOVED",
+            Self::Modified => "MODIFIED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1819,7 +1841,6 @@ impl ChangeType {
 ///         description: Allows usage of the API without watermarks.
 ///       - name: EXTENDED_TILE_CACHE_PERIOD
 ///         type: INT64
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProjectProperties {
     /// List of per consumer project-specific properties.
@@ -1836,7 +1857,6 @@ pub struct ProjectProperties {
 ///
 /// These values can be set via API producer console. Only API providers can
 /// define and set these properties.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
     /// The name of the property (a.k.a key).
@@ -1883,11 +1903,11 @@ pub mod property {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PropertyType::Unspecified => "UNSPECIFIED",
-                PropertyType::Int64 => "INT64",
-                PropertyType::Bool => "BOOL",
-                PropertyType::String => "STRING",
-                PropertyType::Double => "DOUBLE",
+                Self::Unspecified => "UNSPECIFIED",
+                Self::Int64 => "INT64",
+                Self::Bool => "BOOL",
+                Self::String => "STRING",
+                Self::Double => "DOUBLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1939,7 +1959,6 @@ pub mod property {
 ///
 /// You can also specify extension ID instead of fully qualified extension name
 /// here.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Context {
     /// A list of RPC context rules that apply to individual API methods.
@@ -1950,7 +1969,6 @@ pub struct Context {
 }
 /// A context rule provides information about the context for an individual API
 /// element.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContextRule {
     /// Selects the methods to which this rule applies.
@@ -1988,7 +2006,6 @@ pub struct ContextRule {
 /// before a request can be processed. This policy annotation is used to
 /// generate the overall policy that will be used for automatic runtime
 /// policy enforcement and documentation generation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldPolicy {
     /// Selects one or more request or response message fields to apply this
@@ -2014,7 +2031,6 @@ pub struct FieldPolicy {
     pub resource_type: ::prost::alloc::string::String,
 }
 /// Defines policies applying to an RPC method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MethodPolicy {
     /// Selects a method to which these policies should be enforced, for example,
@@ -2037,7 +2053,6 @@ pub struct MethodPolicy {
 ///
 ///      control:
 ///        environment: servicecontrol.googleapis.com
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Control {
     /// The service controller environment to use. If empty, no control plane
@@ -2063,7 +2078,6 @@ pub struct Control {
 /// Although it is not forbidden, it is generally a bad idea to include
 /// non-finite values (infinities or NaNs) in the population of values, as this
 /// will render the `mean` and `sum_of_squared_deviation` fields meaningless.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Distribution {
     /// The number of values in the population. Must be non-negative. This value
@@ -2118,7 +2132,6 @@ pub struct Distribution {
 /// Nested message and enum types in `Distribution`.
 pub mod distribution {
     /// The range of the population values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Range {
         /// The minimum of the population values.
@@ -2143,7 +2156,6 @@ pub mod distribution {
     /// of finite values: lower bound of the underflow bucket is -infinity and the
     /// upper bound of the overflow bucket is +infinity. The finite buckets are
     /// so-called because both bounds are finite.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BucketOptions {
         /// Exactly one of these three fields must be set.
@@ -2162,7 +2174,6 @@ pub mod distribution {
         ///     Upper bound (0 <= i < N-1):     offset + (width * i).
         ///
         ///     Lower bound (1 <= i < N):       offset + (width * (i - 1)).
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Linear {
             /// Must be greater than 0.
@@ -2185,7 +2196,6 @@ pub mod distribution {
         ///     Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
         ///
         ///     Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct Exponential {
             /// Must be greater than 0.
@@ -2209,7 +2219,6 @@ pub mod distribution {
         /// The `bounds` field must contain at least one element. If `bounds` has
         /// only one element, then there are no finite buckets, and that single
         /// element is the common boundary of the overflow and underflow buckets.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Explicit {
             /// The values must be monotonically increasing.
@@ -2217,7 +2226,6 @@ pub mod distribution {
             pub bounds: ::prost::alloc::vec::Vec<f64>,
         }
         /// Exactly one of these three fields must be set.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Options {
             /// The linear bucket.
@@ -2236,7 +2244,6 @@ pub mod distribution {
     /// particular value added to a Distribution bucket, such as a trace ID that
     /// was active when a value was added. They may contain further information,
     /// such as a example values and timestamps, origin, etc.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Exemplar {
         /// Value of the exemplar point. This value determines to which bucket the
@@ -2316,7 +2323,6 @@ pub mod distribution {
 /// <pre><code>&#40;== resource_for v1.shelves.books ==&#41;</code></pre>
 /// The directive `suppress_warning` does not directly affect documentation
 /// and is documented together with service config validation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Documentation {
     /// A short description of what the service does. The summary must be plain
@@ -2359,7 +2365,6 @@ pub struct Documentation {
     pub overview: ::prost::alloc::string::String,
 }
 /// A documentation rule provides information about individual API elements.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DocumentationRule {
     /// The selector is a comma-separated list of patterns for any element such as
@@ -2383,7 +2388,6 @@ pub struct DocumentationRule {
 }
 /// Represents a documentation page. A page can contain subpages to represent
 /// nested documentation set structure.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Page {
     /// The name of the page. It will be used as an identity of the page to
@@ -2433,7 +2437,6 @@ pub struct Page {
 ///        # to decide whether the subsequent cross-origin request is allowed
 ///        # to proceed.
 ///        allow_cors: true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
     /// The canonical name of this endpoint.
@@ -2996,6 +2999,37 @@ pub enum ErrorReason {
     /// "locations/asia-northeast3" violates at least one location policy.
     /// The troubleshooting guidance is provided in the Help links.
     LocationPolicyViolated = 31,
+    /// The request is denied because origin request header is missing.
+    ///
+    /// Example of an ErrorInfo when
+    /// accessing "pubsub.googleapis.com" service with an empty "Origin" request
+    /// header.
+    ///
+    /// {
+    ///    reason: "MISSING_ORIGIN"
+    ///    domain: "googleapis.com"
+    ///    metadata {
+    ///      "consumer":"projects/123456"
+    ///      "service": "pubsub.googleapis.com"
+    ///    }
+    /// }
+    MissingOrigin = 33,
+    /// The request is denied because the request contains more than one credential
+    /// type that are individually acceptable, but not together. The customer
+    /// should retry their request with only one set of credentials.
+    ///
+    /// Example of an ErrorInfo when
+    /// accessing "pubsub.googleapis.com" service with overloaded credentials.
+    ///
+    /// {
+    ///    reason: "OVERLOADED_CREDENTIALS"
+    ///    domain: "googleapis.com"
+    ///    metadata {
+    ///      "consumer":"projects/123456"
+    ///      "service": "pubsub.googleapis.com"
+    ///    }
+    /// }
+    OverloadedCredentials = 34,
 }
 impl ErrorReason {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -3004,41 +3038,41 @@ impl ErrorReason {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ErrorReason::Unspecified => "ERROR_REASON_UNSPECIFIED",
-            ErrorReason::ServiceDisabled => "SERVICE_DISABLED",
-            ErrorReason::BillingDisabled => "BILLING_DISABLED",
-            ErrorReason::ApiKeyInvalid => "API_KEY_INVALID",
-            ErrorReason::ApiKeyServiceBlocked => "API_KEY_SERVICE_BLOCKED",
-            ErrorReason::ApiKeyHttpReferrerBlocked => "API_KEY_HTTP_REFERRER_BLOCKED",
-            ErrorReason::ApiKeyIpAddressBlocked => "API_KEY_IP_ADDRESS_BLOCKED",
-            ErrorReason::ApiKeyAndroidAppBlocked => "API_KEY_ANDROID_APP_BLOCKED",
-            ErrorReason::ApiKeyIosAppBlocked => "API_KEY_IOS_APP_BLOCKED",
-            ErrorReason::RateLimitExceeded => "RATE_LIMIT_EXCEEDED",
-            ErrorReason::ResourceQuotaExceeded => "RESOURCE_QUOTA_EXCEEDED",
-            ErrorReason::LocationTaxPolicyViolated => "LOCATION_TAX_POLICY_VIOLATED",
-            ErrorReason::UserProjectDenied => "USER_PROJECT_DENIED",
-            ErrorReason::ConsumerSuspended => "CONSUMER_SUSPENDED",
-            ErrorReason::ConsumerInvalid => "CONSUMER_INVALID",
-            ErrorReason::SecurityPolicyViolated => "SECURITY_POLICY_VIOLATED",
-            ErrorReason::AccessTokenExpired => "ACCESS_TOKEN_EXPIRED",
-            ErrorReason::AccessTokenScopeInsufficient => {
-                "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
-            }
-            ErrorReason::AccountStateInvalid => "ACCOUNT_STATE_INVALID",
-            ErrorReason::AccessTokenTypeUnsupported => "ACCESS_TOKEN_TYPE_UNSUPPORTED",
-            ErrorReason::CredentialsMissing => "CREDENTIALS_MISSING",
-            ErrorReason::ResourceProjectInvalid => "RESOURCE_PROJECT_INVALID",
-            ErrorReason::SessionCookieInvalid => "SESSION_COOKIE_INVALID",
-            ErrorReason::UserBlockedByAdmin => "USER_BLOCKED_BY_ADMIN",
-            ErrorReason::ResourceUsageRestrictionViolated => {
+            Self::Unspecified => "ERROR_REASON_UNSPECIFIED",
+            Self::ServiceDisabled => "SERVICE_DISABLED",
+            Self::BillingDisabled => "BILLING_DISABLED",
+            Self::ApiKeyInvalid => "API_KEY_INVALID",
+            Self::ApiKeyServiceBlocked => "API_KEY_SERVICE_BLOCKED",
+            Self::ApiKeyHttpReferrerBlocked => "API_KEY_HTTP_REFERRER_BLOCKED",
+            Self::ApiKeyIpAddressBlocked => "API_KEY_IP_ADDRESS_BLOCKED",
+            Self::ApiKeyAndroidAppBlocked => "API_KEY_ANDROID_APP_BLOCKED",
+            Self::ApiKeyIosAppBlocked => "API_KEY_IOS_APP_BLOCKED",
+            Self::RateLimitExceeded => "RATE_LIMIT_EXCEEDED",
+            Self::ResourceQuotaExceeded => "RESOURCE_QUOTA_EXCEEDED",
+            Self::LocationTaxPolicyViolated => "LOCATION_TAX_POLICY_VIOLATED",
+            Self::UserProjectDenied => "USER_PROJECT_DENIED",
+            Self::ConsumerSuspended => "CONSUMER_SUSPENDED",
+            Self::ConsumerInvalid => "CONSUMER_INVALID",
+            Self::SecurityPolicyViolated => "SECURITY_POLICY_VIOLATED",
+            Self::AccessTokenExpired => "ACCESS_TOKEN_EXPIRED",
+            Self::AccessTokenScopeInsufficient => "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
+            Self::AccountStateInvalid => "ACCOUNT_STATE_INVALID",
+            Self::AccessTokenTypeUnsupported => "ACCESS_TOKEN_TYPE_UNSUPPORTED",
+            Self::CredentialsMissing => "CREDENTIALS_MISSING",
+            Self::ResourceProjectInvalid => "RESOURCE_PROJECT_INVALID",
+            Self::SessionCookieInvalid => "SESSION_COOKIE_INVALID",
+            Self::UserBlockedByAdmin => "USER_BLOCKED_BY_ADMIN",
+            Self::ResourceUsageRestrictionViolated => {
                 "RESOURCE_USAGE_RESTRICTION_VIOLATED"
             }
-            ErrorReason::SystemParameterUnsupported => "SYSTEM_PARAMETER_UNSUPPORTED",
-            ErrorReason::OrgRestrictionViolation => "ORG_RESTRICTION_VIOLATION",
-            ErrorReason::OrgRestrictionHeaderInvalid => "ORG_RESTRICTION_HEADER_INVALID",
-            ErrorReason::ServiceNotVisible => "SERVICE_NOT_VISIBLE",
-            ErrorReason::GcpSuspended => "GCP_SUSPENDED",
-            ErrorReason::LocationPolicyViolated => "LOCATION_POLICY_VIOLATED",
+            Self::SystemParameterUnsupported => "SYSTEM_PARAMETER_UNSUPPORTED",
+            Self::OrgRestrictionViolation => "ORG_RESTRICTION_VIOLATION",
+            Self::OrgRestrictionHeaderInvalid => "ORG_RESTRICTION_HEADER_INVALID",
+            Self::ServiceNotVisible => "SERVICE_NOT_VISIBLE",
+            Self::GcpSuspended => "GCP_SUSPENDED",
+            Self::LocationPolicyViolated => "LOCATION_POLICY_VIOLATED",
+            Self::MissingOrigin => "MISSING_ORIGIN",
+            Self::OverloadedCredentials => "OVERLOADED_CREDENTIALS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3077,12 +3111,13 @@ impl ErrorReason {
             "SERVICE_NOT_VISIBLE" => Some(Self::ServiceNotVisible),
             "GCP_SUSPENDED" => Some(Self::GcpSuspended),
             "LOCATION_POLICY_VIOLATED" => Some(Self::LocationPolicyViolated),
+            "MISSING_ORIGIN" => Some(Self::MissingOrigin),
+            "OVERLOADED_CREDENTIALS" => Some(Self::OverloadedCredentials),
             _ => None,
         }
     }
 }
 /// Rich semantic information of an API field beyond basic typing.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FieldInfo {
     /// The standard format of a field value. This does not explicitly configure
@@ -3145,11 +3180,11 @@ pub mod field_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Format::Unspecified => "FORMAT_UNSPECIFIED",
-                Format::Uuid4 => "UUID4",
-                Format::Ipv4 => "IPV4",
-                Format::Ipv6 => "IPV6",
-                Format::Ipv4OrIpv6 => "IPV4_OR_IPV6",
+                Self::Unspecified => "FORMAT_UNSPECIFIED",
+                Self::Uuid4 => "UUID4",
+                Self::Ipv4 => "IPV4",
+                Self::Ipv6 => "IPV6",
+                Self::Ipv4OrIpv6 => "IPV4_OR_IPV6",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3166,7 +3201,6 @@ pub mod field_info {
     }
 }
 /// A reference to a message type, for use in [FieldInfo][google.api.FieldInfo].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypeReference {
     /// The name of the type that the annotated, generic field may represent.
@@ -3224,7 +3258,6 @@ pub struct TypeReference {
 ///
 /// Use of this type only changes how the request and response bodies are
 /// handled, all other features will continue to work unchanged.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpBody {
     /// The HTTP Content-Type header value specifying the content type of the body.
@@ -3239,7 +3272,6 @@ pub struct HttpBody {
     pub extensions: ::prost::alloc::vec::Vec<::prost_types::Any>,
 }
 /// A description of a label.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LabelDescriptor {
     /// The label key.
@@ -3282,9 +3314,9 @@ pub mod label_descriptor {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ValueType::String => "STRING",
-                ValueType::Bool => "BOOL",
-                ValueType::Int64 => "INT64",
+                Self::String => "STRING",
+                Self::Bool => "BOOL",
+                Self::Int64 => "INT64",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3306,7 +3338,6 @@ pub mod label_descriptor {
 ///        labels:
 ///        - key: /customer_id
 ///          description: Identifier of a library customer
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LogDescriptor {
     /// The name of the log. It must be less than 512 characters long and can
@@ -3358,7 +3389,6 @@ pub struct LogDescriptor {
 ///        - monitored_resource: library.googleapis.com/branch
 ///          logs:
 ///          - activity_history
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Logging {
     /// Logging configurations for sending logs to the producer project.
@@ -3378,7 +3408,6 @@ pub struct Logging {
 pub mod logging {
     /// Configuration of a specific logging destination (the producer project
     /// or the consumer project).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LoggingDestination {
         /// The monitored resource type. The type must be defined in the
@@ -3398,7 +3427,6 @@ pub mod logging {
 /// deleting or altering it stops data collection and makes the metric type's
 /// existing data unusable.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricDescriptor {
     /// The resource name of the metric descriptor.
@@ -3563,8 +3591,7 @@ pub struct MetricDescriptor {
 /// Nested message and enum types in `MetricDescriptor`.
 pub mod metric_descriptor {
     /// Additional annotations that can be used to guide the usage of a metric.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricDescriptorMetadata {
         /// Deprecated. Must use the
         /// [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage]
@@ -3583,6 +3610,67 @@ pub mod metric_descriptor {
         /// data loss due to errors.
         #[prost(message, optional, tag = "3")]
         pub ingest_delay: ::core::option::Option<::prost_types::Duration>,
+        /// The scope of the timeseries data of the metric.
+        #[prost(
+            enumeration = "metric_descriptor_metadata::TimeSeriesResourceHierarchyLevel",
+            repeated,
+            tag = "4"
+        )]
+        pub time_series_resource_hierarchy_level: ::prost::alloc::vec::Vec<i32>,
+    }
+    /// Nested message and enum types in `MetricDescriptorMetadata`.
+    pub mod metric_descriptor_metadata {
+        /// The resource hierarchy level of the timeseries data of a metric.
+        #[derive(
+            Clone,
+            Copy,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            PartialOrd,
+            Ord,
+            ::prost::Enumeration
+        )]
+        #[repr(i32)]
+        pub enum TimeSeriesResourceHierarchyLevel {
+            /// Do not use this default value.
+            Unspecified = 0,
+            /// Scopes a metric to a project.
+            Project = 1,
+            /// Scopes a metric to an organization.
+            Organization = 2,
+            /// Scopes a metric to a folder.
+            Folder = 3,
+        }
+        impl TimeSeriesResourceHierarchyLevel {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Self::Unspecified => {
+                        "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED"
+                    }
+                    Self::Project => "PROJECT",
+                    Self::Organization => "ORGANIZATION",
+                    Self::Folder => "FOLDER",
+                }
+            }
+            /// Creates an enum from field names used in the ProtoBuf definition.
+            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                match value {
+                    "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED" => {
+                        Some(Self::Unspecified)
+                    }
+                    "PROJECT" => Some(Self::Project),
+                    "ORGANIZATION" => Some(Self::Organization),
+                    "FOLDER" => Some(Self::Folder),
+                    _ => None,
+                }
+            }
+        }
     }
     /// The kind of measurement. It describes how the data is reported.
     /// For information on setting the start time and end time based on
@@ -3620,10 +3708,10 @@ pub mod metric_descriptor {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MetricKind::Unspecified => "METRIC_KIND_UNSPECIFIED",
-                MetricKind::Gauge => "GAUGE",
-                MetricKind::Delta => "DELTA",
-                MetricKind::Cumulative => "CUMULATIVE",
+                Self::Unspecified => "METRIC_KIND_UNSPECIFIED",
+                Self::Gauge => "GAUGE",
+                Self::Delta => "DELTA",
+                Self::Cumulative => "CUMULATIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3675,13 +3763,13 @@ pub mod metric_descriptor {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ValueType::Unspecified => "VALUE_TYPE_UNSPECIFIED",
-                ValueType::Bool => "BOOL",
-                ValueType::Int64 => "INT64",
-                ValueType::Double => "DOUBLE",
-                ValueType::String => "STRING",
-                ValueType::Distribution => "DISTRIBUTION",
-                ValueType::Money => "MONEY",
+                Self::Unspecified => "VALUE_TYPE_UNSPECIFIED",
+                Self::Bool => "BOOL",
+                Self::Int64 => "INT64",
+                Self::Double => "DOUBLE",
+                Self::String => "STRING",
+                Self::Distribution => "DISTRIBUTION",
+                Self::Money => "MONEY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3701,7 +3789,6 @@ pub mod metric_descriptor {
 }
 /// A specific metric, identified by specifying values for all of the
 /// labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metric {
     /// An existing metric type, see
@@ -3728,7 +3815,6 @@ pub struct Metric {
 /// provide a `list` method that returns the monitored resource descriptors used
 /// by the API.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MonitoredResourceDescriptor {
     /// Optional. The resource name of the monitored resource descriptor:
@@ -3782,7 +3868,6 @@ pub struct MonitoredResourceDescriptor {
 ///        "labels": { "project_id": "my-project",
 ///                    "instance_id": "12345678901234",
 ///                    "zone": "us-central1-a" }}
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MonitoredResource {
     /// Required. The monitored resource type. This field must match
@@ -3809,7 +3894,6 @@ pub struct MonitoredResource {
 /// instance. There is some other useful auxiliary metadata. Monitoring and
 /// Logging use an ingestion pipeline to extract metadata for cloud resources of
 /// all types, and store the metadata in this message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MonitoredResourceMetadata {
     /// Output only. Values for predefined system metadata labels.
@@ -3883,7 +3967,6 @@ pub struct MonitoredResourceMetadata {
 ///          metrics:
 ///          - library.googleapis.com/book/returned_count
 ///          - library.googleapis.com/book/num_overdue
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Monitoring {
     /// Monitoring configurations for sending metrics to the producer project.
@@ -3911,7 +3994,6 @@ pub struct Monitoring {
 pub mod monitoring {
     /// Configuration of a specific monitoring destination (the producer project
     /// or the consumer project).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MonitoringDestination {
         /// The monitored resource type. The type must be defined in
@@ -3977,7 +4059,6 @@ pub mod monitoring {
 ///         value_type: INT64
 ///
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Quota {
     /// List of QuotaLimit definitions for the service.
@@ -3990,7 +4071,6 @@ pub struct Quota {
 }
 /// Bind API methods to metrics. Binding a method to a metric causes that
 /// metric's configured quota behaviors to apply to the method call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetricRule {
     /// Selects the methods to which this rule applies.
@@ -4011,7 +4091,6 @@ pub struct MetricRule {
 /// `QuotaLimit` defines a specific limit that applies over a specified duration
 /// for a limit type. There can be at most one limit for a duration and limit
 /// type combination defined within a `QuotaGroup`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuotaLimit {
     /// Name of the quota limit.
@@ -4071,8 +4150,8 @@ pub struct QuotaLimit {
     #[prost(string, tag = "8")]
     pub metric: ::prost::alloc::string::String,
     /// Specify the unit of the quota limit. It uses the same syntax as
-    /// [Metric.unit][]. The supported unit kinds are determined by the quota
-    /// backend system.
+    /// [MetricDescriptor.unit][google.api.MetricDescriptor.unit]. The supported
+    /// unit kinds are determined by the quota backend system.
     ///
     /// Here are some examples:
     /// * "1/min/{project}" for quota per minute per project.
@@ -4452,7 +4531,6 @@ pub struct QuotaLimit {
 ///
 ///      x-goog-request-params:
 ///      table_location=instances/instance_bar&routing_id=prof_qux
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RoutingRule {
     /// A collection of Routing Parameter specifications.
@@ -4465,7 +4543,6 @@ pub struct RoutingRule {
     pub routing_parameters: ::prost::alloc::vec::Vec<RoutingParameter>,
 }
 /// A projection from an input message to the GRPC or REST header.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RoutingParameter {
     /// A request field to extract the header key-value pair from.
@@ -4529,7 +4606,6 @@ pub struct RoutingParameter {
     pub path_template: ::prost::alloc::string::String,
 }
 /// Source information used to create a Service Config
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SourceInfo {
     /// All files used during config generation.
@@ -4542,7 +4618,6 @@ pub struct SourceInfo {
 /// system, not by an individual API. It is typically mapped to an HTTP header
 /// and/or a URL query parameter. This configuration specifies which methods
 /// change the names of the system parameters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SystemParameters {
     /// Define system parameters.
@@ -4579,7 +4654,6 @@ pub struct SystemParameters {
 }
 /// Define a system parameter rule mapping system parameter definitions to
 /// methods.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SystemParameterRule {
     /// Selects the methods to which this rule applies. Use '*' to indicate all
@@ -4600,7 +4674,6 @@ pub struct SystemParameterRule {
 /// Define a parameter's name and location. The parameter may be passed as either
 /// an HTTP header or a URL query parameter, and if both are passed the behavior
 /// is implementation-dependent.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SystemParameter {
     /// Define the name of the parameter, such as "api_key" . It is case sensitive.
@@ -4616,7 +4689,6 @@ pub struct SystemParameter {
     pub url_query_parameter: ::prost::alloc::string::String,
 }
 /// Configuration controlling usage of a service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Usage {
     /// Requirements that must be satisfied before a consumer project can use the
@@ -4671,7 +4743,6 @@ pub struct Usage {
 ///        rules:
 ///        - selector: "google.example.library.v1.LibraryService.CreateBook"
 ///          allow_unregistered_calls: true
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UsageRule {
     /// Selects the methods to which this rule applies. Use '*' to indicate all
@@ -4725,7 +4796,6 @@ pub struct UsageRule {
 ///        - selector: "*"
 ///          requirements:
 ///            provider_id: google_calendar_auth
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Service {
     /// The service name, which is a DNS-like logical identifier for the
@@ -4863,7 +4933,6 @@ pub struct Service {
 ///
 /// Here, all methods are publicly visible except for the restricted methods
 /// EnhancedSearch and Delegate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Visibility {
     /// A list of visibility rules that apply to individual API elements.
@@ -4874,7 +4943,6 @@ pub struct Visibility {
 }
 /// A visibility rule provides visibility configuration for an individual API
 /// element.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VisibilityRule {
     /// Selects methods, messages, fields, enums, etc. to which this rule applies.

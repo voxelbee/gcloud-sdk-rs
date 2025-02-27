@@ -103,7 +103,6 @@
 ///    ]
 /// }
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Card {
     /// The header of the card. A header usually contains a leading image and a
@@ -200,7 +199,6 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardHeader {
         /// Required. The title of the card header.
@@ -231,7 +229,6 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Section {
         /// Text that appears at the top of a section.
@@ -276,7 +273,6 @@ pub mod card {
     ///
     /// [Google Workspace
     /// Add-ons](<https://developers.google.com/workspace/add-ons>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardAction {
         /// The label that displays as the action menu item.
@@ -300,7 +296,6 @@ pub mod card {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CardFixedFooter {
         /// The primary button of the fixed footer. The button must be a text button
@@ -349,9 +344,9 @@ pub mod card {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DividerStyle::Unspecified => "DIVIDER_STYLE_UNSPECIFIED",
-                DividerStyle::SolidDivider => "SOLID_DIVIDER",
-                DividerStyle::NoDivider => "NO_DIVIDER",
+                Self::Unspecified => "DIVIDER_STYLE_UNSPECIFIED",
+                Self::SolidDivider => "SOLID_DIVIDER",
+                Self::NoDivider => "NO_DIVIDER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -400,9 +395,9 @@ pub mod card {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DisplayStyle::Unspecified => "DISPLAY_STYLE_UNSPECIFIED",
-                DisplayStyle::Peek => "PEEK",
-                DisplayStyle::Replace => "REPLACE",
+                Self::Unspecified => "DISPLAY_STYLE_UNSPECIFIED",
+                Self::Peek => "PEEK",
+                Self::Replace => "REPLACE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -420,7 +415,6 @@ pub mod card {
 ///
 /// A widget is a composite object that can represent one of text, images,
 /// buttons, and other object types.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Widget {
     /// Specifies whether widgets align to the left, right, or center of a column.
@@ -464,8 +458,8 @@ pub mod widget {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ImageType::Square => "SQUARE",
-                ImageType::Circle => "CIRCLE",
+                Self::Square => "SQUARE",
+                Self::Circle => "CIRCLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -513,10 +507,10 @@ pub mod widget {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HorizontalAlignment::Unspecified => "HORIZONTAL_ALIGNMENT_UNSPECIFIED",
-                HorizontalAlignment::Start => "START",
-                HorizontalAlignment::Center => "CENTER",
-                HorizontalAlignment::End => "END",
+                Self::Unspecified => "HORIZONTAL_ALIGNMENT_UNSPECIFIED",
+                Self::Start => "START",
+                Self::Center => "CENTER",
+                Self::End => "END",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -532,7 +526,6 @@ pub mod widget {
     }
     /// A widget can only have one of the following items. You can use multiple
     /// widget fields to display more items.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
         /// Displays a text paragraph. Supports simple HTML formatted text. For more
@@ -820,7 +813,6 @@ pub mod widget {
 ///
 /// [Google Workspace Add-ons and
 /// Chat apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextParagraph {
     /// The text that's shown in the widget.
@@ -833,7 +825,6 @@ pub struct TextParagraph {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Image {
     /// The HTTPS URL that hosts the image.
@@ -865,7 +856,6 @@ pub struct Image {
 /// ```
 /// "divider": {}
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Divider {}
 /// A widget that displays text with optional decorations such as a label above
@@ -876,7 +866,6 @@ pub struct Divider {}
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DecoratedText {
     /// Deprecated in favor of `startIcon`.
@@ -926,7 +915,6 @@ pub mod decorated_text {
     /// apps](<https://developers.google.com/workspace/extend>):
     ///
     /// Only supported in the `decoratedText` widget.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SwitchControl {
         /// The name by which the switch widget is identified in a form input event.
@@ -988,9 +976,9 @@ pub mod decorated_text {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    ControlType::Switch => "SWITCH",
-                    ControlType::Checkbox => "CHECKBOX",
-                    ControlType::CheckBox => "CHECK_BOX",
+                    Self::Switch => "SWITCH",
+                    Self::Checkbox => "CHECKBOX",
+                    Self::CheckBox => "CHECK_BOX",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1006,7 +994,6 @@ pub mod decorated_text {
     }
     /// A button, switch, checkbox, or image that appears to the right-hand side
     /// of text in the `decoratedText` widget.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Control {
         /// A button that a user can click to trigger an action.
@@ -1042,7 +1029,6 @@ pub mod decorated_text {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextInput {
     /// The name by which the text input is identified in a form input event.
@@ -1159,8 +1145,8 @@ pub mod text_input {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::SingleLine => "SINGLE_LINE",
-                Type::MultipleLine => "MULTIPLE_LINE",
+                Self::SingleLine => "SINGLE_LINE",
+                Self::MultipleLine => "MULTIPLE_LINE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1191,7 +1177,6 @@ pub mod text_input {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Suggestions {
     /// A list of suggestions used for autocomplete recommendations in text input
@@ -1205,7 +1190,6 @@ pub mod suggestions {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SuggestionItem {
         #[prost(oneof = "suggestion_item::Content", tags = "1")]
@@ -1213,7 +1197,6 @@ pub mod suggestions {
     }
     /// Nested message and enum types in `SuggestionItem`.
     pub mod suggestion_item {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Content {
             /// The value of a suggested input to a text input field. This is
@@ -1230,7 +1213,6 @@ pub mod suggestions {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ButtonList {
     /// An array of buttons.
@@ -1252,7 +1234,6 @@ pub struct ButtonList {
 ///
 /// [Google Workspace Add-ons
 /// and Chat apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelectionInput {
     /// The name that identifies the selection input in a form input event.
@@ -1314,7 +1295,6 @@ pub mod selection_input {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SelectionItem {
         /// The text that identifies or describes the item to users.
@@ -1349,7 +1329,6 @@ pub mod selection_input {
     /// items in a multiselect menu.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PlatformDataSource {
         /// The data source.
@@ -1389,8 +1368,8 @@ pub mod selection_input {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    CommonDataSource::Unknown => "UNKNOWN",
-                    CommonDataSource::User => "USER",
+                    Self::Unknown => "UNKNOWN",
+                    Self::User => "USER",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1403,7 +1382,6 @@ pub mod selection_input {
             }
         }
         /// The data source.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
         pub enum DataSource {
             /// A data source shared by all Google Workspace applications, such as
@@ -1474,11 +1452,11 @@ pub mod selection_input {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SelectionType::CheckBox => "CHECK_BOX",
-                SelectionType::RadioButton => "RADIO_BUTTON",
-                SelectionType::Switch => "SWITCH",
-                SelectionType::Dropdown => "DROPDOWN",
-                SelectionType::MultiSelect => "MULTI_SELECT",
+                Self::CheckBox => "CHECK_BOX",
+                Self::RadioButton => "RADIO_BUTTON",
+                Self::Switch => "SWITCH",
+                Self::Dropdown => "DROPDOWN",
+                Self::MultiSelect => "MULTI_SELECT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1497,7 +1475,6 @@ pub mod selection_input {
     /// selection items.
     ///
     /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum MultiSelectDataSource {
         /// An external data source, such as a relational data base.
@@ -1518,7 +1495,6 @@ pub mod selection_input {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateTimePicker {
     /// The name by which the `DateTimePicker` is identified in a form input event.
@@ -1592,9 +1568,9 @@ pub mod date_time_picker {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DateTimePickerType::DateAndTime => "DATE_AND_TIME",
-                DateTimePickerType::DateOnly => "DATE_ONLY",
-                DateTimePickerType::TimeOnly => "TIME_ONLY",
+                Self::DateAndTime => "DATE_AND_TIME",
+                Self::DateOnly => "DATE_ONLY",
+                Self::TimeOnly => "TIME_ONLY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1620,7 +1596,6 @@ pub mod date_time_picker {
 ///
 /// [Google Workspace
 /// Add-ons and Chat apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Button {
     /// The text displayed inside the button.
@@ -1693,7 +1668,6 @@ pub struct Button {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Icon {
     /// Optional. A description of the icon used for accessibility.
@@ -1720,7 +1694,6 @@ pub struct Icon {
 /// Nested message and enum types in `Icon`.
 pub mod icon {
     /// The icon displayed in the widget on the card.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Icons {
         /// Display one of the built-in icons provided by Google Workspace.
@@ -1778,7 +1751,6 @@ pub mod icon {
 /// ```
 ///
 /// [Google Chat apps](<https://developers.google.com/workspace/chat>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MaterialIcon {
     /// The icon name defined in the [Google Material
@@ -1827,7 +1799,6 @@ pub struct MaterialIcon {
 ///   "aspectRatio": 16/9
 /// }
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ImageCropStyle {
     /// The crop type.
@@ -1884,11 +1855,11 @@ pub mod image_crop_style {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ImageCropType::Unspecified => "IMAGE_CROP_TYPE_UNSPECIFIED",
-                ImageCropType::Square => "SQUARE",
-                ImageCropType::Circle => "CIRCLE",
-                ImageCropType::RectangleCustom => "RECTANGLE_CUSTOM",
-                ImageCropType::Rectangle43 => "RECTANGLE_4_3",
+                Self::Unspecified => "IMAGE_CROP_TYPE_UNSPECIFIED",
+                Self::Square => "SQUARE",
+                Self::Circle => "CIRCLE",
+                Self::RectangleCustom => "RECTANGLE_CUSTOM",
+                Self::Rectangle43 => "RECTANGLE_4_3",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1909,7 +1880,6 @@ pub mod image_crop_style {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BorderStyle {
     /// The border type.
@@ -1955,9 +1925,9 @@ pub mod border_style {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                BorderType::Unspecified => "BORDER_TYPE_UNSPECIFIED",
-                BorderType::NoBorder => "NO_BORDER",
-                BorderType::Stroke => "STROKE",
+                Self::Unspecified => "BORDER_TYPE_UNSPECIFIED",
+                Self::NoBorder => "NO_BORDER",
+                Self::Stroke => "STROKE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1975,7 +1945,6 @@ pub mod border_style {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImageComponent {
     /// The image URL.
@@ -2038,7 +2007,6 @@ pub struct ImageComponent {
 ///    }
 /// }
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Grid {
     /// The text that displays in the grid header.
@@ -2068,7 +2036,6 @@ pub mod grid {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GridItem {
         /// A user-specified identifier for this grid item. This identifier is
@@ -2121,9 +2088,9 @@ pub mod grid {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    GridItemLayout::Unspecified => "GRID_ITEM_LAYOUT_UNSPECIFIED",
-                    GridItemLayout::TextBelow => "TEXT_BELOW",
-                    GridItemLayout::TextAbove => "TEXT_ABOVE",
+                    Self::Unspecified => "GRID_ITEM_LAYOUT_UNSPECIFIED",
+                    Self::TextBelow => "TEXT_BELOW",
+                    Self::TextAbove => "TEXT_ABOVE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2168,7 +2135,6 @@ pub mod grid {
 /// apps](<https://developers.google.com/workspace/extend>):
 /// Columns for Google Workspace Add-ons are in
 /// Developer Preview.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Columns {
     /// An array of columns. You can include up to 2 columns in a card or dialog.
@@ -2183,7 +2149,6 @@ pub mod columns {
     /// apps](<https://developers.google.com/workspace/extend>):
     /// Columns for Google Workspace Add-ons are in
     /// Developer Preview.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Column {
         /// Specifies how a column fills the width of the card.
@@ -2210,7 +2175,6 @@ pub mod columns {
         /// apps](<https://developers.google.com/workspace/extend>):
         /// Columns for Google Workspace Add-ons are in
         /// Developer Preview.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Widgets {
             #[prost(oneof = "widgets::Data", tags = "1, 2, 3, 4, 5, 6, 7")]
@@ -2218,7 +2182,6 @@ pub mod columns {
         }
         /// Nested message and enum types in `Widgets`.
         pub mod widgets {
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum Data {
                 /// [TextParagraph][google.apps.card.v1.TextParagraph] widget.
@@ -2282,11 +2245,9 @@ pub mod columns {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    HorizontalSizeStyle::Unspecified => {
-                        "HORIZONTAL_SIZE_STYLE_UNSPECIFIED"
-                    }
-                    HorizontalSizeStyle::FillAvailableSpace => "FILL_AVAILABLE_SPACE",
-                    HorizontalSizeStyle::FillMinimumSpace => "FILL_MINIMUM_SPACE",
+                    Self::Unspecified => "HORIZONTAL_SIZE_STYLE_UNSPECIFIED",
+                    Self::FillAvailableSpace => "FILL_AVAILABLE_SPACE",
+                    Self::FillMinimumSpace => "FILL_MINIMUM_SPACE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2335,10 +2296,10 @@ pub mod columns {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    VerticalAlignment::Unspecified => "VERTICAL_ALIGNMENT_UNSPECIFIED",
-                    VerticalAlignment::Center => "CENTER",
-                    VerticalAlignment::Top => "TOP",
-                    VerticalAlignment::Bottom => "BOTTOM",
+                    Self::Unspecified => "VERTICAL_ALIGNMENT_UNSPECIFIED",
+                    Self::Center => "CENTER",
+                    Self::Top => "TOP",
+                    Self::Bottom => "BOTTOM",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2359,7 +2320,6 @@ pub mod columns {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnClick {
     #[prost(oneof = "on_click::Data", tags = "1, 2, 3, 4")]
@@ -2367,7 +2327,6 @@ pub struct OnClick {
 }
 /// Nested message and enum types in `OnClick`.
 pub mod on_click {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
         /// If specified, an action is triggered by this `onClick`.
@@ -2397,7 +2356,6 @@ pub mod on_click {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpenLink {
     /// The URL to open.
@@ -2453,8 +2411,8 @@ pub mod open_link {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                OpenAs::FullSize => "FULL_SIZE",
-                OpenAs::Overlay => "OVERLAY",
+                Self::FullSize => "FULL_SIZE",
+                Self::Overlay => "OVERLAY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2506,8 +2464,8 @@ pub mod open_link {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                OnClose::Nothing => "NOTHING",
-                OnClose::Reload => "RELOAD",
+                Self::Nothing => "NOTHING",
+                Self::Reload => "RELOAD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2526,7 +2484,6 @@ pub mod open_link {
 ///
 /// [Google Workspace Add-ons and Chat
 /// apps](<https://developers.google.com/workspace/extend>):
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Action {
     /// A custom function to invoke when the containing element is
@@ -2595,7 +2552,6 @@ pub mod action {
     ///
     /// [Google Workspace Add-ons and Chat
     /// apps](<https://developers.google.com/workspace/extend>):
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ActionParameter {
         /// The name of the parameter for the action script.
@@ -2635,8 +2591,8 @@ pub mod action {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LoadIndicator::Spinner => "SPINNER",
-                LoadIndicator::None => "NONE",
+                Self::Spinner => "SPINNER",
+                Self::None => "NONE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2698,8 +2654,8 @@ pub mod action {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Interaction::Unspecified => "INTERACTION_UNSPECIFIED",
-                Interaction::OpenDialog => "OPEN_DIALOG",
+                Self::Unspecified => "INTERACTION_UNSPECIFIED",
+                Self::OpenDialog => "OPEN_DIALOG",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.

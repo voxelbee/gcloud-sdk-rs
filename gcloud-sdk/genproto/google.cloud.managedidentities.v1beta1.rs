@@ -3,7 +3,6 @@
 /// If the domain is being changed, it will be placed into the UPDATING state,
 /// which indicates that the resource is being reconciled. At this point, Get
 /// will reflect an intermediate state.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Domain {
     /// Output only. The unique name of the domain using the form:
@@ -103,14 +102,14 @@ pub mod domain {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Ready => "READY",
-                State::Updating => "UPDATING",
-                State::Deleting => "DELETING",
-                State::Repairing => "REPAIRING",
-                State::PerformingMaintenance => "PERFORMING_MAINTENANCE",
-                State::Unavailable => "UNAVAILABLE",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Ready => "READY",
+                Self::Updating => "UPDATING",
+                Self::Deleting => "DELETING",
+                Self::Repairing => "REPAIRING",
+                Self::PerformingMaintenance => "PERFORMING_MAINTENANCE",
+                Self::Unavailable => "UNAVAILABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -131,7 +130,6 @@ pub mod domain {
 }
 /// Represents a relationship between two domains. This allows a controller in
 /// one domain to authenticate a user in another domain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trust {
     /// The fully qualified target domain name which will be in trust with the
@@ -214,12 +212,12 @@ pub mod trust {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Updating => "UPDATING",
-                State::Deleting => "DELETING",
-                State::Connected => "CONNECTED",
-                State::Disconnected => "DISCONNECTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Updating => "UPDATING",
+                Self::Deleting => "DELETING",
+                Self::Connected => "CONNECTED",
+                Self::Disconnected => "DISCONNECTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -263,9 +261,9 @@ pub mod trust {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TrustType::Unspecified => "TRUST_TYPE_UNSPECIFIED",
-                TrustType::Forest => "FOREST",
-                TrustType::External => "EXTERNAL",
+                Self::Unspecified => "TRUST_TYPE_UNSPECIFIED",
+                Self::Forest => "FOREST",
+                Self::External => "EXTERNAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -311,10 +309,10 @@ pub mod trust {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TrustDirection::Unspecified => "TRUST_DIRECTION_UNSPECIFIED",
-                TrustDirection::Inbound => "INBOUND",
-                TrustDirection::Outbound => "OUTBOUND",
-                TrustDirection::Bidirectional => "BIDIRECTIONAL",
+                Self::Unspecified => "TRUST_DIRECTION_UNSPECIFIED",
+                Self::Inbound => "INBOUND",
+                Self::Outbound => "OUTBOUND",
+                Self::Bidirectional => "BIDIRECTIONAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -330,7 +328,6 @@ pub mod trust {
     }
 }
 /// Represents the metadata of the long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpMetadata {
     /// Output only. The time the operation was created.
@@ -357,7 +354,6 @@ pub struct OpMetadata {
 }
 /// Request message for
 /// [CreateMicrosoftAdDomain][google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomain]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMicrosoftAdDomainRequest {
     /// Required. The resource project name and location using the form:
@@ -382,7 +378,6 @@ pub struct CreateMicrosoftAdDomainRequest {
 }
 /// Request message for
 /// [ResetAdminPassword][google.cloud.managedidentities.v1beta1.ResetAdminPassword]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetAdminPasswordRequest {
     /// Required. The domain resource name using the form:
@@ -392,7 +387,6 @@ pub struct ResetAdminPasswordRequest {
 }
 /// Response message for
 /// [ResetAdminPassword][google.cloud.managedidentities.v1beta1.ResetAdminPassword]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetAdminPasswordResponse {
     /// A random password. See [admin][google.cloud.managedidentities.v1beta1.Domain.admin] for more information.
@@ -401,7 +395,6 @@ pub struct ResetAdminPasswordResponse {
 }
 /// Request message for
 /// [ListDomains][google.cloud.managedidentities.v1beta1.ListDomains]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDomainsRequest {
     /// Required. The resource name of the domain location using the form:
@@ -433,7 +426,6 @@ pub struct ListDomainsRequest {
 }
 /// Response message for
 /// [ListDomains][google.cloud.managedidentities.v1beta1.ListDomains]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDomainsResponse {
     /// A list of Managed Identities Service domains in the project.
@@ -449,7 +441,6 @@ pub struct ListDomainsResponse {
 }
 /// Request message for
 /// [GetDomain][google.cloud.managedidentities.v1beta1.GetDomain]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDomainRequest {
     /// Required. The domain resource name using the form:
@@ -459,7 +450,6 @@ pub struct GetDomainRequest {
 }
 /// Request message for
 /// [UpdateDomain][google.cloud.managedidentities.v1beta1.UpdateDomain]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDomainRequest {
     /// Required. Mask of fields to update. At least one path must be supplied in this
@@ -478,7 +468,6 @@ pub struct UpdateDomainRequest {
 }
 /// Request message for
 /// [DeleteDomain][google.cloud.managedidentities.v1beta1.DeleteDomain]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDomainRequest {
     /// Required. The domain resource name using the form:
@@ -488,7 +477,6 @@ pub struct DeleteDomainRequest {
 }
 /// Request message for
 /// [AttachTrust][google.cloud.managedidentities.v1beta1.AttachTrust]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttachTrustRequest {
     /// Required. The resource domain name, project name and location using the form:
@@ -501,7 +489,6 @@ pub struct AttachTrustRequest {
 }
 /// Request message for
 /// [ReconfigureTrust][google.cloud.managedidentities.v1beta1.ReconfigureTrust]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReconfigureTrustRequest {
     /// Required. The resource domain name, project name and location using the form:
@@ -521,7 +508,6 @@ pub struct ReconfigureTrustRequest {
 }
 /// Request message for
 /// [DetachTrust][google.cloud.managedidentities.v1beta1.DetachTrust]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DetachTrustRequest {
     /// Required. The resource domain name, project name, and location using the form:
@@ -534,7 +520,6 @@ pub struct DetachTrustRequest {
 }
 /// Request message for
 /// [ValidateTrust][google.cloud.managedidentities.v1beta1.ValidateTrust]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidateTrustRequest {
     /// Required. The resource domain name, project name, and location using the form:
@@ -547,7 +532,13 @@ pub struct ValidateTrustRequest {
 }
 /// Generated client implementations.
 pub mod managed_identities_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
@@ -569,8 +560,8 @@ pub mod managed_identities_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -595,7 +586,7 @@ pub mod managed_identities_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ManagedIdentitiesServiceClient::new(
                 InterceptedService::new(inner, interceptor),
@@ -644,8 +635,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -675,8 +665,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -706,8 +695,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -734,8 +722,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -765,8 +752,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -796,8 +782,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -827,8 +812,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -858,8 +842,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -889,8 +872,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -921,8 +903,7 @@ pub mod managed_identities_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

@@ -2,7 +2,6 @@
 /// Dimensions are attributes of your data. For example, the dimension
 /// `userEmail` indicates the email of the user that accessed reporting data.
 /// Dimension values in report responses are strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimension {
     /// The API name of the dimension. See [Data Access
@@ -15,7 +14,6 @@ pub struct AccessDimension {
 }
 /// The quantitative measurements of a report. For example, the metric
 /// `accessCount` is the total number of data access records.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetric {
     /// The API name of the metric. See [Data Access
@@ -27,7 +25,6 @@ pub struct AccessMetric {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// A contiguous range of days: startDate, startDate + 1, ..., endDate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDateRange {
     /// The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot
@@ -45,7 +42,6 @@ pub struct AccessDateRange {
 }
 /// Expresses dimension or metric filters. The fields in the same expression need
 /// to be either all dimensions or all metrics.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpression {
     /// Specify one type of filter expression for `FilterExpression`.
@@ -55,7 +51,6 @@ pub struct AccessFilterExpression {
 /// Nested message and enum types in `AccessFilterExpression`.
 pub mod access_filter_expression {
     /// Specify one type of filter expression for `FilterExpression`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneExpression {
         /// Each of the FilterExpressions in the and_group has an AND relationship.
@@ -74,7 +69,6 @@ pub mod access_filter_expression {
     }
 }
 /// A list of filter expressions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilterExpressionList {
     /// A list of filter expressions.
@@ -82,7 +76,6 @@ pub struct AccessFilterExpressionList {
     pub expressions: ::prost::alloc::vec::Vec<AccessFilterExpression>,
 }
 /// An expression to filter dimension or metric values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessFilter {
     /// The dimension name or metric name.
@@ -95,7 +88,6 @@ pub struct AccessFilter {
 /// Nested message and enum types in `AccessFilter`.
 pub mod access_filter {
     /// Specify one type of filter for `Filter`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneFilter {
         /// Strings related filter.
@@ -113,7 +105,6 @@ pub mod access_filter {
     }
 }
 /// The filter for strings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessStringFilter {
     /// The match type for this filter.
@@ -164,13 +155,13 @@ pub mod access_string_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MatchType::Unspecified => "MATCH_TYPE_UNSPECIFIED",
-                MatchType::Exact => "EXACT",
-                MatchType::BeginsWith => "BEGINS_WITH",
-                MatchType::EndsWith => "ENDS_WITH",
-                MatchType::Contains => "CONTAINS",
-                MatchType::FullRegexp => "FULL_REGEXP",
-                MatchType::PartialRegexp => "PARTIAL_REGEXP",
+                Self::Unspecified => "MATCH_TYPE_UNSPECIFIED",
+                Self::Exact => "EXACT",
+                Self::BeginsWith => "BEGINS_WITH",
+                Self::EndsWith => "ENDS_WITH",
+                Self::Contains => "CONTAINS",
+                Self::FullRegexp => "FULL_REGEXP",
+                Self::PartialRegexp => "PARTIAL_REGEXP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -189,7 +180,6 @@ pub mod access_string_filter {
     }
 }
 /// The result needs to be in a list of string values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessInListFilter {
     /// The list of string values. Must be non-empty.
@@ -200,7 +190,6 @@ pub struct AccessInListFilter {
     pub case_sensitive: bool,
 }
 /// Filters for numeric or date values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessNumericFilter {
     /// The operation type for this filter.
@@ -246,12 +235,12 @@ pub mod access_numeric_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::Equal => "EQUAL",
-                Operation::LessThan => "LESS_THAN",
-                Operation::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
-                Operation::GreaterThan => "GREATER_THAN",
-                Operation::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::Equal => "EQUAL",
+                Self::LessThan => "LESS_THAN",
+                Self::LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                Self::GreaterThan => "GREATER_THAN",
+                Self::GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -269,7 +258,6 @@ pub mod access_numeric_filter {
     }
 }
 /// To express that the result needs to be between two numbers (inclusive).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessBetweenFilter {
     /// Begins with this number.
@@ -280,7 +268,6 @@ pub struct AccessBetweenFilter {
     pub to_value: ::core::option::Option<NumericValue>,
 }
 /// To represent a number.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NumericValue {
     /// One of a numeric value
@@ -290,7 +277,6 @@ pub struct NumericValue {
 /// Nested message and enum types in `NumericValue`.
 pub mod numeric_value {
     /// One of a numeric value
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum OneValue {
         /// Integer value
@@ -304,7 +290,6 @@ pub mod numeric_value {
 /// Order bys define how rows will be sorted in the response. For example,
 /// ordering rows by descending access count is one ordering, and ordering rows
 /// by the country string is a different ordering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessOrderBy {
     /// If true, sorts by descending order. If false or unspecified, sorts in
@@ -318,7 +303,6 @@ pub struct AccessOrderBy {
 /// Nested message and enum types in `AccessOrderBy`.
 pub mod access_order_by {
     /// Sorts by metric values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct MetricOrderBy {
         /// A metric name in the request to order by.
@@ -326,7 +310,6 @@ pub mod access_order_by {
         pub metric_name: ::prost::alloc::string::String,
     }
     /// Sorts by dimension values.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DimensionOrderBy {
         /// A dimension name in the request to order by.
@@ -373,12 +356,10 @@ pub mod access_order_by {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    OrderType::Unspecified => "ORDER_TYPE_UNSPECIFIED",
-                    OrderType::Alphanumeric => "ALPHANUMERIC",
-                    OrderType::CaseInsensitiveAlphanumeric => {
-                        "CASE_INSENSITIVE_ALPHANUMERIC"
-                    }
-                    OrderType::Numeric => "NUMERIC",
+                    Self::Unspecified => "ORDER_TYPE_UNSPECIFIED",
+                    Self::Alphanumeric => "ALPHANUMERIC",
+                    Self::CaseInsensitiveAlphanumeric => "CASE_INSENSITIVE_ALPHANUMERIC",
+                    Self::Numeric => "NUMERIC",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -396,7 +377,6 @@ pub mod access_order_by {
         }
     }
     /// Specify one type of order by for `OrderBy`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OneOrderBy {
         /// Sorts results by a metric's values.
@@ -411,7 +391,6 @@ pub mod access_order_by {
 /// produce column entries within rows and DimensionHeaders. However, dimensions
 /// used exclusively within filters or expressions do not produce columns in a
 /// report; correspondingly, those dimensions do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionHeader {
     /// The dimension's name; for example 'userEmail'.
@@ -422,7 +401,6 @@ pub struct AccessDimensionHeader {
 /// report produce column entries within rows and MetricHeaders. However,
 /// metrics used exclusively within filters or expressions do not produce columns
 /// in a report; correspondingly, those metrics do not produce headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricHeader {
     /// The metric's name; for example 'accessCount'.
@@ -430,7 +408,6 @@ pub struct AccessMetricHeader {
     pub metric_name: ::prost::alloc::string::String,
 }
 /// Access report data for each row.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessRow {
     /// List of dimension values. These values are in the same order as specified
@@ -443,7 +420,6 @@ pub struct AccessRow {
     pub metric_values: ::prost::alloc::vec::Vec<AccessMetricValue>,
 }
 /// The value of a dimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessDimensionValue {
     /// The dimension value. For example, this value may be 'France' for the
@@ -452,7 +428,6 @@ pub struct AccessDimensionValue {
     pub value: ::prost::alloc::string::String,
 }
 /// The value of a metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessMetricValue {
     /// The measurement value. For example, this value may be '13'.
@@ -462,7 +437,6 @@ pub struct AccessMetricValue {
 /// Current state of all quotas for this Analytics property. If any quota for a
 /// property is exhausted, all requests to that property will return Resource
 /// Exhausted errors.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuota {
     /// Properties can use 250,000 tokens per day. Most requests consume fewer than
@@ -489,7 +463,6 @@ pub struct AccessQuota {
     pub tokens_per_project_per_hour: ::core::option::Option<AccessQuotaStatus>,
 }
 /// Current state for a particular quota group.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AccessQuotaStatus {
     /// Quota consumed by this request.
@@ -500,7 +473,6 @@ pub struct AccessQuotaStatus {
     pub remaining: i32,
 }
 /// A resource message representing a Google Analytics account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Account {
     /// Output only. Resource name of this account.
@@ -530,8 +502,7 @@ pub struct Account {
     #[prost(string, tag = "7")]
     pub gmp_organization: ::prost::alloc::string::String,
 }
-/// A resource message representing a Google Analytics GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A resource message representing a Google Analytics property.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Property {
     /// Output only. Resource name of this property.
@@ -604,7 +575,6 @@ pub struct Property {
     pub account: ::prost::alloc::string::String,
 }
 /// A resource message representing a data stream.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataStream {
     /// Output only. Resource name of this Data Stream.
@@ -636,7 +606,6 @@ pub struct DataStream {
 /// Nested message and enum types in `DataStream`.
 pub mod data_stream {
     /// Data specific to web streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WebStreamData {
         /// Output only. Analytics Measurement ID.
@@ -654,7 +623,6 @@ pub mod data_stream {
         pub default_uri: ::prost::alloc::string::String,
     }
     /// Data specific to Android app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AndroidAppStreamData {
         /// Output only. ID of the corresponding Android app in Firebase, if any.
@@ -667,7 +635,6 @@ pub mod data_stream {
         pub package_name: ::prost::alloc::string::String,
     }
     /// Data specific to iOS app streams.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IosAppStreamData {
         /// Output only. ID of the corresponding iOS app in Firebase, if any.
@@ -709,10 +676,10 @@ pub mod data_stream {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DataStreamType::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
-                DataStreamType::WebDataStream => "WEB_DATA_STREAM",
-                DataStreamType::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
-                DataStreamType::IosAppDataStream => "IOS_APP_DATA_STREAM",
+                Self::Unspecified => "DATA_STREAM_TYPE_UNSPECIFIED",
+                Self::WebDataStream => "WEB_DATA_STREAM",
+                Self::AndroidAppDataStream => "ANDROID_APP_DATA_STREAM",
+                Self::IosAppDataStream => "IOS_APP_DATA_STREAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -728,7 +695,6 @@ pub mod data_stream {
     }
     /// Data for specific data stream types. The message that will be
     /// set corresponds to the type of this stream.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StreamData {
         /// Data specific to web streams. Must be populated if type is
@@ -745,8 +711,7 @@ pub mod data_stream {
         IosAppStreamData(IosAppStreamData),
     }
 }
-/// A link between a GA4 property and a Firebase project.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Firebase project.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirebaseLink {
     /// Output only. Example format: properties/1234/firebaseLinks/5678
@@ -765,8 +730,7 @@ pub struct FirebaseLink {
     #[prost(message, optional, tag = "3")]
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
 }
-/// A link between a GA4 property and a Google Ads account.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A link between a Google Analytics property and a Google Ads account.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleAdsLink {
     /// Output only. Format:
@@ -800,7 +764,6 @@ pub struct GoogleAdsLink {
 }
 /// A resource message representing data sharing settings of a Google Analytics
 /// account.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataSharingSettings {
     /// Output only. Resource name.
@@ -829,8 +792,7 @@ pub struct DataSharingSettings {
     pub sharing_with_others_enabled: bool,
 }
 /// A virtual resource representing an overview of an account and
-/// all its child GA4 properties.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// all its child Google Analytics properties.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccountSummary {
     /// Resource name for this account summary.
@@ -850,8 +812,7 @@ pub struct AccountSummary {
     #[prost(message, repeated, tag = "4")]
     pub property_summaries: ::prost::alloc::vec::Vec<PropertySummary>,
 }
-/// A virtual resource representing metadata for a GA4 property.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A virtual resource representing metadata for a Google Analytics property.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PropertySummary {
     /// Resource name of property referred to by this property summary
@@ -874,7 +835,6 @@ pub struct PropertySummary {
     pub parent: ::prost::alloc::string::String,
 }
 /// A secret value used for sending hits to Measurement Protocol.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MeasurementProtocolSecret {
     /// Output only. Resource name of this secret. This secret may be a child of
@@ -895,7 +855,6 @@ pub struct MeasurementProtocolSecret {
 /// that resulted from the same cause. Common causes would be updates made in the
 /// Google Analytics UI, changes from customer support, or automatic Google
 /// Analytics system changes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryEvent {
     /// ID of this change history event. This ID is unique across Google Analytics.
@@ -922,7 +881,6 @@ pub struct ChangeHistoryEvent {
     pub changes: ::prost::alloc::vec::Vec<ChangeHistoryChange>,
 }
 /// A description of a change to a single Google Analytics resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangeHistoryChange {
     /// Resource name of the resource whose changes are described by this entry.
@@ -948,7 +906,6 @@ pub struct ChangeHistoryChange {
 pub mod change_history_change {
     /// A snapshot of a resource as before or after the result of a change in
     /// change history.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ChangeHistoryResource {
         #[prost(
@@ -959,7 +916,6 @@ pub mod change_history_change {
     }
     /// Nested message and enum types in `ChangeHistoryResource`.
     pub mod change_history_resource {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Resource {
             /// A snapshot of an Account resource in change history.
@@ -990,7 +946,6 @@ pub mod change_history_change {
     }
 }
 /// A conversion event in a Google Analytics property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConversionEvent {
     /// Output only. Resource name of this conversion event.
@@ -1031,7 +986,6 @@ pub struct ConversionEvent {
 pub mod conversion_event {
     /// Defines a default value/currency for a conversion event. Both value and
     /// currency must be provided.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultConversionValue {
         /// This value will be used to populate the value for all conversions
@@ -1075,11 +1029,9 @@ pub mod conversion_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConversionCountingMethod::Unspecified => {
-                    "CONVERSION_COUNTING_METHOD_UNSPECIFIED"
-                }
-                ConversionCountingMethod::OncePerEvent => "ONCE_PER_EVENT",
-                ConversionCountingMethod::OncePerSession => "ONCE_PER_SESSION",
+                Self::Unspecified => "CONVERSION_COUNTING_METHOD_UNSPECIFIED",
+                Self::OncePerEvent => "ONCE_PER_EVENT",
+                Self::OncePerSession => "ONCE_PER_SESSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1094,7 +1046,6 @@ pub mod conversion_event {
     }
 }
 /// A key event in a Google Analytics property.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyEvent {
     /// Output only. Resource name of this key event.
@@ -1130,7 +1081,6 @@ pub struct KeyEvent {
 /// Nested message and enum types in `KeyEvent`.
 pub mod key_event {
     /// Defines a default value/currency for a key event.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DefaultValue {
         /// Required. This will be used to populate the "value" parameter for all
@@ -1176,9 +1126,9 @@ pub mod key_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CountingMethod::Unspecified => "COUNTING_METHOD_UNSPECIFIED",
-                CountingMethod::OncePerEvent => "ONCE_PER_EVENT",
-                CountingMethod::OncePerSession => "ONCE_PER_SESSION",
+                Self::Unspecified => "COUNTING_METHOD_UNSPECIFIED",
+                Self::OncePerEvent => "ONCE_PER_EVENT",
+                Self::OncePerSession => "ONCE_PER_SESSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1193,7 +1143,6 @@ pub mod key_event {
     }
 }
 /// A definition for a CustomDimension.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomDimension {
     /// Output only. Resource name for this CustomDimension resource.
@@ -1267,10 +1216,10 @@ pub mod custom_dimension {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DimensionScope::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
-                DimensionScope::Event => "EVENT",
-                DimensionScope::User => "USER",
-                DimensionScope::Item => "ITEM",
+                Self::Unspecified => "DIMENSION_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
+                Self::User => "USER",
+                Self::Item => "ITEM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1286,7 +1235,6 @@ pub mod custom_dimension {
     }
 }
 /// A definition for a custom metric.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetric {
     /// Output only. Resource name for this CustomMetric resource.
@@ -1379,17 +1327,17 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MeasurementUnit::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
-                MeasurementUnit::Standard => "STANDARD",
-                MeasurementUnit::Currency => "CURRENCY",
-                MeasurementUnit::Feet => "FEET",
-                MeasurementUnit::Meters => "METERS",
-                MeasurementUnit::Kilometers => "KILOMETERS",
-                MeasurementUnit::Miles => "MILES",
-                MeasurementUnit::Milliseconds => "MILLISECONDS",
-                MeasurementUnit::Seconds => "SECONDS",
-                MeasurementUnit::Minutes => "MINUTES",
-                MeasurementUnit::Hours => "HOURS",
+                Self::Unspecified => "MEASUREMENT_UNIT_UNSPECIFIED",
+                Self::Standard => "STANDARD",
+                Self::Currency => "CURRENCY",
+                Self::Feet => "FEET",
+                Self::Meters => "METERS",
+                Self::Kilometers => "KILOMETERS",
+                Self::Miles => "MILES",
+                Self::Milliseconds => "MILLISECONDS",
+                Self::Seconds => "SECONDS",
+                Self::Minutes => "MINUTES",
+                Self::Hours => "HOURS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1436,8 +1384,8 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MetricScope::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
-                MetricScope::Event => "EVENT",
+                Self::Unspecified => "METRIC_SCOPE_UNSPECIFIED",
+                Self::Event => "EVENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1478,9 +1426,9 @@ pub mod custom_metric {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RestrictedMetricType::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
-                RestrictedMetricType::CostData => "COST_DATA",
-                RestrictedMetricType::RevenueData => "REVENUE_DATA",
+                Self::Unspecified => "RESTRICTED_METRIC_TYPE_UNSPECIFIED",
+                Self::CostData => "COST_DATA",
+                Self::RevenueData => "REVENUE_DATA",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1495,16 +1443,18 @@ pub mod custom_metric {
     }
 }
 /// Settings values for data retention. This is a singleton resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataRetentionSettings {
     /// Output only. Resource name for this DataRetentionSetting resource.
     /// Format: properties/{property}/dataRetentionSettings
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
-    /// The length of time that event-level data is retained.
+    /// Required. The length of time that event-level data is retained.
     #[prost(enumeration = "data_retention_settings::RetentionDuration", tag = "2")]
     pub event_data_retention: i32,
+    /// Required. The length of time that user-level data is retained.
+    #[prost(enumeration = "data_retention_settings::RetentionDuration", tag = "4")]
+    pub user_data_retention: i32,
     /// If true, reset the retention period for the user identifier with every
     /// event from that user.
     #[prost(bool, tag = "3")]
@@ -1533,13 +1483,13 @@ pub mod data_retention_settings {
         /// The data retention time duration is 14 months.
         FourteenMonths = 3,
         /// The data retention time duration is 26 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         TwentySixMonths = 4,
         /// The data retention time duration is 38 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         ThirtyEightMonths = 5,
         /// The data retention time duration is 50 months.
-        /// Available to 360 properties only.
+        /// Available to 360 properties only. Available for event data only.
         FiftyMonths = 6,
     }
     impl RetentionDuration {
@@ -1549,12 +1499,12 @@ pub mod data_retention_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RetentionDuration::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
-                RetentionDuration::TwoMonths => "TWO_MONTHS",
-                RetentionDuration::FourteenMonths => "FOURTEEN_MONTHS",
-                RetentionDuration::TwentySixMonths => "TWENTY_SIX_MONTHS",
-                RetentionDuration::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
-                RetentionDuration::FiftyMonths => "FIFTY_MONTHS",
+                Self::Unspecified => "RETENTION_DURATION_UNSPECIFIED",
+                Self::TwoMonths => "TWO_MONTHS",
+                Self::FourteenMonths => "FOURTEEN_MONTHS",
+                Self::TwentySixMonths => "TWENTY_SIX_MONTHS",
+                Self::ThirtyEightMonths => "THIRTY_EIGHT_MONTHS",
+                Self::FiftyMonths => "FIFTY_MONTHS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1637,35 +1587,33 @@ impl IndustryCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            IndustryCategory::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
-            IndustryCategory::Automotive => "AUTOMOTIVE",
-            IndustryCategory::BusinessAndIndustrialMarkets => {
-                "BUSINESS_AND_INDUSTRIAL_MARKETS"
-            }
-            IndustryCategory::Finance => "FINANCE",
-            IndustryCategory::Healthcare => "HEALTHCARE",
-            IndustryCategory::Technology => "TECHNOLOGY",
-            IndustryCategory::Travel => "TRAVEL",
-            IndustryCategory::Other => "OTHER",
-            IndustryCategory::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
-            IndustryCategory::BeautyAndFitness => "BEAUTY_AND_FITNESS",
-            IndustryCategory::BooksAndLiterature => "BOOKS_AND_LITERATURE",
-            IndustryCategory::FoodAndDrink => "FOOD_AND_DRINK",
-            IndustryCategory::Games => "GAMES",
-            IndustryCategory::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
-            IndustryCategory::HomeAndGarden => "HOME_AND_GARDEN",
-            IndustryCategory::InternetAndTelecom => "INTERNET_AND_TELECOM",
-            IndustryCategory::LawAndGovernment => "LAW_AND_GOVERNMENT",
-            IndustryCategory::News => "NEWS",
-            IndustryCategory::OnlineCommunities => "ONLINE_COMMUNITIES",
-            IndustryCategory::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
-            IndustryCategory::PetsAndAnimals => "PETS_AND_ANIMALS",
-            IndustryCategory::RealEstate => "REAL_ESTATE",
-            IndustryCategory::Reference => "REFERENCE",
-            IndustryCategory::Science => "SCIENCE",
-            IndustryCategory::Sports => "SPORTS",
-            IndustryCategory::JobsAndEducation => "JOBS_AND_EDUCATION",
-            IndustryCategory::Shopping => "SHOPPING",
+            Self::Unspecified => "INDUSTRY_CATEGORY_UNSPECIFIED",
+            Self::Automotive => "AUTOMOTIVE",
+            Self::BusinessAndIndustrialMarkets => "BUSINESS_AND_INDUSTRIAL_MARKETS",
+            Self::Finance => "FINANCE",
+            Self::Healthcare => "HEALTHCARE",
+            Self::Technology => "TECHNOLOGY",
+            Self::Travel => "TRAVEL",
+            Self::Other => "OTHER",
+            Self::ArtsAndEntertainment => "ARTS_AND_ENTERTAINMENT",
+            Self::BeautyAndFitness => "BEAUTY_AND_FITNESS",
+            Self::BooksAndLiterature => "BOOKS_AND_LITERATURE",
+            Self::FoodAndDrink => "FOOD_AND_DRINK",
+            Self::Games => "GAMES",
+            Self::HobbiesAndLeisure => "HOBBIES_AND_LEISURE",
+            Self::HomeAndGarden => "HOME_AND_GARDEN",
+            Self::InternetAndTelecom => "INTERNET_AND_TELECOM",
+            Self::LawAndGovernment => "LAW_AND_GOVERNMENT",
+            Self::News => "NEWS",
+            Self::OnlineCommunities => "ONLINE_COMMUNITIES",
+            Self::PeopleAndSociety => "PEOPLE_AND_SOCIETY",
+            Self::PetsAndAnimals => "PETS_AND_ANIMALS",
+            Self::RealEstate => "REAL_ESTATE",
+            Self::Reference => "REFERENCE",
+            Self::Science => "SCIENCE",
+            Self::Sports => "SPORTS",
+            Self::JobsAndEducation => "JOBS_AND_EDUCATION",
+            Self::Shopping => "SHOPPING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1720,9 +1668,9 @@ impl ServiceLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ServiceLevel::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
-            ServiceLevel::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
-            ServiceLevel::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
+            Self::Unspecified => "SERVICE_LEVEL_UNSPECIFIED",
+            Self::GoogleAnalyticsStandard => "GOOGLE_ANALYTICS_STANDARD",
+            Self::GoogleAnalytics360 => "GOOGLE_ANALYTICS_360",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1756,10 +1704,10 @@ impl ActorType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActorType::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
-            ActorType::User => "USER",
-            ActorType::System => "SYSTEM",
-            ActorType::Support => "SUPPORT",
+            Self::Unspecified => "ACTOR_TYPE_UNSPECIFIED",
+            Self::User => "USER",
+            Self::System => "SYSTEM",
+            Self::Support => "SUPPORT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1793,10 +1741,10 @@ impl ActionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
-            ActionType::Created => "CREATED",
-            ActionType::Updated => "UPDATED",
-            ActionType::Deleted => "DELETED",
+            Self::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+            Self::Created => "CREATED",
+            Self::Updated => "UPDATED",
+            Self::Deleted => "DELETED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1830,6 +1778,10 @@ pub enum ChangeHistoryResourceType {
     ConversionEvent = 9,
     /// MeasurementProtocolSecret resource
     MeasurementProtocolSecret = 10,
+    /// CustomDimension resource
+    CustomDimension = 11,
+    /// CustomMetric resource
+    CustomMetric = 12,
     /// DataRetentionSettings resource
     DataRetentionSettings = 13,
     /// DisplayVideo360AdvertiserLink resource
@@ -1848,27 +1800,23 @@ impl ChangeHistoryResourceType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ChangeHistoryResourceType::Unspecified => {
-                "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED"
-            }
-            ChangeHistoryResourceType::Account => "ACCOUNT",
-            ChangeHistoryResourceType::Property => "PROPERTY",
-            ChangeHistoryResourceType::FirebaseLink => "FIREBASE_LINK",
-            ChangeHistoryResourceType::GoogleAdsLink => "GOOGLE_ADS_LINK",
-            ChangeHistoryResourceType::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
-            ChangeHistoryResourceType::ConversionEvent => "CONVERSION_EVENT",
-            ChangeHistoryResourceType::MeasurementProtocolSecret => {
-                "MEASUREMENT_PROTOCOL_SECRET"
-            }
-            ChangeHistoryResourceType::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLink => {
-                "DISPLAY_VIDEO_360_ADVERTISER_LINK"
-            }
-            ChangeHistoryResourceType::DisplayVideo360AdvertiserLinkProposal => {
+            Self::Unspecified => "CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED",
+            Self::Account => "ACCOUNT",
+            Self::Property => "PROPERTY",
+            Self::FirebaseLink => "FIREBASE_LINK",
+            Self::GoogleAdsLink => "GOOGLE_ADS_LINK",
+            Self::GoogleSignalsSettings => "GOOGLE_SIGNALS_SETTINGS",
+            Self::ConversionEvent => "CONVERSION_EVENT",
+            Self::MeasurementProtocolSecret => "MEASUREMENT_PROTOCOL_SECRET",
+            Self::CustomDimension => "CUSTOM_DIMENSION",
+            Self::CustomMetric => "CUSTOM_METRIC",
+            Self::DataRetentionSettings => "DATA_RETENTION_SETTINGS",
+            Self::DisplayVideo360AdvertiserLink => "DISPLAY_VIDEO_360_ADVERTISER_LINK",
+            Self::DisplayVideo360AdvertiserLinkProposal => {
                 "DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL"
             }
-            ChangeHistoryResourceType::DataStream => "DATA_STREAM",
-            ChangeHistoryResourceType::AttributionSettings => "ATTRIBUTION_SETTINGS",
+            Self::DataStream => "DATA_STREAM",
+            Self::AttributionSettings => "ATTRIBUTION_SETTINGS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1882,6 +1830,8 @@ impl ChangeHistoryResourceType {
             "GOOGLE_SIGNALS_SETTINGS" => Some(Self::GoogleSignalsSettings),
             "CONVERSION_EVENT" => Some(Self::ConversionEvent),
             "MEASUREMENT_PROTOCOL_SECRET" => Some(Self::MeasurementProtocolSecret),
+            "CUSTOM_DIMENSION" => Some(Self::CustomDimension),
+            "CUSTOM_METRIC" => Some(Self::CustomMetric),
             "DATA_RETENTION_SETTINGS" => Some(Self::DataRetentionSettings),
             "DISPLAY_VIDEO_360_ADVERTISER_LINK" => {
                 Some(Self::DisplayVideo360AdvertiserLink)
@@ -1895,17 +1845,17 @@ impl ChangeHistoryResourceType {
         }
     }
 }
-/// Types of Property resources.
+/// Types of `Property` resources.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum PropertyType {
     /// Unknown or unspecified property type
     Unspecified = 0,
-    /// Ordinary GA4 property
+    /// Ordinary Google Analytics property
     Ordinary = 1,
-    /// GA4 subproperty
+    /// Google Analytics subproperty
     Subproperty = 2,
-    /// GA4 rollup property
+    /// Google Analytics rollup property
     Rollup = 3,
 }
 impl PropertyType {
@@ -1915,10 +1865,10 @@ impl PropertyType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PropertyType::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
-            PropertyType::Ordinary => "PROPERTY_TYPE_ORDINARY",
-            PropertyType::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
-            PropertyType::Rollup => "PROPERTY_TYPE_ROLLUP",
+            Self::Unspecified => "PROPERTY_TYPE_UNSPECIFIED",
+            Self::Ordinary => "PROPERTY_TYPE_ORDINARY",
+            Self::Subproperty => "PROPERTY_TYPE_SUBPROPERTY",
+            Self::Rollup => "PROPERTY_TYPE_ROLLUP",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1933,7 +1883,6 @@ impl PropertyType {
     }
 }
 /// The request for a Data Access Record Report.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportRequest {
     /// The Data Access Report supports requesting at the property level or account
@@ -1941,9 +1890,9 @@ pub struct RunAccessReportRequest {
     /// access for all properties under that account.
     ///
     /// To request at the property level, entity should be for example
-    /// 'properties/123' if "123" is your GA4 property ID. To request at the
-    /// account level, entity should be for example 'accounts/1234' if "1234" is
-    /// your GA4 Account ID.
+    /// 'properties/123' if "123" is your Google Analytics property ID. To request
+    /// at the account level, entity should be for example 'accounts/1234' if
+    /// "1234" is your Google Analytics Account ID.
     #[prost(string, tag = "1")]
     pub entity: ::prost::alloc::string::String,
     /// The dimensions requested and displayed in the response. Requests are
@@ -2028,7 +1977,6 @@ pub struct RunAccessReportRequest {
     pub expand_groups: bool,
 }
 /// The customized Data Access Record Report response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunAccessReportResponse {
     /// The header for a column in the report that corresponds to a specific
@@ -2060,7 +2008,6 @@ pub struct RunAccessReportResponse {
     pub quota: ::core::option::Option<AccessQuota>,
 }
 /// Request message for GetAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAccountRequest {
     /// Required. The name of the account to lookup.
@@ -2070,7 +2017,6 @@ pub struct GetAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsRequest {
     /// The maximum number of resources to return. The service may return
@@ -2092,7 +2038,6 @@ pub struct ListAccountsRequest {
     pub show_deleted: bool,
 }
 /// Request message for ListAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountsResponse {
     /// Results that were accessible to the caller.
@@ -2104,7 +2049,6 @@ pub struct ListAccountsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for DeleteAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAccountRequest {
     /// Required. The name of the Account to soft-delete.
@@ -2114,7 +2058,6 @@ pub struct DeleteAccountRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateAccount RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAccountRequest {
     /// Required. The account to update.
@@ -2129,7 +2072,6 @@ pub struct UpdateAccountRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketRequest {
     /// The account to create.
@@ -2141,7 +2083,6 @@ pub struct ProvisionAccountTicketRequest {
     pub redirect_uri: ::prost::alloc::string::String,
 }
 /// Response message for ProvisionAccountTicket RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisionAccountTicketResponse {
     /// The param to be passed in the ToS link.
@@ -2149,7 +2090,6 @@ pub struct ProvisionAccountTicketResponse {
     pub account_ticket_id: ::prost::alloc::string::String,
 }
 /// Request message for GetProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPropertyRequest {
     /// Required. The name of the property to lookup.
@@ -2159,7 +2099,6 @@ pub struct GetPropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesRequest {
     /// Required. An expression for filtering the results of the request.
@@ -2199,7 +2138,6 @@ pub struct ListPropertiesRequest {
     pub show_deleted: bool,
 }
 /// Response message for ListProperties RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPropertiesResponse {
     /// Results that matched the filter criteria and were accessible to the caller.
@@ -2211,7 +2149,6 @@ pub struct ListPropertiesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for UpdateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePropertyRequest {
     /// Required. The property to update.
@@ -2227,7 +2164,6 @@ pub struct UpdatePropertyRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePropertyRequest {
     /// Required. The property to create.
@@ -2236,7 +2172,6 @@ pub struct CreatePropertyRequest {
     pub property: ::core::option::Option<Property>,
 }
 /// Request message for DeleteProperty RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePropertyRequest {
     /// Required. The name of the Property to soft-delete.
@@ -2246,7 +2181,6 @@ pub struct DeletePropertyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}
@@ -2259,7 +2193,6 @@ pub struct CreateFirebaseLinkRequest {
     pub firebase_link: ::core::option::Option<FirebaseLink>,
 }
 /// Request message for DeleteFirebaseLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFirebaseLinkRequest {
     /// Required. Format: properties/{property_id}/firebaseLinks/{firebase_link_id}
@@ -2269,7 +2202,6 @@ pub struct DeleteFirebaseLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksRequest {
     /// Required. Format: properties/{property_id}
@@ -2291,7 +2223,6 @@ pub struct ListFirebaseLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListFirebaseLinks RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFirebaseLinksResponse {
     /// List of FirebaseLinks. This will have at most one value.
@@ -2305,7 +2236,6 @@ pub struct ListFirebaseLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234
@@ -2316,7 +2246,6 @@ pub struct CreateGoogleAdsLinkRequest {
     pub google_ads_link: ::core::option::Option<GoogleAdsLink>,
 }
 /// Request message for UpdateGoogleAdsLink RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateGoogleAdsLinkRequest {
     /// The GoogleAdsLink to update
@@ -2330,7 +2259,6 @@ pub struct UpdateGoogleAdsLinkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for DeleteGoogleAdsLink RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteGoogleAdsLinkRequest {
     /// Required. Example format: properties/1234/googleAdsLinks/5678
@@ -2338,7 +2266,6 @@ pub struct DeleteGoogleAdsLinkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksRequest {
     /// Required. Example format: properties/1234
@@ -2358,7 +2285,6 @@ pub struct ListGoogleAdsLinksRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListGoogleAdsLinks RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListGoogleAdsLinksResponse {
     /// List of GoogleAdsLinks.
@@ -2370,7 +2296,6 @@ pub struct ListGoogleAdsLinksResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataSharingSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataSharingSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -2381,7 +2306,6 @@ pub struct GetDataSharingSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesRequest {
     /// The maximum number of AccountSummary resources to return. The service may
@@ -2398,7 +2322,6 @@ pub struct ListAccountSummariesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListAccountSummaries RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAccountSummariesResponse {
     /// Account summaries of all accounts the caller has access to.
@@ -2410,7 +2333,6 @@ pub struct ListAccountSummariesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionRequest {
     /// Required. The property for which to acknowledge user data collection.
@@ -2428,11 +2350,9 @@ pub struct AcknowledgeUserDataCollectionRequest {
     pub acknowledgement: ::prost::alloc::string::String,
 }
 /// Response message for AcknowledgeUserDataCollection RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AcknowledgeUserDataCollectionResponse {}
 /// Request message for SearchChangeHistoryEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsRequest {
     /// Required. The account resource for which to return change history
@@ -2472,9 +2392,14 @@ pub struct SearchChangeHistoryEventsRequest {
     #[prost(message, optional, tag = "7")]
     pub latest_change_time: ::core::option::Option<::prost_types::Timestamp>,
     /// Optional. The maximum number of ChangeHistoryEvent items to return.
-    /// The service may return fewer than this value, even if there are additional
-    /// pages. If unspecified, at most 50 items will be returned.
-    /// The maximum value is 200 (higher values will be coerced to the maximum).
+    /// If unspecified, at most 50 items will be returned. The maximum value is 200
+    /// (higher values will be coerced to the maximum).
+    ///
+    /// Note that the service may return a page with fewer items than this value
+    /// specifies (potentially even zero), and that there still may be additional
+    /// pages. If you want a particular number of items, you'll need to continue
+    /// requesting additional pages using `page_token` until you get the needed
+    /// number.
     #[prost(int32, tag = "8")]
     pub page_size: i32,
     /// Optional. A page token, received from a previous
@@ -2486,7 +2411,6 @@ pub struct SearchChangeHistoryEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for SearchAccounts RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchChangeHistoryEventsResponse {
     /// Results that were accessible to the caller.
@@ -2498,7 +2422,6 @@ pub struct SearchChangeHistoryEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetMeasurementProtocolSecret RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMeasurementProtocolSecretRequest {
     /// Required. The name of the measurement protocol secret to lookup.
@@ -2508,7 +2431,6 @@ pub struct GetMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateMeasurementProtocolSecretRequest {
     /// Required. The parent resource where this secret will be created.
@@ -2520,7 +2442,6 @@ pub struct CreateMeasurementProtocolSecretRequest {
     pub measurement_protocol_secret: ::core::option::Option<MeasurementProtocolSecret>,
 }
 /// Request message for DeleteMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteMeasurementProtocolSecretRequest {
     /// Required. The name of the MeasurementProtocolSecret to delete.
@@ -2530,7 +2451,6 @@ pub struct DeleteMeasurementProtocolSecretRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateMeasurementProtocolSecretRequest {
     /// Required. The measurement protocol secret to update.
@@ -2542,7 +2462,6 @@ pub struct UpdateMeasurementProtocolSecretRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsRequest {
     /// Required. The resource name of the parent stream.
@@ -2563,7 +2482,6 @@ pub struct ListMeasurementProtocolSecretsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListMeasurementProtocolSecret RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListMeasurementProtocolSecretsResponse {
     /// A list of secrets for the parent stream specified in the request.
@@ -2577,7 +2495,6 @@ pub struct ListMeasurementProtocolSecretsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConversionEventRequest {
     /// Required. The conversion event to create.
@@ -2589,7 +2506,6 @@ pub struct CreateConversionEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConversionEventRequest {
     /// Required. The conversion event to update.
@@ -2604,7 +2520,6 @@ pub struct UpdateConversionEventRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConversionEventRequest {
     /// Required. The resource name of the conversion event to retrieve.
@@ -2614,7 +2529,6 @@ pub struct GetConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteConversionEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConversionEventRequest {
     /// Required. The resource name of the conversion event to delete.
@@ -2624,7 +2538,6 @@ pub struct DeleteConversionEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListConversionEvents RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsRequest {
     /// Required. The resource name of the parent property.
@@ -2644,7 +2557,6 @@ pub struct ListConversionEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListConversionEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConversionEventsResponse {
     /// The requested conversion events
@@ -2656,7 +2568,6 @@ pub struct ListConversionEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateKeyEventRequest {
     /// Required. The Key Event to create.
@@ -2668,7 +2579,6 @@ pub struct CreateKeyEventRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Request message for UpdateKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateKeyEventRequest {
     /// Required. The Key Event to update.
@@ -2683,7 +2593,6 @@ pub struct UpdateKeyEventRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for GetKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetKeyEventRequest {
     /// Required. The resource name of the Key Event to retrieve.
@@ -2693,7 +2602,6 @@ pub struct GetKeyEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for DeleteKeyEvent RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteKeyEventRequest {
     /// Required. The resource name of the Key Event to delete.
@@ -2703,7 +2611,6 @@ pub struct DeleteKeyEventRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for ListKeyEvents RPC
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListKeyEventsRequest {
     /// Required. The resource name of the parent property.
@@ -2723,7 +2630,6 @@ pub struct ListKeyEventsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListKeyEvents RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListKeyEventsResponse {
     /// The requested Key Events
@@ -2735,7 +2641,6 @@ pub struct ListKeyEventsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomDimensionRequest {
     /// Required. Example format: properties/1234
@@ -2746,7 +2651,6 @@ pub struct CreateCustomDimensionRequest {
     pub custom_dimension: ::core::option::Option<CustomDimension>,
 }
 /// Request message for UpdateCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomDimensionRequest {
     /// The CustomDimension to update
@@ -2759,7 +2663,6 @@ pub struct UpdateCustomDimensionRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsRequest {
     /// Required. Example format: properties/1234
@@ -2779,7 +2682,6 @@ pub struct ListCustomDimensionsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomDimensions RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomDimensionsResponse {
     /// List of CustomDimensions.
@@ -2791,7 +2693,6 @@ pub struct ListCustomDimensionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomDimensionRequest {
     /// Required. The name of the CustomDimension to archive.
@@ -2800,7 +2701,6 @@ pub struct ArchiveCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomDimension RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomDimensionRequest {
     /// Required. The name of the CustomDimension to get.
@@ -2809,7 +2709,6 @@ pub struct GetCustomDimensionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for CreateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomMetricRequest {
     /// Required. Example format: properties/1234
@@ -2820,7 +2719,6 @@ pub struct CreateCustomMetricRequest {
     pub custom_metric: ::core::option::Option<CustomMetric>,
 }
 /// Request message for UpdateCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomMetricRequest {
     /// The CustomMetric to update
@@ -2833,7 +2731,6 @@ pub struct UpdateCustomMetricRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsRequest {
     /// Required. Example format: properties/1234
@@ -2853,7 +2750,6 @@ pub struct ListCustomMetricsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListCustomMetrics RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomMetricsResponse {
     /// List of CustomMetrics.
@@ -2865,7 +2761,6 @@ pub struct ListCustomMetricsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for ArchiveCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArchiveCustomMetricRequest {
     /// Required. The name of the CustomMetric to archive.
@@ -2874,7 +2769,6 @@ pub struct ArchiveCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetCustomMetric RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomMetricRequest {
     /// Required. The name of the CustomMetric to get.
@@ -2883,7 +2777,6 @@ pub struct GetCustomMetricRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for GetDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRetentionSettingsRequest {
     /// Required. The name of the settings to lookup.
@@ -2894,7 +2787,6 @@ pub struct GetDataRetentionSettingsRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataRetentionSettings RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataRetentionSettingsRequest {
     /// Required. The settings to update.
@@ -2909,7 +2801,6 @@ pub struct UpdateDataRetentionSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for CreateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDataStreamRequest {
     /// Required. Example format: properties/1234
@@ -2920,7 +2811,6 @@ pub struct CreateDataStreamRequest {
     pub data_stream: ::core::option::Option<DataStream>,
 }
 /// Request message for DeleteDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataStreamRequest {
     /// Required. The name of the DataStream to delete.
@@ -2929,7 +2819,6 @@ pub struct DeleteDataStreamRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for UpdateDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDataStreamRequest {
     /// The DataStream to update
@@ -2942,7 +2831,6 @@ pub struct UpdateDataStreamRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsRequest {
     /// Required. Example format: properties/1234
@@ -2962,7 +2850,6 @@ pub struct ListDataStreamsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for ListDataStreams RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDataStreamsResponse {
     /// List of DataStreams.
@@ -2974,7 +2861,6 @@ pub struct ListDataStreamsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for GetDataStream RPC.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataStreamRequest {
     /// Required. The name of the DataStream to get.
@@ -2984,10 +2870,16 @@ pub struct GetDataStreamRequest {
 }
 /// Generated client implementations.
 pub mod analytics_admin_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
-    /// Service Interface for the Analytics Admin API (GA4).
+    /// Service Interface for the Google Analytics Admin API.
     #[derive(Debug, Clone)]
     pub struct AnalyticsAdminServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -3007,8 +2899,8 @@ pub mod analytics_admin_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3033,7 +2925,7 @@ pub mod analytics_admin_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AnalyticsAdminServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3077,8 +2969,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3098,7 +2989,7 @@ pub mod analytics_admin_service_client {
         }
         /// Returns all accounts accessible by the caller.
         ///
-        /// Note that these accounts might not currently have GA4 properties.
+        /// Note that these accounts might not currently have GA properties.
         /// Soft-deleted (ie: "trashed") accounts are excluded by default.
         /// Returns an empty list if no relevant accounts are found.
         pub async fn list_accounts(
@@ -3112,8 +3003,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3150,8 +3040,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3178,8 +3067,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3209,8 +3097,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3240,8 +3127,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3259,7 +3145,7 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lookup for a single "GA4" Property.
+        /// Lookup for a single GA Property.
         pub async fn get_property(
             &mut self,
             request: impl tonic::IntoRequest<super::GetPropertyRequest>,
@@ -3268,8 +3154,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3289,7 +3174,6 @@ pub mod analytics_admin_service_client {
         }
         /// Returns child Properties under the specified parent Account.
         ///
-        /// Only "GA4" properties will be returned.
         /// Properties will be excluded if the caller does not have access.
         /// Soft-deleted (ie: "trashed") properties are excluded by default.
         /// Returns an empty list if no relevant properties are found.
@@ -3304,8 +3188,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3323,7 +3206,8 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Creates an "GA4" property with the specified location and attributes.
+        /// Creates a Google Analytics property with the specified location and
+        /// attributes.
         pub async fn create_property(
             &mut self,
             request: impl tonic::IntoRequest<super::CreatePropertyRequest>,
@@ -3332,8 +3216,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3361,7 +3244,7 @@ pub mod analytics_admin_service_client {
         /// will be permanently purged.
         /// https://support.google.com/analytics/answer/6154772
         ///
-        /// Returns an error if the target is not found, or is not a GA4 Property.
+        /// Returns an error if the target is not found.
         pub async fn delete_property(
             &mut self,
             request: impl tonic::IntoRequest<super::DeletePropertyRequest>,
@@ -3370,8 +3253,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3398,8 +3280,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3428,8 +3309,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3456,8 +3336,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3488,8 +3367,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3516,8 +3394,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3544,8 +3421,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3572,8 +3448,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3603,8 +3478,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3635,8 +3509,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3654,7 +3527,7 @@ pub mod analytics_admin_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lookup for a single "GA4" MeasurementProtocolSecret.
+        /// Lookup for a single MeasurementProtocolSecret.
         pub async fn get_measurement_protocol_secret(
             &mut self,
             request: impl tonic::IntoRequest<super::GetMeasurementProtocolSecretRequest>,
@@ -3666,8 +3539,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3700,8 +3572,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3733,8 +3604,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3763,8 +3633,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3796,8 +3665,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3831,8 +3699,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3852,6 +3719,9 @@ pub mod analytics_admin_service_client {
         }
         /// Searches through all changes to an account or its children given the
         /// specified set of filters.
+        ///
+        /// Only returns the subset of changes supported by the API. The UI may return
+        /// additional changes.
         pub async fn search_change_history_events(
             &mut self,
             request: impl tonic::IntoRequest<super::SearchChangeHistoryEventsRequest>,
@@ -3863,8 +3733,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3884,6 +3753,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `CreateKeyEvent` instead.
         /// Creates a conversion event with the specified attributes.
+        #[deprecated]
         pub async fn create_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateConversionEventRequest>,
@@ -3895,8 +3765,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3916,6 +3785,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `UpdateKeyEvent` instead.
         /// Updates a conversion event with the specified attributes.
+        #[deprecated]
         pub async fn update_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateConversionEventRequest>,
@@ -3927,8 +3797,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3948,6 +3817,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `GetKeyEvent` instead.
         /// Retrieve a single conversion event.
+        #[deprecated]
         pub async fn get_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::GetConversionEventRequest>,
@@ -3959,8 +3829,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3980,6 +3849,7 @@ pub mod analytics_admin_service_client {
         }
         /// Deprecated: Use `DeleteKeyEvent` instead.
         /// Deletes a conversion event in a property.
+        #[deprecated]
         pub async fn delete_conversion_event(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteConversionEventRequest>,
@@ -3988,8 +3858,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4011,6 +3880,7 @@ pub mod analytics_admin_service_client {
         /// Returns a list of conversion events in the specified parent property.
         ///
         /// Returns an empty list if no conversion events are found.
+        #[deprecated]
         pub async fn list_conversion_events(
             &mut self,
             request: impl tonic::IntoRequest<super::ListConversionEventsRequest>,
@@ -4022,8 +3892,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4050,8 +3919,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4078,8 +3946,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4106,8 +3973,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4134,8 +4000,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4166,8 +4031,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4197,8 +4061,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4228,8 +4091,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4259,8 +4121,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4287,8 +4148,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4318,8 +4178,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4346,8 +4205,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4374,8 +4232,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4405,8 +4262,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4433,8 +4289,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4461,8 +4316,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4492,8 +4346,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4523,8 +4376,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4551,8 +4403,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4579,8 +4430,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4607,8 +4457,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4638,8 +4487,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4666,8 +4514,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4694,12 +4541,17 @@ pub mod analytics_admin_service_client {
         /// only be requested on Google Analytics 360 properties. This method is only
         /// available to Administrators.
         ///
-        /// These data access records include GA4 UI Reporting, GA4 UI Explorations,
-        /// GA4 Data API, and other products like Firebase & Admob that can retrieve
+        /// These data access records include GA UI Reporting, GA UI Explorations,
+        /// GA Data API, and other products like Firebase & Admob that can retrieve
         /// data from Google Analytics through a linkage. These records don't include
         /// property configuration changes like adding a stream or changing a
         /// property's time zone. For configuration change history, see
         /// [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+        ///
+        /// To give your feedback on this API, complete the [Google Analytics Access
+        /// Reports
+        /// feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform)
+        /// form.
         pub async fn run_access_report(
             &mut self,
             request: impl tonic::IntoRequest<super::RunAccessReportRequest>,
@@ -4711,8 +4563,7 @@ pub mod analytics_admin_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

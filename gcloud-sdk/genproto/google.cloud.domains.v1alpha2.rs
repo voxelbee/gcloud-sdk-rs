@@ -15,7 +15,6 @@
 /// the domain for transfer and retrieve the domain's transfer authorization
 /// code. Then call `RetrieveTransferParameters` to confirm that the domain is
 /// unlocked and to get values needed to build a call to `TransferDomain`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Registration {
     /// Output only. Name of the `Registration` resource, in the format
@@ -122,14 +121,14 @@ pub mod registration {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::RegistrationPending => "REGISTRATION_PENDING",
-                State::RegistrationFailed => "REGISTRATION_FAILED",
-                State::TransferPending => "TRANSFER_PENDING",
-                State::TransferFailed => "TRANSFER_FAILED",
-                State::Active => "ACTIVE",
-                State::Suspended => "SUSPENDED",
-                State::Exported => "EXPORTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::RegistrationPending => "REGISTRATION_PENDING",
+                Self::RegistrationFailed => "REGISTRATION_FAILED",
+                Self::TransferPending => "TRANSFER_PENDING",
+                Self::TransferFailed => "TRANSFER_FAILED",
+                Self::Active => "ACTIVE",
+                Self::Suspended => "SUSPENDED",
+                Self::Exported => "EXPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -182,9 +181,9 @@ pub mod registration {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Issue::Unspecified => "ISSUE_UNSPECIFIED",
-                Issue::ContactSupport => "CONTACT_SUPPORT",
-                Issue::UnverifiedEmail => "UNVERIFIED_EMAIL",
+                Self::Unspecified => "ISSUE_UNSPECIFIED",
+                Self::ContactSupport => "CONTACT_SUPPORT",
+                Self::UnverifiedEmail => "UNVERIFIED_EMAIL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -199,7 +198,6 @@ pub mod registration {
     }
 }
 /// Defines renewal, billing, and transfer settings for a `Registration`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ManagementSettings {
     /// Output only. The renewal method for this `Registration`.
@@ -247,9 +245,9 @@ pub mod management_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RenewalMethod::Unspecified => "RENEWAL_METHOD_UNSPECIFIED",
-                RenewalMethod::AutomaticRenewal => "AUTOMATIC_RENEWAL",
-                RenewalMethod::ManualRenewal => "MANUAL_RENEWAL",
+                Self::Unspecified => "RENEWAL_METHOD_UNSPECIFIED",
+                Self::AutomaticRenewal => "AUTOMATIC_RENEWAL",
+                Self::ManualRenewal => "MANUAL_RENEWAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -265,7 +263,6 @@ pub mod management_settings {
 }
 /// Defines the DNS configuration of a `Registration`, including name servers,
 /// DNSSEC, and glue records.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DnsSettings {
     /// The list of glue records for this `Registration`. Commonly empty.
@@ -278,7 +275,6 @@ pub struct DnsSettings {
 /// Nested message and enum types in `DnsSettings`.
 pub mod dns_settings {
     /// Configuration for an arbitrary DNS provider.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CustomDns {
         /// Required. A list of name servers that store the DNS zone for this domain. Each name
@@ -296,7 +292,6 @@ pub mod dns_settings {
     /// `Registration`'s `dns_provider`. You cannot configure the DNS zone itself
     /// using the API. To configure the DNS zone, go to
     /// [Google Domains](<https://domains.google/>).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GoogleDomainsDns {
         /// Output only. A list of name servers that store the DNS zone for this domain. Each name
@@ -318,7 +313,6 @@ pub mod dns_settings {
     /// Defines a Delegation Signer (DS) record, which is needed to enable DNSSEC
     /// for a domain. It contains a digest (hash) of a DNSKEY record that must be
     /// present in the domain's DNS zone.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DsRecord {
         /// The key tag of the record. Must be set in range 0 -- 65535.
@@ -395,24 +389,24 @@ pub mod dns_settings {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Algorithm::Unspecified => "ALGORITHM_UNSPECIFIED",
-                    Algorithm::Rsamd5 => "RSAMD5",
-                    Algorithm::Dh => "DH",
-                    Algorithm::Dsa => "DSA",
-                    Algorithm::Ecc => "ECC",
-                    Algorithm::Rsasha1 => "RSASHA1",
-                    Algorithm::Dsansec3sha1 => "DSANSEC3SHA1",
-                    Algorithm::Rsasha1nsec3sha1 => "RSASHA1NSEC3SHA1",
-                    Algorithm::Rsasha256 => "RSASHA256",
-                    Algorithm::Rsasha512 => "RSASHA512",
-                    Algorithm::Eccgost => "ECCGOST",
-                    Algorithm::Ecdsap256sha256 => "ECDSAP256SHA256",
-                    Algorithm::Ecdsap384sha384 => "ECDSAP384SHA384",
-                    Algorithm::Ed25519 => "ED25519",
-                    Algorithm::Ed448 => "ED448",
-                    Algorithm::Indirect => "INDIRECT",
-                    Algorithm::Privatedns => "PRIVATEDNS",
-                    Algorithm::Privateoid => "PRIVATEOID",
+                    Self::Unspecified => "ALGORITHM_UNSPECIFIED",
+                    Self::Rsamd5 => "RSAMD5",
+                    Self::Dh => "DH",
+                    Self::Dsa => "DSA",
+                    Self::Ecc => "ECC",
+                    Self::Rsasha1 => "RSASHA1",
+                    Self::Dsansec3sha1 => "DSANSEC3SHA1",
+                    Self::Rsasha1nsec3sha1 => "RSASHA1NSEC3SHA1",
+                    Self::Rsasha256 => "RSASHA256",
+                    Self::Rsasha512 => "RSASHA512",
+                    Self::Eccgost => "ECCGOST",
+                    Self::Ecdsap256sha256 => "ECDSAP256SHA256",
+                    Self::Ecdsap384sha384 => "ECDSAP384SHA384",
+                    Self::Ed25519 => "ED25519",
+                    Self::Ed448 => "ED448",
+                    Self::Indirect => "INDIRECT",
+                    Self::Privatedns => "PRIVATEDNS",
+                    Self::Privateoid => "PRIVATEOID",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -473,11 +467,11 @@ pub mod dns_settings {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    DigestType::Unspecified => "DIGEST_TYPE_UNSPECIFIED",
-                    DigestType::Sha1 => "SHA1",
-                    DigestType::Sha256 => "SHA256",
-                    DigestType::Gost3411 => "GOST3411",
-                    DigestType::Sha384 => "SHA384",
+                    Self::Unspecified => "DIGEST_TYPE_UNSPECIFIED",
+                    Self::Sha1 => "SHA1",
+                    Self::Sha256 => "SHA256",
+                    Self::Gost3411 => "GOST3411",
+                    Self::Sha384 => "SHA384",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -499,7 +493,6 @@ pub mod dns_settings {
     /// For example, when `ns.example.com` is a name server for `example.com`, the
     /// host `ns.example.com` must have a glue record to break the circular DNS
     /// reference.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GlueRecord {
         /// Required. Domain name of the host in Punycode format.
@@ -548,9 +541,9 @@ pub mod dns_settings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DsState::Unspecified => "DS_STATE_UNSPECIFIED",
-                DsState::DsRecordsUnpublished => "DS_RECORDS_UNPUBLISHED",
-                DsState::DsRecordsPublished => "DS_RECORDS_PUBLISHED",
+                Self::Unspecified => "DS_STATE_UNSPECIFIED",
+                Self::DsRecordsUnpublished => "DS_RECORDS_UNPUBLISHED",
+                Self::DsRecordsPublished => "DS_RECORDS_PUBLISHED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -564,7 +557,6 @@ pub mod dns_settings {
         }
     }
     /// The DNS provider of the registration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DnsProvider {
         /// An arbitrary DNS provider identified by its name servers.
@@ -581,7 +573,6 @@ pub mod dns_settings {
 /// [ICANN](<https://icann.org/>) requires all domain names to have associated
 /// contact information. The `registrant_contact` is considered the
 /// domain's legal owner, and often the other contacts are identical.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContactSettings {
     /// Required. Privacy setting for the contacts associated with the `Registration`.
@@ -607,7 +598,6 @@ pub struct ContactSettings {
 /// Nested message and enum types in `ContactSettings`.
 pub mod contact_settings {
     /// Details required for a contact associated with a `Registration`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Contact {
         /// Required. Postal address of the contact.
@@ -629,7 +619,6 @@ pub mod contact_settings {
     }
 }
 /// Request for the `SearchDomains` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchDomainsRequest {
     /// Required. String used to search for available domain names.
@@ -640,7 +629,6 @@ pub struct SearchDomainsRequest {
     pub location: ::prost::alloc::string::String,
 }
 /// Response for the `SearchDomains` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchDomainsResponse {
     /// Results of the domain name search.
@@ -648,7 +636,6 @@ pub struct SearchDomainsResponse {
     pub register_parameters: ::prost::alloc::vec::Vec<RegisterParameters>,
 }
 /// Request for the `RetrieveRegisterParameters` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveRegisterParametersRequest {
     /// Required. The domain name. Unicode domain names must be expressed in Punycode format.
@@ -659,7 +646,6 @@ pub struct RetrieveRegisterParametersRequest {
     pub location: ::prost::alloc::string::String,
 }
 /// Response for the `RetrieveRegisterParameters` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveRegisterParametersResponse {
     /// Parameters to use when calling the `RegisterDomain` method.
@@ -667,7 +653,6 @@ pub struct RetrieveRegisterParametersResponse {
     pub register_parameters: ::core::option::Option<RegisterParameters>,
 }
 /// Request for the `RegisterDomain` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegisterDomainRequest {
     /// Required. The parent resource of the `Registration`. Must be in the
@@ -698,7 +683,6 @@ pub struct RegisterDomainRequest {
     pub validate_only: bool,
 }
 /// Request for the `RetrieveTransferParameters` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveTransferParametersRequest {
     /// Required. The domain name. Unicode domain names must be expressed in Punycode format.
@@ -709,7 +693,6 @@ pub struct RetrieveTransferParametersRequest {
     pub location: ::prost::alloc::string::String,
 }
 /// Response for the `RetrieveTransferParameters` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveTransferParametersResponse {
     /// Parameters to use when calling the `TransferDomain` method.
@@ -717,7 +700,6 @@ pub struct RetrieveTransferParametersResponse {
     pub transfer_parameters: ::core::option::Option<TransferParameters>,
 }
 /// Request for the `TransferDomain` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferDomainRequest {
     /// Required. The parent resource of the `Registration`. Must be in the
@@ -752,7 +734,6 @@ pub struct TransferDomainRequest {
     pub validate_only: bool,
 }
 /// Request for the `ListRegistrations` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegistrationsRequest {
     /// Required. The project and location from which to list `Registration`s, specified in
@@ -786,7 +767,6 @@ pub struct ListRegistrationsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response for the `ListRegistrations` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegistrationsResponse {
     /// A list of `Registration`s.
@@ -798,7 +778,6 @@ pub struct ListRegistrationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `GetRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRegistrationRequest {
     /// Required. The name of the `Registration` to get, in the format
@@ -807,7 +786,6 @@ pub struct GetRegistrationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `UpdateRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateRegistrationRequest {
     /// Fields of the `Registration` to update.
@@ -820,7 +798,6 @@ pub struct UpdateRegistrationRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request for the `ConfigureManagementSettings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigureManagementSettingsRequest {
     /// Required. The name of the `Registration` whose management settings are being updated,
@@ -837,7 +814,6 @@ pub struct ConfigureManagementSettingsRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request for the `ConfigureDnsSettings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigureDnsSettingsRequest {
     /// Required. The name of the `Registration` whose DNS settings are being updated,
@@ -863,7 +839,6 @@ pub struct ConfigureDnsSettingsRequest {
     pub validate_only: bool,
 }
 /// Request for the `ConfigureContactSettings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConfigureContactSettingsRequest {
     /// Required. The name of the `Registration` whose contact settings are being updated,
@@ -887,7 +862,6 @@ pub struct ConfigureContactSettingsRequest {
     pub validate_only: bool,
 }
 /// Request for the `ExportRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExportRegistrationRequest {
     /// Required. The name of the `Registration` to export,
@@ -896,7 +870,6 @@ pub struct ExportRegistrationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `DeleteRegistration` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRegistrationRequest {
     /// Required. The name of the `Registration` to delete,
@@ -905,7 +878,6 @@ pub struct DeleteRegistrationRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `RetrieveAuthorizationCode` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetrieveAuthorizationCodeRequest {
     /// Required. The name of the `Registration` whose authorization code is being retrieved,
@@ -914,7 +886,6 @@ pub struct RetrieveAuthorizationCodeRequest {
     pub registration: ::prost::alloc::string::String,
 }
 /// Request for the `ResetAuthorizationCode` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetAuthorizationCodeRequest {
     /// Required. The name of the `Registration` whose authorization code is being reset,
@@ -923,7 +894,6 @@ pub struct ResetAuthorizationCodeRequest {
     pub registration: ::prost::alloc::string::String,
 }
 /// Parameters required to register a new domain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegisterParameters {
     /// The domain name. Unicode domain names are expressed in Punycode format.
@@ -981,11 +951,11 @@ pub mod register_parameters {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Availability::Unspecified => "AVAILABILITY_UNSPECIFIED",
-                Availability::Available => "AVAILABLE",
-                Availability::Unavailable => "UNAVAILABLE",
-                Availability::Unsupported => "UNSUPPORTED",
-                Availability::Unknown => "UNKNOWN",
+                Self::Unspecified => "AVAILABILITY_UNSPECIFIED",
+                Self::Available => "AVAILABLE",
+                Self::Unavailable => "UNAVAILABLE",
+                Self::Unsupported => "UNSUPPORTED",
+                Self::Unknown => "UNKNOWN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1002,7 +972,6 @@ pub mod register_parameters {
     }
 }
 /// Parameters required to transfer a domain from another registrar.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferParameters {
     /// The domain name. Unicode domain names are expressed in Punycode format.
@@ -1027,7 +996,6 @@ pub struct TransferParameters {
     pub yearly_price: ::core::option::Option<super::super::super::r#type::Money>,
 }
 /// Defines an authorization code.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AuthorizationCode {
     /// The Authorization Code in ASCII. It can be used to transfer the domain
@@ -1036,7 +1004,6 @@ pub struct AuthorizationCode {
     pub code: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation. Output only.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
@@ -1092,10 +1059,10 @@ impl ContactPrivacy {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ContactPrivacy::Unspecified => "CONTACT_PRIVACY_UNSPECIFIED",
-            ContactPrivacy::PublicContactData => "PUBLIC_CONTACT_DATA",
-            ContactPrivacy::PrivateContactData => "PRIVATE_CONTACT_DATA",
-            ContactPrivacy::RedactedContactData => "REDACTED_CONTACT_DATA",
+            Self::Unspecified => "CONTACT_PRIVACY_UNSPECIFIED",
+            Self::PublicContactData => "PUBLIC_CONTACT_DATA",
+            Self::PrivateContactData => "PRIVATE_CONTACT_DATA",
+            Self::RedactedContactData => "REDACTED_CONTACT_DATA",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1129,8 +1096,8 @@ impl DomainNotice {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            DomainNotice::Unspecified => "DOMAIN_NOTICE_UNSPECIFIED",
-            DomainNotice::HstsPreloaded => "HSTS_PRELOADED",
+            Self::Unspecified => "DOMAIN_NOTICE_UNSPECIFIED",
+            Self::HstsPreloaded => "HSTS_PRELOADED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1159,8 +1126,8 @@ impl ContactNotice {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ContactNotice::Unspecified => "CONTACT_NOTICE_UNSPECIFIED",
-            ContactNotice::PublicContactDataAcknowledgement => {
+            Self::Unspecified => "CONTACT_NOTICE_UNSPECIFIED",
+            Self::PublicContactDataAcknowledgement => {
                 "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
             }
         }
@@ -1194,9 +1161,9 @@ impl TransferLockState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TransferLockState::Unspecified => "TRANSFER_LOCK_STATE_UNSPECIFIED",
-            TransferLockState::Unlocked => "UNLOCKED",
-            TransferLockState::Locked => "LOCKED",
+            Self::Unspecified => "TRANSFER_LOCK_STATE_UNSPECIFIED",
+            Self::Unlocked => "UNLOCKED",
+            Self::Locked => "LOCKED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1211,7 +1178,13 @@ impl TransferLockState {
 }
 /// Generated client implementations.
 pub mod domains_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The Cloud Domains API enables management and configuration of domain names.
@@ -1234,8 +1207,8 @@ pub mod domains_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1260,7 +1233,7 @@ pub mod domains_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DomainsClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1311,8 +1284,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1343,8 +1315,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1386,8 +1357,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1422,8 +1392,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1473,8 +1442,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1504,8 +1472,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1532,8 +1499,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1568,8 +1534,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1599,8 +1564,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1630,8 +1594,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1662,8 +1625,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1701,8 +1663,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1750,8 +1711,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1785,8 +1745,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1819,8 +1778,7 @@ pub mod domains_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

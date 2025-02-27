@@ -19,10 +19,10 @@ impl VolumePerformanceTier {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            VolumePerformanceTier::Unspecified => "VOLUME_PERFORMANCE_TIER_UNSPECIFIED",
-            VolumePerformanceTier::Shared => "VOLUME_PERFORMANCE_TIER_SHARED",
-            VolumePerformanceTier::Assigned => "VOLUME_PERFORMANCE_TIER_ASSIGNED",
-            VolumePerformanceTier::Ht => "VOLUME_PERFORMANCE_TIER_HT",
+            Self::Unspecified => "VOLUME_PERFORMANCE_TIER_UNSPECIFIED",
+            Self::Shared => "VOLUME_PERFORMANCE_TIER_SHARED",
+            Self::Assigned => "VOLUME_PERFORMANCE_TIER_ASSIGNED",
+            Self::Ht => "VOLUME_PERFORMANCE_TIER_HT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -54,9 +54,9 @@ impl WorkloadProfile {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            WorkloadProfile::Unspecified => "WORKLOAD_PROFILE_UNSPECIFIED",
-            WorkloadProfile::Generic => "WORKLOAD_PROFILE_GENERIC",
-            WorkloadProfile::Hana => "WORKLOAD_PROFILE_HANA",
+            Self::Unspecified => "WORKLOAD_PROFILE_UNSPECIFIED",
+            Self::Generic => "WORKLOAD_PROFILE_GENERIC",
+            Self::Hana => "WORKLOAD_PROFILE_HANA",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -70,7 +70,6 @@ impl WorkloadProfile {
     }
 }
 /// A storage volume logical unit number (LUN).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Lun {
     /// Output only. The name of the LUN.
@@ -148,12 +147,12 @@ pub mod lun {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Updating => "UPDATING",
-                State::Ready => "READY",
-                State::Deleting => "DELETING",
-                State::CoolOff => "COOL_OFF",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Updating => "UPDATING",
+                Self::Ready => "READY",
+                Self::Deleting => "DELETING",
+                Self::CoolOff => "COOL_OFF",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -195,8 +194,8 @@ pub mod lun {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MultiprotocolType::Unspecified => "MULTIPROTOCOL_TYPE_UNSPECIFIED",
-                MultiprotocolType::Linux => "LINUX",
+                Self::Unspecified => "MULTIPROTOCOL_TYPE_UNSPECIFIED",
+                Self::Linux => "LINUX",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -236,9 +235,9 @@ pub mod lun {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StorageType::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
-                StorageType::Ssd => "SSD",
-                StorageType::Hdd => "HDD",
+                Self::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
+                Self::Ssd => "SSD",
+                Self::Hdd => "HDD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -253,7 +252,6 @@ pub mod lun {
     }
 }
 /// Message for requesting storage lun information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetLunRequest {
     /// Required. Name of the resource.
@@ -261,7 +259,6 @@ pub struct GetLunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting a list of storage volume luns.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLunsRequest {
     /// Required. Parent value for ListLunsRequest.
@@ -276,7 +273,6 @@ pub struct ListLunsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message containing the list of storage volume luns.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLunsResponse {
     /// The list of luns.
@@ -290,7 +286,6 @@ pub struct ListLunsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request for skip lun cooloff and delete it.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvictLunRequest {
     /// Required. The name of the lun.
@@ -298,7 +293,6 @@ pub struct EvictLunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A Network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Network {
     /// Output only. The resource name of this `Network`.
@@ -389,9 +383,9 @@ pub mod network {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Client => "CLIENT",
-                Type::Private => "PRIVATE",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Client => "CLIENT",
+                Self::Private => "PRIVATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -436,11 +430,11 @@ pub mod network {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Provisioning => "PROVISIONING",
-                State::Provisioned => "PROVISIONED",
-                State::Deprovisioning => "DEPROVISIONING",
-                State::Updating => "UPDATING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Provisioning => "PROVISIONING",
+                Self::Provisioned => "PROVISIONED",
+                Self::Deprovisioning => "DEPROVISIONING",
+                Self::Updating => "UPDATING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -457,7 +451,6 @@ pub mod network {
     }
 }
 /// A reservation of one or more addresses in a network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkAddressReservation {
     /// The first address of this reservation block.
@@ -475,7 +468,6 @@ pub struct NetworkAddressReservation {
     pub note: ::prost::alloc::string::String,
 }
 /// A network VRF.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Vrf {
     /// The name of the VRF.
@@ -497,7 +489,6 @@ pub struct Vrf {
 /// Nested message and enum types in `VRF`.
 pub mod vrf {
     /// QOS policy parameters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct QosPolicy {
         /// The bandwidth permitted by the QOS policy, in gbps.
@@ -505,7 +496,6 @@ pub mod vrf {
         pub bandwidth_gbps: f64,
     }
     /// VLAN attachment details.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct VlanAttachment {
         /// The peer vlan ID of the attachment.
@@ -560,9 +550,9 @@ pub mod vrf {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Provisioning => "PROVISIONING",
-                State::Provisioned => "PROVISIONED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Provisioning => "PROVISIONING",
+                Self::Provisioned => "PROVISIONED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -580,7 +570,6 @@ pub mod vrf {
 /// physical interface (for eg. bond, nic) of the instance. Each logical
 /// interface can effectively map to multiple network-IP pairs and still be
 /// mapped to one underlying physical interface.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LogicalInterface {
     /// List of logical network interfaces within a logical interface.
@@ -601,7 +590,6 @@ pub struct LogicalInterface {
 /// Nested message and enum types in `LogicalInterface`.
 pub mod logical_interface {
     /// Each logical network interface is effectively a network and IP pair.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LogicalNetworkInterface {
         /// Name of the network
@@ -623,7 +611,6 @@ pub mod logical_interface {
     }
 }
 /// Message for requesting network information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNetworkRequest {
     /// Required. Name of the resource.
@@ -631,7 +618,6 @@ pub struct GetNetworkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting a list of networks.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNetworksRequest {
     /// Required. Parent value for ListNetworksRequest.
@@ -649,7 +635,6 @@ pub struct ListNetworksRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message containing the list of networks.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNetworksResponse {
     /// The list of networks.
@@ -663,7 +648,6 @@ pub struct ListNetworksResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message requesting to updating a network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateNetworkRequest {
     /// Required. The network to update.
@@ -679,7 +663,6 @@ pub struct UpdateNetworkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Network with all used IP addresses.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkUsage {
     /// Network.
@@ -690,7 +673,6 @@ pub struct NetworkUsage {
     pub used_ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request to get networks with IPs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNetworkUsageRequest {
     /// Required. Parent value (project and location).
@@ -698,7 +680,6 @@ pub struct ListNetworkUsageRequest {
     pub location: ::prost::alloc::string::String,
 }
 /// Response with Networks with IPs
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNetworkUsageResponse {
     /// Networks with IPs.
@@ -706,7 +687,6 @@ pub struct ListNetworkUsageResponse {
     pub networks: ::prost::alloc::vec::Vec<NetworkUsage>,
 }
 /// Mount point for a network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkMountPoint {
     /// Instance to attach network to.
@@ -723,7 +703,6 @@ pub struct NetworkMountPoint {
     pub ip_address: ::prost::alloc::string::String,
 }
 /// Message requesting rename of a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameNetworkRequest {
     /// Required. The `name` field is used to identify the network.
@@ -735,7 +714,6 @@ pub struct RenameNetworkRequest {
     pub new_network_id: ::prost::alloc::string::String,
 }
 /// A storage volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Volume {
     /// Output only. The resource name of this `Volume`.
@@ -835,7 +813,6 @@ pub struct Volume {
 /// Nested message and enum types in `Volume`.
 pub mod volume {
     /// Details about snapshot space reservation and usage on the storage volume.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SnapshotReservationDetail {
         /// The space on this storage volume reserved for snapshots, shown in GiB.
@@ -887,9 +864,9 @@ pub mod volume {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StorageType::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
-                StorageType::Ssd => "SSD",
-                StorageType::Hdd => "HDD",
+                Self::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
+                Self::Ssd => "SSD",
+                Self::Hdd => "HDD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -937,12 +914,12 @@ pub mod volume {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Ready => "READY",
-                State::Deleting => "DELETING",
-                State::Updating => "UPDATING",
-                State::CoolOff => "COOL_OFF",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Ready => "READY",
+                Self::Deleting => "DELETING",
+                Self::Updating => "UPDATING",
+                Self::CoolOff => "COOL_OFF",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -990,12 +967,10 @@ pub mod volume {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SnapshotAutoDeleteBehavior::Unspecified => {
-                    "SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED"
-                }
-                SnapshotAutoDeleteBehavior::Disabled => "DISABLED",
-                SnapshotAutoDeleteBehavior::OldestFirst => "OLDEST_FIRST",
-                SnapshotAutoDeleteBehavior::NewestFirst => "NEWEST_FIRST",
+                Self::Unspecified => "SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED",
+                Self::Disabled => "DISABLED",
+                Self::OldestFirst => "OLDEST_FIRST",
+                Self::NewestFirst => "NEWEST_FIRST",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1038,9 +1013,9 @@ pub mod volume {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Protocol::Unspecified => "PROTOCOL_UNSPECIFIED",
-                Protocol::FibreChannel => "FIBRE_CHANNEL",
-                Protocol::Nfs => "NFS",
+                Self::Unspecified => "PROTOCOL_UNSPECIFIED",
+                Self::FibreChannel => "FIBRE_CHANNEL",
+                Self::Nfs => "NFS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1081,9 +1056,9 @@ pub mod volume {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                WorkloadProfile::Unspecified => "WORKLOAD_PROFILE_UNSPECIFIED",
-                WorkloadProfile::Generic => "GENERIC",
-                WorkloadProfile::Hana => "HANA",
+                Self::Unspecified => "WORKLOAD_PROFILE_UNSPECIFIED",
+                Self::Generic => "GENERIC",
+                Self::Hana => "HANA",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1098,7 +1073,6 @@ pub mod volume {
     }
 }
 /// Message for requesting storage volume information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVolumeRequest {
     /// Required. Name of the resource.
@@ -1106,7 +1080,6 @@ pub struct GetVolumeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting a list of storage volumes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVolumesRequest {
     /// Required. Parent value for ListVolumesRequest.
@@ -1124,7 +1097,6 @@ pub struct ListVolumesRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message containing the list of storage volumes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVolumesResponse {
     /// The list of storage volumes.
@@ -1138,7 +1110,6 @@ pub struct ListVolumesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for updating a volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateVolumeRequest {
     /// Required. The volume to update.
@@ -1154,7 +1125,6 @@ pub struct UpdateVolumeRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Message requesting rename of a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameVolumeRequest {
     /// Required. The `name` field is used to identify the volume.
@@ -1166,7 +1136,6 @@ pub struct RenameVolumeRequest {
     pub new_volume_id: ::prost::alloc::string::String,
 }
 /// Request for skip volume cooloff and delete it.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EvictVolumeRequest {
     /// Required. The name of the Volume.
@@ -1174,7 +1143,6 @@ pub struct EvictVolumeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for emergency resize Volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResizeVolumeRequest {
     /// Required. Volume to resize.
@@ -1185,7 +1153,6 @@ pub struct ResizeVolumeRequest {
     pub size_gib: i64,
 }
 /// A server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Instance {
     /// Immutable. The resource name of this `Instance`.
@@ -1309,14 +1276,14 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Provisioning => "PROVISIONING",
-                State::Running => "RUNNING",
-                State::Deleted => "DELETED",
-                State::Updating => "UPDATING",
-                State::Starting => "STARTING",
-                State::Stopping => "STOPPING",
-                State::Shutdown => "SHUTDOWN",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Provisioning => "PROVISIONING",
+                Self::Running => "RUNNING",
+                Self::Deleted => "DELETED",
+                Self::Updating => "UPDATING",
+                Self::Starting => "STARTING",
+                Self::Stopping => "STOPPING",
+                Self::Shutdown => "SHUTDOWN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1336,7 +1303,6 @@ pub mod instance {
     }
 }
 /// Message for requesting server information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInstanceRequest {
     /// Required. Name of the resource.
@@ -1344,7 +1310,6 @@ pub struct GetInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting the list of servers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesRequest {
     /// Required. Parent value for ListInstancesRequest.
@@ -1362,7 +1327,6 @@ pub struct ListInstancesRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message for the list of servers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesResponse {
     /// The list of servers.
@@ -1376,7 +1340,6 @@ pub struct ListInstancesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message requesting to updating a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInstanceRequest {
     /// Required. The server to update.
@@ -1394,7 +1357,6 @@ pub struct UpdateInstanceRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Message requesting rename of a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameInstanceRequest {
     /// Required. The `name` field is used to identify the instance.
@@ -1406,7 +1368,6 @@ pub struct RenameInstanceRequest {
     pub new_instance_id: ::prost::alloc::string::String,
 }
 /// Message requesting to reset a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetInstanceRequest {
     /// Required. Name of the resource.
@@ -1414,7 +1375,6 @@ pub struct ResetInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message requesting to start a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartInstanceRequest {
     /// Required. Name of the resource.
@@ -1422,11 +1382,9 @@ pub struct StartInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message from starting a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StartInstanceResponse {}
 /// Message requesting to stop a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopInstanceRequest {
     /// Required. Name of the resource.
@@ -1434,11 +1392,9 @@ pub struct StopInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Response message from stopping a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StopInstanceResponse {}
 /// Message for enabling the interactive serial console on an instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableInteractiveSerialConsoleRequest {
     /// Required. Name of the resource.
@@ -1446,11 +1402,9 @@ pub struct EnableInteractiveSerialConsoleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for response of EnableInteractiveSerialConsole.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct EnableInteractiveSerialConsoleResponse {}
 /// Message for disabling the interactive serial console on an instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableInteractiveSerialConsoleRequest {
     /// Required. Name of the resource.
@@ -1458,11 +1412,9 @@ pub struct DisableInteractiveSerialConsoleRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for response of DisableInteractiveSerialConsole.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DisableInteractiveSerialConsoleResponse {}
 /// Message for detach specific LUN from an Instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DetachLunRequest {
     /// Required. Name of the instance.
@@ -1476,7 +1428,6 @@ pub struct DetachLunRequest {
     pub skip_reboot: bool,
 }
 /// Network template.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ServerNetworkTemplate {
     /// Output only. Template's unique name. The full resource name follows the
@@ -1500,7 +1451,6 @@ pub struct ServerNetworkTemplate {
 /// Nested message and enum types in `ServerNetworkTemplate`.
 pub mod server_network_template {
     /// Logical interface.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LogicalInterface {
         /// Interface name.
@@ -1547,9 +1497,9 @@ pub mod server_network_template {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    InterfaceType::Unspecified => "INTERFACE_TYPE_UNSPECIFIED",
-                    InterfaceType::Bond => "BOND",
-                    InterfaceType::Nic => "NIC",
+                    Self::Unspecified => "INTERFACE_TYPE_UNSPECIFIED",
+                    Self::Bond => "BOND",
+                    Self::Nic => "NIC",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1565,7 +1515,6 @@ pub mod server_network_template {
     }
 }
 /// An NFS share.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NfsShare {
     /// Immutable. The name of the NFS share.
@@ -1605,7 +1554,6 @@ pub struct NfsShare {
 /// Nested message and enum types in `NfsShare`.
 pub mod nfs_share {
     /// Represents an 'access point' for the share.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AllowedClient {
         /// The network the access point sits on.
@@ -1670,11 +1618,11 @@ pub mod nfs_share {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Provisioned => "PROVISIONED",
-                State::Creating => "CREATING",
-                State::Updating => "UPDATING",
-                State::Deleting => "DELETING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Provisioned => "PROVISIONED",
+                Self::Creating => "CREATING",
+                Self::Updating => "UPDATING",
+                Self::Deleting => "DELETING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1717,9 +1665,9 @@ pub mod nfs_share {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MountPermissions::Unspecified => "MOUNT_PERMISSIONS_UNSPECIFIED",
-                MountPermissions::Read => "READ",
-                MountPermissions::ReadWrite => "READ_WRITE",
+                Self::Unspecified => "MOUNT_PERMISSIONS_UNSPECIFIED",
+                Self::Read => "READ",
+                Self::ReadWrite => "READ_WRITE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1760,9 +1708,9 @@ pub mod nfs_share {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                StorageType::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
-                StorageType::Ssd => "SSD",
-                StorageType::Hdd => "HDD",
+                Self::Unspecified => "STORAGE_TYPE_UNSPECIFIED",
+                Self::Ssd => "SSD",
+                Self::Hdd => "HDD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1777,7 +1725,6 @@ pub mod nfs_share {
     }
 }
 /// Message for requesting NFS share information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNfsShareRequest {
     /// Required. Name of the resource.
@@ -1785,7 +1732,6 @@ pub struct GetNfsShareRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting a list of NFS shares.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNfsSharesRequest {
     /// Required. Parent value for ListNfsSharesRequest.
@@ -1803,7 +1749,6 @@ pub struct ListNfsSharesRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response message containing the list of NFS shares.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNfsSharesResponse {
     /// The list of NFS shares.
@@ -1817,7 +1762,6 @@ pub struct ListNfsSharesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message requesting to updating an NFS share.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateNfsShareRequest {
     /// Required. The NFS share to update.
@@ -1834,7 +1778,6 @@ pub struct UpdateNfsShareRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Message requesting rename of a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameNfsShareRequest {
     /// Required. The `name` field is used to identify the nfsshare.
@@ -1846,7 +1789,6 @@ pub struct RenameNfsShareRequest {
     pub new_nfsshare_id: ::prost::alloc::string::String,
 }
 /// Message for creating an NFS share.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateNfsShareRequest {
     /// Required. The parent project and location.
@@ -1857,7 +1799,6 @@ pub struct CreateNfsShareRequest {
     pub nfs_share: ::core::option::Option<NfsShare>,
 }
 /// Message for deleting an NFS share.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteNfsShareRequest {
     /// Required. The name of the NFS share to delete.
@@ -1865,7 +1806,6 @@ pub struct DeleteNfsShareRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Operation System image.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OsImage {
     /// Output only. OS Image's unique name.
@@ -1891,7 +1831,6 @@ pub struct OsImage {
     >,
 }
 /// Request for getting all available OS images.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOsImagesRequest {
     /// Required. Parent value for ListProvisioningQuotasRequest.
@@ -1908,7 +1847,6 @@ pub struct ListOsImagesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Request for getting all available OS images.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOsImagesResponse {
     /// The OS images available.
@@ -1920,7 +1858,6 @@ pub struct ListOsImagesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// A provisioning configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisioningConfig {
     /// Output only. The system-generated name of the provisioning config. This
@@ -2014,14 +1951,14 @@ pub mod provisioning_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Draft => "DRAFT",
-                State::Submitted => "SUBMITTED",
-                State::Provisioning => "PROVISIONING",
-                State::Provisioned => "PROVISIONED",
-                State::Validated => "VALIDATED",
-                State::Cancelled => "CANCELLED",
-                State::Failed => "FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Draft => "DRAFT",
+                Self::Submitted => "SUBMITTED",
+                Self::Provisioning => "PROVISIONING",
+                Self::Provisioned => "PROVISIONED",
+                Self::Validated => "VALIDATED",
+                Self::Cancelled => "CANCELLED",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2041,7 +1978,6 @@ pub mod provisioning_config {
     }
 }
 /// Request for SubmitProvisioningConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubmitProvisioningConfigRequest {
     /// Required. The parent project and location containing the
@@ -2057,7 +1993,6 @@ pub struct SubmitProvisioningConfigRequest {
     pub email: ::prost::alloc::string::String,
 }
 /// Response for SubmitProvisioningConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubmitProvisioningConfigResponse {
     /// The submitted provisioning config.
@@ -2065,7 +2000,6 @@ pub struct SubmitProvisioningConfigResponse {
     pub provisioning_config: ::core::option::Option<ProvisioningConfig>,
 }
 /// A provisioning quota for a given project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProvisioningQuota {
     /// Output only. The name of the provisioning quota.
@@ -2122,10 +2056,10 @@ pub mod provisioning_quota {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AssetType::Unspecified => "ASSET_TYPE_UNSPECIFIED",
-                AssetType::Server => "ASSET_TYPE_SERVER",
-                AssetType::Storage => "ASSET_TYPE_STORAGE",
-                AssetType::Network => "ASSET_TYPE_NETWORK",
+                Self::Unspecified => "ASSET_TYPE_UNSPECIFIED",
+                Self::Server => "ASSET_TYPE_SERVER",
+                Self::Storage => "ASSET_TYPE_STORAGE",
+                Self::Network => "ASSET_TYPE_NETWORK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2140,7 +2074,6 @@ pub mod provisioning_quota {
         }
     }
     /// The quota of one asset type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Quota {
         /// Instance quota.
@@ -2148,7 +2081,6 @@ pub mod provisioning_quota {
         InstanceQuota(super::InstanceQuota),
     }
     /// Available quantity based on asset type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Availability {
         /// Server count.
@@ -2163,7 +2095,6 @@ pub mod provisioning_quota {
     }
 }
 /// Message for requesting the list of provisioning quotas.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProvisioningQuotasRequest {
     /// Required. Parent value for ListProvisioningQuotasRequest.
@@ -2180,7 +2111,6 @@ pub struct ListProvisioningQuotasRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the list of provisioning quotas.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListProvisioningQuotasResponse {
     /// The provisioning quotas registered in this project.
@@ -2192,7 +2122,6 @@ pub struct ListProvisioningQuotasResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Configuration parameters for a new instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceConfig {
     /// Output only. The name of the instance config.
@@ -2250,7 +2179,6 @@ pub struct InstanceConfig {
 /// Nested message and enum types in `InstanceConfig`.
 pub mod instance_config {
     /// A network.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NetworkAddress {
         /// Id of the network to use, within the same ProvisioningConfig request.
@@ -2292,9 +2220,9 @@ pub mod instance_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NetworkConfig::NetworkconfigUnspecified => "NETWORKCONFIG_UNSPECIFIED",
-                NetworkConfig::SingleVlan => "SINGLE_VLAN",
-                NetworkConfig::MultiVlan => "MULTI_VLAN",
+                Self::NetworkconfigUnspecified => "NETWORKCONFIG_UNSPECIFIED",
+                Self::SingleVlan => "SINGLE_VLAN",
+                Self::MultiVlan => "MULTI_VLAN",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2309,7 +2237,6 @@ pub mod instance_config {
     }
 }
 /// Configuration parameters for a new volume.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeConfig {
     /// Output only. The name of the volume config.
@@ -2357,7 +2284,6 @@ pub struct VolumeConfig {
 /// Nested message and enum types in `VolumeConfig`.
 pub mod volume_config {
     /// A LUN(Logical Unit Number) range.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct LunRange {
         /// Number of LUNs to create.
@@ -2368,7 +2294,6 @@ pub mod volume_config {
         pub size_gb: i32,
     }
     /// A NFS export entry.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NfsExport {
         /// Network to use to publish the export.
@@ -2422,9 +2347,9 @@ pub mod volume_config {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    Permissions::Unspecified => "PERMISSIONS_UNSPECIFIED",
-                    Permissions::ReadOnly => "READ_ONLY",
-                    Permissions::ReadWrite => "READ_WRITE",
+                    Self::Unspecified => "PERMISSIONS_UNSPECIFIED",
+                    Self::ReadOnly => "READ_ONLY",
+                    Self::ReadWrite => "READ_WRITE",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2438,7 +2363,6 @@ pub mod volume_config {
             }
         }
         /// A client object.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Client {
             /// Either a single machine, identified by an ID, or a comma-separated
@@ -2478,9 +2402,9 @@ pub mod volume_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Flash => "FLASH",
-                Type::Disk => "DISK",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Flash => "FLASH",
+                Self::Disk => "DISK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2521,9 +2445,9 @@ pub mod volume_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Protocol::Unspecified => "PROTOCOL_UNSPECIFIED",
-                Protocol::Fc => "PROTOCOL_FC",
-                Protocol::Nfs => "PROTOCOL_NFS",
+                Self::Unspecified => "PROTOCOL_UNSPECIFIED",
+                Self::Fc => "PROTOCOL_FC",
+                Self::Nfs => "PROTOCOL_NFS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2538,7 +2462,6 @@ pub mod volume_config {
     }
 }
 /// Configuration parameters for a new network.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkConfig {
     /// Output only. The name of the network config.
@@ -2582,7 +2505,6 @@ pub struct NetworkConfig {
 /// Nested message and enum types in `NetworkConfig`.
 pub mod network_config {
     /// A GCP vlan attachment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IntakeVlanAttachment {
         /// Identifier of the VLAN attachment.
@@ -2620,9 +2542,9 @@ pub mod network_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Client => "CLIENT",
-                Type::Private => "PRIVATE",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Client => "CLIENT",
+                Self::Private => "PRIVATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2667,11 +2589,11 @@ pub mod network_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Bandwidth::Unspecified => "BANDWIDTH_UNSPECIFIED",
-                Bandwidth::Bw1Gbps => "BW_1_GBPS",
-                Bandwidth::Bw2Gbps => "BW_2_GBPS",
-                Bandwidth::Bw5Gbps => "BW_5_GBPS",
-                Bandwidth::Bw10Gbps => "BW_10_GBPS",
+                Self::Unspecified => "BANDWIDTH_UNSPECIFIED",
+                Self::Bw1Gbps => "BW_1_GBPS",
+                Self::Bw2Gbps => "BW_2_GBPS",
+                Self::Bw5Gbps => "BW_5_GBPS",
+                Self::Bw10Gbps => "BW_10_GBPS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2718,11 +2640,11 @@ pub mod network_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ServiceCidr::Unspecified => "SERVICE_CIDR_UNSPECIFIED",
-                ServiceCidr::Disabled => "DISABLED",
-                ServiceCidr::High26 => "HIGH_26",
-                ServiceCidr::High27 => "HIGH_27",
-                ServiceCidr::High28 => "HIGH_28",
+                Self::Unspecified => "SERVICE_CIDR_UNSPECIFIED",
+                Self::Disabled => "DISABLED",
+                Self::High26 => "HIGH_26",
+                Self::High27 => "HIGH_27",
+                Self::High28 => "HIGH_28",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2739,7 +2661,6 @@ pub mod network_config {
     }
 }
 /// A resource budget.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceQuota {
     /// Output only. The name of the instance quota.
@@ -2762,7 +2683,6 @@ pub struct InstanceQuota {
     pub available_machine_count: i32,
 }
 /// Request for GetProvisioningConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProvisioningConfigRequest {
     /// Required. Name of the ProvisioningConfig.
@@ -2770,7 +2690,6 @@ pub struct GetProvisioningConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for CreateProvisioningConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateProvisioningConfigRequest {
     /// Required. The parent project and location containing the
@@ -2786,7 +2705,6 @@ pub struct CreateProvisioningConfigRequest {
     pub email: ::prost::alloc::string::String,
 }
 /// Message for updating a ProvisioningConfig.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateProvisioningConfigRequest {
     /// Required. The ProvisioningConfig to update.
@@ -2801,7 +2719,6 @@ pub struct UpdateProvisioningConfigRequest {
     pub email: ::prost::alloc::string::String,
 }
 /// An SSH key, used for authorizing with the interactive serial console feature.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SshKey {
     /// Output only. The name of this SSH key.
@@ -2813,7 +2730,6 @@ pub struct SshKey {
     pub public_key: ::prost::alloc::string::String,
 }
 /// Message for listing the public SSH keys in a project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSshKeysRequest {
     /// Required. The parent containing the SSH keys.
@@ -2828,7 +2744,6 @@ pub struct ListSshKeysRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Message for response of ListSSHKeys.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListSshKeysResponse {
     /// The SSH keys registered in the project.
@@ -2840,7 +2755,6 @@ pub struct ListSshKeysResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Message for registering a public SSH key in a project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSshKeyRequest {
     /// Required. The parent containing the SSH keys.
@@ -2858,7 +2772,6 @@ pub struct CreateSshKeyRequest {
     pub ssh_key_id: ::prost::alloc::string::String,
 }
 /// Message for deleting an SSH key from a project.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSshKeyRequest {
     /// Required. The name of the SSH key to delete.
@@ -2867,7 +2780,6 @@ pub struct DeleteSshKeyRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// A snapshot of a volume. Only boot volumes can have snapshots.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VolumeSnapshot {
     /// The name of the snapshot.
@@ -2920,9 +2832,9 @@ pub mod volume_snapshot {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SnapshotType::Unspecified => "SNAPSHOT_TYPE_UNSPECIFIED",
-                SnapshotType::AdHoc => "AD_HOC",
-                SnapshotType::Scheduled => "SCHEDULED",
+                Self::Unspecified => "SNAPSHOT_TYPE_UNSPECIFIED",
+                Self::AdHoc => "AD_HOC",
+                Self::Scheduled => "SCHEDULED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2937,7 +2849,6 @@ pub mod volume_snapshot {
     }
 }
 /// Message for requesting volume snapshot information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetVolumeSnapshotRequest {
     /// Required. The name of the snapshot.
@@ -2945,7 +2856,6 @@ pub struct GetVolumeSnapshotRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for requesting a list of volume snapshots.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVolumeSnapshotsRequest {
     /// Required. Parent value for ListVolumesRequest.
@@ -2960,7 +2870,6 @@ pub struct ListVolumeSnapshotsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message containing the list of volume snapshots.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListVolumeSnapshotsResponse {
     /// The list of snapshots.
@@ -2974,7 +2883,6 @@ pub struct ListVolumeSnapshotsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Message for deleting named Volume snapshot.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteVolumeSnapshotRequest {
     /// Required. The name of the snapshot to delete.
@@ -2982,7 +2890,6 @@ pub struct DeleteVolumeSnapshotRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Message for creating a volume snapshot.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateVolumeSnapshotRequest {
     /// Required. The volume to snapshot.
@@ -2993,7 +2900,6 @@ pub struct CreateVolumeSnapshotRequest {
     pub volume_snapshot: ::core::option::Option<VolumeSnapshot>,
 }
 /// Message for restoring a volume snapshot.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestoreVolumeSnapshotRequest {
     /// Required. Name of the snapshot which will be used to restore its parent
@@ -3002,7 +2908,6 @@ pub struct RestoreVolumeSnapshotRequest {
     pub volume_snapshot: ::prost::alloc::string::String,
 }
 /// Represents the metadata from a long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -3032,12 +2937,17 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Response message from resetting a server.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ResetInstanceResponse {}
 /// Generated client implementations.
 pub mod bare_metal_solution_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Performs management operations on Bare Metal Solution servers.
@@ -3067,8 +2977,8 @@ pub mod bare_metal_solution_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3093,7 +3003,7 @@ pub mod bare_metal_solution_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             BareMetalSolutionClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3140,8 +3050,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3168,8 +3077,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3199,8 +3107,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3228,8 +3135,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3260,8 +3166,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3291,8 +3196,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3322,8 +3226,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3355,8 +3258,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3388,8 +3290,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3419,8 +3320,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3451,8 +3351,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3480,8 +3379,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3508,8 +3406,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3539,8 +3436,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3567,8 +3463,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3598,8 +3493,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3627,8 +3521,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3659,8 +3552,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3690,8 +3582,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3721,8 +3612,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3753,8 +3643,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3781,8 +3670,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3812,8 +3700,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3841,8 +3728,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3873,8 +3759,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3902,8 +3787,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3931,8 +3815,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3964,8 +3847,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3992,8 +3874,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4023,8 +3904,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4055,8 +3935,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4083,8 +3962,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4114,8 +3992,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4145,8 +4022,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4176,8 +4052,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4205,8 +4080,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4236,8 +4110,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4267,8 +4140,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4298,8 +4170,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4329,8 +4200,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4360,8 +4230,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4391,8 +4260,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4420,8 +4288,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4451,8 +4318,7 @@ pub mod bare_metal_solution_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

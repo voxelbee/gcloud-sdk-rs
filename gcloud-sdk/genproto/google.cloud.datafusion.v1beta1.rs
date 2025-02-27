@@ -5,7 +5,6 @@
 /// these configurations allows several benefits, such as reduced network latency
 /// while accessing the customer resources from managed Data Fusion instance
 /// nodes, as well as access to the customer on-prem resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkConfig {
     /// Name of the network in the customer project with which the Tenant Project
@@ -21,7 +20,6 @@ pub struct NetworkConfig {
     pub ip_allocation: ::prost::alloc::string::String,
 }
 /// The Data Fusion version.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Version {
     /// The version number of the Data Fusion instance, such as '6.0.1.0'.
@@ -67,9 +65,9 @@ pub mod version {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Preview => "TYPE_PREVIEW",
-                Type::GeneralAvailability => "TYPE_GENERAL_AVAILABILITY",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Preview => "TYPE_PREVIEW",
+                Self::GeneralAvailability => "TYPE_GENERAL_AVAILABILITY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -84,7 +82,6 @@ pub mod version {
     }
 }
 /// Identifies Data Fusion accelerators for an instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Accelerator {
     /// The type of an accelator for a CDF instance.
@@ -123,9 +120,9 @@ pub mod accelerator {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AcceleratorType::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
-                AcceleratorType::Cdc => "CDC",
-                AcceleratorType::Healthcare => "HEALTHCARE",
+                Self::Unspecified => "ACCELERATOR_TYPE_UNSPECIFIED",
+                Self::Cdc => "CDC",
+                Self::Healthcare => "HEALTHCARE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -141,7 +138,6 @@ pub mod accelerator {
 }
 /// The crypto key configuration. This field is used by the Customer-managed
 /// encryption keys (CMEK) feature.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CryptoKeyConfig {
     /// The name of the key which is used to encrypt/decrypt customer data. For key
@@ -151,7 +147,6 @@ pub struct CryptoKeyConfig {
     pub key_reference: ::prost::alloc::string::String,
 }
 /// Represents a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Instance {
     /// Output only. The name of this instance is in the form of
@@ -307,10 +302,10 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::Basic => "BASIC",
-                Type::Enterprise => "ENTERPRISE",
-                Type::Developer => "DEVELOPER",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::Basic => "BASIC",
+                Self::Enterprise => "ENTERPRISE",
+                Self::Developer => "DEVELOPER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -368,17 +363,17 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Running => "RUNNING",
-                State::Failed => "FAILED",
-                State::Deleting => "DELETING",
-                State::Upgrading => "UPGRADING",
-                State::Restarting => "RESTARTING",
-                State::Updating => "UPDATING",
-                State::AutoUpdating => "AUTO_UPDATING",
-                State::AutoUpgrading => "AUTO_UPGRADING",
-                State::Disabled => "DISABLED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Running => "RUNNING",
+                Self::Failed => "FAILED",
+                Self::Deleting => "DELETING",
+                Self::Upgrading => "UPGRADING",
+                Self::Restarting => "RESTARTING",
+                Self::Updating => "UPDATING",
+                Self::AutoUpdating => "AUTO_UPDATING",
+                Self::AutoUpgrading => "AUTO_UPGRADING",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -425,8 +420,8 @@ pub mod instance {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DisabledReason::Unspecified => "DISABLED_REASON_UNSPECIFIED",
-                DisabledReason::KmsKeyIssue => "KMS_KEY_ISSUE",
+                Self::Unspecified => "DISABLED_REASON_UNSPECIFIED",
+                Self::KmsKeyIssue => "KMS_KEY_ISSUE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -440,7 +435,6 @@ pub mod instance {
     }
 }
 /// Request message for listing Data Fusion instances.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesRequest {
     /// Required. The project and location for which to retrieve instance information
@@ -464,7 +458,6 @@ pub struct ListInstancesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response message for the list instance request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListInstancesResponse {
     /// Represents a list of Data Fusion instances.
@@ -479,7 +472,6 @@ pub struct ListInstancesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request message for the list available versions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsRequest {
     /// Required. The project and location for which to retrieve instance information
@@ -500,7 +492,6 @@ pub struct ListAvailableVersionsRequest {
     pub latest_patch_only: bool,
 }
 /// Response message for the list available versions request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAvailableVersionsResponse {
     /// Represents a list of versions that are supported.
@@ -512,7 +503,6 @@ pub struct ListAvailableVersionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for getting details about a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetInstanceRequest {
     /// Required. The instance resource name in the format
@@ -521,7 +511,6 @@ pub struct GetInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request message for creating a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInstanceRequest {
     /// Required. The instance's project and location in the format
@@ -536,7 +525,6 @@ pub struct CreateInstanceRequest {
     pub instance: ::core::option::Option<Instance>,
 }
 /// Request message for deleting a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteInstanceRequest {
     /// Required. The instance resource name in the format
@@ -547,7 +535,6 @@ pub struct DeleteInstanceRequest {
 /// Request message for updating a Data Fusion instance.
 /// Data Fusion only allows updating the labels, options, and stack driver
 /// settings.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateInstanceRequest {
     /// Required. The instance resource that replaces the resource on the server. Currently,
@@ -565,7 +552,6 @@ pub struct UpdateInstanceRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request message for restarting a Data Fusion instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RestartInstanceRequest {
     /// Required. Name of the Data Fusion instance which need to be restarted in the form of
@@ -575,7 +561,6 @@ pub struct RestartInstanceRequest {
 }
 /// Request message for upgrading a Data Fusion instance.
 /// To change the instance properties, instance update should be used.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpgradeInstanceRequest {
     /// Required. Name of the Data Fusion instance which need to be upgraded in the form of
@@ -586,7 +571,6 @@ pub struct UpgradeInstanceRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Represents the metadata of a long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
@@ -615,7 +599,6 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// Request message for RemoveIamPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveIamPolicyRequest {
     /// Required. The resource on which IAM policy to be removed is attached to.
@@ -623,11 +606,9 @@ pub struct RemoveIamPolicyRequest {
     pub resource: ::prost::alloc::string::String,
 }
 /// Response message for RemoveIamPolicy method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveIamPolicyResponse {}
 /// List namespaces request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesRequest {
     /// Required. The instance to list its namespaces.
@@ -649,7 +630,6 @@ pub struct ListNamespacesRequest {
 }
 /// IAMPolicy encapsulates the IAM policy name, definition and status of
 /// policy fetching.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IamPolicy {
     /// Policy definition if IAM policy fetching is successful,
@@ -661,7 +641,6 @@ pub struct IamPolicy {
     pub status: ::core::option::Option<super::super::super::rpc::Status>,
 }
 /// Represents the information of a namespace
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Namespace {
     /// Name of the given namespace.
@@ -672,7 +651,6 @@ pub struct Namespace {
     pub iam_policy: ::core::option::Option<IamPolicy>,
 }
 /// List namespaces response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListNamespacesResponse {
     /// List of namespaces
@@ -685,7 +663,6 @@ pub struct ListNamespacesResponse {
 }
 /// DNS peering configuration. These configurations are used to create
 /// DNS peering with the customer Cloud DNS.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DnsPeering {
     /// Required. Name of the zone.
@@ -705,7 +682,6 @@ pub struct DnsPeering {
     pub target_network: ::prost::alloc::string::String,
 }
 /// Request message to create dns peering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddDnsPeeringRequest {
     /// Required. The resource on which DNS peering will be created.
@@ -716,11 +692,9 @@ pub struct AddDnsPeeringRequest {
     pub dns_peering: ::core::option::Option<DnsPeering>,
 }
 /// Response message for set dns peering method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddDnsPeeringResponse {}
 /// Request message to remove dns peering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveDnsPeeringRequest {
     /// Required. The resource on which DNS peering will be removed.
@@ -731,11 +705,9 @@ pub struct RemoveDnsPeeringRequest {
     pub zone: ::prost::alloc::string::String,
 }
 /// Response message for set dns peering method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveDnsPeeringResponse {}
 /// List dns peering request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDnsPeeringsRequest {
     /// Required. The resource on which dns peering will be listed.
@@ -750,7 +722,6 @@ pub struct ListDnsPeeringsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// List dns peering response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDnsPeeringsResponse {
     /// List of dns peering configs.
@@ -779,9 +750,9 @@ impl NamespaceView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            NamespaceView::Unspecified => "NAMESPACE_VIEW_UNSPECIFIED",
-            NamespaceView::Basic => "NAMESPACE_VIEW_BASIC",
-            NamespaceView::Full => "NAMESPACE_VIEW_FULL",
+            Self::Unspecified => "NAMESPACE_VIEW_UNSPECIFIED",
+            Self::Basic => "NAMESPACE_VIEW_BASIC",
+            Self::Full => "NAMESPACE_VIEW_FULL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -796,7 +767,13 @@ impl NamespaceView {
 }
 /// Generated client implementations.
 pub mod data_fusion_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service for creating and managing Data Fusion instances.
@@ -821,8 +798,8 @@ pub mod data_fusion_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -847,7 +824,7 @@ pub mod data_fusion_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DataFusionClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -895,8 +872,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -926,8 +902,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -954,8 +929,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -985,8 +959,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1016,8 +989,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1047,8 +1019,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1079,8 +1050,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1111,8 +1081,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1142,8 +1111,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1173,8 +1141,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1204,8 +1171,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1235,8 +1201,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1266,8 +1231,7 @@ pub mod data_fusion_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

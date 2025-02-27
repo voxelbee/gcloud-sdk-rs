@@ -2,7 +2,6 @@
 /// Represents service health events that may affect Google Cloud products.
 /// Event resource is a read-only view and does not allow any modifications. All
 /// fields are output only.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Event {
     /// Output only. Identifier. Name of the event. Unique name of the event in
@@ -85,8 +84,8 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventCategory::Unspecified => "EVENT_CATEGORY_UNSPECIFIED",
-                EventCategory::Incident => "INCIDENT",
+                Self::Unspecified => "EVENT_CATEGORY_UNSPECIFIED",
+                Self::Incident => "INCIDENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -129,9 +128,9 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DetailedCategory::Unspecified => "DETAILED_CATEGORY_UNSPECIFIED",
-                DetailedCategory::ConfirmedIncident => "CONFIRMED_INCIDENT",
-                DetailedCategory::EmergingIncident => "EMERGING_INCIDENT",
+                Self::Unspecified => "DETAILED_CATEGORY_UNSPECIFIED",
+                Self::ConfirmedIncident => "CONFIRMED_INCIDENT",
+                Self::EmergingIncident => "EMERGING_INCIDENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -174,9 +173,9 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
-                State::Closed => "CLOSED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Closed => "CLOSED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -239,13 +238,13 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DetailedState::Unspecified => "DETAILED_STATE_UNSPECIFIED",
-                DetailedState::Emerging => "EMERGING",
-                DetailedState::Confirmed => "CONFIRMED",
-                DetailedState::Resolved => "RESOLVED",
-                DetailedState::Merged => "MERGED",
-                DetailedState::AutoClosed => "AUTO_CLOSED",
-                DetailedState::FalsePositive => "FALSE_POSITIVE",
+                Self::Unspecified => "DETAILED_STATE_UNSPECIFIED",
+                Self::Emerging => "EMERGING",
+                Self::Confirmed => "CONFIRMED",
+                Self::Resolved => "RESOLVED",
+                Self::Merged => "MERGED",
+                Self::AutoClosed => "AUTO_CLOSED",
+                Self::FalsePositive => "FALSE_POSITIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -301,12 +300,12 @@ pub mod event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Relevance::Unspecified => "RELEVANCE_UNSPECIFIED",
-                Relevance::Unknown => "UNKNOWN",
-                Relevance::NotImpacted => "NOT_IMPACTED",
-                Relevance::PartiallyRelated => "PARTIALLY_RELATED",
-                Relevance::Related => "RELATED",
-                Relevance::Impacted => "IMPACTED",
+                Self::Unspecified => "RELEVANCE_UNSPECIFIED",
+                Self::Unknown => "UNKNOWN",
+                Self::NotImpacted => "NOT_IMPACTED",
+                Self::PartiallyRelated => "PARTIALLY_RELATED",
+                Self::Related => "RELATED",
+                Self::Impacted => "IMPACTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -326,7 +325,6 @@ pub mod event {
 /// Represents service health events that may affect Google Cloud products used
 /// across the organization. It is a read-only view and does not allow any
 /// modifications.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrganizationEvent {
     /// Output only. Identifier. Name of the event. Unique name of the event in
@@ -413,8 +411,8 @@ pub mod organization_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                EventCategory::Unspecified => "EVENT_CATEGORY_UNSPECIFIED",
-                EventCategory::Incident => "INCIDENT",
+                Self::Unspecified => "EVENT_CATEGORY_UNSPECIFIED",
+                Self::Incident => "INCIDENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -457,9 +455,9 @@ pub mod organization_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DetailedCategory::Unspecified => "DETAILED_CATEGORY_UNSPECIFIED",
-                DetailedCategory::ConfirmedIncident => "CONFIRMED_INCIDENT",
-                DetailedCategory::EmergingIncident => "EMERGING_INCIDENT",
+                Self::Unspecified => "DETAILED_CATEGORY_UNSPECIFIED",
+                Self::ConfirmedIncident => "CONFIRMED_INCIDENT",
+                Self::EmergingIncident => "EMERGING_INCIDENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -503,9 +501,9 @@ pub mod organization_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
-                State::Closed => "CLOSED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Closed => "CLOSED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -568,13 +566,13 @@ pub mod organization_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DetailedState::Unspecified => "DETAILED_STATE_UNSPECIFIED",
-                DetailedState::Emerging => "EMERGING",
-                DetailedState::Confirmed => "CONFIRMED",
-                DetailedState::Resolved => "RESOLVED",
-                DetailedState::Merged => "MERGED",
-                DetailedState::AutoClosed => "AUTO_CLOSED",
-                DetailedState::FalsePositive => "FALSE_POSITIVE",
+                Self::Unspecified => "DETAILED_STATE_UNSPECIFIED",
+                Self::Emerging => "EMERGING",
+                Self::Confirmed => "CONFIRMED",
+                Self::Resolved => "RESOLVED",
+                Self::Merged => "MERGED",
+                Self::AutoClosed => "AUTO_CLOSED",
+                Self::FalsePositive => "FALSE_POSITIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -593,7 +591,6 @@ pub mod organization_event {
     }
 }
 /// Records an update made to the event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventUpdate {
     /// Output only. The time the update was posted.
@@ -613,7 +610,6 @@ pub struct EventUpdate {
     pub workaround: ::prost::alloc::string::String,
 }
 /// Represents the locations impacted by the event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Location {
     /// Location impacted by the event. Example: `"us-central1"`
@@ -621,15 +617,16 @@ pub struct Location {
     pub location_name: ::prost::alloc::string::String,
 }
 /// Represents the Google Cloud product impacted by the event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Product {
     /// Google Cloud product impacted by the event. Example: `"Google Cloud SQL"`
     #[prost(string, tag = "1")]
     pub product_name: ::prost::alloc::string::String,
+    /// Unique identifier for the product.
+    #[prost(string, tag = "2")]
+    pub id: ::prost::alloc::string::String,
 }
 /// Represents the Google Cloud products and locations impacted by the event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventImpact {
     /// Google Cloud product impacted by the event.
@@ -641,7 +638,6 @@ pub struct EventImpact {
 }
 /// Represents impact to assets at organizational level. It is a read-only view
 /// and does not allow any modifications.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OrganizationImpact {
     /// Output only. Identifier. Unique name of the organization impact in this
@@ -667,7 +663,6 @@ pub struct OrganizationImpact {
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Represents the asset impacted by the events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
     /// Output only. Full name of the resource as defined in
@@ -680,7 +675,7 @@ pub struct Asset {
     #[prost(string, tag = "2")]
     pub asset_type: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Requests list of events.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsRequest {
     /// Required. Parent value using the form
@@ -710,7 +705,8 @@ pub struct ListEventsRequest {
     /// response. The expression takes the following forms: <br>
     /// *   field=value for `category` and `state`<br>
     /// *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-    /// Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+    /// Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+    /// `event_impacts.product.product_name:"Eventarc"`
     /// <br>
     ///
     /// Multiple filter queries are separated by spaces. Example:
@@ -720,14 +716,14 @@ pub struct ListEventsRequest {
     /// AND and OR expressions explicitly.
     ///
     /// Filter is supported for the following fields: `category`, `state`,
-    /// `update_time`
+    /// `update_time`, `event_impacts.product.product_name`
     #[prost(string, tag = "4")]
     pub filter: ::prost::alloc::string::String,
     /// Optional. Event fields to include in response.
     #[prost(enumeration = "EventView", tag = "6")]
     pub view: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Response to request for listing events.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEventsResponse {
     /// Output only. List of events.
@@ -744,8 +740,7 @@ pub struct ListEventsResponse {
     #[prost(string, repeated, tag = "3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// Message for getting an event
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Gets information about a specific event.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEventRequest {
     /// Required. Unique name of the event in this scope including project
@@ -758,7 +753,7 @@ pub struct GetEventRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Requests list of events that affect an organization.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationEventsRequest {
     /// Required. Parent value using the form
@@ -795,7 +790,7 @@ pub struct ListOrganizationEventsRequest {
     /// *   field=value for `category` and `state`
     /// *   field &lt;, >, &lt;=, or >= value for `update_time`
     ///
-    /// Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+    /// Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
     ///
     /// Multiple filter queries are space-separated. Example:
     /// `category=INCIDENT state=ACTIVE`.
@@ -811,7 +806,7 @@ pub struct ListOrganizationEventsRequest {
     #[prost(enumeration = "OrganizationEventView", tag = "6")]
     pub view: i32,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Response to request for listing organization events.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationEventsResponse {
     /// Output only. List of organization events affecting an organization.
@@ -828,7 +823,7 @@ pub struct ListOrganizationEventsResponse {
     #[prost(string, repeated, tag = "3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Gets information about a specific event affecting an organization.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrganizationEventRequest {
     /// Required. Unique name of the event in this scope including organization and
@@ -843,8 +838,7 @@ pub struct GetOrganizationEventRequest {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-/// Message for requesting list of OrganizationImpacts
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Requests list of projects under an organization affected by an event.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationImpactsRequest {
     /// Required. Parent value using the form
@@ -894,7 +888,8 @@ pub struct ListOrganizationImpactsRequest {
     #[prost(string, tag = "4")]
     pub filter: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Response to request for listing projects under an organization affected by an
+/// event.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOrganizationImpactsResponse {
     /// Output only. List of
@@ -913,7 +908,7 @@ pub struct ListOrganizationImpactsResponse {
     #[prost(string, repeated, tag = "3")]
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Gets information about an event that affects a project under an organization.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrganizationImpactRequest {
     /// Required. Name of the resource using the form
@@ -948,9 +943,9 @@ impl EventView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            EventView::Unspecified => "EVENT_VIEW_UNSPECIFIED",
-            EventView::Basic => "EVENT_VIEW_BASIC",
-            EventView::Full => "EVENT_VIEW_FULL",
+            Self::Unspecified => "EVENT_VIEW_UNSPECIFIED",
+            Self::Basic => "EVENT_VIEW_BASIC",
+            Self::Full => "EVENT_VIEW_FULL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -983,9 +978,9 @@ impl OrganizationEventView {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OrganizationEventView::Unspecified => "ORGANIZATION_EVENT_VIEW_UNSPECIFIED",
-            OrganizationEventView::Basic => "ORGANIZATION_EVENT_VIEW_BASIC",
-            OrganizationEventView::Full => "ORGANIZATION_EVENT_VIEW_FULL",
+            Self::Unspecified => "ORGANIZATION_EVENT_VIEW_UNSPECIFIED",
+            Self::Basic => "ORGANIZATION_EVENT_VIEW_BASIC",
+            Self::Full => "ORGANIZATION_EVENT_VIEW_FULL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1000,7 +995,13 @@ impl OrganizationEventView {
 }
 /// Generated client implementations.
 pub mod service_health_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Request service health events relevant to your Google Cloud project.
@@ -1023,8 +1024,8 @@ pub mod service_health_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1049,7 +1050,7 @@ pub mod service_health_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ServiceHealthClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1096,8 +1097,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1124,8 +1124,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1155,8 +1154,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1187,8 +1185,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1219,8 +1216,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1251,8 +1247,7 @@ pub mod service_health_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

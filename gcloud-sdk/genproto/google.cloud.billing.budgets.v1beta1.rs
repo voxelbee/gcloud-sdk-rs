@@ -4,7 +4,6 @@
 /// (for example, send an alert when 90% of the target spend is met).
 /// The budget time period is configurable, with options such as month (default),
 /// quarter, year, or custom time period.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Budget {
     /// Output only. Resource name of the budget.
@@ -43,7 +42,6 @@ pub struct Budget {
     pub etag: ::prost::alloc::string::String,
 }
 /// The budgeted amount for each usage period.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BudgetAmount {
     /// Specification for what amount to use as the budget.
@@ -53,7 +51,6 @@ pub struct BudgetAmount {
 /// Nested message and enum types in `BudgetAmount`.
 pub mod budget_amount {
     /// Specification for what amount to use as the budget.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum BudgetAmount {
         /// A specified amount to use as the budget.
@@ -81,7 +78,6 @@ pub mod budget_amount {
 /// LastPeriodAmount cannot be set for a budget configured with
 /// a
 /// [Filter.custom_period][google.cloud.billing.budgets.v1beta1.Filter.custom_period].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LastPeriodAmount {}
 /// ThresholdRule contains the definition of a threshold. Threshold rules define
@@ -106,7 +102,6 @@ pub struct LastPeriodAmount {}
 /// For more information, see
 /// [set budget threshold rules and
 /// actions](<https://cloud.google.com/billing/docs/how-to/budgets#budget-actions>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ThresholdRule {
     /// Required. Send an alert when this threshold is exceeded.
@@ -154,9 +149,9 @@ pub mod threshold_rule {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Basis::Unspecified => "BASIS_UNSPECIFIED",
-                Basis::CurrentSpend => "CURRENT_SPEND",
-                Basis::ForecastedSpend => "FORECASTED_SPEND",
+                Self::Unspecified => "BASIS_UNSPECIFIED",
+                Self::CurrentSpend => "CURRENT_SPEND",
+                Self::ForecastedSpend => "FORECASTED_SPEND",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -172,7 +167,6 @@ pub mod threshold_rule {
 }
 /// AllUpdatesRule defines notifications that are sent based on budget spend
 /// and thresholds.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllUpdatesRule {
     /// Optional. The name of the Pub/Sub topic where budget related messages will
@@ -225,7 +219,6 @@ pub struct AllUpdatesRule {
     pub enable_project_level_recipients: bool,
 }
 /// A filter for a budget, limiting the scope of the cost to calculate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Filter {
     /// Optional. A set of projects of the form `projects/{project}`,
@@ -334,12 +327,10 @@ pub mod filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                CreditTypesTreatment::Unspecified => "CREDIT_TYPES_TREATMENT_UNSPECIFIED",
-                CreditTypesTreatment::IncludeAllCredits => "INCLUDE_ALL_CREDITS",
-                CreditTypesTreatment::ExcludeAllCredits => "EXCLUDE_ALL_CREDITS",
-                CreditTypesTreatment::IncludeSpecifiedCredits => {
-                    "INCLUDE_SPECIFIED_CREDITS"
-                }
+                Self::Unspecified => "CREDIT_TYPES_TREATMENT_UNSPECIFIED",
+                Self::IncludeAllCredits => "INCLUDE_ALL_CREDITS",
+                Self::ExcludeAllCredits => "EXCLUDE_ALL_CREDITS",
+                Self::IncludeSpecifiedCredits => "INCLUDE_SPECIFIED_CREDITS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -356,7 +347,6 @@ pub mod filter {
     /// Multiple options to choose the budget's time period, specifying that only
     /// usage that occurs during this time period should be included in the budget.
     /// If not set, the <code>usage_period</code> defaults to CalendarPeriod.MONTH.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum UsagePeriod {
         /// Optional. Specifies to track usage for recurring calendar period.
@@ -374,7 +364,6 @@ pub mod filter {
     }
 }
 /// All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CustomPeriod {
     /// Required. The start date must be after January 1, 2017.
@@ -412,10 +401,10 @@ impl CalendarPeriod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CalendarPeriod::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
-            CalendarPeriod::Month => "MONTH",
-            CalendarPeriod::Quarter => "QUARTER",
-            CalendarPeriod::Year => "YEAR",
+            Self::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
+            Self::Month => "MONTH",
+            Self::Quarter => "QUARTER",
+            Self::Year => "YEAR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -430,7 +419,6 @@ impl CalendarPeriod {
     }
 }
 /// Request for CreateBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateBudgetRequest {
     /// Required. The name of the billing account to create the budget in. Values
@@ -442,7 +430,6 @@ pub struct CreateBudgetRequest {
     pub budget: ::core::option::Option<Budget>,
 }
 /// Request for UpdateBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateBudgetRequest {
     /// Required. The updated budget object.
@@ -459,7 +446,6 @@ pub struct UpdateBudgetRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request for GetBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBudgetRequest {
     /// Required. Name of budget to get. Values are of the form
@@ -468,7 +454,6 @@ pub struct GetBudgetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for ListBudgets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsRequest {
     /// Required. Name of billing account to list budgets under. Values
@@ -494,7 +479,6 @@ pub struct ListBudgetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for ListBudgets
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListBudgetsResponse {
     /// List of the budgets owned by the requested billing account.
@@ -506,7 +490,6 @@ pub struct ListBudgetsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for DeleteBudget
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteBudgetRequest {
     /// Required. Name of the budget to delete. Values are of the form
@@ -516,7 +499,13 @@ pub struct DeleteBudgetRequest {
 }
 /// Generated client implementations.
 pub mod budget_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// BudgetService stores Cloud Billing budgets, which define a
@@ -540,8 +529,8 @@ pub mod budget_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -566,7 +555,7 @@ pub mod budget_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             BudgetServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -612,8 +601,7 @@ pub mod budget_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -644,8 +632,7 @@ pub mod budget_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -677,8 +664,7 @@ pub mod budget_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -713,8 +699,7 @@ pub mod budget_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -741,8 +726,7 @@ pub mod budget_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

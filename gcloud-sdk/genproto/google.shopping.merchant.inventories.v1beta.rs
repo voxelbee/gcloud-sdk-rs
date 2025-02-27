@@ -4,7 +4,6 @@
 /// [`storeCode`][google.shopping.merchant.inventories.v1beta.LocalInventory.store_code].
 /// For a list of all accepted attribute values, see the [local product inventory
 /// data specification](<https://support.google.com/merchants/answer/3061342>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalInventory {
     /// Output only. The name of the `LocalInventory` resource.
@@ -72,7 +71,6 @@ pub struct LocalInventory {
     >,
 }
 /// Request message for the `ListLocalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesRequest {
     /// Required. The `name` of the parent product to list local inventories for.
@@ -98,7 +96,6 @@ pub struct ListLocalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListLocalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListLocalInventoriesResponse {
     /// The `LocalInventory` resources for the given product from the specified
@@ -111,7 +108,6 @@ pub struct ListLocalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertLocalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertLocalInventoryRequest {
     /// Required. The account and product where this inventory will be inserted.
@@ -125,7 +121,6 @@ pub struct InsertLocalInventoryRequest {
     pub local_inventory: ::core::option::Option<LocalInventory>,
 }
 /// Request message for the `DeleteLocalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteLocalInventoryRequest {
     /// Required. The name of the local inventory for the given product to delete.
@@ -136,7 +131,13 @@ pub struct DeleteLocalInventoryRequest {
 }
 /// Generated client implementations.
 pub mod local_inventory_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service to manage local inventory for products
@@ -159,8 +160,8 @@ pub mod local_inventory_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -185,7 +186,7 @@ pub mod local_inventory_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             LocalInventoryServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -237,8 +238,7 @@ pub mod local_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -273,8 +273,7 @@ pub mod local_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -305,8 +304,7 @@ pub mod local_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -332,7 +330,6 @@ pub mod local_inventory_service_client {
 /// For a list of all accepted attribute values, see the [regional product
 /// inventory data
 /// specification](<https://support.google.com/merchants/answer/9698880>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionalInventory {
     /// Output only. The name of the `RegionalInventory` resource.
@@ -378,7 +375,6 @@ pub struct RegionalInventory {
     >,
 }
 /// Request message for the `ListRegionalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesRequest {
     /// Required. The `name` of the parent product to list `RegionalInventory`
@@ -403,7 +399,6 @@ pub struct ListRegionalInventoriesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for the `ListRegionalInventories` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRegionalInventoriesResponse {
     /// The `RegionalInventory` resources for the given product from the specified
@@ -416,7 +411,6 @@ pub struct ListRegionalInventoriesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request message for the `InsertRegionalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertRegionalInventoryRequest {
     /// Required. The account and product where this inventory will be inserted.
@@ -430,7 +424,6 @@ pub struct InsertRegionalInventoryRequest {
     pub regional_inventory: ::core::option::Option<RegionalInventory>,
 }
 /// Request message for the `DeleteRegionalInventory` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRegionalInventoryRequest {
     /// Required. The name of the `RegionalInventory` resource to delete.
@@ -441,7 +434,13 @@ pub struct DeleteRegionalInventoryRequest {
 }
 /// Generated client implementations.
 pub mod regional_inventory_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service to manage regional inventory for products. There is also separate
@@ -465,8 +464,8 @@ pub mod regional_inventory_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -491,7 +490,7 @@ pub mod regional_inventory_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             RegionalInventoryServiceClient::new(
                 InterceptedService::new(inner, interceptor),
@@ -545,8 +544,7 @@ pub mod regional_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -584,8 +582,7 @@ pub mod regional_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -616,8 +613,7 @@ pub mod regional_inventory_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

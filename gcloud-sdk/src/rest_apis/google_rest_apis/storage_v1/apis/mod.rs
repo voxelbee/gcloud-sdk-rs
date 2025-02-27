@@ -1,4 +1,3 @@
-use serde::{Deserialize, Serialize};
 use std::error;
 use std::fmt;
 
@@ -93,13 +92,17 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
     unimplemented!("Only objects are supported with style=deepObject")
 }
 
+pub mod anywhere_caches_api;
 pub mod bucket_access_controls_api;
 pub mod buckets_api;
 pub mod channels_api;
 pub mod default_object_access_controls_api;
+pub mod folders_api;
+pub mod managed_folders_api;
 pub mod notifications_api;
 pub mod object_access_controls_api;
 pub mod objects_api;
+pub mod operations_api;
 pub mod projects_api;
 
 pub mod configuration;

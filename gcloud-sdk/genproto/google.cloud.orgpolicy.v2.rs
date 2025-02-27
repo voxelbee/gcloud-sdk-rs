@@ -13,7 +13,6 @@
 /// Constraints have a default behavior determined by the `constraint_default`
 /// field, which is the enforcement behavior that is used in the absence of a
 /// policy being defined or inherited for the resource in question.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Constraint {
     /// Immutable. The resource name of the constraint. Must be in one of
@@ -53,7 +52,6 @@ pub struct Constraint {
 pub mod constraint {
     /// A constraint that allows or disallows a list of string values, which are
     /// configured by an Organization Policy administrator with a policy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ListConstraint {
         /// Indicates whether values grouped into categories can be used in
@@ -73,7 +71,6 @@ pub mod constraint {
     /// For example, a constraint `constraints/compute.disableSerialPortAccess`.
     /// If it is enforced on a VM instance, serial port connections will not be
     /// opened to that instance.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct BooleanConstraint {}
     /// Specifies the default behavior in the absence of any policy for the
@@ -110,9 +107,9 @@ pub mod constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ConstraintDefault::Unspecified => "CONSTRAINT_DEFAULT_UNSPECIFIED",
-                ConstraintDefault::Allow => "ALLOW",
-                ConstraintDefault::Deny => "DENY",
+                Self::Unspecified => "CONSTRAINT_DEFAULT_UNSPECIFIED",
+                Self::Allow => "ALLOW",
+                Self::Deny => "DENY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -128,7 +125,6 @@ pub mod constraint {
     /// The type of restrictions for this `Constraint`.
     ///
     /// Immutable after creation.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum ConstraintType {
         /// Defines this constraint as being a ListConstraint.
@@ -145,7 +141,6 @@ pub mod constraint {
 /// By creating a custom constraint, customers can apply policies of this
 /// custom constraint. *Creating a custom constraint itself does NOT apply any
 /// policy enforcement*.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomConstraint {
     /// Immutable. Name of the constraint. This is unique within the organization.
@@ -223,6 +218,10 @@ pub mod custom_constraint {
         /// Constraint applied when deleting the resource.
         /// Not supported yet.
         Delete = 3,
+        /// Constraint applied when removing an IAM grant.
+        RemoveGrant = 4,
+        /// Constraint applied when enforcing forced tagging.
+        GovernTags = 5,
     }
     impl MethodType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -231,10 +230,12 @@ pub mod custom_constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                MethodType::Unspecified => "METHOD_TYPE_UNSPECIFIED",
-                MethodType::Create => "CREATE",
-                MethodType::Update => "UPDATE",
-                MethodType::Delete => "DELETE",
+                Self::Unspecified => "METHOD_TYPE_UNSPECIFIED",
+                Self::Create => "CREATE",
+                Self::Update => "UPDATE",
+                Self::Delete => "DELETE",
+                Self::RemoveGrant => "REMOVE_GRANT",
+                Self::GovernTags => "GOVERN_TAGS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -244,6 +245,8 @@ pub mod custom_constraint {
                 "CREATE" => Some(Self::Create),
                 "UPDATE" => Some(Self::Update),
                 "DELETE" => Some(Self::Delete),
+                "REMOVE_GRANT" => Some(Self::RemoveGrant),
+                "GOVERN_TAGS" => Some(Self::GovernTags),
                 _ => None,
             }
         }
@@ -276,9 +279,9 @@ pub mod custom_constraint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ActionType::Unspecified => "ACTION_TYPE_UNSPECIFIED",
-                ActionType::Allow => "ALLOW",
-                ActionType::Deny => "DENY",
+                Self::Unspecified => "ACTION_TYPE_UNSPECIFIED",
+                Self::Allow => "ALLOW",
+                Self::Deny => "DENY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -294,7 +297,6 @@ pub mod custom_constraint {
 }
 /// Defines an organization policy which is used to specify constraints
 /// for configurations of Google Cloud resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Policy {
     /// Immutable. The resource name of the policy. Must be one of the following
@@ -333,7 +335,6 @@ pub struct Policy {
 }
 /// Similar to PolicySpec but with an extra 'launch' field for launch reference.
 /// The PolicySpec here is specific for dry-run/darklaunch.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlternatePolicySpec {
     /// Reference to the launch that will be used while audit logging and to
@@ -347,7 +348,6 @@ pub struct AlternatePolicySpec {
 }
 /// Defines a Google Cloud policy specification which is used to specify
 /// constraints for configurations of Google Cloud resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PolicySpec {
     /// An opaque tag indicating the current version of the policySpec, used for
@@ -398,7 +398,6 @@ pub struct PolicySpec {
 /// Nested message and enum types in `PolicySpec`.
 pub mod policy_spec {
     /// A rule used to express this policy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PolicyRule {
         /// A condition which determines whether this rule is used
@@ -437,7 +436,6 @@ pub mod policy_spec {
         ///
         /// The `supports_under` field of the associated `Constraint`  defines
         /// whether ancestry prefixes can be used.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct StringValues {
             /// List of values allowed at this resource.
@@ -447,7 +445,6 @@ pub mod policy_spec {
             #[prost(string, repeated, tag = "2")]
             pub denied_values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         }
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Kind {
             /// List of values to be used for this policy rule. This field can be set
@@ -472,7 +469,6 @@ pub mod policy_spec {
 }
 /// The request sent to the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsRequest {
     /// Required. The Google Cloud resource that parents the constraint. Must be in
@@ -496,7 +492,6 @@ pub struct ListConstraintsRequest {
 }
 /// The response returned from the \[ListConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConstraintsResponse {
     /// The collection of constraints that are available on the targeted resource.
@@ -508,7 +503,6 @@ pub struct ListConstraintsResponse {
 }
 /// The request sent to the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesRequest {
     /// Required. The target Google Cloud resource that parents the set of
@@ -534,7 +528,6 @@ pub struct ListPoliciesRequest {
 /// The response returned from the \[ListPolicies\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListPolicies\] method. It will be empty
 /// if no policies are set on the resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPoliciesResponse {
     /// All policies that exist on the resource. It will be empty if no
@@ -548,7 +541,6 @@ pub struct ListPoliciesResponse {
 }
 /// The request sent to the \[GetPolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetPolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPolicyRequest {
     /// Required. Resource name of the policy. See
@@ -558,7 +550,6 @@ pub struct GetPolicyRequest {
 }
 /// The request sent to the \[GetEffectivePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetEffectivePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEffectivePolicyRequest {
     /// Required. The effective policy to compute. See
@@ -568,7 +559,6 @@ pub struct GetEffectivePolicyRequest {
 }
 /// The request sent to the \[CreatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreatePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePolicyRequest {
     /// Required. The Google Cloud resource that will parent the new policy. Must
@@ -586,7 +576,6 @@ pub struct CreatePolicyRequest {
 }
 /// The request sent to the \[UpdatePolicyRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdatePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePolicyRequest {
     /// Required. Policy to update.
@@ -600,7 +589,6 @@ pub struct UpdatePolicyRequest {
 }
 /// The request sent to the \[DeletePolicy\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeletePolicy\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePolicyRequest {
     /// Required. Name of the policy to delete.
@@ -615,7 +603,6 @@ pub struct DeletePolicyRequest {
 }
 /// The request sent to the \[CreateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.CreateCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomConstraintRequest {
     /// Required. Must be in the following form:
@@ -629,7 +616,6 @@ pub struct CreateCustomConstraintRequest {
 }
 /// The request sent to the \[GetCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomConstraintRequest {
     /// Required. Resource name of the custom constraint. See the custom constraint
@@ -639,7 +625,6 @@ pub struct GetCustomConstraintRequest {
 }
 /// The request sent to the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsRequest {
     /// Required. The target Google Cloud resource that parents the set of custom
@@ -662,7 +647,6 @@ pub struct ListCustomConstraintsRequest {
 /// The response returned from the \[ListCustomConstraints\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints\] method. It will
 /// be empty if no custom constraints are set on the organization resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomConstraintsResponse {
     /// All custom constraints that exist on the organization resource. It will be
@@ -676,7 +660,6 @@ pub struct ListCustomConstraintsResponse {
 }
 /// The request sent to the \[UpdateCustomConstraintRequest\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.UpdateCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomConstraintRequest {
     /// Required. `CustomConstraint` to update.
@@ -685,7 +668,6 @@ pub struct UpdateCustomConstraintRequest {
 }
 /// The request sent to the \[DeleteCustomConstraint\]
 /// \[google.cloud.orgpolicy.v2.OrgPolicy.DeleteCustomConstraint\] method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCustomConstraintRequest {
     /// Required. Name of the custom constraint to delete.
@@ -695,7 +677,13 @@ pub struct DeleteCustomConstraintRequest {
 }
 /// Generated client implementations.
 pub mod org_policy_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// An interface for managing organization policies.
@@ -737,8 +725,8 @@ pub mod org_policy_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -763,7 +751,7 @@ pub mod org_policy_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             OrgPolicyClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -810,8 +798,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -841,8 +828,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -873,8 +859,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -903,8 +888,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -936,8 +920,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -972,8 +955,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1003,8 +985,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1039,8 +1020,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1076,8 +1056,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1110,8 +1089,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1142,8 +1120,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1173,8 +1150,7 @@ pub mod org_policy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

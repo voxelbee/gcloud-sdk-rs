@@ -4,7 +4,6 @@
 /// A `Content` includes a `role` field designating the producer of the `Content`
 /// and a `parts` field containing multi-part data that contains the content of
 /// the message turn.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Content {
     /// Ordered `Parts` that constitute a single message. Parts may have different
@@ -25,7 +24,6 @@ pub struct Content {
 ///
 /// A `Part` must have a fixed IANA MIME type identifying the type and subtype
 /// of the media if the `inline_data` field is filled with raw bytes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Part {
     #[prost(oneof = "part::Data", tags = "2, 3, 4, 5, 6, 9, 10")]
@@ -33,7 +31,6 @@ pub struct Part {
 }
 /// Nested message and enum types in `Part`.
 pub mod part {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
         /// Inline text.
@@ -67,7 +64,6 @@ pub mod part {
 /// Raw media bytes.
 ///
 /// Text should not be sent as raw bytes, use the 'text' field.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Blob {
     /// The IANA standard MIME type of the source data.
@@ -84,7 +80,6 @@ pub struct Blob {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// URI based data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FileData {
     /// Optional. The IANA standard MIME type of the source data.
@@ -100,7 +95,6 @@ pub struct FileData {
 /// Only generated when using the `CodeExecution` tool, in which the code will
 /// be automatically executed, and a corresponding `CodeExecutionResult` will
 /// also be generated.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutableCode {
     /// Required. Programming language of the `code`.
@@ -138,8 +132,8 @@ pub mod executable_code {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Language::Unspecified => "LANGUAGE_UNSPECIFIED",
-                Language::Python => "PYTHON",
+                Self::Unspecified => "LANGUAGE_UNSPECIFIED",
+                Self::Python => "PYTHON",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -156,7 +150,6 @@ pub mod executable_code {
 ///
 /// Only generated when using the `CodeExecution`, and always follows a `part`
 /// containing the `ExecutableCode`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CodeExecutionResult {
     /// Required. Outcome of the code execution.
@@ -201,10 +194,10 @@ pub mod code_execution_result {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Outcome::Unspecified => "OUTCOME_UNSPECIFIED",
-                Outcome::Ok => "OUTCOME_OK",
-                Outcome::Failed => "OUTCOME_FAILED",
-                Outcome::DeadlineExceeded => "OUTCOME_DEADLINE_EXCEEDED",
+                Self::Unspecified => "OUTCOME_UNSPECIFIED",
+                Self::Ok => "OUTCOME_OK",
+                Self::Failed => "OUTCOME_FAILED",
+                Self::DeadlineExceeded => "OUTCOME_DEADLINE_EXCEEDED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -224,38 +217,110 @@ pub mod code_execution_result {
 /// A `Tool` is a piece of code that enables the system to interact with
 /// external systems to perform an action, or set of actions, outside of
 /// knowledge and scope of the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Tool {
     /// Optional. A list of `FunctionDeclarations` available to the model that can
     /// be used for function calling.
     ///
     /// The model or system does not execute the function. Instead the defined
-    /// function may be returned as a [FunctionCall][content.part.function_call]
-    /// with arguments to the client side for execution. The model may decide to
-    /// call a subset of these functions by populating
-    /// [FunctionCall][content.part.function_call] in the response. The next
-    /// conversation turn may contain a
-    /// [FunctionResponse][content.part.function_response]
-    /// with the \[content.role\] "function" generation context for the next model
-    /// turn.
+    /// function may be returned as a
+    /// [FunctionCall][google.ai.generativelanguage.v1beta.Part.function_call] with
+    /// arguments to the client side for execution. The model may decide to call a
+    /// subset of these functions by populating
+    /// [FunctionCall][google.ai.generativelanguage.v1beta.Part.function_call] in
+    /// the response. The next conversation turn may contain a
+    /// [FunctionResponse][google.ai.generativelanguage.v1beta.Part.function_response]
+    /// with the [Content.role][google.ai.generativelanguage.v1beta.Content.role]
+    /// "function" generation context for the next model turn.
     #[prost(message, repeated, tag = "1")]
     pub function_declarations: ::prost::alloc::vec::Vec<FunctionDeclaration>,
+    /// Optional. Retrieval tool that is powered by Google search.
+    #[prost(message, optional, tag = "2")]
+    pub google_search_retrieval: ::core::option::Option<GoogleSearchRetrieval>,
     /// Optional. Enables the model to execute code as part of generation.
     #[prost(message, optional, tag = "3")]
     pub code_execution: ::core::option::Option<CodeExecution>,
+    /// Optional. GoogleSearch tool type.
+    /// Tool to support Google Search in Model. Powered by Google.
+    #[prost(message, optional, tag = "4")]
+    pub google_search: ::core::option::Option<tool::GoogleSearch>,
+}
+/// Nested message and enum types in `Tool`.
+pub mod tool {
+    /// GoogleSearch tool type.
+    /// Tool to support Google Search in Model. Powered by Google.
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct GoogleSearch {}
+}
+/// Tool to retrieve public web data for grounding, powered by Google.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct GoogleSearchRetrieval {
+    /// Specifies the dynamic retrieval configuration for the given source.
+    #[prost(message, optional, tag = "1")]
+    pub dynamic_retrieval_config: ::core::option::Option<DynamicRetrievalConfig>,
+}
+/// Describes the options to customize dynamic retrieval.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DynamicRetrievalConfig {
+    /// The mode of the predictor to be used in dynamic retrieval.
+    #[prost(enumeration = "dynamic_retrieval_config::Mode", tag = "1")]
+    pub mode: i32,
+    /// The threshold to be used in dynamic retrieval.
+    /// If not set, a system default value is used.
+    #[prost(float, optional, tag = "2")]
+    pub dynamic_threshold: ::core::option::Option<f32>,
+}
+/// Nested message and enum types in `DynamicRetrievalConfig`.
+pub mod dynamic_retrieval_config {
+    /// The mode of the predictor to be used in dynamic retrieval.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Mode {
+        /// Always trigger retrieval.
+        Unspecified = 0,
+        /// Run retrieval only when system decides it is necessary.
+        Dynamic = 1,
+    }
+    impl Mode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "MODE_UNSPECIFIED",
+                Self::Dynamic => "MODE_DYNAMIC",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "MODE_UNSPECIFIED" => Some(Self::Unspecified),
+                "MODE_DYNAMIC" => Some(Self::Dynamic),
+                _ => None,
+            }
+        }
+    }
 }
 /// Tool that executes code generated by the model, and automatically returns
 /// the result to the model.
 ///
 /// See also `ExecutableCode` and `CodeExecutionResult` which are only generated
 /// when using this tool.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CodeExecution {}
 /// The Tool configuration containing parameters for specifying `Tool` use
 /// in the request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ToolConfig {
     /// Optional. Function calling config.
@@ -263,7 +328,6 @@ pub struct ToolConfig {
     pub function_calling_config: ::core::option::Option<FunctionCallingConfig>,
 }
 /// Configuration for specifying function calling behavior.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionCallingConfig {
     /// Optional. Specifies the mode in which function calling should execute. If
@@ -317,10 +381,10 @@ pub mod function_calling_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Mode::Unspecified => "MODE_UNSPECIFIED",
-                Mode::Auto => "AUTO",
-                Mode::Any => "ANY",
-                Mode::None => "NONE",
+                Self::Unspecified => "MODE_UNSPECIFIED",
+                Self::Auto => "AUTO",
+                Self::Any => "ANY",
+                Self::None => "NONE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -340,7 +404,6 @@ pub mod function_calling_config {
 /// in this declaration are the function name and parameters. This
 /// FunctionDeclaration is a representation of a block of code that can be used
 /// as a `Tool` by the model and executed by the client.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionDeclaration {
     /// Required. The name of the function.
@@ -357,13 +420,21 @@ pub struct FunctionDeclaration {
     /// for the parameter.
     #[prost(message, optional, tag = "3")]
     pub parameters: ::core::option::Option<Schema>,
+    /// Optional. Describes the output from this function in JSON Schema format.
+    /// Reflects the Open API 3.03 Response Object. The Schema defines the type
+    /// used for the response value of the function.
+    #[prost(message, optional, tag = "4")]
+    pub response: ::core::option::Option<Schema>,
 }
 /// A predicted `FunctionCall` returned from the model that contains
 /// a string representing the `FunctionDeclaration.name` with the
 /// arguments and their values.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionCall {
+    /// Optional. The unique id of the function call. If populated, the client to
+    /// execute the `function_call` and return the response with the matching `id`.
+    #[prost(string, tag = "3")]
+    pub id: ::prost::alloc::string::String,
     /// Required. The name of the function to call.
     /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum
     /// length of 63.
@@ -378,9 +449,12 @@ pub struct FunctionCall {
 /// object containing any output from the function is used as context to
 /// the model. This should contain the result of a`FunctionCall` made
 /// based on model prediction.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionResponse {
+    /// Optional. The id of the function call this response is for. Populated by
+    /// the client to match the corresponding function call `id`.
+    #[prost(string, tag = "3")]
+    pub id: ::prost::alloc::string::String,
     /// Required. The name of the function to call.
     /// Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum
     /// length of 63.
@@ -394,7 +468,6 @@ pub struct FunctionResponse {
 /// These types can be objects, but also primitives and arrays.
 /// Represents a select subset of an [OpenAPI 3.0 schema
 /// object](<https://spec.openapis.org/oas/v3.0.3#schema>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Schema {
     /// Required. Data type.
@@ -404,6 +477,7 @@ pub struct Schema {
     /// datatypes. Supported formats:
     ///   for NUMBER type: float, double
     ///   for INTEGER type: int32, int64
+    ///   for STRING type: enum
     #[prost(string, tag = "2")]
     pub format: ::prost::alloc::string::String,
     /// Optional. A brief description of the parameter. This could contain examples
@@ -421,6 +495,12 @@ pub struct Schema {
     /// Optional. Schema of the elements of Type.ARRAY.
     #[prost(message, optional, boxed, tag = "6")]
     pub items: ::core::option::Option<::prost::alloc::boxed::Box<Schema>>,
+    /// Optional. Maximum number of the elements for Type.ARRAY.
+    #[prost(int64, tag = "21")]
+    pub max_items: i64,
+    /// Optional. Minimum number of the elements for Type.ARRAY.
+    #[prost(int64, tag = "22")]
+    pub min_items: i64,
     /// Optional. Properties of Type.OBJECT.
     #[prost(map = "string, message", tag = "7")]
     pub properties: ::std::collections::HashMap<::prost::alloc::string::String, Schema>,
@@ -429,7 +509,6 @@ pub struct Schema {
     pub required: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Passage included inline with a grounding configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingPassage {
     /// Identifier for the passage for attributing this passage in grounded
@@ -441,7 +520,6 @@ pub struct GroundingPassage {
     pub content: ::core::option::Option<Content>,
 }
 /// A repeated list of passages.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingPassages {
     /// List of passages.
@@ -475,13 +553,13 @@ impl Type {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Type::Unspecified => "TYPE_UNSPECIFIED",
-            Type::String => "STRING",
-            Type::Number => "NUMBER",
-            Type::Integer => "INTEGER",
-            Type::Boolean => "BOOLEAN",
-            Type::Array => "ARRAY",
-            Type::Object => "OBJECT",
+            Self::Unspecified => "TYPE_UNSPECIFIED",
+            Self::String => "STRING",
+            Self::Number => "NUMBER",
+            Self::Integer => "INTEGER",
+            Self::Boolean => "BOOLEAN",
+            Self::Array => "ARRAY",
+            Self::Object => "OBJECT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -502,7 +580,6 @@ impl Type {
 /// to GenerativeService.
 ///
 /// Cached content can be only used with model it was created for.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CachedContent {
     /// Optional. Identifier. The resource name referring to the cached content.
@@ -548,7 +625,6 @@ pub struct CachedContent {
 /// Nested message and enum types in `CachedContent`.
 pub mod cached_content {
     /// Metadata on the usage of the cached content.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UsageMetadata {
         /// Total number of tokens that the cached content consumes.
@@ -556,7 +632,6 @@ pub mod cached_content {
         pub total_token_count: i32,
     }
     /// Specifies when this resource will expire.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Expiration {
         /// Timestamp in UTC of when this resource is considered expired.
@@ -570,7 +645,6 @@ pub mod cached_content {
     }
 }
 /// Request to list CachedContents.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCachedContentsRequest {
     /// Optional. The maximum number of cached contents to return. The service may
@@ -588,7 +662,6 @@ pub struct ListCachedContentsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response with CachedContents list.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCachedContentsResponse {
     /// List of cached contents.
@@ -600,7 +673,6 @@ pub struct ListCachedContentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to create CachedContent.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCachedContentRequest {
     /// Required. The cached content to create.
@@ -608,7 +680,6 @@ pub struct CreateCachedContentRequest {
     pub cached_content: ::core::option::Option<CachedContent>,
 }
 /// Request to read CachedContent.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCachedContentRequest {
     /// Required. The resource name referring to the content cache entry.
@@ -617,7 +688,6 @@ pub struct GetCachedContentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update CachedContent.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCachedContentRequest {
     /// Required. The content cache entry to update
@@ -628,7 +698,6 @@ pub struct UpdateCachedContentRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to delete CachedContent.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCachedContentRequest {
     /// Required. The resource name referring to the content cache entry
@@ -638,7 +707,13 @@ pub struct DeleteCachedContentRequest {
 }
 /// Generated client implementations.
 pub mod cache_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// API for managing cache of content (CachedContent resources) that can be used
@@ -664,8 +739,8 @@ pub mod cache_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -690,7 +765,7 @@ pub mod cache_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             CacheServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -737,8 +812,7 @@ pub mod cache_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -765,8 +839,7 @@ pub mod cache_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -793,8 +866,7 @@ pub mod cache_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -821,8 +893,7 @@ pub mod cache_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -849,8 +920,7 @@ pub mod cache_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -871,7 +941,6 @@ pub mod cache_service_client {
     }
 }
 /// A collection of source attributions for a piece of content.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CitationMetadata {
     /// Citations to sources for a specific response.
@@ -879,7 +948,6 @@ pub struct CitationMetadata {
     pub citation_sources: ::prost::alloc::vec::Vec<CitationSource>,
 }
 /// A citation to a source for a portion of a specific response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CitationSource {
     /// Optional. Start of segment of the response that is attributed to this
@@ -905,7 +973,6 @@ pub struct CitationSource {
 ///
 /// ContentFilter contains a reason and an optional supporting string. The reason
 /// may be unspecified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentFilter {
     /// The reason content was blocked during request processing.
@@ -945,9 +1012,9 @@ pub mod content_filter {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                BlockedReason::Unspecified => "BLOCKED_REASON_UNSPECIFIED",
-                BlockedReason::Safety => "SAFETY",
-                BlockedReason::Other => "OTHER",
+                Self::Unspecified => "BLOCKED_REASON_UNSPECIFIED",
+                Self::Safety => "SAFETY",
+                Self::Other => "OTHER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -968,7 +1035,6 @@ pub mod content_filter {
 /// Each SafetyFeedback will return the safety settings used by the request as
 /// well as the lowest HarmProbability that should be allowed in order to return
 /// a result.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetyFeedback {
     /// Safety rating evaluated from content.
@@ -985,7 +1051,6 @@ pub struct SafetyFeedback {
 /// Content is classified for safety across a number of
 /// harm categories and the probability of the harm classification is included
 /// here.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetyRating {
     /// Required. The category for this rating.
@@ -1035,11 +1100,11 @@ pub mod safety_rating {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HarmProbability::Unspecified => "HARM_PROBABILITY_UNSPECIFIED",
-                HarmProbability::Negligible => "NEGLIGIBLE",
-                HarmProbability::Low => "LOW",
-                HarmProbability::Medium => "MEDIUM",
-                HarmProbability::High => "HIGH",
+                Self::Unspecified => "HARM_PROBABILITY_UNSPECIFIED",
+                Self::Negligible => "NEGLIGIBLE",
+                Self::Low => "LOW",
+                Self::Medium => "MEDIUM",
+                Self::High => "HIGH",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1059,7 +1124,6 @@ pub mod safety_rating {
 ///
 /// Passing a safety setting for a category changes the allowed probability that
 /// content is blocked.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SafetySetting {
     /// Required. The category for this setting.
@@ -1095,6 +1159,8 @@ pub mod safety_setting {
         BlockOnlyHigh = 3,
         /// All content will be allowed.
         BlockNone = 4,
+        /// Turn off the safety filter.
+        Off = 5,
     }
     impl HarmBlockThreshold {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -1103,11 +1169,12 @@ pub mod safety_setting {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HarmBlockThreshold::Unspecified => "HARM_BLOCK_THRESHOLD_UNSPECIFIED",
-                HarmBlockThreshold::BlockLowAndAbove => "BLOCK_LOW_AND_ABOVE",
-                HarmBlockThreshold::BlockMediumAndAbove => "BLOCK_MEDIUM_AND_ABOVE",
-                HarmBlockThreshold::BlockOnlyHigh => "BLOCK_ONLY_HIGH",
-                HarmBlockThreshold::BlockNone => "BLOCK_NONE",
+                Self::Unspecified => "HARM_BLOCK_THRESHOLD_UNSPECIFIED",
+                Self::BlockLowAndAbove => "BLOCK_LOW_AND_ABOVE",
+                Self::BlockMediumAndAbove => "BLOCK_MEDIUM_AND_ABOVE",
+                Self::BlockOnlyHigh => "BLOCK_ONLY_HIGH",
+                Self::BlockNone => "BLOCK_NONE",
+                Self::Off => "OFF",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1118,6 +1185,7 @@ pub mod safety_setting {
                 "BLOCK_MEDIUM_AND_ABOVE" => Some(Self::BlockMediumAndAbove),
                 "BLOCK_ONLY_HIGH" => Some(Self::BlockOnlyHigh),
                 "BLOCK_NONE" => Some(Self::BlockNone),
+                "OFF" => Some(Self::Off),
                 _ => None,
             }
         }
@@ -1132,27 +1200,31 @@ pub mod safety_setting {
 pub enum HarmCategory {
     /// Category is unspecified.
     Unspecified = 0,
-    /// Negative or harmful comments targeting identity and/or protected attribute.
+    /// **PaLM** - Negative or harmful comments targeting identity and/or protected
+    /// attribute.
     Derogatory = 1,
-    /// Content that is rude, disrespectful, or profane.
+    /// **PaLM** - Content that is rude, disrespectful, or profane.
     Toxicity = 2,
-    /// Describes scenarios depicting violence against an individual or group, or
-    /// general descriptions of gore.
+    /// **PaLM** - Describes scenarios depicting violence against an individual or
+    /// group, or general descriptions of gore.
     Violence = 3,
-    /// Contains references to sexual acts or other lewd content.
+    /// **PaLM** - Contains references to sexual acts or other lewd content.
     Sexual = 4,
-    /// Promotes unchecked medical advice.
+    /// **PaLM** - Promotes unchecked medical advice.
     Medical = 5,
-    /// Dangerous content that promotes, facilitates, or encourages harmful acts.
+    /// **PaLM** - Dangerous content that promotes, facilitates, or encourages
+    /// harmful acts.
     Dangerous = 6,
-    /// Harasment content.
+    /// **Gemini** - Harassment content.
     Harassment = 7,
-    /// Hate speech and content.
+    /// **Gemini** - Hate speech and content.
     HateSpeech = 8,
-    /// Sexually explicit content.
+    /// **Gemini** - Sexually explicit content.
     SexuallyExplicit = 9,
-    /// Dangerous content.
+    /// **Gemini** - Dangerous content.
     DangerousContent = 10,
+    /// **Gemini** - Content that may be used to harm civic integrity.
+    CivicIntegrity = 11,
 }
 impl HarmCategory {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1161,17 +1233,18 @@ impl HarmCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            HarmCategory::Unspecified => "HARM_CATEGORY_UNSPECIFIED",
-            HarmCategory::Derogatory => "HARM_CATEGORY_DEROGATORY",
-            HarmCategory::Toxicity => "HARM_CATEGORY_TOXICITY",
-            HarmCategory::Violence => "HARM_CATEGORY_VIOLENCE",
-            HarmCategory::Sexual => "HARM_CATEGORY_SEXUAL",
-            HarmCategory::Medical => "HARM_CATEGORY_MEDICAL",
-            HarmCategory::Dangerous => "HARM_CATEGORY_DANGEROUS",
-            HarmCategory::Harassment => "HARM_CATEGORY_HARASSMENT",
-            HarmCategory::HateSpeech => "HARM_CATEGORY_HATE_SPEECH",
-            HarmCategory::SexuallyExplicit => "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-            HarmCategory::DangerousContent => "HARM_CATEGORY_DANGEROUS_CONTENT",
+            Self::Unspecified => "HARM_CATEGORY_UNSPECIFIED",
+            Self::Derogatory => "HARM_CATEGORY_DEROGATORY",
+            Self::Toxicity => "HARM_CATEGORY_TOXICITY",
+            Self::Violence => "HARM_CATEGORY_VIOLENCE",
+            Self::Sexual => "HARM_CATEGORY_SEXUAL",
+            Self::Medical => "HARM_CATEGORY_MEDICAL",
+            Self::Dangerous => "HARM_CATEGORY_DANGEROUS",
+            Self::Harassment => "HARM_CATEGORY_HARASSMENT",
+            Self::HateSpeech => "HARM_CATEGORY_HATE_SPEECH",
+            Self::SexuallyExplicit => "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            Self::DangerousContent => "HARM_CATEGORY_DANGEROUS_CONTENT",
+            Self::CivicIntegrity => "HARM_CATEGORY_CIVIC_INTEGRITY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1188,12 +1261,12 @@ impl HarmCategory {
             "HARM_CATEGORY_HATE_SPEECH" => Some(Self::HateSpeech),
             "HARM_CATEGORY_SEXUALLY_EXPLICIT" => Some(Self::SexuallyExplicit),
             "HARM_CATEGORY_DANGEROUS_CONTENT" => Some(Self::DangerousContent),
+            "HARM_CATEGORY_CIVIC_INTEGRITY" => Some(Self::CivicIntegrity),
             _ => None,
         }
     }
 }
 /// Request to generate a message response from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateMessageRequest {
     /// Required. The name of the model to use.
@@ -1243,7 +1316,6 @@ pub struct GenerateMessageRequest {
 ///
 /// This includes candidate messages and
 /// conversation history in the form of chronologically-ordered messages.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateMessageResponse {
     /// Candidate response messages from the model.
@@ -1268,7 +1340,6 @@ pub struct GenerateMessageResponse {
 ///
 /// The `author` is used to tag messages when they are fed to the
 /// model as text.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Message {
     /// Optional. The author of this Message.
@@ -1298,7 +1369,6 @@ pub struct Message {
 /// prime the model to respond in different ways, and the conversation history
 /// or list of messages representing the alternating turns of the conversation
 /// between the user and the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MessagePrompt {
     /// Optional. Text that should be provided to the model first to ground the
@@ -1342,7 +1412,6 @@ pub struct MessagePrompt {
 /// An input/output example used to instruct the Model.
 ///
 /// It demonstrates how the model should respond or format its response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Example {
     /// Required. An example of an input `Message` from the user.
@@ -1356,7 +1425,6 @@ pub struct Example {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountMessageTokensRequest {
     /// Required. The model's resource name. This serves as an ID for the Model to
@@ -1374,7 +1442,6 @@ pub struct CountMessageTokensRequest {
 /// A response from `CountMessageTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountMessageTokensResponse {
     /// The number of tokens that the `model` tokenizes the `prompt` into.
@@ -1385,7 +1452,13 @@ pub struct CountMessageTokensResponse {
 }
 /// Generated client implementations.
 pub mod discuss_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// An API for using Generative Language Models (GLMs) in dialog applications.
@@ -1411,8 +1484,8 @@ pub mod discuss_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1437,7 +1510,7 @@ pub mod discuss_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             DiscussServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1484,8 +1557,7 @@ pub mod discuss_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1515,8 +1587,7 @@ pub mod discuss_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1537,7 +1608,7 @@ pub mod discuss_service_client {
     }
 }
 /// A file uploaded to the API.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Next ID: 15
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct File {
     /// Immutable. Identifier. The `File` resource name. The ID (name excluding the
@@ -1616,10 +1687,10 @@ pub mod file {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Processing => "PROCESSING",
-                State::Active => "ACTIVE",
-                State::Failed => "FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Processing => "PROCESSING",
+                Self::Active => "ACTIVE",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1634,7 +1705,6 @@ pub mod file {
         }
     }
     /// Metadata for the File.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Metadata {
         /// Output only. Metadata for a video.
@@ -1643,7 +1713,6 @@ pub mod file {
     }
 }
 /// Metadata for a video `File`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VideoMetadata {
     /// Duration of the video.
@@ -1651,7 +1720,6 @@ pub struct VideoMetadata {
     pub video_duration: ::core::option::Option<::prost_types::Duration>,
 }
 /// Request for `CreateFile`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFileRequest {
     /// Optional. Metadata for the file to create.
@@ -1659,7 +1727,6 @@ pub struct CreateFileRequest {
     pub file: ::core::option::Option<File>,
 }
 /// Response for `CreateFile`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateFileResponse {
     /// Metadata for the created file.
@@ -1667,7 +1734,6 @@ pub struct CreateFileResponse {
     pub file: ::core::option::Option<File>,
 }
 /// Request for `ListFiles`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesRequest {
     /// Optional. Maximum number of `File`s to return per page.
@@ -1679,7 +1745,6 @@ pub struct ListFilesRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response for `ListFiles`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFilesResponse {
     /// The list of `File`s.
@@ -1691,7 +1756,6 @@ pub struct ListFilesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for `GetFile`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFileRequest {
     /// Required. The name of the `File` to get.
@@ -1700,7 +1764,6 @@ pub struct GetFileRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for `DeleteFile`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteFileRequest {
     /// Required. The name of the `File` to delete.
@@ -1710,7 +1773,13 @@ pub struct DeleteFileRequest {
 }
 /// Generated client implementations.
 pub mod file_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// An API for uploading and managing files.
@@ -1733,8 +1802,8 @@ pub mod file_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1759,7 +1828,7 @@ pub mod file_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             FileServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1806,8 +1875,7 @@ pub mod file_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1837,8 +1905,7 @@ pub mod file_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1865,8 +1932,7 @@ pub mod file_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1893,8 +1959,7 @@ pub mod file_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1916,7 +1981,6 @@ pub mod file_service_client {
 }
 /// A `Corpus` is a collection of `Document`s.
 /// A project can create up to 5 corpora.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Corpus {
     /// Immutable. Identifier. The `Corpus` resource name. The ID (name excluding
@@ -1942,7 +2006,6 @@ pub struct Corpus {
 }
 /// A `Document` is a collection of `Chunk`s.
 /// A `Corpus` can have a maximum of 10,000 `Document`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Document {
     /// Immutable. Identifier. The `Document` resource name. The ID (name excluding
@@ -1970,7 +2033,6 @@ pub struct Document {
     pub create_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// User provided string values assigned to a single metadata key.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StringList {
     /// The string values of the metadata to store.
@@ -1978,7 +2040,6 @@ pub struct StringList {
     pub values: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// User provided metadata stored as key-value pairs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetadata {
     /// Required. The key of the metadata to store.
@@ -1989,7 +2050,6 @@ pub struct CustomMetadata {
 }
 /// Nested message and enum types in `CustomMetadata`.
 pub mod custom_metadata {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         /// The string value of the metadata to store.
@@ -2009,7 +2069,6 @@ pub mod custom_metadata {
 ///    key = "document.custom_metadata.genre"
 ///    conditions = [{string_value = "drama", operation = EQUAL},
 ///                  {string_value = "action", operation = EQUAL}]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetadataFilter {
     /// Required. The key of the metadata to filter on.
@@ -2021,7 +2080,6 @@ pub struct MetadataFilter {
     pub conditions: ::prost::alloc::vec::Vec<Condition>,
 }
 /// Filter condition applicable to a single key.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Condition {
     /// Required. Operator applied to the given key-value pair to trigger the
@@ -2081,15 +2139,15 @@ pub mod condition {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operator::Unspecified => "OPERATOR_UNSPECIFIED",
-                Operator::Less => "LESS",
-                Operator::LessEqual => "LESS_EQUAL",
-                Operator::Equal => "EQUAL",
-                Operator::GreaterEqual => "GREATER_EQUAL",
-                Operator::Greater => "GREATER",
-                Operator::NotEqual => "NOT_EQUAL",
-                Operator::Includes => "INCLUDES",
-                Operator::Excludes => "EXCLUDES",
+                Self::Unspecified => "OPERATOR_UNSPECIFIED",
+                Self::Less => "LESS",
+                Self::LessEqual => "LESS_EQUAL",
+                Self::Equal => "EQUAL",
+                Self::GreaterEqual => "GREATER_EQUAL",
+                Self::Greater => "GREATER",
+                Self::NotEqual => "NOT_EQUAL",
+                Self::Includes => "INCLUDES",
+                Self::Excludes => "EXCLUDES",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2114,7 +2172,6 @@ pub mod condition {
     /// value type, the filtering condition should use `string_value` paired with
     /// an INCLUDES/EXCLUDES operation, otherwise the result will also be an empty
     /// set.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         /// The string value to filter the metadata on.
@@ -2128,7 +2185,6 @@ pub mod condition {
 /// A `Chunk` is a subpart of a `Document` that is treated as an independent unit
 /// for the purposes of vector representation and storage.
 /// A `Corpus` can have a maximum of 1 million `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Chunk {
     /// Immutable. Identifier. The `Chunk` resource name. The ID (name excluding
@@ -2189,10 +2245,10 @@ pub mod chunk {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::PendingProcessing => "STATE_PENDING_PROCESSING",
-                State::Active => "STATE_ACTIVE",
-                State::Failed => "STATE_FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::PendingProcessing => "STATE_PENDING_PROCESSING",
+                Self::Active => "STATE_ACTIVE",
+                Self::Failed => "STATE_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2208,7 +2264,6 @@ pub mod chunk {
     }
 }
 /// Extracted data that represents the `Chunk` content.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChunkData {
     #[prost(oneof = "chunk_data::Data", tags = "1")]
@@ -2216,7 +2271,6 @@ pub struct ChunkData {
 }
 /// Nested message and enum types in `ChunkData`.
 pub mod chunk_data {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Data {
         /// The `Chunk` content as a string.
@@ -2226,34 +2280,42 @@ pub mod chunk_data {
     }
 }
 /// Request to generate a completion from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateContentRequest {
     /// Required. The name of the `Model` to use for generating the completion.
     ///
-    /// Format: `name=models/{model}`.
+    /// Format: `models/{model}`.
     #[prost(string, tag = "1")]
     pub model: ::prost::alloc::string::String,
-    /// Optional. Developer set system instruction. Currently, text only.
+    /// Optional. Developer set [system
+    /// instruction(s)](<https://ai.google.dev/gemini-api/docs/system-instructions>).
+    /// Currently, text only.
     #[prost(message, optional, tag = "8")]
     pub system_instruction: ::core::option::Option<Content>,
     /// Required. The content of the current conversation with the model.
     ///
-    /// For single-turn queries, this is a single instance. For multi-turn queries,
-    /// this is a repeated field that contains conversation history + latest
-    /// request.
+    /// For single-turn queries, this is a single instance. For multi-turn queries
+    /// like [chat](<https://ai.google.dev/gemini-api/docs/text-generation#chat>),
+    /// this is a repeated field that contains the conversation history and the
+    /// latest request.
     #[prost(message, repeated, tag = "2")]
     pub contents: ::prost::alloc::vec::Vec<Content>,
-    /// Optional. A list of `Tools` the model may use to generate the next
+    /// Optional. A list of `Tools` the `Model` may use to generate the next
     /// response.
     ///
     /// A `Tool` is a piece of code that enables the system to interact with
     /// external systems to perform an action, or set of actions, outside of
-    /// knowledge and scope of the model. The only supported tool is currently
-    /// `Function`.
+    /// knowledge and scope of the `Model`. Supported `Tool`s are `Function` and
+    /// `code_execution`. Refer to the [Function
+    /// calling](<https://ai.google.dev/gemini-api/docs/function-calling>) and the
+    /// [Code execution](<https://ai.google.dev/gemini-api/docs/code-execution>)
+    /// guides to learn more.
     #[prost(message, repeated, tag = "5")]
     pub tools: ::prost::alloc::vec::Vec<Tool>,
-    /// Optional. Tool configuration for any `Tool` specified in the request.
+    /// Optional. Tool configuration for any `Tool` specified in the request. Refer
+    /// to the [Function calling
+    /// guide](<https://ai.google.dev/gemini-api/docs/function-calling#function_calling_mode>)
+    /// for a usage example.
     #[prost(message, optional, tag = "7")]
     pub tool_config: ::core::option::Option<ToolConfig>,
     /// Optional. A list of unique `SafetySetting` instances for blocking unsafe
@@ -2268,22 +2330,55 @@ pub struct GenerateContentRequest {
     /// `SafetyCategory` provided in the list, the API will use the default safety
     /// setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
     /// HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-    /// HARM_CATEGORY_HARASSMENT are supported.
+    /// HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+    /// Refer to the [guide](<https://ai.google.dev/gemini-api/docs/safety-settings>)
+    /// for detailed information on available safety settings. Also refer to the
+    /// [Safety guidance](<https://ai.google.dev/gemini-api/docs/safety-guidance>) to
+    /// learn how to incorporate safety considerations in your AI applications.
     #[prost(message, repeated, tag = "3")]
     pub safety_settings: ::prost::alloc::vec::Vec<SafetySetting>,
     /// Optional. Configuration options for model generation and outputs.
     #[prost(message, optional, tag = "4")]
     pub generation_config: ::core::option::Option<GenerationConfig>,
-    /// Optional. The name of the cached content used as context to serve the
-    /// prediction. Note: only used in explicit caching, where users can have
-    /// control over caching (e.g. what content to cache) and enjoy guaranteed cost
-    /// savings. Format: `cachedContents/{cachedContent}`
+    /// Optional. The name of the content
+    /// [cached](<https://ai.google.dev/gemini-api/docs/caching>) to use as context
+    /// to serve the prediction. Format: `cachedContents/{cachedContent}`
     #[prost(string, optional, tag = "9")]
     pub cached_content: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// The configuration for the prebuilt speaker to use.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PrebuiltVoiceConfig {
+    /// The name of the preset voice to use.
+    #[prost(string, optional, tag = "1")]
+    pub voice_name: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// The configuration for the voice to use.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VoiceConfig {
+    /// The configuration for the speaker to use.
+    #[prost(oneof = "voice_config::VoiceConfig", tags = "1")]
+    pub voice_config: ::core::option::Option<voice_config::VoiceConfig>,
+}
+/// Nested message and enum types in `VoiceConfig`.
+pub mod voice_config {
+    /// The configuration for the speaker to use.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum VoiceConfig {
+        /// The configuration for the prebuilt voice to use.
+        #[prost(message, tag = "1")]
+        PrebuiltVoiceConfig(super::PrebuiltVoiceConfig),
+    }
+}
+/// The speech generation config.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpeechConfig {
+    /// The configuration for the speaker to use.
+    #[prost(message, optional, tag = "1")]
+    pub voice_config: ::core::option::Option<VoiceConfig>,
+}
 /// Configuration options for model generation and outputs. Not all parameters
-/// may be configurable for every model.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// are configurable for every model.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerationConfig {
     /// Optional. Number of generated responses to return.
@@ -2294,11 +2389,11 @@ pub struct GenerationConfig {
     pub candidate_count: ::core::option::Option<i32>,
     /// Optional. The set of character sequences (up to 5) that will stop output
     /// generation. If specified, the API will stop at the first appearance of a
-    /// stop sequence. The stop sequence will not be included as part of the
+    /// `stop_sequence`. The stop sequence will not be included as part of the
     /// response.
     #[prost(string, repeated, tag = "2")]
     pub stop_sequences: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Optional. The maximum number of tokens to include in a candidate.
+    /// Optional. The maximum number of tokens to include in a response candidate.
     ///
     /// Note: The default value varies by model, see the `Model.output_token_limit`
     /// attribute of the `Model` returned from the `getModel` function.
@@ -2315,57 +2410,178 @@ pub struct GenerationConfig {
     /// Optional. The maximum cumulative probability of tokens to consider when
     /// sampling.
     ///
-    /// The model uses combined Top-k and nucleus sampling.
+    /// The model uses combined Top-k and Top-p (nucleus) sampling.
     ///
     /// Tokens are sorted based on their assigned probabilities so that only the
     /// most likely tokens are considered. Top-k sampling directly limits the
-    /// maximum number of tokens to consider, while Nucleus sampling limits number
-    /// of tokens based on the cumulative probability.
+    /// maximum number of tokens to consider, while Nucleus sampling limits the
+    /// number of tokens based on the cumulative probability.
     ///
-    /// Note: The default value varies by model, see the `Model.top_p`
-    /// attribute of the `Model` returned from the `getModel` function.
+    /// Note: The default value varies by `Model` and is specified by
+    /// the`Model.top_p` attribute returned from the `getModel` function. An empty
+    /// `top_k` attribute indicates that the model doesn't apply top-k sampling
+    /// and doesn't allow setting `top_k` on requests.
     #[prost(float, optional, tag = "6")]
     pub top_p: ::core::option::Option<f32>,
     /// Optional. The maximum number of tokens to consider when sampling.
     ///
-    /// Models use nucleus sampling or combined Top-k and nucleus sampling.
-    /// Top-k sampling considers the set of `top_k` most probable tokens.
-    /// Models running with nucleus sampling don't allow top_k setting.
+    /// Gemini models use Top-p (nucleus) sampling or a combination of Top-k and
+    /// nucleus sampling. Top-k sampling considers the set of `top_k` most probable
+    /// tokens. Models running with nucleus sampling don't allow top_k setting.
     ///
-    /// Note: The default value varies by model, see the `Model.top_k`
-    /// attribute of the `Model` returned from the `getModel` function. Empty
-    /// `top_k` field in `Model` indicates the model doesn't apply top-k sampling
+    /// Note: The default value varies by `Model` and is specified by
+    /// the`Model.top_p` attribute returned from the `getModel` function. An empty
+    /// `top_k` attribute indicates that the model doesn't apply top-k sampling
     /// and doesn't allow setting `top_k` on requests.
     #[prost(int32, optional, tag = "7")]
     pub top_k: ::core::option::Option<i32>,
-    /// Optional. Output response mimetype of the generated candidate text.
-    /// Supported mimetype:
+    /// Optional. MIME type of the generated candidate text.
+    /// Supported MIME types are:
     /// `text/plain`: (default) Text output.
-    /// `application/json`: JSON response in the candidates.
+    /// `application/json`: JSON response in the response candidates.
+    /// `text/x.enum`: ENUM as a string response in the response candidates.
+    /// Refer to the
+    /// [docs](<https://ai.google.dev/gemini-api/docs/prompting_with_media#plain_text_formats>)
+    /// for a list of all supported text MIME types.
     #[prost(string, tag = "13")]
     pub response_mime_type: ::prost::alloc::string::String,
-    /// Optional. Output response schema of the generated candidate text when
-    /// response mime type can have schema. Schema can be objects, primitives or
-    /// arrays and is a subset of [OpenAPI
-    /// schema](<https://spec.openapis.org/oas/v3.0.3#schema>).
+    /// Optional. Output schema of the generated candidate text. Schemas must be a
+    /// subset of the [OpenAPI schema](<https://spec.openapis.org/oas/v3.0.3#schema>)
+    /// and can be objects, primitives or arrays.
     ///
-    /// If set, a compatible response_mime_type must also be set.
-    /// Compatible mimetypes:
+    /// If set, a compatible `response_mime_type` must also be set.
+    /// Compatible MIME types:
     /// `application/json`: Schema for JSON response.
+    /// Refer to the [JSON text generation
+    /// guide](<https://ai.google.dev/gemini-api/docs/json-mode>) for more details.
     #[prost(message, optional, tag = "14")]
     pub response_schema: ::core::option::Option<Schema>,
+    /// Optional. Presence penalty applied to the next token's logprobs if the
+    /// token has already been seen in the response.
+    ///
+    /// This penalty is binary on/off and not dependant on the number of times the
+    /// token is used (after the first). Use
+    /// [frequency_penalty][google.ai.generativelanguage.v1beta.GenerationConfig.frequency_penalty]
+    /// for a penalty that increases with each use.
+    ///
+    /// A positive penalty will discourage the use of tokens that have already
+    /// been used in the response, increasing the vocabulary.
+    ///
+    /// A negative penalty will encourage the use of tokens that have already been
+    /// used in the response, decreasing the vocabulary.
+    #[prost(float, optional, tag = "15")]
+    pub presence_penalty: ::core::option::Option<f32>,
+    /// Optional. Frequency penalty applied to the next token's logprobs,
+    /// multiplied by the number of times each token has been seen in the respponse
+    /// so far.
+    ///
+    /// A positive penalty will discourage the use of tokens that have already
+    /// been used, proportional to the number of times the token has been used:
+    /// The more a token is used, the more dificult it is for the model to use
+    /// that token again increasing the vocabulary of responses.
+    ///
+    /// Caution: A _negative_ penalty will encourage the model to reuse tokens
+    /// proportional to the number of times the token has been used. Small
+    /// negative values will reduce the vocabulary of a response. Larger negative
+    /// values will cause the model to start repeating a common token  until it
+    /// hits the
+    /// [max_output_tokens][google.ai.generativelanguage.v1beta.GenerationConfig.max_output_tokens]
+    /// limit.
+    #[prost(float, optional, tag = "16")]
+    pub frequency_penalty: ::core::option::Option<f32>,
+    /// Optional. If true, export the logprobs results in response.
+    #[prost(bool, optional, tag = "17")]
+    pub response_logprobs: ::core::option::Option<bool>,
+    /// Optional. Only valid if
+    /// [response_logprobs=True][google.ai.generativelanguage.v1beta.GenerationConfig.response_logprobs].
+    /// This sets the number of top logprobs to return at each decoding step in the
+    /// [Candidate.logprobs_result][google.ai.generativelanguage.v1beta.Candidate.logprobs_result].
+    #[prost(int32, optional, tag = "18")]
+    pub logprobs: ::core::option::Option<i32>,
+    /// Optional. Enables enhanced civic answers. It may not be available for all
+    /// models.
+    #[prost(bool, optional, tag = "19")]
+    pub enable_enhanced_civic_answers: ::core::option::Option<bool>,
+    /// Optional. The requested modalities of the response. Represents the set of
+    /// modalities that the model can return, and should be expected in the
+    /// response. This is an exact match to the modalities of the response.
+    ///
+    /// A model may have multiple combinations of supported modalities. If the
+    /// requested modalities do not match any of the supported combinations, an
+    /// error will be returned.
+    ///
+    /// An empty list is equivalent to requesting only text.
+    #[prost(
+        enumeration = "generation_config::Modality",
+        repeated,
+        packed = "false",
+        tag = "20"
+    )]
+    pub response_modalities: ::prost::alloc::vec::Vec<i32>,
+    /// Optional. The speech generation config.
+    #[prost(message, optional, tag = "21")]
+    pub speech_config: ::core::option::Option<SpeechConfig>,
+}
+/// Nested message and enum types in `GenerationConfig`.
+pub mod generation_config {
+    /// Supported modalities of the response.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Modality {
+        /// Default value.
+        Unspecified = 0,
+        /// Indicates the model should return text.
+        Text = 1,
+        /// Indicates the model should return images.
+        Image = 2,
+        /// Indicates the model should return audio.
+        Audio = 3,
+    }
+    impl Modality {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "MODALITY_UNSPECIFIED",
+                Self::Text => "TEXT",
+                Self::Image => "IMAGE",
+                Self::Audio => "AUDIO",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "MODALITY_UNSPECIFIED" => Some(Self::Unspecified),
+                "TEXT" => Some(Self::Text),
+                "IMAGE" => Some(Self::Image),
+                "AUDIO" => Some(Self::Audio),
+                _ => None,
+            }
+        }
+    }
 }
 /// Configuration for retrieving grounding content from a `Corpus` or
 /// `Document` created using the Semantic Retriever API.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SemanticRetrieverConfig {
-    /// Required. Name of the resource for retrieval, e.g. corpora/123 or
-    /// corpora/123/documents/abc.
+    /// Required. Name of the resource for retrieval. Example: `corpora/123` or
+    /// `corpora/123/documents/abc`.
     #[prost(string, tag = "1")]
     pub source: ::prost::alloc::string::String,
-    /// Required. Query to use for similarity matching `Chunk`s in the given
-    /// resource.
+    /// Required. Query to use for matching `Chunk`s in the given resource by
+    /// similarity.
     #[prost(message, optional, tag = "2")]
     pub query: ::core::option::Option<Content>,
     /// Optional. Filters for selecting `Document`s and/or `Chunk`s from the
@@ -2379,17 +2595,16 @@ pub struct SemanticRetrieverConfig {
     #[prost(float, optional, tag = "5")]
     pub minimum_relevance_score: ::core::option::Option<f32>,
 }
-/// Response from the model supporting multiple candidates.
+/// Response from the model supporting multiple candidate responses.
 ///
-/// Note on safety ratings and content filtering. They are reported for both
+/// Safety ratings and content filtering are reported for both
 /// prompt in `GenerateContentResponse.prompt_feedback` and for each candidate
-/// in `finish_reason` and in `safety_ratings`. The API contract is that:
-///   - either all requested candidates are returned or no candidates at all
-///   - no candidates are returned only if there was something wrong with the
-///     prompt (see `prompt_feedback`)
-///   - feedback on each candidate is reported on `finish_reason` and
+/// in `finish_reason` and in `safety_ratings`. The API:
+///   - Returns either all requested candidates or none of them
+///   - Returns no candidates at all only if there was something wrong with the
+///     prompt (check `prompt_feedback`)
+///   - Reports feedback on each candidate in `finish_reason` and
 ///     `safety_ratings`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateContentResponse {
     /// Candidate responses from the model.
@@ -2403,16 +2618,18 @@ pub struct GenerateContentResponse {
     /// Output only. Metadata on the generation requests' token usage.
     #[prost(message, optional, tag = "3")]
     pub usage_metadata: ::core::option::Option<generate_content_response::UsageMetadata>,
+    /// Output only. The model version used to generate the response.
+    #[prost(string, tag = "4")]
+    pub model_version: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `GenerateContentResponse`.
 pub mod generate_content_response {
     /// A set of the feedback metadata the prompt specified in
     /// `GenerateContentRequest.content`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PromptFeedback {
         /// Optional. If set, the prompt was blocked and no candidates are returned.
-        /// Rephrase your prompt.
+        /// Rephrase the prompt.
         #[prost(enumeration = "prompt_feedback::BlockReason", tag = "1")]
         pub block_reason: i32,
         /// Ratings for safety of the prompt.
@@ -2422,7 +2639,7 @@ pub mod generate_content_response {
     }
     /// Nested message and enum types in `PromptFeedback`.
     pub mod prompt_feedback {
-        /// Specifies what was the reason why prompt was blocked.
+        /// Specifies the reason why the prompt was blocked.
         #[derive(
             Clone,
             Copy,
@@ -2438,11 +2655,18 @@ pub mod generate_content_response {
         pub enum BlockReason {
             /// Default value. This value is unused.
             Unspecified = 0,
-            /// Prompt was blocked due to safety reasons. You can inspect
-            /// `safety_ratings` to understand which safety category blocked it.
+            /// Prompt was blocked due to safety reasons. Inspect `safety_ratings`
+            /// to understand which safety category blocked it.
             Safety = 1,
             /// Prompt was blocked due to unknown reasons.
             Other = 2,
+            /// Prompt was blocked due to the terms which are included from the
+            /// terminology blocklist.
+            Blocklist = 3,
+            /// Prompt was blocked due to prohibited content.
+            ProhibitedContent = 4,
+            /// Candidates blocked due to unsafe image generation content.
+            ImageSafety = 5,
         }
         impl BlockReason {
             /// String value of the enum field names used in the ProtoBuf definition.
@@ -2451,9 +2675,12 @@ pub mod generate_content_response {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    BlockReason::Unspecified => "BLOCK_REASON_UNSPECIFIED",
-                    BlockReason::Safety => "SAFETY",
-                    BlockReason::Other => "OTHER",
+                    Self::Unspecified => "BLOCK_REASON_UNSPECIFIED",
+                    Self::Safety => "SAFETY",
+                    Self::Other => "OTHER",
+                    Self::Blocklist => "BLOCKLIST",
+                    Self::ProhibitedContent => "PROHIBITED_CONTENT",
+                    Self::ImageSafety => "IMAGE_SAFETY",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2462,37 +2689,38 @@ pub mod generate_content_response {
                     "BLOCK_REASON_UNSPECIFIED" => Some(Self::Unspecified),
                     "SAFETY" => Some(Self::Safety),
                     "OTHER" => Some(Self::Other),
+                    "BLOCKLIST" => Some(Self::Blocklist),
+                    "PROHIBITED_CONTENT" => Some(Self::ProhibitedContent),
+                    "IMAGE_SAFETY" => Some(Self::ImageSafety),
                     _ => None,
                 }
             }
         }
     }
     /// Metadata on the generation request's token usage.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UsageMetadata {
-        /// Number of tokens in the prompt. When cached_content is set, this is still
-        /// the total effective prompt size. I.e. this includes the number of tokens
-        /// in the cached content.
+        /// Number of tokens in the prompt. When `cached_content` is set, this is
+        /// still the total effective prompt size meaning this includes the number of
+        /// tokens in the cached content.
         #[prost(int32, tag = "1")]
         pub prompt_token_count: i32,
-        /// Number of tokens in the cached part of the prompt, i.e. in the cached
-        /// content.
+        /// Number of tokens in the cached part of the prompt (the cached content)
         #[prost(int32, tag = "4")]
         pub cached_content_token_count: i32,
-        /// Total number of tokens across the generated candidates.
+        /// Total number of tokens across all the generated response candidates.
         #[prost(int32, tag = "2")]
         pub candidates_token_count: i32,
-        /// Total token count for the generation request (prompt + candidates).
+        /// Total token count for the generation request (prompt + response
+        /// candidates).
         #[prost(int32, tag = "3")]
         pub total_token_count: i32,
     }
 }
 /// A response candidate generated from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Candidate {
-    /// Output only. Index of the candidate in the list of candidates.
+    /// Output only. Index of the candidate in the list of response candidates.
     #[prost(int32, optional, tag = "3")]
     pub index: ::core::option::Option<i32>,
     /// Output only. Generated content returned from the model.
@@ -2500,7 +2728,7 @@ pub struct Candidate {
     pub content: ::core::option::Option<Content>,
     /// Optional. Output only. The reason why the model stopped generating tokens.
     ///
-    /// If empty, the model has not stopped generating the tokens.
+    /// If empty, the model has not stopped generating tokens.
     #[prost(enumeration = "candidate::FinishReason", tag = "2")]
     pub finish_reason: i32,
     /// List of ratings for the safety of a response candidate.
@@ -2524,6 +2752,17 @@ pub struct Candidate {
     /// This field is populated for `GenerateAnswer` calls.
     #[prost(message, repeated, tag = "8")]
     pub grounding_attributions: ::prost::alloc::vec::Vec<GroundingAttribution>,
+    /// Output only. Grounding metadata for the candidate.
+    ///
+    /// This field is populated for `GenerateContent` calls.
+    #[prost(message, optional, tag = "9")]
+    pub grounding_metadata: ::core::option::Option<GroundingMetadata>,
+    /// Output only. Average log probability score of the candidate.
+    #[prost(double, tag = "10")]
+    pub avg_logprobs: f64,
+    /// Output only. Log-likelihood scores for the response tokens and top tokens
+    #[prost(message, optional, tag = "11")]
+    pub logprobs_result: ::core::option::Option<LogprobsResult>,
 }
 /// Nested message and enum types in `Candidate`.
 pub mod candidate {
@@ -2547,12 +2786,27 @@ pub mod candidate {
         Stop = 1,
         /// The maximum number of tokens as specified in the request was reached.
         MaxTokens = 2,
-        /// The candidate content was flagged for safety reasons.
+        /// The response candidate content was flagged for safety reasons.
         Safety = 3,
-        /// The candidate content was flagged for recitation reasons.
+        /// The response candidate content was flagged for recitation reasons.
         Recitation = 4,
+        /// The response candidate content was flagged for using an unsupported
+        /// language.
+        Language = 6,
         /// Unknown reason.
         Other = 5,
+        /// Token generation stopped because the content contains forbidden terms.
+        Blocklist = 7,
+        /// Token generation stopped for potentially containing prohibited content.
+        ProhibitedContent = 8,
+        /// Token generation stopped because the content potentially contains
+        /// Sensitive Personally Identifiable Information (SPII).
+        Spii = 9,
+        /// The function call generated by the model is invalid.
+        MalformedFunctionCall = 10,
+        /// Token generation stopped because generated images contain safety
+        /// violations.
+        ImageSafety = 11,
     }
     impl FinishReason {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -2561,12 +2815,18 @@ pub mod candidate {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FinishReason::Unspecified => "FINISH_REASON_UNSPECIFIED",
-                FinishReason::Stop => "STOP",
-                FinishReason::MaxTokens => "MAX_TOKENS",
-                FinishReason::Safety => "SAFETY",
-                FinishReason::Recitation => "RECITATION",
-                FinishReason::Other => "OTHER",
+                Self::Unspecified => "FINISH_REASON_UNSPECIFIED",
+                Self::Stop => "STOP",
+                Self::MaxTokens => "MAX_TOKENS",
+                Self::Safety => "SAFETY",
+                Self::Recitation => "RECITATION",
+                Self::Language => "LANGUAGE",
+                Self::Other => "OTHER",
+                Self::Blocklist => "BLOCKLIST",
+                Self::ProhibitedContent => "PROHIBITED_CONTENT",
+                Self::Spii => "SPII",
+                Self::MalformedFunctionCall => "MALFORMED_FUNCTION_CALL",
+                Self::ImageSafety => "IMAGE_SAFETY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2577,14 +2837,53 @@ pub mod candidate {
                 "MAX_TOKENS" => Some(Self::MaxTokens),
                 "SAFETY" => Some(Self::Safety),
                 "RECITATION" => Some(Self::Recitation),
+                "LANGUAGE" => Some(Self::Language),
                 "OTHER" => Some(Self::Other),
+                "BLOCKLIST" => Some(Self::Blocklist),
+                "PROHIBITED_CONTENT" => Some(Self::ProhibitedContent),
+                "SPII" => Some(Self::Spii),
+                "MALFORMED_FUNCTION_CALL" => Some(Self::MalformedFunctionCall),
+                "IMAGE_SAFETY" => Some(Self::ImageSafety),
                 _ => None,
             }
         }
     }
 }
+/// Logprobs Result
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LogprobsResult {
+    /// Length = total number of decoding steps.
+    #[prost(message, repeated, tag = "1")]
+    pub top_candidates: ::prost::alloc::vec::Vec<logprobs_result::TopCandidates>,
+    /// Length = total number of decoding steps.
+    /// The chosen candidates may or may not be in top_candidates.
+    #[prost(message, repeated, tag = "2")]
+    pub chosen_candidates: ::prost::alloc::vec::Vec<logprobs_result::Candidate>,
+}
+/// Nested message and enum types in `LogprobsResult`.
+pub mod logprobs_result {
+    /// Candidate for the logprobs token and score.
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Candidate {
+        /// The candidate’s token string value.
+        #[prost(string, optional, tag = "1")]
+        pub token: ::core::option::Option<::prost::alloc::string::String>,
+        /// The candidate’s token id value.
+        #[prost(int32, optional, tag = "3")]
+        pub token_id: ::core::option::Option<i32>,
+        /// The candidate's log probability.
+        #[prost(float, optional, tag = "2")]
+        pub log_probability: ::core::option::Option<f32>,
+    }
+    /// Candidates with top log probabilities at each decoding step.
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct TopCandidates {
+        /// Sorted by log probability in descending order.
+        #[prost(message, repeated, tag = "1")]
+        pub candidates: ::prost::alloc::vec::Vec<Candidate>,
+    }
+}
 /// Identifier for the source contributing to this attribution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttributionSourceId {
     #[prost(oneof = "attribution_source_id::Source", tags = "1, 2")]
@@ -2593,7 +2892,6 @@ pub struct AttributionSourceId {
 /// Nested message and enum types in `AttributionSourceId`.
 pub mod attribution_source_id {
     /// Identifier for a part within a `GroundingPassage`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GroundingPassageId {
         /// Output only. ID of the passage matching the `GenerateAnswerRequest`'s
@@ -2607,7 +2905,6 @@ pub mod attribution_source_id {
     }
     /// Identifier for a `Chunk` retrieved via Semantic Retriever specified in the
     /// `GenerateAnswerRequest` using `SemanticRetrieverConfig`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SemanticRetrieverChunk {
         /// Output only. Name of the source matching the request's
@@ -2620,7 +2917,6 @@ pub mod attribution_source_id {
         #[prost(string, tag = "2")]
         pub chunk: ::prost::alloc::string::String,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Identifier for an inline passage.
@@ -2632,7 +2928,6 @@ pub mod attribution_source_id {
     }
 }
 /// Attribution for a source that contributed to an answer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GroundingAttribution {
     /// Output only. Identifier for the source contributing to this attribution.
@@ -2642,8 +2937,112 @@ pub struct GroundingAttribution {
     #[prost(message, optional, tag = "2")]
     pub content: ::core::option::Option<Content>,
 }
-/// Request to generate a grounded answer from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Metadata related to retrieval in the grounding flow.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct RetrievalMetadata {
+    /// Optional. Score indicating how likely information from google search could
+    /// help answer the prompt. The score is in the range \[0, 1\], where 0 is the
+    /// least likely and 1 is the most likely. This score is only populated when
+    /// google search grounding and dynamic retrieval is enabled. It will be
+    /// compared to the threshold to determine whether to trigger google search.
+    #[prost(float, tag = "2")]
+    pub google_search_dynamic_retrieval_score: f32,
+}
+/// Metadata returned to client when grounding is enabled.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GroundingMetadata {
+    /// Optional. Google search entry for the following-up web searches.
+    #[prost(message, optional, tag = "1")]
+    pub search_entry_point: ::core::option::Option<SearchEntryPoint>,
+    /// List of supporting references retrieved from specified grounding source.
+    #[prost(message, repeated, tag = "2")]
+    pub grounding_chunks: ::prost::alloc::vec::Vec<GroundingChunk>,
+    /// List of grounding support.
+    #[prost(message, repeated, tag = "3")]
+    pub grounding_supports: ::prost::alloc::vec::Vec<GroundingSupport>,
+    /// Metadata related to retrieval in the grounding flow.
+    #[prost(message, optional, tag = "4")]
+    pub retrieval_metadata: ::core::option::Option<RetrievalMetadata>,
+    /// Web search queries for the following-up web search.
+    #[prost(string, repeated, tag = "5")]
+    pub web_search_queries: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Google search entry point.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchEntryPoint {
+    /// Optional. Web content snippet that can be embedded in a web page or an app
+    /// webview.
+    #[prost(string, tag = "1")]
+    pub rendered_content: ::prost::alloc::string::String,
+    /// Optional. Base64 encoded JSON representing array of <search term, search
+    /// url> tuple.
+    #[prost(bytes = "vec", tag = "2")]
+    pub sdk_blob: ::prost::alloc::vec::Vec<u8>,
+}
+/// Grounding chunk.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GroundingChunk {
+    /// Chunk type.
+    #[prost(oneof = "grounding_chunk::ChunkType", tags = "1")]
+    pub chunk_type: ::core::option::Option<grounding_chunk::ChunkType>,
+}
+/// Nested message and enum types in `GroundingChunk`.
+pub mod grounding_chunk {
+    /// Chunk from the web.
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Web {
+        /// URI reference of the chunk.
+        #[prost(string, optional, tag = "1")]
+        pub uri: ::core::option::Option<::prost::alloc::string::String>,
+        /// Title of the chunk.
+        #[prost(string, optional, tag = "2")]
+        pub title: ::core::option::Option<::prost::alloc::string::String>,
+    }
+    /// Chunk type.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ChunkType {
+        /// Grounding chunk from the web.
+        #[prost(message, tag = "1")]
+        Web(Web),
+    }
+}
+/// Segment of the content.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Segment {
+    /// Output only. The index of a Part object within its parent Content object.
+    #[prost(int32, tag = "1")]
+    pub part_index: i32,
+    /// Output only. Start index in the given Part, measured in bytes. Offset from
+    /// the start of the Part, inclusive, starting at zero.
+    #[prost(int32, tag = "2")]
+    pub start_index: i32,
+    /// Output only. End index in the given Part, measured in bytes. Offset from
+    /// the start of the Part, exclusive, starting at zero.
+    #[prost(int32, tag = "3")]
+    pub end_index: i32,
+    /// Output only. The text corresponding to the segment from the response.
+    #[prost(string, tag = "4")]
+    pub text: ::prost::alloc::string::String,
+}
+/// Grounding support.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GroundingSupport {
+    /// Segment of the content this support belongs to.
+    #[prost(message, optional, tag = "1")]
+    pub segment: ::core::option::Option<Segment>,
+    /// A list of indices (into 'grounding_chunk') specifying the
+    /// citations associated with the claim. For instance \[1,3,4\] means
+    /// that grounding_chunk\[1\], grounding_chunk\[3\],
+    /// grounding_chunk\[4\] are the retrieved content attributed to the claim.
+    #[prost(int32, repeated, tag = "2")]
+    pub grounding_chunk_indices: ::prost::alloc::vec::Vec<i32>,
+    /// Confidence score of the support references. Ranges from 0 to 1. 1 is the
+    /// most confident. This list must have the same size as the
+    /// grounding_chunk_indices.
+    #[prost(float, repeated, tag = "3")]
+    pub confidence_scores: ::prost::alloc::vec::Vec<f32>,
+}
+/// Request to generate a grounded answer from the `Model`.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAnswerRequest {
     /// Required. The name of the `Model` to use for generating the grounded
@@ -2652,12 +3051,12 @@ pub struct GenerateAnswerRequest {
     /// Format: `model=models/{model}`.
     #[prost(string, tag = "1")]
     pub model: ::prost::alloc::string::String,
-    /// Required. The content of the current conversation with the model. For
+    /// Required. The content of the current conversation with the `Model`. For
     /// single-turn queries, this is a single question to answer. For multi-turn
     /// queries, this is a repeated field that contains conversation history and
     /// the last `Content` in the list containing the question.
     ///
-    /// Note: GenerateAnswer currently only supports queries in English.
+    /// Note: `GenerateAnswer` only supports queries in English.
     #[prost(message, repeated, tag = "2")]
     pub contents: ::prost::alloc::vec::Vec<Content>,
     /// Required. Style in which answers should be returned.
@@ -2676,6 +3075,11 @@ pub struct GenerateAnswerRequest {
     /// setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
     /// HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
     /// HARM_CATEGORY_HARASSMENT are supported.
+    /// Refer to the
+    /// [guide](<https://ai.google.dev/gemini-api/docs/safety-settings>)
+    /// for detailed information on available safety settings. Also refer to the
+    /// [Safety guidance](<https://ai.google.dev/gemini-api/docs/safety-guidance>) to
+    /// learn how to incorporate safety considerations in your AI applications.
     #[prost(message, repeated, tag = "3")]
     pub safety_settings: ::prost::alloc::vec::Vec<SafetySetting>,
     /// Optional. Controls the randomness of the output.
@@ -2726,10 +3130,10 @@ pub mod generate_answer_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AnswerStyle::Unspecified => "ANSWER_STYLE_UNSPECIFIED",
-                AnswerStyle::Abstractive => "ABSTRACTIVE",
-                AnswerStyle::Extractive => "EXTRACTIVE",
-                AnswerStyle::Verbose => "VERBOSE",
+                Self::Unspecified => "ANSWER_STYLE_UNSPECIFIED",
+                Self::Abstractive => "ABSTRACTIVE",
+                Self::Extractive => "EXTRACTIVE",
+                Self::Verbose => "VERBOSE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2744,7 +3148,6 @@ pub mod generate_answer_request {
         }
     }
     /// The sources in which to ground the answer.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum GroundingSource {
         /// Passages provided inline with the request.
@@ -2757,7 +3160,6 @@ pub mod generate_answer_request {
     }
 }
 /// Response from the model for a grounded answer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateAnswerResponse {
     /// Candidate answer from the model.
@@ -2771,22 +3173,22 @@ pub struct GenerateAnswerResponse {
     /// Output only. The model's estimate of the probability that its answer is
     /// correct and grounded in the input passages.
     ///
-    /// A low answerable_probability indicates that the answer might not be
+    /// A low `answerable_probability` indicates that the answer might not be
     /// grounded in the sources.
     ///
-    /// When `answerable_probability` is low, some clients may wish to:
+    /// When `answerable_probability` is low, you may want to:
     ///
     /// * Display a message to the effect of "We couldn’t answer that question" to
     /// the user.
     /// * Fall back to a general-purpose LLM that answers the question from world
     /// knowledge. The threshold and nature of such fallbacks will depend on
-    /// individual clients’ use cases. 0.5 is a good starting threshold.
+    /// individual use cases. `0.5` is a good starting threshold.
     #[prost(float, optional, tag = "2")]
     pub answerable_probability: ::core::option::Option<f32>,
     /// Output only. Feedback related to the input data used to answer the
-    /// question, as opposed to model-generated response to the question.
+    /// question, as opposed to the model-generated response to the question.
     ///
-    /// "Input data" can be one or more of the following:
+    /// The input data can be one or more of the following:
     ///
     /// - Question specified by the last entry in `GenerateAnswerRequest.content`
     /// - Conversation history specified by the other entries in
@@ -2799,12 +3201,11 @@ pub struct GenerateAnswerResponse {
 /// Nested message and enum types in `GenerateAnswerResponse`.
 pub mod generate_answer_response {
     /// Feedback related to the input data used to answer the question, as opposed
-    /// to model-generated response to the question.
-    #[allow(clippy::derive_partial_eq_without_eq)]
+    /// to the model-generated response to the question.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InputFeedback {
         /// Optional. If set, the input was blocked and no candidates are returned.
-        /// Rephrase your input.
+        /// Rephrase the input.
         #[prost(enumeration = "input_feedback::BlockReason", optional, tag = "1")]
         pub block_reason: ::core::option::Option<i32>,
         /// Ratings for safety of the input.
@@ -2830,7 +3231,7 @@ pub mod generate_answer_response {
         pub enum BlockReason {
             /// Default value. This value is unused.
             Unspecified = 0,
-            /// Input was blocked due to safety reasons. You can inspect
+            /// Input was blocked due to safety reasons. Inspect
             /// `safety_ratings` to understand which safety category blocked it.
             Safety = 1,
             /// Input was blocked due to other reasons.
@@ -2843,9 +3244,9 @@ pub mod generate_answer_response {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    BlockReason::Unspecified => "BLOCK_REASON_UNSPECIFIED",
-                    BlockReason::Safety => "SAFETY",
-                    BlockReason::Other => "OTHER",
+                    Self::Unspecified => "BLOCK_REASON_UNSPECIFIED",
+                    Self::Safety => "SAFETY",
+                    Self::Other => "OTHER",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2861,7 +3262,6 @@ pub mod generate_answer_response {
     }
 }
 /// Request containing the `Content` for the model to embed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedContentRequest {
     /// Required. The model's resource name. This serves as an ID for the Model to
@@ -2889,13 +3289,12 @@ pub struct EmbedContentRequest {
     pub title: ::core::option::Option<::prost::alloc::string::String>,
     /// Optional. Optional reduced dimension for the output embedding. If set,
     /// excessive values in the output embedding are truncated from the end.
-    /// Supported by newer models since 2024, and the earlier model
-    /// (`models/embedding-001`) cannot specify this value.
+    /// Supported by newer models since 2024 only. You cannot set this value if
+    /// using the earlier model (`models/embedding-001`).
     #[prost(int32, optional, tag = "5")]
     pub output_dimensionality: ::core::option::Option<i32>,
 }
 /// A list of floats representing an embedding.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContentEmbedding {
     /// The embedding values.
@@ -2903,7 +3302,6 @@ pub struct ContentEmbedding {
     pub values: ::prost::alloc::vec::Vec<f32>,
 }
 /// The response to an `EmbedContentRequest`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedContentResponse {
     /// Output only. The embedding generated from the input content.
@@ -2911,7 +3309,6 @@ pub struct EmbedContentResponse {
     pub embedding: ::core::option::Option<ContentEmbedding>,
 }
 /// Batch request to get embeddings from the model for a list of prompts.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedContentsRequest {
     /// Required. The model's resource name. This serves as an ID for the Model to
@@ -2928,7 +3325,6 @@ pub struct BatchEmbedContentsRequest {
     pub requests: ::prost::alloc::vec::Vec<EmbedContentRequest>,
 }
 /// The response to a `BatchEmbedContentsRequest`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedContentsResponse {
     /// Output only. The embeddings for each request, in the same order as provided
@@ -2940,7 +3336,6 @@ pub struct BatchEmbedContentsResponse {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountTokensRequest {
     /// Required. The model's resource name. This serves as an ID for the Model to
@@ -2955,26 +3350,27 @@ pub struct CountTokensRequest {
     /// when `generate_content_request` is set.
     #[prost(message, repeated, tag = "2")]
     pub contents: ::prost::alloc::vec::Vec<Content>,
-    /// Optional. The overall input given to the model. CountTokens will count
-    /// prompt, function calling, etc.
+    /// Optional. The overall input given to the `Model`. This includes the prompt
+    /// as well as other model steering information like [system
+    /// instructions](<https://ai.google.dev/gemini-api/docs/system-instructions>),
+    /// and/or function declarations for [function
+    /// calling](<https://ai.google.dev/gemini-api/docs/function-calling>).
+    /// `Model`s/`Content`s and `generate_content_request`s are mutually
+    /// exclusive. You can either send `Model` + `Content`s or a
+    /// `generate_content_request`, but never both.
     #[prost(message, optional, tag = "3")]
     pub generate_content_request: ::core::option::Option<GenerateContentRequest>,
 }
 /// A response from `CountTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountTokensResponse {
-    /// The number of tokens that the `model` tokenizes the `prompt` into.
-    ///
-    /// Always non-negative. When cached_content is set, this is still the total
-    /// effective prompt size. I.e. this includes the number of tokens in the
-    /// cached content.
+    /// The number of tokens that the `Model` tokenizes the `prompt` into. Always
+    /// non-negative.
     #[prost(int32, tag = "1")]
     pub total_tokens: i32,
-    /// Number of tokens in the cached part of the prompt, i.e. in the cached
-    /// content.
+    /// Number of tokens in the cached part of the prompt (the cached content).
     #[prost(int32, tag = "5")]
     pub cached_content_token_count: i32,
 }
@@ -3006,14 +3402,14 @@ impl TaskType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TaskType::Unspecified => "TASK_TYPE_UNSPECIFIED",
-            TaskType::RetrievalQuery => "RETRIEVAL_QUERY",
-            TaskType::RetrievalDocument => "RETRIEVAL_DOCUMENT",
-            TaskType::SemanticSimilarity => "SEMANTIC_SIMILARITY",
-            TaskType::Classification => "CLASSIFICATION",
-            TaskType::Clustering => "CLUSTERING",
-            TaskType::QuestionAnswering => "QUESTION_ANSWERING",
-            TaskType::FactVerification => "FACT_VERIFICATION",
+            Self::Unspecified => "TASK_TYPE_UNSPECIFIED",
+            Self::RetrievalQuery => "RETRIEVAL_QUERY",
+            Self::RetrievalDocument => "RETRIEVAL_DOCUMENT",
+            Self::SemanticSimilarity => "SEMANTIC_SIMILARITY",
+            Self::Classification => "CLASSIFICATION",
+            Self::Clustering => "CLUSTERING",
+            Self::QuestionAnswering => "QUESTION_ANSWERING",
+            Self::FactVerification => "FACT_VERIFICATION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3033,7 +3429,13 @@ impl TaskType {
 }
 /// Generated client implementations.
 pub mod generative_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// API for using Large Models that generate multimodal content and have
@@ -3057,8 +3459,8 @@ pub mod generative_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3083,7 +3485,7 @@ pub mod generative_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             GenerativeServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3118,13 +3520,13 @@ pub mod generative_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        /// Generates a response from the model given an input
-        /// `GenerateContentRequest`.
-        ///
-        /// Input capabilities differ between models, including tuned models. See the
-        /// [model guide](https://ai.google.dev/models/gemini) and
-        /// [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for
-        /// details.
+        /// Generates a model response given an input `GenerateContentRequest`.
+        /// Refer to the [text generation
+        /// guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
+        /// usage information. Input capabilities differ between models, including
+        /// tuned models. Refer to the [model
+        /// guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
+        /// guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
         pub async fn generate_content(
             &mut self,
             request: impl tonic::IntoRequest<super::GenerateContentRequest>,
@@ -3136,8 +3538,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3168,8 +3569,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3187,8 +3587,9 @@ pub mod generative_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Generates a streamed response from the model given an input
-        /// `GenerateContentRequest`.
+        /// Generates a [streamed
+        /// response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
+        /// from the model given an input `GenerateContentRequest`.
         pub async fn stream_generate_content(
             &mut self,
             request: impl tonic::IntoRequest<super::GenerateContentRequest>,
@@ -3200,8 +3601,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3219,7 +3619,9 @@ pub mod generative_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
-        /// Generates an embedding from the model given an input `Content`.
+        /// Generates a text embedding vector from the input `Content` using the
+        /// specified [Gemini Embedding
+        /// model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
         pub async fn embed_content(
             &mut self,
             request: impl tonic::IntoRequest<super::EmbedContentRequest>,
@@ -3231,8 +3633,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3250,8 +3651,9 @@ pub mod generative_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Generates multiple embeddings from the model given input text in a
-        /// synchronous call.
+        /// Generates multiple embedding vectors from the input `Content` which
+        /// consists of a batch of strings represented as `EmbedContentRequest`
+        /// objects.
         pub async fn batch_embed_contents(
             &mut self,
             request: impl tonic::IntoRequest<super::BatchEmbedContentsRequest>,
@@ -3263,8 +3665,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3282,7 +3683,9 @@ pub mod generative_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Runs a model's tokenizer on input content and returns the token count.
+        /// Runs a model's tokenizer on input `Content` and returns the token count.
+        /// Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
+        /// to learn more about tokens.
         pub async fn count_tokens(
             &mut self,
             request: impl tonic::IntoRequest<super::CountTokensRequest>,
@@ -3294,8 +3697,7 @@ pub mod generative_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3316,10 +3718,11 @@ pub mod generative_service_client {
     }
 }
 /// Information about a Generative Language Model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Model {
-    /// Required. The resource name of the `Model`.
+    /// Required. The resource name of the `Model`. Refer to [Model
+    /// variants](<https://ai.google.dev/gemini-api/docs/models/gemini#model-variations>)
+    /// for all allowed values.
     ///
     /// Format: `models/{model}` with a `{model}` naming convention of:
     ///
@@ -3327,22 +3730,22 @@ pub struct Model {
     ///
     /// Examples:
     ///
-    /// * `models/chat-bison-001`
+    /// * `models/gemini-1.5-flash-001`
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Required. The name of the base model, pass this to the generation request.
     ///
     /// Examples:
     ///
-    /// * `chat-bison`
+    /// * `gemini-1.5-flash`
     #[prost(string, tag = "2")]
     pub base_model_id: ::prost::alloc::string::String,
     /// Required. The version number of the model.
     ///
-    /// This represents the major version
+    /// This represents the major version (`1.0` or `1.5`)
     #[prost(string, tag = "3")]
     pub version: ::prost::alloc::string::String,
-    /// The human-readable name of the model. E.g. "Chat Bison".
+    /// The human-readable name of the model. E.g. "Gemini 1.5 Flash".
     ///
     /// The name can be up to 128 characters long and can consist of any UTF-8
     /// characters.
@@ -3359,8 +3762,8 @@ pub struct Model {
     pub output_token_limit: i32,
     /// The model's supported generation methods.
     ///
-    /// The method names are defined as Pascal case
-    /// strings, such as `generateMessage` which correspond to API methods.
+    /// The corresponding API method names are defined as Pascal case
+    /// strings, such as `generateMessage` and `generateContent`.
     #[prost(string, repeated, tag = "8")]
     pub supported_generation_methods: ::prost::alloc::vec::Vec<
         ::prost::alloc::string::String,
@@ -3377,7 +3780,8 @@ pub struct Model {
     /// The maximum temperature this model can use.
     #[prost(float, optional, tag = "13")]
     pub max_temperature: ::core::option::Option<f32>,
-    /// For Nucleus sampling.
+    /// For [Nucleus
+    /// sampling](<https://ai.google.dev/gemini-api/docs/prompting-strategies#top-p>).
     ///
     /// Nucleus sampling considers the smallest set of tokens whose probability
     /// sum is at least `top_p`.
@@ -3396,16 +3800,18 @@ pub struct Model {
     pub top_k: ::core::option::Option<i32>,
 }
 /// A fine-tuned model created using ModelService.CreateTunedModel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TunedModel {
     /// Output only. The tuned model name. A unique name will be generated on
     /// create. Example: `tunedModels/az2mb0bpw6i` If display_name is set on
     /// create, the id portion of the name will be set by concatenating the words
     /// of the display_name with hyphens and adding a random portion for
-    /// uniqueness. Example:
-    ///      display_name = "Sentence Translator"
-    ///      name = "tunedModels/sentence-translator-u3b7m"
+    /// uniqueness.
+    ///
+    /// Example:
+    ///
+    ///   * display_name = `Sentence Translator`
+    ///   * name = `tunedModels/sentence-translator-u3b7m`
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Optional. The name to display for this model in user interfaces.
@@ -3456,6 +3862,9 @@ pub struct TunedModel {
     /// Required. The tuning task that creates the tuned model.
     #[prost(message, optional, tag = "10")]
     pub tuning_task: ::core::option::Option<TuningTask>,
+    /// Optional. List of project numbers that have read access to the tuned model.
+    #[prost(int64, repeated, packed = "false", tag = "14")]
+    pub reader_project_numbers: ::prost::alloc::vec::Vec<i64>,
     /// The model used as the starting point for tuning.
     #[prost(oneof = "tuned_model::SourceModel", tags = "3, 4")]
     pub source_model: ::core::option::Option<tuned_model::SourceModel>,
@@ -3492,10 +3901,10 @@ pub mod tuned_model {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Creating => "CREATING",
-                State::Active => "ACTIVE",
-                State::Failed => "FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Creating => "CREATING",
+                Self::Active => "ACTIVE",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3510,7 +3919,6 @@ pub mod tuned_model {
         }
     }
     /// The model used as the starting point for tuning.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SourceModel {
         /// Optional. TunedModel to use as the starting point for training the new
@@ -3518,13 +3926,12 @@ pub mod tuned_model {
         #[prost(message, tag = "3")]
         TunedModelSource(super::TunedModelSource),
         /// Immutable. The name of the `Model` to tune.
-        /// Example: `models/text-bison-001`
+        /// Example: `models/gemini-1.5-flash-001`
         #[prost(string, tag = "4")]
         BaseModel(::prost::alloc::string::String),
     }
 }
 /// Tuned model as a source for training a new model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TunedModelSource {
     /// Immutable. The name of the `TunedModel` to use as the starting point for
@@ -3533,12 +3940,11 @@ pub struct TunedModelSource {
     #[prost(string, tag = "1")]
     pub tuned_model: ::prost::alloc::string::String,
     /// Output only. The name of the base `Model` this `TunedModel` was tuned from.
-    /// Example: `models/text-bison-001`
+    /// Example: `models/gemini-1.5-flash-001`
     #[prost(string, tag = "2")]
     pub base_model: ::prost::alloc::string::String,
 }
 /// Tuning tasks that create tuned models.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningTask {
     /// Output only. The timestamp when tuning this model started.
@@ -3560,7 +3966,6 @@ pub struct TuningTask {
 }
 /// Hyperparameters controlling the tuning process. Read more at
 /// <https://ai.google.dev/docs/model_tuning_guidance>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Hyperparameters {
     /// Immutable. The number of training epochs. An epoch is one pass through the
@@ -3581,7 +3986,6 @@ pub struct Hyperparameters {
 /// Nested message and enum types in `Hyperparameters`.
 pub mod hyperparameters {
     /// Options for specifying learning rate during tuning.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum LearningRateOption {
         /// Optional. Immutable. The learning rate hyperparameter for tuning.
@@ -3599,7 +4003,6 @@ pub mod hyperparameters {
     }
 }
 /// Dataset for training or validation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Dataset {
     /// Inline data or a reference to the data.
@@ -3609,25 +4012,22 @@ pub struct Dataset {
 /// Nested message and enum types in `Dataset`.
 pub mod dataset {
     /// Inline data or a reference to the data.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Dataset {
-        /// Optional. Inline examples.
+        /// Optional. Inline examples with simple input/output text.
         #[prost(message, tag = "1")]
         Examples(super::TuningExamples),
     }
 }
 /// A set of tuning examples. Can be training or validation data.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningExamples {
-    /// Required. The examples. Example input can be for text or discuss, but all
-    /// examples in a set must be of the same type.
+    /// The examples. Example input can be for text or discuss, but all examples
+    /// in a set must be of the same type.
     #[prost(message, repeated, tag = "1")]
     pub examples: ::prost::alloc::vec::Vec<TuningExample>,
 }
 /// A single example for tuning.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TuningExample {
     /// Required. The expected model output.
@@ -3640,7 +4040,6 @@ pub struct TuningExample {
 /// Nested message and enum types in `TuningExample`.
 pub mod tuning_example {
     /// The input to the model for this example.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ModelInput {
         /// Optional. Text model input.
@@ -3649,7 +4048,6 @@ pub mod tuning_example {
     }
 }
 /// Record for a single tuning step.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TuningSnapshot {
     /// Output only. The tuning step.
@@ -3666,7 +4064,6 @@ pub struct TuningSnapshot {
     pub compute_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Request for getting information about a specific Model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetModelRequest {
     /// Required. The resource name of the model.
@@ -3678,13 +4075,11 @@ pub struct GetModelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing all Models.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListModelsRequest {
     /// The maximum number of `Models` to return (per page).
     ///
-    /// The service may return fewer models.
-    /// If unspecified, at most 50 models will be returned per page.
+    /// If unspecified, 50 models will be returned per page.
     /// This method returns at most 1000 models per page, even if you pass a larger
     /// page_size.
     #[prost(int32, tag = "2")]
@@ -3700,7 +4095,6 @@ pub struct ListModelsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response from `ListModel` containing a paginated list of Models.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListModelsResponse {
     /// The returned Models.
@@ -3713,7 +4107,6 @@ pub struct ListModelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for getting information about a specific Model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTunedModelRequest {
     /// Required. The resource name of the model.
@@ -3723,7 +4116,6 @@ pub struct GetTunedModelRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing TunedModels.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTunedModelsRequest {
     /// Optional. The maximum number of `TunedModels` to return (per page).
@@ -3761,7 +4153,6 @@ pub struct ListTunedModelsRequest {
     pub filter: ::prost::alloc::string::String,
 }
 /// Response from `ListTunedModels` containing a paginated list of Models.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTunedModelsResponse {
     /// The returned Models.
@@ -3774,13 +4165,12 @@ pub struct ListTunedModelsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to create a TunedModel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTunedModelRequest {
     /// Optional. The unique id for the tuned model if specified.
     /// This value should be up to 40 characters, the first character must be a
     /// letter, the last could be a letter or a number. The id must match the
-    /// regular expression: [a-z](\[a-z0-9-\]{0,38}\[a-z0-9\])?.
+    /// regular expression: `[a-z](\[a-z0-9-\]{0,38}\[a-z0-9\])?`.
     #[prost(string, optional, tag = "1")]
     pub tuned_model_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Required. The tuned model to create.
@@ -3789,7 +4179,6 @@ pub struct CreateTunedModelRequest {
 }
 /// Metadata about the state and progress of creating a tuned model returned from
 /// the long-running operation
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTunedModelMetadata {
     /// Name of the tuned model associated with the tuning operation.
@@ -3809,18 +4198,16 @@ pub struct CreateTunedModelMetadata {
     pub snapshots: ::prost::alloc::vec::Vec<TuningSnapshot>,
 }
 /// Request to update a TunedModel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTunedModelRequest {
     /// Required. The tuned model to update.
     #[prost(message, optional, tag = "1")]
     pub tuned_model: ::core::option::Option<TunedModel>,
-    /// Required. The list of fields to update.
+    /// Optional. The list of fields to update.
     #[prost(message, optional, tag = "2")]
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to delete a TunedModel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTunedModelRequest {
     /// Required. The resource name of the model.
@@ -3830,7 +4217,13 @@ pub struct DeleteTunedModelRequest {
 }
 /// Generated client implementations.
 pub mod model_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Provides methods for getting metadata information about Generative Models.
@@ -3853,8 +4246,8 @@ pub mod model_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3879,7 +4272,7 @@ pub mod model_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ModelServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3914,7 +4307,12 @@ pub mod model_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        /// Gets information about a specific Model.
+        /// Gets information about a specific `Model` such as its version number, token
+        /// limits,
+        /// [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters)
+        /// and other metadata. Refer to the [Gemini models
+        /// guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed
+        /// model information.
         pub async fn get_model(
             &mut self,
             request: impl tonic::IntoRequest<super::GetModelRequest>,
@@ -3923,8 +4321,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3942,7 +4339,8 @@ pub mod model_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lists models available through the API.
+        /// Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini)
+        /// available through the Gemini API.
         pub async fn list_models(
             &mut self,
             request: impl tonic::IntoRequest<super::ListModelsRequest>,
@@ -3954,8 +4352,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3982,8 +4379,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4001,7 +4397,7 @@ pub mod model_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Lists tuned models owned by the user.
+        /// Lists created tuned models.
         pub async fn list_tuned_models(
             &mut self,
             request: impl tonic::IntoRequest<super::ListTunedModelsRequest>,
@@ -4013,8 +4409,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4033,10 +4428,10 @@ pub mod model_service_client {
             self.inner.unary(req, path, codec).await
         }
         /// Creates a tuned model.
-        /// Intermediate tuning progress (if any) is accessed through the
+        /// Check intermediate tuning progress (if any) through the
         /// [google.longrunning.Operations] service.
         ///
-        /// Status and results can be accessed through the Operations service.
+        /// Access status and results through the Operations service.
         /// Example:
         ///   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222
         pub async fn create_tuned_model(
@@ -4050,8 +4445,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4078,8 +4472,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4106,8 +4499,7 @@ pub mod model_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4141,7 +4533,6 @@ pub mod model_service_client {
 /// - reader can use the resource (e.g. tuned model, corpus) for inference
 /// - writer has reader's permissions and additionally can edit and share
 /// - owner has writer's permissions and additionally can delete
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Permission {
     /// Output only. Identifier. The permission name. A unique name will be
@@ -4196,10 +4587,10 @@ pub mod permission {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                GranteeType::Unspecified => "GRANTEE_TYPE_UNSPECIFIED",
-                GranteeType::User => "USER",
-                GranteeType::Group => "GROUP",
-                GranteeType::Everyone => "EVERYONE",
+                Self::Unspecified => "GRANTEE_TYPE_UNSPECIFIED",
+                Self::User => "USER",
+                Self::Group => "GROUP",
+                Self::Everyone => "EVERYONE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4243,10 +4634,10 @@ pub mod permission {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Role::Unspecified => "ROLE_UNSPECIFIED",
-                Role::Owner => "OWNER",
-                Role::Writer => "WRITER",
-                Role::Reader => "READER",
+                Self::Unspecified => "ROLE_UNSPECIFIED",
+                Self::Owner => "OWNER",
+                Self::Writer => "WRITER",
+                Self::Reader => "READER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4262,7 +4653,6 @@ pub mod permission {
     }
 }
 /// Request to create a `Permission`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreatePermissionRequest {
     /// Required. The parent resource of the `Permission`.
@@ -4276,7 +4666,6 @@ pub struct CreatePermissionRequest {
     pub permission: ::core::option::Option<Permission>,
 }
 /// Request for getting information about a specific `Permission`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPermissionRequest {
     /// Required. The resource name of the permission.
@@ -4288,7 +4677,6 @@ pub struct GetPermissionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for listing permissions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPermissionsRequest {
     /// Required. The parent resource of the permissions.
@@ -4317,7 +4705,6 @@ pub struct ListPermissionsRequest {
 }
 /// Response from `ListPermissions` containing a paginated list of
 /// permissions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListPermissionsResponse {
     /// Returned permissions.
@@ -4330,7 +4717,6 @@ pub struct ListPermissionsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request to update the `Permission`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdatePermissionRequest {
     /// Required. The permission to update.
@@ -4344,7 +4730,6 @@ pub struct UpdatePermissionRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to delete the `Permission`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeletePermissionRequest {
     /// Required. The resource name of the permission.
@@ -4355,7 +4740,6 @@ pub struct DeletePermissionRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to transfer the ownership of the tuned model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferOwnershipRequest {
     /// Required. The resource name of the tuned model to transfer ownership.
@@ -4369,12 +4753,17 @@ pub struct TransferOwnershipRequest {
     pub email_address: ::prost::alloc::string::String,
 }
 /// Response from `TransferOwnership`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransferOwnershipResponse {}
 /// Generated client implementations.
 pub mod permission_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Provides methods for managing permissions to PaLM API resources.
@@ -4397,8 +4786,8 @@ pub mod permission_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -4423,7 +4812,7 @@ pub mod permission_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             PermissionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -4467,8 +4856,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4495,8 +4883,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4526,8 +4913,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4554,8 +4940,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4582,8 +4967,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4615,8 +4999,7 @@ pub mod permission_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4636,8 +5019,153 @@ pub mod permission_service_client {
         }
     }
 }
+/// Request message for
+/// [PredictionService.Predict][google.ai.generativelanguage.v1beta.PredictionService.Predict].
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PredictRequest {
+    /// Required. The name of the model for prediction.
+    /// Format: `name=models/{model}`.
+    #[prost(string, tag = "1")]
+    pub model: ::prost::alloc::string::String,
+    /// Required. The instances that are the input to the prediction call.
+    #[prost(message, repeated, tag = "2")]
+    pub instances: ::prost::alloc::vec::Vec<::prost_types::Value>,
+    /// Optional. The parameters that govern the prediction call.
+    #[prost(message, optional, tag = "3")]
+    pub parameters: ::core::option::Option<::prost_types::Value>,
+}
+/// Response message for \[PredictionService.Predict\].
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PredictResponse {
+    /// The outputs of the prediction call.
+    #[prost(message, repeated, tag = "1")]
+    pub predictions: ::prost::alloc::vec::Vec<::prost_types::Value>,
+}
+/// Generated client implementations.
+pub mod prediction_service_client {
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    /// A service for online predictions and explanations.
+    #[derive(Debug, Clone)]
+    pub struct PredictionServiceClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl PredictionServiceClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> PredictionServiceClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> PredictionServiceClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+        {
+            PredictionServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        /// Performs a prediction request.
+        pub async fn predict(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PredictRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::PredictResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.ai.generativelanguage.v1beta.PredictionService/Predict",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.ai.generativelanguage.v1beta.PredictionService",
+                        "Predict",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+    }
+}
 /// Request to create a `Corpus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCorpusRequest {
     /// Required. The `Corpus` to create.
@@ -4645,7 +5173,6 @@ pub struct CreateCorpusRequest {
     pub corpus: ::core::option::Option<Corpus>,
 }
 /// Request for getting information about a specific `Corpus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCorpusRequest {
     /// Required. The name of the `Corpus`.
@@ -4654,7 +5181,6 @@ pub struct GetCorpusRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Corpus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCorpusRequest {
     /// Required. The `Corpus` to update.
@@ -4666,7 +5192,6 @@ pub struct UpdateCorpusRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to delete a `Corpus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCorpusRequest {
     /// Required. The resource name of the `Corpus`.
@@ -4682,7 +5207,6 @@ pub struct DeleteCorpusRequest {
     pub force: bool,
 }
 /// Request for listing `Corpora`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCorporaRequest {
     /// Optional. The maximum number of `Corpora` to return (per page).
@@ -4704,7 +5228,6 @@ pub struct ListCorporaRequest {
 }
 /// Response from `ListCorpora` containing a paginated list of `Corpora`.
 /// The results are sorted by ascending `corpus.create_time`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCorporaResponse {
     /// The returned corpora.
@@ -4716,7 +5239,6 @@ pub struct ListCorporaResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for querying a `Corpus`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryCorpusRequest {
     /// Required. The name of the `Corpus` to query.
@@ -4768,7 +5290,6 @@ pub struct QueryCorpusRequest {
     pub results_count: i32,
 }
 /// Response from `QueryCorpus` containing a list of relevant chunks.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryCorpusResponse {
     /// The relevant chunks.
@@ -4776,7 +5297,6 @@ pub struct QueryCorpusResponse {
     pub relevant_chunks: ::prost::alloc::vec::Vec<RelevantChunk>,
 }
 /// The information for a chunk relevant to a query.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RelevantChunk {
     /// `Chunk` relevance to the query.
@@ -4787,7 +5307,6 @@ pub struct RelevantChunk {
     pub chunk: ::core::option::Option<Chunk>,
 }
 /// Request to create a `Document`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDocumentRequest {
     /// Required. The name of the `Corpus` where this `Document` will be created.
@@ -4799,7 +5318,6 @@ pub struct CreateDocumentRequest {
     pub document: ::core::option::Option<Document>,
 }
 /// Request for getting information about a specific `Document`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDocumentRequest {
     /// Required. The name of the `Document` to retrieve.
@@ -4808,7 +5326,6 @@ pub struct GetDocumentRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Document`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDocumentRequest {
     /// Required. The `Document` to update.
@@ -4821,7 +5338,6 @@ pub struct UpdateDocumentRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to delete a `Document`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDocumentRequest {
     /// Required. The resource name of the `Document` to delete.
@@ -4837,7 +5353,6 @@ pub struct DeleteDocumentRequest {
     pub force: bool,
 }
 /// Request for listing `Document`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsRequest {
     /// Required. The name of the `Corpus` containing `Document`s.
@@ -4863,7 +5378,6 @@ pub struct ListDocumentsRequest {
 }
 /// Response from `ListDocuments` containing a paginated list of `Document`s.
 /// The `Document`s are sorted by ascending `document.create_time`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDocumentsResponse {
     /// The returned `Document`s.
@@ -4875,7 +5389,6 @@ pub struct ListDocumentsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for querying a `Document`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDocumentRequest {
     /// Required. The name of the `Document` to query.
@@ -4927,7 +5440,6 @@ pub struct QueryDocumentRequest {
     pub metadata_filters: ::prost::alloc::vec::Vec<MetadataFilter>,
 }
 /// Response from `QueryDocument` containing a list of relevant chunks.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDocumentResponse {
     /// The returned relevant chunks.
@@ -4935,7 +5447,6 @@ pub struct QueryDocumentResponse {
     pub relevant_chunks: ::prost::alloc::vec::Vec<RelevantChunk>,
 }
 /// Request to create a `Chunk`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChunkRequest {
     /// Required. The name of the `Document` where this `Chunk` will be created.
@@ -4947,7 +5458,6 @@ pub struct CreateChunkRequest {
     pub chunk: ::core::option::Option<Chunk>,
 }
 /// Request to batch create `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateChunksRequest {
     /// Optional. The name of the `Document` where this batch of `Chunk`s will be
@@ -4961,7 +5471,6 @@ pub struct BatchCreateChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<CreateChunkRequest>,
 }
 /// Response from `BatchCreateChunks` containing a list of created `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchCreateChunksResponse {
     /// `Chunk`s created.
@@ -4969,7 +5478,6 @@ pub struct BatchCreateChunksResponse {
     pub chunks: ::prost::alloc::vec::Vec<Chunk>,
 }
 /// Request for getting information about a specific `Chunk`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetChunkRequest {
     /// Required. The name of the `Chunk` to retrieve.
@@ -4978,7 +5486,6 @@ pub struct GetChunkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to update a `Chunk`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateChunkRequest {
     /// Required. The `Chunk` to update.
@@ -4990,7 +5497,6 @@ pub struct UpdateChunkRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to batch update `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateChunksRequest {
     /// Optional. The name of the `Document` containing the `Chunk`s to update.
@@ -5004,7 +5510,6 @@ pub struct BatchUpdateChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<UpdateChunkRequest>,
 }
 /// Response from `BatchUpdateChunks` containing a list of updated `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchUpdateChunksResponse {
     /// `Chunk`s updated.
@@ -5012,7 +5517,6 @@ pub struct BatchUpdateChunksResponse {
     pub chunks: ::prost::alloc::vec::Vec<Chunk>,
 }
 /// Request to delete a `Chunk`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteChunkRequest {
     /// Required. The resource name of the `Chunk` to delete.
@@ -5021,7 +5525,6 @@ pub struct DeleteChunkRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to batch delete `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchDeleteChunksRequest {
     /// Optional. The name of the `Document` containing the `Chunk`s to delete.
@@ -5034,7 +5537,6 @@ pub struct BatchDeleteChunksRequest {
     pub requests: ::prost::alloc::vec::Vec<DeleteChunkRequest>,
 }
 /// Request for listing `Chunk`s.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChunksRequest {
     /// Required. The name of the `Document` containing `Chunk`s.
@@ -5060,7 +5562,6 @@ pub struct ListChunksRequest {
 }
 /// Response from `ListChunks` containing a paginated list of `Chunk`s.
 /// The `Chunk`s are sorted by ascending `chunk.create_time`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListChunksResponse {
     /// The returned `Chunk`s.
@@ -5073,7 +5574,13 @@ pub struct ListChunksResponse {
 }
 /// Generated client implementations.
 pub mod retriever_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// An API for semantic search over a corpus of user uploaded content.
@@ -5096,8 +5603,8 @@ pub mod retriever_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -5122,7 +5629,7 @@ pub mod retriever_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             RetrieverServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -5166,8 +5673,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5194,8 +5700,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5222,8 +5727,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5250,8 +5754,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5281,8 +5784,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5312,8 +5814,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5340,8 +5841,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5368,8 +5868,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5396,8 +5895,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5424,8 +5922,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5455,8 +5952,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5486,8 +5982,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5514,8 +6009,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5545,8 +6039,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5573,8 +6066,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5601,8 +6093,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5632,8 +6123,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5660,8 +6150,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5688,8 +6177,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5719,8 +6207,7 @@ pub mod retriever_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5741,7 +6228,6 @@ pub mod retriever_service_client {
     }
 }
 /// Request to generate a text completion response from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateTextRequest {
     /// Required. The name of the `Model` or `TunedModel` to use for generating the
@@ -5827,7 +6313,6 @@ pub struct GenerateTextRequest {
     pub stop_sequences: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response from the model, including candidate completions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateTextResponse {
     /// Candidate responses from the model.
@@ -5853,7 +6338,6 @@ pub struct GenerateTextResponse {
 /// Text given to the model as a prompt.
 ///
 /// The Model will use this TextPrompt to Generate a text completion.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextPrompt {
     /// Required. The prompt text.
@@ -5861,7 +6345,6 @@ pub struct TextPrompt {
     pub text: ::prost::alloc::string::String,
 }
 /// Output text returned from a model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TextCompletion {
     /// Output only. The generated text returned from the model.
@@ -5881,7 +6364,6 @@ pub struct TextCompletion {
     pub citation_metadata: ::core::option::Option<CitationMetadata>,
 }
 /// Request to get a text embedding from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTextRequest {
     /// Required. The model name to use with the format model=models/{model}.
@@ -5893,7 +6375,6 @@ pub struct EmbedTextRequest {
     pub text: ::prost::alloc::string::String,
 }
 /// The response to a EmbedTextRequest.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EmbedTextResponse {
     /// Output only. The embedding generated from the input text.
@@ -5901,7 +6382,6 @@ pub struct EmbedTextResponse {
     pub embedding: ::core::option::Option<Embedding>,
 }
 /// Batch request to get a text embedding from the model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedTextRequest {
     /// Required. The name of the `Model` to use for generating the embedding.
@@ -5920,7 +6400,6 @@ pub struct BatchEmbedTextRequest {
     pub requests: ::prost::alloc::vec::Vec<EmbedTextRequest>,
 }
 /// The response to a EmbedTextRequest.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BatchEmbedTextResponse {
     /// Output only. The embeddings generated from the input text.
@@ -5928,7 +6407,6 @@ pub struct BatchEmbedTextResponse {
     pub embeddings: ::prost::alloc::vec::Vec<Embedding>,
 }
 /// A list of floats representing the embedding.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Embedding {
     /// The embedding values.
@@ -5939,7 +6417,6 @@ pub struct Embedding {
 ///
 /// Models may tokenize text differently, so each model may return a different
 /// `token_count`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CountTextTokensRequest {
     /// Required. The model's resource name. This serves as an ID for the Model to
@@ -5957,7 +6434,6 @@ pub struct CountTextTokensRequest {
 /// A response from `CountTextTokens`.
 ///
 /// It returns the model's `token_count` for the `prompt`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CountTextTokensResponse {
     /// The number of tokens that the `model` tokenizes the `prompt` into.
@@ -5968,7 +6444,13 @@ pub struct CountTextTokensResponse {
 }
 /// Generated client implementations.
 pub mod text_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// API for using Generative Language Models (GLMs) trained to generate text.
@@ -5994,8 +6476,8 @@ pub mod text_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -6020,7 +6502,7 @@ pub mod text_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             TextServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -6067,8 +6549,7 @@ pub mod text_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6098,8 +6579,7 @@ pub mod text_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6130,8 +6610,7 @@ pub mod text_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -6161,8 +6640,7 @@ pub mod text_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

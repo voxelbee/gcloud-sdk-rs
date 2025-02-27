@@ -2,7 +2,6 @@
 /// A trace describes how long it takes for an application to perform an
 /// operation. It consists of a set of spans, each of which represent a single
 /// timed event within the operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
     /// Project ID of the Cloud project where the trace data is stored.
@@ -18,7 +17,6 @@ pub struct Trace {
     pub spans: ::prost::alloc::vec::Vec<TraceSpan>,
 }
 /// List of new or updated traces.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Traces {
     /// List of traces.
@@ -30,7 +28,6 @@ pub struct Traces {
 /// end-to-end latency of an operation and, optionally, one or more subspans for
 /// its suboperations. Spans do not need to be contiguous. There may be gaps
 /// between spans in a trace.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TraceSpan {
     /// Identifier for the span. Must be a 64-bit integer other than 0 and
@@ -134,9 +131,9 @@ pub mod trace_span {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SpanKind::Unspecified => "SPAN_KIND_UNSPECIFIED",
-                SpanKind::RpcServer => "RPC_SERVER",
-                SpanKind::RpcClient => "RPC_CLIENT",
+                Self::Unspecified => "SPAN_KIND_UNSPECIFIED",
+                Self::RpcServer => "RPC_SERVER",
+                Self::RpcClient => "RPC_CLIENT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -152,7 +149,6 @@ pub mod trace_span {
 }
 /// The request message for the `ListTraces` method. All fields are required
 /// unless specified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -263,10 +259,10 @@ pub mod list_traces_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ViewType::Unspecified => "VIEW_TYPE_UNSPECIFIED",
-                ViewType::Minimal => "MINIMAL",
-                ViewType::Rootspan => "ROOTSPAN",
-                ViewType::Complete => "COMPLETE",
+                Self::Unspecified => "VIEW_TYPE_UNSPECIFIED",
+                Self::Minimal => "MINIMAL",
+                Self::Rootspan => "ROOTSPAN",
+                Self::Complete => "COMPLETE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -282,7 +278,6 @@ pub mod list_traces_request {
     }
 }
 /// The response message for the `ListTraces` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTracesResponse {
     /// List of trace records as specified by the view parameter.
@@ -295,7 +290,6 @@ pub struct ListTracesResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// The request message for the `GetTrace` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTraceRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -306,7 +300,6 @@ pub struct GetTraceRequest {
     pub trace_id: ::prost::alloc::string::String,
 }
 /// The request message for the `PatchTraces` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchTracesRequest {
     /// Required. ID of the Cloud project where the trace data is stored.
@@ -318,7 +311,13 @@ pub struct PatchTracesRequest {
 }
 /// Generated client implementations.
 pub mod trace_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// This file describes an API for collecting and viewing traces and spans
@@ -345,8 +344,8 @@ pub mod trace_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -371,7 +370,7 @@ pub mod trace_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             TraceServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -418,8 +417,7 @@ pub mod trace_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -446,8 +444,7 @@ pub mod trace_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -478,8 +475,7 @@ pub mod trace_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

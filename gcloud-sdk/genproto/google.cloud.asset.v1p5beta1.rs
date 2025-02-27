@@ -7,7 +7,6 @@
 /// See [Supported asset
 /// types](<https://cloud.google.com/asset-inventory/docs/supported-asset-types>)
 /// for more information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Asset {
     /// The full name of the asset. Example:
@@ -64,7 +63,6 @@ pub struct Asset {
 pub mod asset {
     /// A representation of an [access
     /// policy](<https://cloud.google.com/access-context-manager/docs/overview#access-policies>).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AccessContextPolicy {
         /// Please also refer to the [access policy user
@@ -88,7 +86,6 @@ pub mod asset {
     }
 }
 /// A representation of a Google Cloud resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Resource {
     /// The API version. Example: "v1".
@@ -136,7 +133,6 @@ pub struct Resource {
     pub data: ::core::option::Option<::prost_types::Struct>,
 }
 /// ListAssets request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsRequest {
     /// Required. Name of the organization or project the assets belong to. Format:
@@ -187,7 +183,6 @@ pub struct ListAssetsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 /// ListAssets response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAssetsResponse {
     /// Time the snapshot was taken.
@@ -224,11 +219,11 @@ impl ContentType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ContentType::Unspecified => "CONTENT_TYPE_UNSPECIFIED",
-            ContentType::Resource => "RESOURCE",
-            ContentType::IamPolicy => "IAM_POLICY",
-            ContentType::OrgPolicy => "ORG_POLICY",
-            ContentType::AccessPolicy => "ACCESS_POLICY",
+            Self::Unspecified => "CONTENT_TYPE_UNSPECIFIED",
+            Self::Resource => "RESOURCE",
+            Self::IamPolicy => "IAM_POLICY",
+            Self::OrgPolicy => "ORG_POLICY",
+            Self::AccessPolicy => "ACCESS_POLICY",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -245,7 +240,13 @@ impl ContentType {
 }
 /// Generated client implementations.
 pub mod asset_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Asset service definition.
@@ -268,8 +269,8 @@ pub mod asset_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -294,7 +295,7 @@ pub mod asset_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AssetServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -342,8 +343,7 @@ pub mod asset_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

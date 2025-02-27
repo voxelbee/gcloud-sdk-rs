@@ -17,7 +17,6 @@
 /// For more information, read reserved IP address.
 ///
 /// (== resource_for {$api_version}.addresses ==) (== resource_for {$api_version}.globalAddresses ==)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Address {
     /// The static IP address represented by this resource.
@@ -112,10 +111,10 @@ pub mod address {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                AddressType::UndefinedAddressType => "UNDEFINED_ADDRESS_TYPE",
-                AddressType::External => "EXTERNAL",
-                AddressType::Internal => "INTERNAL",
-                AddressType::UnspecifiedType => "UNSPECIFIED_TYPE",
+                Self::UndefinedAddressType => "UNDEFINED_ADDRESS_TYPE",
+                Self::External => "EXTERNAL",
+                Self::Internal => "INTERNAL",
+                Self::UnspecifiedType => "UNSPECIFIED_TYPE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -156,10 +155,10 @@ pub mod address {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                IpVersion::UndefinedIpVersion => "UNDEFINED_IP_VERSION",
-                IpVersion::Ipv4 => "IPV4",
-                IpVersion::Ipv6 => "IPV6",
-                IpVersion::UnspecifiedVersion => "UNSPECIFIED_VERSION",
+                Self::UndefinedIpVersion => "UNDEFINED_IP_VERSION",
+                Self::Ipv4 => "IPV4",
+                Self::Ipv6 => "IPV6",
+                Self::UnspecifiedVersion => "UNSPECIFIED_VERSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -201,9 +200,9 @@ pub mod address {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NetworkTier::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
-                NetworkTier::Premium => "PREMIUM",
-                NetworkTier::Standard => "STANDARD",
+                Self::UndefinedNetworkTier => "UNDEFINED_NETWORK_TIER",
+                Self::Premium => "PREMIUM",
+                Self::Standard => "STANDARD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -248,11 +247,11 @@ pub mod address {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Purpose::UndefinedPurpose => "UNDEFINED_PURPOSE",
-                Purpose::DnsResolver => "DNS_RESOLVER",
-                Purpose::GceEndpoint => "GCE_ENDPOINT",
-                Purpose::NatAuto => "NAT_AUTO",
-                Purpose::VpcPeering => "VPC_PEERING",
+                Self::UndefinedPurpose => "UNDEFINED_PURPOSE",
+                Self::DnsResolver => "DNS_RESOLVER",
+                Self::GceEndpoint => "GCE_ENDPOINT",
+                Self::NatAuto => "NAT_AUTO",
+                Self::VpcPeering => "VPC_PEERING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -294,10 +293,10 @@ pub mod address {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Status::UndefinedStatus => "UNDEFINED_STATUS",
-                Status::InUse => "IN_USE",
-                Status::Reserved => "RESERVED",
-                Status::Reserving => "RESERVING",
+                Self::UndefinedStatus => "UNDEFINED_STATUS",
+                Self::InUse => "IN_USE",
+                Self::Reserved => "RESERVED",
+                Self::Reserving => "RESERVING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -313,7 +312,6 @@ pub mod address {
     }
 }
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressAggregatedList {
     /// \[Output Only\] Unique identifier for the resource; defined by the server.
@@ -339,7 +337,6 @@ pub struct AddressAggregatedList {
     pub warning: ::core::option::Option<Warning>,
 }
 /// Contains a list of addresses.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressList {
     /// \[Output Only\] Unique identifier for the resource; defined by the server.
@@ -362,7 +359,6 @@ pub struct AddressList {
     pub warning: ::core::option::Option<Warning>,
 }
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressesScopedList {
     /// \[Output Only\] A list of addresses contained in this scope.
@@ -373,7 +369,6 @@ pub struct AddressesScopedList {
     pub warning: ::core::option::Option<Warning>,
 }
 /// A request message for Addresses.AggregatedList. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AggregatedListAddressesRequest {
     /// A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
@@ -406,7 +401,6 @@ pub struct AggregatedListAddressesRequest {
     pub project: ::prost::alloc::string::String,
 }
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Data {
     /// \[Output Only\] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).
@@ -417,7 +411,6 @@ pub struct Data {
     pub value: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for Addresses.Delete. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAddressRequest {
     /// Name of the address resource to delete.
@@ -438,7 +431,6 @@ pub struct DeleteAddressRequest {
     pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// \[Output Only\] If errors are generated during processing of the operation, this field will be populated.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Error {
     /// \[Output Only\] The array of errors encountered while processing this operation.
@@ -446,7 +438,6 @@ pub struct Error {
     pub errors: ::prost::alloc::vec::Vec<Errors>,
 }
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Errors {
     /// \[Output Only\] The error type identifier for this error.
@@ -460,7 +451,6 @@ pub struct Errors {
     pub message: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for RegionOperations.Get. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRegionOperationRequest {
     /// Name of the Operations resource to return.
@@ -474,7 +464,6 @@ pub struct GetRegionOperationRequest {
     pub region: ::prost::alloc::string::String,
 }
 /// A request message for Addresses.Insert. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InsertAddressRequest {
     /// The body resource for this request
@@ -495,7 +484,6 @@ pub struct InsertAddressRequest {
     pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for Addresses.List. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAddressesRequest {
     /// A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
@@ -541,7 +529,6 @@ pub struct ListAddressesRequest {
 /// - For zonal operations, use the zoneOperations resource.
 ///
 /// For more information, read  Global, Regional, and Zonal Resources. (== resource_for {$api_version}.globalOperations ==) (== resource_for {$api_version}.regionOperations ==) (== resource_for {$api_version}.zoneOperations ==)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
     /// \[Output Only\] The value of `requestId` if you provided it in the request. Not present otherwise.
@@ -643,10 +630,10 @@ pub mod operation {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Status::UndefinedStatus => "UNDEFINED_STATUS",
-                Status::Done => "DONE",
-                Status::Pending => "PENDING",
-                Status::Running => "RUNNING",
+                Self::UndefinedStatus => "UNDEFINED_STATUS",
+                Self::Done => "DONE",
+                Self::Pending => "PENDING",
+                Self::Running => "RUNNING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -662,7 +649,6 @@ pub mod operation {
     }
 }
 /// A request message for RegionOperations.Wait. See the method description for details.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WaitRegionOperationRequest {
     /// Name of the Operations resource to return.
@@ -676,7 +662,6 @@ pub struct WaitRegionOperationRequest {
     pub region: ::prost::alloc::string::String,
 }
 /// \[Output Only\] Informational warning message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Warning {
     /// \[Output Only\] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
@@ -740,34 +725,34 @@ pub mod warning {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Code::UndefinedCode => "UNDEFINED_CODE",
-                Code::CleanupFailed => "CLEANUP_FAILED",
-                Code::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
-                Code::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
-                Code::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
-                Code::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
-                Code::ExternalApiWarning => "EXTERNAL_API_WARNING",
-                Code::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
-                Code::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
-                Code::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
-                Code::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
-                Code::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
-                Code::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
-                Code::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
-                Code::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
-                Code::NotCriticalError => "NOT_CRITICAL_ERROR",
-                Code::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
-                Code::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
-                Code::ResourceInUseByOtherResourceWarning => {
+                Self::UndefinedCode => "UNDEFINED_CODE",
+                Self::CleanupFailed => "CLEANUP_FAILED",
+                Self::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
+                Self::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
+                Self::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                Self::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
+                Self::ExternalApiWarning => "EXTERNAL_API_WARNING",
+                Self::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
+                Self::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
+                Self::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
+                Self::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                Self::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
+                Self::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
+                Self::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                Self::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
+                Self::NotCriticalError => "NOT_CRITICAL_ERROR",
+                Self::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
+                Self::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
+                Self::ResourceInUseByOtherResourceWarning => {
                     "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
                 }
-                Code::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
-                Code::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
-                Code::SingleInstancePropertyTemplate => {
+                Self::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
+                Self::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
+                Self::SingleInstancePropertyTemplate => {
                     "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
                 }
-                Code::UndeclaredProperties => "UNDECLARED_PROPERTIES",
-                Code::Unreachable => "UNREACHABLE",
+                Self::UndeclaredProperties => "UNDECLARED_PROPERTIES",
+                Self::Unreachable => "UNREACHABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -811,7 +796,6 @@ pub mod warning {
     }
 }
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Warnings {
     /// \[Output Only\] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.
@@ -875,34 +859,34 @@ pub mod warnings {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Code::UndefinedCode => "UNDEFINED_CODE",
-                Code::CleanupFailed => "CLEANUP_FAILED",
-                Code::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
-                Code::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
-                Code::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
-                Code::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
-                Code::ExternalApiWarning => "EXTERNAL_API_WARNING",
-                Code::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
-                Code::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
-                Code::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
-                Code::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
-                Code::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
-                Code::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
-                Code::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
-                Code::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
-                Code::NotCriticalError => "NOT_CRITICAL_ERROR",
-                Code::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
-                Code::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
-                Code::ResourceInUseByOtherResourceWarning => {
+                Self::UndefinedCode => "UNDEFINED_CODE",
+                Self::CleanupFailed => "CLEANUP_FAILED",
+                Self::DeprecatedResourceUsed => "DEPRECATED_RESOURCE_USED",
+                Self::DeprecatedTypeUsed => "DEPRECATED_TYPE_USED",
+                Self::DiskSizeLargerThanImageSize => "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                Self::ExperimentalTypeUsed => "EXPERIMENTAL_TYPE_USED",
+                Self::ExternalApiWarning => "EXTERNAL_API_WARNING",
+                Self::FieldValueOverriden => "FIELD_VALUE_OVERRIDEN",
+                Self::InjectedKernelsDeprecated => "INJECTED_KERNELS_DEPRECATED",
+                Self::MissingTypeDependency => "MISSING_TYPE_DEPENDENCY",
+                Self::NextHopAddressNotAssigned => "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                Self::NextHopCannotIpForward => "NEXT_HOP_CANNOT_IP_FORWARD",
+                Self::NextHopInstanceNotFound => "NEXT_HOP_INSTANCE_NOT_FOUND",
+                Self::NextHopInstanceNotOnNetwork => "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                Self::NextHopNotRunning => "NEXT_HOP_NOT_RUNNING",
+                Self::NotCriticalError => "NOT_CRITICAL_ERROR",
+                Self::NoResultsOnPage => "NO_RESULTS_ON_PAGE",
+                Self::RequiredTosAgreement => "REQUIRED_TOS_AGREEMENT",
+                Self::ResourceInUseByOtherResourceWarning => {
                     "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
                 }
-                Code::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
-                Code::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
-                Code::SingleInstancePropertyTemplate => {
+                Self::ResourceNotDeleted => "RESOURCE_NOT_DELETED",
+                Self::SchemaValidationIgnored => "SCHEMA_VALIDATION_IGNORED",
+                Self::SingleInstancePropertyTemplate => {
                     "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
                 }
-                Code::UndeclaredProperties => "UNDECLARED_PROPERTIES",
-                Code::Unreachable => "UNREACHABLE",
+                Self::UndeclaredProperties => "UNDECLARED_PROPERTIES",
+                Self::Unreachable => "UNREACHABLE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -947,7 +931,13 @@ pub mod warnings {
 }
 /// Generated client implementations.
 pub mod addresses_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     ///
@@ -973,8 +963,8 @@ pub mod addresses_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -999,7 +989,7 @@ pub mod addresses_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AddressesClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1046,8 +1036,7 @@ pub mod addresses_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1074,8 +1063,7 @@ pub mod addresses_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1099,8 +1087,7 @@ pub mod addresses_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1124,8 +1111,7 @@ pub mod addresses_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1144,7 +1130,13 @@ pub mod addresses_client {
 }
 /// Generated client implementations.
 pub mod region_operations_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The RegionOperations API.
@@ -1167,8 +1159,8 @@ pub mod region_operations_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1193,7 +1185,7 @@ pub mod region_operations_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             RegionOperationsClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1237,8 +1229,7 @@ pub mod region_operations_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1269,8 +1260,7 @@ pub mod region_operations_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

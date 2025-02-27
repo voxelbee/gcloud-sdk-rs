@@ -29,7 +29,6 @@
 ///
 /// Note that html formattings for 'DIMENSION' and 'METRIC' are the same, while
 /// semantic markups are different.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnnotatedString {
     /// Text version of the string.
@@ -46,7 +45,6 @@ pub struct AnnotatedString {
 pub mod annotated_string {
     /// Semantic markup denotes a substring (by index and length) with markup
     /// information.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SemanticMarkup {
         /// The semantic type of the markup substring.
@@ -95,13 +93,13 @@ pub mod annotated_string {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SemanticMarkupType::MarkupTypeUnspecified => "MARKUP_TYPE_UNSPECIFIED",
-                SemanticMarkupType::Metric => "METRIC",
-                SemanticMarkupType::Dimension => "DIMENSION",
-                SemanticMarkupType::Filter => "FILTER",
-                SemanticMarkupType::Unused => "UNUSED",
-                SemanticMarkupType::Blocked => "BLOCKED",
-                SemanticMarkupType::Row => "ROW",
+                Self::MarkupTypeUnspecified => "MARKUP_TYPE_UNSPECIFIED",
+                Self::Metric => "METRIC",
+                Self::Dimension => "DIMENSION",
+                Self::Filter => "FILTER",
+                Self::Unused => "UNUSED",
+                Self::Blocked => "BLOCKED",
+                Self::Row => "ROW",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -120,7 +118,6 @@ pub mod annotated_string {
     }
 }
 /// Request for query suggestions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SuggestQueriesRequest {
     /// Required. The parent of the suggestion query is the resource denoting the project and
@@ -147,7 +144,6 @@ pub struct SuggestQueriesRequest {
     pub suggestion_types: ::prost::alloc::vec::Vec<i32>,
 }
 /// A suggestion for a query with a ranking score.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Suggestion {
     /// Detailed information about the suggestion.
@@ -163,7 +159,6 @@ pub struct Suggestion {
     pub suggestion_type: i32,
 }
 /// Detailed information about the suggestion.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SuggestionInfo {
     /// Annotations for the suggestion. This provides information about which part
@@ -200,7 +195,6 @@ pub mod suggestion_info {
     ///   { start_char_index: 4, length: 7}
     /// }
     /// ```
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct MatchInfo {
         /// Unicode character index of the string annotation.
@@ -212,7 +206,6 @@ pub mod suggestion_info {
     }
 }
 /// Response to SuggestQueries.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SuggestQueriesResponse {
     /// A list of suggestions.
@@ -237,9 +230,9 @@ impl SuggestionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            SuggestionType::Unspecified => "SUGGESTION_TYPE_UNSPECIFIED",
-            SuggestionType::Entity => "ENTITY",
-            SuggestionType::Template => "TEMPLATE",
+            Self::Unspecified => "SUGGESTION_TYPE_UNSPECIFIED",
+            Self::Entity => "ENTITY",
+            Self::Template => "TEMPLATE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -254,7 +247,13 @@ impl SuggestionType {
 }
 /// Generated client implementations.
 pub mod auto_suggestion_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// This stateless API provides automatic suggestions for natural language
@@ -342,8 +341,8 @@ pub mod auto_suggestion_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -368,7 +367,7 @@ pub mod auto_suggestion_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             AutoSuggestionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -416,8 +415,7 @@ pub mod auto_suggestion_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -440,7 +438,6 @@ pub mod auto_suggestion_service_client {
 /// The question resource represents a natural language query, its settings,
 /// understanding generated by the system, and answer retrieval status.
 /// A question cannot be modified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Question {
     /// Output only. Immutable. The unique identifier for the Question. The ID is server-generated.
@@ -495,7 +492,6 @@ pub struct Question {
     pub debug_info: ::core::option::Option<::prost_types::Any>,
 }
 /// Details on the failure to interpret the question.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InterpretError {
     /// Error message explaining why this question could not be interpreted.
@@ -511,7 +507,6 @@ pub struct InterpretError {
 /// Nested message and enum types in `InterpretError`.
 pub mod interpret_error {
     /// Details on interpretation failure.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InterpretErrorDetails {
         /// Populated if parts of the query are unsupported.
@@ -527,7 +522,6 @@ pub mod interpret_error {
         pub ambiguity_details: ::core::option::Option<InterpretAmbiguityDetails>,
     }
     /// Details about unsupported parts in a query.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InterpretUnsupportedDetails {
         /// Unsupported operators. For example: median.
@@ -538,7 +532,6 @@ pub mod interpret_error {
         pub intent: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// Details about an incomplete query.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InterpretIncompleteQueryDetails {
         /// List of missing interpret entities.
@@ -547,7 +540,6 @@ pub mod interpret_error {
     }
     /// Details about a query that was too ambiguous. Currently, the message
     /// has no fields and its presence signals that there was ambiguity.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct InterpretAmbiguityDetails {}
     /// The interpret error code provides an error category why the interpretation
@@ -584,10 +576,10 @@ pub mod interpret_error {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                InterpretErrorCode::Unspecified => "INTERPRET_ERROR_CODE_UNSPECIFIED",
-                InterpretErrorCode::InvalidQuery => "INVALID_QUERY",
-                InterpretErrorCode::FailedToUnderstand => "FAILED_TO_UNDERSTAND",
-                InterpretErrorCode::FailedToAnswer => "FAILED_TO_ANSWER",
+                Self::Unspecified => "INTERPRET_ERROR_CODE_UNSPECIFIED",
+                Self::InvalidQuery => "INVALID_QUERY",
+                Self::FailedToUnderstand => "FAILED_TO_UNDERSTAND",
+                Self::FailedToAnswer => "FAILED_TO_ANSWER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -603,7 +595,6 @@ pub mod interpret_error {
     }
 }
 /// Information about the backend status (such as BigQuery) of the execution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionInfo {
     /// Status returned by the backend when the job was created.
@@ -655,11 +646,11 @@ pub mod execution_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                JobExecutionState::Unspecified => "JOB_EXECUTION_STATE_UNSPECIFIED",
-                JobExecutionState::NotExecuted => "NOT_EXECUTED",
-                JobExecutionState::Running => "RUNNING",
-                JobExecutionState::Succeeded => "SUCCEEDED",
-                JobExecutionState::Failed => "FAILED",
+                Self::Unspecified => "JOB_EXECUTION_STATE_UNSPECIFIED",
+                Self::NotExecuted => "NOT_EXECUTED",
+                Self::Running => "RUNNING",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -678,7 +669,6 @@ pub mod execution_info {
 /// BigQuery job information. This can be used to query the BigQuery API and
 /// retrieve the current job's status (using
 /// [jobs.get](<https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get>)).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BigQueryJob {
     /// The job ID.
@@ -692,7 +682,6 @@ pub struct BigQueryJob {
     pub location: ::prost::alloc::string::String,
 }
 /// An interpretation of a natural language query.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Interpretation {
     /// List of data sources used in the current understanding.
@@ -728,7 +717,6 @@ pub struct Interpretation {
 /// to trigger the execution. Using the `execute` RPC is needed in order to
 /// track the state of a question and report on it correctly to the data
 /// administrators.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DataQuery {
     /// The generated SQL query to be sent to the backend.
@@ -736,7 +724,6 @@ pub struct DataQuery {
     pub sql: ::prost::alloc::string::String,
 }
 /// Human readable interpretation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HumanReadable {
     /// Generated query explaining the interpretation.
@@ -748,7 +735,6 @@ pub struct HumanReadable {
 }
 /// Information about the interpretation structure that helps to understand and
 /// visualize the response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InterpretationStructure {
     /// List of possible visualization types to apply for this interpretation. The
@@ -767,7 +753,6 @@ pub struct InterpretationStructure {
 /// Nested message and enum types in `InterpretationStructure`.
 pub mod interpretation_structure {
     /// Information about a column.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ColumnInfo {
         /// The alias of the output column as used by the backend. For example, the
@@ -840,19 +825,19 @@ pub mod interpretation_structure {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                VisualizationType::Unspecified => "VISUALIZATION_TYPE_UNSPECIFIED",
-                VisualizationType::Table => "TABLE",
-                VisualizationType::BarChart => "BAR_CHART",
-                VisualizationType::ColumnChart => "COLUMN_CHART",
-                VisualizationType::Timeline => "TIMELINE",
-                VisualizationType::ScatterPlot => "SCATTER_PLOT",
-                VisualizationType::PieChart => "PIE_CHART",
-                VisualizationType::LineChart => "LINE_CHART",
-                VisualizationType::AreaChart => "AREA_CHART",
-                VisualizationType::ComboChart => "COMBO_CHART",
-                VisualizationType::Histogram => "HISTOGRAM",
-                VisualizationType::GenericChart => "GENERIC_CHART",
-                VisualizationType::ChartNotUnderstood => "CHART_NOT_UNDERSTOOD",
+                Self::Unspecified => "VISUALIZATION_TYPE_UNSPECIFIED",
+                Self::Table => "TABLE",
+                Self::BarChart => "BAR_CHART",
+                Self::ColumnChart => "COLUMN_CHART",
+                Self::Timeline => "TIMELINE",
+                Self::ScatterPlot => "SCATTER_PLOT",
+                Self::PieChart => "PIE_CHART",
+                Self::LineChart => "LINE_CHART",
+                Self::AreaChart => "AREA_CHART",
+                Self::ComboChart => "COMBO_CHART",
+                Self::Histogram => "HISTOGRAM",
+                Self::GenericChart => "GENERIC_CHART",
+                Self::ChartNotUnderstood => "CHART_NOT_UNDERSTOOD",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -877,7 +862,6 @@ pub mod interpretation_structure {
     }
 }
 /// Configuriation of debug flags.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DebugFlags {
     /// Whether to include the original VAQuery.
@@ -943,9 +927,9 @@ impl InterpretEntity {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            InterpretEntity::Unspecified => "INTERPRET_ENTITY_UNSPECIFIED",
-            InterpretEntity::Dimension => "DIMENSION",
-            InterpretEntity::Metric => "METRIC",
+            Self::Unspecified => "INTERPRET_ENTITY_UNSPECIFIED",
+            Self::Dimension => "DIMENSION",
+            Self::Metric => "METRIC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -959,7 +943,6 @@ impl InterpretEntity {
     }
 }
 /// Feedback provided by a user.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UserFeedback {
     /// Required. The unique identifier for the user feedback.
@@ -1004,9 +987,9 @@ pub mod user_feedback {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                UserFeedbackRating::Unspecified => "USER_FEEDBACK_RATING_UNSPECIFIED",
-                UserFeedbackRating::Positive => "POSITIVE",
-                UserFeedbackRating::Negative => "NEGATIVE",
+                Self::Unspecified => "USER_FEEDBACK_RATING_UNSPECIFIED",
+                Self::Positive => "POSITIVE",
+                Self::Negative => "NEGATIVE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1021,7 +1004,6 @@ pub mod user_feedback {
     }
 }
 /// A request to get a previously created question.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetQuestionRequest {
     /// Required. The unique identifier for the question.
@@ -1033,7 +1015,6 @@ pub struct GetQuestionRequest {
     pub read_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Request to create a question resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateQuestionRequest {
     /// Required. The name of the project this data source reference belongs to.
@@ -1045,7 +1026,6 @@ pub struct CreateQuestionRequest {
     pub question: ::core::option::Option<Question>,
 }
 /// Request to execute an interpretation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteQuestionRequest {
     /// Required. The unique identifier for the question.
@@ -1057,7 +1037,6 @@ pub struct ExecuteQuestionRequest {
     pub interpretation_index: i32,
 }
 /// Request to get user feedback.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserFeedbackRequest {
     /// Required. The unique identifier for the user feedback.
@@ -1067,7 +1046,6 @@ pub struct GetUserFeedbackRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request to updates user feedback.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateUserFeedbackRequest {
     /// Required. The user feedback to update. This can be called even if there is no
@@ -1082,7 +1060,13 @@ pub struct UpdateUserFeedbackRequest {
 }
 /// Generated client implementations.
 pub mod question_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service to interpret natural language queries.
@@ -1119,8 +1103,8 @@ pub mod question_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1145,7 +1129,7 @@ pub mod question_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             QuestionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1189,8 +1173,7 @@ pub mod question_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1217,8 +1200,7 @@ pub mod question_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1245,8 +1227,7 @@ pub mod question_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1273,8 +1254,7 @@ pub mod question_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1302,8 +1282,7 @@ pub mod question_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

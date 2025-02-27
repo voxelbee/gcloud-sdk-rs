@@ -2,7 +2,6 @@
 /// Information related to how and why a fallback result was used. If this field
 /// is set, then it means the server used a different routing mode from your
 /// preferred mode as fallback.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FallbackInfo {
     /// Routing mode used for the response. If fallback was triggered, the mode
@@ -38,9 +37,9 @@ impl FallbackReason {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            FallbackReason::Unspecified => "FALLBACK_REASON_UNSPECIFIED",
-            FallbackReason::ServerError => "SERVER_ERROR",
-            FallbackReason::LatencyExceeded => "LATENCY_EXCEEDED",
+            Self::Unspecified => "FALLBACK_REASON_UNSPECIFIED",
+            Self::ServerError => "SERVER_ERROR",
+            Self::LatencyExceeded => "LATENCY_EXCEEDED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -75,9 +74,9 @@ impl FallbackRoutingMode {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            FallbackRoutingMode::Unspecified => "FALLBACK_ROUTING_MODE_UNSPECIFIED",
-            FallbackRoutingMode::FallbackTrafficUnaware => "FALLBACK_TRAFFIC_UNAWARE",
-            FallbackRoutingMode::FallbackTrafficAware => "FALLBACK_TRAFFIC_AWARE",
+            Self::Unspecified => "FALLBACK_ROUTING_MODE_UNSPECIFIED",
+            Self::FallbackTrafficUnaware => "FALLBACK_TRAFFIC_UNAWARE",
+            Self::FallbackTrafficAware => "FALLBACK_TRAFFIC_AWARE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -93,7 +92,6 @@ impl FallbackRoutingMode {
 /// Contains [`GeocodedWaypoints`][google.maps.routing.v2.GeocodedWaypoint] for
 /// origin, destination and intermediate waypoints. Only populated for address
 /// waypoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeocodingResults {
     /// Origin geocoded waypoint.
@@ -111,7 +109,6 @@ pub struct GeocodingResults {
 /// Details about the locations used as waypoints. Only populated for address
 /// waypoints. Includes details about the geocoding results for the purposes of
 /// determining what the address was geocoded to.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GeocodedWaypoint {
     /// Indicates the status code resulting from the geocoding operation.
@@ -138,7 +135,6 @@ pub struct GeocodedWaypoint {
     pub place_id: ::prost::alloc::string::String,
 }
 /// Localized description of time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedTime {
     /// The time specified as a string in a given time zone.
@@ -151,7 +147,6 @@ pub struct LocalizedTime {
     pub time_zone: ::prost::alloc::string::String,
 }
 /// Encapsulates a location (a geographic point, and an optional heading).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Location {
     /// The waypoint's geographic coordinates.
@@ -221,27 +216,27 @@ impl Maneuver {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Maneuver::Unspecified => "MANEUVER_UNSPECIFIED",
-            Maneuver::TurnSlightLeft => "TURN_SLIGHT_LEFT",
-            Maneuver::TurnSharpLeft => "TURN_SHARP_LEFT",
-            Maneuver::UturnLeft => "UTURN_LEFT",
-            Maneuver::TurnLeft => "TURN_LEFT",
-            Maneuver::TurnSlightRight => "TURN_SLIGHT_RIGHT",
-            Maneuver::TurnSharpRight => "TURN_SHARP_RIGHT",
-            Maneuver::UturnRight => "UTURN_RIGHT",
-            Maneuver::TurnRight => "TURN_RIGHT",
-            Maneuver::Straight => "STRAIGHT",
-            Maneuver::RampLeft => "RAMP_LEFT",
-            Maneuver::RampRight => "RAMP_RIGHT",
-            Maneuver::Merge => "MERGE",
-            Maneuver::ForkLeft => "FORK_LEFT",
-            Maneuver::ForkRight => "FORK_RIGHT",
-            Maneuver::Ferry => "FERRY",
-            Maneuver::FerryTrain => "FERRY_TRAIN",
-            Maneuver::RoundaboutLeft => "ROUNDABOUT_LEFT",
-            Maneuver::RoundaboutRight => "ROUNDABOUT_RIGHT",
-            Maneuver::Depart => "DEPART",
-            Maneuver::NameChange => "NAME_CHANGE",
+            Self::Unspecified => "MANEUVER_UNSPECIFIED",
+            Self::TurnSlightLeft => "TURN_SLIGHT_LEFT",
+            Self::TurnSharpLeft => "TURN_SHARP_LEFT",
+            Self::UturnLeft => "UTURN_LEFT",
+            Self::TurnLeft => "TURN_LEFT",
+            Self::TurnSlightRight => "TURN_SLIGHT_RIGHT",
+            Self::TurnSharpRight => "TURN_SHARP_RIGHT",
+            Self::UturnRight => "UTURN_RIGHT",
+            Self::TurnRight => "TURN_RIGHT",
+            Self::Straight => "STRAIGHT",
+            Self::RampLeft => "RAMP_LEFT",
+            Self::RampRight => "RAMP_RIGHT",
+            Self::Merge => "MERGE",
+            Self::ForkLeft => "FORK_LEFT",
+            Self::ForkRight => "FORK_RIGHT",
+            Self::Ferry => "FERRY",
+            Self::FerryTrain => "FERRY_TRAIN",
+            Self::RoundaboutLeft => "ROUNDABOUT_LEFT",
+            Self::RoundaboutRight => "ROUNDABOUT_RIGHT",
+            Self::Depart => "DEPART",
+            Self::NameChange => "NAME_CHANGE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -274,7 +269,6 @@ impl Maneuver {
 }
 /// Encapsulates navigation instructions for a
 /// [`RouteLegStep`][google.maps.routing.v2.RouteLegStep].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NavigationInstruction {
     /// Encapsulates the navigation instructions for the current step (for example,
@@ -287,7 +281,6 @@ pub struct NavigationInstruction {
     pub instructions: ::prost::alloc::string::String,
 }
 /// Encapsulates an encoded polyline.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Polyline {
     /// Encapsulates the type of polyline. Defaults to encoded_polyline.
@@ -297,7 +290,6 @@ pub struct Polyline {
 /// Nested message and enum types in `Polyline`.
 pub mod polyline {
     /// Encapsulates the type of polyline. Defaults to encoded_polyline.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum PolylineType {
         /// The string encoding of the polyline using the [polyline encoding
@@ -333,9 +325,9 @@ impl PolylineQuality {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PolylineQuality::Unspecified => "POLYLINE_QUALITY_UNSPECIFIED",
-            PolylineQuality::HighQuality => "HIGH_QUALITY",
-            PolylineQuality::Overview => "OVERVIEW",
+            Self::Unspecified => "POLYLINE_QUALITY_UNSPECIFIED",
+            Self::HighQuality => "HIGH_QUALITY",
+            Self::Overview => "OVERVIEW",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -368,9 +360,9 @@ impl PolylineEncoding {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            PolylineEncoding::Unspecified => "POLYLINE_ENCODING_UNSPECIFIED",
-            PolylineEncoding::EncodedPolyline => "ENCODED_POLYLINE",
-            PolylineEncoding::GeoJsonLinestring => "GEO_JSON_LINESTRING",
+            Self::Unspecified => "POLYLINE_ENCODING_UNSPECIFIED",
+            Self::EncodedPolyline => "ENCODED_POLYLINE",
+            Self::GeoJsonLinestring => "GEO_JSON_LINESTRING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -380,6 +372,98 @@ impl PolylineEncoding {
             "ENCODED_POLYLINE" => Some(Self::EncodedPolyline),
             "GEO_JSON_LINESTRING" => Some(Self::GeoJsonLinestring),
             _ => None,
+        }
+    }
+}
+/// Details corresponding to a given index or contiguous segment of a polyline.
+/// Given a polyline with points P_0, P_1, ... , P_N (zero-based index), the
+/// `PolylineDetails` defines an interval and associated metadata.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PolylineDetails {
+    /// Flyover details along the polyline.
+    #[prost(message, repeated, tag = "12")]
+    pub flyover_info: ::prost::alloc::vec::Vec<polyline_details::FlyoverInfo>,
+    /// Narrow road details along the polyline.
+    #[prost(message, repeated, tag = "13")]
+    pub narrow_road_info: ::prost::alloc::vec::Vec<polyline_details::NarrowRoadInfo>,
+}
+/// Nested message and enum types in `PolylineDetails`.
+pub mod polyline_details {
+    /// Encapsulates the start and end indexes for a polyline detail.
+    /// For instances where the data corresponds to a single point, `start_index`
+    /// and `end_index` will be equal.
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct PolylinePointIndex {
+        /// The start index of this detail in the polyline.
+        #[prost(int32, optional, tag = "1")]
+        pub start_index: ::core::option::Option<i32>,
+        /// The end index of this detail in the polyline.
+        #[prost(int32, optional, tag = "2")]
+        pub end_index: ::core::option::Option<i32>,
+    }
+    /// Encapsulates information about flyovers along the polyline.
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct FlyoverInfo {
+        /// Output only. Denotes whether a flyover exists for a given stretch of the
+        /// polyline.
+        #[prost(enumeration = "RoadFeatureState", tag = "1")]
+        pub flyover_presence: i32,
+        /// The location of flyover related information along the polyline.
+        #[prost(message, optional, tag = "2")]
+        pub polyline_point_index: ::core::option::Option<PolylinePointIndex>,
+    }
+    /// Encapsulates information about narrow roads along the polyline.
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct NarrowRoadInfo {
+        /// Output only. Denotes whether a narrow road exists for a given stretch of
+        /// the polyline.
+        #[prost(enumeration = "RoadFeatureState", tag = "1")]
+        pub narrow_road_presence: i32,
+        /// The location of narrow road related information along the polyline.
+        #[prost(message, optional, tag = "2")]
+        pub polyline_point_index: ::core::option::Option<PolylinePointIndex>,
+    }
+    /// Encapsulates the states of road features along a stretch of polyline.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum RoadFeatureState {
+        /// The road feature's state was not computed (default value).
+        Unspecified = 0,
+        /// The road feature exists.
+        Exists = 1,
+        /// The road feature does not exist.
+        DoesNotExist = 2,
+    }
+    impl RoadFeatureState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "ROAD_FEATURE_STATE_UNSPECIFIED",
+                Self::Exists => "EXISTS",
+                Self::DoesNotExist => "DOES_NOT_EXIST",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "ROAD_FEATURE_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+                "EXISTS" => Some(Self::Exists),
+                "DOES_NOT_EXIST" => Some(Self::DoesNotExist),
+                _ => None,
+            }
         }
     }
 }
@@ -400,6 +484,8 @@ pub enum RouteLabel {
     /// Fuel efficient route. Routes labeled with this value are determined to be
     /// optimized for Eco parameters such as fuel consumption.
     FuelEfficient = 3,
+    /// Shorter travel distance route. This is an experimental feature.
+    ShorterDistance = 4,
 }
 impl RouteLabel {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -408,10 +494,11 @@ impl RouteLabel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RouteLabel::Unspecified => "ROUTE_LABEL_UNSPECIFIED",
-            RouteLabel::DefaultRoute => "DEFAULT_ROUTE",
-            RouteLabel::DefaultRouteAlternate => "DEFAULT_ROUTE_ALTERNATE",
-            RouteLabel::FuelEfficient => "FUEL_EFFICIENT",
+            Self::Unspecified => "ROUTE_LABEL_UNSPECIFIED",
+            Self::DefaultRoute => "DEFAULT_ROUTE",
+            Self::DefaultRouteAlternate => "DEFAULT_ROUTE_ALTERNATE",
+            Self::FuelEfficient => "FUEL_EFFICIENT",
+            Self::ShorterDistance => "SHORTER_DISTANCE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -421,6 +508,7 @@ impl RouteLabel {
             "DEFAULT_ROUTE" => Some(Self::DefaultRoute),
             "DEFAULT_ROUTE_ALTERNATE" => Some(Self::DefaultRouteAlternate),
             "FUEL_EFFICIENT" => Some(Self::FuelEfficient),
+            "SHORTER_DISTANCE" => Some(Self::ShorterDistance),
             _ => None,
         }
     }
@@ -454,12 +542,12 @@ impl RouteTravelMode {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RouteTravelMode::TravelModeUnspecified => "TRAVEL_MODE_UNSPECIFIED",
-            RouteTravelMode::Drive => "DRIVE",
-            RouteTravelMode::Bicycle => "BICYCLE",
-            RouteTravelMode::Walk => "WALK",
-            RouteTravelMode::TwoWheeler => "TWO_WHEELER",
-            RouteTravelMode::Transit => "TRANSIT",
+            Self::TravelModeUnspecified => "TRAVEL_MODE_UNSPECIFIED",
+            Self::Drive => "DRIVE",
+            Self::Bicycle => "BICYCLE",
+            Self::Walk => "WALK",
+            Self::TwoWheeler => "TWO_WHEELER",
+            Self::Transit => "TRANSIT",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -479,7 +567,6 @@ impl RouteTravelMode {
 /// Given a path with points P_0, P_1, ... , P_N (zero-based index), the
 /// `SpeedReadingInterval` defines an interval and describes its traffic using
 /// the following categories.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SpeedReadingInterval {
     /// The starting index of this interval in the polyline.
@@ -523,10 +610,10 @@ pub mod speed_reading_interval {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Speed::Unspecified => "SPEED_UNSPECIFIED",
-                Speed::Normal => "NORMAL",
-                Speed::Slow => "SLOW",
-                Speed::TrafficJam => "TRAFFIC_JAM",
+                Self::Unspecified => "SPEED_UNSPECIFIED",
+                Self::Normal => "NORMAL",
+                Self::Slow => "SLOW",
+                Self::TrafficJam => "TRAFFIC_JAM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -540,7 +627,6 @@ pub mod speed_reading_interval {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum SpeedType {
         /// Traffic speed in this interval.
@@ -550,7 +636,6 @@ pub mod speed_reading_interval {
 }
 /// Encapsulates toll information on a [`Route`][google.maps.routing.v2.Route] or
 /// on a [`RouteLeg`][google.maps.routing.v2.RouteLeg].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TollInfo {
     /// The monetary amount of tolls for the corresponding
@@ -564,7 +649,6 @@ pub struct TollInfo {
     pub estimated_price: ::prost::alloc::vec::Vec<super::super::super::r#type::Money>,
 }
 /// A transit agency that operates a transit line.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitAgency {
     /// The name of this transit agency.
@@ -578,7 +662,6 @@ pub struct TransitAgency {
     pub uri: ::prost::alloc::string::String,
 }
 /// Contains information about the transit line used in this step.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitLine {
     /// The transit agency (or agencies) that operates this transit line.
@@ -610,7 +693,6 @@ pub struct TransitLine {
     pub vehicle: ::core::option::Option<TransitVehicle>,
 }
 /// Information about a transit stop.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitStop {
     /// The name of the transit stop.
@@ -621,7 +703,6 @@ pub struct TransitStop {
     pub location: ::core::option::Option<Location>,
 }
 /// Information about a vehicle used in transit routes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitVehicle {
     /// The name of this vehicle, capitalized.
@@ -704,25 +785,25 @@ pub mod transit_vehicle {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TransitVehicleType::Unspecified => "TRANSIT_VEHICLE_TYPE_UNSPECIFIED",
-                TransitVehicleType::Bus => "BUS",
-                TransitVehicleType::CableCar => "CABLE_CAR",
-                TransitVehicleType::CommuterTrain => "COMMUTER_TRAIN",
-                TransitVehicleType::Ferry => "FERRY",
-                TransitVehicleType::Funicular => "FUNICULAR",
-                TransitVehicleType::GondolaLift => "GONDOLA_LIFT",
-                TransitVehicleType::HeavyRail => "HEAVY_RAIL",
-                TransitVehicleType::HighSpeedTrain => "HIGH_SPEED_TRAIN",
-                TransitVehicleType::IntercityBus => "INTERCITY_BUS",
-                TransitVehicleType::LongDistanceTrain => "LONG_DISTANCE_TRAIN",
-                TransitVehicleType::MetroRail => "METRO_RAIL",
-                TransitVehicleType::Monorail => "MONORAIL",
-                TransitVehicleType::Other => "OTHER",
-                TransitVehicleType::Rail => "RAIL",
-                TransitVehicleType::ShareTaxi => "SHARE_TAXI",
-                TransitVehicleType::Subway => "SUBWAY",
-                TransitVehicleType::Tram => "TRAM",
-                TransitVehicleType::Trolleybus => "TROLLEYBUS",
+                Self::Unspecified => "TRANSIT_VEHICLE_TYPE_UNSPECIFIED",
+                Self::Bus => "BUS",
+                Self::CableCar => "CABLE_CAR",
+                Self::CommuterTrain => "COMMUTER_TRAIN",
+                Self::Ferry => "FERRY",
+                Self::Funicular => "FUNICULAR",
+                Self::GondolaLift => "GONDOLA_LIFT",
+                Self::HeavyRail => "HEAVY_RAIL",
+                Self::HighSpeedTrain => "HIGH_SPEED_TRAIN",
+                Self::IntercityBus => "INTERCITY_BUS",
+                Self::LongDistanceTrain => "LONG_DISTANCE_TRAIN",
+                Self::MetroRail => "METRO_RAIL",
+                Self::Monorail => "MONORAIL",
+                Self::Other => "OTHER",
+                Self::Rail => "RAIL",
+                Self::ShareTaxi => "SHARE_TAXI",
+                Self::Subway => "SUBWAY",
+                Self::Tram => "TRAM",
+                Self::Trolleybus => "TROLLEYBUS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -754,7 +835,6 @@ pub mod transit_vehicle {
 }
 /// Contains a route, which consists of a series of connected road segments
 /// that join beginning, ending, and intermediate waypoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Route {
     /// Labels for the `Route` that are useful to identify specific properties
@@ -814,22 +894,26 @@ pub struct Route {
     /// Text representations of properties of the `Route`.
     #[prost(message, optional, tag = "11")]
     pub localized_values: ::core::option::Option<route::RouteLocalizedValues>,
-    /// A web-safe, base64-encoded route token that can be passed to the Navigation
-    /// SDK, that allows the Navigation SDK to reconstruct the route during
-    /// navigation, and, in the event of rerouting, honor the original intention
-    /// when you created the route by calling ComputeRoutes. Customers should treat
-    /// this token as an opaque blob. It is not meant for reading or mutating.
+    /// An opaque token that can be passed to [Navigation
+    /// SDK](<https://developers.google.com/maps/documentation/navigation>) to
+    /// reconstruct the route during navigation, and, in the event of rerouting,
+    /// honor the original intention when the route was created. Treat this token
+    /// as an opaque blob.  Don't compare its value across requests as its value
+    /// may change even if the service returns the exact same route.
+    ///
     /// NOTE: `Route.route_token` is only available for requests that have set
     /// `ComputeRoutesRequest.routing_preference` to `TRAFFIC_AWARE` or
     /// `TRAFFIC_AWARE_OPTIMAL`. `Route.route_token` is not supported for requests
     /// that have Via waypoints.
     #[prost(string, tag = "12")]
     pub route_token: ::prost::alloc::string::String,
+    /// Contains information about details along the polyline.
+    #[prost(message, optional, tag = "14")]
+    pub polyline_details: ::core::option::Option<PolylineDetails>,
 }
 /// Nested message and enum types in `Route`.
 pub mod route {
     /// Text representations of certain properties.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLocalizedValues {
         /// Travel distance represented in text form.
@@ -837,9 +921,10 @@ pub mod route {
         pub distance: ::core::option::Option<
             super::super::super::super::r#type::LocalizedText,
         >,
-        /// Duration taking traffic conditions into consideration, represented in
-        /// text form. Note: If you did not request traffic information, this value
-        /// will be the same value as `static_duration`.
+        /// Duration, represented in text form and localized to the region of the
+        /// query. Takes traffic conditions into consideration. Note: If you did not
+        /// request traffic information, this value is the same value as
+        /// `static_duration`.
         #[prost(message, optional, tag = "2")]
         pub duration: ::core::option::Option<
             super::super::super::super::r#type::LocalizedText,
@@ -859,7 +944,6 @@ pub mod route {
 }
 /// Contains the additional information that the user should be informed
 /// about, such as possible traffic zone restrictions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteTravelAdvisory {
     /// Contains information about tolls on the route. This field is only populated
@@ -896,7 +980,6 @@ pub struct RouteTravelAdvisory {
 }
 /// Contains the additional information that the user should be informed
 /// about on a leg step, such as possible traffic zone restrictions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegTravelAdvisory {
     /// Contains information about tolls on the specific `RouteLeg`.
@@ -922,7 +1005,6 @@ pub struct RouteLegTravelAdvisory {
 }
 /// Contains the additional information that the user should be informed
 /// about, such as possible traffic zone restrictions on a leg step.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStepTravelAdvisory {
     /// NOTE: This field is not currently populated.
@@ -930,7 +1012,6 @@ pub struct RouteLegStepTravelAdvisory {
     pub speed_reading_intervals: ::prost::alloc::vec::Vec<SpeedReadingInterval>,
 }
 /// Contains a segment between non-`via` waypoints.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLeg {
     /// The travel distance of the route leg, in meters.
@@ -980,7 +1061,6 @@ pub struct RouteLeg {
 /// Nested message and enum types in `RouteLeg`.
 pub mod route_leg {
     /// Text representations of certain properties.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLegLocalizedValues {
         /// Travel distance represented in text form.
@@ -988,9 +1068,10 @@ pub mod route_leg {
         pub distance: ::core::option::Option<
             super::super::super::super::r#type::LocalizedText,
         >,
-        /// Duration taking traffic conditions into consideration represented in text
-        /// form. Note: If you did not request traffic information, this value will
-        /// be the same value as static_duration.
+        /// Duration, represented in text form and localized to the region of the
+        /// query. Takes traffic conditions into consideration. Note: If you did not
+        /// request traffic information, this value is the same value as
+        /// static_duration.
         #[prost(message, optional, tag = "2")]
         pub duration: ::core::option::Option<
             super::super::super::super::r#type::LocalizedText,
@@ -1003,7 +1084,6 @@ pub mod route_leg {
         >,
     }
     /// Provides overview information about a list of `RouteLegStep`s.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StepsOverview {
         /// Summarized information about different multi-modal segments of
@@ -1021,7 +1101,6 @@ pub mod route_leg {
         /// contiguous `RouteLegStep` that have the same `RouteTravelMode`.
         /// This field is not populated if the `RouteLeg` does not contain any
         /// multi-modal segments in the steps.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct MultiModalSegment {
             /// The corresponding `RouteLegStep` index that is the start of a
@@ -1046,7 +1125,6 @@ pub mod route_leg {
 /// Contains a segment of a [`RouteLeg`][google.maps.routing.v2.RouteLeg]. A
 /// step corresponds to a single navigation instruction. Route legs are made up
 /// of steps.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStep {
     /// The travel distance of this step, in meters. In some circumstances, this
@@ -1089,7 +1167,6 @@ pub struct RouteLegStep {
 /// Nested message and enum types in `RouteLegStep`.
 pub mod route_leg_step {
     /// Text representations of certain properties.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RouteLegStepLocalizedValues {
         /// Travel distance represented in text form.
@@ -1106,7 +1183,6 @@ pub mod route_leg_step {
     }
 }
 /// Additional information for the `RouteLegStep` related to `TRANSIT` routes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteLegStepTransitDetails {
     /// Information about the arrival and departure stops for the step.
@@ -1135,7 +1211,7 @@ pub struct RouteLegStepTransitDetails {
     /// The number of stops from the departure to the arrival stop. This count
     /// includes the arrival stop, but excludes the departure stop. For example, if
     /// your route leaves from Stop A, passes through stops B and C, and arrives at
-    /// stop D, stop_count will return 3.
+    /// stop D, <code>stop_count</code> returns 3.
     #[prost(int32, tag = "6")]
     pub stop_count: i32,
     /// The text that appears in schedules and sign boards to identify a transit
@@ -1148,7 +1224,6 @@ pub struct RouteLegStepTransitDetails {
 /// Nested message and enum types in `RouteLegStepTransitDetails`.
 pub mod route_leg_step_transit_details {
     /// Details about the transit stops for the `RouteLegStep`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TransitStopDetails {
         /// Information about the arrival stop for the step.
@@ -1165,7 +1240,6 @@ pub mod route_leg_step_transit_details {
         pub departure_time: ::core::option::Option<::prost_types::Timestamp>,
     }
     /// Localized descriptions of values for `RouteTransitDetails`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TransitDetailsLocalizedValues {
         /// Time in its formatted text representation with a corresponding time zone.
@@ -1408,119 +1482,115 @@ impl TollPass {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TollPass::Unspecified => "TOLL_PASS_UNSPECIFIED",
-            TollPass::AuEtollTag => "AU_ETOLL_TAG",
-            TollPass::AuEwayTag => "AU_EWAY_TAG",
-            TollPass::AuLinkt => "AU_LINKT",
-            TollPass::ArTelepase => "AR_TELEPASE",
-            TollPass::BrAutoExpreso => "BR_AUTO_EXPRESO",
-            TollPass::BrConectcar => "BR_CONECTCAR",
-            TollPass::BrMoveMais => "BR_MOVE_MAIS",
-            TollPass::BrPassaRapido => "BR_PASSA_RAPIDO",
-            TollPass::BrSemParar => "BR_SEM_PARAR",
-            TollPass::BrTaggy => "BR_TAGGY",
-            TollPass::BrVeloe => "BR_VELOE",
-            TollPass::CaUsAkwasasneSeawayCorporateCard => {
+            Self::Unspecified => "TOLL_PASS_UNSPECIFIED",
+            Self::AuEtollTag => "AU_ETOLL_TAG",
+            Self::AuEwayTag => "AU_EWAY_TAG",
+            Self::AuLinkt => "AU_LINKT",
+            Self::ArTelepase => "AR_TELEPASE",
+            Self::BrAutoExpreso => "BR_AUTO_EXPRESO",
+            Self::BrConectcar => "BR_CONECTCAR",
+            Self::BrMoveMais => "BR_MOVE_MAIS",
+            Self::BrPassaRapido => "BR_PASSA_RAPIDO",
+            Self::BrSemParar => "BR_SEM_PARAR",
+            Self::BrTaggy => "BR_TAGGY",
+            Self::BrVeloe => "BR_VELOE",
+            Self::CaUsAkwasasneSeawayCorporateCard => {
                 "CA_US_AKWASASNE_SEAWAY_CORPORATE_CARD"
             }
-            TollPass::CaUsAkwasasneSeawayTransitCard => {
-                "CA_US_AKWASASNE_SEAWAY_TRANSIT_CARD"
-            }
-            TollPass::CaUsBlueWaterEdgePass => "CA_US_BLUE_WATER_EDGE_PASS",
-            TollPass::CaUsConnexion => "CA_US_CONNEXION",
-            TollPass::CaUsNexusCard => "CA_US_NEXUS_CARD",
-            TollPass::IdEToll => "ID_E_TOLL",
-            TollPass::InFastag => "IN_FASTAG",
-            TollPass::InLocalHpPlateExempt => "IN_LOCAL_HP_PLATE_EXEMPT",
-            TollPass::JpEtc => "JP_ETC",
-            TollPass::JpEtc2 => "JP_ETC2",
-            TollPass::MxIave => "MX_IAVE",
-            TollPass::MxPase => "MX_PASE",
-            TollPass::MxQuickpass => "MX_QUICKPASS",
-            TollPass::MxSistemaTelepeajeChihuahua => "MX_SISTEMA_TELEPEAJE_CHIHUAHUA",
-            TollPass::MxTagIave => "MX_TAG_IAVE",
-            TollPass::MxTagTelevia => "MX_TAG_TELEVIA",
-            TollPass::MxTelevia => "MX_TELEVIA",
-            TollPass::MxViapass => "MX_VIAPASS",
-            TollPass::UsAlFreedomPass => "US_AL_FREEDOM_PASS",
-            TollPass::UsAkAntonAndersonTunnelBookOf10Tickets => {
+            Self::CaUsAkwasasneSeawayTransitCard => "CA_US_AKWASASNE_SEAWAY_TRANSIT_CARD",
+            Self::CaUsBlueWaterEdgePass => "CA_US_BLUE_WATER_EDGE_PASS",
+            Self::CaUsConnexion => "CA_US_CONNEXION",
+            Self::CaUsNexusCard => "CA_US_NEXUS_CARD",
+            Self::IdEToll => "ID_E_TOLL",
+            Self::InFastag => "IN_FASTAG",
+            Self::InLocalHpPlateExempt => "IN_LOCAL_HP_PLATE_EXEMPT",
+            Self::JpEtc => "JP_ETC",
+            Self::JpEtc2 => "JP_ETC2",
+            Self::MxIave => "MX_IAVE",
+            Self::MxPase => "MX_PASE",
+            Self::MxQuickpass => "MX_QUICKPASS",
+            Self::MxSistemaTelepeajeChihuahua => "MX_SISTEMA_TELEPEAJE_CHIHUAHUA",
+            Self::MxTagIave => "MX_TAG_IAVE",
+            Self::MxTagTelevia => "MX_TAG_TELEVIA",
+            Self::MxTelevia => "MX_TELEVIA",
+            Self::MxViapass => "MX_VIAPASS",
+            Self::UsAlFreedomPass => "US_AL_FREEDOM_PASS",
+            Self::UsAkAntonAndersonTunnelBookOf10Tickets => {
                 "US_AK_ANTON_ANDERSON_TUNNEL_BOOK_OF_10_TICKETS"
             }
-            TollPass::UsCaFastrak => "US_CA_FASTRAK",
-            TollPass::UsCaFastrakCavSticker => "US_CA_FASTRAK_CAV_STICKER",
-            TollPass::UsCoExpresstoll => "US_CO_EXPRESSTOLL",
-            TollPass::UsCoGoPass => "US_CO_GO_PASS",
-            TollPass::UsDeEzpassde => "US_DE_EZPASSDE",
-            TollPass::UsFlBobSikesTollBridgePass => "US_FL_BOB_SIKES_TOLL_BRIDGE_PASS",
-            TollPass::UsFlDunesCommunityDevelopmentDistrictExpresscard => {
+            Self::UsCaFastrak => "US_CA_FASTRAK",
+            Self::UsCaFastrakCavSticker => "US_CA_FASTRAK_CAV_STICKER",
+            Self::UsCoExpresstoll => "US_CO_EXPRESSTOLL",
+            Self::UsCoGoPass => "US_CO_GO_PASS",
+            Self::UsDeEzpassde => "US_DE_EZPASSDE",
+            Self::UsFlBobSikesTollBridgePass => "US_FL_BOB_SIKES_TOLL_BRIDGE_PASS",
+            Self::UsFlDunesCommunityDevelopmentDistrictExpresscard => {
                 "US_FL_DUNES_COMMUNITY_DEVELOPMENT_DISTRICT_EXPRESSCARD"
             }
-            TollPass::UsFlEpass => "US_FL_EPASS",
-            TollPass::UsFlGibaTollPass => "US_FL_GIBA_TOLL_PASS",
-            TollPass::UsFlLeeway => "US_FL_LEEWAY",
-            TollPass::UsFlSunpass => "US_FL_SUNPASS",
-            TollPass::UsFlSunpassPro => "US_FL_SUNPASS_PRO",
-            TollPass::UsIlEzpassil => "US_IL_EZPASSIL",
-            TollPass::UsIlIpass => "US_IL_IPASS",
-            TollPass::UsInEzpassin => "US_IN_EZPASSIN",
-            TollPass::UsKsBestpassHorizon => "US_KS_BESTPASS_HORIZON",
-            TollPass::UsKsKtag => "US_KS_KTAG",
-            TollPass::UsKsNationalpass => "US_KS_NATIONALPASS",
-            TollPass::UsKsPrepassElitepass => "US_KS_PREPASS_ELITEPASS",
-            TollPass::UsKyRiverlink => "US_KY_RIVERLINK",
-            TollPass::UsLaGeauxpass => "US_LA_GEAUXPASS",
-            TollPass::UsLaTollTag => "US_LA_TOLL_TAG",
-            TollPass::UsMaEzpassma => "US_MA_EZPASSMA",
-            TollPass::UsMdEzpassmd => "US_MD_EZPASSMD",
-            TollPass::UsMeEzpassme => "US_ME_EZPASSME",
-            TollPass::UsMiAmbassadorBridgePremierCommuterCard => {
+            Self::UsFlEpass => "US_FL_EPASS",
+            Self::UsFlGibaTollPass => "US_FL_GIBA_TOLL_PASS",
+            Self::UsFlLeeway => "US_FL_LEEWAY",
+            Self::UsFlSunpass => "US_FL_SUNPASS",
+            Self::UsFlSunpassPro => "US_FL_SUNPASS_PRO",
+            Self::UsIlEzpassil => "US_IL_EZPASSIL",
+            Self::UsIlIpass => "US_IL_IPASS",
+            Self::UsInEzpassin => "US_IN_EZPASSIN",
+            Self::UsKsBestpassHorizon => "US_KS_BESTPASS_HORIZON",
+            Self::UsKsKtag => "US_KS_KTAG",
+            Self::UsKsNationalpass => "US_KS_NATIONALPASS",
+            Self::UsKsPrepassElitepass => "US_KS_PREPASS_ELITEPASS",
+            Self::UsKyRiverlink => "US_KY_RIVERLINK",
+            Self::UsLaGeauxpass => "US_LA_GEAUXPASS",
+            Self::UsLaTollTag => "US_LA_TOLL_TAG",
+            Self::UsMaEzpassma => "US_MA_EZPASSMA",
+            Self::UsMdEzpassmd => "US_MD_EZPASSMD",
+            Self::UsMeEzpassme => "US_ME_EZPASSME",
+            Self::UsMiAmbassadorBridgePremierCommuterCard => {
                 "US_MI_AMBASSADOR_BRIDGE_PREMIER_COMMUTER_CARD"
             }
-            TollPass::UsMiBcpass => "US_MI_BCPASS",
-            TollPass::UsMiGrosseIleTollBridgePassTag => {
+            Self::UsMiBcpass => "US_MI_BCPASS",
+            Self::UsMiGrosseIleTollBridgePassTag => {
                 "US_MI_GROSSE_ILE_TOLL_BRIDGE_PASS_TAG"
             }
-            TollPass::UsMiIqProxCard => "US_MI_IQ_PROX_CARD",
-            TollPass::UsMiIqTag => "US_MI_IQ_TAG",
-            TollPass::UsMiMackinacBridgeMacPass => "US_MI_MACKINAC_BRIDGE_MAC_PASS",
-            TollPass::UsMiNexpressToll => "US_MI_NEXPRESS_TOLL",
-            TollPass::UsMnEzpassmn => "US_MN_EZPASSMN",
-            TollPass::UsNcEzpassnc => "US_NC_EZPASSNC",
-            TollPass::UsNcPeachPass => "US_NC_PEACH_PASS",
-            TollPass::UsNcQuickPass => "US_NC_QUICK_PASS",
-            TollPass::UsNhEzpassnh => "US_NH_EZPASSNH",
-            TollPass::UsNjDownbeachExpressPass => "US_NJ_DOWNBEACH_EXPRESS_PASS",
-            TollPass::UsNjEzpassnj => "US_NJ_EZPASSNJ",
-            TollPass::UsNyExpresspass => "US_NY_EXPRESSPASS",
-            TollPass::UsNyEzpassny => "US_NY_EZPASSNY",
-            TollPass::UsOhEzpassoh => "US_OH_EZPASSOH",
-            TollPass::UsPaEzpasspa => "US_PA_EZPASSPA",
-            TollPass::UsRiEzpassri => "US_RI_EZPASSRI",
-            TollPass::UsScPalpass => "US_SC_PALPASS",
-            TollPass::UsTxAviTag => "US_TX_AVI_TAG",
-            TollPass::UsTxBancpass => "US_TX_BANCPASS",
-            TollPass::UsTxDelRioPass => "US_TX_DEL_RIO_PASS",
-            TollPass::UsTxEfastPass => "US_TX_EFAST_PASS",
-            TollPass::UsTxEaglePassExpressCard => "US_TX_EAGLE_PASS_EXPRESS_CARD",
-            TollPass::UsTxEptoll => "US_TX_EPTOLL",
-            TollPass::UsTxEzCross => "US_TX_EZ_CROSS",
-            TollPass::UsTxEztag => "US_TX_EZTAG",
-            TollPass::UsTxFuegoTag => "US_TX_FUEGO_TAG",
-            TollPass::UsTxLaredoTradeTag => "US_TX_LAREDO_TRADE_TAG",
-            TollPass::UsTxPluspass => "US_TX_PLUSPASS",
-            TollPass::UsTxTolltag => "US_TX_TOLLTAG",
-            TollPass::UsTxTxtag => "US_TX_TXTAG",
-            TollPass::UsTxXpressCard => "US_TX_XPRESS_CARD",
-            TollPass::UsUtAdamsAveParkwayExpresscard => {
-                "US_UT_ADAMS_AVE_PARKWAY_EXPRESSCARD"
-            }
-            TollPass::UsVaEzpassva => "US_VA_EZPASSVA",
-            TollPass::UsWaBreezeby => "US_WA_BREEZEBY",
-            TollPass::UsWaGoodToGo => "US_WA_GOOD_TO_GO",
-            TollPass::UsWvEzpasswv => "US_WV_EZPASSWV",
-            TollPass::UsWvMemorialBridgeTickets => "US_WV_MEMORIAL_BRIDGE_TICKETS",
-            TollPass::UsWvMovPass => "US_WV_MOV_PASS",
-            TollPass::UsWvNewellTollBridgeTicket => "US_WV_NEWELL_TOLL_BRIDGE_TICKET",
+            Self::UsMiIqProxCard => "US_MI_IQ_PROX_CARD",
+            Self::UsMiIqTag => "US_MI_IQ_TAG",
+            Self::UsMiMackinacBridgeMacPass => "US_MI_MACKINAC_BRIDGE_MAC_PASS",
+            Self::UsMiNexpressToll => "US_MI_NEXPRESS_TOLL",
+            Self::UsMnEzpassmn => "US_MN_EZPASSMN",
+            Self::UsNcEzpassnc => "US_NC_EZPASSNC",
+            Self::UsNcPeachPass => "US_NC_PEACH_PASS",
+            Self::UsNcQuickPass => "US_NC_QUICK_PASS",
+            Self::UsNhEzpassnh => "US_NH_EZPASSNH",
+            Self::UsNjDownbeachExpressPass => "US_NJ_DOWNBEACH_EXPRESS_PASS",
+            Self::UsNjEzpassnj => "US_NJ_EZPASSNJ",
+            Self::UsNyExpresspass => "US_NY_EXPRESSPASS",
+            Self::UsNyEzpassny => "US_NY_EZPASSNY",
+            Self::UsOhEzpassoh => "US_OH_EZPASSOH",
+            Self::UsPaEzpasspa => "US_PA_EZPASSPA",
+            Self::UsRiEzpassri => "US_RI_EZPASSRI",
+            Self::UsScPalpass => "US_SC_PALPASS",
+            Self::UsTxAviTag => "US_TX_AVI_TAG",
+            Self::UsTxBancpass => "US_TX_BANCPASS",
+            Self::UsTxDelRioPass => "US_TX_DEL_RIO_PASS",
+            Self::UsTxEfastPass => "US_TX_EFAST_PASS",
+            Self::UsTxEaglePassExpressCard => "US_TX_EAGLE_PASS_EXPRESS_CARD",
+            Self::UsTxEptoll => "US_TX_EPTOLL",
+            Self::UsTxEzCross => "US_TX_EZ_CROSS",
+            Self::UsTxEztag => "US_TX_EZTAG",
+            Self::UsTxFuegoTag => "US_TX_FUEGO_TAG",
+            Self::UsTxLaredoTradeTag => "US_TX_LAREDO_TRADE_TAG",
+            Self::UsTxPluspass => "US_TX_PLUSPASS",
+            Self::UsTxTolltag => "US_TX_TOLLTAG",
+            Self::UsTxTxtag => "US_TX_TXTAG",
+            Self::UsTxXpressCard => "US_TX_XPRESS_CARD",
+            Self::UsUtAdamsAveParkwayExpresscard => "US_UT_ADAMS_AVE_PARKWAY_EXPRESSCARD",
+            Self::UsVaEzpassva => "US_VA_EZPASSVA",
+            Self::UsWaBreezeby => "US_WA_BREEZEBY",
+            Self::UsWaGoodToGo => "US_WA_GOOD_TO_GO",
+            Self::UsWvEzpasswv => "US_WV_EZPASSWV",
+            Self::UsWvMemorialBridgeTickets => "US_WV_MEMORIAL_BRIDGE_TICKETS",
+            Self::UsWvMovPass => "US_WV_MOV_PASS",
+            Self::UsWvNewellTollBridgeTicket => "US_WV_NEWELL_TOLL_BRIDGE_TICKET",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1667,11 +1737,11 @@ impl VehicleEmissionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            VehicleEmissionType::Unspecified => "VEHICLE_EMISSION_TYPE_UNSPECIFIED",
-            VehicleEmissionType::Gasoline => "GASOLINE",
-            VehicleEmissionType::Electric => "ELECTRIC",
-            VehicleEmissionType::Hybrid => "HYBRID",
-            VehicleEmissionType::Diesel => "DIESEL",
+            Self::Unspecified => "VEHICLE_EMISSION_TYPE_UNSPECIFIED",
+            Self::Gasoline => "GASOLINE",
+            Self::Electric => "ELECTRIC",
+            Self::Hybrid => "HYBRID",
+            Self::Diesel => "DIESEL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1687,7 +1757,6 @@ impl VehicleEmissionType {
     }
 }
 /// Contains the vehicle information, such as the vehicle emission type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VehicleInfo {
     /// Describes the vehicle's emission type.
@@ -1698,7 +1767,6 @@ pub struct VehicleInfo {
 }
 /// Encapsulates a set of optional conditions to satisfy when calculating the
 /// routes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteModifiers {
     /// When set to true, avoids toll roads where reasonable, giving preference to
@@ -1769,10 +1837,10 @@ impl RoutingPreference {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RoutingPreference::Unspecified => "ROUTING_PREFERENCE_UNSPECIFIED",
-            RoutingPreference::TrafficUnaware => "TRAFFIC_UNAWARE",
-            RoutingPreference::TrafficAware => "TRAFFIC_AWARE",
-            RoutingPreference::TrafficAwareOptimal => "TRAFFIC_AWARE_OPTIMAL",
+            Self::Unspecified => "ROUTING_PREFERENCE_UNSPECIFIED",
+            Self::TrafficUnaware => "TRAFFIC_UNAWARE",
+            Self::TrafficAware => "TRAFFIC_AWARE",
+            Self::TrafficAwareOptimal => "TRAFFIC_AWARE_OPTIMAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1816,10 +1884,10 @@ impl TrafficModel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            TrafficModel::Unspecified => "TRAFFIC_MODEL_UNSPECIFIED",
-            TrafficModel::BestGuess => "BEST_GUESS",
-            TrafficModel::Pessimistic => "PESSIMISTIC",
-            TrafficModel::Optimistic => "OPTIMISTIC",
+            Self::Unspecified => "TRAFFIC_MODEL_UNSPECIFIED",
+            Self::BestGuess => "BEST_GUESS",
+            Self::Pessimistic => "PESSIMISTIC",
+            Self::Optimistic => "OPTIMISTIC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1835,7 +1903,6 @@ impl TrafficModel {
 }
 /// Preferences for `TRANSIT` based routes that influence the route that is
 /// returned.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransitPreferences {
     /// A set of travel modes to use when getting a `TRANSIT` route. Defaults to
@@ -1884,12 +1951,12 @@ pub mod transit_preferences {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TransitTravelMode::Unspecified => "TRANSIT_TRAVEL_MODE_UNSPECIFIED",
-                TransitTravelMode::Bus => "BUS",
-                TransitTravelMode::Subway => "SUBWAY",
-                TransitTravelMode::Train => "TRAIN",
-                TransitTravelMode::LightRail => "LIGHT_RAIL",
-                TransitTravelMode::Rail => "RAIL",
+                Self::Unspecified => "TRANSIT_TRAVEL_MODE_UNSPECIFIED",
+                Self::Bus => "BUS",
+                Self::Subway => "SUBWAY",
+                Self::Train => "TRAIN",
+                Self::LightRail => "LIGHT_RAIL",
+                Self::Rail => "RAIL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1935,11 +2002,9 @@ pub mod transit_preferences {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TransitRoutingPreference::Unspecified => {
-                    "TRANSIT_ROUTING_PREFERENCE_UNSPECIFIED"
-                }
-                TransitRoutingPreference::LessWalking => "LESS_WALKING",
-                TransitRoutingPreference::FewerTransfers => "FEWER_TRANSFERS",
+                Self::Unspecified => "TRANSIT_ROUTING_PREFERENCE_UNSPECIFIED",
+                Self::LessWalking => "LESS_WALKING",
+                Self::FewerTransfers => "FEWER_TRANSFERS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1972,9 +2037,9 @@ impl Units {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Units::Unspecified => "UNITS_UNSPECIFIED",
-            Units::Metric => "METRIC",
-            Units::Imperial => "IMPERIAL",
+            Self::Unspecified => "UNITS_UNSPECIFIED",
+            Self::Metric => "METRIC",
+            Self::Imperial => "IMPERIAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1989,7 +2054,6 @@ impl Units {
 }
 /// Encapsulates a waypoint. Waypoints mark both the beginning and end of a
 /// route, and include intermediate stops along the route.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Waypoint {
     /// Marks this waypoint as a milestone rather a stopping point. For
@@ -2028,7 +2092,6 @@ pub struct Waypoint {
 /// Nested message and enum types in `Waypoint`.
 pub mod waypoint {
     /// Different ways to represent a location.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum LocationType {
         /// A point specified using geographic coordinates, including an optional
@@ -2045,7 +2108,6 @@ pub mod waypoint {
     }
 }
 /// ComputeRoutes request message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRoutesRequest {
     /// Required. Origin waypoint.
@@ -2138,7 +2200,10 @@ pub struct ComputeRoutesRequest {
     /// request in addition to the default route. A reference route is a route with
     /// a different route calculation objective than the default route. For example
     /// a `FUEL_EFFICIENT` reference route calculation takes into account various
-    /// parameters that would generate an optimal fuel efficient route.
+    /// parameters that would generate an optimal fuel efficient route. When using
+    /// this feature, look for
+    /// [`route_labels`][google.maps.routing.v2.Route.route_labels] on the
+    /// resulting routes.
     #[prost(
         enumeration = "compute_routes_request::ReferenceRoute",
         repeated,
@@ -2196,9 +2261,23 @@ pub mod compute_routes_request {
     pub enum ReferenceRoute {
         /// Not used. Requests containing this value fail.
         Unspecified = 0,
-        /// Fuel efficient route. Routes labeled with this value are determined to be
-        /// optimized for parameters such as fuel consumption.
+        /// Fuel efficient route.
         FuelEfficient = 1,
+        /// Route with shorter travel distance. This is an experimental feature.
+        ///
+        /// For `DRIVE` requests, this feature prioritizes shorter distance over
+        /// driving comfort. For example, it may prefer local roads instead of
+        /// highways, take dirt roads, cut through parking lots, etc. This feature
+        /// does not return any maneuvers that Google Maps knows to be illegal.
+        ///
+        /// For `BICYCLE` and `TWO_WHEELER` requests, this feature returns routes
+        /// similar to those returned when you don't specify
+        /// `requested_reference_routes`.
+        ///
+        /// This feature is not compatible with any other travel modes, via
+        /// intermediate waypoints, or `optimize_waypoint_order`; such requests will
+        /// fail. However, you can use it with any `routing_preference`.
+        ShorterDistance = 2,
     }
     impl ReferenceRoute {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -2207,8 +2286,9 @@ pub mod compute_routes_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ReferenceRoute::Unspecified => "REFERENCE_ROUTE_UNSPECIFIED",
-                ReferenceRoute::FuelEfficient => "FUEL_EFFICIENT",
+                Self::Unspecified => "REFERENCE_ROUTE_UNSPECIFIED",
+                Self::FuelEfficient => "FUEL_EFFICIENT",
+                Self::ShorterDistance => "SHORTER_DISTANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2216,6 +2296,7 @@ pub mod compute_routes_request {
             match value {
                 "REFERENCE_ROUTE_UNSPECIFIED" => Some(Self::Unspecified),
                 "FUEL_EFFICIENT" => Some(Self::FuelEfficient),
+                "SHORTER_DISTANCE" => Some(Self::ShorterDistance),
                 _ => None,
             }
         }
@@ -2247,6 +2328,18 @@ pub mod compute_routes_request {
         /// is meant to be read as-is. This content is for display only.
         /// Do not programmatically parse it.
         HtmlFormattedNavigationInstructions = 4,
+        /// Flyover information for the route(s). The
+        /// `routes.polyline_details.flyover_info` fieldmask must be specified to
+        /// return this information. This data will only currently be populated for
+        /// certain metros in India. This feature is experimental, and the
+        /// SKU/charge is subject to change.
+        FlyoverInfoOnPolyline = 7,
+        /// Narrow road information for the route(s). The
+        /// `routes.polyline_details.narrow_road_info` fieldmask must be specified
+        /// to return this information. This data will only currently be populated
+        /// for certain metros in India. This feature is experimental, and the
+        /// SKU/charge is subject to change.
+        NarrowRoadInfoOnPolyline = 8,
     }
     impl ExtraComputation {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -2255,13 +2348,15 @@ pub mod compute_routes_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExtraComputation::Unspecified => "EXTRA_COMPUTATION_UNSPECIFIED",
-                ExtraComputation::Tolls => "TOLLS",
-                ExtraComputation::FuelConsumption => "FUEL_CONSUMPTION",
-                ExtraComputation::TrafficOnPolyline => "TRAFFIC_ON_POLYLINE",
-                ExtraComputation::HtmlFormattedNavigationInstructions => {
+                Self::Unspecified => "EXTRA_COMPUTATION_UNSPECIFIED",
+                Self::Tolls => "TOLLS",
+                Self::FuelConsumption => "FUEL_CONSUMPTION",
+                Self::TrafficOnPolyline => "TRAFFIC_ON_POLYLINE",
+                Self::HtmlFormattedNavigationInstructions => {
                     "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS"
                 }
+                Self::FlyoverInfoOnPolyline => "FLYOVER_INFO_ON_POLYLINE",
+                Self::NarrowRoadInfoOnPolyline => "NARROW_ROAD_INFO_ON_POLYLINE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2274,13 +2369,14 @@ pub mod compute_routes_request {
                 "HTML_FORMATTED_NAVIGATION_INSTRUCTIONS" => {
                     Some(Self::HtmlFormattedNavigationInstructions)
                 }
+                "FLYOVER_INFO_ON_POLYLINE" => Some(Self::FlyoverInfoOnPolyline),
+                "NARROW_ROAD_INFO_ON_POLYLINE" => Some(Self::NarrowRoadInfoOnPolyline),
                 _ => None,
             }
         }
     }
 }
 /// ComputeRoutes the response message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRoutesResponse {
     /// Contains an array of computed routes (up to three) when you specify
@@ -2301,7 +2397,6 @@ pub struct ComputeRoutesResponse {
     pub geocoding_results: ::core::option::Option<GeocodingResults>,
 }
 /// ComputeRouteMatrix request message
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComputeRouteMatrixRequest {
     /// Required. Array of origins, which determines the rows of the response
@@ -2420,8 +2515,8 @@ pub mod compute_route_matrix_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExtraComputation::Unspecified => "EXTRA_COMPUTATION_UNSPECIFIED",
-                ExtraComputation::Tolls => "TOLLS",
+                Self::Unspecified => "EXTRA_COMPUTATION_UNSPECIFIED",
+                Self::Tolls => "TOLLS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2435,7 +2530,6 @@ pub mod compute_route_matrix_request {
     }
 }
 /// A single origin for ComputeRouteMatrixRequest
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixOrigin {
     /// Required. Origin waypoint
@@ -2446,7 +2540,6 @@ pub struct RouteMatrixOrigin {
     pub route_modifiers: ::core::option::Option<RouteModifiers>,
 }
 /// A single destination for ComputeRouteMatrixRequest
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixDestination {
     /// Required. Destination waypoint
@@ -2455,7 +2548,6 @@ pub struct RouteMatrixDestination {
 }
 /// Contains route information computed for an origin/destination pair in the
 /// ComputeRouteMatrix API. This proto can be streamed to the client.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteMatrixElement {
     /// Zero-based index of the origin in the request.
@@ -2503,7 +2595,6 @@ pub struct RouteMatrixElement {
 /// Nested message and enum types in `RouteMatrixElement`.
 pub mod route_matrix_element {
     /// Text representations of certain properties.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct LocalizedValues {
         /// Travel distance represented in text form.
@@ -2551,11 +2642,9 @@ impl RouteMatrixElementCondition {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RouteMatrixElementCondition::Unspecified => {
-                "ROUTE_MATRIX_ELEMENT_CONDITION_UNSPECIFIED"
-            }
-            RouteMatrixElementCondition::RouteExists => "ROUTE_EXISTS",
-            RouteMatrixElementCondition::RouteNotFound => "ROUTE_NOT_FOUND",
+            Self::Unspecified => "ROUTE_MATRIX_ELEMENT_CONDITION_UNSPECIFIED",
+            Self::RouteExists => "ROUTE_EXISTS",
+            Self::RouteNotFound => "ROUTE_NOT_FOUND",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2570,7 +2659,13 @@ impl RouteMatrixElementCondition {
 }
 /// Generated client implementations.
 pub mod routes_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The Routes API.
@@ -2593,8 +2688,8 @@ pub mod routes_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -2619,7 +2714,7 @@ pub mod routes_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             RoutesClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -2700,8 +2795,7 @@ pub mod routes_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2762,8 +2856,7 @@ pub mod routes_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

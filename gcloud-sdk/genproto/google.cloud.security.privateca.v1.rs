@@ -5,7 +5,6 @@
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
 /// can be used to create
 /// [Certificates][google.cloud.security.privateca.v1.Certificate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateAuthority {
     /// Output only. The resource name for this
@@ -121,7 +120,6 @@ pub mod certificate_authority {
     /// URLs where a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// will publish content.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AccessUrls {
         /// The URL where this
@@ -140,7 +138,6 @@ pub mod certificate_authority {
     /// A Cloud KMS key configuration that a
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// will use.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyVersionSpec {
         #[prost(oneof = "key_version_spec::KeyVersion", tags = "1, 2")]
@@ -148,7 +145,6 @@ pub mod certificate_authority {
     }
     /// Nested message and enum types in `KeyVersionSpec`.
     pub mod key_version_spec {
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum KeyVersion {
             /// The resource name for an existing Cloud KMS CryptoKeyVersion in the
@@ -197,9 +193,9 @@ pub mod certificate_authority {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::SelfSigned => "SELF_SIGNED",
-                Type::Subordinate => "SUBORDINATE",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::SelfSigned => "SELF_SIGNED",
+                Self::Subordinate => "SUBORDINATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -272,12 +268,12 @@ pub mod certificate_authority {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Enabled => "ENABLED",
-                State::Disabled => "DISABLED",
-                State::Staged => "STAGED",
-                State::AwaitingUserActivation => "AWAITING_USER_ACTIVATION",
-                State::Deleted => "DELETED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+                Self::Staged => "STAGED",
+                Self::AwaitingUserActivation => "AWAITING_USER_ACTIVATION",
+                Self::Deleted => "DELETED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -341,15 +337,15 @@ pub mod certificate_authority {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                SignHashAlgorithm::Unspecified => "SIGN_HASH_ALGORITHM_UNSPECIFIED",
-                SignHashAlgorithm::RsaPss2048Sha256 => "RSA_PSS_2048_SHA256",
-                SignHashAlgorithm::RsaPss3072Sha256 => "RSA_PSS_3072_SHA256",
-                SignHashAlgorithm::RsaPss4096Sha256 => "RSA_PSS_4096_SHA256",
-                SignHashAlgorithm::RsaPkcs12048Sha256 => "RSA_PKCS1_2048_SHA256",
-                SignHashAlgorithm::RsaPkcs13072Sha256 => "RSA_PKCS1_3072_SHA256",
-                SignHashAlgorithm::RsaPkcs14096Sha256 => "RSA_PKCS1_4096_SHA256",
-                SignHashAlgorithm::EcP256Sha256 => "EC_P256_SHA256",
-                SignHashAlgorithm::EcP384Sha384 => "EC_P384_SHA384",
+                Self::Unspecified => "SIGN_HASH_ALGORITHM_UNSPECIFIED",
+                Self::RsaPss2048Sha256 => "RSA_PSS_2048_SHA256",
+                Self::RsaPss3072Sha256 => "RSA_PSS_3072_SHA256",
+                Self::RsaPss4096Sha256 => "RSA_PSS_4096_SHA256",
+                Self::RsaPkcs12048Sha256 => "RSA_PKCS1_2048_SHA256",
+                Self::RsaPkcs13072Sha256 => "RSA_PKCS1_3072_SHA256",
+                Self::RsaPkcs14096Sha256 => "RSA_PKCS1_4096_SHA256",
+                Self::EcP256Sha256 => "EC_P256_SHA256",
+                Self::EcP384Sha384 => "EC_P384_SHA384",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -376,7 +372,6 @@ pub mod certificate_authority {
 /// issuance policies for one or more
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
 /// resources and to rotate CA certificates in and out of the trust anchor.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CaPool {
     /// Output only. The resource name for this
@@ -420,7 +415,6 @@ pub mod ca_pool {
     /// set here apply to certificates issued by any
     /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority]
     /// in the [CaPool][google.cloud.security.privateca.v1.CaPool].
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct PublishingOptions {
         /// Optional. When true, publishes each
@@ -484,9 +478,9 @@ pub mod ca_pool {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    EncodingFormat::Unspecified => "ENCODING_FORMAT_UNSPECIFIED",
-                    EncodingFormat::Pem => "PEM",
-                    EncodingFormat::Der => "DER",
+                    Self::Unspecified => "ENCODING_FORMAT_UNSPECIFIED",
+                    Self::Pem => "PEM",
+                    Self::Der => "DER",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -502,7 +496,6 @@ pub mod ca_pool {
     }
     /// Defines controls over all certificate issuance within a
     /// [CaPool][google.cloud.security.privateca.v1.CaPool].
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct IssuancePolicy {
         /// Optional. If any
@@ -578,7 +571,6 @@ pub mod ca_pool {
         /// [AllowedKeyType][google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType]
         /// may refer to either a fully-qualified key algorithm, such as RSA 4096, or
         /// a family of key algorithms, such as any RSA key.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct AllowedKeyType {
             #[prost(oneof = "allowed_key_type::KeyType", tags = "1, 2")]
@@ -589,7 +581,6 @@ pub mod ca_pool {
             /// Describes an RSA key that may be used in a
             /// [Certificate][google.cloud.security.privateca.v1.Certificate] issued
             /// from a [CaPool][google.cloud.security.privateca.v1.CaPool].
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct RsaKeyType {
                 /// Optional. The minimum allowed RSA modulus size (inclusive), in bits.
@@ -606,7 +597,6 @@ pub mod ca_pool {
             /// Describes an Elliptic Curve key that may be used in a
             /// [Certificate][google.cloud.security.privateca.v1.Certificate] issued
             /// from a [CaPool][google.cloud.security.privateca.v1.CaPool].
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, Copy, PartialEq, ::prost::Message)]
             pub struct EcKeyType {
                 /// Optional. A signature algorithm that must be used. If this is
@@ -652,12 +642,10 @@ pub mod ca_pool {
                     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
                     pub fn as_str_name(&self) -> &'static str {
                         match self {
-                            EcSignatureAlgorithm::Unspecified => {
-                                "EC_SIGNATURE_ALGORITHM_UNSPECIFIED"
-                            }
-                            EcSignatureAlgorithm::EcdsaP256 => "ECDSA_P256",
-                            EcSignatureAlgorithm::EcdsaP384 => "ECDSA_P384",
-                            EcSignatureAlgorithm::Eddsa25519 => "EDDSA_25519",
+                            Self::Unspecified => "EC_SIGNATURE_ALGORITHM_UNSPECIFIED",
+                            Self::EcdsaP256 => "ECDSA_P256",
+                            Self::EcdsaP384 => "ECDSA_P384",
+                            Self::Eddsa25519 => "EDDSA_25519",
                         }
                     }
                     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -674,7 +662,6 @@ pub mod ca_pool {
                     }
                 }
             }
-            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
             pub enum KeyType {
                 /// Represents an allowed RSA key type.
@@ -689,7 +676,6 @@ pub mod ca_pool {
         /// specifies the allowed ways in which
         /// [Certificates][google.cloud.security.privateca.v1.Certificate] may be
         /// requested from this [CaPool][google.cloud.security.privateca.v1.CaPool].
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, Copy, PartialEq, ::prost::Message)]
         pub struct IssuanceModes {
             /// Optional. When true, allows callers to create
@@ -734,9 +720,9 @@ pub mod ca_pool {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Tier::Unspecified => "TIER_UNSPECIFIED",
-                Tier::Enterprise => "ENTERPRISE",
-                Tier::Devops => "DEVOPS",
+                Self::Unspecified => "TIER_UNSPECIFIED",
+                Self::Enterprise => "ENTERPRISE",
+                Self::Devops => "DEVOPS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -754,7 +740,6 @@ pub mod ca_pool {
 /// [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
 /// corresponds to a signed X.509 certificate Revocation List (CRL). A CRL
 /// contains the serial numbers of certificates that should no longer be trusted.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateRevocationList {
     /// Output only. The resource name for this
@@ -810,7 +795,6 @@ pub struct CertificateRevocationList {
 pub mod certificate_revocation_list {
     /// Describes a revoked
     /// [Certificate][google.cloud.security.privateca.v1.Certificate].
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RevokedCertificate {
         /// The resource name for the
@@ -862,9 +846,9 @@ pub mod certificate_revocation_list {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Active => "ACTIVE",
-                State::Superseded => "SUPERSEDED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Active => "ACTIVE",
+                Self::Superseded => "SUPERSEDED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -881,7 +865,6 @@ pub mod certificate_revocation_list {
 /// A [Certificate][google.cloud.security.privateca.v1.Certificate] corresponds
 /// to a signed X.509 certificate issued by a
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Certificate {
     /// Output only. The resource name for this
@@ -954,7 +937,6 @@ pub struct Certificate {
 pub mod certificate {
     /// Describes fields that are relavent to the revocation of a
     /// [Certificate][google.cloud.security.privateca.v1.Certificate].
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct RevocationDetails {
         /// Indicates why a
@@ -969,7 +951,6 @@ pub mod certificate {
         pub revocation_time: ::core::option::Option<::prost_types::Timestamp>,
     }
     /// The config used to create a signed X.509 certificate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CertificateConfig {
         /// Immutable. A pem-encoded X.509 certificate signing request (CSR).
@@ -984,7 +965,6 @@ pub mod certificate {
 /// A
 /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
 /// refers to a managed template for certificate issuance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateTemplate {
     /// Output only. The resource name for this
@@ -1070,7 +1050,6 @@ pub struct CertificateTemplate {
 /// used to describe certain fields of an X.509 certificate, such as the key
 /// usage fields, fields specific to CA certificates, certificate policy
 /// extensions and custom extensions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct X509Parameters {
     /// Optional. Indicates the intended use for keys that correspond to a
@@ -1101,7 +1080,6 @@ pub struct X509Parameters {
 /// Nested message and enum types in `X509Parameters`.
 pub mod x509_parameters {
     /// Describes values that are relevant in a CA certificate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct CaOptions {
         /// Optional. Refers to the "CA" X.509 extension, which is a boolean value.
@@ -1120,7 +1098,6 @@ pub mod x509_parameters {
     }
     /// Describes the X.509 name constraints extension, per
     /// <https://tools.ietf.org/html/rfc5280#section-4.2.1.10>
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NameConstraints {
         /// Indicates whether or not the name constraints are marked critical.
@@ -1188,7 +1165,6 @@ pub mod x509_parameters {
 /// known issuing
 /// [CertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthority],
 /// or a PEM issuer certificate chain.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubordinateConfig {
     #[prost(oneof = "subordinate_config::SubordinateConfig", tags = "1, 2")]
@@ -1200,14 +1176,12 @@ pub struct SubordinateConfig {
 pub mod subordinate_config {
     /// This message describes a subordinate CA's issuer certificate chain. This
     /// wrapper exists for compatibility reasons.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubordinateConfigChain {
         /// Required. Expected to be in leaf-to-root order according to RFC 5246.
         #[prost(string, repeated, tag = "1")]
         pub pem_certificates: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum SubordinateConfig {
         /// Required. This can refer to a
@@ -1228,7 +1202,6 @@ pub mod subordinate_config {
 }
 /// A [PublicKey][google.cloud.security.privateca.v1.PublicKey] describes a
 /// public key.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PublicKey {
     /// Required. A public key. The padding and encoding
@@ -1280,8 +1253,8 @@ pub mod public_key {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                KeyFormat::Unspecified => "KEY_FORMAT_UNSPECIFIED",
-                KeyFormat::Pem => "PEM",
+                Self::Unspecified => "KEY_FORMAT_UNSPECIFIED",
+                Self::Pem => "PEM",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1297,7 +1270,6 @@ pub mod public_key {
 /// A [CertificateConfig][google.cloud.security.privateca.v1.CertificateConfig]
 /// describes an X.509 certificate or CSR that is to be created, as an
 /// alternative to using ASN.1.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateConfig {
     /// Required. Specifies some of the values in a certificate that are related to
@@ -1329,7 +1301,6 @@ pub struct CertificateConfig {
 pub mod certificate_config {
     /// These values are used to create the distinguished name and subject
     /// alternative name fields in an X.509 certificate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubjectConfig {
         /// Optional. Contains distinguished name fields such as the common name,
@@ -1342,7 +1313,6 @@ pub mod certificate_config {
     }
     /// A KeyId identifies a specific public key, usually by hashing the public
     /// key.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyId {
         /// Required. The value of this KeyId encoded in lowercase hexadecimal. This
@@ -1355,7 +1325,6 @@ pub mod certificate_config {
 /// [CertificateDescription][google.cloud.security.privateca.v1.CertificateDescription]
 /// describes an X.509 certificate or CSR that has been issued, as an alternative
 /// to using ASN.1 / X.509.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateDescription {
     /// Describes some of the values in a certificate that are related to the
@@ -1401,7 +1370,6 @@ pub struct CertificateDescription {
 pub mod certificate_description {
     /// These values describe fields in an issued X.509 certificate such as the
     /// distinguished name, subject alternative names, serial number, and lifetime.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubjectDescription {
         /// Contains distinguished name fields such as the common name, location and
@@ -1429,7 +1397,6 @@ pub mod certificate_description {
     }
     /// A KeyId identifies a specific public key, usually by hashing the public
     /// key.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct KeyId {
         /// Optional. The value of this KeyId encoded in lowercase hexadecimal. This
@@ -1438,7 +1405,6 @@ pub mod certificate_description {
         pub key_id: ::prost::alloc::string::String,
     }
     /// A group of fingerprints for the x509 certificate.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CertificateFingerprint {
         /// The SHA 256 hash, encoded in hexadecimal, of the DER x509 certificate.
@@ -1449,7 +1415,6 @@ pub mod certificate_description {
 /// An [ObjectId][google.cloud.security.privateca.v1.ObjectId] specifies an
 /// object identifier (OID). These provide context and describe types in ASN.1
 /// messages.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectId {
     /// Required. The parts of an OID path. The most significant parts of the path
@@ -1460,7 +1425,6 @@ pub struct ObjectId {
 /// An [X509Extension][google.cloud.security.privateca.v1.X509Extension]
 /// specifies an X.509 extension, which may be used in different parts of X.509
 /// objects like certificates, CSRs, and CRLs.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct X509Extension {
     /// Required. The OID for this X.509 extension.
@@ -1477,7 +1441,6 @@ pub struct X509Extension {
 }
 /// A [KeyUsage][google.cloud.security.privateca.v1.KeyUsage] describes key usage
 /// values that may appear in an X.509 certificate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyUsage {
     /// Describes high-level ways in which a key may be used.
@@ -1497,7 +1460,6 @@ pub mod key_usage {
     /// [KeyUsage.KeyUsageOptions][google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions]
     /// corresponds to the key usage values described in
     /// <https://tools.ietf.org/html/rfc5280#section-4.2.1.3.>
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct KeyUsageOptions {
         /// The key may be used for digital signatures.
@@ -1532,7 +1494,6 @@ pub mod key_usage {
     /// [KeyUsage.ExtendedKeyUsageOptions][google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions]
     /// has fields that correspond to certain common OIDs that could be specified
     /// as an extended key usage value.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ExtendedKeyUsageOptions {
         /// Corresponds to OID 1.3.6.1.5.5.7.3.1. Officially described as "TLS WWW
@@ -1563,7 +1524,6 @@ pub mod key_usage {
 }
 /// [Subject][google.cloud.security.privateca.v1.Subject] describes parts of a
 /// distinguished name that, in turn, describes the subject of the certificate.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Subject {
     /// The "common name" of the subject.
@@ -1595,7 +1555,6 @@ pub struct Subject {
 /// corresponds to a more modern way of listing what the asserted identity is in
 /// a certificate (i.e., compared to the "common name" in the distinguished
 /// name).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectAltNames {
     /// Contains only valid, fully-qualified host names.
@@ -1620,7 +1579,6 @@ pub struct SubjectAltNames {
 /// [Certificate][google.cloud.security.privateca.v1.Certificate]'s
 /// [Subject][google.cloud.security.privateca.v1.Subject] and
 /// [SubjectAltNames][google.cloud.security.privateca.v1.SubjectAltNames].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateIdentityConstraints {
     /// Optional. A CEL expression that may be used to validate the resolved X.509
@@ -1647,7 +1605,6 @@ pub struct CertificateIdentityConstraints {
 }
 /// Describes a set of X.509 extensions that may be part of some certificate
 /// issuance controls.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CertificateExtensionConstraints {
     /// Optional. A set of named X.509 extensions. Will be combined with
@@ -1736,15 +1693,13 @@ pub mod certificate_extension_constraints {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                KnownCertificateExtension::Unspecified => {
-                    "KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED"
-                }
-                KnownCertificateExtension::BaseKeyUsage => "BASE_KEY_USAGE",
-                KnownCertificateExtension::ExtendedKeyUsage => "EXTENDED_KEY_USAGE",
-                KnownCertificateExtension::CaOptions => "CA_OPTIONS",
-                KnownCertificateExtension::PolicyIds => "POLICY_IDS",
-                KnownCertificateExtension::AiaOcspServers => "AIA_OCSP_SERVERS",
-                KnownCertificateExtension::NameConstraints => "NAME_CONSTRAINTS",
+                Self::Unspecified => "KNOWN_CERTIFICATE_EXTENSION_UNSPECIFIED",
+                Self::BaseKeyUsage => "BASE_KEY_USAGE",
+                Self::ExtendedKeyUsage => "EXTENDED_KEY_USAGE",
+                Self::CaOptions => "CA_OPTIONS",
+                Self::PolicyIds => "POLICY_IDS",
+                Self::AiaOcspServers => "AIA_OCSP_SERVERS",
+                Self::NameConstraints => "NAME_CONSTRAINTS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1811,19 +1766,15 @@ impl RevocationReason {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RevocationReason::Unspecified => "REVOCATION_REASON_UNSPECIFIED",
-            RevocationReason::KeyCompromise => "KEY_COMPROMISE",
-            RevocationReason::CertificateAuthorityCompromise => {
-                "CERTIFICATE_AUTHORITY_COMPROMISE"
-            }
-            RevocationReason::AffiliationChanged => "AFFILIATION_CHANGED",
-            RevocationReason::Superseded => "SUPERSEDED",
-            RevocationReason::CessationOfOperation => "CESSATION_OF_OPERATION",
-            RevocationReason::CertificateHold => "CERTIFICATE_HOLD",
-            RevocationReason::PrivilegeWithdrawn => "PRIVILEGE_WITHDRAWN",
-            RevocationReason::AttributeAuthorityCompromise => {
-                "ATTRIBUTE_AUTHORITY_COMPROMISE"
-            }
+            Self::Unspecified => "REVOCATION_REASON_UNSPECIFIED",
+            Self::KeyCompromise => "KEY_COMPROMISE",
+            Self::CertificateAuthorityCompromise => "CERTIFICATE_AUTHORITY_COMPROMISE",
+            Self::AffiliationChanged => "AFFILIATION_CHANGED",
+            Self::Superseded => "SUPERSEDED",
+            Self::CessationOfOperation => "CESSATION_OF_OPERATION",
+            Self::CertificateHold => "CERTIFICATE_HOLD",
+            Self::PrivilegeWithdrawn => "PRIVILEGE_WITHDRAWN",
+            Self::AttributeAuthorityCompromise => "ATTRIBUTE_AUTHORITY_COMPROMISE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1878,9 +1829,9 @@ impl SubjectRequestMode {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            SubjectRequestMode::Unspecified => "SUBJECT_REQUEST_MODE_UNSPECIFIED",
-            SubjectRequestMode::Default => "DEFAULT",
-            SubjectRequestMode::ReflectedSpiffe => "REFLECTED_SPIFFE",
+            Self::Unspecified => "SUBJECT_REQUEST_MODE_UNSPECIFIED",
+            Self::Default => "DEFAULT",
+            Self::ReflectedSpiffe => "REFLECTED_SPIFFE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1895,7 +1846,6 @@ impl SubjectRequestMode {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateRequest {
     /// Required. The resource name of the
@@ -1964,7 +1914,6 @@ pub struct CreateCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateRequest {
     /// Required. The [name][google.cloud.security.privateca.v1.Certificate.name]
@@ -1975,7 +1924,6 @@ pub struct GetCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificates].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificatesRequest {
     /// Required. The resource name of the location associated with the
@@ -2010,7 +1958,6 @@ pub struct ListCertificatesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificates].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificatesResponse {
     /// The list of [Certificates][google.cloud.security.privateca.v1.Certificate].
@@ -2027,7 +1974,6 @@ pub struct ListCertificatesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.RevokeCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.RevokeCertificate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RevokeCertificateRequest {
     /// Required. The resource name for this
@@ -2058,7 +2004,6 @@ pub struct RevokeCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateRequest {
     /// Required. [Certificate][google.cloud.security.privateca.v1.Certificate]
@@ -2086,7 +2031,6 @@ pub struct UpdateCertificateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ActivateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActivateCertificateAuthorityRequest {
     /// Required. The resource name for this
@@ -2120,7 +2064,6 @@ pub struct ActivateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateAuthorityRequest {
     /// Required. The resource name of the
@@ -2156,7 +2099,6 @@ pub struct CreateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DisableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DisableCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DisableCertificateAuthorityRequest {
     /// Required. The resource name for this
@@ -2188,7 +2130,6 @@ pub struct DisableCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.EnableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.EnableCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EnableCertificateAuthorityRequest {
     /// Required. The resource name for this
@@ -2214,7 +2155,6 @@ pub struct EnableCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCertificateAuthorityCsrRequest {
     /// Required. The resource name for this
@@ -2225,7 +2165,6 @@ pub struct FetchCertificateAuthorityCsrRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCertificateAuthorityCsrResponse {
     /// Output only. The PEM-encoded signed certificate signing request (CSR).
@@ -2234,7 +2173,6 @@ pub struct FetchCertificateAuthorityCsrResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateAuthorityRequest {
     /// Required. The
@@ -2246,7 +2184,6 @@ pub struct GetCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateAuthoritiesRequest {
     /// Required. The resource name of the
@@ -2278,7 +2215,6 @@ pub struct ListCertificateAuthoritiesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateAuthoritiesResponse {
     /// The list of
@@ -2296,7 +2232,6 @@ pub struct ListCertificateAuthoritiesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UndeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UndeleteCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UndeleteCertificateAuthorityRequest {
     /// Required. The resource name for this
@@ -2322,7 +2257,6 @@ pub struct UndeleteCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCertificateAuthorityRequest {
     /// Required. The resource name for this
@@ -2363,7 +2297,6 @@ pub struct DeleteCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateAuthority].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateAuthorityRequest {
     /// Required.
@@ -2392,7 +2325,6 @@ pub struct UpdateCertificateAuthorityRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCaPool].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCaPoolRequest {
     /// Required. The resource name of the location associated with the
@@ -2426,7 +2358,6 @@ pub struct CreateCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCaPool].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCaPoolRequest {
     /// Required. [CaPool][google.cloud.security.privateca.v1.CaPool] with updated
@@ -2454,7 +2385,6 @@ pub struct UpdateCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCaPool].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCaPoolRequest {
     /// Required. The resource name for this
@@ -2486,7 +2416,6 @@ pub struct DeleteCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.FetchCaCerts][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCaCerts].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCaCertsRequest {
     /// Required. The resource name for the
@@ -2512,7 +2441,6 @@ pub struct FetchCaCertsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.FetchCaCerts][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCaCerts].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FetchCaCertsResponse {
     /// The PEM encoded CA certificate chains of all certificate authorities in
@@ -2523,7 +2451,6 @@ pub struct FetchCaCertsResponse {
 }
 /// Nested message and enum types in `FetchCaCertsResponse`.
 pub mod fetch_ca_certs_response {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CertChain {
         /// The certificates that form the CA chain, from leaf to root order.
@@ -2533,7 +2460,6 @@ pub mod fetch_ca_certs_response {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCaPool][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCaPool].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCaPoolRequest {
     /// Required. The [name][google.cloud.security.privateca.v1.CaPool.name] of the
@@ -2543,7 +2469,6 @@ pub struct GetCaPoolRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCaPools][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCaPools].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCaPoolsRequest {
     /// Required. The resource name of the location associated with the
@@ -2573,7 +2498,6 @@ pub struct ListCaPoolsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCaPools][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCaPools].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCaPoolsResponse {
     /// The list of [CaPools][google.cloud.security.privateca.v1.CaPool].
@@ -2590,7 +2514,6 @@ pub struct ListCaPoolsResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateRevocationList].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateRevocationListRequest {
     /// Required. The
@@ -2603,7 +2526,6 @@ pub struct GetCertificateRevocationListRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateRevocationListsRequest {
     /// Required. The resource name of the location associated with the
@@ -2634,7 +2556,6 @@ pub struct ListCertificateRevocationListsRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateRevocationListsResponse {
     /// The list of
@@ -2654,7 +2575,6 @@ pub struct ListCertificateRevocationListsResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateRevocationList].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateRevocationListRequest {
     /// Required.
@@ -2683,7 +2603,6 @@ pub struct UpdateCertificateRevocationListRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.CreateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCertificateTemplateRequest {
     /// Required. The resource name of the location associated with the
@@ -2718,7 +2637,6 @@ pub struct CreateCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.DeleteCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCertificateTemplateRequest {
     /// Required. The resource name for this
@@ -2744,7 +2662,6 @@ pub struct DeleteCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.GetCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCertificateTemplateRequest {
     /// Required. The
@@ -2756,7 +2673,6 @@ pub struct GetCertificateTemplateRequest {
 }
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateTemplatesRequest {
     /// Required. The resource name of the location associated with the
@@ -2787,7 +2703,6 @@ pub struct ListCertificateTemplatesRequest {
 }
 /// Response message for
 /// [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCertificateTemplatesResponse {
     /// The list of
@@ -2805,7 +2720,6 @@ pub struct ListCertificateTemplatesResponse {
 }
 /// Request message for
 /// [CertificateAuthorityService.UpdateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateTemplate].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCertificateTemplateRequest {
     /// Required.
@@ -2833,7 +2747,6 @@ pub struct UpdateCertificateTemplateRequest {
     pub request_id: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -2864,7 +2777,13 @@ pub struct OperationMetadata {
 }
 /// Generated client implementations.
 pub mod certificate_authority_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// [Certificate Authority
@@ -2889,8 +2808,8 @@ pub mod certificate_authority_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -2915,7 +2834,7 @@ pub mod certificate_authority_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             CertificateAuthorityServiceClient::new(
                 InterceptedService::new(inner, interceptor),
@@ -2963,8 +2882,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -2991,8 +2909,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3022,8 +2939,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3050,8 +2966,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3080,8 +2995,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3120,8 +3034,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3153,8 +3066,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3185,8 +3097,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3217,8 +3128,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3258,8 +3168,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3290,8 +3199,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3322,8 +3230,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3355,8 +3262,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3387,8 +3293,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3419,8 +3324,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3450,8 +3354,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3481,8 +3384,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3509,8 +3411,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3540,8 +3441,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3571,8 +3471,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3605,8 +3504,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3637,8 +3535,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3671,8 +3568,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3705,8 +3601,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3738,8 +3633,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3770,8 +3664,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3802,8 +3695,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3834,8 +3726,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3866,8 +3757,7 @@ pub mod certificate_authority_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

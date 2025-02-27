@@ -6,7 +6,6 @@
 /// response code in the range \[200 - 299\]. A failure to receive a response
 /// constitutes a failed execution. For a redirected request, the response
 /// returned by the redirected request is considered.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpTarget {
     /// Required. The full URI path that the request will be sent to. This string
@@ -20,14 +19,20 @@ pub struct HttpTarget {
     /// Which HTTP method to use for the request.
     #[prost(enumeration = "HttpMethod", tag = "2")]
     pub http_method: i32,
+    /// HTTP request headers.
+    ///
+    /// This map contains the header field names and values.
+    ///
     /// The user can specify HTTP request headers to send with the job's
-    /// HTTP request. This map contains the header field names and
-    /// values. Repeated headers are not supported, but a header value can
-    /// contain commas. These headers represent a subset of the headers
-    /// that will accompany the job's HTTP request. Some HTTP request
-    /// headers will be ignored or replaced. A partial list of headers that
-    /// will be ignored or replaced is below:
-    /// - Host: This will be computed by Cloud Scheduler and derived from
+    /// HTTP request. Repeated headers are not supported, but a header value can
+    /// contain commas.
+    ///
+    /// The following headers represent a subset of the headers
+    /// that accompany the job's HTTP request. Some HTTP request
+    /// headers are ignored or replaced. A partial list of headers that
+    /// are ignored or replaced is below:
+    ///
+    /// * Host: This will be computed by Cloud Scheduler and derived from
     /// [uri][google.cloud.scheduler.v1.HttpTarget.uri].
     /// * `Content-Length`: This will be computed by Cloud Scheduler.
     /// * `User-Agent`: This will be set to `"Google-Cloud-Scheduler"`.
@@ -38,6 +43,15 @@ pub struct HttpTarget {
     /// * `X-CloudScheduler-ScheduleTime`: For Cloud Scheduler jobs specified in
     /// the unix-cron format, this header will contain the job schedule as an
     /// offset of UTC parsed according to RFC3339.
+    ///
+    /// If the job has a [body][google.cloud.scheduler.v1.HttpTarget.body] and the
+    /// following headers are not set by the user, Cloud Scheduler sets default
+    /// values:
+    ///
+    /// * `Content-Type`: This will be set to `"application/octet-stream"`. You
+    ///    can override this default by explicitly setting `Content-Type` to a
+    ///    particular media type when creating the job. For example, you can set
+    ///    `Content-Type` to `"application/json"`.
     ///
     /// The total size of headers must be less than 80KB.
     #[prost(map = "string, string", tag = "3")]
@@ -65,7 +79,6 @@ pub mod http_target {
     /// If specified, all `Authorization` headers in the
     /// [HttpTarget.headers][google.cloud.scheduler.v1.HttpTarget.headers] field
     /// will be overridden.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum AuthorizationHeader {
         /// If specified, an
@@ -99,7 +112,6 @@ pub mod http_target {
 /// retry configuration and not counted against retry counts. Any other
 /// response code, or a failure to receive a response before the
 /// deadline, constitutes a failed attempt.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineHttpTarget {
     /// The HTTP method to use for the request. PATCH and OPTIONS are not
@@ -135,20 +147,18 @@ pub struct AppEngineHttpTarget {
     /// the unix-cron format, this header will contain the job schedule as an
     /// offset of UTC parsed according to RFC3339.
     ///
-    /// If the job has an
-    /// [body][google.cloud.scheduler.v1.AppEngineHttpTarget.body], Cloud Scheduler
-    /// sets the following headers:
+    /// If the job has a [body][google.cloud.scheduler.v1.AppEngineHttpTarget.body]
+    /// and the following headers are not set by the user, Cloud Scheduler sets
+    /// default values:
     ///
-    /// * `Content-Type`: By default, the `Content-Type` header is set to
-    ///    `"application/octet-stream"`. The default can be overridden by explictly
-    ///    setting `Content-Type` to a particular media type when the job is
-    ///    created.
-    ///    For example, `Content-Type` can be set to `"application/json"`.
-    /// * `Content-Length`: This is computed by Cloud Scheduler. This value is
-    ///    output only. It cannot be changed.
+    /// * `Content-Type`: This will be set to `"application/octet-stream"`. You
+    ///    can override this default by explicitly setting `Content-Type` to a
+    ///    particular media type when creating the job. For example, you can set
+    ///    `Content-Type` to `"application/json"`.
     ///
     /// The headers below are output only. They cannot be set or overridden:
     ///
+    /// * `Content-Length`: This is computed by Cloud Scheduler.
     /// * `X-Google-*`: For Google internal use only.
     /// * `X-AppEngine-*`: For Google internal use only.
     ///
@@ -170,7 +180,6 @@ pub struct AppEngineHttpTarget {
 }
 /// Pub/Sub target. The job will be delivered by publishing a message to
 /// the given Pub/Sub topic.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PubsubTarget {
     /// Required. The name of the Cloud Pub/Sub topic to which messages will
@@ -209,7 +218,6 @@ pub struct PubsubTarget {
 /// routing](<https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed>),
 /// and [App Engine Flex request
 /// routing](<https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineRouting {
     /// App service.
@@ -309,7 +317,6 @@ pub struct AppEngineRouting {
 /// [OAuth token](<https://developers.google.com/identity/protocols/OAuth2>).
 /// This type of authorization should generally only be used when calling Google
 /// APIs hosted on *.googleapis.com.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OAuthToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -330,7 +337,6 @@ pub struct OAuthToken {
 /// This type of authorization can be used for many scenarios, including
 /// calling Cloud Run, or endpoints where you intend to validate the token
 /// yourself.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OidcToken {
     /// [Service account email](<https://cloud.google.com/iam/docs/service-accounts>)
@@ -372,14 +378,14 @@ impl HttpMethod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            HttpMethod::Unspecified => "HTTP_METHOD_UNSPECIFIED",
-            HttpMethod::Post => "POST",
-            HttpMethod::Get => "GET",
-            HttpMethod::Head => "HEAD",
-            HttpMethod::Put => "PUT",
-            HttpMethod::Delete => "DELETE",
-            HttpMethod::Patch => "PATCH",
-            HttpMethod::Options => "OPTIONS",
+            Self::Unspecified => "HTTP_METHOD_UNSPECIFIED",
+            Self::Post => "POST",
+            Self::Get => "GET",
+            Self::Head => "HEAD",
+            Self::Put => "PUT",
+            Self::Delete => "DELETE",
+            Self::Patch => "PATCH",
+            Self::Options => "OPTIONS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -399,7 +405,6 @@ impl HttpMethod {
 }
 /// Configuration for a job.
 /// The maximum allowed size for a job is 1MB.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
     /// Optionally caller-specified in
@@ -453,7 +458,11 @@ pub struct Job {
     /// If [retry_count][google.cloud.scheduler.v1.RetryConfig.retry_count] > 0 and
     /// a job attempt fails, the job will be tried a total of
     /// [retry_count][google.cloud.scheduler.v1.RetryConfig.retry_count] times,
-    /// with exponential backoff, until the next scheduled start time.
+    /// with exponential backoff, until the next scheduled start time. If
+    /// retry_count is 0, a job attempt will not be retried if it fails. Instead
+    /// the Cloud Scheduler system will wait for the next scheduled execution time.
+    /// Setting retry_count to 0 does not prevent failed jobs from running
+    /// according to schedule after the failure.
     #[prost(string, tag = "20")]
     pub schedule: ::prost::alloc::string::String,
     /// Specifies the time zone to be used in interpreting
@@ -559,11 +568,11 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Enabled => "ENABLED",
-                State::Paused => "PAUSED",
-                State::Disabled => "DISABLED",
-                State::UpdateFailed => "UPDATE_FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Paused => "PAUSED",
+                Self::Disabled => "DISABLED",
+                Self::UpdateFailed => "UPDATE_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -581,7 +590,6 @@ pub mod job {
     /// Required.
     ///
     /// Delivery settings containing destination and parameters.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
         /// Pub/Sub target.
@@ -601,7 +609,6 @@ pub mod job {
 /// an acknowledgement is not received from the handler, then it will be retried
 /// with exponential backoff according to the settings in
 /// [RetryConfig][google.cloud.scheduler.v1.RetryConfig].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryConfig {
     /// The number of attempts that the system will make to run a job using the
@@ -610,9 +617,10 @@ pub struct RetryConfig {
     ///
     /// The default value of retry_count is zero.
     ///
-    /// If retry_count is zero, a job attempt will *not* be retried if
+    /// If retry_count is 0, a job attempt will not be retried if
     /// it fails. Instead the Cloud Scheduler system will wait for the
-    /// next scheduled execution time.
+    /// next scheduled execution time. Setting retry_count to 0 does not prevent
+    /// failed jobs from running according to schedule after the failure.
     ///
     /// If retry_count is set to a non-zero number then Cloud Scheduler
     /// will retry failed attempts, using exponential backoff,
@@ -657,7 +665,7 @@ pub struct RetryConfig {
     /// [min_backoff_duration][google.cloud.scheduler.v1.RetryConfig.min_backoff_duration]
     /// is 10s,
     /// [max_backoff_duration][google.cloud.scheduler.v1.RetryConfig.max_backoff_duration]
-    /// is 300s, and `max_doublings` is 3, then the a job will first be retried in
+    /// is 300s, and `max_doublings` is 3, then the job will first be retried in
     /// 10s. The retry interval will double three times, and then increase linearly
     /// by 2^3 * 10s.  Finally, the job will retry at intervals of
     /// [max_backoff_duration][google.cloud.scheduler.v1.RetryConfig.max_backoff_duration]
@@ -672,7 +680,6 @@ pub struct RetryConfig {
 }
 /// Request message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1.CloudScheduler.ListJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsRequest {
     /// Required. The location name. For example:
@@ -692,17 +699,12 @@ pub struct ListJobsRequest {
     /// request the next page of results, page_token must be the value of
     /// [next_page_token][google.cloud.scheduler.v1.ListJobsResponse.next_page_token]
     /// returned from the previous call to
-    /// [ListJobs][google.cloud.scheduler.v1.CloudScheduler.ListJobs]. It is an
-    /// error to switch the value of
-    /// [filter][google.cloud.scheduler.v1.ListJobsRequest.filter] or
-    /// [order_by][google.cloud.scheduler.v1.ListJobsRequest.order_by] while
-    /// iterating through pages.
+    /// [ListJobs][google.cloud.scheduler.v1.CloudScheduler.ListJobs].
     #[prost(string, tag = "6")]
     pub page_token: ::prost::alloc::string::String,
 }
 /// Response message for listing jobs using
 /// [ListJobs][google.cloud.scheduler.v1.CloudScheduler.ListJobs].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobsResponse {
     /// The list of jobs.
@@ -721,7 +723,6 @@ pub struct ListJobsResponse {
 }
 /// Request message for
 /// [GetJob][google.cloud.scheduler.v1.CloudScheduler.GetJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetJobRequest {
     /// Required. The job name. For example:
@@ -731,7 +732,6 @@ pub struct GetJobRequest {
 }
 /// Request message for
 /// [CreateJob][google.cloud.scheduler.v1.CloudScheduler.CreateJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateJobRequest {
     /// Required. The location name. For example:
@@ -749,7 +749,6 @@ pub struct CreateJobRequest {
 }
 /// Request message for
 /// [UpdateJob][google.cloud.scheduler.v1.CloudScheduler.UpdateJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateJobRequest {
     /// Required. The new job properties.
@@ -765,7 +764,6 @@ pub struct UpdateJobRequest {
 }
 /// Request message for deleting a job using
 /// [DeleteJob][google.cloud.scheduler.v1.CloudScheduler.DeleteJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteJobRequest {
     /// Required. The job name. For example:
@@ -775,7 +773,6 @@ pub struct DeleteJobRequest {
 }
 /// Request message for
 /// [PauseJob][google.cloud.scheduler.v1.CloudScheduler.PauseJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseJobRequest {
     /// Required. The job name. For example:
@@ -785,7 +782,6 @@ pub struct PauseJobRequest {
 }
 /// Request message for
 /// [ResumeJob][google.cloud.scheduler.v1.CloudScheduler.ResumeJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResumeJobRequest {
     /// Required. The job name. For example:
@@ -795,7 +791,6 @@ pub struct ResumeJobRequest {
 }
 /// Request message for forcing a job to run now using
 /// [RunJob][google.cloud.scheduler.v1.CloudScheduler.RunJob].
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RunJobRequest {
     /// Required. The job name. For example:
@@ -805,7 +800,13 @@ pub struct RunJobRequest {
 }
 /// Generated client implementations.
 pub mod cloud_scheduler_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The Cloud Scheduler API allows external entities to reliably
@@ -829,8 +830,8 @@ pub mod cloud_scheduler_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -855,7 +856,7 @@ pub mod cloud_scheduler_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             CloudSchedulerClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -902,8 +903,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -930,8 +930,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -955,8 +954,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -992,8 +990,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1020,8 +1017,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1057,8 +1053,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1093,8 +1088,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1124,8 +1118,7 @@ pub mod cloud_scheduler_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

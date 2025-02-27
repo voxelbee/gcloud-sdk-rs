@@ -10,7 +10,6 @@
 /// `FAILED`. The message for the error or failure will be on the `error` or the
 /// `value` if the Operation results in an error or if the `state` of the
 /// Deployment is `FAILED`, respectively.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompleteDeploymentEvent {
     /// The `state` of this deployment completion event.
@@ -54,9 +53,9 @@ pub mod complete_deployment_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -69,7 +68,6 @@ pub mod complete_deployment_event {
             }
         }
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Result of the Deployment recorded upon completion.
@@ -81,7 +79,6 @@ pub mod complete_deployment_event {
     }
 }
 /// This message is used when the CompleteDeploymentEvent has a value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompleteDeploymentResult {
     /// This is the Deployment that completed.

@@ -17,6 +17,8 @@ pub enum Type {
     ResourceDeleted = 6,
     /// Rollout updated.
     RolloutUpdate = 7,
+    /// Deploy Policy evaluation.
+    DeployPolicyEvaluation = 8,
     /// Deprecated: This field is never used. Use release_render log type instead.
     RenderStatuesChange = 2,
 }
@@ -27,14 +29,15 @@ impl Type {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Type::Unspecified => "TYPE_UNSPECIFIED",
-            Type::PubsubNotificationFailure => "TYPE_PUBSUB_NOTIFICATION_FAILURE",
-            Type::ResourceStateChange => "TYPE_RESOURCE_STATE_CHANGE",
-            Type::ProcessAborted => "TYPE_PROCESS_ABORTED",
-            Type::RestrictionViolated => "TYPE_RESTRICTION_VIOLATED",
-            Type::ResourceDeleted => "TYPE_RESOURCE_DELETED",
-            Type::RolloutUpdate => "TYPE_ROLLOUT_UPDATE",
-            Type::RenderStatuesChange => "TYPE_RENDER_STATUES_CHANGE",
+            Self::Unspecified => "TYPE_UNSPECIFIED",
+            Self::PubsubNotificationFailure => "TYPE_PUBSUB_NOTIFICATION_FAILURE",
+            Self::ResourceStateChange => "TYPE_RESOURCE_STATE_CHANGE",
+            Self::ProcessAborted => "TYPE_PROCESS_ABORTED",
+            Self::RestrictionViolated => "TYPE_RESTRICTION_VIOLATED",
+            Self::ResourceDeleted => "TYPE_RESOURCE_DELETED",
+            Self::RolloutUpdate => "TYPE_ROLLOUT_UPDATE",
+            Self::DeployPolicyEvaluation => "TYPE_DEPLOY_POLICY_EVALUATION",
+            Self::RenderStatuesChange => "TYPE_RENDER_STATUES_CHANGE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -47,6 +50,7 @@ impl Type {
             "TYPE_RESTRICTION_VIOLATED" => Some(Self::RestrictionViolated),
             "TYPE_RESOURCE_DELETED" => Some(Self::ResourceDeleted),
             "TYPE_ROLLOUT_UPDATE" => Some(Self::RolloutUpdate),
+            "TYPE_DEPLOY_POLICY_EVALUATION" => Some(Self::DeployPolicyEvaluation),
             "TYPE_RENDER_STATUES_CHANGE" => Some(Self::RenderStatuesChange),
             _ => None,
         }
@@ -54,7 +58,6 @@ impl Type {
 }
 /// Payload proto for "clouddeploy.googleapis.com/automation"
 /// Platform Log event that describes the Automation related events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationEvent {
     /// Debug message for when there is an update on the AutomationRun.
@@ -73,7 +76,6 @@ pub struct AutomationEvent {
 }
 /// Payload proto for "clouddeploy.googleapis.com/automation_run"
 /// Platform Log event that describes the AutomationRun related events.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationRunEvent {
     /// Debug message for when there is an update on the AutomationRun.
@@ -103,7 +105,6 @@ pub struct AutomationRunEvent {
 ///
 /// A `DeliveryPipeline` defines a pipeline through which a Skaffold
 /// configuration can progress.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliveryPipeline {
     /// Optional. Name of the `DeliveryPipeline`. Format is
@@ -166,7 +167,6 @@ pub struct DeliveryPipeline {
 /// Nested message and enum types in `DeliveryPipeline`.
 pub mod delivery_pipeline {
     /// The ordering configuration of the `DeliveryPipeline`.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Pipeline {
         /// SerialPipeline defines a sequential set of stages for a
@@ -176,7 +176,6 @@ pub mod delivery_pipeline {
     }
 }
 /// SerialPipeline defines a sequential set of stages for a `DeliveryPipeline`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SerialPipeline {
     /// Each stage specifies configuration for a `Target`. The ordering
@@ -185,7 +184,6 @@ pub struct SerialPipeline {
     pub stages: ::prost::alloc::vec::Vec<Stage>,
 }
 /// Stage specifies a location to which to deploy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Stage {
     /// The target_id to which this stage points. This field refers exclusively to
@@ -208,7 +206,6 @@ pub struct Stage {
     pub deploy_parameters: ::prost::alloc::vec::Vec<DeployParameters>,
 }
 /// DeployParameters contains deploy parameters information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeployParameters {
     /// Required. Values are deploy parameters in key-value pairs.
@@ -227,7 +224,6 @@ pub struct DeployParameters {
     >,
 }
 /// Strategy contains deployment strategy information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Strategy {
     /// Deployment strategy details.
@@ -237,7 +233,6 @@ pub struct Strategy {
 /// Nested message and enum types in `Strategy`.
 pub mod strategy {
     /// Deployment strategy details.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DeploymentStrategy {
         /// Standard deployment strategy executes a single deploy and allows
@@ -251,7 +246,6 @@ pub mod strategy {
     }
 }
 /// Predeploy contains the predeploy job configuration information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Predeploy {
     /// Optional. A sequence of Skaffold custom actions to invoke during execution
@@ -260,7 +254,6 @@ pub struct Predeploy {
     pub actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Postdeploy contains the postdeploy job configuration information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Postdeploy {
     /// Optional. A sequence of Skaffold custom actions to invoke during execution
@@ -269,7 +262,6 @@ pub struct Postdeploy {
     pub actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Standard represents the standard deployment strategy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Standard {
     /// Whether to verify a deployment.
@@ -285,7 +277,6 @@ pub struct Standard {
     pub postdeploy: ::core::option::Option<Postdeploy>,
 }
 /// Canary represents the canary deployment strategy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Canary {
     /// Optional. Runtime specific configurations for the deployment strategy. The
@@ -300,7 +291,6 @@ pub struct Canary {
 /// Nested message and enum types in `Canary`.
 pub mod canary {
     /// The mode to use for the canary deployment strategy.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mode {
         /// Configures the progressive based deployment for a Target.
@@ -314,7 +304,6 @@ pub mod canary {
     }
 }
 /// CanaryDeployment represents the canary deployment configuration
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CanaryDeployment {
     /// Required. The percentage based deployments that will occur as a part of a
@@ -338,7 +327,6 @@ pub struct CanaryDeployment {
 }
 /// CustomCanaryDeployment represents the custom canary deployment
 /// configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomCanaryDeployment {
     /// Required. Configuration for each phase in the canary deployment in the
@@ -350,7 +338,6 @@ pub struct CustomCanaryDeployment {
 pub mod custom_canary_deployment {
     /// PhaseConfig represents the configuration for a phase in the custom
     /// canary deployment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PhaseConfig {
         /// Required. The ID to assign to the `Rollout` phase.
@@ -382,7 +369,6 @@ pub mod custom_canary_deployment {
     }
 }
 /// KubernetesConfig contains the Kubernetes runtime configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KubernetesConfig {
     /// The service definition configuration.
@@ -392,7 +378,6 @@ pub struct KubernetesConfig {
 /// Nested message and enum types in `KubernetesConfig`.
 pub mod kubernetes_config {
     /// Information about the Kubernetes Gateway API service mesh configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct GatewayServiceMesh {
         /// Required. Name of the Gateway API HTTPRoute.
@@ -420,9 +405,39 @@ pub mod kubernetes_config {
         /// Service resources. This label must already be present in both resources.
         #[prost(string, tag = "6")]
         pub pod_selector_label: ::prost::alloc::string::String,
+        /// Optional. Route destinations allow configuring the Gateway API HTTPRoute
+        /// to be deployed to additional clusters. This option is available for
+        /// multi-cluster service mesh set ups that require the route to exist in the
+        /// clusters that call the service. If unspecified, the HTTPRoute will only
+        /// be deployed to the Target cluster.
+        #[prost(message, optional, tag = "8")]
+        pub route_destinations: ::core::option::Option<
+            gateway_service_mesh::RouteDestinations,
+        >,
+    }
+    /// Nested message and enum types in `GatewayServiceMesh`.
+    pub mod gateway_service_mesh {
+        /// Information about route destinations for the Gateway API service mesh.
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct RouteDestinations {
+            /// Required. The clusters where the Gateway API HTTPRoute resource will be
+            /// deployed to. Valid entries include the associated entities IDs
+            /// configured in the Target resource and "@self" to include the Target
+            /// cluster.
+            #[prost(string, repeated, tag = "1")]
+            pub destination_ids: ::prost::alloc::vec::Vec<
+                ::prost::alloc::string::String,
+            >,
+            /// Optional. Whether to propagate the Kubernetes Service to the route
+            /// destination clusters. The Service will always be deployed to the Target
+            /// cluster even if the HTTPRoute is not. This option may be used to
+            /// facilitiate successful DNS lookup in the route destination clusters.
+            /// Can only be set to true if destinations are specified.
+            #[prost(bool, tag = "2")]
+            pub propagate_service: bool,
+        }
     }
     /// Information about the Kubernetes Service networking configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ServiceNetworking {
         /// Required. Name of the Kubernetes Service.
@@ -444,7 +459,6 @@ pub mod kubernetes_config {
         pub pod_selector_label: ::prost::alloc::string::String,
     }
     /// The service definition configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ServiceDefinition {
         /// Kubernetes Gateway API service mesh configuration.
@@ -456,7 +470,6 @@ pub mod kubernetes_config {
     }
 }
 /// CloudRunConfig contains the Cloud Run runtime configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunConfig {
     /// Whether Cloud Deploy should update the traffic stanza in a Cloud Run
@@ -480,7 +493,6 @@ pub struct CloudRunConfig {
 }
 /// RuntimeConfig contains the runtime specific configurations for a deployment
 /// strategy.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RuntimeConfig {
     /// The runtime configuration details.
@@ -490,7 +502,6 @@ pub struct RuntimeConfig {
 /// Nested message and enum types in `RuntimeConfig`.
 pub mod runtime_config {
     /// The runtime configuration details.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RuntimeConfig {
         /// Kubernetes runtime configuration.
@@ -503,7 +514,6 @@ pub mod runtime_config {
 }
 /// PipelineReadyCondition contains information around the status of the
 /// Pipeline.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PipelineReadyCondition {
     /// True if the Pipeline is in a valid state. Otherwise at least one condition
@@ -518,7 +528,6 @@ pub struct PipelineReadyCondition {
 }
 /// `TargetsPresentCondition` contains information on any Targets referenced in
 /// the Delivery Pipeline that do not actually exist.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetsPresentCondition {
     /// True if there aren't any missing Targets.
@@ -534,7 +543,6 @@ pub struct TargetsPresentCondition {
 }
 /// TargetsTypeCondition contains information on whether the Targets defined in
 /// the Delivery Pipeline are of the same type.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetsTypeCondition {
     /// True if the targets are all a comparable type. For example this is true if
@@ -547,7 +555,6 @@ pub struct TargetsTypeCondition {
     pub error_details: ::prost::alloc::string::String,
 }
 /// PipelineCondition contains all conditions relevant to a Delivery Pipeline.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PipelineCondition {
     /// Details around the Pipeline's overall status.
@@ -562,7 +569,6 @@ pub struct PipelineCondition {
     pub targets_type_condition: ::core::option::Option<TargetsTypeCondition>,
 }
 /// The request object for `ListDeliveryPipelines`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDeliveryPipelinesRequest {
     /// Required. The parent, which owns this collection of pipelines. Format must
@@ -591,7 +597,6 @@ pub struct ListDeliveryPipelinesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListDeliveryPipelines`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDeliveryPipelinesResponse {
     /// The `DeliveryPipeline` objects.
@@ -606,7 +611,6 @@ pub struct ListDeliveryPipelinesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetDeliveryPipeline`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDeliveryPipelineRequest {
     /// Required. Name of the `DeliveryPipeline`. Format must be
@@ -615,7 +619,6 @@ pub struct GetDeliveryPipelineRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object for `CreateDeliveryPipeline`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateDeliveryPipelineRequest {
     /// Required. The parent collection in which the `DeliveryPipeline` must be
@@ -649,7 +652,6 @@ pub struct CreateDeliveryPipelineRequest {
     pub validate_only: bool,
 }
 /// The request object for `UpdateDeliveryPipeline`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateDeliveryPipelineRequest {
     /// Required. Field mask is used to specify the fields to be overwritten by the
@@ -687,7 +689,6 @@ pub struct UpdateDeliveryPipelineRequest {
     pub validate_only: bool,
 }
 /// The request object for `DeleteDeliveryPipeline`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDeliveryPipelineRequest {
     /// Required. The name of the `DeliveryPipeline` to delete. The format is
@@ -729,7 +730,6 @@ pub struct DeleteDeliveryPipelineRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// Configs for the Rollback rollout.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackTargetConfig {
     /// Optional. The rollback `Rollout` to create.
@@ -741,7 +741,6 @@ pub struct RollbackTargetConfig {
     pub starting_phase_id: ::prost::alloc::string::String,
 }
 /// The request object for `RollbackTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackTargetRequest {
     /// Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
@@ -771,9 +770,12 @@ pub struct RollbackTargetRequest {
     /// with a `RollbackTargetResponse`.
     #[prost(bool, tag = "7")]
     pub validate_only: bool,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
+    #[prost(string, repeated, tag = "9")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `RollbackTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackTargetResponse {
     /// The config of the rollback `Rollout` created or will be created.
@@ -784,7 +786,6 @@ pub struct RollbackTargetResponse {
 ///
 /// A `Target` defines a location to which a Skaffold configuration
 /// can be deployed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Target {
     /// Optional. Name of the `Target`. Format is
@@ -835,6 +836,19 @@ pub struct Target {
     /// Output only. Most recent time at which the `Target` was updated.
     #[prost(message, optional, tag = "9")]
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// Optional. Map of entity IDs to their associated entities. Associated
+    /// entities allows specifying places other than the deployment target for
+    /// specific features. For example, the Gateway API canary can be configured to
+    /// deploy the HTTPRoute to a different cluster(s) than the deployment cluster
+    /// using associated entities. An entity ID must consist of lower-case letters,
+    /// numbers, and hyphens, start with a letter and end with a letter or a
+    /// number, and have a max length of 63 characters. In other words, it must
+    /// match the following regex: `^[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?$`.
+    #[prost(map = "string, message", tag = "23")]
+    pub associated_entities: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        AssociatedEntities,
+    >,
     /// Optional. This checksum is computed by the server based on the value of
     /// other fields, and may be sent on update and delete requests to ensure the
     /// client has an up-to-date value before proceeding.
@@ -864,7 +878,6 @@ pub struct Target {
 pub mod target {
     /// Destination to which the Skaffold configuration is applied during a
     /// rollout.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DeploymentTarget {
         /// Optional. Information specifying a GKE Cluster.
@@ -885,7 +898,6 @@ pub mod target {
     }
 }
 /// Configuration of the environment to use when calling Skaffold.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionConfig {
     /// Required. Usages when this configuration should be applied.
@@ -964,14 +976,12 @@ pub mod execution_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExecutionEnvironmentUsage::Unspecified => {
-                    "EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED"
-                }
-                ExecutionEnvironmentUsage::Render => "RENDER",
-                ExecutionEnvironmentUsage::Deploy => "DEPLOY",
-                ExecutionEnvironmentUsage::Verify => "VERIFY",
-                ExecutionEnvironmentUsage::Predeploy => "PREDEPLOY",
-                ExecutionEnvironmentUsage::Postdeploy => "POSTDEPLOY",
+                Self::Unspecified => "EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED",
+                Self::Render => "RENDER",
+                Self::Deploy => "DEPLOY",
+                Self::Verify => "VERIFY",
+                Self::Predeploy => "PREDEPLOY",
+                Self::Postdeploy => "POSTDEPLOY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -988,7 +998,6 @@ pub mod execution_config {
         }
     }
     /// Details of the environment.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ExecutionEnvironment {
         /// Optional. Use default Cloud Build pool.
@@ -1000,7 +1009,6 @@ pub mod execution_config {
     }
 }
 /// Execution using the default Cloud Build pool.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DefaultPool {
     /// Optional. Google service account to use for execution. If unspecified,
@@ -1016,7 +1024,6 @@ pub struct DefaultPool {
     pub artifact_storage: ::prost::alloc::string::String,
 }
 /// Execution using a private Cloud Build pool.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PrivatePool {
     /// Required. Resource name of the Cloud Build worker pool to use. The format
@@ -1036,7 +1043,6 @@ pub struct PrivatePool {
     pub artifact_storage: ::prost::alloc::string::String,
 }
 /// Information specifying a GKE Cluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GkeCluster {
     /// Optional. Information specifying a GKE Cluster. Format is
@@ -1051,6 +1057,7 @@ pub struct GkeCluster {
     ///
     /// Only specify this option when `cluster` is a [private GKE
     /// cluster](<https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept>).
+    /// Note that `internal_ip` and `dns_endpoint` cannot both be set to true.
     #[prost(bool, tag = "2")]
     pub internal_ip: bool,
     /// Optional. If set, used to configure a
@@ -1058,9 +1065,12 @@ pub struct GkeCluster {
     /// to the Kubernetes server.
     #[prost(string, tag = "3")]
     pub proxy_url: ::prost::alloc::string::String,
+    /// Optional. If set, the cluster will be accessed using the DNS endpoint. Note
+    /// that `dns_endpoint` and `internal_ip` cannot both be set to true.
+    #[prost(bool, tag = "4")]
+    pub dns_endpoint: bool,
 }
 /// Information specifying an Anthos Cluster.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AnthosCluster {
     /// Optional. Membership of the GKE Hub-registered cluster to which to apply
@@ -1070,7 +1080,6 @@ pub struct AnthosCluster {
     pub membership: ::prost::alloc::string::String,
 }
 /// Information specifying where to deploy a Cloud Run Service.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunLocation {
     /// Required. The location for the Cloud Run Service. Format must be
@@ -1079,7 +1088,6 @@ pub struct CloudRunLocation {
     pub location: ::prost::alloc::string::String,
 }
 /// Information specifying a multiTarget.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MultiTarget {
     /// Required. The target_ids of this multiTarget.
@@ -1087,7 +1095,6 @@ pub struct MultiTarget {
     pub target_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information specifying a Custom Target.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTarget {
     /// Required. The name of the CustomTargetType. Format must be
@@ -1095,8 +1102,17 @@ pub struct CustomTarget {
     #[prost(string, tag = "1")]
     pub custom_target_type: ::prost::alloc::string::String,
 }
+/// Information about entities associated with a `Target`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AssociatedEntities {
+    /// Optional. Information specifying GKE clusters as associated entities.
+    #[prost(message, repeated, tag = "2")]
+    pub gke_clusters: ::prost::alloc::vec::Vec<GkeCluster>,
+    /// Optional. Information specifying Anthos clusters as associated entities.
+    #[prost(message, repeated, tag = "3")]
+    pub anthos_clusters: ::prost::alloc::vec::Vec<AnthosCluster>,
+}
 /// The request object for `ListTargets`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTargetsRequest {
     /// Required. The parent, which owns this collection of targets. Format must be
@@ -1126,7 +1142,6 @@ pub struct ListTargetsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListTargets`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListTargetsResponse {
     /// The `Target` objects.
@@ -1141,7 +1156,6 @@ pub struct ListTargetsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTargetRequest {
     /// Required. Name of the `Target`. Format must be
@@ -1150,7 +1164,6 @@ pub struct GetTargetRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object for `CreateTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTargetRequest {
     /// Required. The parent collection in which the `Target` must be created.
@@ -1185,7 +1198,6 @@ pub struct CreateTargetRequest {
     pub validate_only: bool,
 }
 /// The request object for `UpdateTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTargetRequest {
     /// Required. Field mask is used to specify the fields to be overwritten by the
@@ -1223,7 +1235,6 @@ pub struct UpdateTargetRequest {
     pub validate_only: bool,
 }
 /// The request object for `DeleteTarget`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteTargetRequest {
     /// Required. The name of the `Target` to delete. The format is
@@ -1264,7 +1275,6 @@ pub struct DeleteTargetRequest {
 /// A `CustomTargetType` defines a type of custom target that can be referenced
 /// in a `Target` in order to facilitate deploying to other systems besides the
 /// supported runtimes.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetType {
     /// Optional. Name of the `CustomTargetType`. Format is
@@ -1326,7 +1336,6 @@ pub struct CustomTargetType {
 /// Nested message and enum types in `CustomTargetType`.
 pub mod custom_target_type {
     /// Defines the `CustomTargetType` renderer and deployer.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Definition {
         /// Configures render and deploy for the `CustomTargetType` using Skaffold
@@ -1337,7 +1346,6 @@ pub mod custom_target_type {
 }
 /// CustomTargetSkaffoldActions represents the `CustomTargetType` configuration
 /// using Skaffold custom actions.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetSkaffoldActions {
     /// Optional. The Skaffold custom action responsible for render operations. If
@@ -1354,7 +1362,6 @@ pub struct CustomTargetSkaffoldActions {
     pub include_skaffold_modules: ::prost::alloc::vec::Vec<SkaffoldModules>,
 }
 /// Skaffold Config modules and their remote source.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkaffoldModules {
     /// Optional. The Skaffold Config modules to use from the specified source.
@@ -1367,7 +1374,6 @@ pub struct SkaffoldModules {
 /// Nested message and enum types in `SkaffoldModules`.
 pub mod skaffold_modules {
     /// Git repository containing Skaffold Config modules.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SkaffoldGitSource {
         /// Required. Git repository the package should be cloned from.
@@ -1381,7 +1387,6 @@ pub mod skaffold_modules {
         pub r#ref: ::prost::alloc::string::String,
     }
     /// Cloud Storage bucket containing Skaffold Config modules.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SkaffoldGcsSource {
         /// Required. Cloud Storage source paths to copy recursively. For example,
@@ -1394,7 +1399,6 @@ pub mod skaffold_modules {
         pub path: ::prost::alloc::string::String,
     }
     /// Cloud Build V2 Repository containing Skaffold Configs.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SkaffoldGcbRepoSource {
         /// Required. Name of the Cloud Build V2 Repository.
@@ -1411,7 +1415,6 @@ pub mod skaffold_modules {
         pub r#ref: ::prost::alloc::string::String,
     }
     /// The source that contains the Skaffold Config modules.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Source {
         /// Remote git repository containing the Skaffold Config modules.
@@ -1426,7 +1429,6 @@ pub mod skaffold_modules {
     }
 }
 /// The request object for `ListCustomTargetTypes`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetTypesRequest {
     /// Required. The parent that owns this collection of custom target types.
@@ -1456,7 +1458,6 @@ pub struct ListCustomTargetTypesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListCustomTargetTypes.`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCustomTargetTypesResponse {
     /// The `CustomTargetType` objects.
@@ -1471,7 +1472,6 @@ pub struct ListCustomTargetTypesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetCustomTargetType`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetCustomTargetTypeRequest {
     /// Required. Name of the `CustomTargetType`. Format must be
@@ -1480,7 +1480,6 @@ pub struct GetCustomTargetTypeRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object for `CreateCustomTargetType`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateCustomTargetTypeRequest {
     /// Required. The parent collection in which the `CustomTargetType` must be
@@ -1514,7 +1513,6 @@ pub struct CreateCustomTargetTypeRequest {
     pub validate_only: bool,
 }
 /// The request object for `UpdateCustomTargetType`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateCustomTargetTypeRequest {
     /// Required. Field mask is used to specify the fields to be overwritten by the
@@ -1552,7 +1550,6 @@ pub struct UpdateCustomTargetTypeRequest {
     pub validate_only: bool,
 }
 /// The request object for `DeleteCustomTargetType`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteCustomTargetTypeRequest {
     /// Required. The name of the `CustomTargetType` to delete. Format must be
@@ -1588,16 +1585,175 @@ pub struct DeleteCustomTargetTypeRequest {
     #[prost(string, tag = "5")]
     pub etag: ::prost::alloc::string::String,
 }
-/// Contains criteria for selecting Targets.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// A `DeployPolicy` resource in the Cloud Deploy API.
+///
+/// A `DeployPolicy` inhibits manual or automation-driven actions within a
+/// Delivery Pipeline or Target.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeployPolicy {
+    /// Output only. Name of the `DeployPolicy`. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    /// The `deployPolicy` component must match `[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?`
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Output only. Unique identifier of the `DeployPolicy`.
+    #[prost(string, tag = "2")]
+    pub uid: ::prost::alloc::string::String,
+    /// Description of the `DeployPolicy`. Max length is 255 characters.
+    #[prost(string, tag = "3")]
+    pub description: ::prost::alloc::string::String,
+    /// User annotations. These attributes can only be set and used by the
+    /// user, and not by Cloud Deploy. Annotations must meet the following
+    /// constraints:
+    ///
+    /// * Annotations are key/value pairs.
+    /// * Valid annotation keys have two segments: an optional prefix and name,
+    /// separated by a slash (`/`).
+    /// * The name segment is required and must be 63 characters or less,
+    /// beginning and ending with an alphanumeric character (`\[a-z0-9A-Z\]`) with
+    /// dashes (`-`), underscores (`_`), dots (`.`), and alphanumerics between.
+    /// * The prefix is optional. If specified, the prefix must be a DNS subdomain:
+    /// a series of DNS labels separated by dots(`.`), not longer than 253
+    /// characters in total, followed by a slash (`/`).
+    ///
+    /// See
+    /// <https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set>
+    /// for more details.
+    #[prost(map = "string, string", tag = "4")]
+    pub annotations: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
+    /// Labels are attributes that can be set and used by both the
+    /// user and by Cloud Deploy. Labels must meet the following constraints:
+    ///
+    /// * Keys and values can contain only lowercase letters, numeric characters,
+    /// underscores, and dashes.
+    /// * All characters must use UTF-8 encoding, and international characters are
+    /// allowed.
+    /// * Keys must start with a lowercase letter or international character.
+    /// * Each resource is limited to a maximum of 64 labels.
+    ///
+    /// Both keys and values are additionally constrained to be <= 128 bytes.
+    #[prost(map = "string, string", tag = "5")]
+    pub labels: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
+    /// Output only. Time at which the deploy policy was created.
+    #[prost(message, optional, tag = "6")]
+    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// Output only. Most recent time at which the deploy policy was updated.
+    #[prost(message, optional, tag = "7")]
+    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// When suspended, the policy will not prevent actions from occurring, even
+    /// if the action violates the policy.
+    #[prost(bool, tag = "8")]
+    pub suspended: bool,
+    /// Required. Selected resources to which the policy will be applied. At least
+    /// one selector is required. If one selector matches the resource the policy
+    /// applies. For example, if there are two selectors and the action being
+    /// attempted matches one of them, the policy will apply to that action.
+    #[prost(message, repeated, tag = "12")]
+    pub selectors: ::prost::alloc::vec::Vec<DeployPolicyResourceSelector>,
+    /// Required. Rules to apply. At least one rule must be present.
+    #[prost(message, repeated, tag = "10")]
+    pub rules: ::prost::alloc::vec::Vec<PolicyRule>,
+    /// The weak etag of the `Automation` resource.
+    /// This checksum is computed by the server based on the value of other
+    /// fields, and may be sent on update and delete requests to ensure the
+    /// client has an up-to-date value before proceeding.
+    #[prost(string, tag = "11")]
+    pub etag: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `DeployPolicy`.
+pub mod deploy_policy {
+    /// What invoked the action. Filters enforcing the policy depending on what
+    /// invoked the action.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Invoker {
+        /// Unspecified.
+        Unspecified = 0,
+        /// The action is user-driven. For example, creating a rollout manually via a
+        /// gcloud create command.
+        User = 1,
+        /// Automated action by Cloud Deploy.
+        DeployAutomation = 2,
+    }
+    impl Invoker {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "INVOKER_UNSPECIFIED",
+                Self::User => "USER",
+                Self::DeployAutomation => "DEPLOY_AUTOMATION",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "INVOKER_UNSPECIFIED" => Some(Self::Unspecified),
+                "USER" => Some(Self::User),
+                "DEPLOY_AUTOMATION" => Some(Self::DeployAutomation),
+                _ => None,
+            }
+        }
+    }
+}
+/// Contains information on the resources to select for a deploy policy.
+/// Attributes provided must all match the resource in order for policy
+/// restrictions to apply. For example, if delivery pipelines attributes given
+/// are an id "prod" and labels "foo: bar", a delivery pipeline resource must
+/// match both that id and have that label in order to be subject to the policy.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeployPolicyResourceSelector {
+    /// Optional. Contains attributes about a delivery pipeline.
+    #[prost(message, optional, tag = "1")]
+    pub delivery_pipeline: ::core::option::Option<DeliveryPipelineAttribute>,
+    /// Optional. Contains attributes about a target.
+    #[prost(message, optional, tag = "2")]
+    pub target: ::core::option::Option<TargetAttribute>,
+}
+/// Contains criteria for selecting DeliveryPipelines.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeliveryPipelineAttribute {
+    /// ID of the `DeliveryPipeline`. The value of this field could be one of the
+    /// following:
+    ///
+    /// * The last segment of a pipeline name
+    /// * "*", all delivery pipelines in a location
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// DeliveryPipeline labels.
+    #[prost(map = "string, string", tag = "2")]
+    pub labels: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
+}
+/// Contains criteria for selecting Targets. This could be used to select targets
+/// for a Deploy Policy or for an Automation.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetAttribute {
     /// ID of the `Target`. The value of this field could be one of the
     /// following:
     ///
-    /// * The last segment of a target name. It only needs the ID to determine
-    /// which target is being referred to
-    /// * "*", all targets in a location.
+    /// * The last segment of a target name
+    /// * "*", all targets in a location
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// Target labels.
@@ -1607,11 +1763,206 @@ pub struct TargetAttribute {
         ::prost::alloc::string::String,
     >,
 }
+/// Deploy Policy rule.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PolicyRule {
+    #[prost(oneof = "policy_rule::Rule", tags = "2")]
+    pub rule: ::core::option::Option<policy_rule::Rule>,
+}
+/// Nested message and enum types in `PolicyRule`.
+pub mod policy_rule {
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Rule {
+        /// Rollout restrictions.
+        #[prost(message, tag = "2")]
+        RolloutRestriction(super::RolloutRestriction),
+    }
+}
+/// Rollout restrictions.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RolloutRestriction {
+    /// Required. Restriction rule ID. Required and must be unique within a
+    /// DeployPolicy. The format is `[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?`.
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Optional. What invoked the action. If left empty, all invoker types will be
+    /// restricted.
+    #[prost(
+        enumeration = "deploy_policy::Invoker",
+        repeated,
+        packed = "false",
+        tag = "2"
+    )]
+    pub invokers: ::prost::alloc::vec::Vec<i32>,
+    /// Optional. Rollout actions to be restricted as part of the policy. If left
+    /// empty, all actions will be restricted.
+    #[prost(
+        enumeration = "rollout_restriction::RolloutActions",
+        repeated,
+        packed = "false",
+        tag = "3"
+    )]
+    pub actions: ::prost::alloc::vec::Vec<i32>,
+    /// Required. Time window within which actions are restricted.
+    #[prost(message, optional, tag = "4")]
+    pub time_windows: ::core::option::Option<TimeWindows>,
+}
+/// Nested message and enum types in `RolloutRestriction`.
+pub mod rollout_restriction {
+    /// Rollout actions to be restricted as part of the policy.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum RolloutActions {
+        /// Unspecified.
+        Unspecified = 0,
+        /// Advance the rollout to the next phase.
+        Advance = 1,
+        /// Approve the rollout.
+        Approve = 2,
+        /// Cancel the rollout.
+        Cancel = 3,
+        /// Create a rollout.
+        Create = 4,
+        /// Ignore a job result on the rollout.
+        IgnoreJob = 5,
+        /// Retry a job for a rollout.
+        RetryJob = 6,
+        /// Rollback a rollout.
+        Rollback = 7,
+        /// Terminate a jobrun.
+        TerminateJobrun = 8,
+    }
+    impl RolloutActions {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "ROLLOUT_ACTIONS_UNSPECIFIED",
+                Self::Advance => "ADVANCE",
+                Self::Approve => "APPROVE",
+                Self::Cancel => "CANCEL",
+                Self::Create => "CREATE",
+                Self::IgnoreJob => "IGNORE_JOB",
+                Self::RetryJob => "RETRY_JOB",
+                Self::Rollback => "ROLLBACK",
+                Self::TerminateJobrun => "TERMINATE_JOBRUN",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "ROLLOUT_ACTIONS_UNSPECIFIED" => Some(Self::Unspecified),
+                "ADVANCE" => Some(Self::Advance),
+                "APPROVE" => Some(Self::Approve),
+                "CANCEL" => Some(Self::Cancel),
+                "CREATE" => Some(Self::Create),
+                "IGNORE_JOB" => Some(Self::IgnoreJob),
+                "RETRY_JOB" => Some(Self::RetryJob),
+                "ROLLBACK" => Some(Self::Rollback),
+                "TERMINATE_JOBRUN" => Some(Self::TerminateJobrun),
+                _ => None,
+            }
+        }
+    }
+}
+/// Time windows within which actions are restricted. See the
+/// [documentation](<https://cloud.google.com/deploy/docs/deploy-policy#dates_times>)
+/// for more information on how to configure dates/times.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TimeWindows {
+    /// Required. The time zone in IANA format [IANA Time Zone
+    /// Database](<https://www.iana.org/time-zones>) (e.g. America/New_York).
+    #[prost(string, tag = "1")]
+    pub time_zone: ::prost::alloc::string::String,
+    /// Optional. One-time windows within which actions are restricted.
+    #[prost(message, repeated, tag = "2")]
+    pub one_time_windows: ::prost::alloc::vec::Vec<OneTimeWindow>,
+    /// Optional. Recurring weekly windows within which actions are restricted.
+    #[prost(message, repeated, tag = "3")]
+    pub weekly_windows: ::prost::alloc::vec::Vec<WeeklyWindow>,
+}
+/// One-time window within which actions are restricted. For example, blocking
+/// actions over New Year's Eve from December 31st at 5pm to January 1st at 9am.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OneTimeWindow {
+    /// Required. Start date.
+    #[prost(message, optional, tag = "1")]
+    pub start_date: ::core::option::Option<super::super::super::r#type::Date>,
+    /// Required. Start time (inclusive). Use 00:00 for the beginning of the day.
+    #[prost(message, optional, tag = "2")]
+    pub start_time: ::core::option::Option<super::super::super::r#type::TimeOfDay>,
+    /// Required. End date.
+    #[prost(message, optional, tag = "3")]
+    pub end_date: ::core::option::Option<super::super::super::r#type::Date>,
+    /// Required. End time (exclusive). You may use 24:00 for the end of the day.
+    #[prost(message, optional, tag = "4")]
+    pub end_time: ::core::option::Option<super::super::super::r#type::TimeOfDay>,
+}
+/// Weekly windows. For example, blocking actions every Saturday and Sunday.
+/// Another example would be blocking actions every weekday from 5pm to midnight.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WeeklyWindow {
+    /// Optional. Days of week. If left empty, all days of the week will be
+    /// included.
+    #[prost(
+        enumeration = "super::super::super::r#type::DayOfWeek",
+        repeated,
+        packed = "false",
+        tag = "1"
+    )]
+    pub days_of_week: ::prost::alloc::vec::Vec<i32>,
+    /// Optional. Start time (inclusive). Use 00:00 for the beginning of the day.
+    /// If you specify start_time you must also specify end_time. If left empty,
+    /// this will block for the entire day for the days specified in days_of_week.
+    #[prost(message, optional, tag = "2")]
+    pub start_time: ::core::option::Option<super::super::super::r#type::TimeOfDay>,
+    /// Optional. End time (exclusive). Use 24:00 to indicate midnight. If you
+    /// specify end_time you must also specify start_time. If left empty, this will
+    /// block for the entire day for the days specified in days_of_week.
+    #[prost(message, optional, tag = "3")]
+    pub end_time: ::core::option::Option<super::super::super::r#type::TimeOfDay>,
+}
+/// Returned from an action if one or more policies were
+/// violated, and therefore the action was prevented. Contains information about
+/// what policies were violated and why.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PolicyViolation {
+    /// Policy violation details.
+    #[prost(message, repeated, tag = "1")]
+    pub policy_violation_details: ::prost::alloc::vec::Vec<PolicyViolationDetails>,
+}
+/// Policy violation details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PolicyViolationDetails {
+    /// Name of the policy that was violated.
+    /// Policy resource will be in the format of
+    /// `projects/{project}/locations/{location}/policies/{policy}`.
+    #[prost(string, tag = "1")]
+    pub policy: ::prost::alloc::string::String,
+    /// Id of the rule that triggered the policy violation.
+    #[prost(string, tag = "2")]
+    pub rule_id: ::prost::alloc::string::String,
+    /// User readable message about why the request violated a policy. This is not
+    /// intended for machine parsing.
+    #[prost(string, tag = "3")]
+    pub failure_message: ::prost::alloc::string::String,
+}
 /// A `Release` resource in the Cloud Deploy API.
 ///
 /// A `Release` defines a specific Skaffold configuration instance
 /// that can be deployed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Release {
     /// Optional. Name of the `Release`. Format is
@@ -1689,9 +2040,9 @@ pub struct Release {
     /// client has an up-to-date value before proceeding.
     #[prost(string, tag = "16")]
     pub etag: ::prost::alloc::string::String,
-    /// The Skaffold version to use when operating on this release, such as
-    /// "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set
-    /// of versions.
+    /// Optional. The Skaffold version to use when operating on this release, such
+    /// as "1.20.0". Not all versions are valid; Cloud Deploy supports a specific
+    /// set of versions.
     ///
     /// If unset, the most recent supported Skaffold version will be used.
     #[prost(string, tag = "19")]
@@ -1723,7 +2074,6 @@ pub struct Release {
 /// Nested message and enum types in `Release`.
 pub mod release {
     /// Details of rendering for a single target.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TargetRender {
         /// Output only. The resource name of the Cloud Build `Build` object that is
@@ -1778,10 +2128,10 @@ pub mod release {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    TargetRenderState::Unspecified => "TARGET_RENDER_STATE_UNSPECIFIED",
-                    TargetRenderState::Succeeded => "SUCCEEDED",
-                    TargetRenderState::Failed => "FAILED",
-                    TargetRenderState::InProgress => "IN_PROGRESS",
+                    Self::Unspecified => "TARGET_RENDER_STATE_UNSPECIFIED",
+                    Self::Succeeded => "SUCCEEDED",
+                    Self::Failed => "FAILED",
+                    Self::InProgress => "IN_PROGRESS",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1842,20 +2192,16 @@ pub mod release {
             /// (if the ProtoBuf definition does not change) and safe for programmatic use.
             pub fn as_str_name(&self) -> &'static str {
                 match self {
-                    FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                    FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                    FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                    FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
-                    FailureCause::VerificationConfigNotFound => {
-                        "VERIFICATION_CONFIG_NOT_FOUND"
-                    }
-                    FailureCause::CustomActionNotFound => "CUSTOM_ACTION_NOT_FOUND",
-                    FailureCause::DeploymentStrategyNotSupported => {
+                    Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                    Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                    Self::ExecutionFailed => "EXECUTION_FAILED",
+                    Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                    Self::VerificationConfigNotFound => "VERIFICATION_CONFIG_NOT_FOUND",
+                    Self::CustomActionNotFound => "CUSTOM_ACTION_NOT_FOUND",
+                    Self::DeploymentStrategyNotSupported => {
                         "DEPLOYMENT_STRATEGY_NOT_SUPPORTED"
                     }
-                    FailureCause::RenderFeatureNotSupported => {
-                        "RENDER_FEATURE_NOT_SUPPORTED"
-                    }
+                    Self::RenderFeatureNotSupported => "RENDER_FEATURE_NOT_SUPPORTED",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1883,7 +2229,6 @@ pub mod release {
     /// ReleaseReadyCondition contains information around the status of the
     /// Release. If a release is not ready, you cannot create a rollout with the
     /// release.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReleaseReadyCondition {
         /// True if the Release is in a valid state. Otherwise at least one condition
@@ -1895,7 +2240,6 @@ pub mod release {
     }
     /// SkaffoldSupportedCondition contains information about when support for the
     /// release's version of Skaffold ends.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct SkaffoldSupportedCondition {
         /// True if the version of Skaffold used by this release is supported.
@@ -1914,7 +2258,6 @@ pub mod release {
         pub support_expiration_time: ::core::option::Option<::prost_types::Timestamp>,
     }
     /// ReleaseCondition contains all conditions relevant to a Release.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct ReleaseCondition {
         /// Details around the Releases's overall status.
@@ -1957,10 +2300,10 @@ pub mod release {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RenderState::Unspecified => "RENDER_STATE_UNSPECIFIED",
-                RenderState::Succeeded => "SUCCEEDED",
-                RenderState::Failed => "FAILED",
-                RenderState::InProgress => "IN_PROGRESS",
+                Self::Unspecified => "RENDER_STATE_UNSPECIFIED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::InProgress => "IN_PROGRESS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1975,8 +2318,163 @@ pub mod release {
         }
     }
 }
+/// The request object for `CreateDeployPolicy`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateDeployPolicyRequest {
+    /// Required. The parent collection in which the `DeployPolicy` must be
+    /// created. The format is `projects/{project_id}/locations/{location_name}`.
+    #[prost(string, tag = "1")]
+    pub parent: ::prost::alloc::string::String,
+    /// Required. ID of the `DeployPolicy`.
+    #[prost(string, tag = "2")]
+    pub deploy_policy_id: ::prost::alloc::string::String,
+    /// Required. The `DeployPolicy` to create.
+    #[prost(message, optional, tag = "3")]
+    pub deploy_policy: ::core::option::Option<DeployPolicy>,
+    /// Optional. A request ID to identify requests. Specify a unique request ID
+    /// so that if you must retry your request, the server knows to ignore the
+    /// request if it has already been completed. The server guarantees that for
+    /// at least 60 minutes after the first request.
+    ///
+    /// For example, consider a situation where you make an initial request and the
+    /// request times out. If you make the request again with the same request ID,
+    /// the server can check if original operation with the same request ID was
+    /// received, and if so, will ignore the second request. This prevents clients
+    /// from accidentally creating duplicate commitments.
+    ///
+    /// The request ID must be a valid UUID with the exception that zero UUID is
+    /// not supported (00000000-0000-0000-0000-000000000000).
+    #[prost(string, tag = "4")]
+    pub request_id: ::prost::alloc::string::String,
+    /// Optional. If set to true, the request is validated and the user is provided
+    /// with an expected result, but no actual change is made.
+    #[prost(bool, tag = "5")]
+    pub validate_only: bool,
+}
+/// The request object for `UpdateDeployPolicy`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateDeployPolicyRequest {
+    /// Required. Field mask is used to specify the fields to be overwritten by the
+    /// update in the `DeployPolicy` resource. The fields specified in the
+    /// update_mask are relative to the resource, not the full request. A field
+    /// will be overwritten if it's in the mask. If the user doesn't provide a mask
+    /// then all fields are overwritten.
+    #[prost(message, optional, tag = "1")]
+    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    /// Required. The `DeployPolicy` to update.
+    #[prost(message, optional, tag = "2")]
+    pub deploy_policy: ::core::option::Option<DeployPolicy>,
+    /// Optional. A request ID to identify requests. Specify a unique request ID
+    /// so that if you must retry your request, the server knows to ignore the
+    /// request if it has already been completed. The server guarantees that for
+    /// at least 60 minutes after the first request.
+    ///
+    /// For example, consider a situation where you make an initial request and the
+    /// request times out. If you make the request again with the same request ID,
+    /// the server can check if original operation with the same request ID was
+    /// received, and if so, will ignore the second request. This prevents clients
+    /// from accidentally creating duplicate commitments.
+    ///
+    /// The request ID must be a valid UUID with the exception that zero UUID is
+    /// not supported (00000000-0000-0000-0000-000000000000).
+    #[prost(string, tag = "3")]
+    pub request_id: ::prost::alloc::string::String,
+    /// Optional. If set to true, updating a `DeployPolicy` that does not exist
+    /// will result in the creation of a new `DeployPolicy`.
+    #[prost(bool, tag = "4")]
+    pub allow_missing: bool,
+    /// Optional. If set to true, the request is validated and the user is provided
+    /// with an expected result, but no actual change is made.
+    #[prost(bool, tag = "5")]
+    pub validate_only: bool,
+}
+/// The request object for `DeleteDeployPolicy`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteDeployPolicyRequest {
+    /// Required. The name of the `DeployPolicy` to delete. The format is
+    /// `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Optional. A request ID to identify requests. Specify a unique request ID
+    /// so that if you must retry your request, the server knows to ignore the
+    /// request if it has already been completed. The server guarantees that for
+    /// at least 60 minutes after the first request.
+    ///
+    /// For example, consider a situation where you make an initial request and the
+    /// request times out. If you make the request again with the same request ID,
+    /// the server can check if original operation with the same request ID was
+    /// received, and if so, will ignore the second request. This prevents clients
+    /// from accidentally creating duplicate commitments.
+    ///
+    /// The request ID must be a valid UUID with the exception that zero UUID is
+    /// not supported (00000000-0000-0000-0000-000000000000).
+    #[prost(string, tag = "2")]
+    pub request_id: ::prost::alloc::string::String,
+    /// Optional. If set to true, then deleting an already deleted or non-existing
+    /// `DeployPolicy` will succeed.
+    #[prost(bool, tag = "3")]
+    pub allow_missing: bool,
+    /// Optional. If set, validate the request and preview the review, but do not
+    /// actually post it.
+    #[prost(bool, tag = "4")]
+    pub validate_only: bool,
+    /// Optional. This checksum is computed by the server based on the value of
+    /// other fields, and may be sent on update and delete requests to ensure the
+    /// client has an up-to-date value before proceeding.
+    #[prost(string, tag = "5")]
+    pub etag: ::prost::alloc::string::String,
+}
+/// The request object for `ListDeployPolicies`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListDeployPoliciesRequest {
+    /// Required. The parent, which owns this collection of deploy policies. Format
+    /// must be `projects/{project_id}/locations/{location_name}`.
+    #[prost(string, tag = "1")]
+    pub parent: ::prost::alloc::string::String,
+    /// The maximum number of deploy policies to return. The service may return
+    /// fewer than this value. If unspecified, at most 50 deploy policies will
+    /// be returned. The maximum value is 1000; values above 1000 will be set
+    /// to 1000.
+    #[prost(int32, tag = "2")]
+    pub page_size: i32,
+    /// A page token, received from a previous `ListDeployPolicies` call.
+    /// Provide this to retrieve the subsequent page.
+    ///
+    /// When paginating, all other provided parameters match
+    /// the call that provided the page token.
+    #[prost(string, tag = "3")]
+    pub page_token: ::prost::alloc::string::String,
+    /// Filter deploy policies to be returned. See <https://google.aip.dev/160> for
+    /// more details. All fields can be used in the filter.
+    #[prost(string, tag = "4")]
+    pub filter: ::prost::alloc::string::String,
+    /// Field to sort by. See <https://google.aip.dev/132#ordering> for more details.
+    #[prost(string, tag = "5")]
+    pub order_by: ::prost::alloc::string::String,
+}
+/// The response object from `ListDeployPolicies`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListDeployPoliciesResponse {
+    /// The `DeployPolicy` objects.
+    #[prost(message, repeated, tag = "1")]
+    pub deploy_policies: ::prost::alloc::vec::Vec<DeployPolicy>,
+    /// A token, which can be sent as `page_token` to retrieve the next page.
+    /// If this field is omitted, there are no subsequent pages.
+    #[prost(string, tag = "2")]
+    pub next_page_token: ::prost::alloc::string::String,
+    /// Locations that could not be reached.
+    #[prost(string, repeated, tag = "3")]
+    pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// The request object for `GetDeployPolicy`
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDeployPolicyRequest {
+    /// Required. Name of the `DeployPolicy`. Format must be
+    /// `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
 /// Description of an a image to use during Skaffold rendering.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BuildArtifact {
     /// Image name in Skaffold configuration.
@@ -1989,7 +2487,6 @@ pub struct BuildArtifact {
     pub tag: ::prost::alloc::string::String,
 }
 /// The artifacts produced by a target render operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetArtifact {
     /// Output only. File path of the resolved Skaffold configuration relative to
@@ -2011,7 +2508,6 @@ pub struct TargetArtifact {
 /// Nested message and enum types in `TargetArtifact`.
 pub mod target_artifact {
     /// Contains the paths to the artifacts, relative to the URI, for a phase.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PhaseArtifact {
         /// Output only. File path of the resolved Skaffold configuration relative to
@@ -2026,7 +2522,6 @@ pub mod target_artifact {
         #[prost(string, tag = "4")]
         pub job_manifests_path: ::prost::alloc::string::String,
     }
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Uri {
         /// Output only. URI of a directory containing the artifacts. This contains
@@ -2037,7 +2532,6 @@ pub mod target_artifact {
     }
 }
 /// The artifacts produced by a deploy operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeployArtifact {
     /// Output only. URI of a directory containing the artifacts. All paths are
@@ -2051,7 +2545,6 @@ pub struct DeployArtifact {
 }
 /// CloudRunRenderMetadata contains Cloud Run information associated with a
 /// `Release` render.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunRenderMetadata {
     /// Output only. The name of the Cloud Run Service in the rendered manifest.
@@ -2060,7 +2553,6 @@ pub struct CloudRunRenderMetadata {
     pub service: ::prost::alloc::string::String,
 }
 /// RenderMetadata includes information associated with a `Release` render.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenderMetadata {
     /// Output only. Metadata associated with rendering for Cloud Run.
@@ -2071,7 +2563,6 @@ pub struct RenderMetadata {
     pub custom: ::core::option::Option<CustomMetadata>,
 }
 /// The request object for `ListReleases`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListReleasesRequest {
     /// Required. The `DeliveryPipeline` which owns this collection of `Release`
@@ -2101,7 +2592,6 @@ pub struct ListReleasesRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListReleases`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListReleasesResponse {
     /// The `Release` objects.
@@ -2116,7 +2606,6 @@ pub struct ListReleasesResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetRelease`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReleaseRequest {
     /// Required. Name of the `Release`. Format must be
@@ -2125,7 +2614,6 @@ pub struct GetReleaseRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object for `CreateRelease`,
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateReleaseRequest {
     /// Required. The parent collection in which the `Release` is created.
@@ -2158,11 +2646,14 @@ pub struct CreateReleaseRequest {
     /// with an expected result, but no actual change is made.
     #[prost(bool, tag = "5")]
     pub validate_only: bool,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "6")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A `Rollout` resource in the Cloud Deploy API.
 ///
 /// A `Rollout` contains information around a specific deployment to a `Target`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Rollout {
     /// Optional. Name of the `Rollout`. Format is
@@ -2262,6 +2753,9 @@ pub struct Rollout {
     pub rolled_back_by_rollouts: ::prost::alloc::vec::Vec<
         ::prost::alloc::string::String,
     >,
+    /// Output only. The AutomationRun actively repairing the rollout.
+    #[prost(string, tag = "28")]
+    pub active_repair_automation_run: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `Rollout`.
 pub mod rollout {
@@ -2297,11 +2791,11 @@ pub mod rollout {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ApprovalState::Unspecified => "APPROVAL_STATE_UNSPECIFIED",
-                ApprovalState::NeedsApproval => "NEEDS_APPROVAL",
-                ApprovalState::DoesNotNeedApproval => "DOES_NOT_NEED_APPROVAL",
-                ApprovalState::Approved => "APPROVED",
-                ApprovalState::Rejected => "REJECTED",
+                Self::Unspecified => "APPROVAL_STATE_UNSPECIFIED",
+                Self::NeedsApproval => "NEEDS_APPROVAL",
+                Self::DoesNotNeedApproval => "DOES_NOT_NEED_APPROVAL",
+                Self::Approved => "APPROVED",
+                Self::Rejected => "REJECTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2361,17 +2855,17 @@ pub mod rollout {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::InProgress => "IN_PROGRESS",
-                State::PendingApproval => "PENDING_APPROVAL",
-                State::ApprovalRejected => "APPROVAL_REJECTED",
-                State::Pending => "PENDING",
-                State::PendingRelease => "PENDING_RELEASE",
-                State::Cancelling => "CANCELLING",
-                State::Cancelled => "CANCELLED",
-                State::Halted => "HALTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::InProgress => "IN_PROGRESS",
+                Self::PendingApproval => "PENDING_APPROVAL",
+                Self::ApprovalRejected => "APPROVAL_REJECTED",
+                Self::Pending => "PENDING",
+                Self::PendingRelease => "PENDING_RELEASE",
+                Self::Cancelling => "CANCELLING",
+                Self::Cancelled => "CANCELLED",
+                Self::Halted => "HALTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2436,19 +2930,15 @@ pub mod rollout {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                FailureCause::DeadlineExceeded => "DEADLINE_EXCEEDED",
-                FailureCause::ReleaseFailed => "RELEASE_FAILED",
-                FailureCause::ReleaseAbandoned => "RELEASE_ABANDONED",
-                FailureCause::VerificationConfigNotFound => {
-                    "VERIFICATION_CONFIG_NOT_FOUND"
-                }
-                FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
-                FailureCause::OperationFeatureNotSupported => {
-                    "OPERATION_FEATURE_NOT_SUPPORTED"
-                }
+                Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                Self::ExecutionFailed => "EXECUTION_FAILED",
+                Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+                Self::ReleaseFailed => "RELEASE_FAILED",
+                Self::ReleaseAbandoned => "RELEASE_ABANDONED",
+                Self::VerificationConfigNotFound => "VERIFICATION_CONFIG_NOT_FOUND",
+                Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                Self::OperationFeatureNotSupported => "OPERATION_FEATURE_NOT_SUPPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2471,7 +2961,6 @@ pub mod rollout {
     }
 }
 /// Metadata includes information associated with a `Rollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metadata {
     /// Output only. The name of the Cloud Run Service that is associated with a
@@ -2488,7 +2977,6 @@ pub struct Metadata {
 }
 /// DeployJobRunMetadata surfaces information associated with a `DeployJobRun` to
 /// the user.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeployJobRunMetadata {
     /// Output only. The name of the Cloud Run Service that is associated with a
@@ -2503,7 +2991,6 @@ pub struct DeployJobRunMetadata {
     pub custom: ::core::option::Option<CustomMetadata>,
 }
 /// CloudRunMetadata contains information from a Cloud Run deployment.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunMetadata {
     /// Output only. The name of the Cloud Run Service that is associated with a
@@ -2526,7 +3013,6 @@ pub struct CloudRunMetadata {
 }
 /// CustomTargetDeployMetadata contains information from a Custom Target
 /// deploy operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetDeployMetadata {
     /// Output only. Skip message provided in the results of a custom deploy
@@ -2536,7 +3022,6 @@ pub struct CustomTargetDeployMetadata {
 }
 /// AutomationRolloutMetadata contains Automation-related actions that
 /// were performed on a rollout.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationRolloutMetadata {
     /// Output only. The name of the AutomationRun initiated by a promote release
@@ -2555,7 +3040,6 @@ pub struct AutomationRolloutMetadata {
     pub repair_automation_runs: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// CustomMetadata contains information from a user-defined operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomMetadata {
     /// Output only. Key-value pairs provided by the user-defined operation.
@@ -2567,7 +3051,6 @@ pub struct CustomMetadata {
 }
 /// Phase represents a collection of jobs that are logically grouped together
 /// for a `Rollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Phase {
     /// Output only. The ID of the Phase.
@@ -2622,13 +3105,13 @@ pub mod phase {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Pending => "PENDING",
-                State::InProgress => "IN_PROGRESS",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Aborted => "ABORTED",
-                State::Skipped => "SKIPPED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Pending => "PENDING",
+                Self::InProgress => "IN_PROGRESS",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Aborted => "ABORTED",
+                Self::Skipped => "SKIPPED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2646,7 +3129,6 @@ pub mod phase {
         }
     }
     /// The job composition of this Phase.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Jobs {
         /// Output only. Deployment job composition.
@@ -2658,7 +3140,6 @@ pub mod phase {
     }
 }
 /// Deployment job composition.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeploymentJobs {
     /// Output only. The deploy Job. This is the deploy job in the phase.
@@ -2675,7 +3156,6 @@ pub struct DeploymentJobs {
     pub postdeploy_job: ::core::option::Option<Job>,
 }
 /// ChildRollouts job composition
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChildRolloutJobs {
     /// Output only. List of CreateChildRolloutJobs
@@ -2686,7 +3166,6 @@ pub struct ChildRolloutJobs {
     pub advance_rollout_jobs: ::prost::alloc::vec::Vec<Job>,
 }
 /// Job represents an operation for a `Rollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Job {
     /// Output only. The ID of the Job.
@@ -2749,15 +3228,15 @@ pub mod job {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Pending => "PENDING",
-                State::Disabled => "DISABLED",
-                State::InProgress => "IN_PROGRESS",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Aborted => "ABORTED",
-                State::Skipped => "SKIPPED",
-                State::Ignored => "IGNORED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Pending => "PENDING",
+                Self::Disabled => "DISABLED",
+                Self::InProgress => "IN_PROGRESS",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Aborted => "ABORTED",
+                Self::Skipped => "SKIPPED",
+                Self::Ignored => "IGNORED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2777,7 +3256,6 @@ pub mod job {
         }
     }
     /// The type of Job.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum JobType {
         /// Output only. A deploy Job.
@@ -2801,15 +3279,12 @@ pub mod job {
     }
 }
 /// A deploy Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeployJob {}
 /// A verify Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct VerifyJob {}
 /// A predeploy Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredeployJob {
     /// Output only. The custom actions that the predeploy Job executes.
@@ -2817,7 +3292,6 @@ pub struct PredeployJob {
     pub actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A postdeploy Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostdeployJob {
     /// Output only. The custom actions that the postdeploy Job executes.
@@ -2825,15 +3299,12 @@ pub struct PostdeployJob {
     pub actions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A createChildRollout Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CreateChildRolloutJob {}
 /// An advanceChildRollout Job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AdvanceChildRolloutJob {}
 /// ListRolloutsRequest is the request object used by `ListRollouts`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolloutsRequest {
     /// Required. The `Release` which owns this collection of `Rollout` objects.
@@ -2862,7 +3333,6 @@ pub struct ListRolloutsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// ListRolloutsResponse is the response object reutrned by `ListRollouts`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRolloutsResponse {
     /// The `Rollout` objects.
@@ -2877,7 +3347,6 @@ pub struct ListRolloutsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetRolloutRequest is the request object used by `GetRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRolloutRequest {
     /// Required. Name of the `Rollout`. Format must be
@@ -2886,7 +3355,6 @@ pub struct GetRolloutRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// CreateRolloutRequest is the request object used by `CreateRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateRolloutRequest {
     /// Required. The parent collection in which the `Rollout` must be created.
@@ -2919,13 +3387,16 @@ pub struct CreateRolloutRequest {
     /// with an expected result, but no actual change is made.
     #[prost(bool, tag = "5")]
     pub validate_only: bool,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "6")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
     /// will start at the first phase.
     #[prost(string, tag = "7")]
     pub starting_phase_id: ::prost::alloc::string::String,
 }
 /// Represents the metadata of the long-running operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// Output only. The time the operation was created.
@@ -2945,9 +3416,10 @@ pub struct OperationMetadata {
     pub status_message: ::prost::alloc::string::String,
     /// Output only. Identifies whether the user has requested cancellation
     /// of the operation. Operations that have successfully been cancelled
-    /// have [Operation.error][] value with a
-    /// [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to
-    /// `Code.CANCELLED`.
+    /// have
+    /// [google.longrunning.Operation.error][google.longrunning.Operation.error]
+    /// value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
+    /// corresponding to `Code.CANCELLED`.
     #[prost(bool, tag = "6")]
     pub requested_cancellation: bool,
     /// Output only. API version used to start the operation.
@@ -2955,7 +3427,6 @@ pub struct OperationMetadata {
     pub api_version: ::prost::alloc::string::String,
 }
 /// The request object used by `ApproveRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ApproveRolloutRequest {
     /// Required. Name of the Rollout. Format is
@@ -2965,13 +3436,15 @@ pub struct ApproveRolloutRequest {
     /// Required. True = approve; false = reject
     #[prost(bool, tag = "2")]
     pub approved: bool,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "3")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `ApproveRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ApproveRolloutResponse {}
 /// The request object used by `AdvanceRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdvanceRolloutRequest {
     /// Required. Name of the Rollout. Format is
@@ -2981,26 +3454,30 @@ pub struct AdvanceRolloutRequest {
     /// Required. The phase ID to advance the `Rollout` to.
     #[prost(string, tag = "2")]
     pub phase_id: ::prost::alloc::string::String,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "3")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `AdvanceRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AdvanceRolloutResponse {}
 /// The request object used by `CancelRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelRolloutRequest {
     /// Required. Name of the Rollout. Format is
     /// `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "2")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `CancelRollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CancelRolloutResponse {}
 /// The request object used by `IgnoreJob`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IgnoreJobRequest {
     /// Required. Name of the Rollout. Format is
@@ -3013,13 +3490,15 @@ pub struct IgnoreJobRequest {
     /// Required. The job ID for the Job to ignore.
     #[prost(string, tag = "3")]
     pub job_id: ::prost::alloc::string::String,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "4")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `IgnoreJob`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct IgnoreJobResponse {}
 /// RetryJobRequest is the request object used by `RetryJob`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetryJobRequest {
     /// Required. Name of the Rollout. Format is
@@ -3032,13 +3511,15 @@ pub struct RetryJobRequest {
     /// Required. The job ID for the Job to retry.
     #[prost(string, tag = "3")]
     pub job_id: ::prost::alloc::string::String,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "4")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from 'RetryJob'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryJobResponse {}
 /// The request object used by `AbandonRelease`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbandonReleaseRequest {
     /// Required. Name of the Release. Format is
@@ -3047,13 +3528,11 @@ pub struct AbandonReleaseRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The response object for `AbandonRelease`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AbandonReleaseResponse {}
 /// A `JobRun` resource in the Cloud Deploy API.
 ///
 /// A `JobRun` contains information of a single `Rollout` job evaluation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobRun {
     /// Optional. Name of the `JobRun`. Format is
@@ -3126,12 +3605,12 @@ pub mod job_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::InProgress => "IN_PROGRESS",
-                State::Succeeded => "SUCCEEDED",
-                State::Failed => "FAILED",
-                State::Terminating => "TERMINATING",
-                State::Terminated => "TERMINATED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::InProgress => "IN_PROGRESS",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::Terminating => "TERMINATING",
+                Self::Terminated => "TERMINATED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3148,7 +3627,6 @@ pub mod job_run {
         }
     }
     /// The `JobRun` type and the information for that type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum JobRun {
         /// Output only. Information specific to a deploy `JobRun`.
@@ -3172,7 +3650,6 @@ pub mod job_run {
     }
 }
 /// DeployJobRun contains information specific to a deploy `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeployJobRun {
     /// Output only. The resource name of the Cloud Build `Build` object that is
@@ -3237,13 +3714,13 @@ pub mod deploy_job_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                FailureCause::DeadlineExceeded => "DEADLINE_EXCEEDED",
-                FailureCause::MissingResourcesForCanary => "MISSING_RESOURCES_FOR_CANARY",
-                FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
-                FailureCause::DeployFeatureNotSupported => "DEPLOY_FEATURE_NOT_SUPPORTED",
+                Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                Self::ExecutionFailed => "EXECUTION_FAILED",
+                Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+                Self::MissingResourcesForCanary => "MISSING_RESOURCES_FOR_CANARY",
+                Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                Self::DeployFeatureNotSupported => "DEPLOY_FEATURE_NOT_SUPPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3262,7 +3739,6 @@ pub mod deploy_job_run {
     }
 }
 /// VerifyJobRun contains information specific to a verify `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VerifyJobRun {
     /// Output only. The resource name of the Cloud Build `Build` object that is
@@ -3326,14 +3802,12 @@ pub mod verify_job_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                FailureCause::DeadlineExceeded => "DEADLINE_EXCEEDED",
-                FailureCause::VerificationConfigNotFound => {
-                    "VERIFICATION_CONFIG_NOT_FOUND"
-                }
-                FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                Self::ExecutionFailed => "EXECUTION_FAILED",
+                Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+                Self::VerificationConfigNotFound => "VERIFICATION_CONFIG_NOT_FOUND",
+                Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3351,7 +3825,6 @@ pub mod verify_job_run {
     }
 }
 /// PredeployJobRun contains information specific to a predeploy `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredeployJobRun {
     /// Output only. The resource name of the Cloud Build `Build` object that is
@@ -3406,11 +3879,11 @@ pub mod predeploy_job_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                FailureCause::DeadlineExceeded => "DEADLINE_EXCEEDED",
-                FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                Self::ExecutionFailed => "EXECUTION_FAILED",
+                Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+                Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3427,7 +3900,6 @@ pub mod predeploy_job_run {
     }
 }
 /// PostdeployJobRun contains information specific to a postdeploy `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostdeployJobRun {
     /// Output only. The resource name of the Cloud Build `Build` object that is
@@ -3482,11 +3954,11 @@ pub mod postdeploy_job_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FailureCause::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
-                FailureCause::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
-                FailureCause::ExecutionFailed => "EXECUTION_FAILED",
-                FailureCause::DeadlineExceeded => "DEADLINE_EXCEEDED",
-                FailureCause::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
+                Self::Unspecified => "FAILURE_CAUSE_UNSPECIFIED",
+                Self::CloudBuildUnavailable => "CLOUD_BUILD_UNAVAILABLE",
+                Self::ExecutionFailed => "EXECUTION_FAILED",
+                Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+                Self::CloudBuildRequestFailed => "CLOUD_BUILD_REQUEST_FAILED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3504,7 +3976,6 @@ pub mod postdeploy_job_run {
 }
 /// CreateChildRolloutJobRun contains information specific to a
 /// createChildRollout `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateChildRolloutJobRun {
     /// Output only. Name of the `ChildRollout`. Format is
@@ -3517,7 +3988,6 @@ pub struct CreateChildRolloutJobRun {
 }
 /// AdvanceChildRolloutJobRun contains information specific to a
 /// advanceChildRollout `JobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdvanceChildRolloutJobRun {
     /// Output only. Name of the `ChildRollout`. Format is
@@ -3529,7 +3999,6 @@ pub struct AdvanceChildRolloutJobRun {
     pub rollout_phase_id: ::prost::alloc::string::String,
 }
 /// ListJobRunsRequest is the request object used by `ListJobRuns`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobRunsRequest {
     /// Required. The `Rollout` which owns this collection of `JobRun` objects.
@@ -3558,7 +4027,6 @@ pub struct ListJobRunsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// ListJobRunsResponse is the response object returned by `ListJobRuns`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListJobRunsResponse {
     /// The `JobRun` objects.
@@ -3573,7 +4041,6 @@ pub struct ListJobRunsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetJobRunRequest is the request object used by `GetJobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetJobRunRequest {
     /// Required. Name of the `JobRun`. Format must be
@@ -3582,20 +4049,21 @@ pub struct GetJobRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object used by `TerminateJobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminateJobRunRequest {
     /// Required. Name of the `JobRun`. Format must be
     /// `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
+    /// Optional. Deploy policies to override. Format is
+    /// `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+    #[prost(string, repeated, tag = "2")]
+    pub override_deploy_policy: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The response object from `TerminateJobRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TerminateJobRunResponse {}
 /// Service-wide configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Config {
     /// Name of the configuration.
@@ -3610,7 +4078,6 @@ pub struct Config {
     pub default_skaffold_version: ::prost::alloc::string::String,
 }
 /// Details of a supported Skaffold version.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SkaffoldVersion {
     /// Release version number. For example, "1.20.3".
@@ -3627,7 +4094,6 @@ pub struct SkaffoldVersion {
     pub support_end_date: ::core::option::Option<super::super::super::r#type::Date>,
 }
 /// Request to get a configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConfigRequest {
     /// Required. Name of requested configuration.
@@ -3641,7 +4107,6 @@ pub struct GetConfigRequest {
 /// Rollout repair and Rollout deployment strategy advancement. The intention
 /// of Automation is to reduce manual intervention in the continuous delivery
 /// process.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Automation {
     /// Output only. Name of the `Automation`. Format is
@@ -3723,7 +4188,6 @@ pub struct Automation {
 }
 /// AutomationResourceSelector contains the information to select the resources
 /// to which an Automation is going to be applied.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationResourceSelector {
     /// Contains attributes about a target.
@@ -3731,17 +4195,15 @@ pub struct AutomationResourceSelector {
     pub targets: ::prost::alloc::vec::Vec<TargetAttribute>,
 }
 /// `AutomationRule` defines the automation activities.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationRule {
     /// The configuration of the Automation rule.
-    #[prost(oneof = "automation_rule::Rule", tags = "1, 2, 3")]
+    #[prost(oneof = "automation_rule::Rule", tags = "1, 2, 3, 4")]
     pub rule: ::core::option::Option<automation_rule::Rule>,
 }
 /// Nested message and enum types in `AutomationRule`.
 pub mod automation_rule {
     /// The configuration of the Automation rule.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Rule {
         /// Optional. `PromoteReleaseRule` will automatically promote a release from
@@ -3756,11 +4218,48 @@ pub mod automation_rule {
         /// rollout.
         #[prost(message, tag = "3")]
         RepairRolloutRule(super::RepairRolloutRule),
+        /// Optional. The `TimedPromoteReleaseRule` will automatically promote a
+        /// release from the current target(s) to the specified target(s) on a
+        /// configured schedule.
+        #[prost(message, tag = "4")]
+        TimedPromoteReleaseRule(super::TimedPromoteReleaseRule),
     }
+}
+/// The `TimedPromoteReleaseRule` will automatically promote a release from the
+/// current target(s) to the specified target(s) on a configured schedule.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TimedPromoteReleaseRule {
+    /// Required. ID of the rule. This ID must be unique in the `Automation`
+    /// resource to which this rule belongs. The format is
+    /// `[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?`.
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Optional. The ID of the stage in the pipeline to which this `Release` is
+    /// deploying. If unspecified, default it to the next stage in the promotion
+    /// flow. The value of this field could be one of the following:
+    ///
+    /// * The last segment of a target name
+    /// * "@next", the next target in the promotion sequence
+    #[prost(string, tag = "2")]
+    pub destination_target_id: ::prost::alloc::string::String,
+    /// Required. Schedule in crontab format. e.g. "0 9 * * 1" for every Monday at
+    /// 9am.
+    #[prost(string, tag = "3")]
+    pub schedule: ::prost::alloc::string::String,
+    /// Required. The time zone in IANA format [IANA Time Zone
+    /// Database](<https://www.iana.org/time-zones>) (e.g. America/New_York).
+    #[prost(string, tag = "4")]
+    pub time_zone: ::prost::alloc::string::String,
+    /// Output only. Information around the state of the Automation rule.
+    #[prost(message, optional, tag = "5")]
+    pub condition: ::core::option::Option<AutomationRuleCondition>,
+    /// Optional. The starting phase of the rollout created by this rule. Default
+    /// to the first phase.
+    #[prost(string, tag = "6")]
+    pub destination_phase: ::prost::alloc::string::String,
 }
 /// The `PromoteRelease` rule will automatically promote a release from the
 /// current target to a specified target.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PromoteReleaseRule {
     /// Required. ID of the rule. This id must be unique in the `Automation`
@@ -3776,10 +4275,8 @@ pub struct PromoteReleaseRule {
     /// deploying. If unspecified, default it to the next stage in the promotion
     /// flow. The value of this field could be one of the following:
     ///
-    /// * The last segment of a target name. It only needs the ID to determine
-    /// if the target is one of the stages in the promotion sequence defined
-    /// in the pipeline.
-    /// * "@next", the next target in the promotion sequence.
+    /// * The last segment of a target name
+    /// * "@next", the next target in the promotion sequence
     #[prost(string, tag = "7")]
     pub destination_target_id: ::prost::alloc::string::String,
     /// Output only. Information around the state of the Automation rule.
@@ -3792,7 +4289,6 @@ pub struct PromoteReleaseRule {
 }
 /// The `AdvanceRollout` automation rule will automatically advance a successful
 /// Rollout to the next phase.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdvanceRolloutRule {
     /// Required. ID of the rule. This id must be unique in the `Automation`
@@ -3816,7 +4312,6 @@ pub struct AdvanceRolloutRule {
 }
 /// The `RepairRolloutRule` automation rule will automatically repair a failed
 /// `Rollout`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepairRolloutRule {
     /// Required. ID of the rule. This id must be unique in the `Automation`
@@ -3824,6 +4319,14 @@ pub struct RepairRolloutRule {
     /// `[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?`.
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
+    /// Optional. Phases within which jobs are subject to automatic repair actions
+    /// on failure. Proceeds only after phase name matched any one in the list, or
+    /// for all phases if unspecified. This value must consist of lower-case
+    /// letters, numbers, and hyphens, start with a letter and end with a letter or
+    /// a number, and have a max length of 63 characters. In other words, it must
+    /// match the following regex: `^[a-z](\[a-z0-9-\]{0,61}\[a-z0-9\])?$`.
+    #[prost(string, repeated, tag = "7")]
+    pub phases: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Optional. Jobs to repair. Proceeds only after job name matched any one in
     /// the list, or for all jobs if unspecified or empty. The phase that includes
     /// the job must match the phase ID specified in `source_phase`. This value
@@ -3836,18 +4339,107 @@ pub struct RepairRolloutRule {
     /// Output only. Information around the state of the 'Automation' rule.
     #[prost(message, optional, tag = "6")]
     pub condition: ::core::option::Option<AutomationRuleCondition>,
+    /// Required. Defines the types of automatic repair phases for failed jobs.
+    #[prost(message, repeated, tag = "8")]
+    pub repair_phases: ::prost::alloc::vec::Vec<RepairPhaseConfig>,
+}
+/// Configuration of the repair phase.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RepairPhaseConfig {
+    /// The repair phase to perform.
+    #[prost(oneof = "repair_phase_config::RepairPhase", tags = "1, 2")]
+    pub repair_phase: ::core::option::Option<repair_phase_config::RepairPhase>,
+}
+/// Nested message and enum types in `RepairPhaseConfig`.
+pub mod repair_phase_config {
+    /// The repair phase to perform.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum RepairPhase {
+        /// Optional. Retries a failed job.
+        #[prost(message, tag = "1")]
+        Retry(super::Retry),
+        /// Optional. Rolls back a `Rollout`.
+        #[prost(message, tag = "2")]
+        Rollback(super::Rollback),
+    }
+}
+/// Retries the failed job.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct Retry {
+    /// Required. Total number of retries. Retry is skipped if set to 0; The
+    /// minimum value is 1, and the maximum value is 10.
+    #[prost(int64, tag = "1")]
+    pub attempts: i64,
+    /// Optional. How long to wait for the first retry. Default is 0, and the
+    /// maximum value is 14d.
+    #[prost(message, optional, tag = "2")]
+    pub wait: ::core::option::Option<::prost_types::Duration>,
+    /// Optional. The pattern of how wait time will be increased. Default is
+    /// linear. Backoff mode will be ignored if `wait` is 0.
+    #[prost(enumeration = "BackoffMode", tag = "3")]
+    pub backoff_mode: i32,
+}
+/// Rolls back a `Rollout`.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Rollback {
+    /// Optional. The starting phase ID for the `Rollout`. If unspecified, the
+    /// `Rollout` will start in the stable phase.
+    #[prost(string, tag = "1")]
+    pub destination_phase: ::prost::alloc::string::String,
+    /// Optional. If pending rollout exists on the target, the rollback operation
+    /// will be aborted.
+    #[prost(bool, tag = "2")]
+    pub disable_rollback_if_rollout_pending: bool,
 }
 /// `AutomationRuleCondition` contains conditions relevant to an
 /// `Automation` rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationRuleCondition {
     /// Optional. Details around targets enumerated in the rule.
     #[prost(message, optional, tag = "1")]
     pub targets_present_condition: ::core::option::Option<TargetsPresentCondition>,
+    /// Details specific to the automation rule type.
+    #[prost(oneof = "automation_rule_condition::RuleTypeCondition", tags = "2")]
+    pub rule_type_condition: ::core::option::Option<
+        automation_rule_condition::RuleTypeCondition,
+    >,
+}
+/// Nested message and enum types in `AutomationRuleCondition`.
+pub mod automation_rule_condition {
+    /// Details specific to the automation rule type.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum RuleTypeCondition {
+        /// Optional. TimedPromoteReleaseCondition contains rule conditions specific
+        /// to a an Automation with a timed promote release rule defined.
+        #[prost(message, tag = "2")]
+        TimedPromoteReleaseCondition(super::TimedPromoteReleaseCondition),
+    }
+}
+/// `TimedPromoteReleaseCondition` contains conditions specific to an Automation
+/// with a Timed Promote Release rule defined.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TimedPromoteReleaseCondition {
+    /// Output only. When the next scheduled promotion(s) will occur.
+    #[prost(message, optional, tag = "1")]
+    pub next_promotion_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// Output only. A list of targets involved in the upcoming timed promotion(s).
+    #[prost(message, repeated, tag = "2")]
+    pub targets_list: ::prost::alloc::vec::Vec<timed_promote_release_condition::Targets>,
+}
+/// Nested message and enum types in `TimedPromoteReleaseCondition`.
+pub mod timed_promote_release_condition {
+    /// The targets involved in a single timed promotion.
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Targets {
+        /// Optional. The source target ID.
+        #[prost(string, tag = "1")]
+        pub source_target_id: ::prost::alloc::string::String,
+        /// Optional. The destination target ID.
+        #[prost(string, tag = "2")]
+        pub destination_target_id: ::prost::alloc::string::String,
+    }
 }
 /// The request object for `CreateAutomation`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAutomationRequest {
     /// Required. The parent collection in which the `Automation` must be created.
@@ -3882,7 +4474,6 @@ pub struct CreateAutomationRequest {
     pub validate_only: bool,
 }
 /// The request object for `UpdateAutomation`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateAutomationRequest {
     /// Required. Field mask is used to specify the fields to be overwritten by the
@@ -3920,7 +4511,6 @@ pub struct UpdateAutomationRequest {
     pub validate_only: bool,
 }
 /// The request object for `DeleteAutomation`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteAutomationRequest {
     /// Required. The name of the `Automation` to delete. The format is
@@ -3958,7 +4548,6 @@ pub struct DeleteAutomationRequest {
     pub etag: ::prost::alloc::string::String,
 }
 /// The request object for `ListAutomations`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAutomationsRequest {
     /// Required. The parent `Delivery Pipeline`, which owns this collection of
@@ -3988,7 +4577,6 @@ pub struct ListAutomationsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListAutomations`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAutomationsResponse {
     /// The `Automation` objects.
@@ -4003,7 +4591,6 @@ pub struct ListAutomationsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetAutomation`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAutomationRequest {
     /// Required. Name of the `Automation`. Format must be
@@ -4015,7 +4602,6 @@ pub struct GetAutomationRequest {
 ///
 /// An `AutomationRun` represents an execution instance of an
 /// automation rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AutomationRun {
     /// Output only. Name of the `AutomationRun`. Format is
@@ -4042,9 +4628,9 @@ pub struct AutomationRun {
     /// time.
     #[prost(message, optional, tag = "6")]
     pub automation_snapshot: ::core::option::Option<Automation>,
-    /// Output only. The ID of the target that represents the promotion stage that
-    /// initiates the `AutomationRun`. The value of this field is the last segment
-    /// of a target name.
+    /// Output only. The ID of the source target that initiates the
+    /// `AutomationRun`. The value of this field is the last segment of a target
+    /// name.
     #[prost(string, tag = "7")]
     pub target_id: ::prost::alloc::string::String,
     /// Output only. Current state of the `AutomationRun`.
@@ -4054,6 +4640,10 @@ pub struct AutomationRun {
     /// only when an explanation is needed.
     #[prost(string, tag = "9")]
     pub state_description: ::prost::alloc::string::String,
+    /// Output only. Contains information about what policies prevented the
+    /// `AutomationRun` from proceeding.
+    #[prost(message, optional, tag = "10")]
+    pub policy_violation: ::core::option::Option<PolicyViolation>,
     /// Output only. Time the `AutomationRun` expires. An `AutomationRun` expires
     /// after 14 days from its creation date.
     #[prost(message, optional, tag = "11")]
@@ -4069,7 +4659,7 @@ pub struct AutomationRun {
     #[prost(message, optional, tag = "16")]
     pub wait_until_time: ::core::option::Option<::prost_types::Timestamp>,
     /// The operation that the `AutomationRun` will perform.
-    #[prost(oneof = "automation_run::Operation", tags = "13, 14, 17")]
+    #[prost(oneof = "automation_run::Operation", tags = "13, 14, 17, 19")]
     pub operation: ::core::option::Option<automation_run::Operation>,
 }
 /// Nested message and enum types in `AutomationRun`.
@@ -4110,13 +4700,13 @@ pub mod automation_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::Succeeded => "SUCCEEDED",
-                State::Cancelled => "CANCELLED",
-                State::Failed => "FAILED",
-                State::InProgress => "IN_PROGRESS",
-                State::Pending => "PENDING",
-                State::Aborted => "ABORTED",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Cancelled => "CANCELLED",
+                Self::Failed => "FAILED",
+                Self::InProgress => "IN_PROGRESS",
+                Self::Pending => "PENDING",
+                Self::Aborted => "ABORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4134,7 +4724,6 @@ pub mod automation_run {
         }
     }
     /// The operation that the `AutomationRun` will perform.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Operation {
         /// Output only. Promotes a release to a specified 'Target'.
@@ -4146,10 +4735,13 @@ pub mod automation_run {
         /// Output only. Repairs a failed 'Rollout'.
         #[prost(message, tag = "17")]
         RepairRolloutOperation(super::RepairRolloutOperation),
+        /// Output only. Promotes a release to a specified 'Target' as defined in a
+        /// Timed Promote Release rule.
+        #[prost(message, tag = "19")]
+        TimedPromoteReleaseOperation(super::TimedPromoteReleaseOperation),
     }
 }
 /// Contains the information of an automated promote-release operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PromoteReleaseOperation {
     /// Output only. The ID of the target that represents the promotion stage to
@@ -4168,7 +4760,6 @@ pub struct PromoteReleaseOperation {
     pub phase: ::prost::alloc::string::String,
 }
 /// Contains the information of an automated advance-rollout operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AdvanceRolloutOperation {
     /// Output only. The phase of a deployment that initiated the operation.
@@ -4185,12 +4776,14 @@ pub struct AdvanceRolloutOperation {
     pub destination_phase: ::prost::alloc::string::String,
 }
 /// Contains the information for an automated `repair rollout` operation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepairRolloutOperation {
     /// Output only. The name of the rollout that initiates the `AutomationRun`.
     #[prost(string, tag = "1")]
     pub rollout: ::prost::alloc::string::String,
+    /// Output only. The index of the current repair action in the repair sequence.
+    #[prost(int64, tag = "6")]
+    pub current_repair_phase_index: i64,
     /// Output only. Records of the repair attempts. Each repair phase may have
     /// multiple retry attempts or single rollback attempt.
     #[prost(message, repeated, tag = "3")]
@@ -4203,9 +4796,23 @@ pub struct RepairRolloutOperation {
     #[prost(string, tag = "5")]
     pub job_id: ::prost::alloc::string::String,
 }
+/// Contains the information of an automated timed promote-release operation.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TimedPromoteReleaseOperation {
+    /// Output only. The ID of the target that represents the promotion stage to
+    /// which the release will be promoted. The value of this field is the last
+    /// segment of a target name.
+    #[prost(string, tag = "1")]
+    pub target_id: ::prost::alloc::string::String,
+    /// Output only. The name of the release to be promoted.
+    #[prost(string, tag = "2")]
+    pub release: ::prost::alloc::string::String,
+    /// Output only. The starting phase of the rollout created by this operation.
+    #[prost(string, tag = "3")]
+    pub phase: ::prost::alloc::string::String,
+}
 /// RepairPhase tracks the repair attempts that have been made for
 /// each `RepairPhaseConfig` specified in the `Automation` resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RepairPhase {
     /// The `RepairPhase` type and the information for that type.
@@ -4215,7 +4822,6 @@ pub struct RepairPhase {
 /// Nested message and enum types in `RepairPhase`.
 pub mod repair_phase {
     /// The `RepairPhase` type and the information for that type.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RepairPhase {
         /// Output only. Records of the retry attempts for retry repair mode.
@@ -4228,7 +4834,6 @@ pub mod repair_phase {
 }
 /// RetryPhase contains the retry attempts and the metadata for initiating a
 /// new attempt.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetryPhase {
     /// Output only. The number of attempts that have been made.
@@ -4243,7 +4848,6 @@ pub struct RetryPhase {
     pub attempts: ::prost::alloc::vec::Vec<RetryAttempt>,
 }
 /// RetryAttempt represents an action of retrying the failed Cloud Deploy job.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RetryAttempt {
     /// Output only. The index of this retry attempt.
@@ -4260,7 +4864,6 @@ pub struct RetryAttempt {
     pub state_desc: ::prost::alloc::string::String,
 }
 /// RollbackAttempt represents an action of rolling back a Cloud Deploy 'Target'.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackAttempt {
     /// Output only. The phase to which the rollout will be rolled back to.
@@ -4275,9 +4878,11 @@ pub struct RollbackAttempt {
     /// Output only. Description of the state of the Rollback.
     #[prost(string, tag = "4")]
     pub state_desc: ::prost::alloc::string::String,
+    /// Output only. If active rollout exists on the target, abort this rollback.
+    #[prost(bool, tag = "5")]
+    pub disable_rollback_if_rollout_pending: bool,
 }
 /// The request object for `ListAutomationRuns`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAutomationRunsRequest {
     /// Required. The parent `Delivery Pipeline`, which owns this collection of
@@ -4307,7 +4912,6 @@ pub struct ListAutomationRunsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// The response object from `ListAutomationRuns`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListAutomationRunsResponse {
     /// The `AutomationRuns` objects.
@@ -4322,7 +4926,6 @@ pub struct ListAutomationRunsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// The request object for `GetAutomationRun`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAutomationRunRequest {
     /// Required. Name of the `AutomationRun`. Format must be
@@ -4331,7 +4934,6 @@ pub struct GetAutomationRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The request object used by `CancelAutomationRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelAutomationRunRequest {
     /// Required. Name of the `AutomationRun`. Format is
@@ -4340,7 +4942,6 @@ pub struct CancelAutomationRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// The response object from `CancelAutomationRun`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CancelAutomationRunResponse {}
 /// The support state of a specific Skaffold version.
@@ -4363,12 +4964,10 @@ impl SkaffoldSupportState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            SkaffoldSupportState::Unspecified => "SKAFFOLD_SUPPORT_STATE_UNSPECIFIED",
-            SkaffoldSupportState::Supported => "SKAFFOLD_SUPPORT_STATE_SUPPORTED",
-            SkaffoldSupportState::MaintenanceMode => {
-                "SKAFFOLD_SUPPORT_STATE_MAINTENANCE_MODE"
-            }
-            SkaffoldSupportState::Unsupported => "SKAFFOLD_SUPPORT_STATE_UNSUPPORTED",
+            Self::Unspecified => "SKAFFOLD_SUPPORT_STATE_UNSPECIFIED",
+            Self::Supported => "SKAFFOLD_SUPPORT_STATE_SUPPORTED",
+            Self::MaintenanceMode => "SKAFFOLD_SUPPORT_STATE_MAINTENANCE_MODE",
+            Self::Unsupported => "SKAFFOLD_SUPPORT_STATE_UNSUPPORTED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4400,9 +4999,9 @@ impl BackoffMode {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BackoffMode::Unspecified => "BACKOFF_MODE_UNSPECIFIED",
-            BackoffMode::Linear => "BACKOFF_MODE_LINEAR",
-            BackoffMode::Exponential => "BACKOFF_MODE_EXPONENTIAL",
+            Self::Unspecified => "BACKOFF_MODE_UNSPECIFIED",
+            Self::Linear => "BACKOFF_MODE_LINEAR",
+            Self::Exponential => "BACKOFF_MODE_EXPONENTIAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4441,13 +5040,13 @@ impl RepairState {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            RepairState::Unspecified => "REPAIR_STATE_UNSPECIFIED",
-            RepairState::Succeeded => "REPAIR_STATE_SUCCEEDED",
-            RepairState::Cancelled => "REPAIR_STATE_CANCELLED",
-            RepairState::Failed => "REPAIR_STATE_FAILED",
-            RepairState::InProgress => "REPAIR_STATE_IN_PROGRESS",
-            RepairState::Pending => "REPAIR_STATE_PENDING",
-            RepairState::Aborted => "REPAIR_STATE_ABORTED",
+            Self::Unspecified => "REPAIR_STATE_UNSPECIFIED",
+            Self::Succeeded => "REPAIR_STATE_SUCCEEDED",
+            Self::Cancelled => "REPAIR_STATE_CANCELLED",
+            Self::Failed => "REPAIR_STATE_FAILED",
+            Self::InProgress => "REPAIR_STATE_IN_PROGRESS",
+            Self::Pending => "REPAIR_STATE_PENDING",
+            Self::Aborted => "REPAIR_STATE_ABORTED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -4466,7 +5065,13 @@ impl RepairState {
 }
 /// Generated client implementations.
 pub mod cloud_deploy_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// CloudDeploy service creates and manages Continuous Delivery operations
@@ -4490,8 +5095,8 @@ pub mod cloud_deploy_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -4516,7 +5121,7 @@ pub mod cloud_deploy_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             CloudDeployClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -4563,8 +5168,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4594,8 +5198,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4625,8 +5228,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4656,8 +5258,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4687,8 +5288,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4718,8 +5318,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4746,8 +5345,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4774,8 +5372,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4802,8 +5399,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4830,8 +5426,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4858,8 +5453,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4886,8 +5480,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4917,8 +5510,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4948,8 +5540,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4979,8 +5570,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5010,8 +5600,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5041,8 +5630,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5066,8 +5654,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5094,8 +5681,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5125,8 +5711,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5144,6 +5729,153 @@ pub mod cloud_deploy_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Creates a new DeployPolicy in a given project and location.
+        pub async fn create_deploy_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateDeployPolicyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.deploy.v1.CloudDeploy/CreateDeployPolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.deploy.v1.CloudDeploy",
+                        "CreateDeployPolicy",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Updates the parameters of a single DeployPolicy.
+        pub async fn update_deploy_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateDeployPolicyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.deploy.v1.CloudDeploy/UpdateDeployPolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.deploy.v1.CloudDeploy",
+                        "UpdateDeployPolicy",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Deletes a single DeployPolicy.
+        pub async fn delete_deploy_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteDeployPolicyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.deploy.v1.CloudDeploy/DeleteDeployPolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.deploy.v1.CloudDeploy",
+                        "DeleteDeployPolicy",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Lists DeployPolicies in a given project and location.
+        pub async fn list_deploy_policies(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListDeployPoliciesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListDeployPoliciesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.deploy.v1.CloudDeploy/ListDeployPolicies",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.deploy.v1.CloudDeploy",
+                        "ListDeployPolicies",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Gets details of a single DeployPolicy.
+        pub async fn get_deploy_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetDeployPolicyRequest>,
+        ) -> std::result::Result<tonic::Response<super::DeployPolicy>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.deploy.v1.CloudDeploy/GetDeployPolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.deploy.v1.CloudDeploy",
+                        "GetDeployPolicy",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Approves a Rollout.
         pub async fn approve_rollout(
             &mut self,
@@ -5156,8 +5888,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5187,8 +5918,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5218,8 +5948,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5249,8 +5978,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5274,8 +6002,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5302,8 +6029,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5333,8 +6059,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5361,8 +6086,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5389,8 +6113,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5414,8 +6137,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5442,8 +6164,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5470,8 +6191,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5498,8 +6218,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5529,8 +6248,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5560,8 +6278,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5588,8 +6305,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5619,8 +6335,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5647,8 +6362,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5678,8 +6392,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5712,8 +6425,7 @@ pub mod cloud_deploy_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -5736,7 +6448,6 @@ pub mod cloud_deploy_client {
 /// Payload proto for "clouddeploy.googleapis.com/customtargettype_notification"
 /// Platform Log event that describes the failure to send a custom target type
 /// status change Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CustomTargetTypeNotificationEvent {
     /// Debug message for when a notification fails to send.
@@ -5755,7 +6466,6 @@ pub struct CustomTargetTypeNotificationEvent {
 /// Payload proto for "clouddeploy.googleapis.com/deliverypipeline_notification"
 /// Platform Log event that describes the failure to send delivery pipeline
 /// status change Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliveryPipelineNotificationEvent {
     /// Debug message for when a notification fails to send.
@@ -5771,10 +6481,156 @@ pub struct DeliveryPipelineNotificationEvent {
     #[prost(enumeration = "Type", tag = "3")]
     pub r#type: i32,
 }
+/// Payload proto for "clouddeploy.googleapis.com/deploypolicy_evaluation"
+/// Platform Log event that describes the deploy policy evaluation event.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeployPolicyEvaluationEvent {
+    /// Debug message for when a deploy policy event occurs.
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+    /// Rule type (e.g. Restrict Rollouts).
+    #[prost(string, tag = "2")]
+    pub rule_type: ::prost::alloc::string::String,
+    /// Rule id.
+    #[prost(string, tag = "3")]
+    pub rule: ::prost::alloc::string::String,
+    /// Unique identifier of the `Delivery Pipeline`.
+    #[prost(string, tag = "4")]
+    pub pipeline_uid: ::prost::alloc::string::String,
+    /// The name of the `Delivery Pipeline`.
+    #[prost(string, tag = "5")]
+    pub delivery_pipeline: ::prost::alloc::string::String,
+    /// Unique identifier of the `Target`. This is an optional field, as a `Target`
+    /// may not always be applicable to a policy.
+    #[prost(string, tag = "6")]
+    pub target_uid: ::prost::alloc::string::String,
+    /// The name of the `Target`. This is an optional field, as a `Target` may not
+    /// always be applicable to a policy.
+    #[prost(string, tag = "7")]
+    pub target: ::prost::alloc::string::String,
+    /// What invoked the action (e.g. a user or automation).
+    #[prost(enumeration = "deploy_policy::Invoker", tag = "8")]
+    pub invoker: i32,
+    /// The name of the `DeployPolicy`.
+    #[prost(string, tag = "9")]
+    pub deploy_policy: ::prost::alloc::string::String,
+    /// Unique identifier of the `DeployPolicy`.
+    #[prost(string, tag = "10")]
+    pub deploy_policy_uid: ::prost::alloc::string::String,
+    /// Whether the request is allowed. Allowed is set as true if:
+    /// (1) the request complies with the policy; or
+    /// (2) the request doesn't comply with the policy but the policy was
+    /// overridden; or
+    /// (3) the request doesn't comply with the policy but the policy was suspended
+    #[prost(bool, tag = "11")]
+    pub allowed: bool,
+    /// The policy verdict of the request.
+    #[prost(enumeration = "deploy_policy_evaluation_event::PolicyVerdict", tag = "12")]
+    pub verdict: i32,
+    /// Things that could have overridden the policy verdict. Overrides together
+    /// with verdict decide whether the request is allowed.
+    #[prost(
+        enumeration = "deploy_policy_evaluation_event::PolicyVerdictOverride",
+        repeated,
+        tag = "13"
+    )]
+    pub overrides: ::prost::alloc::vec::Vec<i32>,
+}
+/// Nested message and enum types in `DeployPolicyEvaluationEvent`.
+pub mod deploy_policy_evaluation_event {
+    /// The policy verdict of the request.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum PolicyVerdict {
+        /// This should never happen.
+        Unspecified = 0,
+        /// Allowed by policy. This enum value is not currently used but may be used
+        /// in the future. Currently logs are only generated when a request is denied
+        /// by policy.
+        AllowedByPolicy = 1,
+        /// Denied by policy.
+        DeniedByPolicy = 2,
+    }
+    impl PolicyVerdict {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "POLICY_VERDICT_UNSPECIFIED",
+                Self::AllowedByPolicy => "ALLOWED_BY_POLICY",
+                Self::DeniedByPolicy => "DENIED_BY_POLICY",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "POLICY_VERDICT_UNSPECIFIED" => Some(Self::Unspecified),
+                "ALLOWED_BY_POLICY" => Some(Self::AllowedByPolicy),
+                "DENIED_BY_POLICY" => Some(Self::DeniedByPolicy),
+                _ => None,
+            }
+        }
+    }
+    /// Things that could have overridden the policy verdict. When overrides are
+    /// used, the request will be allowed even if it is DENIED_BY_POLICY.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum PolicyVerdictOverride {
+        /// This should never happen.
+        Unspecified = 0,
+        /// The policy was overridden.
+        PolicyOverridden = 1,
+        /// The policy was suspended.
+        PolicySuspended = 2,
+    }
+    impl PolicyVerdictOverride {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "POLICY_VERDICT_OVERRIDE_UNSPECIFIED",
+                Self::PolicyOverridden => "POLICY_OVERRIDDEN",
+                Self::PolicySuspended => "POLICY_SUSPENDED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "POLICY_VERDICT_OVERRIDE_UNSPECIFIED" => Some(Self::Unspecified),
+                "POLICY_OVERRIDDEN" => Some(Self::PolicyOverridden),
+                "POLICY_SUSPENDED" => Some(Self::PolicySuspended),
+                _ => None,
+            }
+        }
+    }
+}
 /// Payload proto for "clouddeploy.googleapis.com/deploypolicy_notification".
 /// Platform Log event that describes the failure to send a pub/sub notification
 /// when there is a DeployPolicy status change.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeployPolicyNotificationEvent {
     /// Debug message for when a deploy policy fails to send a pub/sub
@@ -5794,7 +6650,6 @@ pub struct DeployPolicyNotificationEvent {
 /// Payload proto for "clouddeploy.googleapis.com/jobrun_notification"
 /// Platform Log event that describes the failure to send JobRun resource update
 /// Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct JobRunNotificationEvent {
     /// Debug message for when a notification fails to send.
@@ -5828,7 +6683,6 @@ pub struct JobRunNotificationEvent {
 /// Payload proto for "clouddeploy.googleapis.com/release_notification"
 /// Platform Log event that describes the failure to send release status change
 /// Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReleaseNotificationEvent {
     /// Debug message for when a notification fails to send.
@@ -5849,7 +6703,6 @@ pub struct ReleaseNotificationEvent {
 }
 /// Payload proto for "clouddeploy.googleapis.com/release_render"
 /// Platform Log event that describes the render status change.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReleaseRenderEvent {
     /// Debug message for when a render transition occurs. Provides further
@@ -5874,7 +6727,6 @@ pub struct ReleaseRenderEvent {
 /// Payload proto for "clouddeploy.googleapis.com/rollout_notification"
 /// Platform Log event that describes the failure to send rollout status change
 /// Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RolloutNotificationEvent {
     /// Debug message for when a notification fails to send.
@@ -5904,7 +6756,6 @@ pub struct RolloutNotificationEvent {
 }
 /// Payload proto for "clouddeploy.googleapis.com/rollout_update"
 /// Platform Log event that describes the rollout update event.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RolloutUpdateEvent {
     /// Debug message for when a rollout update event occurs.
@@ -5986,20 +6837,20 @@ pub mod rollout_update_event {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RolloutUpdateType::Unspecified => "ROLLOUT_UPDATE_TYPE_UNSPECIFIED",
-                RolloutUpdateType::Pending => "PENDING",
-                RolloutUpdateType::PendingRelease => "PENDING_RELEASE",
-                RolloutUpdateType::InProgress => "IN_PROGRESS",
-                RolloutUpdateType::Cancelling => "CANCELLING",
-                RolloutUpdateType::Cancelled => "CANCELLED",
-                RolloutUpdateType::Halted => "HALTED",
-                RolloutUpdateType::Succeeded => "SUCCEEDED",
-                RolloutUpdateType::Failed => "FAILED",
-                RolloutUpdateType::ApprovalRequired => "APPROVAL_REQUIRED",
-                RolloutUpdateType::Approved => "APPROVED",
-                RolloutUpdateType::Rejected => "REJECTED",
-                RolloutUpdateType::AdvanceRequired => "ADVANCE_REQUIRED",
-                RolloutUpdateType::Advanced => "ADVANCED",
+                Self::Unspecified => "ROLLOUT_UPDATE_TYPE_UNSPECIFIED",
+                Self::Pending => "PENDING",
+                Self::PendingRelease => "PENDING_RELEASE",
+                Self::InProgress => "IN_PROGRESS",
+                Self::Cancelling => "CANCELLING",
+                Self::Cancelled => "CANCELLED",
+                Self::Halted => "HALTED",
+                Self::Succeeded => "SUCCEEDED",
+                Self::Failed => "FAILED",
+                Self::ApprovalRequired => "APPROVAL_REQUIRED",
+                Self::Approved => "APPROVED",
+                Self::Rejected => "REJECTED",
+                Self::AdvanceRequired => "ADVANCE_REQUIRED",
+                Self::Advanced => "ADVANCED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -6027,7 +6878,6 @@ pub mod rollout_update_event {
 /// Payload proto for "clouddeploy.googleapis.com/target_notification"
 /// Platform Log event that describes the failure to send target status change
 /// Pub/Sub notification.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TargetNotificationEvent {
     /// Debug message for when a notification fails to send.

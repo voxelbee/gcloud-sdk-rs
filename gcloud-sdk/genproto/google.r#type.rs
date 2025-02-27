@@ -4,7 +4,6 @@
 /// specified otherwise, this must conform to the
 /// <a href="<http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84>
 /// standard</a>. Values must be within normalized ranges.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LatLng {
     /// The latitude in degrees. It must be in the range \[-90.0, +90.0\].
@@ -27,7 +26,6 @@ pub struct LatLng {
 ///
 /// Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and
 /// `google.protobuf.Timestamp`.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Date {
     /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
@@ -68,7 +66,6 @@ pub struct Date {
 ///
 /// This type is more flexible than some applications may want. Make sure to
 /// document and validate your application's limitations.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateTime {
     /// Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
@@ -113,7 +110,6 @@ pub mod date_time {
     /// in the future (for example, a country modifies their DST start/end dates,
     /// and future DateTimes in the affected range had already been stored).
     /// If omitted, the DateTime is considered to be in local time.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TimeOffset {
         /// UTC offset. Must be whole seconds, between -18 hours and +18 hours.
@@ -128,7 +124,6 @@ pub mod date_time {
 }
 /// Represents a time zone from the
 /// [IANA Time Zone Database](<https://www.iana.org/time-zones>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TimeZone {
     /// IANA Time Zone Database time zone, e.g. "America/New_York".
@@ -138,24 +133,78 @@ pub struct TimeZone {
     #[prost(string, tag = "2")]
     pub version: ::prost::alloc::string::String,
 }
-/// Represents an amount of money with its currency type.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Money {
-    /// The three-letter currency code defined in ISO 4217.
-    #[prost(string, tag = "1")]
-    pub currency_code: ::prost::alloc::string::String,
-    /// The whole units of the amount.
-    /// For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
-    #[prost(int64, tag = "2")]
-    pub units: i64,
-    /// Number of nano (10^-9) units of the amount.
-    /// The value must be between -999,999,999 and +999,999,999 inclusive.
-    /// If `units` is positive, `nanos` must be positive or zero.
-    /// If `units` is zero, `nanos` can be positive, zero, or negative.
-    /// If `units` is negative, `nanos` must be negative or zero.
-    /// For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+/// Represents a day of the week.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum DayOfWeek {
+    /// The day of the week is unspecified.
+    Unspecified = 0,
+    /// Monday
+    Monday = 1,
+    /// Tuesday
+    Tuesday = 2,
+    /// Wednesday
+    Wednesday = 3,
+    /// Thursday
+    Thursday = 4,
+    /// Friday
+    Friday = 5,
+    /// Saturday
+    Saturday = 6,
+    /// Sunday
+    Sunday = 7,
+}
+impl DayOfWeek {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "DAY_OF_WEEK_UNSPECIFIED",
+            Self::Monday => "MONDAY",
+            Self::Tuesday => "TUESDAY",
+            Self::Wednesday => "WEDNESDAY",
+            Self::Thursday => "THURSDAY",
+            Self::Friday => "FRIDAY",
+            Self::Saturday => "SATURDAY",
+            Self::Sunday => "SUNDAY",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "DAY_OF_WEEK_UNSPECIFIED" => Some(Self::Unspecified),
+            "MONDAY" => Some(Self::Monday),
+            "TUESDAY" => Some(Self::Tuesday),
+            "WEDNESDAY" => Some(Self::Wednesday),
+            "THURSDAY" => Some(Self::Thursday),
+            "FRIDAY" => Some(Self::Friday),
+            "SATURDAY" => Some(Self::Saturday),
+            "SUNDAY" => Some(Self::Sunday),
+            _ => None,
+        }
+    }
+}
+/// Represents a time of day. The date and time zone are either not significant
+/// or are specified elsewhere. An API may choose to allow leap seconds. Related
+/// types are [google.type.Date][google.type.Date] and
+/// `google.protobuf.Timestamp`.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TimeOfDay {
+    /// Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
+    /// to allow the value "24:00:00" for scenarios like business closing time.
+    #[prost(int32, tag = "1")]
+    pub hours: i32,
+    /// Minutes of hour of day. Must be from 0 to 59.
+    #[prost(int32, tag = "2")]
+    pub minutes: i32,
+    /// Seconds of minutes of the time. Must normally be from 0 to 59. An API may
+    /// allow the value 60 if it allows leap-seconds.
     #[prost(int32, tag = "3")]
+    pub seconds: i32,
+    /// Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    #[prost(int32, tag = "4")]
     pub nanos: i32,
 }
 /// Represents a color in the RGBA color space. This representation is designed
@@ -282,7 +331,6 @@ pub struct Money {
 ///      };
 ///
 ///      // ...
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Color {
     /// The amount of red in the color as a value in the interval \[0, 1\].
@@ -339,7 +387,6 @@ pub struct Color {
 /// The exact variables and functions that may be referenced within an expression
 /// are determined by the service that evaluates it. See the service
 /// documentation for additional information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Expr {
     /// Textual representation of an expression in Common Expression Language
@@ -360,13 +407,31 @@ pub struct Expr {
     #[prost(string, tag = "4")]
     pub location: ::prost::alloc::string::String,
 }
+/// Represents an amount of money with its currency type.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Money {
+    /// The three-letter currency code defined in ISO 4217.
+    #[prost(string, tag = "1")]
+    pub currency_code: ::prost::alloc::string::String,
+    /// The whole units of the amount.
+    /// For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+    #[prost(int64, tag = "2")]
+    pub units: i64,
+    /// Number of nano (10^-9) units of the amount.
+    /// The value must be between -999,999,999 and +999,999,999 inclusive.
+    /// If `units` is positive, `nanos` must be positive or zero.
+    /// If `units` is zero, `nanos` can be positive, zero, or negative.
+    /// If `units` is negative, `nanos` must be negative or zero.
+    /// For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
+    #[prost(int32, tag = "3")]
+    pub nanos: i32,
+}
 /// Represents a time interval, encoded as a Timestamp start (inclusive) and a
 /// Timestamp end (exclusive).
 ///
 /// The start must be less than or equal to the end.
 /// When the start equals the end, the interval is empty (matches no time).
 /// When both start and end are unspecified, the interval matches any time.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Interval {
     /// Optional. Inclusive start of the interval.
@@ -382,80 +447,78 @@ pub struct Interval {
     #[prost(message, optional, tag = "2")]
     pub end_time: ::core::option::Option<::prost_types::Timestamp>,
 }
-/// Represents a day of the week.
+/// Represents a month in the Gregorian calendar.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum DayOfWeek {
-    /// The day of the week is unspecified.
+pub enum Month {
+    /// The unspecified month.
     Unspecified = 0,
-    /// Monday
-    Monday = 1,
-    /// Tuesday
-    Tuesday = 2,
-    /// Wednesday
-    Wednesday = 3,
-    /// Thursday
-    Thursday = 4,
-    /// Friday
-    Friday = 5,
-    /// Saturday
-    Saturday = 6,
-    /// Sunday
-    Sunday = 7,
+    /// The month of January.
+    January = 1,
+    /// The month of February.
+    February = 2,
+    /// The month of March.
+    March = 3,
+    /// The month of April.
+    April = 4,
+    /// The month of May.
+    May = 5,
+    /// The month of June.
+    June = 6,
+    /// The month of July.
+    July = 7,
+    /// The month of August.
+    August = 8,
+    /// The month of September.
+    September = 9,
+    /// The month of October.
+    October = 10,
+    /// The month of November.
+    November = 11,
+    /// The month of December.
+    December = 12,
 }
-impl DayOfWeek {
+impl Month {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            DayOfWeek::Unspecified => "DAY_OF_WEEK_UNSPECIFIED",
-            DayOfWeek::Monday => "MONDAY",
-            DayOfWeek::Tuesday => "TUESDAY",
-            DayOfWeek::Wednesday => "WEDNESDAY",
-            DayOfWeek::Thursday => "THURSDAY",
-            DayOfWeek::Friday => "FRIDAY",
-            DayOfWeek::Saturday => "SATURDAY",
-            DayOfWeek::Sunday => "SUNDAY",
+            Self::Unspecified => "MONTH_UNSPECIFIED",
+            Self::January => "JANUARY",
+            Self::February => "FEBRUARY",
+            Self::March => "MARCH",
+            Self::April => "APRIL",
+            Self::May => "MAY",
+            Self::June => "JUNE",
+            Self::July => "JULY",
+            Self::August => "AUGUST",
+            Self::September => "SEPTEMBER",
+            Self::October => "OCTOBER",
+            Self::November => "NOVEMBER",
+            Self::December => "DECEMBER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "DAY_OF_WEEK_UNSPECIFIED" => Some(Self::Unspecified),
-            "MONDAY" => Some(Self::Monday),
-            "TUESDAY" => Some(Self::Tuesday),
-            "WEDNESDAY" => Some(Self::Wednesday),
-            "THURSDAY" => Some(Self::Thursday),
-            "FRIDAY" => Some(Self::Friday),
-            "SATURDAY" => Some(Self::Saturday),
-            "SUNDAY" => Some(Self::Sunday),
+            "MONTH_UNSPECIFIED" => Some(Self::Unspecified),
+            "JANUARY" => Some(Self::January),
+            "FEBRUARY" => Some(Self::February),
+            "MARCH" => Some(Self::March),
+            "APRIL" => Some(Self::April),
+            "MAY" => Some(Self::May),
+            "JUNE" => Some(Self::June),
+            "JULY" => Some(Self::July),
+            "AUGUST" => Some(Self::August),
+            "SEPTEMBER" => Some(Self::September),
+            "OCTOBER" => Some(Self::October),
+            "NOVEMBER" => Some(Self::November),
+            "DECEMBER" => Some(Self::December),
             _ => None,
         }
     }
-}
-/// Represents a time of day. The date and time zone are either not significant
-/// or are specified elsewhere. An API may choose to allow leap seconds. Related
-/// types are [google.type.Date][google.type.Date] and
-/// `google.protobuf.Timestamp`.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct TimeOfDay {
-    /// Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
-    /// to allow the value "24:00:00" for scenarios like business closing time.
-    #[prost(int32, tag = "1")]
-    pub hours: i32,
-    /// Minutes of hour of day. Must be from 0 to 59.
-    #[prost(int32, tag = "2")]
-    pub minutes: i32,
-    /// Seconds of minutes of the time. Must normally be from 0 to 59. An API may
-    /// allow the value 60 if it allows leap-seconds.
-    #[prost(int32, tag = "3")]
-    pub seconds: i32,
-    /// Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
-    #[prost(int32, tag = "4")]
-    pub nanos: i32,
 }
 /// Represents a postal address, e.g. for postal delivery or payments addresses.
 /// Given a postal address, a postal service can deliver items to a premise, P.O.
@@ -474,7 +537,6 @@ pub struct TimeOfDay {
 ///
 /// For more guidance on how to use this schema, please see:
 /// <https://support.google.com/business/answer/6397478>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PostalAddress {
     /// The schema revision of the `PostalAddress`. This must be set to 0, which is
@@ -576,7 +638,6 @@ pub struct PostalAddress {
 /// \[BigDecimal\]:
 /// <https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html>
 /// \[decimal.Decimal\]: <https://docs.python.org/3/library/decimal.html>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Decimal {
     /// The decimal value, as a string.
@@ -643,7 +704,6 @@ pub struct Decimal {
     pub value: ::prost::alloc::string::String,
 }
 /// Localized variant of a text in a particular language.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedText {
     /// Localized string in the language corresponding to `language_code' below.
@@ -690,14 +750,14 @@ impl CalendarPeriod {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            CalendarPeriod::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
-            CalendarPeriod::Day => "DAY",
-            CalendarPeriod::Week => "WEEK",
-            CalendarPeriod::Fortnight => "FORTNIGHT",
-            CalendarPeriod::Month => "MONTH",
-            CalendarPeriod::Quarter => "QUARTER",
-            CalendarPeriod::Half => "HALF",
-            CalendarPeriod::Year => "YEAR",
+            Self::Unspecified => "CALENDAR_PERIOD_UNSPECIFIED",
+            Self::Day => "DAY",
+            Self::Week => "WEEK",
+            Self::Fortnight => "FORTNIGHT",
+            Self::Month => "MONTH",
+            Self::Quarter => "QUARTER",
+            Self::Half => "HALF",
+            Self::Year => "YEAR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -741,7 +801,6 @@ impl CalendarPeriod {
 ///
 ///   Reference(s):
 ///    - <https://github.com/google/libphonenumber>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PhoneNumber {
     /// The phone number's extension. The extension is not standardized in ITU
@@ -772,7 +831,6 @@ pub mod phone_number {
     /// dialable, which means the same short code can exist in different regions,
     /// with different usage and pricing, even if those regions share the same
     /// country calling code (e.g. US and CA).
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ShortCode {
         /// Required. The BCP-47 region code of the location where calls to this
@@ -790,7 +848,6 @@ pub mod phone_number {
     /// Required.  Either a regular number, or a short code.  New fields may be
     /// added to the oneof below in the future, so clients should ignore phone
     /// numbers for which none of the fields they coded against are set.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
         /// The phone number, represented as a leading plus sign ('+'), followed by a
@@ -819,7 +876,6 @@ pub mod phone_number {
     }
 }
 /// Represents a fraction in terms of a numerator divided by a denominator.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Fraction {
     /// The numerator in the fraction, e.g. 2 in 2/3.
@@ -829,79 +885,6 @@ pub struct Fraction {
     /// positive.
     #[prost(int64, tag = "2")]
     pub denominator: i64,
-}
-/// Represents a month in the Gregorian calendar.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum Month {
-    /// The unspecified month.
-    Unspecified = 0,
-    /// The month of January.
-    January = 1,
-    /// The month of February.
-    February = 2,
-    /// The month of March.
-    March = 3,
-    /// The month of April.
-    April = 4,
-    /// The month of May.
-    May = 5,
-    /// The month of June.
-    June = 6,
-    /// The month of July.
-    July = 7,
-    /// The month of August.
-    August = 8,
-    /// The month of September.
-    September = 9,
-    /// The month of October.
-    October = 10,
-    /// The month of November.
-    November = 11,
-    /// The month of December.
-    December = 12,
-}
-impl Month {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Month::Unspecified => "MONTH_UNSPECIFIED",
-            Month::January => "JANUARY",
-            Month::February => "FEBRUARY",
-            Month::March => "MARCH",
-            Month::April => "APRIL",
-            Month::May => "MAY",
-            Month::June => "JUNE",
-            Month::July => "JULY",
-            Month::August => "AUGUST",
-            Month::September => "SEPTEMBER",
-            Month::October => "OCTOBER",
-            Month::November => "NOVEMBER",
-            Month::December => "DECEMBER",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "MONTH_UNSPECIFIED" => Some(Self::Unspecified),
-            "JANUARY" => Some(Self::January),
-            "FEBRUARY" => Some(Self::February),
-            "MARCH" => Some(Self::March),
-            "APRIL" => Some(Self::April),
-            "MAY" => Some(Self::May),
-            "JUNE" => Some(Self::June),
-            "JULY" => Some(Self::July),
-            "AUGUST" => Some(Self::August),
-            "SEPTEMBER" => Some(Self::September),
-            "OCTOBER" => Some(Self::October),
-            "NOVEMBER" => Some(Self::November),
-            "DECEMBER" => Some(Self::December),
-            _ => None,
-        }
-    }
 }
 /// A quaternion is defined as the quotient of two directed lines in a
 /// three-dimensional space or equivalently as the quotient of two Euclidean
@@ -959,7 +942,6 @@ impl Month {
 /// kept positive, which can be achieved by changing all the signs when `w` is
 /// negative.
 ///
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// The x component.

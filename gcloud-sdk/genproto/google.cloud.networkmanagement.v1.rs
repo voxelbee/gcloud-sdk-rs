@@ -10,7 +10,6 @@
 ///    |---------------------Trace----------------------|
 ///    Step1(State) Step2(State) ---  StepN(State(final))
 /// ```
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Trace {
     /// Derived from the source and destination endpoints definition specified by
@@ -35,7 +34,6 @@ pub struct Trace {
 }
 /// A simulated forwarding path is composed of multiple steps.
 /// Each step has a well-defined state and an associated configuration.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Step {
     /// A description of the step. Usually this is a summary of the state.
@@ -57,7 +55,7 @@ pub struct Step {
     /// final state the configuration is cleared.
     #[prost(
         oneof = "step::StepInfo",
-        tags = "5, 6, 7, 8, 24, 9, 10, 11, 21, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 25, 26, 27, 28"
+        tags = "5, 6, 7, 8, 24, 9, 10, 11, 21, 12, 13, 14, 15, 16, 17, 18, 19, 30, 31, 20, 22, 23, 25, 26, 27, 28, 29"
     )]
     pub step_info: ::core::option::Option<step::StepInfo>,
 }
@@ -100,6 +98,12 @@ pub mod step {
         /// Initial state: packet originating from a Cloud SQL instance.
         /// A CloudSQLInstanceInfo is populated with starting instance information.
         StartFromCloudSqlInstance = 22,
+        /// Initial state: packet originating from a Redis instance.
+        /// A RedisInstanceInfo is populated with starting instance information.
+        StartFromRedisInstance = 32,
+        /// Initial state: packet originating from a Redis Cluster.
+        /// A RedisClusterInfo is populated with starting Cluster information.
+        StartFromRedisCluster = 33,
         /// Initial state: packet originating from a Cloud Function.
         /// A CloudFunctionInfo is populated with starting function information.
         StartFromCloudFunction = 23,
@@ -116,6 +120,10 @@ pub mod step {
         /// Initial state: packet originating from a published service that uses
         /// Private Service Connect. Used only for return traces.
         StartFromPscPublishedService = 30,
+        /// Initial state: packet originating from a serverless network endpoint
+        /// group backend. Used only for return traces.
+        /// The serverless_neg information is populated.
+        StartFromServerlessNeg = 31,
         /// Config checking state: verify ingress firewall rule.
         ApplyIngressFirewallRule = 4,
         /// Config checking state: verify egress firewall rule.
@@ -166,37 +174,40 @@ pub mod step {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                State::Unspecified => "STATE_UNSPECIFIED",
-                State::StartFromInstance => "START_FROM_INSTANCE",
-                State::StartFromInternet => "START_FROM_INTERNET",
-                State::StartFromGoogleService => "START_FROM_GOOGLE_SERVICE",
-                State::StartFromPrivateNetwork => "START_FROM_PRIVATE_NETWORK",
-                State::StartFromGkeMaster => "START_FROM_GKE_MASTER",
-                State::StartFromCloudSqlInstance => "START_FROM_CLOUD_SQL_INSTANCE",
-                State::StartFromCloudFunction => "START_FROM_CLOUD_FUNCTION",
-                State::StartFromAppEngineVersion => "START_FROM_APP_ENGINE_VERSION",
-                State::StartFromCloudRunRevision => "START_FROM_CLOUD_RUN_REVISION",
-                State::StartFromStorageBucket => "START_FROM_STORAGE_BUCKET",
-                State::StartFromPscPublishedService => "START_FROM_PSC_PUBLISHED_SERVICE",
-                State::ApplyIngressFirewallRule => "APPLY_INGRESS_FIREWALL_RULE",
-                State::ApplyEgressFirewallRule => "APPLY_EGRESS_FIREWALL_RULE",
-                State::ApplyRoute => "APPLY_ROUTE",
-                State::ApplyForwardingRule => "APPLY_FORWARDING_RULE",
-                State::AnalyzeLoadBalancerBackend => "ANALYZE_LOAD_BALANCER_BACKEND",
-                State::SpoofingApproved => "SPOOFING_APPROVED",
-                State::ArriveAtInstance => "ARRIVE_AT_INSTANCE",
-                State::ArriveAtInternalLoadBalancer => "ARRIVE_AT_INTERNAL_LOAD_BALANCER",
-                State::ArriveAtExternalLoadBalancer => "ARRIVE_AT_EXTERNAL_LOAD_BALANCER",
-                State::ArriveAtVpnGateway => "ARRIVE_AT_VPN_GATEWAY",
-                State::ArriveAtVpnTunnel => "ARRIVE_AT_VPN_TUNNEL",
-                State::ArriveAtVpcConnector => "ARRIVE_AT_VPC_CONNECTOR",
-                State::Nat => "NAT",
-                State::ProxyConnection => "PROXY_CONNECTION",
-                State::Deliver => "DELIVER",
-                State::Drop => "DROP",
-                State::Forward => "FORWARD",
-                State::Abort => "ABORT",
-                State::ViewerPermissionMissing => "VIEWER_PERMISSION_MISSING",
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::StartFromInstance => "START_FROM_INSTANCE",
+                Self::StartFromInternet => "START_FROM_INTERNET",
+                Self::StartFromGoogleService => "START_FROM_GOOGLE_SERVICE",
+                Self::StartFromPrivateNetwork => "START_FROM_PRIVATE_NETWORK",
+                Self::StartFromGkeMaster => "START_FROM_GKE_MASTER",
+                Self::StartFromCloudSqlInstance => "START_FROM_CLOUD_SQL_INSTANCE",
+                Self::StartFromRedisInstance => "START_FROM_REDIS_INSTANCE",
+                Self::StartFromRedisCluster => "START_FROM_REDIS_CLUSTER",
+                Self::StartFromCloudFunction => "START_FROM_CLOUD_FUNCTION",
+                Self::StartFromAppEngineVersion => "START_FROM_APP_ENGINE_VERSION",
+                Self::StartFromCloudRunRevision => "START_FROM_CLOUD_RUN_REVISION",
+                Self::StartFromStorageBucket => "START_FROM_STORAGE_BUCKET",
+                Self::StartFromPscPublishedService => "START_FROM_PSC_PUBLISHED_SERVICE",
+                Self::StartFromServerlessNeg => "START_FROM_SERVERLESS_NEG",
+                Self::ApplyIngressFirewallRule => "APPLY_INGRESS_FIREWALL_RULE",
+                Self::ApplyEgressFirewallRule => "APPLY_EGRESS_FIREWALL_RULE",
+                Self::ApplyRoute => "APPLY_ROUTE",
+                Self::ApplyForwardingRule => "APPLY_FORWARDING_RULE",
+                Self::AnalyzeLoadBalancerBackend => "ANALYZE_LOAD_BALANCER_BACKEND",
+                Self::SpoofingApproved => "SPOOFING_APPROVED",
+                Self::ArriveAtInstance => "ARRIVE_AT_INSTANCE",
+                Self::ArriveAtInternalLoadBalancer => "ARRIVE_AT_INTERNAL_LOAD_BALANCER",
+                Self::ArriveAtExternalLoadBalancer => "ARRIVE_AT_EXTERNAL_LOAD_BALANCER",
+                Self::ArriveAtVpnGateway => "ARRIVE_AT_VPN_GATEWAY",
+                Self::ArriveAtVpnTunnel => "ARRIVE_AT_VPN_TUNNEL",
+                Self::ArriveAtVpcConnector => "ARRIVE_AT_VPC_CONNECTOR",
+                Self::Nat => "NAT",
+                Self::ProxyConnection => "PROXY_CONNECTION",
+                Self::Deliver => "DELIVER",
+                Self::Drop => "DROP",
+                Self::Forward => "FORWARD",
+                Self::Abort => "ABORT",
+                Self::ViewerPermissionMissing => "VIEWER_PERMISSION_MISSING",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -209,6 +220,8 @@ pub mod step {
                 "START_FROM_PRIVATE_NETWORK" => Some(Self::StartFromPrivateNetwork),
                 "START_FROM_GKE_MASTER" => Some(Self::StartFromGkeMaster),
                 "START_FROM_CLOUD_SQL_INSTANCE" => Some(Self::StartFromCloudSqlInstance),
+                "START_FROM_REDIS_INSTANCE" => Some(Self::StartFromRedisInstance),
+                "START_FROM_REDIS_CLUSTER" => Some(Self::StartFromRedisCluster),
                 "START_FROM_CLOUD_FUNCTION" => Some(Self::StartFromCloudFunction),
                 "START_FROM_APP_ENGINE_VERSION" => Some(Self::StartFromAppEngineVersion),
                 "START_FROM_CLOUD_RUN_REVISION" => Some(Self::StartFromCloudRunRevision),
@@ -216,6 +229,7 @@ pub mod step {
                 "START_FROM_PSC_PUBLISHED_SERVICE" => {
                     Some(Self::StartFromPscPublishedService)
                 }
+                "START_FROM_SERVERLESS_NEG" => Some(Self::StartFromServerlessNeg),
                 "APPLY_INGRESS_FIREWALL_RULE" => Some(Self::ApplyIngressFirewallRule),
                 "APPLY_EGRESS_FIREWALL_RULE" => Some(Self::ApplyEgressFirewallRule),
                 "APPLY_ROUTE" => Some(Self::ApplyRoute),
@@ -248,7 +262,6 @@ pub mod step {
     /// has no permission to view the configuration in this step, for non-final
     /// states a special state is populated (VIEWER_PERMISSION_MISSING), and for
     /// final state the configuration is cleared.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum StepInfo {
         /// Display information of a Compute Engine instance.
@@ -306,6 +319,12 @@ pub mod step {
         /// Display information of a Cloud SQL instance.
         #[prost(message, tag = "19")]
         CloudSqlInstance(super::CloudSqlInstanceInfo),
+        /// Display information of a Redis Instance.
+        #[prost(message, tag = "30")]
+        RedisInstance(super::RedisInstanceInfo),
+        /// Display information of a Redis Cluster.
+        #[prost(message, tag = "31")]
+        RedisCluster(super::RedisClusterInfo),
         /// Display information of a Cloud Function.
         #[prost(message, tag = "20")]
         CloudFunction(super::CloudFunctionInfo),
@@ -327,10 +346,13 @@ pub mod step {
         /// Display information of a Storage Bucket. Used only for return traces.
         #[prost(message, tag = "28")]
         StorageBucket(super::StorageBucketInfo),
+        /// Display information of a Serverless network endpoint group backend. Used
+        /// only for return traces.
+        #[prost(message, tag = "29")]
+        ServerlessNeg(super::ServerlessNegInfo),
     }
 }
 /// For display only. Metadata associated with a Compute Engine instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InstanceInfo {
     /// Name of a Compute Engine instance.
@@ -358,9 +380,12 @@ pub struct InstanceInfo {
     #[deprecated]
     #[prost(string, tag = "8")]
     pub service_account: ::prost::alloc::string::String,
+    /// URI of the PSC network attachment the NIC is attached to (if relevant).
+    #[prost(string, tag = "9")]
+    pub psc_network_attachment_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine network.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// Next ID: 7
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NetworkInfo {
     /// Name of a Compute Engine network.
@@ -369,21 +394,26 @@ pub struct NetworkInfo {
     /// URI of a Compute Engine network.
     #[prost(string, tag = "2")]
     pub uri: ::prost::alloc::string::String,
-    /// The IP range that matches the test.
+    /// URI of the subnet matching the source IP address of the test.
+    #[prost(string, tag = "5")]
+    pub matched_subnet_uri: ::prost::alloc::string::String,
+    /// The IP range of the subnet matching the source IP address of the test.
     #[prost(string, tag = "4")]
     pub matched_ip_range: ::prost::alloc::string::String,
+    /// The region of the subnet matching the source IP address of the test.
+    #[prost(string, tag = "6")]
+    pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a VPC firewall rule, an implied
-/// VPC firewall rule, or a hierarchical firewall policy rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
+/// VPC firewall rule, or a firewall policy rule.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FirewallInfo {
-    /// The display name of the VPC firewall rule. This field is not applicable
-    /// to hierarchical firewall policy rules.
+    /// The display name of the firewall rule. This field might be empty for
+    /// firewall policy rules.
     #[prost(string, tag = "1")]
     pub display_name: ::prost::alloc::string::String,
-    /// The URI of the VPC firewall rule. This field is not applicable to
-    /// implied firewall rules or hierarchical firewall policy rules.
+    /// The URI of the firewall rule. This field is not applicable to implied
+    /// VPC firewall rules.
     #[prost(string, tag = "2")]
     pub uri: ::prost::alloc::string::String,
     /// Possible values: INGRESS, EGRESS
@@ -400,7 +430,7 @@ pub struct FirewallInfo {
     #[prost(string, tag = "6")]
     pub network_uri: ::prost::alloc::string::String,
     /// The target tags defined by the VPC firewall rule. This field is not
-    /// applicable to hierarchical firewall policy rules.
+    /// applicable to firewall policy rules.
     #[prost(string, repeated, tag = "7")]
     pub target_tags: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The target service accounts specified by the firewall rule.
@@ -408,10 +438,16 @@ pub struct FirewallInfo {
     pub target_service_accounts: ::prost::alloc::vec::Vec<
         ::prost::alloc::string::String,
     >,
-    /// The hierarchical firewall policy that this rule is associated with.
-    /// This field is not applicable to VPC firewall rules.
+    /// The name of the firewall policy that this rule is associated with.
+    /// This field is not applicable to VPC firewall rules and implied VPC firewall
+    /// rules.
     #[prost(string, tag = "9")]
     pub policy: ::prost::alloc::string::String,
+    /// The URI of the firewall policy that this rule is associated with.
+    /// This field is not applicable to VPC firewall rules and implied VPC firewall
+    /// rules.
+    #[prost(string, tag = "11")]
+    pub policy_uri: ::prost::alloc::string::String,
     /// The firewall rule's type.
     #[prost(enumeration = "firewall_info::FirewallRuleType", tag = "10")]
     pub firewall_rule_type: i32,
@@ -477,25 +513,21 @@ pub mod firewall_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                FirewallRuleType::Unspecified => "FIREWALL_RULE_TYPE_UNSPECIFIED",
-                FirewallRuleType::HierarchicalFirewallPolicyRule => {
+                Self::Unspecified => "FIREWALL_RULE_TYPE_UNSPECIFIED",
+                Self::HierarchicalFirewallPolicyRule => {
                     "HIERARCHICAL_FIREWALL_POLICY_RULE"
                 }
-                FirewallRuleType::VpcFirewallRule => "VPC_FIREWALL_RULE",
-                FirewallRuleType::ImpliedVpcFirewallRule => "IMPLIED_VPC_FIREWALL_RULE",
-                FirewallRuleType::ServerlessVpcAccessManagedFirewallRule => {
+                Self::VpcFirewallRule => "VPC_FIREWALL_RULE",
+                Self::ImpliedVpcFirewallRule => "IMPLIED_VPC_FIREWALL_RULE",
+                Self::ServerlessVpcAccessManagedFirewallRule => {
                     "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"
                 }
-                FirewallRuleType::NetworkFirewallPolicyRule => {
-                    "NETWORK_FIREWALL_POLICY_RULE"
-                }
-                FirewallRuleType::NetworkRegionalFirewallPolicyRule => {
+                Self::NetworkFirewallPolicyRule => "NETWORK_FIREWALL_POLICY_RULE",
+                Self::NetworkRegionalFirewallPolicyRule => {
                     "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"
                 }
-                FirewallRuleType::UnsupportedFirewallPolicyRule => {
-                    "UNSUPPORTED_FIREWALL_POLICY_RULE"
-                }
-                FirewallRuleType::TrackingState => "TRACKING_STATE",
+                Self::UnsupportedFirewallPolicyRule => "UNSUPPORTED_FIREWALL_POLICY_RULE",
+                Self::TrackingState => "TRACKING_STATE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -524,7 +556,6 @@ pub mod firewall_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine route.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouteInfo {
     /// Type of route.
@@ -539,12 +570,12 @@ pub struct RouteInfo {
     /// Name of a route.
     #[prost(string, tag = "1")]
     pub display_name: ::prost::alloc::string::String,
-    /// URI of a route.
-    /// Dynamic, peering static and peering dynamic routes do not have an URI.
-    /// Advertised route from Google Cloud VPC to on-premises network also does
-    /// not have an URI.
+    /// URI of a route (if applicable).
     #[prost(string, tag = "2")]
     pub uri: ::prost::alloc::string::String,
+    /// Region of the route (if applicable).
+    #[prost(string, tag = "19")]
+    pub region: ::prost::alloc::string::String,
     /// Destination IP range of the route.
     #[prost(string, tag = "3")]
     pub dest_ip_range: ::prost::alloc::string::String,
@@ -578,6 +609,20 @@ pub struct RouteInfo {
     /// URI of a NCC Spoke. NCC_HUB routes only.
     #[prost(string, optional, tag = "16")]
     pub ncc_spoke_uri: ::core::option::Option<::prost::alloc::string::String>,
+    /// For advertised dynamic routes, the URI of the Cloud Router that advertised
+    /// the corresponding IP prefix.
+    #[prost(string, optional, tag = "17")]
+    pub advertised_route_source_router_uri: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
+    /// For advertised routes, the URI of their next hop, i.e. the URI of the
+    /// hybrid endpoint (VPN tunnel, Interconnect attachment, NCC router appliance)
+    /// the advertised prefix is advertised through, or URI of the source peered
+    /// network.
+    #[prost(string, optional, tag = "18")]
+    pub advertised_route_next_hop_uri: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
 }
 /// Nested message and enum types in `RouteInfo`.
 pub mod route_info {
@@ -612,6 +657,9 @@ pub mod route_info {
         PeeringDynamic = 6,
         /// Policy based route.
         PolicyBased = 7,
+        /// Advertised route. Synthetic route which is used to transition from the
+        /// StartFromPrivateNetwork state in Connectivity tests.
+        Advertised = 101,
     }
     impl RouteType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -620,14 +668,15 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RouteType::Unspecified => "ROUTE_TYPE_UNSPECIFIED",
-                RouteType::Subnet => "SUBNET",
-                RouteType::Static => "STATIC",
-                RouteType::Dynamic => "DYNAMIC",
-                RouteType::PeeringSubnet => "PEERING_SUBNET",
-                RouteType::PeeringStatic => "PEERING_STATIC",
-                RouteType::PeeringDynamic => "PEERING_DYNAMIC",
-                RouteType::PolicyBased => "POLICY_BASED",
+                Self::Unspecified => "ROUTE_TYPE_UNSPECIFIED",
+                Self::Subnet => "SUBNET",
+                Self::Static => "STATIC",
+                Self::Dynamic => "DYNAMIC",
+                Self::PeeringSubnet => "PEERING_SUBNET",
+                Self::PeeringStatic => "PEERING_STATIC",
+                Self::PeeringDynamic => "PEERING_DYNAMIC",
+                Self::PolicyBased => "POLICY_BASED",
+                Self::Advertised => "ADVERTISED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -641,6 +690,7 @@ pub mod route_info {
                 "PEERING_STATIC" => Some(Self::PeeringStatic),
                 "PEERING_DYNAMIC" => Some(Self::PeeringDynamic),
                 "POLICY_BASED" => Some(Self::PolicyBased),
+                "ADVERTISED" => Some(Self::Advertised),
                 _ => None,
             }
         }
@@ -699,19 +749,19 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NextHopType::Unspecified => "NEXT_HOP_TYPE_UNSPECIFIED",
-                NextHopType::NextHopIp => "NEXT_HOP_IP",
-                NextHopType::NextHopInstance => "NEXT_HOP_INSTANCE",
-                NextHopType::NextHopNetwork => "NEXT_HOP_NETWORK",
-                NextHopType::NextHopPeering => "NEXT_HOP_PEERING",
-                NextHopType::NextHopInterconnect => "NEXT_HOP_INTERCONNECT",
-                NextHopType::NextHopVpnTunnel => "NEXT_HOP_VPN_TUNNEL",
-                NextHopType::NextHopVpnGateway => "NEXT_HOP_VPN_GATEWAY",
-                NextHopType::NextHopInternetGateway => "NEXT_HOP_INTERNET_GATEWAY",
-                NextHopType::NextHopBlackhole => "NEXT_HOP_BLACKHOLE",
-                NextHopType::NextHopIlb => "NEXT_HOP_ILB",
-                NextHopType::NextHopRouterAppliance => "NEXT_HOP_ROUTER_APPLIANCE",
-                NextHopType::NextHopNccHub => "NEXT_HOP_NCC_HUB",
+                Self::Unspecified => "NEXT_HOP_TYPE_UNSPECIFIED",
+                Self::NextHopIp => "NEXT_HOP_IP",
+                Self::NextHopInstance => "NEXT_HOP_INSTANCE",
+                Self::NextHopNetwork => "NEXT_HOP_NETWORK",
+                Self::NextHopPeering => "NEXT_HOP_PEERING",
+                Self::NextHopInterconnect => "NEXT_HOP_INTERCONNECT",
+                Self::NextHopVpnTunnel => "NEXT_HOP_VPN_TUNNEL",
+                Self::NextHopVpnGateway => "NEXT_HOP_VPN_GATEWAY",
+                Self::NextHopInternetGateway => "NEXT_HOP_INTERNET_GATEWAY",
+                Self::NextHopBlackhole => "NEXT_HOP_BLACKHOLE",
+                Self::NextHopIlb => "NEXT_HOP_ILB",
+                Self::NextHopRouterAppliance => "NEXT_HOP_ROUTER_APPLIANCE",
+                Self::NextHopNccHub => "NEXT_HOP_NCC_HUB",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -762,9 +812,9 @@ pub mod route_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RouteScope::Unspecified => "ROUTE_SCOPE_UNSPECIFIED",
-                RouteScope::Network => "NETWORK",
-                RouteScope::NccHub => "NCC_HUB",
+                Self::Unspecified => "ROUTE_SCOPE_UNSPECIFIED",
+                Self::Network => "NETWORK",
+                Self::NccHub => "NCC_HUB",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -783,7 +833,6 @@ pub mod route_info {
 /// some Google Services use special routes within Google production
 /// infrastructure to reach Compute Engine Instances.
 /// <https://cloud.google.com/vpc/docs/routes#special_return_paths>
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GoogleServiceInfo {
     /// Source IP address.
@@ -840,15 +889,13 @@ pub mod google_service_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                GoogleServiceType::Unspecified => "GOOGLE_SERVICE_TYPE_UNSPECIFIED",
-                GoogleServiceType::Iap => "IAP",
-                GoogleServiceType::GfeProxyOrHealthCheckProber => {
-                    "GFE_PROXY_OR_HEALTH_CHECK_PROBER"
-                }
-                GoogleServiceType::CloudDns => "CLOUD_DNS",
-                GoogleServiceType::GoogleApi => "GOOGLE_API",
-                GoogleServiceType::GoogleApiPsc => "GOOGLE_API_PSC",
-                GoogleServiceType::GoogleApiVpcSc => "GOOGLE_API_VPC_SC",
+                Self::Unspecified => "GOOGLE_SERVICE_TYPE_UNSPECIFIED",
+                Self::Iap => "IAP",
+                Self::GfeProxyOrHealthCheckProber => "GFE_PROXY_OR_HEALTH_CHECK_PROBER",
+                Self::CloudDns => "CLOUD_DNS",
+                Self::GoogleApi => "GOOGLE_API",
+                Self::GoogleApiPsc => "GOOGLE_API_PSC",
+                Self::GoogleApiVpcSc => "GOOGLE_API_VPC_SC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -869,19 +916,18 @@ pub mod google_service_info {
     }
 }
 /// For display only. Metadata associated with a Compute Engine forwarding rule.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardingRuleInfo {
-    /// Name of a Compute Engine forwarding rule.
+    /// Name of the forwarding rule.
     #[prost(string, tag = "1")]
     pub display_name: ::prost::alloc::string::String,
-    /// URI of a Compute Engine forwarding rule.
+    /// URI of the forwarding rule.
     #[prost(string, tag = "2")]
     pub uri: ::prost::alloc::string::String,
-    /// Protocol defined in the forwarding rule that matches the test.
+    /// Protocol defined in the forwarding rule that matches the packet.
     #[prost(string, tag = "3")]
     pub matched_protocol: ::prost::alloc::string::String,
-    /// Port range defined in the forwarding rule that matches the test.
+    /// Port range defined in the forwarding rule that matches the packet.
     #[prost(string, tag = "6")]
     pub matched_port_range: ::prost::alloc::string::String,
     /// VIP of the forwarding rule.
@@ -890,12 +936,25 @@ pub struct ForwardingRuleInfo {
     /// Target type of the forwarding rule.
     #[prost(string, tag = "5")]
     pub target: ::prost::alloc::string::String,
-    /// Network URI. Only valid for Internal Load Balancer.
+    /// Network URI.
     #[prost(string, tag = "7")]
     pub network_uri: ::prost::alloc::string::String,
+    /// Region of the forwarding rule. Set only for regional forwarding rules.
+    #[prost(string, tag = "8")]
+    pub region: ::prost::alloc::string::String,
+    /// Name of the load balancer the forwarding rule belongs to. Empty for
+    /// forwarding rules not related to load balancers (like PSC forwarding rules).
+    #[prost(string, tag = "9")]
+    pub load_balancer_name: ::prost::alloc::string::String,
+    /// URI of the PSC service attachment this forwarding rule targets (if
+    /// applicable).
+    #[prost(string, tag = "10")]
+    pub psc_service_attachment_uri: ::prost::alloc::string::String,
+    /// PSC Google API target this forwarding rule targets (if applicable).
+    #[prost(string, tag = "11")]
+    pub psc_google_api_target: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a load balancer.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerInfo {
     /// Type of the load balancer.
@@ -953,12 +1012,12 @@ pub mod load_balancer_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                LoadBalancerType::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
-                LoadBalancerType::InternalTcpUdp => "INTERNAL_TCP_UDP",
-                LoadBalancerType::NetworkTcpUdp => "NETWORK_TCP_UDP",
-                LoadBalancerType::HttpProxy => "HTTP_PROXY",
-                LoadBalancerType::TcpProxy => "TCP_PROXY",
-                LoadBalancerType::SslProxy => "SSL_PROXY",
+                Self::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
+                Self::InternalTcpUdp => "INTERNAL_TCP_UDP",
+                Self::NetworkTcpUdp => "NETWORK_TCP_UDP",
+                Self::HttpProxy => "HTTP_PROXY",
+                Self::TcpProxy => "TCP_PROXY",
+                Self::SslProxy => "SSL_PROXY",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1004,10 +1063,10 @@ pub mod load_balancer_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                BackendType::Unspecified => "BACKEND_TYPE_UNSPECIFIED",
-                BackendType::BackendService => "BACKEND_SERVICE",
-                BackendType::TargetPool => "TARGET_POOL",
-                BackendType::TargetInstance => "TARGET_INSTANCE",
+                Self::Unspecified => "BACKEND_TYPE_UNSPECIFIED",
+                Self::BackendService => "BACKEND_SERVICE",
+                Self::TargetPool => "TARGET_POOL",
+                Self::TargetInstance => "TARGET_INSTANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1023,7 +1082,6 @@ pub mod load_balancer_info {
     }
 }
 /// For display only. Metadata associated with a specific load balancer backend.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackend {
     /// Name of a Compute Engine instance or network endpoint.
@@ -1081,11 +1139,9 @@ pub mod load_balancer_backend {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HealthCheckFirewallState::Unspecified => {
-                    "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED"
-                }
-                HealthCheckFirewallState::Configured => "CONFIGURED",
-                HealthCheckFirewallState::Misconfigured => "MISCONFIGURED",
+                Self::Unspecified => "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED",
+                Self::Configured => "CONFIGURED",
+                Self::Misconfigured => "MISCONFIGURED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1100,7 +1156,6 @@ pub mod load_balancer_backend {
     }
 }
 /// For display only. Metadata associated with a Compute Engine VPN gateway.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnGatewayInfo {
     /// Name of a VPN gateway.
@@ -1125,7 +1180,6 @@ pub struct VpnGatewayInfo {
     pub region: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Compute Engine VPN tunnel.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpnTunnelInfo {
     /// Name of a VPN tunnel.
@@ -1189,10 +1243,10 @@ pub mod vpn_tunnel_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RoutingType::Unspecified => "ROUTING_TYPE_UNSPECIFIED",
-                RoutingType::RouteBased => "ROUTE_BASED",
-                RoutingType::PolicyBased => "POLICY_BASED",
-                RoutingType::Dynamic => "DYNAMIC",
+                Self::Unspecified => "ROUTING_TYPE_UNSPECIFIED",
+                Self::RouteBased => "ROUTE_BASED",
+                Self::PolicyBased => "POLICY_BASED",
+                Self::Dynamic => "DYNAMIC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1210,7 +1264,6 @@ pub mod vpn_tunnel_info {
 /// For display only. The specification of the endpoints for the test.
 /// EndpointInfo is derived from source and destination Endpoint and validated
 /// by the backend data plane model.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointInfo {
     /// Source IP address.
@@ -1239,7 +1292,6 @@ pub struct EndpointInfo {
     pub source_agent_uri: ::prost::alloc::string::String,
 }
 /// Details of the final state "deliver" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeliverInfo {
     /// Target type where the packet is delivered to.
@@ -1251,6 +1303,13 @@ pub struct DeliverInfo {
     /// IP address of the target (if applicable).
     #[prost(string, tag = "3")]
     pub ip_address: ::prost::alloc::string::String,
+    /// Name of the Cloud Storage Bucket the packet is delivered to (if
+    /// applicable).
+    #[prost(string, tag = "4")]
+    pub storage_bucket: ::prost::alloc::string::String,
+    /// PSC Google API target the packet is delivered to (if applicable).
+    #[prost(string, tag = "5")]
+    pub psc_google_api_target: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `DeliverInfo`.
 pub mod deliver_info {
@@ -1283,7 +1342,7 @@ pub mod deliver_info {
         /// Target is a published service that uses [Private Service
         /// Connect](<https://cloud.google.com/vpc/docs/configure-private-service-connect-services>).
         PscPublishedService = 6,
-        /// Target is all Google APIs that use [Private Service
+        /// Target is Google APIs that use [Private Service
         /// Connect](<https://cloud.google.com/vpc/docs/configure-private-service-connect-apis>).
         PscGoogleApi = 7,
         /// Target is a VPC-SC that uses [Private Service
@@ -1301,6 +1360,12 @@ pub mod deliver_info {
         AppEngineVersion = 13,
         /// Target is a Cloud Run revision. Used only for return traces.
         CloudRunRevision = 14,
+        /// Target is a Google-managed service. Used only for return traces.
+        GoogleManagedService = 15,
+        /// Target is a Redis Instance.
+        RedisInstance = 16,
+        /// Target is a Redis Cluster.
+        RedisCluster = 17,
     }
     impl Target {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -1309,21 +1374,24 @@ pub mod deliver_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Target::Unspecified => "TARGET_UNSPECIFIED",
-                Target::Instance => "INSTANCE",
-                Target::Internet => "INTERNET",
-                Target::GoogleApi => "GOOGLE_API",
-                Target::GkeMaster => "GKE_MASTER",
-                Target::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
-                Target::PscPublishedService => "PSC_PUBLISHED_SERVICE",
-                Target::PscGoogleApi => "PSC_GOOGLE_API",
-                Target::PscVpcSc => "PSC_VPC_SC",
-                Target::ServerlessNeg => "SERVERLESS_NEG",
-                Target::StorageBucket => "STORAGE_BUCKET",
-                Target::PrivateNetwork => "PRIVATE_NETWORK",
-                Target::CloudFunction => "CLOUD_FUNCTION",
-                Target::AppEngineVersion => "APP_ENGINE_VERSION",
-                Target::CloudRunRevision => "CLOUD_RUN_REVISION",
+                Self::Unspecified => "TARGET_UNSPECIFIED",
+                Self::Instance => "INSTANCE",
+                Self::Internet => "INTERNET",
+                Self::GoogleApi => "GOOGLE_API",
+                Self::GkeMaster => "GKE_MASTER",
+                Self::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
+                Self::PscPublishedService => "PSC_PUBLISHED_SERVICE",
+                Self::PscGoogleApi => "PSC_GOOGLE_API",
+                Self::PscVpcSc => "PSC_VPC_SC",
+                Self::ServerlessNeg => "SERVERLESS_NEG",
+                Self::StorageBucket => "STORAGE_BUCKET",
+                Self::PrivateNetwork => "PRIVATE_NETWORK",
+                Self::CloudFunction => "CLOUD_FUNCTION",
+                Self::AppEngineVersion => "APP_ENGINE_VERSION",
+                Self::CloudRunRevision => "CLOUD_RUN_REVISION",
+                Self::GoogleManagedService => "GOOGLE_MANAGED_SERVICE",
+                Self::RedisInstance => "REDIS_INSTANCE",
+                Self::RedisCluster => "REDIS_CLUSTER",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1344,13 +1412,15 @@ pub mod deliver_info {
                 "CLOUD_FUNCTION" => Some(Self::CloudFunction),
                 "APP_ENGINE_VERSION" => Some(Self::AppEngineVersion),
                 "CLOUD_RUN_REVISION" => Some(Self::CloudRunRevision),
+                "GOOGLE_MANAGED_SERVICE" => Some(Self::GoogleManagedService),
+                "REDIS_INSTANCE" => Some(Self::RedisInstance),
+                "REDIS_CLUSTER" => Some(Self::RedisCluster),
                 _ => None,
             }
         }
     }
 }
 /// Details of the final state "forward" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForwardInfo {
     /// Target type where this packet is forwarded to.
@@ -1407,16 +1477,16 @@ pub mod forward_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Target::Unspecified => "TARGET_UNSPECIFIED",
-                Target::PeeringVpc => "PEERING_VPC",
-                Target::VpnGateway => "VPN_GATEWAY",
-                Target::Interconnect => "INTERCONNECT",
-                Target::GkeMaster => "GKE_MASTER",
-                Target::ImportedCustomRouteNextHop => "IMPORTED_CUSTOM_ROUTE_NEXT_HOP",
-                Target::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
-                Target::AnotherProject => "ANOTHER_PROJECT",
-                Target::NccHub => "NCC_HUB",
-                Target::RouterAppliance => "ROUTER_APPLIANCE",
+                Self::Unspecified => "TARGET_UNSPECIFIED",
+                Self::PeeringVpc => "PEERING_VPC",
+                Self::VpnGateway => "VPN_GATEWAY",
+                Self::Interconnect => "INTERCONNECT",
+                Self::GkeMaster => "GKE_MASTER",
+                Self::ImportedCustomRouteNextHop => "IMPORTED_CUSTOM_ROUTE_NEXT_HOP",
+                Self::CloudSqlInstance => "CLOUD_SQL_INSTANCE",
+                Self::AnotherProject => "ANOTHER_PROJECT",
+                Self::NccHub => "NCC_HUB",
+                Self::RouterAppliance => "ROUTER_APPLIANCE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1440,7 +1510,6 @@ pub mod forward_info {
     }
 }
 /// Details of the final state "abort" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbortInfo {
     /// Causes that the analysis is aborted.
@@ -1504,6 +1573,9 @@ pub mod abort_info {
         /// Aborted because no endpoint with the packet's destination IP address is
         /// found.
         UnknownIp = 2,
+        /// Aborted because no endpoint with the packet's destination IP is found in
+        /// the Google-managed project.
+        GoogleManagedServiceUnknownIp = 32,
         /// Aborted because the source IP address doesn't belong to any of the
         /// subnets of the source VPC network.
         SourceIpAddressNotInSourceNetwork = 23,
@@ -1516,6 +1588,9 @@ pub mod abort_info {
         /// Aborted because user lacks permission to access Network endpoint group
         /// endpoint configs required to run the test.
         PermissionDeniedNoNegEndpointConfigs = 29,
+        /// Aborted because user lacks permission to access Cloud Router configs
+        /// required to run the test.
+        PermissionDeniedNoCloudRouterConfigs = 36,
         /// Aborted because no valid source or destination endpoint is derived from
         /// the input test request.
         NoSourceLocation = 5,
@@ -1557,6 +1632,11 @@ pub mod abort_info {
         /// Aborted because tests with a PSC-based Cloud SQL instance as a source are
         /// not supported.
         SourcePscCloudSqlUnsupported = 20,
+        /// Aborted because tests with a Redis Cluster as a source are not supported.
+        SourceRedisClusterUnsupported = 34,
+        /// Aborted because tests with a Redis Instance as a source are not
+        /// supported.
+        SourceRedisInstanceUnsupported = 35,
         /// Aborted because tests with a forwarding rule as a source are not
         /// supported.
         SourceForwardingRuleUnsupported = 21,
@@ -1576,52 +1656,62 @@ pub mod abort_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Cause::Unspecified => "CAUSE_UNSPECIFIED",
-                Cause::UnknownNetwork => "UNKNOWN_NETWORK",
-                Cause::UnknownProject => "UNKNOWN_PROJECT",
-                Cause::NoExternalIp => "NO_EXTERNAL_IP",
-                Cause::UnintendedDestination => "UNINTENDED_DESTINATION",
-                Cause::SourceEndpointNotFound => "SOURCE_ENDPOINT_NOT_FOUND",
-                Cause::MismatchedSourceNetwork => "MISMATCHED_SOURCE_NETWORK",
-                Cause::DestinationEndpointNotFound => "DESTINATION_ENDPOINT_NOT_FOUND",
-                Cause::MismatchedDestinationNetwork => "MISMATCHED_DESTINATION_NETWORK",
-                Cause::UnknownIp => "UNKNOWN_IP",
-                Cause::SourceIpAddressNotInSourceNetwork => {
+                Self::Unspecified => "CAUSE_UNSPECIFIED",
+                Self::UnknownNetwork => "UNKNOWN_NETWORK",
+                Self::UnknownProject => "UNKNOWN_PROJECT",
+                Self::NoExternalIp => "NO_EXTERNAL_IP",
+                Self::UnintendedDestination => "UNINTENDED_DESTINATION",
+                Self::SourceEndpointNotFound => "SOURCE_ENDPOINT_NOT_FOUND",
+                Self::MismatchedSourceNetwork => "MISMATCHED_SOURCE_NETWORK",
+                Self::DestinationEndpointNotFound => "DESTINATION_ENDPOINT_NOT_FOUND",
+                Self::MismatchedDestinationNetwork => "MISMATCHED_DESTINATION_NETWORK",
+                Self::UnknownIp => "UNKNOWN_IP",
+                Self::GoogleManagedServiceUnknownIp => {
+                    "GOOGLE_MANAGED_SERVICE_UNKNOWN_IP"
+                }
+                Self::SourceIpAddressNotInSourceNetwork => {
                     "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK"
                 }
-                Cause::PermissionDenied => "PERMISSION_DENIED",
-                Cause::PermissionDeniedNoCloudNatConfigs => {
+                Self::PermissionDenied => "PERMISSION_DENIED",
+                Self::PermissionDeniedNoCloudNatConfigs => {
                     "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS"
                 }
-                Cause::PermissionDeniedNoNegEndpointConfigs => {
+                Self::PermissionDeniedNoNegEndpointConfigs => {
                     "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"
                 }
-                Cause::NoSourceLocation => "NO_SOURCE_LOCATION",
-                Cause::InvalidArgument => "INVALID_ARGUMENT",
-                Cause::TraceTooLong => "TRACE_TOO_LONG",
-                Cause::InternalError => "INTERNAL_ERROR",
-                Cause::Unsupported => "UNSUPPORTED",
-                Cause::MismatchedIpVersion => "MISMATCHED_IP_VERSION",
-                Cause::GkeKonnectivityProxyUnsupported => {
+                Self::PermissionDeniedNoCloudRouterConfigs => {
+                    "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"
+                }
+                Self::NoSourceLocation => "NO_SOURCE_LOCATION",
+                Self::InvalidArgument => "INVALID_ARGUMENT",
+                Self::TraceTooLong => "TRACE_TOO_LONG",
+                Self::InternalError => "INTERNAL_ERROR",
+                Self::Unsupported => "UNSUPPORTED",
+                Self::MismatchedIpVersion => "MISMATCHED_IP_VERSION",
+                Self::GkeKonnectivityProxyUnsupported => {
                     "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"
                 }
-                Cause::ResourceConfigNotFound => "RESOURCE_CONFIG_NOT_FOUND",
-                Cause::VmInstanceConfigNotFound => "VM_INSTANCE_CONFIG_NOT_FOUND",
-                Cause::NetworkConfigNotFound => "NETWORK_CONFIG_NOT_FOUND",
-                Cause::FirewallConfigNotFound => "FIREWALL_CONFIG_NOT_FOUND",
-                Cause::RouteConfigNotFound => "ROUTE_CONFIG_NOT_FOUND",
-                Cause::GoogleManagedServiceAmbiguousPscEndpoint => {
+                Self::ResourceConfigNotFound => "RESOURCE_CONFIG_NOT_FOUND",
+                Self::VmInstanceConfigNotFound => "VM_INSTANCE_CONFIG_NOT_FOUND",
+                Self::NetworkConfigNotFound => "NETWORK_CONFIG_NOT_FOUND",
+                Self::FirewallConfigNotFound => "FIREWALL_CONFIG_NOT_FOUND",
+                Self::RouteConfigNotFound => "ROUTE_CONFIG_NOT_FOUND",
+                Self::GoogleManagedServiceAmbiguousPscEndpoint => {
                     "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"
                 }
-                Cause::SourcePscCloudSqlUnsupported => "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED",
-                Cause::SourceForwardingRuleUnsupported => {
+                Self::SourcePscCloudSqlUnsupported => "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED",
+                Self::SourceRedisClusterUnsupported => "SOURCE_REDIS_CLUSTER_UNSUPPORTED",
+                Self::SourceRedisInstanceUnsupported => {
+                    "SOURCE_REDIS_INSTANCE_UNSUPPORTED"
+                }
+                Self::SourceForwardingRuleUnsupported => {
                     "SOURCE_FORWARDING_RULE_UNSUPPORTED"
                 }
-                Cause::NonRoutableIpAddress => "NON_ROUTABLE_IP_ADDRESS",
-                Cause::UnknownIssueInGoogleManagedProject => {
+                Self::NonRoutableIpAddress => "NON_ROUTABLE_IP_ADDRESS",
+                Self::UnknownIssueInGoogleManagedProject => {
                     "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"
                 }
-                Cause::UnsupportedGoogleManagedProjectConfig => {
+                Self::UnsupportedGoogleManagedProjectConfig => {
                     "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"
                 }
             }
@@ -1643,6 +1733,9 @@ pub mod abort_info {
                     Some(Self::MismatchedDestinationNetwork)
                 }
                 "UNKNOWN_IP" => Some(Self::UnknownIp),
+                "GOOGLE_MANAGED_SERVICE_UNKNOWN_IP" => {
+                    Some(Self::GoogleManagedServiceUnknownIp)
+                }
                 "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK" => {
                     Some(Self::SourceIpAddressNotInSourceNetwork)
                 }
@@ -1652,6 +1745,9 @@ pub mod abort_info {
                 }
                 "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS" => {
                     Some(Self::PermissionDeniedNoNegEndpointConfigs)
+                }
+                "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS" => {
+                    Some(Self::PermissionDeniedNoCloudRouterConfigs)
                 }
                 "NO_SOURCE_LOCATION" => Some(Self::NoSourceLocation),
                 "INVALID_ARGUMENT" => Some(Self::InvalidArgument),
@@ -1673,6 +1769,12 @@ pub mod abort_info {
                 "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED" => {
                     Some(Self::SourcePscCloudSqlUnsupported)
                 }
+                "SOURCE_REDIS_CLUSTER_UNSUPPORTED" => {
+                    Some(Self::SourceRedisClusterUnsupported)
+                }
+                "SOURCE_REDIS_INSTANCE_UNSUPPORTED" => {
+                    Some(Self::SourceRedisInstanceUnsupported)
+                }
                 "SOURCE_FORWARDING_RULE_UNSUPPORTED" => {
                     Some(Self::SourceForwardingRuleUnsupported)
                 }
@@ -1689,7 +1791,6 @@ pub mod abort_info {
     }
 }
 /// Details of the final state "drop" and associated resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropInfo {
     /// Cause that the packet is dropped.
@@ -1800,6 +1901,10 @@ pub mod drop_info {
         GkeClusterNotRunning = 27,
         /// Packet sent from or to a Cloud SQL instance that is not in running state.
         CloudSqlInstanceNotRunning = 28,
+        /// Packet sent from or to a Redis Instance that is not in running state.
+        RedisInstanceNotRunning = 68,
+        /// Packet sent from or to a Redis Cluster that is not in running state.
+        RedisClusterNotRunning = 69,
         /// The type of traffic is blocked and the user cannot configure a firewall
         /// rule to enable it. See [Always blocked
         /// traffic](<https://cloud.google.com/vpc/docs/firewalls#blockedtraffic>) for
@@ -1850,6 +1955,10 @@ pub mod drop_info {
         /// Packet was dropped because there is no route from a Cloud SQL
         /// instance to a destination network.
         CloudSqlInstanceNoRoute = 35,
+        /// Packet was dropped because the Cloud SQL instance requires all
+        /// connections to use Cloud SQL connectors and to target the Cloud SQL proxy
+        /// port (3307).
+        CloudSqlConnectorRequired = 63,
         /// Packet could be dropped because the Cloud Function is not in an active
         /// status.
         CloudFunctionNotActive = 22,
@@ -1858,6 +1967,12 @@ pub mod drop_info {
         /// Packet could be dropped because the VPC connector is not in a running
         /// state.
         VpcConnectorNotRunning = 24,
+        /// Packet could be dropped because the traffic from the serverless service
+        /// to the VPC connector is not allowed.
+        VpcConnectorServerlessTrafficBlocked = 60,
+        /// Packet could be dropped because the health check traffic to the VPC
+        /// connector is not allowed.
+        VpcConnectorHealthCheckTrafficBlocked = 61,
         /// Packet could be dropped because it was sent from a different region
         /// to a regional forwarding without global access.
         ForwardingRuleRegionMismatch = 25,
@@ -1882,6 +1997,9 @@ pub mod drop_info {
         CloudSqlPscNegUnsupported = 58,
         /// No NAT subnets are defined for the PSC service attachment.
         NoNatSubnetsForPscServiceAttachment = 57,
+        /// PSC endpoint is accessed via NCC, but PSC transitivity configuration is
+        /// not yet propagated.
+        PscTransitivityNotPropagated = 64,
         /// The packet sent from the hybrid NEG proxy matches a non-dynamic route,
         /// but such a configuration is not supported.
         HybridNegNonDynamicRouteMatched = 55,
@@ -1900,6 +2018,61 @@ pub mod drop_info {
         CloudNatNoAddresses = 40,
         /// Packet is stuck in a routing loop.
         RoutingLoop = 59,
+        /// Packet is dropped inside a Google-managed service due to being delivered
+        /// in return trace to an endpoint that doesn't match the endpoint the packet
+        /// was sent from in forward trace. Used only for return traces.
+        DroppedInsideGoogleManagedService = 62,
+        /// Packet is dropped due to a load balancer backend instance not having a
+        /// network interface in the network expected by the load balancer.
+        LoadBalancerBackendInvalidNetwork = 65,
+        /// Packet is dropped due to a backend service named port not being defined
+        /// on the instance group level.
+        BackendServiceNamedPortNotDefined = 66,
+        /// Packet is dropped due to a destination IP range being part of a Private
+        /// NAT IP range.
+        DestinationIsPrivateNatIpRange = 67,
+        /// Generic drop cause for a packet being dropped inside a Redis Instance
+        /// service project.
+        DroppedInsideRedisInstanceService = 70,
+        /// Packet is dropped due to an unsupported port being used to connect to a
+        /// Redis Instance. Port 6379 should be used to connect to a Redis Instance.
+        RedisInstanceUnsupportedPort = 71,
+        /// Packet is dropped due to connecting from PUPI address to a PSA based
+        /// Redis Instance.
+        RedisInstanceConnectingFromPupiAddress = 72,
+        /// Packet is dropped due to no route to the destination network.
+        RedisInstanceNoRouteToDestinationNetwork = 73,
+        /// Redis Instance does not have an external IP address.
+        RedisInstanceNoExternalIp = 74,
+        /// Packet is dropped due to an unsupported protocol being used to connect to
+        /// a Redis Instance. Only TCP connections are accepted by a Redis Instance.
+        RedisInstanceUnsupportedProtocol = 78,
+        /// Generic drop cause for a packet being dropped inside a Redis Cluster
+        /// service project.
+        DroppedInsideRedisClusterService = 75,
+        /// Packet is dropped due to an unsupported port being used to connect to a
+        /// Redis Cluster. Ports 6379 and 11000 to 13047 should be used to connect to
+        /// a Redis Cluster.
+        RedisClusterUnsupportedPort = 76,
+        /// Redis Cluster does not have an external IP address.
+        RedisClusterNoExternalIp = 77,
+        /// Packet is dropped due to an unsupported protocol being used to connect to
+        /// a Redis Cluster. Only TCP connections are accepted by a Redis Cluster.
+        RedisClusterUnsupportedProtocol = 79,
+        /// Packet from the non-GCP (on-prem) or unknown GCP network is dropped due
+        /// to the destination IP address not belonging to any IP prefix advertised
+        /// via BGP by the Cloud Router.
+        NoAdvertisedRouteToGcpDestination = 80,
+        /// Packet from the non-GCP (on-prem) or unknown GCP network is dropped due
+        /// to the destination IP address not belonging to any IP prefix included to
+        /// the local traffic selector of the VPN tunnel.
+        NoTrafficSelectorToGcpDestination = 81,
+        /// Packet from the unknown peered network is dropped due to no known route
+        /// from the source network to the destination IP address.
+        NoKnownRouteFromPeeredNetworkToDestination = 82,
+        /// Sending packets processed by the Private NAT Gateways to the Private
+        /// Service Connect endpoints is not supported.
+        PrivateNatToPscEndpointUnsupported = 83,
     }
     impl Cause {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -1908,122 +2081,172 @@ pub mod drop_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Cause::Unspecified => "CAUSE_UNSPECIFIED",
-                Cause::UnknownExternalAddress => "UNKNOWN_EXTERNAL_ADDRESS",
-                Cause::ForeignIpDisallowed => "FOREIGN_IP_DISALLOWED",
-                Cause::FirewallRule => "FIREWALL_RULE",
-                Cause::NoRoute => "NO_ROUTE",
-                Cause::RouteBlackhole => "ROUTE_BLACKHOLE",
-                Cause::RouteWrongNetwork => "ROUTE_WRONG_NETWORK",
-                Cause::RouteNextHopIpAddressNotResolved => {
+                Self::Unspecified => "CAUSE_UNSPECIFIED",
+                Self::UnknownExternalAddress => "UNKNOWN_EXTERNAL_ADDRESS",
+                Self::ForeignIpDisallowed => "FOREIGN_IP_DISALLOWED",
+                Self::FirewallRule => "FIREWALL_RULE",
+                Self::NoRoute => "NO_ROUTE",
+                Self::RouteBlackhole => "ROUTE_BLACKHOLE",
+                Self::RouteWrongNetwork => "ROUTE_WRONG_NETWORK",
+                Self::RouteNextHopIpAddressNotResolved => {
                     "ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED"
                 }
-                Cause::RouteNextHopResourceNotFound => {
-                    "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND"
-                }
-                Cause::RouteNextHopInstanceWrongNetwork => {
+                Self::RouteNextHopResourceNotFound => "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND",
+                Self::RouteNextHopInstanceWrongNetwork => {
                     "ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK"
                 }
-                Cause::RouteNextHopInstanceNonPrimaryIp => {
+                Self::RouteNextHopInstanceNonPrimaryIp => {
                     "ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP"
                 }
-                Cause::RouteNextHopForwardingRuleIpMismatch => {
+                Self::RouteNextHopForwardingRuleIpMismatch => {
                     "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH"
                 }
-                Cause::RouteNextHopVpnTunnelNotEstablished => {
+                Self::RouteNextHopVpnTunnelNotEstablished => {
                     "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"
                 }
-                Cause::RouteNextHopForwardingRuleTypeInvalid => {
+                Self::RouteNextHopForwardingRuleTypeInvalid => {
                     "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"
                 }
-                Cause::NoRouteFromInternetToPrivateIpv6Address => {
+                Self::NoRouteFromInternetToPrivateIpv6Address => {
                     "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"
                 }
-                Cause::VpnTunnelLocalSelectorMismatch => {
+                Self::VpnTunnelLocalSelectorMismatch => {
                     "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"
                 }
-                Cause::VpnTunnelRemoteSelectorMismatch => {
+                Self::VpnTunnelRemoteSelectorMismatch => {
                     "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"
                 }
-                Cause::PrivateTrafficToInternet => "PRIVATE_TRAFFIC_TO_INTERNET",
-                Cause::PrivateGoogleAccessDisallowed => {
-                    "PRIVATE_GOOGLE_ACCESS_DISALLOWED"
-                }
-                Cause::PrivateGoogleAccessViaVpnTunnelUnsupported => {
+                Self::PrivateTrafficToInternet => "PRIVATE_TRAFFIC_TO_INTERNET",
+                Self::PrivateGoogleAccessDisallowed => "PRIVATE_GOOGLE_ACCESS_DISALLOWED",
+                Self::PrivateGoogleAccessViaVpnTunnelUnsupported => {
                     "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED"
                 }
-                Cause::NoExternalAddress => "NO_EXTERNAL_ADDRESS",
-                Cause::UnknownInternalAddress => "UNKNOWN_INTERNAL_ADDRESS",
-                Cause::ForwardingRuleMismatch => "FORWARDING_RULE_MISMATCH",
-                Cause::ForwardingRuleNoInstances => "FORWARDING_RULE_NO_INSTANCES",
-                Cause::FirewallBlockingLoadBalancerBackendHealthCheck => {
+                Self::NoExternalAddress => "NO_EXTERNAL_ADDRESS",
+                Self::UnknownInternalAddress => "UNKNOWN_INTERNAL_ADDRESS",
+                Self::ForwardingRuleMismatch => "FORWARDING_RULE_MISMATCH",
+                Self::ForwardingRuleNoInstances => "FORWARDING_RULE_NO_INSTANCES",
+                Self::FirewallBlockingLoadBalancerBackendHealthCheck => {
                     "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"
                 }
-                Cause::InstanceNotRunning => "INSTANCE_NOT_RUNNING",
-                Cause::GkeClusterNotRunning => "GKE_CLUSTER_NOT_RUNNING",
-                Cause::CloudSqlInstanceNotRunning => "CLOUD_SQL_INSTANCE_NOT_RUNNING",
-                Cause::TrafficTypeBlocked => "TRAFFIC_TYPE_BLOCKED",
-                Cause::GkeMasterUnauthorizedAccess => "GKE_MASTER_UNAUTHORIZED_ACCESS",
-                Cause::CloudSqlInstanceUnauthorizedAccess => {
+                Self::InstanceNotRunning => "INSTANCE_NOT_RUNNING",
+                Self::GkeClusterNotRunning => "GKE_CLUSTER_NOT_RUNNING",
+                Self::CloudSqlInstanceNotRunning => "CLOUD_SQL_INSTANCE_NOT_RUNNING",
+                Self::RedisInstanceNotRunning => "REDIS_INSTANCE_NOT_RUNNING",
+                Self::RedisClusterNotRunning => "REDIS_CLUSTER_NOT_RUNNING",
+                Self::TrafficTypeBlocked => "TRAFFIC_TYPE_BLOCKED",
+                Self::GkeMasterUnauthorizedAccess => "GKE_MASTER_UNAUTHORIZED_ACCESS",
+                Self::CloudSqlInstanceUnauthorizedAccess => {
                     "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"
                 }
-                Cause::DroppedInsideGkeService => "DROPPED_INSIDE_GKE_SERVICE",
-                Cause::DroppedInsideCloudSqlService => "DROPPED_INSIDE_CLOUD_SQL_SERVICE",
-                Cause::GoogleManagedServiceNoPeering => {
+                Self::DroppedInsideGkeService => "DROPPED_INSIDE_GKE_SERVICE",
+                Self::DroppedInsideCloudSqlService => "DROPPED_INSIDE_CLOUD_SQL_SERVICE",
+                Self::GoogleManagedServiceNoPeering => {
                     "GOOGLE_MANAGED_SERVICE_NO_PEERING"
                 }
-                Cause::GoogleManagedServiceNoPscEndpoint => {
+                Self::GoogleManagedServiceNoPscEndpoint => {
                     "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"
                 }
-                Cause::GkePscEndpointMissing => "GKE_PSC_ENDPOINT_MISSING",
-                Cause::CloudSqlInstanceNoIpAddress => "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS",
-                Cause::GkeControlPlaneRegionMismatch => {
+                Self::GkePscEndpointMissing => "GKE_PSC_ENDPOINT_MISSING",
+                Self::CloudSqlInstanceNoIpAddress => "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS",
+                Self::GkeControlPlaneRegionMismatch => {
                     "GKE_CONTROL_PLANE_REGION_MISMATCH"
                 }
-                Cause::PublicGkeControlPlaneToPrivateDestination => {
+                Self::PublicGkeControlPlaneToPrivateDestination => {
                     "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"
                 }
-                Cause::GkeControlPlaneNoRoute => "GKE_CONTROL_PLANE_NO_ROUTE",
-                Cause::CloudSqlInstanceNotConfiguredForExternalTraffic => {
+                Self::GkeControlPlaneNoRoute => "GKE_CONTROL_PLANE_NO_ROUTE",
+                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => {
                     "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"
                 }
-                Cause::PublicCloudSqlInstanceToPrivateDestination => {
+                Self::PublicCloudSqlInstanceToPrivateDestination => {
                     "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"
                 }
-                Cause::CloudSqlInstanceNoRoute => "CLOUD_SQL_INSTANCE_NO_ROUTE",
-                Cause::CloudFunctionNotActive => "CLOUD_FUNCTION_NOT_ACTIVE",
-                Cause::VpcConnectorNotSet => "VPC_CONNECTOR_NOT_SET",
-                Cause::VpcConnectorNotRunning => "VPC_CONNECTOR_NOT_RUNNING",
-                Cause::ForwardingRuleRegionMismatch => "FORWARDING_RULE_REGION_MISMATCH",
-                Cause::PscConnectionNotAccepted => "PSC_CONNECTION_NOT_ACCEPTED",
-                Cause::PscEndpointAccessedFromPeeredNetwork => {
+                Self::CloudSqlInstanceNoRoute => "CLOUD_SQL_INSTANCE_NO_ROUTE",
+                Self::CloudSqlConnectorRequired => "CLOUD_SQL_CONNECTOR_REQUIRED",
+                Self::CloudFunctionNotActive => "CLOUD_FUNCTION_NOT_ACTIVE",
+                Self::VpcConnectorNotSet => "VPC_CONNECTOR_NOT_SET",
+                Self::VpcConnectorNotRunning => "VPC_CONNECTOR_NOT_RUNNING",
+                Self::VpcConnectorServerlessTrafficBlocked => {
+                    "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED"
+                }
+                Self::VpcConnectorHealthCheckTrafficBlocked => {
+                    "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED"
+                }
+                Self::ForwardingRuleRegionMismatch => "FORWARDING_RULE_REGION_MISMATCH",
+                Self::PscConnectionNotAccepted => "PSC_CONNECTION_NOT_ACCEPTED",
+                Self::PscEndpointAccessedFromPeeredNetwork => {
                     "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK"
                 }
-                Cause::PscNegProducerEndpointNoGlobalAccess => {
+                Self::PscNegProducerEndpointNoGlobalAccess => {
                     "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS"
                 }
-                Cause::PscNegProducerForwardingRuleMultiplePorts => {
+                Self::PscNegProducerForwardingRuleMultiplePorts => {
                     "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS"
                 }
-                Cause::CloudSqlPscNegUnsupported => "CLOUD_SQL_PSC_NEG_UNSUPPORTED",
-                Cause::NoNatSubnetsForPscServiceAttachment => {
+                Self::CloudSqlPscNegUnsupported => "CLOUD_SQL_PSC_NEG_UNSUPPORTED",
+                Self::NoNatSubnetsForPscServiceAttachment => {
                     "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT"
                 }
-                Cause::HybridNegNonDynamicRouteMatched => {
+                Self::PscTransitivityNotPropagated => "PSC_TRANSITIVITY_NOT_PROPAGATED",
+                Self::HybridNegNonDynamicRouteMatched => {
                     "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED"
                 }
-                Cause::HybridNegNonLocalDynamicRouteMatched => {
+                Self::HybridNegNonLocalDynamicRouteMatched => {
                     "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED"
                 }
-                Cause::CloudRunRevisionNotReady => "CLOUD_RUN_REVISION_NOT_READY",
-                Cause::DroppedInsidePscServiceProducer => {
+                Self::CloudRunRevisionNotReady => "CLOUD_RUN_REVISION_NOT_READY",
+                Self::DroppedInsidePscServiceProducer => {
                     "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"
                 }
-                Cause::LoadBalancerHasNoProxySubnet => {
-                    "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"
+                Self::LoadBalancerHasNoProxySubnet => "LOAD_BALANCER_HAS_NO_PROXY_SUBNET",
+                Self::CloudNatNoAddresses => "CLOUD_NAT_NO_ADDRESSES",
+                Self::RoutingLoop => "ROUTING_LOOP",
+                Self::DroppedInsideGoogleManagedService => {
+                    "DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE"
                 }
-                Cause::CloudNatNoAddresses => "CLOUD_NAT_NO_ADDRESSES",
-                Cause::RoutingLoop => "ROUTING_LOOP",
+                Self::LoadBalancerBackendInvalidNetwork => {
+                    "LOAD_BALANCER_BACKEND_INVALID_NETWORK"
+                }
+                Self::BackendServiceNamedPortNotDefined => {
+                    "BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED"
+                }
+                Self::DestinationIsPrivateNatIpRange => {
+                    "DESTINATION_IS_PRIVATE_NAT_IP_RANGE"
+                }
+                Self::DroppedInsideRedisInstanceService => {
+                    "DROPPED_INSIDE_REDIS_INSTANCE_SERVICE"
+                }
+                Self::RedisInstanceUnsupportedPort => "REDIS_INSTANCE_UNSUPPORTED_PORT",
+                Self::RedisInstanceConnectingFromPupiAddress => {
+                    "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS"
+                }
+                Self::RedisInstanceNoRouteToDestinationNetwork => {
+                    "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK"
+                }
+                Self::RedisInstanceNoExternalIp => "REDIS_INSTANCE_NO_EXTERNAL_IP",
+                Self::RedisInstanceUnsupportedProtocol => {
+                    "REDIS_INSTANCE_UNSUPPORTED_PROTOCOL"
+                }
+                Self::DroppedInsideRedisClusterService => {
+                    "DROPPED_INSIDE_REDIS_CLUSTER_SERVICE"
+                }
+                Self::RedisClusterUnsupportedPort => "REDIS_CLUSTER_UNSUPPORTED_PORT",
+                Self::RedisClusterNoExternalIp => "REDIS_CLUSTER_NO_EXTERNAL_IP",
+                Self::RedisClusterUnsupportedProtocol => {
+                    "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL"
+                }
+                Self::NoAdvertisedRouteToGcpDestination => {
+                    "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION"
+                }
+                Self::NoTrafficSelectorToGcpDestination => {
+                    "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION"
+                }
+                Self::NoKnownRouteFromPeeredNetworkToDestination => {
+                    "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION"
+                }
+                Self::PrivateNatToPscEndpointUnsupported => {
+                    "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED"
+                }
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2085,6 +2308,8 @@ pub mod drop_info {
                 "CLOUD_SQL_INSTANCE_NOT_RUNNING" => {
                     Some(Self::CloudSqlInstanceNotRunning)
                 }
+                "REDIS_INSTANCE_NOT_RUNNING" => Some(Self::RedisInstanceNotRunning),
+                "REDIS_CLUSTER_NOT_RUNNING" => Some(Self::RedisClusterNotRunning),
                 "TRAFFIC_TYPE_BLOCKED" => Some(Self::TrafficTypeBlocked),
                 "GKE_MASTER_UNAUTHORIZED_ACCESS" => {
                     Some(Self::GkeMasterUnauthorizedAccess)
@@ -2120,9 +2345,16 @@ pub mod drop_info {
                     Some(Self::PublicCloudSqlInstanceToPrivateDestination)
                 }
                 "CLOUD_SQL_INSTANCE_NO_ROUTE" => Some(Self::CloudSqlInstanceNoRoute),
+                "CLOUD_SQL_CONNECTOR_REQUIRED" => Some(Self::CloudSqlConnectorRequired),
                 "CLOUD_FUNCTION_NOT_ACTIVE" => Some(Self::CloudFunctionNotActive),
                 "VPC_CONNECTOR_NOT_SET" => Some(Self::VpcConnectorNotSet),
                 "VPC_CONNECTOR_NOT_RUNNING" => Some(Self::VpcConnectorNotRunning),
+                "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED" => {
+                    Some(Self::VpcConnectorServerlessTrafficBlocked)
+                }
+                "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED" => {
+                    Some(Self::VpcConnectorHealthCheckTrafficBlocked)
+                }
                 "FORWARDING_RULE_REGION_MISMATCH" => {
                     Some(Self::ForwardingRuleRegionMismatch)
                 }
@@ -2140,6 +2372,9 @@ pub mod drop_info {
                 "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT" => {
                     Some(Self::NoNatSubnetsForPscServiceAttachment)
                 }
+                "PSC_TRANSITIVITY_NOT_PROPAGATED" => {
+                    Some(Self::PscTransitivityNotPropagated)
+                }
                 "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED" => {
                     Some(Self::HybridNegNonDynamicRouteMatched)
                 }
@@ -2155,6 +2390,56 @@ pub mod drop_info {
                 }
                 "CLOUD_NAT_NO_ADDRESSES" => Some(Self::CloudNatNoAddresses),
                 "ROUTING_LOOP" => Some(Self::RoutingLoop),
+                "DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE" => {
+                    Some(Self::DroppedInsideGoogleManagedService)
+                }
+                "LOAD_BALANCER_BACKEND_INVALID_NETWORK" => {
+                    Some(Self::LoadBalancerBackendInvalidNetwork)
+                }
+                "BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED" => {
+                    Some(Self::BackendServiceNamedPortNotDefined)
+                }
+                "DESTINATION_IS_PRIVATE_NAT_IP_RANGE" => {
+                    Some(Self::DestinationIsPrivateNatIpRange)
+                }
+                "DROPPED_INSIDE_REDIS_INSTANCE_SERVICE" => {
+                    Some(Self::DroppedInsideRedisInstanceService)
+                }
+                "REDIS_INSTANCE_UNSUPPORTED_PORT" => {
+                    Some(Self::RedisInstanceUnsupportedPort)
+                }
+                "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS" => {
+                    Some(Self::RedisInstanceConnectingFromPupiAddress)
+                }
+                "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK" => {
+                    Some(Self::RedisInstanceNoRouteToDestinationNetwork)
+                }
+                "REDIS_INSTANCE_NO_EXTERNAL_IP" => Some(Self::RedisInstanceNoExternalIp),
+                "REDIS_INSTANCE_UNSUPPORTED_PROTOCOL" => {
+                    Some(Self::RedisInstanceUnsupportedProtocol)
+                }
+                "DROPPED_INSIDE_REDIS_CLUSTER_SERVICE" => {
+                    Some(Self::DroppedInsideRedisClusterService)
+                }
+                "REDIS_CLUSTER_UNSUPPORTED_PORT" => {
+                    Some(Self::RedisClusterUnsupportedPort)
+                }
+                "REDIS_CLUSTER_NO_EXTERNAL_IP" => Some(Self::RedisClusterNoExternalIp),
+                "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL" => {
+                    Some(Self::RedisClusterUnsupportedProtocol)
+                }
+                "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION" => {
+                    Some(Self::NoAdvertisedRouteToGcpDestination)
+                }
+                "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION" => {
+                    Some(Self::NoTrafficSelectorToGcpDestination)
+                }
+                "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION" => {
+                    Some(Self::NoKnownRouteFromPeeredNetworkToDestination)
+                }
+                "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED" => {
+                    Some(Self::PrivateNatToPscEndpointUnsupported)
+                }
                 _ => None,
             }
         }
@@ -2162,7 +2447,6 @@ pub mod drop_info {
 }
 /// For display only. Metadata associated with a Google Kubernetes Engine (GKE)
 /// cluster master.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GkeMasterInfo {
     /// URI of a GKE cluster.
@@ -2171,15 +2455,17 @@ pub struct GkeMasterInfo {
     /// URI of a GKE cluster network.
     #[prost(string, tag = "4")]
     pub cluster_network_uri: ::prost::alloc::string::String,
-    /// Internal IP address of a GKE cluster master.
+    /// Internal IP address of a GKE cluster control plane.
     #[prost(string, tag = "5")]
     pub internal_ip: ::prost::alloc::string::String,
-    /// External IP address of a GKE cluster master.
+    /// External IP address of a GKE cluster control plane.
     #[prost(string, tag = "6")]
     pub external_ip: ::prost::alloc::string::String,
+    /// DNS endpoint of a GKE cluster control plane.
+    #[prost(string, tag = "7")]
+    pub dns_endpoint: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a Cloud SQL instance.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudSqlInstanceInfo {
     /// Name of a Cloud SQL instance.
@@ -2202,8 +2488,54 @@ pub struct CloudSqlInstanceInfo {
     #[prost(string, tag = "7")]
     pub region: ::prost::alloc::string::String,
 }
+/// For display only. Metadata associated with a Cloud Redis Instance.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RedisInstanceInfo {
+    /// Name of a Cloud Redis Instance.
+    #[prost(string, tag = "1")]
+    pub display_name: ::prost::alloc::string::String,
+    /// URI of a Cloud Redis Instance.
+    #[prost(string, tag = "2")]
+    pub uri: ::prost::alloc::string::String,
+    /// URI of a Cloud Redis Instance network.
+    #[prost(string, tag = "3")]
+    pub network_uri: ::prost::alloc::string::String,
+    /// Primary endpoint IP address of a Cloud Redis Instance.
+    #[prost(string, tag = "4")]
+    pub primary_endpoint_ip: ::prost::alloc::string::String,
+    /// Read endpoint IP address of a Cloud Redis Instance (if applicable).
+    #[prost(string, tag = "5")]
+    pub read_endpoint_ip: ::prost::alloc::string::String,
+    /// Region in which the Cloud Redis Instance is defined.
+    #[prost(string, tag = "6")]
+    pub region: ::prost::alloc::string::String,
+}
+/// For display only. Metadata associated with a Redis Cluster.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RedisClusterInfo {
+    /// Name of a Redis Cluster.
+    #[prost(string, tag = "1")]
+    pub display_name: ::prost::alloc::string::String,
+    /// URI of a Redis Cluster in format
+    /// "projects/{project_id}/locations/{location}/clusters/{cluster_id}"
+    #[prost(string, tag = "2")]
+    pub uri: ::prost::alloc::string::String,
+    /// URI of a Redis Cluster network in format
+    /// "projects/{project_id}/global/networks/{network_id}".
+    #[prost(string, tag = "3")]
+    pub network_uri: ::prost::alloc::string::String,
+    /// Discovery endpoint IP address of a Redis Cluster.
+    #[prost(string, tag = "4")]
+    pub discovery_endpoint_ip_address: ::prost::alloc::string::String,
+    /// Secondary endpoint IP address of a Redis Cluster.
+    #[prost(string, tag = "5")]
+    pub secondary_endpoint_ip_address: ::prost::alloc::string::String,
+    /// Name of the region in which the Redis Cluster is defined. For example,
+    /// "us-central1".
+    #[prost(string, tag = "6")]
+    pub location: ::prost::alloc::string::String,
+}
 /// For display only. Metadata associated with a Cloud Function.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudFunctionInfo {
     /// Name of a Cloud Function.
@@ -2220,7 +2552,6 @@ pub struct CloudFunctionInfo {
     pub version_id: i64,
 }
 /// For display only. Metadata associated with a Cloud Run revision.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CloudRunRevisionInfo {
     /// Name of a Cloud Run revision.
@@ -2237,7 +2568,6 @@ pub struct CloudRunRevisionInfo {
     pub service_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with an App Engine version.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppEngineVersionInfo {
     /// Name of an App Engine version.
@@ -2254,7 +2584,6 @@ pub struct AppEngineVersionInfo {
     pub environment: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with a VPC connector.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VpcConnectorInfo {
     /// Name of a VPC connector.
@@ -2268,7 +2597,6 @@ pub struct VpcConnectorInfo {
     pub location: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with NAT.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NatInfo {
     /// Type of NAT.
@@ -2347,11 +2675,11 @@ pub mod nat_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Type::Unspecified => "TYPE_UNSPECIFIED",
-                Type::InternalToExternal => "INTERNAL_TO_EXTERNAL",
-                Type::ExternalToInternal => "EXTERNAL_TO_INTERNAL",
-                Type::CloudNat => "CLOUD_NAT",
-                Type::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
+                Self::Unspecified => "TYPE_UNSPECIFIED",
+                Self::InternalToExternal => "INTERNAL_TO_EXTERNAL",
+                Self::ExternalToInternal => "EXTERNAL_TO_INTERNAL",
+                Self::CloudNat => "CLOUD_NAT",
+                Self::PrivateServiceConnect => "PRIVATE_SERVICE_CONNECT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2368,7 +2696,6 @@ pub mod nat_info {
     }
 }
 /// For display only. Metadata associated with ProxyConnection.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProxyConnectionInfo {
     /// IP protocol in string format, for example: "TCP", "UDP", "ICMP".
@@ -2409,7 +2736,6 @@ pub struct ProxyConnectionInfo {
     pub network_uri: ::prost::alloc::string::String,
 }
 /// For display only. Metadata associated with the load balancer backend.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoadBalancerBackendInfo {
     /// Display name of the backend. For example, it might be an instance name for
@@ -2497,21 +2823,11 @@ pub mod load_balancer_backend_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                HealthCheckFirewallsConfigState::Unspecified => {
-                    "HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsConfigured => {
-                    "FIREWALLS_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsPartiallyConfigured => {
-                    "FIREWALLS_PARTIALLY_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsNotConfigured => {
-                    "FIREWALLS_NOT_CONFIGURED"
-                }
-                HealthCheckFirewallsConfigState::FirewallsUnsupported => {
-                    "FIREWALLS_UNSUPPORTED"
-                }
+                Self::Unspecified => "HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED",
+                Self::FirewallsConfigured => "FIREWALLS_CONFIGURED",
+                Self::FirewallsPartiallyConfigured => "FIREWALLS_PARTIALLY_CONFIGURED",
+                Self::FirewallsNotConfigured => "FIREWALLS_NOT_CONFIGURED",
+                Self::FirewallsUnsupported => "FIREWALLS_UNSUPPORTED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2532,12 +2848,19 @@ pub mod load_balancer_backend_info {
     }
 }
 /// For display only. Metadata associated with Storage Bucket.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageBucketInfo {
     /// Cloud Storage Bucket name.
     #[prost(string, tag = "1")]
     pub bucket: ::prost::alloc::string::String,
+}
+/// For display only. Metadata associated with the serverless network endpoint
+/// group backend.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ServerlessNegInfo {
+    /// URI of the serverless network endpoint group.
+    #[prost(string, tag = "1")]
+    pub neg_uri: ::prost::alloc::string::String,
 }
 /// Type of a load balancer. For more information, see [Summary of Google Cloud
 /// load
@@ -2576,21 +2899,17 @@ impl LoadBalancerType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LoadBalancerType::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
-            LoadBalancerType::HttpsAdvancedLoadBalancer => "HTTPS_ADVANCED_LOAD_BALANCER",
-            LoadBalancerType::HttpsLoadBalancer => "HTTPS_LOAD_BALANCER",
-            LoadBalancerType::RegionalHttpsLoadBalancer => "REGIONAL_HTTPS_LOAD_BALANCER",
-            LoadBalancerType::InternalHttpsLoadBalancer => "INTERNAL_HTTPS_LOAD_BALANCER",
-            LoadBalancerType::SslProxyLoadBalancer => "SSL_PROXY_LOAD_BALANCER",
-            LoadBalancerType::TcpProxyLoadBalancer => "TCP_PROXY_LOAD_BALANCER",
-            LoadBalancerType::InternalTcpProxyLoadBalancer => {
-                "INTERNAL_TCP_PROXY_LOAD_BALANCER"
-            }
-            LoadBalancerType::NetworkLoadBalancer => "NETWORK_LOAD_BALANCER",
-            LoadBalancerType::LegacyNetworkLoadBalancer => "LEGACY_NETWORK_LOAD_BALANCER",
-            LoadBalancerType::TcpUdpInternalLoadBalancer => {
-                "TCP_UDP_INTERNAL_LOAD_BALANCER"
-            }
+            Self::Unspecified => "LOAD_BALANCER_TYPE_UNSPECIFIED",
+            Self::HttpsAdvancedLoadBalancer => "HTTPS_ADVANCED_LOAD_BALANCER",
+            Self::HttpsLoadBalancer => "HTTPS_LOAD_BALANCER",
+            Self::RegionalHttpsLoadBalancer => "REGIONAL_HTTPS_LOAD_BALANCER",
+            Self::InternalHttpsLoadBalancer => "INTERNAL_HTTPS_LOAD_BALANCER",
+            Self::SslProxyLoadBalancer => "SSL_PROXY_LOAD_BALANCER",
+            Self::TcpProxyLoadBalancer => "TCP_PROXY_LOAD_BALANCER",
+            Self::InternalTcpProxyLoadBalancer => "INTERNAL_TCP_PROXY_LOAD_BALANCER",
+            Self::NetworkLoadBalancer => "NETWORK_LOAD_BALANCER",
+            Self::LegacyNetworkLoadBalancer => "LEGACY_NETWORK_LOAD_BALANCER",
+            Self::TcpUdpInternalLoadBalancer => "TCP_UDP_INTERNAL_LOAD_BALANCER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2614,10 +2933,9 @@ impl LoadBalancerType {
     }
 }
 /// A Connectivity Test for a network reachability analysis.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectivityTest {
-    /// Required. Unique name of the resource using the form:
+    /// Identifier. Unique name of the resource using the form:
     ///      `projects/{project_id}/locations/global/connectivityTests/{test_id}`
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
@@ -2702,13 +3020,22 @@ pub struct ConnectivityTest {
     /// existing test.
     #[prost(message, optional, tag = "14")]
     pub probing_details: ::core::option::Option<ProbingDetails>,
+    /// Whether run analysis for the return path from destination to source.
+    /// Default value is false.
+    #[prost(bool, tag = "15")]
+    pub round_trip: bool,
+    /// Output only. The reachability details of this test from the latest run for
+    /// the return path. The details are updated when creating a new test,
+    /// updating an existing test, or triggering a one-time rerun of an existing
+    /// test.
+    #[prost(message, optional, tag = "16")]
+    pub return_reachability_details: ::core::option::Option<ReachabilityDetails>,
     /// Whether the test should skip firewall checking.
     /// If not provided, we assume false.
     #[prost(bool, tag = "17")]
     pub bypass_firewall_checks: bool,
 }
 /// Source or destination of the Connectivity Test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endpoint {
     /// The IP address of the endpoint, which can be an external or internal IP.
@@ -2739,13 +3066,27 @@ pub struct Endpoint {
     /// Output only. Type of the load balancer the forwarding rule points to.
     #[prost(enumeration = "LoadBalancerType", optional, tag = "16")]
     pub load_balancer_type: ::core::option::Option<i32>,
-    /// A cluster URI for [Google Kubernetes Engine
-    /// master](<https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture>).
+    /// A cluster URI for [Google Kubernetes Engine cluster control
+    /// plane](<https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture>).
     #[prost(string, tag = "7")]
     pub gke_master_cluster: ::prost::alloc::string::String,
+    /// DNS endpoint of [Google Kubernetes Engine cluster control
+    /// plane](<https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture>).
+    /// Requires gke_master_cluster to be set, can't be used simultaneoulsly with
+    /// ip_address or network. Applicable only to destination endpoint.
+    #[prost(string, tag = "19")]
+    pub fqdn: ::prost::alloc::string::String,
     /// A [Cloud SQL](<https://cloud.google.com/sql>) instance URI.
     #[prost(string, tag = "8")]
     pub cloud_sql_instance: ::prost::alloc::string::String,
+    /// A [Redis Instance](<https://cloud.google.com/memorystore/docs/redis>)
+    /// URI.
+    #[prost(string, tag = "17")]
+    pub redis_instance: ::prost::alloc::string::String,
+    /// A [Redis Cluster](<https://cloud.google.com/memorystore/docs/cluster>)
+    /// URI.
+    #[prost(string, tag = "18")]
+    pub redis_cluster: ::prost::alloc::string::String,
     /// A [Cloud Function](<https://cloud.google.com/functions>).
     #[prost(message, optional, tag = "10")]
     pub cloud_function: ::core::option::Option<endpoint::CloudFunctionEndpoint>,
@@ -2780,7 +3121,6 @@ pub struct Endpoint {
 /// Nested message and enum types in `Endpoint`.
 pub mod endpoint {
     /// Wrapper for Cloud Function attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudFunctionEndpoint {
         /// A [Cloud Function](<https://cloud.google.com/functions>) name.
@@ -2788,7 +3128,6 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for the App Engine service version attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AppEngineVersionEndpoint {
         /// An [App Engine](<https://cloud.google.com/appengine>) [service
@@ -2798,7 +3137,6 @@ pub mod endpoint {
         pub uri: ::prost::alloc::string::String,
     }
     /// Wrapper for Cloud Run revision attributes.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CloudRunRevisionEndpoint {
         /// A [Cloud Run](<https://cloud.google.com/run>)
@@ -2841,9 +3179,9 @@ pub mod endpoint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                NetworkType::Unspecified => "NETWORK_TYPE_UNSPECIFIED",
-                NetworkType::GcpNetwork => "GCP_NETWORK",
-                NetworkType::NonGcpNetwork => "NON_GCP_NETWORK",
+                Self::Unspecified => "NETWORK_TYPE_UNSPECIFIED",
+                Self::GcpNetwork => "GCP_NETWORK",
+                Self::NonGcpNetwork => "NON_GCP_NETWORK",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2889,11 +3227,11 @@ pub mod endpoint {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ForwardingRuleTarget::Unspecified => "FORWARDING_RULE_TARGET_UNSPECIFIED",
-                ForwardingRuleTarget::Instance => "INSTANCE",
-                ForwardingRuleTarget::LoadBalancer => "LOAD_BALANCER",
-                ForwardingRuleTarget::VpnGateway => "VPN_GATEWAY",
-                ForwardingRuleTarget::Psc => "PSC",
+                Self::Unspecified => "FORWARDING_RULE_TARGET_UNSPECIFIED",
+                Self::Instance => "INSTANCE",
+                Self::LoadBalancer => "LOAD_BALANCER",
+                Self::VpnGateway => "VPN_GATEWAY",
+                Self::Psc => "PSC",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2910,7 +3248,6 @@ pub mod endpoint {
     }
 }
 /// Results of the configuration analysis from the last run of the test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReachabilityDetails {
     /// The overall result of the test's configuration analysis.
@@ -2980,11 +3317,11 @@ pub mod reachability_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unspecified => "RESULT_UNSPECIFIED",
-                Result::Reachable => "REACHABLE",
-                Result::Unreachable => "UNREACHABLE",
-                Result::Ambiguous => "AMBIGUOUS",
-                Result::Undetermined => "UNDETERMINED",
+                Self::Unspecified => "RESULT_UNSPECIFIED",
+                Self::Reachable => "REACHABLE",
+                Self::Unreachable => "UNREACHABLE",
+                Self::Ambiguous => "AMBIGUOUS",
+                Self::Undetermined => "UNDETERMINED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3001,7 +3338,6 @@ pub mod reachability_details {
     }
 }
 /// Latency percentile rank and value.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct LatencyPercentile {
     /// Percentage of samples this data point applies to.
@@ -3014,7 +3350,6 @@ pub struct LatencyPercentile {
     pub latency_micros: i64,
 }
 /// Describes measured latency distribution.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LatencyDistribution {
     /// Representative latency percentiles.
@@ -3022,7 +3357,6 @@ pub struct LatencyDistribution {
     pub latency_percentiles: ::prost::alloc::vec::Vec<LatencyPercentile>,
 }
 /// Results of active probing from the last run of the test.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProbingDetails {
     /// The overall result of active probing.
@@ -3066,7 +3400,6 @@ pub struct ProbingDetails {
 pub mod probing_details {
     /// Representation of a network edge location as per
     /// <https://cloud.google.com/vpc/docs/edge-locations.>
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct EdgeLocation {
         /// Name of the metropolitan area.
@@ -3109,11 +3442,11 @@ pub mod probing_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ProbingResult::Unspecified => "PROBING_RESULT_UNSPECIFIED",
-                ProbingResult::Reachable => "REACHABLE",
-                ProbingResult::Unreachable => "UNREACHABLE",
-                ProbingResult::ReachabilityInconsistent => "REACHABILITY_INCONSISTENT",
-                ProbingResult::Undetermined => "UNDETERMINED",
+                Self::Unspecified => "PROBING_RESULT_UNSPECIFIED",
+                Self::Reachable => "REACHABLE",
+                Self::Unreachable => "UNREACHABLE",
+                Self::ReachabilityInconsistent => "REACHABILITY_INCONSISTENT",
+                Self::Undetermined => "UNDETERMINED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3157,9 +3490,9 @@ pub mod probing_details {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ProbingAbortCause::Unspecified => "PROBING_ABORT_CAUSE_UNSPECIFIED",
-                ProbingAbortCause::PermissionDenied => "PERMISSION_DENIED",
-                ProbingAbortCause::NoSourceLocation => "NO_SOURCE_LOCATION",
+                Self::Unspecified => "PROBING_ABORT_CAUSE_UNSPECIFIED",
+                Self::PermissionDenied => "PERMISSION_DENIED",
+                Self::NoSourceLocation => "NO_SOURCE_LOCATION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3174,7 +3507,6 @@ pub mod probing_details {
     }
 }
 /// Request for the `ListConnectivityTests` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsRequest {
     /// Required. The parent resource of the Connectivity Tests:
@@ -3212,7 +3544,6 @@ pub struct ListConnectivityTestsRequest {
     pub order_by: ::prost::alloc::string::String,
 }
 /// Response for the `ListConnectivityTests` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListConnectivityTestsResponse {
     /// List of Connectivity Tests.
@@ -3226,7 +3557,6 @@ pub struct ListConnectivityTestsResponse {
     pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request for the `GetConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetConnectivityTestRequest {
     /// Required. `ConnectivityTest` resource name using the form:
@@ -3235,7 +3565,6 @@ pub struct GetConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `CreateConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateConnectivityTestRequest {
     /// Required. The parent resource of the Connectivity Test to create:
@@ -3257,7 +3586,6 @@ pub struct CreateConnectivityTestRequest {
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `UpdateConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateConnectivityTestRequest {
     /// Required. Mask of fields to update. At least one path must be supplied in
@@ -3269,7 +3597,6 @@ pub struct UpdateConnectivityTestRequest {
     pub resource: ::core::option::Option<ConnectivityTest>,
 }
 /// Request for the `DeleteConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteConnectivityTestRequest {
     /// Required. Connectivity Test resource name using the form:
@@ -3278,7 +3605,6 @@ pub struct DeleteConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `RerunConnectivityTest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RerunConnectivityTestRequest {
     /// Required. Connectivity Test resource name using the form:
@@ -3287,7 +3613,6 @@ pub struct RerunConnectivityTestRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Metadata describing an [Operation][google.longrunning.Operation]
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationMetadata {
     /// The time the operation was created.
@@ -3315,7 +3640,13 @@ pub struct OperationMetadata {
 }
 /// Generated client implementations.
 pub mod reachability_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// The Reachability service in the Google Cloud Network Management API provides
@@ -3345,8 +3676,8 @@ pub mod reachability_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3371,7 +3702,7 @@ pub mod reachability_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             ReachabilityServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3418,8 +3749,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3449,8 +3779,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3492,8 +3821,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3524,7 +3852,7 @@ pub mod reachability_service_client {
         ///
         /// If the endpoint specifications in `ConnectivityTest` are incomplete, the
         /// reachability result returns a value of `AMBIGUOUS`. See the documentation
-        /// in `ConnectivityTest` for for more details.
+        /// in `ConnectivityTest` for more details.
         pub async fn update_connectivity_test(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateConnectivityTestRequest>,
@@ -3536,8 +3864,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3578,8 +3905,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3609,8 +3935,7 @@ pub mod reachability_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -3624,6 +3949,639 @@ pub mod reachability_service_client {
                     GrpcMethod::new(
                         "google.cloud.networkmanagement.v1.ReachabilityService",
                         "DeleteConnectivityTest",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+    }
+}
+/// A configuration to generate VPC Flow Logs.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct VpcFlowLogsConfig {
+    /// Identifier. Unique name of the configuration using the form:
+    ///      `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Optional. The user-supplied description of the VPC Flow Logs configuration.
+    /// Maximum of 512 characters.
+    #[prost(string, optional, tag = "2")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// Optional. The state of the VPC Flow Log configuration. Default value is
+    /// ENABLED. When creating a new configuration, it must be enabled.
+    #[prost(enumeration = "vpc_flow_logs_config::State", optional, tag = "3")]
+    pub state: ::core::option::Option<i32>,
+    /// Optional. The aggregation interval for the logs. Default value is
+    /// INTERVAL_5_SEC.
+    #[prost(
+        enumeration = "vpc_flow_logs_config::AggregationInterval",
+        optional,
+        tag = "4"
+    )]
+    pub aggregation_interval: ::core::option::Option<i32>,
+    /// Optional. The value of the field must be in (0, 1]. The sampling rate of
+    /// VPC Flow Logs where 1.0 means all collected logs are reported. Setting the
+    /// sampling rate to 0.0 is not allowed. If you want to disable VPC Flow Logs,
+    /// use the state field instead. Default value is 1.0.
+    #[prost(float, optional, tag = "5")]
+    pub flow_sampling: ::core::option::Option<f32>,
+    /// Optional. Configures whether all, none or a subset of metadata fields
+    /// should be added to the reported VPC flow logs. Default value is
+    /// INCLUDE_ALL_METADATA.
+    #[prost(enumeration = "vpc_flow_logs_config::Metadata", optional, tag = "6")]
+    pub metadata: ::core::option::Option<i32>,
+    /// Optional. Custom metadata fields to include in the reported VPC flow logs.
+    /// Can only be specified if "metadata" was set to CUSTOM_METADATA.
+    #[prost(string, repeated, tag = "7")]
+    pub metadata_fields: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Optional. Export filter used to define which VPC Flow Logs should be
+    /// logged.
+    #[prost(string, optional, tag = "8")]
+    pub filter_expr: ::core::option::Option<::prost::alloc::string::String>,
+    /// Output only. A diagnostic bit - describes the state of the configured
+    /// target resource for diagnostic purposes.
+    #[prost(
+        enumeration = "vpc_flow_logs_config::TargetResourceState",
+        optional,
+        tag = "12"
+    )]
+    pub target_resource_state: ::core::option::Option<i32>,
+    /// Optional. Resource labels to represent user-provided metadata.
+    #[prost(map = "string, string", tag = "11")]
+    pub labels: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        ::prost::alloc::string::String,
+    >,
+    /// Output only. The time the config was created.
+    #[prost(message, optional, tag = "9")]
+    pub create_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// Output only. The time the config was updated.
+    #[prost(message, optional, tag = "10")]
+    pub update_time: ::core::option::Option<::prost_types::Timestamp>,
+    /// Reference to the resource of the config scope. That is, the scope from
+    /// which traffic is logged. The target resource must belong to the same
+    /// project as the configuration.
+    #[prost(oneof = "vpc_flow_logs_config::TargetResource", tags = "102, 103")]
+    pub target_resource: ::core::option::Option<vpc_flow_logs_config::TargetResource>,
+}
+/// Nested message and enum types in `VpcFlowLogsConfig`.
+pub mod vpc_flow_logs_config {
+    /// Determines whether this configuration will be generating logs.
+    /// Setting state=DISABLED will pause the log generation for this config.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum State {
+        /// If not specified, will default to ENABLED.
+        Unspecified = 0,
+        /// When ENABLED, this configuration will generate logs.
+        Enabled = 1,
+        /// When DISABLED, this configuration will not generate logs.
+        Disabled = 2,
+    }
+    impl State {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "STATE_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATE_UNSPECIFIED" => Some(Self::Unspecified),
+                "ENABLED" => Some(Self::Enabled),
+                "DISABLED" => Some(Self::Disabled),
+                _ => None,
+            }
+        }
+    }
+    /// Toggles the aggregation interval for collecting flow logs by 5-tuple.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum AggregationInterval {
+        /// If not specified, will default to INTERVAL_5_SEC.
+        Unspecified = 0,
+        /// Aggregate logs in 5s intervals.
+        Interval5Sec = 1,
+        /// Aggregate logs in 30s intervals.
+        Interval30Sec = 2,
+        /// Aggregate logs in 1m intervals.
+        Interval1Min = 3,
+        /// Aggregate logs in 5m intervals.
+        Interval5Min = 4,
+        /// Aggregate logs in 10m intervals.
+        Interval10Min = 5,
+        /// Aggregate logs in 15m intervals.
+        Interval15Min = 6,
+    }
+    impl AggregationInterval {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "AGGREGATION_INTERVAL_UNSPECIFIED",
+                Self::Interval5Sec => "INTERVAL_5_SEC",
+                Self::Interval30Sec => "INTERVAL_30_SEC",
+                Self::Interval1Min => "INTERVAL_1_MIN",
+                Self::Interval5Min => "INTERVAL_5_MIN",
+                Self::Interval10Min => "INTERVAL_10_MIN",
+                Self::Interval15Min => "INTERVAL_15_MIN",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "AGGREGATION_INTERVAL_UNSPECIFIED" => Some(Self::Unspecified),
+                "INTERVAL_5_SEC" => Some(Self::Interval5Sec),
+                "INTERVAL_30_SEC" => Some(Self::Interval30Sec),
+                "INTERVAL_1_MIN" => Some(Self::Interval1Min),
+                "INTERVAL_5_MIN" => Some(Self::Interval5Min),
+                "INTERVAL_10_MIN" => Some(Self::Interval10Min),
+                "INTERVAL_15_MIN" => Some(Self::Interval15Min),
+                _ => None,
+            }
+        }
+    }
+    /// Configures which log fields would be included.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Metadata {
+        /// If not specified, will default to INCLUDE_ALL_METADATA.
+        Unspecified = 0,
+        /// Include all metadata fields.
+        IncludeAllMetadata = 1,
+        /// Exclude all metadata fields.
+        ExcludeAllMetadata = 2,
+        /// Include only custom fields (specified in metadata_fields).
+        CustomMetadata = 3,
+    }
+    impl Metadata {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "METADATA_UNSPECIFIED",
+                Self::IncludeAllMetadata => "INCLUDE_ALL_METADATA",
+                Self::ExcludeAllMetadata => "EXCLUDE_ALL_METADATA",
+                Self::CustomMetadata => "CUSTOM_METADATA",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "METADATA_UNSPECIFIED" => Some(Self::Unspecified),
+                "INCLUDE_ALL_METADATA" => Some(Self::IncludeAllMetadata),
+                "EXCLUDE_ALL_METADATA" => Some(Self::ExcludeAllMetadata),
+                "CUSTOM_METADATA" => Some(Self::CustomMetadata),
+                _ => None,
+            }
+        }
+    }
+    /// Optional states of the target resource that are used as part of the
+    /// diagnostic bit.
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum TargetResourceState {
+        /// Unspecified target resource state.
+        Unspecified = 0,
+        /// Indicates that the target resource exists.
+        TargetResourceExists = 1,
+        /// Indicates that the target resource does not exist.
+        TargetResourceDoesNotExist = 2,
+    }
+    impl TargetResourceState {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::Unspecified => "TARGET_RESOURCE_STATE_UNSPECIFIED",
+                Self::TargetResourceExists => "TARGET_RESOURCE_EXISTS",
+                Self::TargetResourceDoesNotExist => "TARGET_RESOURCE_DOES_NOT_EXIST",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "TARGET_RESOURCE_STATE_UNSPECIFIED" => Some(Self::Unspecified),
+                "TARGET_RESOURCE_EXISTS" => Some(Self::TargetResourceExists),
+                "TARGET_RESOURCE_DOES_NOT_EXIST" => {
+                    Some(Self::TargetResourceDoesNotExist)
+                }
+                _ => None,
+            }
+        }
+    }
+    /// Reference to the resource of the config scope. That is, the scope from
+    /// which traffic is logged. The target resource must belong to the same
+    /// project as the configuration.
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum TargetResource {
+        /// Traffic will be logged from the Interconnect Attachment.
+        /// Format:
+        /// projects/{project_id}/regions/{region}/interconnectAttachments/{name}
+        #[prost(string, tag = "102")]
+        InterconnectAttachment(::prost::alloc::string::String),
+        /// Traffic will be logged from the VPN Tunnel.
+        /// Format: projects/{project_id}/regions/{region}/vpnTunnels/{name}
+        #[prost(string, tag = "103")]
+        VpnTunnel(::prost::alloc::string::String),
+    }
+}
+/// Request for the `ListVpcFlowLogsConfigs` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListVpcFlowLogsConfigsRequest {
+    /// Required. The parent resource of the VpcFlowLogsConfig:
+    ///      `projects/{project_id}/locations/global`
+    #[prost(string, tag = "1")]
+    pub parent: ::prost::alloc::string::String,
+    /// Optional. Number of `VpcFlowLogsConfigs` to return.
+    #[prost(int32, tag = "2")]
+    pub page_size: i32,
+    /// Optional. Page token from an earlier query, as returned in
+    /// `next_page_token`.
+    #[prost(string, tag = "3")]
+    pub page_token: ::prost::alloc::string::String,
+    /// Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+    /// A filter expression must use the supported \[CEL logic operators\]
+    /// (<https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators>).
+    #[prost(string, tag = "4")]
+    pub filter: ::prost::alloc::string::String,
+    /// Optional. Field to use to sort the list.
+    #[prost(string, tag = "5")]
+    pub order_by: ::prost::alloc::string::String,
+}
+/// Response for the `ListVpcFlowLogsConfigs` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListVpcFlowLogsConfigsResponse {
+    /// List of VPC Flow Log configurations.
+    #[prost(message, repeated, tag = "1")]
+    pub vpc_flow_logs_configs: ::prost::alloc::vec::Vec<VpcFlowLogsConfig>,
+    /// Page token to fetch the next set of configurations.
+    #[prost(string, tag = "2")]
+    pub next_page_token: ::prost::alloc::string::String,
+    /// Locations that could not be reached (when querying all locations with `-`).
+    #[prost(string, repeated, tag = "3")]
+    pub unreachable: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Request for the `GetVpcFlowLogsConfig` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetVpcFlowLogsConfigRequest {
+    /// Required. `VpcFlowLogsConfig` resource name using the form:
+    ///      `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
+/// Request for the `CreateVpcFlowLogsConfig` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateVpcFlowLogsConfigRequest {
+    /// Required. The parent resource of the VPC Flow Logs configuration to create:
+    ///      `projects/{project_id}/locations/global`
+    #[prost(string, tag = "1")]
+    pub parent: ::prost::alloc::string::String,
+    /// Required. ID of the `VpcFlowLogsConfig`.
+    #[prost(string, tag = "2")]
+    pub vpc_flow_logs_config_id: ::prost::alloc::string::String,
+    /// Required. A `VpcFlowLogsConfig` resource
+    #[prost(message, optional, tag = "3")]
+    pub vpc_flow_logs_config: ::core::option::Option<VpcFlowLogsConfig>,
+}
+/// Request for the `UpdateVpcFlowLogsConfig` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateVpcFlowLogsConfigRequest {
+    /// Required. Mask of fields to update. At least one path must be supplied in
+    /// this field.
+    #[prost(message, optional, tag = "1")]
+    pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
+    /// Required. Only fields specified in update_mask are updated.
+    #[prost(message, optional, tag = "2")]
+    pub vpc_flow_logs_config: ::core::option::Option<VpcFlowLogsConfig>,
+}
+/// Request for the `DeleteVpcFlowLogsConfig` method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteVpcFlowLogsConfigRequest {
+    /// Required. `VpcFlowLogsConfig` resource name using the form:
+    ///      `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
+/// Generated client implementations.
+pub mod vpc_flow_logs_service_client {
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    /// The VPC Flow Logs service in the Google Cloud Network Management API provides
+    /// configurations that generate Flow Logs. The service and the configuration
+    /// resources created using this service are global.
+    #[derive(Debug, Clone)]
+    pub struct VpcFlowLogsServiceClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl VpcFlowLogsServiceClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> VpcFlowLogsServiceClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> VpcFlowLogsServiceClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+        {
+            VpcFlowLogsServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        /// Lists all `VpcFlowLogsConfigs` in a given project.
+        pub async fn list_vpc_flow_logs_configs(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListVpcFlowLogsConfigsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListVpcFlowLogsConfigsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.networkmanagement.v1.VpcFlowLogsService/ListVpcFlowLogsConfigs",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.networkmanagement.v1.VpcFlowLogsService",
+                        "ListVpcFlowLogsConfigs",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Gets the details of a specific `VpcFlowLogsConfig`.
+        pub async fn get_vpc_flow_logs_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetVpcFlowLogsConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::VpcFlowLogsConfig>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.networkmanagement.v1.VpcFlowLogsService/GetVpcFlowLogsConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.networkmanagement.v1.VpcFlowLogsService",
+                        "GetVpcFlowLogsConfig",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Creates a new `VpcFlowLogsConfig`.
+        /// If a configuration with the exact same settings already exists (even if the
+        /// ID is different), the creation fails.
+        /// Notes:
+        ///
+        ///   1. Creating a configuration with state=DISABLED will fail
+        ///   2. The following fields are not considered as `settings` for the purpose
+        ///   of the check mentioned above, therefore - creating another configuration
+        ///   with the same fields but different values for the following fields will
+        ///   fail as well:
+        ///       * name
+        ///       * create_time
+        ///       * update_time
+        ///       * labels
+        ///       * description
+        pub async fn create_vpc_flow_logs_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateVpcFlowLogsConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.networkmanagement.v1.VpcFlowLogsService/CreateVpcFlowLogsConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.networkmanagement.v1.VpcFlowLogsService",
+                        "CreateVpcFlowLogsConfig",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Updates an existing `VpcFlowLogsConfig`.
+        /// If a configuration with the exact same settings already exists (even if the
+        /// ID is different), the creation fails.
+        /// Notes:
+        ///
+        ///   1. Updating a configuration with state=DISABLED will fail.
+        ///   2. The following fields are not considered as `settings` for the purpose
+        ///   of the check mentioned above, therefore - updating another configuration
+        ///   with the same fields but different values for the following fields will
+        ///   fail as well:
+        ///       * name
+        ///       * create_time
+        ///       * update_time
+        ///       * labels
+        ///       * description
+        pub async fn update_vpc_flow_logs_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateVpcFlowLogsConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.networkmanagement.v1.VpcFlowLogsService/UpdateVpcFlowLogsConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.networkmanagement.v1.VpcFlowLogsService",
+                        "UpdateVpcFlowLogsConfig",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Deletes a specific `VpcFlowLogsConfig`.
+        pub async fn delete_vpc_flow_logs_config(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteVpcFlowLogsConfigRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::super::super::super::longrunning::Operation>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.networkmanagement.v1.VpcFlowLogsService/DeleteVpcFlowLogsConfig",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.networkmanagement.v1.VpcFlowLogsService",
+                        "DeleteVpcFlowLogsConfig",
                     ),
                 );
             self.inner.unary(req, path, codec).await

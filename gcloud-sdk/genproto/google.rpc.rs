@@ -6,7 +6,6 @@
 ///
 /// You can find out more about this error model and how to work with it in the
 /// [API Design Guide](<https://cloud.google.com/apis/design/errors>).
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Status {
     /// The status code, which should be an enum value of
@@ -179,23 +178,23 @@ impl Code {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Code::Ok => "OK",
-            Code::Cancelled => "CANCELLED",
-            Code::Unknown => "UNKNOWN",
-            Code::InvalidArgument => "INVALID_ARGUMENT",
-            Code::DeadlineExceeded => "DEADLINE_EXCEEDED",
-            Code::NotFound => "NOT_FOUND",
-            Code::AlreadyExists => "ALREADY_EXISTS",
-            Code::PermissionDenied => "PERMISSION_DENIED",
-            Code::Unauthenticated => "UNAUTHENTICATED",
-            Code::ResourceExhausted => "RESOURCE_EXHAUSTED",
-            Code::FailedPrecondition => "FAILED_PRECONDITION",
-            Code::Aborted => "ABORTED",
-            Code::OutOfRange => "OUT_OF_RANGE",
-            Code::Unimplemented => "UNIMPLEMENTED",
-            Code::Internal => "INTERNAL",
-            Code::Unavailable => "UNAVAILABLE",
-            Code::DataLoss => "DATA_LOSS",
+            Self::Ok => "OK",
+            Self::Cancelled => "CANCELLED",
+            Self::Unknown => "UNKNOWN",
+            Self::InvalidArgument => "INVALID_ARGUMENT",
+            Self::DeadlineExceeded => "DEADLINE_EXCEEDED",
+            Self::NotFound => "NOT_FOUND",
+            Self::AlreadyExists => "ALREADY_EXISTS",
+            Self::PermissionDenied => "PERMISSION_DENIED",
+            Self::Unauthenticated => "UNAUTHENTICATED",
+            Self::ResourceExhausted => "RESOURCE_EXHAUSTED",
+            Self::FailedPrecondition => "FAILED_PRECONDITION",
+            Self::Aborted => "ABORTED",
+            Self::OutOfRange => "OUT_OF_RANGE",
+            Self::Unimplemented => "UNIMPLEMENTED",
+            Self::Internal => "INTERNAL",
+            Self::Unavailable => "UNAVAILABLE",
+            Self::DataLoss => "DATA_LOSS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -246,7 +245,6 @@ impl Code {
 ///          "availableRegions": "us-central1,us-east2"
 ///        }
 ///      }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ErrorInfo {
     /// The reason of the error. This is a constant value that identifies the
@@ -266,11 +264,12 @@ pub struct ErrorInfo {
     pub domain: ::prost::alloc::string::String,
     /// Additional structured details about this error.
     ///
-    /// Keys should match /\[a-zA-Z0-9-_\]/ and be limited to 64 characters in
+    /// Keys must match a regular expression of `[a-z][a-zA-Z0-9-_]+` but should
+    /// ideally be lowerCamelCase. Also, they must be limited to 64 characters in
     /// length. When identifying the current value of an exceeded limit, the units
     /// should be contained in the key, not the value.  For example, rather than
-    /// {"instanceLimit": "100/request"}, should be returned as,
-    /// {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
+    /// `{"instanceLimit": "100/request"}`, should be returned as,
+    /// `{"instanceLimitPerRequest": "100"}`, if the client exceeds the number of
     /// instances that can be created in a single (batch) request.
     #[prost(map = "string, string", tag = "3")]
     pub metadata: ::std::collections::HashMap<
@@ -291,7 +290,6 @@ pub struct ErrorInfo {
 /// the delay between retries based on `retry_delay`, until either a maximum
 /// number of retries have been reached or a maximum retry delay cap has been
 /// reached.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RetryInfo {
     /// Clients should wait at least this long between retrying the same request.
@@ -299,7 +297,6 @@ pub struct RetryInfo {
     pub retry_delay: ::core::option::Option<::prost_types::Duration>,
 }
 /// Describes additional debugging info.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DebugInfo {
     /// The stack trace entries indicating where the error occurred.
@@ -320,7 +317,6 @@ pub struct DebugInfo {
 ///
 /// Also see RetryInfo and Help types for other details about handling a
 /// quota failure.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuotaFailure {
     /// Describes all quota violations.
@@ -331,7 +327,6 @@ pub struct QuotaFailure {
 pub mod quota_failure {
     /// A message type used to describe a single quota violation.  For example, a
     /// daily quota or a custom quota that was exceeded.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Violation {
         /// The subject on which the quota check failed.
@@ -355,7 +350,6 @@ pub mod quota_failure {
 /// For example, if an RPC failed because it required the Terms of Service to be
 /// acknowledged, it could list the terms of service violation in the
 /// PreconditionFailure message.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PreconditionFailure {
     /// Describes all precondition violations.
@@ -365,7 +359,6 @@ pub struct PreconditionFailure {
 /// Nested message and enum types in `PreconditionFailure`.
 pub mod precondition_failure {
     /// A message type used to describe a single precondition failure.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Violation {
         /// The type of PreconditionFailure. We recommend using a service-specific
@@ -388,7 +381,6 @@ pub mod precondition_failure {
 }
 /// Describes violations in a client request. This error type focuses on the
 /// syntactic aspects of the request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BadRequest {
     /// Describes all violations in a client request.
@@ -398,7 +390,6 @@ pub struct BadRequest {
 /// Nested message and enum types in `BadRequest`.
 pub mod bad_request {
     /// A message type used to describe a single bad request field.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FieldViolation {
         /// A path that leads to a field in the request body. The value will be a
@@ -443,11 +434,22 @@ pub mod bad_request {
         /// A description of why the request element is bad.
         #[prost(string, tag = "2")]
         pub description: ::prost::alloc::string::String,
+        /// The reason of the field-level error. This is a constant value that
+        /// identifies the proximate cause of the field-level error. It should
+        /// uniquely identify the type of the FieldViolation within the scope of the
+        /// google.rpc.ErrorInfo.domain. This should be at most 63
+        /// characters and match a regular expression of `[A-Z][A-Z0-9_]+\[A-Z0-9\]`,
+        /// which represents UPPER_SNAKE_CASE.
+        #[prost(string, tag = "3")]
+        pub reason: ::prost::alloc::string::String,
+        /// Provides a localized error message for field-level errors that is safe to
+        /// return to the API consumer.
+        #[prost(message, optional, tag = "4")]
+        pub localized_message: ::core::option::Option<super::LocalizedMessage>,
     }
 }
 /// Contains metadata about the request that clients can attach when filing a bug
 /// or providing other forms of feedback.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RequestInfo {
     /// An opaque string that should only be interpreted by the service generating
@@ -460,7 +462,6 @@ pub struct RequestInfo {
     pub serving_data: ::prost::alloc::string::String,
 }
 /// Describes the resource that is being accessed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceInfo {
     /// A name for the type of resource being accessed, e.g. "sql table",
@@ -490,7 +491,6 @@ pub struct ResourceInfo {
 /// For example, if a quota check failed with an error indicating the calling
 /// project hasn't enabled the accessed service, this can contain a URL pointing
 /// directly to the right place in the developer console to flip the bit.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Help {
     /// URL(s) pointing to additional information on handling the current error.
@@ -500,7 +500,6 @@ pub struct Help {
 /// Nested message and enum types in `Help`.
 pub mod help {
     /// Describes a URL link.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Link {
         /// Describes what the link offers.
@@ -513,7 +512,6 @@ pub mod help {
 }
 /// Provides a localized error message that is safe to return to the user
 /// which can be attached to an RPC error.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LocalizedMessage {
     /// The locale used following the specification defined at
@@ -526,7 +524,6 @@ pub struct LocalizedMessage {
     pub message: ::prost::alloc::string::String,
 }
 /// Represents an HTTP request.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpRequest {
     /// The HTTP request method.
@@ -544,7 +541,6 @@ pub struct HttpRequest {
     pub body: ::prost::alloc::vec::Vec<u8>,
 }
 /// Represents an HTTP response.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpResponse {
     /// The HTTP status code, such as 200 or 404.
@@ -562,7 +558,6 @@ pub struct HttpResponse {
     pub body: ::prost::alloc::vec::Vec<u8>,
 }
 /// Represents an HTTP header.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HttpHeader {
     /// The HTTP header key. It is case insensitive.

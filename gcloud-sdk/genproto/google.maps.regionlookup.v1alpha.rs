@@ -39,7 +39,6 @@
 /// California is returned as a candidate in the candidate_place_ids field.
 ///
 /// Next available tag: 10
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionIdentifier {
     /// Required. Place type to match.
@@ -104,17 +103,17 @@ pub mod region_identifier {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PlaceType::Unspecified => "PLACE_TYPE_UNSPECIFIED",
-                PlaceType::PostalCode => "POSTAL_CODE",
-                PlaceType::AdministrativeAreaLevel1 => "ADMINISTRATIVE_AREA_LEVEL_1",
-                PlaceType::AdministrativeAreaLevel2 => "ADMINISTRATIVE_AREA_LEVEL_2",
-                PlaceType::Locality => "LOCALITY",
-                PlaceType::Neighborhood => "NEIGHBORHOOD",
-                PlaceType::Country => "COUNTRY",
-                PlaceType::Sublocality => "SUBLOCALITY",
-                PlaceType::AdministrativeAreaLevel3 => "ADMINISTRATIVE_AREA_LEVEL_3",
-                PlaceType::AdministrativeAreaLevel4 => "ADMINISTRATIVE_AREA_LEVEL_4",
-                PlaceType::SchoolDistrict => "SCHOOL_DISTRICT",
+                Self::Unspecified => "PLACE_TYPE_UNSPECIFIED",
+                Self::PostalCode => "POSTAL_CODE",
+                Self::AdministrativeAreaLevel1 => "ADMINISTRATIVE_AREA_LEVEL_1",
+                Self::AdministrativeAreaLevel2 => "ADMINISTRATIVE_AREA_LEVEL_2",
+                Self::Locality => "LOCALITY",
+                Self::Neighborhood => "NEIGHBORHOOD",
+                Self::Country => "COUNTRY",
+                Self::Sublocality => "SUBLOCALITY",
+                Self::AdministrativeAreaLevel3 => "ADMINISTRATIVE_AREA_LEVEL_3",
+                Self::AdministrativeAreaLevel4 => "ADMINISTRATIVE_AREA_LEVEL_4",
+                Self::SchoolDistrict => "SCHOOL_DISTRICT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -136,7 +135,6 @@ pub mod region_identifier {
         }
     }
     /// The location must be specified by one of the following:
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
         /// The name of the region to match to a Place ID.
@@ -184,7 +182,6 @@ pub mod region_identifier {
 /// Region Match.
 ///
 /// Next available tag: 5
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionMatch {
     /// Place ID of the region that is matched. If region is found, this field is
@@ -237,7 +234,6 @@ pub struct RegionMatch {
 /// the candidate_place_ids field.
 ///
 /// Next available tag: 10
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegionSearchValue {
     /// Required. The type of the place to match.
@@ -302,17 +298,17 @@ pub mod region_search_value {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PlaceType::Unspecified => "PLACE_TYPE_UNSPECIFIED",
-                PlaceType::PostalCode => "POSTAL_CODE",
-                PlaceType::AdministrativeAreaLevel1 => "ADMINISTRATIVE_AREA_LEVEL_1",
-                PlaceType::AdministrativeAreaLevel2 => "ADMINISTRATIVE_AREA_LEVEL_2",
-                PlaceType::Locality => "LOCALITY",
-                PlaceType::Neighborhood => "NEIGHBORHOOD",
-                PlaceType::Country => "COUNTRY",
-                PlaceType::Sublocality => "SUBLOCALITY",
-                PlaceType::AdministrativeAreaLevel3 => "ADMINISTRATIVE_AREA_LEVEL_3",
-                PlaceType::AdministrativeAreaLevel4 => "ADMINISTRATIVE_AREA_LEVEL_4",
-                PlaceType::SchoolDistrict => "SCHOOL_DISTRICT",
+                Self::Unspecified => "PLACE_TYPE_UNSPECIFIED",
+                Self::PostalCode => "POSTAL_CODE",
+                Self::AdministrativeAreaLevel1 => "ADMINISTRATIVE_AREA_LEVEL_1",
+                Self::AdministrativeAreaLevel2 => "ADMINISTRATIVE_AREA_LEVEL_2",
+                Self::Locality => "LOCALITY",
+                Self::Neighborhood => "NEIGHBORHOOD",
+                Self::Country => "COUNTRY",
+                Self::Sublocality => "SUBLOCALITY",
+                Self::AdministrativeAreaLevel3 => "ADMINISTRATIVE_AREA_LEVEL_3",
+                Self::AdministrativeAreaLevel4 => "ADMINISTRATIVE_AREA_LEVEL_4",
+                Self::SchoolDistrict => "SCHOOL_DISTRICT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -334,7 +330,6 @@ pub mod region_search_value {
         }
     }
     /// The location must be specified by one of the following:
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Location {
         /// The unstructured street address that is contained inside a region to
@@ -352,7 +347,6 @@ pub mod region_search_value {
 /// Lookup Region Request.
 ///
 /// Next available tag: 4
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRegionRequest {
     /// Each `RegionIdentifier` represents the desired fields used to lookup a
@@ -377,7 +371,6 @@ pub struct LookupRegionRequest {
 /// Lookup Region Response.
 ///
 /// Next available tag: 3
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupRegionResponse {
     /// Lookup region matches, one for each `RegionIdentifier` in
@@ -392,7 +385,6 @@ pub struct LookupRegionResponse {
 /// Search Region Request.
 ///
 /// Next available tag: 4
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchRegionRequest {
     /// Each value represents desired search values of a single region to match.
@@ -418,7 +410,6 @@ pub struct SearchRegionRequest {
 /// Match Region Response.
 ///
 /// Next available tag: 3
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchRegionResponse {
     /// Search region matches, one for each `RegionSearchValue` in
@@ -432,7 +423,13 @@ pub struct SearchRegionResponse {
 }
 /// Generated client implementations.
 pub mod region_lookup_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Service definition for the Region Lookup API.
@@ -455,8 +452,8 @@ pub mod region_lookup_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -481,7 +478,7 @@ pub mod region_lookup_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             RegionLookupClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -538,8 +535,7 @@ pub mod region_lookup_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -582,8 +578,7 @@ pub mod region_lookup_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

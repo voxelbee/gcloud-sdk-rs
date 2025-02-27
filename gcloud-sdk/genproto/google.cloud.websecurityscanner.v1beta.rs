@@ -2,7 +2,6 @@
 /// A CrawledUrl resource represents a URL that was crawled during a ScanRun. Web
 /// Security Scanner Service crawls the web applications, following all links
 /// within the scope of sites, to find the URLs to test against.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CrawledUrl {
     /// The http method of the request that was used to visit the URL, in
@@ -17,7 +16,6 @@ pub struct CrawledUrl {
     pub body: ::prost::alloc::string::String,
 }
 /// ! Information about a vulnerability with an HTML.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Form {
     /// ! The URI where to send the form when it's submitted.
@@ -28,7 +26,6 @@ pub struct Form {
     pub fields: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information reported for an outdated library.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OutdatedLibrary {
     /// The name of the outdated library.
@@ -43,7 +40,6 @@ pub struct OutdatedLibrary {
 }
 /// Information regarding any resource causing the vulnerability such
 /// as JavaScript sources, image, audio files, etc.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ViolatingResource {
     /// The MIME type of this resource.
@@ -54,7 +50,6 @@ pub struct ViolatingResource {
     pub resource_url: ::prost::alloc::string::String,
 }
 /// Information about vulnerable request parameters.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableParameters {
     /// The vulnerable parameter names.
@@ -62,7 +57,6 @@ pub struct VulnerableParameters {
     pub parameter_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Information about vulnerable or missing HTTP Headers.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VulnerableHeaders {
     /// List of vulnerable headers.
@@ -75,7 +69,6 @@ pub struct VulnerableHeaders {
 /// Nested message and enum types in `VulnerableHeaders`.
 pub mod vulnerable_headers {
     /// Describes a HTTP Header.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Header {
         /// Header name.
@@ -87,7 +80,6 @@ pub mod vulnerable_headers {
     }
 }
 /// Information reported for an XSS.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Xss {
     /// Stack traces leading to the point where the XSS occurred.
@@ -99,7 +91,6 @@ pub struct Xss {
 }
 /// A Finding resource represents a vulnerability instance identified during a
 /// ScanRun.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Finding {
     /// The resource name of the Finding. The name follows the format of
@@ -165,7 +156,6 @@ pub struct Finding {
 }
 /// A FindingTypeStats resource represents stats regarding a specific FindingType
 /// of Findings under a given ScanRun.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindingTypeStats {
     /// The finding type associated with the stats.
@@ -179,7 +169,6 @@ pub struct FindingTypeStats {
 /// APIs when scan configuration validation fails. It is also reported as part of
 /// a ScanRunErrorTrace message if scan validation fails due to a scan
 /// configuration error.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanConfigError {
     /// Indicates the reason code for a configuration failure.
@@ -316,69 +305,69 @@ pub mod scan_config_error {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Code::Unspecified => "CODE_UNSPECIFIED",
-                Code::InternalError => "INTERNAL_ERROR",
-                Code::AppengineApiBackendError => "APPENGINE_API_BACKEND_ERROR",
-                Code::AppengineApiNotAccessible => "APPENGINE_API_NOT_ACCESSIBLE",
-                Code::AppengineDefaultHostMissing => "APPENGINE_DEFAULT_HOST_MISSING",
-                Code::CannotUseGoogleComAccount => "CANNOT_USE_GOOGLE_COM_ACCOUNT",
-                Code::CannotUseOwnerAccount => "CANNOT_USE_OWNER_ACCOUNT",
-                Code::ComputeApiBackendError => "COMPUTE_API_BACKEND_ERROR",
-                Code::ComputeApiNotAccessible => "COMPUTE_API_NOT_ACCESSIBLE",
-                Code::CustomLoginUrlDoesNotBelongToCurrentProject => {
+                Self::Unspecified => "CODE_UNSPECIFIED",
+                Self::InternalError => "INTERNAL_ERROR",
+                Self::AppengineApiBackendError => "APPENGINE_API_BACKEND_ERROR",
+                Self::AppengineApiNotAccessible => "APPENGINE_API_NOT_ACCESSIBLE",
+                Self::AppengineDefaultHostMissing => "APPENGINE_DEFAULT_HOST_MISSING",
+                Self::CannotUseGoogleComAccount => "CANNOT_USE_GOOGLE_COM_ACCOUNT",
+                Self::CannotUseOwnerAccount => "CANNOT_USE_OWNER_ACCOUNT",
+                Self::ComputeApiBackendError => "COMPUTE_API_BACKEND_ERROR",
+                Self::ComputeApiNotAccessible => "COMPUTE_API_NOT_ACCESSIBLE",
+                Self::CustomLoginUrlDoesNotBelongToCurrentProject => {
                     "CUSTOM_LOGIN_URL_DOES_NOT_BELONG_TO_CURRENT_PROJECT"
                 }
-                Code::CustomLoginUrlMalformed => "CUSTOM_LOGIN_URL_MALFORMED",
-                Code::CustomLoginUrlMappedToNonRoutableAddress => {
+                Self::CustomLoginUrlMalformed => "CUSTOM_LOGIN_URL_MALFORMED",
+                Self::CustomLoginUrlMappedToNonRoutableAddress => {
                     "CUSTOM_LOGIN_URL_MAPPED_TO_NON_ROUTABLE_ADDRESS"
                 }
-                Code::CustomLoginUrlMappedToUnreservedAddress => {
+                Self::CustomLoginUrlMappedToUnreservedAddress => {
                     "CUSTOM_LOGIN_URL_MAPPED_TO_UNRESERVED_ADDRESS"
                 }
-                Code::CustomLoginUrlHasNonRoutableIpAddress => {
+                Self::CustomLoginUrlHasNonRoutableIpAddress => {
                     "CUSTOM_LOGIN_URL_HAS_NON_ROUTABLE_IP_ADDRESS"
                 }
-                Code::CustomLoginUrlHasUnreservedIpAddress => {
+                Self::CustomLoginUrlHasUnreservedIpAddress => {
                     "CUSTOM_LOGIN_URL_HAS_UNRESERVED_IP_ADDRESS"
                 }
-                Code::DuplicateScanName => "DUPLICATE_SCAN_NAME",
-                Code::InvalidFieldValue => "INVALID_FIELD_VALUE",
-                Code::FailedToAuthenticateToTarget => "FAILED_TO_AUTHENTICATE_TO_TARGET",
-                Code::FindingTypeUnspecified => "FINDING_TYPE_UNSPECIFIED",
-                Code::ForbiddenToScanCompute => "FORBIDDEN_TO_SCAN_COMPUTE",
-                Code::ForbiddenUpdateToManagedScan => "FORBIDDEN_UPDATE_TO_MANAGED_SCAN",
-                Code::MalformedFilter => "MALFORMED_FILTER",
-                Code::MalformedResourceName => "MALFORMED_RESOURCE_NAME",
-                Code::ProjectInactive => "PROJECT_INACTIVE",
-                Code::RequiredField => "REQUIRED_FIELD",
-                Code::ResourceNameInconsistent => "RESOURCE_NAME_INCONSISTENT",
-                Code::ScanAlreadyRunning => "SCAN_ALREADY_RUNNING",
-                Code::ScanNotRunning => "SCAN_NOT_RUNNING",
-                Code::SeedUrlDoesNotBelongToCurrentProject => {
+                Self::DuplicateScanName => "DUPLICATE_SCAN_NAME",
+                Self::InvalidFieldValue => "INVALID_FIELD_VALUE",
+                Self::FailedToAuthenticateToTarget => "FAILED_TO_AUTHENTICATE_TO_TARGET",
+                Self::FindingTypeUnspecified => "FINDING_TYPE_UNSPECIFIED",
+                Self::ForbiddenToScanCompute => "FORBIDDEN_TO_SCAN_COMPUTE",
+                Self::ForbiddenUpdateToManagedScan => "FORBIDDEN_UPDATE_TO_MANAGED_SCAN",
+                Self::MalformedFilter => "MALFORMED_FILTER",
+                Self::MalformedResourceName => "MALFORMED_RESOURCE_NAME",
+                Self::ProjectInactive => "PROJECT_INACTIVE",
+                Self::RequiredField => "REQUIRED_FIELD",
+                Self::ResourceNameInconsistent => "RESOURCE_NAME_INCONSISTENT",
+                Self::ScanAlreadyRunning => "SCAN_ALREADY_RUNNING",
+                Self::ScanNotRunning => "SCAN_NOT_RUNNING",
+                Self::SeedUrlDoesNotBelongToCurrentProject => {
                     "SEED_URL_DOES_NOT_BELONG_TO_CURRENT_PROJECT"
                 }
-                Code::SeedUrlMalformed => "SEED_URL_MALFORMED",
-                Code::SeedUrlMappedToNonRoutableAddress => {
+                Self::SeedUrlMalformed => "SEED_URL_MALFORMED",
+                Self::SeedUrlMappedToNonRoutableAddress => {
                     "SEED_URL_MAPPED_TO_NON_ROUTABLE_ADDRESS"
                 }
-                Code::SeedUrlMappedToUnreservedAddress => {
+                Self::SeedUrlMappedToUnreservedAddress => {
                     "SEED_URL_MAPPED_TO_UNRESERVED_ADDRESS"
                 }
-                Code::SeedUrlHasNonRoutableIpAddress => {
+                Self::SeedUrlHasNonRoutableIpAddress => {
                     "SEED_URL_HAS_NON_ROUTABLE_IP_ADDRESS"
                 }
-                Code::SeedUrlHasUnreservedIpAddress => {
+                Self::SeedUrlHasUnreservedIpAddress => {
                     "SEED_URL_HAS_UNRESERVED_IP_ADDRESS"
                 }
-                Code::ServiceAccountNotConfigured => "SERVICE_ACCOUNT_NOT_CONFIGURED",
-                Code::TooManyScans => "TOO_MANY_SCANS",
-                Code::UnableToResolveProjectInfo => "UNABLE_TO_RESOLVE_PROJECT_INFO",
-                Code::UnsupportedBlacklistPatternFormat => {
+                Self::ServiceAccountNotConfigured => "SERVICE_ACCOUNT_NOT_CONFIGURED",
+                Self::TooManyScans => "TOO_MANY_SCANS",
+                Self::UnableToResolveProjectInfo => "UNABLE_TO_RESOLVE_PROJECT_INFO",
+                Self::UnsupportedBlacklistPatternFormat => {
                     "UNSUPPORTED_BLACKLIST_PATTERN_FORMAT"
                 }
-                Code::UnsupportedFilter => "UNSUPPORTED_FILTER",
-                Code::UnsupportedFindingType => "UNSUPPORTED_FINDING_TYPE",
-                Code::UnsupportedUrlScheme => "UNSUPPORTED_URL_SCHEME",
+                Self::UnsupportedFilter => "UNSUPPORTED_FILTER",
+                Self::UnsupportedFindingType => "UNSUPPORTED_FINDING_TYPE",
+                Self::UnsupportedUrlScheme => "UNSUPPORTED_URL_SCHEME",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -464,7 +453,6 @@ pub mod scan_config_error {
 }
 /// Output only.
 /// Defines an error trace message for a ScanRun.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRunErrorTrace {
     /// Indicates the error reason code.
@@ -526,13 +514,13 @@ pub mod scan_run_error_trace {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Code::Unspecified => "CODE_UNSPECIFIED",
-                Code::InternalError => "INTERNAL_ERROR",
-                Code::ScanConfigIssue => "SCAN_CONFIG_ISSUE",
-                Code::AuthenticationConfigIssue => "AUTHENTICATION_CONFIG_ISSUE",
-                Code::TimedOutWhileScanning => "TIMED_OUT_WHILE_SCANNING",
-                Code::TooManyRedirects => "TOO_MANY_REDIRECTS",
-                Code::TooManyHttpErrors => "TOO_MANY_HTTP_ERRORS",
+                Self::Unspecified => "CODE_UNSPECIFIED",
+                Self::InternalError => "INTERNAL_ERROR",
+                Self::ScanConfigIssue => "SCAN_CONFIG_ISSUE",
+                Self::AuthenticationConfigIssue => "AUTHENTICATION_CONFIG_ISSUE",
+                Self::TimedOutWhileScanning => "TIMED_OUT_WHILE_SCANNING",
+                Self::TooManyRedirects => "TOO_MANY_REDIRECTS",
+                Self::TooManyHttpErrors => "TOO_MANY_HTTP_ERRORS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -553,7 +541,6 @@ pub mod scan_run_error_trace {
 /// Output only.
 /// Defines a warning trace message for ScanRun. Warning traces provide customers
 /// with useful information that helps make the scanning process more effective.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ScanRunWarningTrace {
     /// Indicates the warning code.
@@ -601,11 +588,11 @@ pub mod scan_run_warning_trace {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Code::Unspecified => "CODE_UNSPECIFIED",
-                Code::InsufficientCrawlResults => "INSUFFICIENT_CRAWL_RESULTS",
-                Code::TooManyCrawlResults => "TOO_MANY_CRAWL_RESULTS",
-                Code::TooManyFuzzTasks => "TOO_MANY_FUZZ_TASKS",
-                Code::BlockedByIap => "BLOCKED_BY_IAP",
+                Self::Unspecified => "CODE_UNSPECIFIED",
+                Self::InsufficientCrawlResults => "INSUFFICIENT_CRAWL_RESULTS",
+                Self::TooManyCrawlResults => "TOO_MANY_CRAWL_RESULTS",
+                Self::TooManyFuzzTasks => "TOO_MANY_FUZZ_TASKS",
+                Self::BlockedByIap => "BLOCKED_BY_IAP",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -623,7 +610,6 @@ pub mod scan_run_warning_trace {
 }
 /// A ScanRun is a output-only resource representing an actual run of the scan.
 /// Next id: 12
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanRun {
     /// The resource name of the ScanRun. The name follows the format of
@@ -705,10 +691,10 @@ pub mod scan_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExecutionState::Unspecified => "EXECUTION_STATE_UNSPECIFIED",
-                ExecutionState::Queued => "QUEUED",
-                ExecutionState::Scanning => "SCANNING",
-                ExecutionState::Finished => "FINISHED",
+                Self::Unspecified => "EXECUTION_STATE_UNSPECIFIED",
+                Self::Queued => "QUEUED",
+                Self::Scanning => "SCANNING",
+                Self::Finished => "FINISHED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -753,10 +739,10 @@ pub mod scan_run {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ResultState::Unspecified => "RESULT_STATE_UNSPECIFIED",
-                ResultState::Success => "SUCCESS",
-                ResultState::Error => "ERROR",
-                ResultState::Killed => "KILLED",
+                Self::Unspecified => "RESULT_STATE_UNSPECIFIED",
+                Self::Success => "SUCCESS",
+                Self::Error => "ERROR",
+                Self::Killed => "KILLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -772,7 +758,6 @@ pub mod scan_run {
     }
 }
 /// A ScanConfig resource contains the configurations to launch a scan.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScanConfig {
     /// The resource name of the ScanConfig. The name follows the format of
@@ -824,7 +809,6 @@ pub struct ScanConfig {
 /// Nested message and enum types in `ScanConfig`.
 pub mod scan_config {
     /// Scan authentication configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Authentication {
         /// Required.
@@ -835,7 +819,6 @@ pub mod scan_config {
     /// Nested message and enum types in `Authentication`.
     pub mod authentication {
         /// Describes authentication configuration that uses a Google account.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct GoogleAccount {
             /// Required. The user name of the Google account.
@@ -847,7 +830,6 @@ pub mod scan_config {
             pub password: ::prost::alloc::string::String,
         }
         /// Describes authentication configuration that uses a custom account.
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct CustomAccount {
             /// Required. The user name of the custom account.
@@ -863,7 +845,6 @@ pub mod scan_config {
         }
         /// Required.
         /// Authentication configuration
-        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Authentication {
             /// Authentication using a Google account.
@@ -875,7 +856,6 @@ pub mod scan_config {
         }
     }
     /// Scan schedule configuration.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct Schedule {
         /// A timestamp indicates when the next run will be scheduled. The value is
@@ -918,10 +898,10 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                UserAgent::Unspecified => "USER_AGENT_UNSPECIFIED",
-                UserAgent::ChromeLinux => "CHROME_LINUX",
-                UserAgent::ChromeAndroid => "CHROME_ANDROID",
-                UserAgent::SafariIphone => "SAFARI_IPHONE",
+                Self::Unspecified => "USER_AGENT_UNSPECIFIED",
+                Self::ChromeLinux => "CHROME_LINUX",
+                Self::ChromeAndroid => "CHROME_ANDROID",
+                Self::SafariIphone => "SAFARI_IPHONE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -964,9 +944,9 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                TargetPlatform::Unspecified => "TARGET_PLATFORM_UNSPECIFIED",
-                TargetPlatform::AppEngine => "APP_ENGINE",
-                TargetPlatform::Compute => "COMPUTE",
+                Self::Unspecified => "TARGET_PLATFORM_UNSPECIFIED",
+                Self::AppEngine => "APP_ENGINE",
+                Self::Compute => "COMPUTE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1009,9 +989,9 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                RiskLevel::Unspecified => "RISK_LEVEL_UNSPECIFIED",
-                RiskLevel::Normal => "NORMAL",
-                RiskLevel::Low => "LOW",
+                Self::Unspecified => "RISK_LEVEL_UNSPECIFIED",
+                Self::Normal => "NORMAL",
+                Self::Low => "LOW",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1053,11 +1033,9 @@ pub mod scan_config {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                ExportToSecurityCommandCenter::Unspecified => {
-                    "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED"
-                }
-                ExportToSecurityCommandCenter::Enabled => "ENABLED",
-                ExportToSecurityCommandCenter::Disabled => "DISABLED",
+                Self::Unspecified => "EXPORT_TO_SECURITY_COMMAND_CENTER_UNSPECIFIED",
+                Self::Enabled => "ENABLED",
+                Self::Disabled => "DISABLED",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1074,7 +1052,6 @@ pub mod scan_config {
     }
 }
 /// Request for the `CreateScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateScanConfigRequest {
     /// Required. The parent resource name where the scan is created, which should be a
@@ -1086,7 +1063,6 @@ pub struct CreateScanConfigRequest {
     pub scan_config: ::core::option::Option<ScanConfig>,
 }
 /// Request for the `DeleteScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteScanConfigRequest {
     /// Required. The resource name of the ScanConfig to be deleted. The name follows the
@@ -1095,7 +1071,6 @@ pub struct DeleteScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanConfig` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanConfigRequest {
     /// Required. The resource name of the ScanConfig to be returned. The name follows the
@@ -1104,7 +1079,6 @@ pub struct GetScanConfigRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanConfigs` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsRequest {
     /// Required. The parent resource name, which should be a project resource name in the
@@ -1123,7 +1097,6 @@ pub struct ListScanConfigsRequest {
     pub page_size: i32,
 }
 /// Request for the `UpdateScanConfigRequest` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateScanConfigRequest {
     /// Required. The ScanConfig to be updated. The name field must be set to identify the
@@ -1138,7 +1111,6 @@ pub struct UpdateScanConfigRequest {
     pub update_mask: ::core::option::Option<::prost_types::FieldMask>,
 }
 /// Response for the `ListScanConfigs` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanConfigsResponse {
     /// The list of ScanConfigs returned.
@@ -1150,7 +1122,6 @@ pub struct ListScanConfigsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StartScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartScanRunRequest {
     /// Required. The resource name of the ScanConfig to be used. The name follows the
@@ -1159,7 +1130,6 @@ pub struct StartScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `GetScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScanRunRequest {
     /// Required. The resource name of the ScanRun to be returned. The name follows the
@@ -1169,7 +1139,6 @@ pub struct GetScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListScanRuns` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsRequest {
     /// Required. The parent resource name, which should be a scan resource name in the
@@ -1188,7 +1157,6 @@ pub struct ListScanRunsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListScanRuns` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListScanRunsResponse {
     /// The list of ScanRuns returned.
@@ -1200,7 +1168,6 @@ pub struct ListScanRunsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `StopScanRun` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopScanRunRequest {
     /// Required. The resource name of the ScanRun to be stopped. The name follows the
@@ -1210,7 +1177,6 @@ pub struct StopScanRunRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListCrawledUrls` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -1230,7 +1196,6 @@ pub struct ListCrawledUrlsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListCrawledUrls` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListCrawledUrlsResponse {
     /// The list of CrawledUrls returned.
@@ -1242,7 +1207,6 @@ pub struct ListCrawledUrlsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `GetFinding` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetFindingRequest {
     /// Required. The resource name of the Finding to be returned. The name follows the
@@ -1252,7 +1216,6 @@ pub struct GetFindingRequest {
     pub name: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -1278,7 +1241,6 @@ pub struct ListFindingsRequest {
     pub page_size: i32,
 }
 /// Response for the `ListFindings` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingsResponse {
     /// The list of Findings returned.
@@ -1290,7 +1252,6 @@ pub struct ListFindingsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 /// Request for the `ListFindingTypeStats` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsRequest {
     /// Required. The parent resource name, which should be a scan run resource name in the
@@ -1300,7 +1261,6 @@ pub struct ListFindingTypeStatsRequest {
     pub parent: ::prost::alloc::string::String,
 }
 /// Response for the `ListFindingTypeStats` method.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListFindingTypeStatsResponse {
     /// The list of FindingTypeStats returned.
@@ -1309,7 +1269,13 @@ pub struct ListFindingTypeStatsResponse {
 }
 /// Generated client implementations.
 pub mod web_security_scanner_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Cloud Web Security Scanner Service identifies security vulnerabilities in web
@@ -1334,8 +1300,8 @@ pub mod web_security_scanner_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1360,7 +1326,7 @@ pub mod web_security_scanner_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             WebSecurityScannerClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1404,8 +1370,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1432,8 +1397,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1460,8 +1424,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1491,8 +1454,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1519,8 +1481,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1547,8 +1508,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1575,8 +1535,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1607,8 +1566,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1635,8 +1593,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1666,8 +1623,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1694,8 +1650,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1725,8 +1680,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1756,8 +1710,7 @@ pub mod web_security_scanner_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;

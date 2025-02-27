@@ -1,6 +1,6 @@
 [package]
 name = "gcloud-sdk"
-version = "0.25.5"
+version = "0.26.3"
 authors = ["Abdulla Abdurakhmanov <me@abdolence.dev>","mechiru <u9053u6d41@gmail.com>"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
@@ -20,6 +20,7 @@ default = ["tls-roots"]
 tls-roots = ["tonic/tls-roots", "reqwest/rustls-tls-native-roots"]
 tls-webpki-roots = ["tonic/tls-webpki-roots", "reqwest/rustls-tls-webpki-roots"]
 rest = ["serde_with"]
+external-account-aws = ["aws-config", "aws-sigv4", "aws-credential-types", "percent-encoding"]
 
 # Google API features
 ccc-hosted-marketplace-v2 = []
@@ -30,11 +31,11 @@ google-actions-sdk-v2-interactionmodel-prompt = []
 google-actions-sdk-v2-interactionmodel-type = []
 google-actions-type = []
 google-ads-admob-v1 = []
-google-ads-googleads-v16-common = []
-google-ads-googleads-v16-enums = []
-google-ads-googleads-v16-errors = []
-google-ads-googleads-v16-resources = []
-google-ads-googleads-v16-services = []
+google-ads-googleads-v17-common = []
+google-ads-googleads-v17-enums = []
+google-ads-googleads-v17-errors = []
+google-ads-googleads-v17-resources = []
+google-ads-googleads-v17-services = []
 google-analytics-admin-v1alpha = []
 google-analytics-admin-v1beta = []
 google-analytics-data-v1beta = []
@@ -428,10 +429,11 @@ google-rest-storage-v1 = ["rest"]
 google-rest-sqladmin-v1 = ["rest"]
 google-rest-dns-v1 = ["rest"]
 google-rest-compute-v1 = ["rest"]
+google-rest-identitytoolkit-v3 = ["rest"]
 
 [dependencies]
 tonic = { version = "0.12", features = ["tls"] }
-tower = "0.4"
+tower = "0.5"
 tower-layer = "0.3"
 tower-util = "0.3"
 futures = "0.3"
@@ -448,12 +450,14 @@ tokio= { version =  "1" }
 tracing = "0.1"
 secret-vault-value = { version="0.3", features=["proto", "serde"] }
 once_cell = "1.19"
-reqwest = { version="0.12", features=["multipart", "json", "gzip", "stream"], default-features = false  }
+reqwest = { version=">=0.12.7", features=["multipart", "json", "gzip", "stream"], default-features = false  }
 bytes = { version = "1"}
-serde_with = { version = "3", optional = true }
+serde_with = { version = "3", optional = true, features = ["base64"] }
+aws-config = { version = "1.1", features = ["behavior-version-latest"], optional = true }
+aws-sigv4 = { version = "1.2" , optional = true }
+aws-credential-types = { version = "1.2.1", optional = true }
+percent-encoding = { version = "2.3", optional = true }
 
-[dev-dependencies]
-cargo-audit = "0.20"
 
 [package.metadata.release]
 tag-prefix=""
