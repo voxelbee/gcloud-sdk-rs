@@ -475,6 +475,28 @@ pub struct AddNodesNodeGroupRequest {
     #[prost(string, tag = "3744684")]
     pub zone: ::prost::alloc::string::String,
 }
+/// A request message for NetworkFirewallPolicies.AddPacketMirroringRule. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddPacketMirroringRuleNetworkFirewallPolicyRequest {
+    /// Name of the firewall policy to update.
+    #[prost(string, tag = "498173265")]
+    pub firewall_policy: ::prost::alloc::string::String,
+    /// The body resource for this request
+    #[prost(message, optional, tag = "250523523")]
+    pub firewall_policy_rule_resource: ::core::option::Option<FirewallPolicyRule>,
+    /// When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+    #[prost(int32, optional, tag = "329635359")]
+    pub max_priority: ::core::option::Option<i32>,
+    /// When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+    #[prost(int32, optional, tag = "267190513")]
+    pub min_priority: ::core::option::Option<i32>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// A request message for Networks.AddPeering. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddPeeringNetworkRequest {
@@ -2516,8 +2538,10 @@ pub mod allocation_aggregate_reservation {
         CloudTpuDeviceCt3 = 42845948,
         CloudTpuLiteDeviceCt5l = 108020067,
         CloudTpuLitePodSliceCt5lp = 18705267,
+        CloudTpuLitePodSliceCt6e = 398926997,
         CloudTpuPodSliceCt3p = 517384376,
         CloudTpuPodSliceCt4p = 517384407,
+        CloudTpuPodSliceCt5p = 517384438,
     }
     impl VmFamily {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -2532,8 +2556,12 @@ pub mod allocation_aggregate_reservation {
                 Self::CloudTpuLitePodSliceCt5lp => {
                     "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP"
                 }
+                Self::CloudTpuLitePodSliceCt6e => {
+                    "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E"
+                }
                 Self::CloudTpuPodSliceCt3p => "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P",
                 Self::CloudTpuPodSliceCt4p => "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P",
+                Self::CloudTpuPodSliceCt5p => "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2547,8 +2575,12 @@ pub mod allocation_aggregate_reservation {
                 "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP" => {
                     Some(Self::CloudTpuLitePodSliceCt5lp)
                 }
+                "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E" => {
+                    Some(Self::CloudTpuLitePodSliceCt6e)
+                }
                 "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P" => Some(Self::CloudTpuPodSliceCt3p),
                 "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P" => Some(Self::CloudTpuPodSliceCt4p),
+                "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P" => Some(Self::CloudTpuPodSliceCt5p),
                 _ => None,
             }
         }
@@ -5856,6 +5888,138 @@ pub struct BfdStatusPacketCounts {
     #[prost(uint32, optional, tag = "39375325")]
     pub num_tx: ::core::option::Option<u32>,
 }
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BgpRoute {
+    /// \[Output only\] AS-PATH for the route
+    #[prost(message, repeated, tag = "137568929")]
+    pub as_paths: ::prost::alloc::vec::Vec<BgpRouteAsPath>,
+    /// \[Output only\] BGP communities in human-readable A:B format.
+    #[prost(string, repeated, tag = "188262983")]
+    pub communities: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// \[Output only\] Destination IP range for the route, in human-readable CIDR format
+    #[prost(message, optional, tag = "180765710")]
+    pub destination: ::core::option::Option<BgpRouteNetworkLayerReachabilityInformation>,
+    /// \[Output only\] BGP multi-exit discriminator
+    #[prost(uint32, optional, tag = "107980")]
+    pub med: ::core::option::Option<u32>,
+    /// \[Output only\] BGP origin (EGP, IGP or INCOMPLETE)
+    /// Check the Origin enum for the list of possible values.
+    #[prost(string, optional, tag = "65122086")]
+    pub origin: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Nested message and enum types in `BgpRoute`.
+pub mod bgp_route {
+    /// \[Output only\] BGP origin (EGP, IGP or INCOMPLETE)
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Origin {
+        /// A value indicating that the enum field is not set.
+        UndefinedOrigin = 0,
+        BgpOriginEgp = 378906473,
+        BgpOriginIgp = 378910317,
+        BgpOriginIncomplete = 452839811,
+    }
+    impl Origin {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::UndefinedOrigin => "UNDEFINED_ORIGIN",
+                Self::BgpOriginEgp => "BGP_ORIGIN_EGP",
+                Self::BgpOriginIgp => "BGP_ORIGIN_IGP",
+                Self::BgpOriginIncomplete => "BGP_ORIGIN_INCOMPLETE",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNDEFINED_ORIGIN" => Some(Self::UndefinedOrigin),
+                "BGP_ORIGIN_EGP" => Some(Self::BgpOriginEgp),
+                "BGP_ORIGIN_IGP" => Some(Self::BgpOriginIgp),
+                "BGP_ORIGIN_INCOMPLETE" => Some(Self::BgpOriginIncomplete),
+                _ => None,
+            }
+        }
+    }
+}
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BgpRouteAsPath {
+    /// \[Output only\] ASNs in the path segment. When type is SEQUENCE, these are ordered.
+    #[prost(int32, repeated, tag = "3003767")]
+    pub asns: ::prost::alloc::vec::Vec<i32>,
+    /// \[Output only\] Type of AS-PATH segment (SEQUENCE or SET)
+    /// Check the Type enum for the list of possible values.
+    #[prost(string, optional, tag = "3575610")]
+    pub r#type: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Nested message and enum types in `BgpRouteAsPath`.
+pub mod bgp_route_as_path {
+    /// \[Output only\] Type of AS-PATH segment (SEQUENCE or SET)
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Type {
+        /// A value indicating that the enum field is not set.
+        UndefinedType = 0,
+        AsPathTypeSequence = 362887609,
+        AsPathTypeSet = 302584650,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::UndefinedType => "UNDEFINED_TYPE",
+                Self::AsPathTypeSequence => "AS_PATH_TYPE_SEQUENCE",
+                Self::AsPathTypeSet => "AS_PATH_TYPE_SET",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNDEFINED_TYPE" => Some(Self::UndefinedType),
+                "AS_PATH_TYPE_SEQUENCE" => Some(Self::AsPathTypeSequence),
+                "AS_PATH_TYPE_SET" => Some(Self::AsPathTypeSet),
+                _ => None,
+            }
+        }
+    }
+}
+/// Network Layer Reachability Information (NLRI) for a route.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BgpRouteNetworkLayerReachabilityInformation {
+    /// If the BGP session supports multiple paths (RFC 7911), the path identifier for this route.
+    #[prost(uint32, optional, tag = "282287989")]
+    pub path_id: ::core::option::Option<u32>,
+    /// Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16.
+    #[prost(string, optional, tag = "93631122")]
+    pub prefix: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// Associates `members`, or principals, with a `role`.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Binding {
@@ -6183,29 +6347,28 @@ pub struct CloneRulesRegionNetworkFirewallPolicyRequest {
     #[prost(string, optional, tag = "25013549")]
     pub source_firewall_policy: ::core::option::Option<::prost::alloc::string::String>,
 }
-/// Represents a regional Commitment resource. Creating a commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.
+/// Represents a regional resource-based commitment resource. Creating this commitment resource means that you are purchasing a resource-based committed use contract, with an explicit start and end time. You can purchase resource-based commitments for both hardware and software resources. For more information, read Resource-based committed use discounts
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Commitment {
-    /// Specifies whether to enable automatic renewal for the commitment. The default value is false if not specified. The field can be updated until the day of the commitment expiration at 12:00am PST. If the field is set to true, the commitment will be automatically renewed for either one or three years according to the terms of the existing commitment.
+    /// Specifies whether to automatically renew the commitment at the end of its current term. The default value is false. If you set the field to true, each time your commitment reaches the end of its term, Compute Engine automatically renews it for another term. You can update this field anytime before the commitment expires. For example, if the commitment is set to expire at 12 AM UTC-8 on January 3, 2027, you can update this field until 11:59 PM UTC-8 on January 2, 2027.
     #[prost(bool, optional, tag = "495520765")]
     pub auto_renew: ::core::option::Option<bool>,
-    /// The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+    /// The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
     /// Check the Category enum for the list of possible values.
     #[prost(string, optional, tag = "50511102")]
     pub category: ::core::option::Option<::prost::alloc::string::String>,
     /// \[Output Only\] Creation timestamp in RFC3339 text format.
     #[prost(string, optional, tag = "30525366")]
     pub creation_timestamp: ::core::option::Option<::prost::alloc::string::String>,
-    /// \[Input Only\] Optional, specifies the CUD end time requested by the customer in RFC3339 text format. Needed when the customer wants CUD's end date is later than the start date + term duration.
+    /// \[Input Only\] Optional, specifies the requested commitment end time in RFC3339 text format. Use this option when the desired commitment's end date is later than the start date + term duration.
     #[prost(string, optional, tag = "181770852")]
     pub custom_end_timestamp: ::core::option::Option<::prost::alloc::string::String>,
-    /// An optional description of this resource. Provide this property when you create the resource.
+    /// An optional description of the commitment. You can provide this property when you create the resource.
     #[prost(string, optional, tag = "422937596")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
     /// \[Output Only\] Commitment end time in RFC3339 text format.
     #[prost(string, optional, tag = "468096690")]
     pub end_timestamp: ::core::option::Option<::prost::alloc::string::String>,
-    /// Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - <https://www.googleapis.com/compute/v1/projects/project/zones/zone> /reservations/reservation - projects/project/zones/zone/reservations/reservation
     #[prost(string, repeated, tag = "493028443")]
     pub existing_reservations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// \[Output Only\] The unique identifier for the resource. This identifier is defined by the server.
@@ -6217,54 +6380,54 @@ pub struct Commitment {
     /// The license specification required as part of a license commitment.
     #[prost(message, optional, tag = "437955148")]
     pub license_resource: ::core::option::Option<LicenseResourceCommitment>,
-    /// List of source commitments to be merged into a new commitment.
+    /// The list of source commitments that you are merging to create the new merged commitment. For more information, see Merging commitments.
     #[prost(string, repeated, tag = "188093761")]
     pub merge_source_commitments: ::prost::alloc::vec::Vec<
         ::prost::alloc::string::String,
     >,
-    /// Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z](\[-a-z0-9\]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+    /// Name of the commitment. You must specify a name when you purchase the commitment. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z](\[-a-z0-9\]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
     #[prost(string, optional, tag = "3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
-    /// The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
+    /// The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
     /// Check the Plan enum for the list of possible values.
     #[prost(string, optional, tag = "3443497")]
     pub plan: ::core::option::Option<::prost::alloc::string::String>,
-    /// \[Output Only\] URL of the region where this commitment may be used.
+    /// \[Output Only\] URL of the region where the commitment and committed resources are located.
     #[prost(string, optional, tag = "138946292")]
     pub region: ::core::option::Option<::prost::alloc::string::String>,
-    /// List of create-on-create reservations for this commitment.
+    /// The list of new reservations that you want to create and attach to this commitment. You must attach reservations to your commitment if your commitment specifies any GPUs or Local SSD disks. For more information, see Attach reservations to resource-based commitments. Specify this property only if you want to create new reservations to attach. To attach existing reservations, specify the existingReservations property instead.
     #[prost(message, repeated, tag = "399717927")]
     pub reservations: ::prost::alloc::vec::Vec<Reservation>,
     /// \[Output Only\] Status information for Commitment resource.
     #[prost(message, optional, tag = "249429315")]
     pub resource_status: ::core::option::Option<CommitmentResourceStatus>,
-    /// A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.
+    /// The list of all the hardware resources, with their types and amounts, that you want to commit to. Specify as a separate entry in the list for each individual resource type.
     #[prost(message, repeated, tag = "164412965")]
     pub resources: ::prost::alloc::vec::Vec<ResourceCommitment>,
     /// \[Output Only\] Server-defined URL for the resource.
     #[prost(string, optional, tag = "456214797")]
     pub self_link: ::core::option::Option<::prost::alloc::string::String>,
-    /// Source commitment to be split into a new commitment.
+    /// The source commitment from which you are transferring resources to create the new split commitment. For more information, see Split commitments.
     #[prost(string, optional, tag = "402611156")]
     pub split_source_commitment: ::core::option::Option<::prost::alloc::string::String>,
     /// \[Output Only\] Commitment start time in RFC3339 text format.
     #[prost(string, optional, tag = "83645817")]
     pub start_timestamp: ::core::option::Option<::prost::alloc::string::String>,
-    /// \[Output Only\] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
+    /// \[Output Only\] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.
     /// Check the Status enum for the list of possible values.
     #[prost(string, optional, tag = "181260274")]
     pub status: ::core::option::Option<::prost::alloc::string::String>,
     /// \[Output Only\] An optional, human-readable explanation of the status.
     #[prost(string, optional, tag = "297428154")]
     pub status_message: ::core::option::Option<::prost::alloc::string::String>,
-    /// The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+    /// The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
     /// Check the Type enum for the list of possible values.
     #[prost(string, optional, tag = "3575610")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Nested message and enum types in `Commitment`.
 pub mod commitment {
-    /// The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+    /// The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
     #[derive(
         Clone,
         Copy,
@@ -6308,7 +6471,7 @@ pub mod commitment {
             }
         }
     }
-    /// The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
+    /// The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
     #[derive(
         Clone,
         Copy,
@@ -6352,7 +6515,7 @@ pub mod commitment {
             }
         }
     }
-    /// \[Output Only\] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
+    /// \[Output Only\] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.
     #[derive(
         Clone,
         Copy,
@@ -6403,7 +6566,7 @@ pub mod commitment {
             }
         }
     }
-    /// The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+    /// The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
     #[derive(
         Clone,
         Copy,
@@ -6443,6 +6606,7 @@ pub mod commitment {
         MemoryOptimizedX424tb = 183116989,
         MemoryOptimizedX432tb = 183144858,
         StorageOptimizedZ3 = 316796085,
+        /// Note for internal users: When adding a new enum Type for v1, make sure to also add it in the comment for the `optional Type type` definition. This ensures that the public documentation displays the new enum Type.
         Unspecified = 437714322,
     }
     impl Type {
@@ -6578,7 +6742,7 @@ pub struct CommitmentResourceStatus {
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitmentsScopedList {
-    /// \[Output Only\] A list of commitments contained in this scope.
+    /// \[Output Only\] The list of commitments contained in this scope.
     #[prost(message, repeated, tag = "450664446")]
     pub commitments: ::prost::alloc::vec::Vec<Commitment>,
     /// \[Output Only\] Informational warning which replaces the list of commitments when the list is empty.
@@ -7854,6 +8018,25 @@ pub struct DeleteResourcePolicyRequest {
     /// Name of the resource policy to delete.
     #[prost(string, tag = "159240835")]
     pub resource_policy: ::prost::alloc::string::String,
+}
+/// A request message for Routers.DeleteRoutePolicy. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteRoutePolicyRouterRequest {
+    /// The Policy name for this request. Name must conform to RFC1035
+    #[prost(string, optional, tag = "91071794")]
+    pub policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Name of the Router resource where Route Policy is defined.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
 }
 /// A request message for Routes.Delete. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -9832,6 +10015,9 @@ pub struct FirewallPolicy {
     /// Name of the resource. For Organization Firewall Policies it's a \[Output Only\] numeric ID allocated by Google Cloud which uniquely identifies the Organization Firewall Policy.
     #[prost(string, optional, tag = "3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// A list of packet mirroring rules that belong to this policy.
+    #[prost(message, repeated, tag = "531644356")]
+    pub packet_mirroring_rules: ::prost::alloc::vec::Vec<FirewallPolicyRule>,
     /// \[Output Only\] The parent of the firewall policy. This field is not applicable to network firewall policies.
     #[prost(string, optional, tag = "78317738")]
     pub parent: ::core::option::Option<::prost::alloc::string::String>,
@@ -11736,6 +11922,19 @@ pub struct GetPacketMirroringRequest {
     #[prost(string, tag = "138946292")]
     pub region: ::prost::alloc::string::String,
 }
+/// A request message for NetworkFirewallPolicies.GetPacketMirroringRule. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPacketMirroringRuleNetworkFirewallPolicyRequest {
+    /// Name of the firewall policy to which the queried rule belongs.
+    #[prost(string, tag = "498173265")]
+    pub firewall_policy: ::prost::alloc::string::String,
+    /// The priority of the rule to get from the firewall policy.
+    #[prost(int32, optional, tag = "445151652")]
+    pub priority: ::core::option::Option<i32>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+}
 /// A request message for Projects.Get. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetProjectRequest {
@@ -12087,6 +12286,22 @@ pub struct GetResourcePolicyRequest {
     /// Name of the resource policy to retrieve.
     #[prost(string, tag = "159240835")]
     pub resource_policy: ::prost::alloc::string::String,
+}
+/// A request message for Routers.GetRoutePolicy. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetRoutePolicyRouterRequest {
+    /// The Policy name for this request. Name must conform to RFC1035
+    #[prost(string, optional, tag = "91071794")]
+    pub policy: ::core::option::Option<::prost::alloc::string::String>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// Name of the Router resource to query for the route policy. The name should conform to RFC1035.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
 }
 /// A request message for Routes.Get. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -17884,6 +18099,9 @@ pub struct InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy {
     /// \[Output Only\] The name of the firewall policy.
     #[prost(string, optional, tag = "3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] The packet mirroring rules that apply to the instance.
+    #[prost(message, repeated, tag = "531644356")]
+    pub packet_mirroring_rules: ::prost::alloc::vec::Vec<FirewallPolicyRule>,
     /// \[Output only\] Priority of firewall policy association. Not applicable for type=HIERARCHY.
     #[prost(int32, optional, tag = "445151652")]
     pub priority: ::core::option::Option<i32>,
@@ -20827,13 +21045,13 @@ pub struct LicenseCodeLicenseAlias {
 /// Commitment for a particular license resource.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LicenseResourceCommitment {
-    /// The number of licenses purchased.
+    /// The number of licenses you plan to purchase.
     #[prost(int64, optional, tag = "196759640")]
     pub amount: ::core::option::Option<i64>,
-    /// Specifies the core range of the instance for which this license applies.
+    /// The number of cores per license.
     #[prost(string, optional, tag = "32482324")]
     pub cores_per_license: ::core::option::Option<::prost::alloc::string::String>,
-    /// Any applicable license URI.
+    /// The applicable license URI.
     #[prost(string, optional, tag = "166757441")]
     pub license: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -21038,6 +21256,142 @@ pub struct ListBackendServicesRequest {
     /// Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
     #[prost(bool, optional, tag = "517198390")]
     pub return_partial_success: ::core::option::Option<bool>,
+}
+/// A request message for Routers.ListBgpRoutes. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListBgpRoutesRoutersRequest {
+    /// (Required) limit results to this address family (either IPv4 or IPv6)
+    /// Check the AddressFamily enum for the list of possible values.
+    #[prost(string, optional, tag = "173744655")]
+    pub address_family: ::core::option::Option<::prost::alloc::string::String>,
+    /// Limit results to destinations that are subnets of this CIDR range
+    #[prost(string, optional, tag = "263872483")]
+    pub destination_prefix: ::core::option::Option<::prost::alloc::string::String>,
+    /// A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+    #[prost(string, optional, tag = "336120696")]
+    pub filter: ::core::option::Option<::prost::alloc::string::String>,
+    /// The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+    #[prost(uint32, optional, tag = "54715419")]
+    pub max_results: ::core::option::Option<u32>,
+    /// Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+    #[prost(string, optional, tag = "160562920")]
+    pub order_by: ::core::option::Option<::prost::alloc::string::String>,
+    /// Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+    #[prost(string, optional, tag = "19994697")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// (Required) limit results to the BGP peer with the given name. Name should conform to RFC1035.
+    #[prost(string, optional, tag = "3436898")]
+    pub peer: ::core::option::Option<::prost::alloc::string::String>,
+    /// When true, the method returns post-policy routes. Otherwise, it returns pre-policy routes.
+    #[prost(bool, optional, tag = "379464304")]
+    pub policy_applied: ::core::option::Option<bool>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+    #[prost(bool, optional, tag = "517198390")]
+    pub return_partial_success: ::core::option::Option<bool>,
+    /// (Required) limit results to this type of route (either LEARNED or ADVERTISED)
+    /// Check the RouteType enum for the list of possible values.
+    #[prost(string, optional, tag = "375888752")]
+    pub route_type: ::core::option::Option<::prost::alloc::string::String>,
+    /// Name or id of the resource for this request. Name should conform to RFC1035.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `ListBgpRoutesRoutersRequest`.
+pub mod list_bgp_routes_routers_request {
+    /// (Required) limit results to this address family (either IPv4 or IPv6)
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum AddressFamily {
+        /// A value indicating that the enum field is not set.
+        UndefinedAddressFamily = 0,
+        Ipv4 = 2254341,
+        Ipv6 = 2254343,
+        UnspecifiedIpVersion = 72938440,
+    }
+    impl AddressFamily {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::UndefinedAddressFamily => "UNDEFINED_ADDRESS_FAMILY",
+                Self::Ipv4 => "IPV4",
+                Self::Ipv6 => "IPV6",
+                Self::UnspecifiedIpVersion => "UNSPECIFIED_IP_VERSION",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNDEFINED_ADDRESS_FAMILY" => Some(Self::UndefinedAddressFamily),
+                "IPV4" => Some(Self::Ipv4),
+                "IPV6" => Some(Self::Ipv6),
+                "UNSPECIFIED_IP_VERSION" => Some(Self::UnspecifiedIpVersion),
+                _ => None,
+            }
+        }
+    }
+    /// (Required) limit results to this type of route (either LEARNED or ADVERTISED)
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum RouteType {
+        /// A value indicating that the enum field is not set.
+        UndefinedRouteType = 0,
+        Advertised = 20302109,
+        Learned = 231892419,
+        UnspecifiedRouteType = 248064440,
+    }
+    impl RouteType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::UndefinedRouteType => "UNDEFINED_ROUTE_TYPE",
+                Self::Advertised => "ADVERTISED",
+                Self::Learned => "LEARNED",
+                Self::UnspecifiedRouteType => "UNSPECIFIED_ROUTE_TYPE",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNDEFINED_ROUTE_TYPE" => Some(Self::UndefinedRouteType),
+                "ADVERTISED" => Some(Self::Advertised),
+                "LEARNED" => Some(Self::Learned),
+                "UNSPECIFIED_ROUTE_TYPE" => Some(Self::UnspecifiedRouteType),
+                _ => None,
+            }
+        }
+    }
 }
 /// A request message for DiskTypes.List. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -23082,6 +23436,34 @@ pub struct ListResourcePoliciesRequest {
     /// Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
     #[prost(bool, optional, tag = "517198390")]
     pub return_partial_success: ::core::option::Option<bool>,
+}
+/// A request message for Routers.ListRoutePolicies. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListRoutePoliciesRoutersRequest {
+    /// A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+    #[prost(string, optional, tag = "336120696")]
+    pub filter: ::core::option::Option<::prost::alloc::string::String>,
+    /// The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+    #[prost(uint32, optional, tag = "54715419")]
+    pub max_results: ::core::option::Option<u32>,
+    /// Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+    #[prost(string, optional, tag = "160562920")]
+    pub order_by: ::core::option::Option<::prost::alloc::string::String>,
+    /// Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+    #[prost(string, optional, tag = "19994697")]
+    pub page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+    #[prost(bool, optional, tag = "517198390")]
+    pub return_partial_success: ::core::option::Option<bool>,
+    /// Name or id of the resource for this request. Name should conform to RFC1035.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
 }
 /// A request message for Routers.List. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -26114,7 +26496,6 @@ pub struct NetworkProfile {
     /// \[Output Only\] Server-defined URL for this resource with the resource id.
     #[prost(string, optional, tag = "44520962")]
     pub self_link_with_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// \[Output Only\] Zone to which the network is restricted.
     #[prost(string, optional, tag = "3744684")]
     pub zone: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -27529,6 +27910,9 @@ pub struct NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy {
     /// \[Output Only\] The name of the firewall policy.
     #[prost(string, optional, tag = "3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] The packet mirroring rules that apply to the network.
+    #[prost(message, repeated, tag = "531644356")]
+    pub packet_mirroring_rules: ::prost::alloc::vec::Vec<FirewallPolicyRule>,
     /// \[Output only\] Priority of firewall policy association. Not applicable for type=HIERARCHY.
     #[prost(int32, optional, tag = "445151652")]
     pub priority: ::core::option::Option<i32>,
@@ -28399,6 +28783,9 @@ pub struct NodeType {
     /// \[Output Only\] Local SSD available to the node type, defined in GB.
     #[prost(int32, optional, tag = "329237578")]
     pub local_ssd_gb: ::core::option::Option<i32>,
+    /// \[Output Only\] Maximum number of VMs that can be created for this node type.
+    #[prost(int32, optional, tag = "307579713")]
+    pub max_vms: ::core::option::Option<i32>,
     /// \[Output Only\] The amount of physical memory available to the node type, defined in MB.
     #[prost(int32, optional, tag = "116001171")]
     pub memory_mb: ::core::option::Option<i32>,
@@ -29515,6 +29902,25 @@ pub struct PatchPacketMirroringRequest {
     #[prost(string, optional, tag = "37109963")]
     pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
+/// A request message for NetworkFirewallPolicies.PatchPacketMirroringRule. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PatchPacketMirroringRuleNetworkFirewallPolicyRequest {
+    /// Name of the firewall policy to update.
+    #[prost(string, tag = "498173265")]
+    pub firewall_policy: ::prost::alloc::string::String,
+    /// The body resource for this request
+    #[prost(message, optional, tag = "250523523")]
+    pub firewall_policy_rule_resource: ::core::option::Option<FirewallPolicyRule>,
+    /// The priority of the rule to patch.
+    #[prost(int32, optional, tag = "445151652")]
+    pub priority: ::core::option::Option<i32>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// A request message for InstanceGroupManagers.PatchPerInstanceConfigs. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PatchPerInstanceConfigsInstanceGroupManagerRequest {
@@ -29808,6 +30214,25 @@ pub struct PatchResourcePolicyRequest {
     /// update_mask indicates fields to be updated as part of this request.
     #[prost(string, optional, tag = "500079778")]
     pub update_mask: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// A request message for Routers.PatchRoutePolicy. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PatchRoutePolicyRouterRequest {
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// The body resource for this request
+    #[prost(message, optional, tag = "116219525")]
+    pub route_policy_resource: ::core::option::Option<RoutePolicy>,
+    /// Name of the Router resource where Route Policy is defined.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
 }
 /// A request message for Routers.Patch. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -33199,6 +33624,12 @@ pub struct RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFi
     /// \[Output Only\] The name of the firewall policy.
     #[prost(string, optional, tag = "3373707")]
     pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output only\] The packet mirroring rules that apply to the network.
+    #[prost(message, repeated, tag = "531644356")]
+    pub packet_mirroring_rules: ::prost::alloc::vec::Vec<FirewallPolicyRule>,
+    /// \[Output only\] Priority of firewall policy association. Not applicable for type=HIERARCHY.
+    #[prost(int32, optional, tag = "445151652")]
+    pub priority: ::core::option::Option<i32>,
     /// \[Output only\] The rules that apply to the network.
     #[prost(message, repeated, tag = "108873975")]
     pub rules: ::prost::alloc::vec::Vec<FirewallPolicyRule>,
@@ -33228,6 +33659,8 @@ pub mod region_network_firewall_policies_get_effective_firewalls_response_effect
         Hierarchy = 69902869,
         Network = 413984270,
         NetworkRegional = 190804272,
+        SystemGlobal = 60099507,
+        SystemRegional = 161777199,
         Unspecified = 526786327,
     }
     impl Type {
@@ -33241,6 +33674,8 @@ pub mod region_network_firewall_policies_get_effective_firewalls_response_effect
                 Self::Hierarchy => "HIERARCHY",
                 Self::Network => "NETWORK",
                 Self::NetworkRegional => "NETWORK_REGIONAL",
+                Self::SystemGlobal => "SYSTEM_GLOBAL",
+                Self::SystemRegional => "SYSTEM_REGIONAL",
                 Self::Unspecified => "UNSPECIFIED",
             }
         }
@@ -33251,6 +33686,8 @@ pub mod region_network_firewall_policies_get_effective_firewalls_response_effect
                 "HIERARCHY" => Some(Self::Hierarchy),
                 "NETWORK" => Some(Self::Network),
                 "NETWORK_REGIONAL" => Some(Self::NetworkRegional),
+                "SYSTEM_GLOBAL" => Some(Self::SystemGlobal),
+                "SYSTEM_REGIONAL" => Some(Self::SystemRegional),
                 "UNSPECIFIED" => Some(Self::Unspecified),
                 _ => None,
             }
@@ -33407,6 +33844,22 @@ pub struct RemoveInstancesInstanceGroupRequest {
     /// The name of the zone where the instance group is located.
     #[prost(string, tag = "3744684")]
     pub zone: ::prost::alloc::string::String,
+}
+/// A request message for NetworkFirewallPolicies.RemovePacketMirroringRule. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemovePacketMirroringRuleNetworkFirewallPolicyRequest {
+    /// Name of the firewall policy to update.
+    #[prost(string, tag = "498173265")]
+    pub firewall_policy: ::prost::alloc::string::String,
+    /// The priority of the rule to remove from the firewall policy.
+    #[prost(int32, optional, tag = "445151652")]
+    pub priority: ::core::option::Option<i32>,
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// A request message for Networks.RemovePeering. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -33939,23 +34392,23 @@ pub struct ResizeReservationRequest {
     #[prost(string, tag = "3744684")]
     pub zone: ::prost::alloc::string::String,
 }
-/// Commitment for a particular resource (a Commitment is composed of one or more of these).
+/// Commitment for a particular hardware resource (a commitment is composed of one or more of these).
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResourceCommitment {
-    /// Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.
+    /// Name of the accelerator type or GPU resource. Specify this field only when the type of hardware resource is ACCELERATOR.
     #[prost(string, optional, tag = "138031246")]
     pub accelerator_type: ::core::option::Option<::prost::alloc::string::String>,
-    /// The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.
+    /// The quantity of the hardware resource that you want to commit to purchasing (in a type-dependent unit). - For vCPUs, you must specify an integer value. - For memory, you specify the amount of MB that you want. The value you specify must be a multiple of 256 MB, with up to 6.5 GB of memory per every vCPU. - For GPUs, you must specify an integer value. - For Local SSD disks, you must specify the amount in GB. The size of a single Local SSD disk is 375 GB.
     #[prost(int64, optional, tag = "196759640")]
     pub amount: ::core::option::Option<i64>,
-    /// Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+    /// The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
     /// Check the Type enum for the list of possible values.
     #[prost(string, optional, tag = "3575610")]
     pub r#type: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Nested message and enum types in `ResourceCommitment`.
 pub mod resource_commitment {
-    /// Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+    /// The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
     #[derive(
         Clone,
         Copy,
@@ -34899,6 +35352,85 @@ pub struct RouteList {
     #[prost(message, optional, tag = "50704284")]
     pub warning: ::core::option::Option<Warning>,
 }
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoutePolicy {
+    /// An optional description of route policy.
+    #[prost(string, optional, tag = "422937596")]
+    pub description: ::core::option::Option<::prost::alloc::string::String>,
+    /// A fingerprint for the Route Policy being applied to this Router, which is essentially a hash of the Route Policy used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update Route Policy. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make a getRoutePolicy() request to retrieve a Route Policy.
+    #[prost(string, optional, tag = "234678500")]
+    pub fingerprint: ::core::option::Option<::prost::alloc::string::String>,
+    /// Route Policy name, which must be a resource ID segment and unique within all the router's Route Policies. Name should conform to RFC1035.
+    #[prost(string, optional, tag = "3373707")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
+    /// List of terms (the order in the list is not important, they are evaluated in order of priority). Order of policies is not retained and might change when getting policy later.
+    #[prost(message, repeated, tag = "110250375")]
+    pub terms: ::prost::alloc::vec::Vec<RoutePolicyPolicyTerm>,
+    ///
+    /// Check the Type enum for the list of possible values.
+    #[prost(string, optional, tag = "3575610")]
+    pub r#type: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// Nested message and enum types in `RoutePolicy`.
+pub mod route_policy {
+    ///
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Type {
+        /// A value indicating that the enum field is not set.
+        UndefinedType = 0,
+        /// The Route Policy is an Export Policy.
+        RoutePolicyTypeExport = 293086882,
+        /// The Route Policy is an Import Policy.
+        RoutePolicyTypeImport = 397444755,
+    }
+    impl Type {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Self::UndefinedType => "UNDEFINED_TYPE",
+                Self::RoutePolicyTypeExport => "ROUTE_POLICY_TYPE_EXPORT",
+                Self::RoutePolicyTypeImport => "ROUTE_POLICY_TYPE_IMPORT",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNDEFINED_TYPE" => Some(Self::UndefinedType),
+                "ROUTE_POLICY_TYPE_EXPORT" => Some(Self::RoutePolicyTypeExport),
+                "ROUTE_POLICY_TYPE_IMPORT" => Some(Self::RoutePolicyTypeImport),
+                _ => None,
+            }
+        }
+    }
+}
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoutePolicyPolicyTerm {
+    /// CEL expressions to evaluate to modify a route when this term matches.
+    #[prost(message, repeated, tag = "448809213")]
+    pub actions: ::prost::alloc::vec::Vec<Expr>,
+    /// CEL expression evaluated against a route to determine if this term applies. When not set, the term applies to all routes.
+    #[prost(message, optional, tag = "103668165")]
+    pub r#match: ::core::option::Option<Expr>,
+    /// The evaluation priority for this term, which must be between 0 (inclusive) and 2^31 (exclusive), and unique within the list.
+    #[prost(int32, optional, tag = "445151652")]
+    pub priority: ::core::option::Option<i32>,
+}
 /// Represents a Cloud Router resource. For more information about Cloud Router, read the Cloud Router overview.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Router {
@@ -35128,10 +35660,10 @@ pub struct RouterBgpPeer {
     /// Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.
     #[prost(bool, optional, tag = "181467939")]
     pub enable_ipv6: ::core::option::Option<bool>,
-    /// List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+    /// List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type.
     #[prost(string, repeated, tag = "134084987")]
     pub export_policies: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+    /// List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type.
     #[prost(string, repeated, tag = "451147946")]
     pub import_policies: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Name of the interface the BGP peer is associated with.
@@ -35427,7 +35959,7 @@ pub struct RouterBgpPeerCustomLearnedIpRange {
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RouterInterface {
-    /// IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
+    /// IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fdff:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
     #[prost(string, optional, tag = "145092645")]
     pub ip_range: ::core::option::Option<::prost::alloc::string::String>,
     /// IP version of this interface.
@@ -36318,6 +36850,66 @@ pub struct RouterStatusResponse {
     pub kind: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "139315229")]
     pub result: ::core::option::Option<RouterStatus>,
+}
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoutersGetRoutePolicyResponse {
+    #[prost(message, optional, tag = "195806222")]
+    pub resource: ::core::option::Option<RoutePolicy>,
+}
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoutersListBgpRoutes {
+    #[prost(string, optional, tag = "3123477")]
+    pub etag: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] The unique identifier for the resource. This identifier is defined by the server.
+    #[prost(string, optional, tag = "3355")]
+    pub id: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] Type of resource. Always compute#routersListBgpRoutes for lists of bgp routes.
+    #[prost(string, optional, tag = "3292052")]
+    pub kind: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+    #[prost(string, optional, tag = "79797525")]
+    pub next_page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] A list of bgp routes.
+    #[prost(message, repeated, tag = "139315229")]
+    pub result: ::prost::alloc::vec::Vec<BgpRoute>,
+    /// \[Output Only\] Server-defined URL for this resource.
+    #[prost(string, optional, tag = "456214797")]
+    pub self_link: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] Unreachable resources.
+    #[prost(string, repeated, tag = "243372063")]
+    pub unreachables: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// \[Output Only\] Informational warning message.
+    #[prost(message, optional, tag = "50704284")]
+    pub warning: ::core::option::Option<Warning>,
+}
+///
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RoutersListRoutePolicies {
+    #[prost(string, optional, tag = "3123477")]
+    pub etag: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] The unique identifier for the resource. This identifier is defined by the server.
+    #[prost(string, optional, tag = "3355")]
+    pub id: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] Type of resource. Always compute#routersListRoutePolicies for lists of route policies.
+    #[prost(string, optional, tag = "3292052")]
+    pub kind: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+    #[prost(string, optional, tag = "79797525")]
+    pub next_page_token: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] A list of route policies.
+    #[prost(message, repeated, tag = "139315229")]
+    pub result: ::prost::alloc::vec::Vec<RoutePolicy>,
+    /// \[Output Only\] Server-defined URL for this resource.
+    #[prost(string, optional, tag = "456214797")]
+    pub self_link: ::core::option::Option<::prost::alloc::string::String>,
+    /// \[Output Only\] Unreachable resources.
+    #[prost(string, repeated, tag = "243372063")]
+    pub unreachables: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// \[Output Only\] Informational warning message.
+    #[prost(message, optional, tag = "50704284")]
+    pub warning: ::core::option::Option<Warning>,
 }
 ///
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -37599,6 +38191,7 @@ pub mod security_policy_ddos_protection_config {
         /// A value indicating that the enum field is not set.
         UndefinedDdosProtection = 0,
         Advanced = 63789090,
+        AdvancedPreview = 40905867,
         Standard = 484642493,
     }
     impl DdosProtection {
@@ -37610,6 +38203,7 @@ pub mod security_policy_ddos_protection_config {
             match self {
                 Self::UndefinedDdosProtection => "UNDEFINED_DDOS_PROTECTION",
                 Self::Advanced => "ADVANCED",
+                Self::AdvancedPreview => "ADVANCED_PREVIEW",
                 Self::Standard => "STANDARD",
             }
         }
@@ -37618,6 +38212,7 @@ pub mod security_policy_ddos_protection_config {
             match value {
                 "UNDEFINED_DDOS_PROTECTION" => Some(Self::UndefinedDdosProtection),
                 "ADVANCED" => Some(Self::Advanced),
+                "ADVANCED_PREVIEW" => Some(Self::AdvancedPreview),
                 "STANDARD" => Some(Self::Standard),
                 _ => None,
             }
@@ -40691,7 +41286,7 @@ pub struct Snapshot {
     pub source_instant_snapshot_encryption_key: ::core::option::Option<
         CustomerEncryptionKey,
     >,
-    /// \[Output Only\] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
+    /// \[Output Only\] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this snapshot. For example, if you created the snapshot from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
     #[prost(string, optional, tag = "287582708")]
     pub source_instant_snapshot_id: ::core::option::Option<
         ::prost::alloc::string::String,
@@ -42623,7 +43218,7 @@ pub struct Subnetwork {
     pub private_ipv6_google_access: ::core::option::Option<
         ::prost::alloc::string::String,
     >,
-    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
     /// Check the Purpose enum for the list of possible values.
     #[prost(string, optional, tag = "316407070")]
     pub purpose: ::core::option::Option<::prost::alloc::string::String>,
@@ -42759,7 +43354,7 @@ pub mod subnetwork {
             }
         }
     }
-    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
     #[derive(
         Clone,
         Copy,
@@ -45811,7 +46406,7 @@ pub struct UpdateRegionBackendServiceRequest {
 /// A request message for RegionCommitments.Update. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateRegionCommitmentRequest {
-    /// Name of the commitment for which auto renew is being updated.
+    /// Name of the commitment that you want to update.
     #[prost(string, tag = "482134805")]
     pub commitment: ::prost::alloc::string::String,
     /// The body resource for this request
@@ -45917,6 +46512,25 @@ pub struct UpdateReservationRequest {
     /// Name of the zone for this request.
     #[prost(string, tag = "3744684")]
     pub zone: ::prost::alloc::string::String,
+}
+/// A request message for Routers.UpdateRoutePolicy. See the method description for details.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateRoutePolicyRouterRequest {
+    /// Project ID for this request.
+    #[prost(string, tag = "227560217")]
+    pub project: ::prost::alloc::string::String,
+    /// Name of the region for this request.
+    #[prost(string, tag = "138946292")]
+    pub region: ::prost::alloc::string::String,
+    /// An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    #[prost(string, optional, tag = "37109963")]
+    pub request_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// The body resource for this request
+    #[prost(message, optional, tag = "116219525")]
+    pub route_policy_resource: ::core::option::Option<RoutePolicy>,
+    /// Name of the Router resource where Route Policy is defined.
+    #[prost(string, tag = "148608841")]
+    pub router: ::prost::alloc::string::String,
 }
 /// A request message for Routers.Update. See the method description for details.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -46270,7 +46884,7 @@ pub struct UsableSubnetwork {
     /// Network URL.
     #[prost(string, optional, tag = "232872494")]
     pub network: ::core::option::Option<::prost::alloc::string::String>,
-    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
     /// Check the Purpose enum for the list of possible values.
     #[prost(string, optional, tag = "316407070")]
     pub purpose: ::core::option::Option<::prost::alloc::string::String>,
@@ -46334,7 +46948,7 @@ pub mod usable_subnetwork {
             }
         }
     }
-    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+    /// The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
     #[derive(
         Clone,
         Copy,
@@ -60248,6 +60862,35 @@ pub mod network_firewall_policies_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Inserts a packet mirroring rule into a firewall policy.
+        pub async fn add_packet_mirroring_rule(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::AddPacketMirroringRuleNetworkFirewallPolicyRequest,
+            >,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.NetworkFirewallPolicies/AddPacketMirroringRule",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.NetworkFirewallPolicies",
+                        "AddPacketMirroringRule",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Inserts a rule into a firewall policy.
         pub async fn add_rule(
             &mut self,
@@ -60451,6 +61094,38 @@ pub mod network_firewall_policies_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Gets a packet mirroring rule of the specified priority.
+        pub async fn get_packet_mirroring_rule(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::GetPacketMirroringRuleNetworkFirewallPolicyRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<super::FirewallPolicyRule>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.NetworkFirewallPolicies/GetPacketMirroringRule",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.NetworkFirewallPolicies",
+                        "GetPacketMirroringRule",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Gets a rule of the specified priority.
         pub async fn get_rule(
             &mut self,
@@ -60565,6 +61240,35 @@ pub mod network_firewall_policies_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Patches a packet mirroring rule of the specified priority.
+        pub async fn patch_packet_mirroring_rule(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::PatchPacketMirroringRuleNetworkFirewallPolicyRequest,
+            >,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.NetworkFirewallPolicies/PatchPacketMirroringRule",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.NetworkFirewallPolicies",
+                        "PatchPacketMirroringRule",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Patches a rule of the specified priority.
         pub async fn patch_rule(
             &mut self,
@@ -60619,6 +61323,35 @@ pub mod network_firewall_policies_client {
                     GrpcMethod::new(
                         "google.cloud.compute.v1.NetworkFirewallPolicies",
                         "RemoveAssociation",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Deletes a packet mirroring rule of the specified priority.
+        pub async fn remove_packet_mirroring_rule(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::RemovePacketMirroringRuleNetworkFirewallPolicyRequest,
+            >,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.NetworkFirewallPolicies/RemovePacketMirroringRule",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.NetworkFirewallPolicies",
+                        "RemovePacketMirroringRule",
                     ),
                 );
             self.inner.unary(req, path, codec).await
@@ -64415,7 +65148,7 @@ pub mod region_commitments_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+        /// Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
         pub async fn update(
             &mut self,
             request: impl tonic::IntoRequest<super::UpdateRegionCommitmentRequest>,
@@ -71507,6 +72240,33 @@ pub mod routers_client {
                 .insert(GrpcMethod::new("google.cloud.compute.v1.Routers", "Delete"));
             self.inner.unary(req, path, codec).await
         }
+        /// Deletes Route Policy
+        pub async fn delete_route_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteRoutePolicyRouterRequest>,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/DeleteRoutePolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.Routers",
+                        "DeleteRoutePolicy",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Returns the specified Router resource.
         pub async fn get(
             &mut self,
@@ -71586,6 +72346,33 @@ pub mod routers_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Returns specified Route Policy
+        pub async fn get_route_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetRoutePolicyRouterRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RoutersGetRoutePolicyResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/GetRoutePolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("google.cloud.compute.v1.Routers", "GetRoutePolicy"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Retrieves runtime information of the specified router.
         pub async fn get_router_status(
             &mut self,
@@ -71657,6 +72444,63 @@ pub mod routers_client {
                 .insert(GrpcMethod::new("google.cloud.compute.v1.Routers", "List"));
             self.inner.unary(req, path, codec).await
         }
+        /// Retrieves a list of router bgp routes available to the specified project.
+        pub async fn list_bgp_routes(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListBgpRoutesRoutersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RoutersListBgpRoutes>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/ListBgpRoutes",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("google.cloud.compute.v1.Routers", "ListBgpRoutes"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Retrieves a list of router route policy subresources available to the specified project.
+        pub async fn list_route_policies(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListRoutePoliciesRoutersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RoutersListRoutePolicies>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/ListRoutePolicies",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.Routers",
+                        "ListRoutePolicies",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Patches the specified Router resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
         pub async fn patch(
             &mut self,
@@ -71677,6 +72521,33 @@ pub mod routers_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("google.cloud.compute.v1.Routers", "Patch"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Patches Route Policy
+        pub async fn patch_route_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PatchRoutePolicyRouterRequest>,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/PatchRoutePolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.Routers",
+                        "PatchRoutePolicy",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
         /// Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
@@ -71724,6 +72595,33 @@ pub mod routers_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("google.cloud.compute.v1.Routers", "Update"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Updates or creates new Route Policy
+        pub async fn update_route_policy(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateRoutePolicyRouterRequest>,
+        ) -> std::result::Result<tonic::Response<super::Operation>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/google.cloud.compute.v1.Routers/UpdateRoutePolicy",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "google.cloud.compute.v1.Routers",
+                        "UpdateRoutePolicy",
+                    ),
+                );
             self.inner.unary(req, path, codec).await
         }
     }

@@ -10,6 +10,9 @@ pub mod dns_v1;
 #[cfg(any(feature = "google-rest-identitytoolkit-v3"))]
 pub mod identitytoolkit_v3;
 
+#[cfg(any(feature = "google-rest-servicecontrol-v1"))]
+pub mod servicecontrol_v1;
+
 #[cfg(any(feature = "google-rest-sqladmin-v1"))]
 pub mod sqladmin_v1;
 
